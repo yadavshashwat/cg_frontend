@@ -869,7 +869,7 @@ modal : 60 - 70
         background: #4d5b94;
         .section-menu-item{
           float: left;
-          width: 20%;
+          width: 16.66%;
           padding: 18px 0px;
           cursor:pointer;
           .icon{
@@ -882,6 +882,7 @@ modal : 60 - 70
           .icon.icon-servicing{background-image:url(../img/wf_carservicing_w.svg); }
           .icon.icon-cleaning{background-image:url(../img/wf_carclean_w.svg); }
           .icon.icon-tyres{background-image:url(../img/wf_wheelboth_w.svg); }
+          .icon.icon-windshield{background-image:url(../img/wf_windshield_w.svg); }
           .icon.icon-emergency{background-image:url(../img/wf_emergency_w.svg); }
           .icon.icon-others{background-image:url(../img/wf_otherservice_w.svg); }
           .icon-text{
@@ -913,10 +914,19 @@ modal : 60 - 70
           padding: 0px 12px;
           .service-list-item{
             width: 100%;
+            border: 1px solid transparent;
             border-bottom: 3px solid #e89b76;
-            height: 60px;
+            height: 63px;
             box-sizing: border-box;
-            padding: 18px 15px;
+            .header-wrapper{
+              margin-right: 90px;
+            }
+            .detail-wrapper{
+              float:right;
+            }
+            .wrapper{
+              padding: 18px 15px;
+            }
             .top-row{
               cursor: pointer;
               .due-div{
@@ -931,15 +941,52 @@ modal : 60 - 70
                 .fr;
                 height: 24px;
                 text-align: center;
+                width:75px;
               }
             }
+            .bot-row{
+              display: none;
+            }
+            .header-wrapper:hover{
+                background: rgba(234,234,234, 0.4);
+            }
+
           }
           .service-list-item:hover{
-              background: rgba(234,234,234, 0.4);
+//            border: 1px solid #e89b76;
+            border-bottom: 3px solid #e89b76;
           }
+
           .service-list-item:last-child{
             border-bottom: 0px;
           }
+          .service-list-item.expanded{
+            height: auto;
+            .bot-row{
+              display: block;
+            }
+          }
+
+          .service-group-item{
+            width: 100%;
+            border: 1px solid transparent;
+            border-bottom: 3px solid #e89b76;
+            height: 63px;
+            .bot-row{
+
+              display: none;
+            .service-list-item{
+              border-bottom: none;
+            }
+            }
+          }
+          .service-group-item.expanded{
+            height: auto;
+            .bot-row{
+              display: block;
+            }
+          }
+
         }
         .servicing{
         }

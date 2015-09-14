@@ -37,39 +37,60 @@ var Global = {
 //                console.log($(this).closest('.section-box').find('.section-content-item').hide())
                 $(this).closest('.section-box').find('.section-content-item').hide();
                 var mine = $(this).closest('.section-box').find('.section-content-item').filter('.'+classy).show();
+                console.log(classy)
                 if(mine.hasClass('loaded')){
 
                 }else{
-                    Commons.ajaxData('fetch_car_'+classy, {c_id:_this.carSelected.id},"get",_this,_this.loadServices)
+                    if(classy == 'servicing' || classy == 'cleaning' || classy == 'vas'){
+                        Commons.ajaxData('fetch_car_'+classy, {c_id:_this.carSelected.id},"get",_this, eval("_this.load"+classy.toTitleCase()))
+                    }
                 }
             }
 //            var stateObj = { foo: "bar" };
         });
+        $('.section-box .section-content-item').on('click', '.service-group-item', function(e){
+            if($(this).hasClass('minimized') ){
+                $(this).siblings().filter('.expanded').removeClass('expanded').addClass('minimized');
+                $(this).removeClass('minimized').addClass('expanded')
+            }else if($(this).hasClass('expanded')){
+                $(this).removeClass('expanded').addClass('minimized')
+            }else{
+
+            }
+        });
         $('.section-box .section-content-item').on('click', '.service-list-item', function(e){
-            var classy = $(this).closest('.section-content-item').attr('data-class');
-            var s_id = $(this).attr('data-id');
-            if(classy == 'servicing' || classy == 'cleaning' || classy == 'vas'){
-                var data = {};
-                data.state = 'dealer';
-                workflowState.pushToHistory(data.state, data, '#'+data.state+'?s_id'+s_id);
-                workflowState.setWorkflow(data.state, data, '#'+data.state+'?s_id'+s_id);
-                workflowState.workflowBarUpdate(data.state);
-                Commons.ajaxData('fetch_servicing_details', {service_id:s_id, c_id:_this.carSelected.id},"get",_this,_this.loadServiceDetails)
+            var $target  = $(e.target);
+            if($target.closest('.header-wrapper').length){
+                var classy = $(this).closest('.section-content-item').attr('data-class');
+                var s_id = $(this).attr('data-id');
+                if(classy == 'servicing' || classy == 'cleaning' || classy == 'vas'){
+                    var data = {};
+                    data.state = 'dealer';
+                    workflowState.pushToHistory(data.state, data, '#'+data.state+'?s_id'+s_id);
+                    workflowState.setWorkflow(data.state, data, '#'+data.state+'?s_id'+s_id);
+                    workflowState.workflowBarUpdate(data.state);
+                    Commons.ajaxData('fetch_servicing_details', {service_id:s_id, c_id:_this.carSelected.id},"get",_this, eval("_this.load"+classy.toTitleCase()+"Details") )
+                }
+            }else if($target.closest('.detail-wrapper').length){
+                if($(this).hasClass('minimized')){
+                    $(this).removeClass('minimized').addClass('expanded');
+                    $(this).find('.bot-row').slideDown();
+                }
             }
         });
     },
-    loadServices : function(data){
+    loadServicing : function(data){
         console.log(data)
         var container = $('.section-box .servicing');
         container.html('');
-        container.json2html(data, Templates.orderPage.services, {append:true});
+        container.json2html(data, Templates.orderPage.servicing, {append:true});
 //        container.append(json2html.transform(data,Templates.orderPage.services));
         $.each(data, function(idx, val){
 
         });
 
     },
-    loadServiceDetails : function(data){
+    loadServicingDetails : function(data){
         console.log('p',data);
         if(data && data.length){
             var common_data = {};
@@ -84,7 +105,19 @@ var Global = {
             container.json2html(data, Templates.orderPage.dealers, {append:true});
 
         }
+    },
+    loadCleaning : function(data){
+        console.log(data);
+        var container = $('.section-box .cleaning');
+        container.html('');
+        container.json2html(data, Templates.orderPage.cleaning.cleaning_group, {append:true});
+//        container.append(json2html.transform(data,Templates.orderPage.services));
+        $.each(data, function(idx, val){
 
+        });
+    },
+    loadVas : function(data){
+        console.log(data);
     },
     paneScrolls:function(){
 

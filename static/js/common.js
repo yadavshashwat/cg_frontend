@@ -161,12 +161,17 @@ function bind(f, obj, args)
 
 var Templates = {
     orderPage:{
-        services:[{
+        servicing:[{
             "tag":"div","class":"service-list-item", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
-                    {"tag":"div", "class":"due-div", "html":function(){return "due at : <span>"+this.Odometer + ' / '+ this.Year+"</span>";}},
-                    {"tag":"div", "class":"detail-div", "html":function(){return "<div> Details </div><i class='fa fa-ellipsis-h'></i>";}},
-                    {"tag":"div", "class":"price-div", "html":function(){return "Price : <span>"+this['Paid/Free']+"</span>";}}
+                    {"tag":"div", "class":"wrapper detail-wrapper", "children":[
+                        {"tag":"div", "class":"detail-div", "html":function(){return "<div> Details </div><i class='fa fa-ellipsis-h'></i>";}}
+                    ]},
+
+                    {"tag":"div", "class":"wrapper header-wrapper", "children":[
+                        {"tag":"div", "class":"due-div", "html":function(){return "due at : <span>"+this.Odometer + ' / '+ this.Year+"</span>";}},
+                        {"tag":"div", "class":"price-div", "html":function(){return "Price : <span>"+this['Paid-Free']+"</span>";}}
+                    ]}
                 ]},
                 {"tag":"div", "class":"bot-row"}
             ]
@@ -186,6 +191,30 @@ var Templates = {
                 ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
-        }]
+        }],
+        cleaning:{
+            cleaning_group:[{
+                "tag":"div","class":"service-group-item minimized",  "children":[
+                    {"tag":"div", "class":"top-row", "children":[
+                        {"tag":"div", "class":"brand-div", "html":function(){return "Dealer : <span>"+this.name+"</span>";}},
+                        {"tag":"div", "class":"price-div", "html":function(){return "Number : <span>"+this.list.length+"</span>";}}
+                    ]},
+                    {"tag":"div", "class":"bot-row", "html":function(){
+                        return json2html.transform(this.list, Templates.orderPage.cleaning.cleaning_item)
+                    }}
+                ]
+            }],
+            cleaning_item:[{
+                "tag":"div", "class":"service-list-item", "data-id":"${id}", "children":[
+                    {"tag":"div", "class":"", "html":function(){ return this.Category }}
+                ]
+            }]
+        }
     }
 };
+
+if (typeof String.prototype.toTitleCase != 'function') {
+    String.prototype.toTitleCase = function (){
+        return (this[0].toUpperCase() + this.slice(1));
+    };
+}
