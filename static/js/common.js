@@ -162,7 +162,7 @@ function bind(f, obj, args)
 var Templates = {
     orderPage:{
         servicing:[{
-            "tag":"div","class":"service-list-item", "data-id":"${id}", "children":[
+            "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
                         {"tag":"div", "class":"detail-div", "html":function(){return "<div> Details </div><i class='fa fa-ellipsis-h'></i>";}}
@@ -170,10 +170,35 @@ var Templates = {
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
                         {"tag":"div", "class":"due-div", "html":function(){return "due at : <span>"+this.Odometer + ' / '+ this.Year+"</span>";}},
-                        {"tag":"div", "class":"price-div", "html":function(){return "Price : <span>"+this['Paid-Free']+"</span>";}}
+                        {"tag":"div", "class":"price-div", "html":function(){return "Type : <span>"+this['Paid-Free']+"</span>";}}
                     ]}
                 ]},
-                {"tag":"div", "class":"bot-row"}
+                {"tag":"div", "class":"bot-row", "children":[
+                    {"tag":"div", "class":"carname-div", "html":function(){return this['Car Name']+" Servicing"; }},
+                    {"tag":"div", "class":"parts-div", "html":function(){
+                        var html = '';
+                        $.each(this['Parts Replaced'], function(i, part){
+                            html += '<span>'+part+'</span>';
+                        })
+                        if(this['Parts Replaced'].length)
+                            return "Parts Replaced : " + this['Parts Replaced'].join(', ');
+                        else
+                            return "Parts Replaced : None" ;
+                    }},
+                    {"tag":"div", "class":"checks-div", "html":function(){
+                        var html = '';
+                        $.each(this['Regular Checks'], function(i, part){
+                            html += '<span>'+part+'</span>';
+                        })
+//                        return "Regular Checks" + html;
+                        if(this['Regular Checks'].length)
+                            return "Regular Checks : " + this['Regular Checks'].join(', ');
+                        else
+                            return "Regular Checks : None" ;
+
+                    }}
+                ]},
+                {"tag":"div", "class":"state-update none-i"}
             ]
         }],
         dealers:[{
@@ -195,18 +220,25 @@ var Templates = {
         cleaning:{
             cleaning_group:[{
                 "tag":"div","class":"service-group-item minimized",  "children":[
-                    {"tag":"div", "class":"top-row", "children":[
+                    {"tag":"div","class":"wrapper header-wrapper", "children":[
+                        {"tag":"div", "class":"top-row", "children":[
                         {"tag":"div", "class":"brand-div", "html":function(){return "Dealer : <span>"+this.name+"</span>";}},
                         {"tag":"div", "class":"price-div", "html":function(){return "Number : <span>"+this.list.length+"</span>";}}
+                        ]},
                     ]},
-                    {"tag":"div", "class":"bot-row", "html":function(){
+                    {"tag":"div","class":"wrapper detail-wrapper", "children":[
+                        {"tag":"div", "class":"bot-row", "html":function(){
                         return json2html.transform(this.list, Templates.orderPage.cleaning.cleaning_item)
-                    }}
+                        }}
+                    ]},
+
                 ]
             }],
             cleaning_item:[{
                 "tag":"div", "class":"service-list-item", "data-id":"${id}", "children":[
-                    {"tag":"div", "class":"", "html":function(){ return this.Category }}
+                    {"tag":"div", "class":"", "html":function(){ return this.Category }},
+                    {"tag":"div", "class":"state-update none-i"}
+
                 ]
             }]
         }
