@@ -4,15 +4,318 @@
     <title>ClickGarage.in - Your One Stop for All Car Solutions</title>
 
     <link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/dash.css"/>
+    
     <link rel="stylesheet" type="text/css" href="../static/css/custom.css"/>
-    <!--<link rel="stylesheet/less" type="text/css" href="../static/less/styles.less"/>-->
+    <link rel="stylesheet/less" type="text/css" href="../static/less/styles.less"/>
     <link rel="stylesheet/less" type="text/css" href="../static/less/login-html.less"/>
     <script type="text/javascript" src="../static/js/legacy/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="../static/js/plugin.js"></script>
     <script type="text/javascript" src="../static/js/dashboard.js"></script>
     <script type="text/javascript" src="../static/js/common.js"></script>
-    <!--<script type="text/javascript" src="../static/js/legacy/less.min.js"></script>-->
+    <script type="text/javascript" src="../static/js/legacy/less.min.js"></script>
+    <script>
+    $(function(){    
+    $("#profilelink").click(function(){
+        $("#account").addClass("hide");
+        $("#personalinfo").removeClass("hide");
+    });
+    $("#accountlink").click(function(){
+        $("#account").removeClass("hide");
+        $("#personalinfo").addClass("hide");
+    });
+        
+    });
+        
+    </script>
 </head>
 <body class="dash-body">
+     
+    <div class="pane dash-pane">
+        <div class="centered-content">
+ <header>
+		<nav>
+		<ul>
+		<li><a href="#">Cart</a></li>
+		<li><a href="#">Contact Us</a></li>
+		<button><a href="#">Signup/Login</a></button>
+		</ul>
+		</nav>
+		</header>
+  
+		<aside>
+		<ul class="outer-ul">
+		<li><a href="#" id="accountlink">Account</a>
+		<ul class="inner-ul">
+		<li><a href="#" id="profilelink">Profile</a></li>
+			<li><a href="#">Cars</a></li>
+				<li><a href="#">Bikes</a></li>
+		</ul>
+		
+		</li>
+			<li><a href="#">Order</a></li>
+				<li><a href="#">Cart</a></li>
+		</ul>
+		
+		</aside>
+            <div class="main-content">
+		<section id="account">
+		<div class="mycontainer , formcontainer">
+		<div class="left_form">
+		<form>
+		<h2>Add a New Address</h2>
+		<div class="pad">
+		 <label  for="name">Name</label>
+       		<input name="name" type="text">
+			</div>
+			<div class="padtextarea">
+			<label  for="streetaddress">Street Address</label>
+			<textarea name="streetaddress"></textarea>
+			</div>
+			<div class="pad">
+			<label  for="landmark">Landmark</label>
+                          <input name="landmark" type="text">
+						  </div>
+						  <div class="pad">
+		<label  for="city">City</label>
+                          <input name="city" type="text">
+						  </div>
+						  
+				 <div class="pad">
+		<label  for="city">State</label>
+                          <!--
+						  <select name="city">
+  <option value="delhi">Delhi</option>
+  <option value="up">U.P</option>
+  <option value="mp">M.P</option>
+  <option value="gujrat">Gujrat</option>
+</select>
+-->
+                     <input name="state" type="text">
+                     
+						  </div>
+		 <div class="pad">
+<label for="country">country</label>
+<span>India(service available only in india)</span>
+</div>		 
+ <div class="pad">
+<label for="pincode">Pincode</label>
+<input name="pincode" type="number">
+</div> 
+		<div class="pad">
+<label for="phone">Phone Number</label>
+<input name="phone" type="tel">
+</div> 				  
+            <div class="pad">
+                <button type="submit">Save</button>
+            </div>
+		</form>
+		</div>
+            <!--
+		<div class="saved_info_container">
+		<h4>Your Saved Address</h4>
+		<div class="saved_info"> 
+		<div class="saved_info_left">
+		<h3>sanskar jain</h3>
+		<address>
+		<p>capital one,3rd
+		floor voyage building itpl 
+		whitefield bangalore
+		<p>ph:9876380094</p>
+		</p>
+	   </address>
+	   <hr>
+	   <a href="#">defaualt address</a>
+	   <hr>
+		<a href="#">delete address</a>
+		</div>
+		<div class="saved_info_right">
+		
+		
+		<h3>sanskar jain</h3>
+		<address>
+		<p>capital one,3rd
+		floor voyage building itpl 
+		whitefield bangalore
+		<p>ph:9876380094</p>
+		</p>
+	   </address>
+	   <hr>
+	   <a href="#">defaualt address</a>
+	   <hr>
+		<a href="#">delete address</a>
+		</div>
+		</div>
+		</div>-->
+	</div>
+	</section>
+    <section id="personalinfo" class="hide">
+	<div class="mycontainer , formcontainer" >
+	<div class="left_form">
+	<form>
+		<h2>Personal Information</h2>
+		<div class="pad">
+		 <label  for="FirstName">First Name</label>
+       		<input name="firstname" type="text">
+			</div>
+			<div class="pad">
+			<label  for="lastname">Last Name</label>
+			<input name="make"></input>
+			</div>
+			<div class="pad">
+			<label  for="contactnumber">Contact Number</label>
+                          <input name="contactnumber" type="tel">
+						  </div>
+						  
+	 <div class="pad">
+	<button  type="submit">Save</button>
+	</div>
+		</form>
+	</div>
+	
+	
+	
+	
+	</div>
+	</section>
+                
+                
+                
+                
+                
+	<section class="hide">
+	<div class="mycontainer" id="container_cars">
+	<div id="cars">
+	<form>
+		
+		<div class="pad">
+		 <label  for="Brand">Brand</label>
+       		<input name="Brand" type="text">
+			</div>
+			<div class="pad">
+			<label  for="make">Make</label>
+			<textarea name="make"></textarea>
+			</div>
+			<div class="pad">
+			<label  for="color">Color</label>
+                          <input name="color" type="text">
+						  </div>
+						  <div class="pad">
+		<label  for="registraion">Registration</label>
+                          <input name="registraion" type="text">
+	
+	</div>
+	 <div class="pad">
+	<button  type="submit">Edit</button>
+	</div>
+		</form>
+	<button type="submit">Add another cart</button>
+	</div>
+	
+	
+	
+	
+	</div>
+	</section>
+                
+	
+	<section class="hide">
+	
+	<div class="mycontainer" id="container_orders_upcoming">
+	<div id="upcoming">
+	<div class="panel">
+		
+		<div class="pad">
+		 <label  for="Car">Car</label>
+       		<input name="car" type="text" readonly="True">
+			</div>
+			<div class="pad">
+			<label  for="service">Service</label>
+			<input name="service" readonly="True" type="text">
+			</div>
+			<div class="pad">
+			<label  for="date">Date</label>
+                          <input readonly="True" name="color" type="date">
+						  </div>
+						  <div class="pad">
+		<label  for="pickuptime">Pickup Time</label>
+                          <input name="pickuptime" readonly="True" type="text">
+	
+	</div>
+	  <div class="pad">
+		<label  for="pickupaddress">Pickup Address</label>
+                          <input name="pickupaddress" readonly="True" type="text">
+	
+	</div>
+	 <div class="pad">
+		<label  for="dropaddress">Drop Address</label>
+                          <input name="dropupaddress" readonly="True" type="text">
+	
+	</div>
+	 <div class="pad">
+	 <form>
+	<button  type="submit">Cancel Booking</button>
+	</form>
+	</div>
+		
+	
+	</div>
+	</div>
+        </div>
+	</section>
+	
+	
+
+
+	<section class="hide">
+	
+	<div class="mycontainer" id="container_orders_completed">
+	<div id="completed">
+	<div class="panel">
+		
+		<div class="pad">
+		 <label  for="Car">Car</label>
+       		<input name="car" type="text" readonly="True">
+			</div>
+			<div class="pad">
+			<label  for="service">Service</label>
+			<input name="service" readonly="True" type="text">
+			</div>
+			<div class="pad">
+			<label  for="date">Date</label>
+                          <input readonly="True" name="color" type="date">
+						  </div>
+						  <div class="pad">
+		<label  for="pickuptime">Pickup Time</label>
+                          <input name="pickuptime" readonly="True" type="text">
+	
+	</div>
+	  <div class="pad">
+		<label  for="pickupaddress">Pickup Address</label>
+                          <input name="pickupaddress" readonly="True" type="text">
+	
+	</div>
+	 <div class="pad">
+		<label  for="dropaddress">Drop Address</label>
+                          <input name="dropupaddress" readonly="True" type="text">
+	
+	</div>
+	 <div class="pad">
+	 <form>
+	<button  type="submit">Rate Experience</button>
+	</form>
+	</div>
+		
+	
+	</div>
+	</div>
+        </div>
+	</section>
+       
+        
+                </div>
+    </div>
+    </div>
+        <div class="overlay overlay-pat"></div>
 </body>
 </html>
