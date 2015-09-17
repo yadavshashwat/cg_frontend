@@ -169,30 +169,30 @@ var Templates = {
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
-                        {"tag":"div", "class":"due-div", "html":function(){return "due at : <span>"+this.Odometer + ' / '+ this.Year+"</span>";}},
-                        {"tag":"div", "class":"price-div", "html":function(){return "Type : <span>"+this['Paid-Free']+"</span>";}}
+                        {"tag":"div", "class":"due-div", "html":function(){return "due at : <span>"+this.odometer + ' / '+ this.Year+"</span>";}},
+                        {"tag":"div", "class":"price-div", "html":function(){return "Type : <span>"+this['paid_free']+"</span>";}}
                     ]}
                 ]},
                 {"tag":"div", "class":"bot-row", "children":[
-                    {"tag":"div", "class":"carname-div", "html":function(){return this['Car Name']+" Servicing"; }},
+                    {"tag":"div", "class":"carname-div", "html":function(){return this['car_name']+" Servicing"; }},
                     {"tag":"div", "class":"parts-div", "html":function(){
                         var html = '';
-                        $.each(this['Parts Replaced'], function(i, part){
-                            html += '<span>'+part+'</span>';
-                        })
-                        if(this['Parts Replaced'].length)
-                            return "Parts Replaced : " + this['Parts Replaced'].join(', ');
+//                        $.each(this['parts_replaced'], function(i, part){
+//                            html += '<span>'+part+'</span>';
+//                        })
+                        if(this['parts_replaced'].length)
+                            return "Parts Replaced : " + this['parts_replaced'].join(', ');
                         else
                             return "Parts Replaced : None" ;
                     }},
                     {"tag":"div", "class":"checks-div", "html":function(){
                         var html = '';
-                        $.each(this['Regular Checks'], function(i, part){
-                            html += '<span>'+part+'</span>';
-                        })
+//                        $.each(this['regular_checks'], function(i, part){
+//                            html += '<span>'+part+'</span>';
+//                        })
 //                        return "Regular Checks" + html;
-                        if(this['Regular Checks'].length)
-                            return "Regular Checks : " + this['Regular Checks'].join(', ');
+                        if(this['regular_checks'].length)
+                            return "Regular Checks : " + this['regular_checks'].join(', ');
                         else
                             return "Regular Checks : None" ;
 
