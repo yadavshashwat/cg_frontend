@@ -237,7 +237,7 @@ var Templates = {
             cleaning_item:[{
                 "tag":"div", "class":"service-list-item", "data-id":"${id}", "children":[
                     {"tag":"div", "class":"header-wrapper", "children":[
-                        {"tag":"div", "class":"", "html":function(){return this.Category}}
+                        {"tag":"div", "class":"", "html":function(){return this.category}}
                     ]},
                     {"tag":"div", "class":"state-update none-i"}
                 ]
@@ -253,8 +253,8 @@ var Templates = {
                     {"tag":"div", "class":"dealer-add-to-cart", "html":"Add to Cart"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
-                    {"tag":"div", "html":"${Price Labour}"},
-                    {"tag":"div", "html":"${Price Parts}"}
+                    {"tag":"div", "html":"${price_labour}"},
+                    {"tag":"div", "html":"${price_parts}"}
                 ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
