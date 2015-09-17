@@ -169,7 +169,7 @@ var Templates = {
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
-                        {"tag":"div", "class":"due-div", "html":function(){return "due at : <span>"+this.odometer + ' / '+ this.Year+"</span>";}},
+                        {"tag":"div", "class":"due-div", "html":function(){return "due at : <span>"+this.odometer + ' / '+ this.year+"</span>";}},
                         {"tag":"div", "class":"price-div", "html":function(){return "Type : <span>"+this['paid_free']+"</span>";}}
                     ]}
                 ]},
