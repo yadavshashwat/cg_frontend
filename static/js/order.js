@@ -79,7 +79,8 @@ var Global = {
                         workflowState.setWorkflow(data.state, data, '#'+data.state+'?s_id='+s_id);
                         workflowState.workflowBarUpdate(data.state);
                     }
-                    Commons.ajaxData('fetch_servicing_details', {service_id:s_id, c_id:_this.carSelected.id},"get",_this, eval("_this.load"+classy.toTitleCase()+"Details") )
+                    console.log("_this.load"+classy.toTitleCase()+"Details");
+                    Commons.ajaxData('fetch_'+classy+'_details', {service_id:s_id, c_id:_this.carSelected.id},"get",_this, eval("_this.load"+classy.toTitleCase()+"Details") )
                 }
             }else if($target.closest('.detail-wrapper').length){
                 if($(this).hasClass('minimized')){
@@ -134,6 +135,21 @@ var Global = {
         $.each(data, function(idx, val){
 
         });
+    },
+    loadCleaningDetails : function(data){
+        console.log('cleaning details',data);
+        if(data && data.length){
+            var common_data = {};
+            var common_keys = ["odometer", "parts_list", "wa_wb_present"];
+            $.each(common_keys, function(idx, val){
+                common_data[val] = data[0][val]
+            });
+            $('.section-select-holder').hide();
+            $('.dealer-select-holder').show();
+            var container = $('.dealer-box .dealer-listings');
+            container.html('');
+            container.json2html(data, Templates.orderPage.packages, {append:true});
+        }
     },
     loadVas : function(data){
         console.log(data);

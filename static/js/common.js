@@ -236,12 +236,29 @@ var Templates = {
             }],
             cleaning_item:[{
                 "tag":"div", "class":"service-list-item", "data-id":"${id}", "children":[
-                    {"tag":"div", "class":"", "html":function(){ return this.Category }},
+                    {"tag":"div", "class":"header-wrapper", "children":[
+                        {"tag":"div", "class":"", "html":function(){return this.Category}}
+                    ]},
                     {"tag":"div", "class":"state-update none-i"}
-
                 ]
             }]
-        }
+        },
+        packages:[{
+            "tag":"div","class":"dealer-list-item","data-id":"${id}", "children":[
+                {"tag":"div","class":"td-info", "children":[
+                    {"tag":"div", "class":"","html":"${service}"}
+                ]},
+                {"tag":"div","class":"col-item td-dealer-select", "children":[
+                    {"tag":"div", "class":"dealer-checkout", "html":"Checkout"},
+                    {"tag":"div", "class":"dealer-add-to-cart", "html":"Add to Cart"}
+                ]},
+                {"tag":"div","class":"col-item td-price", "children":[
+                    {"tag":"div", "html":"${Price Labour}"},
+                    {"tag":"div", "html":"${Price Parts}"}
+                ]},
+                {"tag":"div","class":"col-item td-rating", "html":""}
+            ]
+        }]
     }
 };
 
