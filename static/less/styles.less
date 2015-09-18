@@ -49,6 +49,14 @@ modal : 60 - 70
   -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
+.left-triangle(@ht, @color: #356B9D){
+		width: 0px;
+		height: 0px;
+		border-style: solid;
+		border-width: @ht;
+		border-color: transparent @color transparent transparent;
+}
+
 .notif{
   background-color: rgba(77,91,148,0.5);
   color:#fff;
@@ -904,6 +912,7 @@ modal : 60 - 70
       }
       .section-listings{
         position: relative;
+        font-family: Roboto;
 
         .section-content-item{
           position: absolute;
@@ -944,6 +953,30 @@ modal : 60 - 70
             }
             .bot-row{
               display: none;
+              .carname-div{
+
+              }
+              .parts-div, .parts-label{
+                position: relative;
+                line-height: 32px;
+                white-space: normal;
+              }
+              .parts-div{
+                margin-left: 120px;
+                .token-class{
+                  display: inline-block;
+                  font-size: 12px;
+                  background: #4d5b94;
+                  border: 1px solid #000;
+                  border-radius: 12px;
+                  line-height: 18px;
+                  padding: 3px 6px;
+                  color:#fff;
+                  margin-right: 12px;
+                  white-space: nowrap;
+
+                }
+              }
             }
             .header-wrapper:hover{
                 background: rgba(234,234,234, 0.4);
@@ -965,28 +998,112 @@ modal : 60 - 70
             }
           }
 
-          .service-group-item{
-            width: 100%;
-            border: 1px solid transparent;
-            border-bottom: 3px solid #e89b76;
-            height: 63px;
-            .bot-row{
-
-              display: none;
-            .service-list-item{
-              border-bottom: none;
-            }
-            }
-          }
-          .service-group-item.expanded{
-            height: auto;
-            .bot-row{
-              display: block;
-            }
-          }
 
         }
         .servicing{
+        }
+        .cleaning{
+          .list-head{
+            float:left;
+            width:120px;
+            border-right: 1px solid #eaeaea;
+            .service-group-head{
+              padding: 10px;
+              position: relative;
+              height: 100px;
+              background-color: #eaeaea;
+              border-bottom: 1px solid #dadada;
+//              width: 78px;
+              .dealer-logo-wrapper{
+                height:100%;
+                border: 1px solid #eaeaea;
+                line-height: 72px;
+                img{
+                  width: 98px;
+                  height: auto;
+                  max-height: 98px;
+                  vertical-align: middle;
+                  overflow: hidden;
+                  line-height: 16px;
+                  font-size: 12px;
+                }
+                .aligner{
+                  display: inline-block;
+                  height: 72px;
+                  width: 0px;
+                  vertical-align: middle;
+                }
+              }
+              .dealer-number-label{
+                position: absolute;
+                right: 12px;
+                bottom:12px;
+                padding: 3px 3px;
+                height: 18px;
+                line-height: 18px;
+                width: 18px;
+                text-align: center;
+                border-radius: 6px;
+                background-color: #fff;
+                border: 1px solid #dedede;
+              }
+              .pointer{
+                position: absolute;
+                right: 0;
+                top: 54px;
+                display: none;
+                .left-triangle(6px, #000 );
+              }
+              .select-border{
+                position: absolute;
+                right: -1px;
+                width: 3px;
+                display: none;
+                top: 0px;
+                height: 120px;
+                background: #000;
+
+              }
+
+            }
+            .service-group-head.selected{
+
+                display: block;
+              .select-border,.pointer{
+                display: block;
+              }
+            }
+            .service-group-head:last-child{
+              border-bottom :  none;
+            }
+            .service-group-head:hover{
+              background-color: #fff;
+            }
+          }
+          .list-body{
+            margin-left:91px;
+            .service-group-item{
+              width: 100%;
+              border: 1px solid transparent;
+              border-bottom: 3px solid #e89b76;
+              display: none;
+//              height: 63px;
+              .bot-row{
+
+                display: none;
+              .service-list-item{
+                border-bottom: none;
+              }
+              }
+            }
+            .service-group-item.expanded{
+              height: auto;
+              .bot-row{
+                display: block;
+              }
+            }
+
+          }
         }
         .fadeLeft{
           -webkit-transform: translate(-100%, 0);
