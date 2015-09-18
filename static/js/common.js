@@ -159,6 +159,13 @@ function bind(f, obj, args)
 
 }
 
+var logoMap = {
+    '3M':'../static/img/dl-logo-3M.png',
+    'Tee Car Care':'../static/img/dl-logo-Tee.png',
+    'Exppress Car Wash':'../static/img/dl-logo-Exppress.png',
+    'ClickGarage On-The-Go':''
+};
+
 var Templates = {
     orderPage:{
         servicing:[{
@@ -174,29 +181,38 @@ var Templates = {
                     ]}
                 ]},
                 {"tag":"div", "class":"bot-row", "children":[
-                    {"tag":"div", "class":"carname-div", "html":function(){return this['car_name']+" Servicing"; }},
-                    {"tag":"div", "class":"parts-div", "html":function(){
-                        var html = '';
-//                        $.each(this['parts_replaced'], function(i, part){
-//                            html += '<span>'+part+'</span>';
-//                        })
-                        if(this['parts_replaced'].length)
-                            return "Parts Replaced : " + this['parts_replaced'].join(', ');
-                        else
-                            return "Parts Replaced : None" ;
-                    }},
-                    {"tag":"div", "class":"checks-div", "html":function(){
-                        var html = '';
-//                        $.each(this['regular_checks'], function(i, part){
-//                            html += '<span>'+part+'</span>';
-//                        })
-//                        return "Regular Checks" + html;
-                        if(this['regular_checks'].length)
-                            return "Regular Checks : " + this['regular_checks'].join(', ');
-                        else
-                            return "Regular Checks : None" ;
+                    {"tag":"div", "class":"row", "children":[
+                         {"tag":"div", "class":"fr", "html":function(){
+                                return 'Cleaning <i class="fa fa-check"></i>';
+                         }},
+                         {"tag":"div", "class":"fr", "html":function(){
+                             if(this['regular_checks'] && this['regular_checks'].length){
+                                return 'Regular Checks <i class="fa fa-check"></i>';
+                             }else{
+                                 return '<span class="disabled">Regular Checks</span>';
+                             }
+                         }},
+//                         {"tag":"div", "class":"carname-div", "html":function(){return this['car_name']+" Servicing"; }},
+                    ]},
+                    {"tag":"div", "class":"row", "children":[
+                        {"tag":"div", "class":"parts-label fl", "html":function(){
+                            return "Parts Replaced : ";
+                        }},
+                        {"tag":"div", "class":"parts-div", "html":function(){
+                            var html = '';
+                            if(this['parts_replaced'] && this['parts_replaced'].length){
+                                $.each(this['parts_replaced'], function(i, part){
+                                    html += '<span class="token-class">'+part+'</span>&nbsp;';
+                                });
+                                return html;
+    //                            return "Regular Checks :" + this['parts_replaced'].join(', ');
+                            }
+                            else
+                                return "None";
+                        }}
 
-                    }}
+                    ]}
+
                 ]},
                 {"tag":"div", "class":"state-update none-i"}
             ]
@@ -218,21 +234,26 @@ var Templates = {
             ]
         }],
         cleaning:{
-            cleaning_group:[{
-                "tag":"div","class":"service-group-item minimized",  "children":[
-                    {"tag":"div","class":"wrapper header-wrapper", "children":[
-                        {"tag":"div", "class":"top-row", "children":[
-                        {"tag":"div", "class":"brand-div", "html":function(){return "Dealer : <span>"+this.name+"</span>";}},
-                        {"tag":"div", "class":"price-div", "html":function(){return "Number : <span>"+this.list.length+"</span>";}}
-                        ]},
-                    ]},
-                    {"tag":"div","class":"wrapper detail-wrapper", "children":[
-                        {"tag":"div", "class":"bot-row", "html":function(){
-                        return json2html.transform(this.list, Templates.orderPage.cleaning.cleaning_item)
-                        }}
-                    ]},
-
+            cleaning_group_head:[{
+                "tag":"div","class":"service-group-head", "data-name":"${name}", "data-id":"${id}",  "children":[
+                    {"tag":"div", "class":"dealer-logo-wrapper", "html":function(){
+                        if(this.name){
+                            return '<img src="'+logoMap[$.trim(this.name)]+'" alt="'+this.name+'" /><div class="aligner"></div>';
+                        }else{
+                            return 'N/A'
+                        }
+                    }},
+                    {"tag":"div", "class":"dealer-number-label", "html":function(){ return this.list.length; }},
+                    {"tag":"div", "class":"pointer right-triangle"},
+                    {"tag":"div", "class":"select-border"}
+//                    {"tag":"div", "class":"brand-div", "html":function(){return "Dealer : <span>"+this.name+"</span>";}},
+//                    {"tag":"div", "class":"price-div", "html":function(){return "Number : <span>"+this.list.length+"</span>";}}
                 ]
+            }],
+            cleaning_group_body:[{
+                "tag":"div","class":"service-group-item wrapper detail-wrapper", "data-name":"${name}", "data-id":"${id}", "html":function(){
+                        return json2html.transform(this.list, Templates.orderPage.cleaning.cleaning_item)
+                }
             }],
             cleaning_item:[{
                 "tag":"div", "class":"service-list-item", "data-id":"${id}", "children":[
