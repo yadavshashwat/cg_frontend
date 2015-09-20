@@ -70,6 +70,7 @@ var Global = {
             if($target.closest('.header-wrapper').length || $target.closest('.state-update').length){
                 var classy = $(this).closest('.section-content-item').attr('data-class');
                 var s_id = $(this).attr('data-id');
+                _this.selectedSection = classy;
                 if(classy == 'servicing' || classy == 'cleaning' || classy == 'vas'){
                     var data = {};
                     data.state = 'dealer';
@@ -107,6 +108,27 @@ var Global = {
                 bodyHolder.find('.service-group-item[data-name="'+name+'"]').show();
             }
         });
+        $('.dealer-box ').on('click', '.dealer-checkout, .dealer-add-to-cart', function(e){
+            var obj = {};
+            obj.timestamp = (new Date()).getTime();
+            obj.service = _this.selectedSection;
+            obj.dealer = $(this).closest('.dealer-list-item').attr('data-name');
+            obj.s_id = $(this).closest('.dealer-list-item').attr('data-id');
+            console.log(obj)
+            var cook_obj = local.load();
+            var oldC = '';
+            if(cook_obj['clgacart']){
+                oldC = cook_obj['clgacart'];
+                oldC += ','
+            }
+            var newC = [obj.timestamp,obj.service, obj.dealer, obj.s_id].join('*');
+            oldC += newC;
+            local.save('clgacart', oldC);
+            Commons.ajaxData('add_to_cart', {'cookie':newC, 'car_id':_this.carSelected.id, 'car_size':_this.carSelected.size}, "get", _this, _this.redirectToCart );
+
+//            Commons.ajaxData('add_to_cart', {})
+        });
+
 
 
     },
@@ -241,7 +263,10 @@ var Global = {
         container.append(overlay).append(content);
         return container;
     },
-    carData:null
+    carData:null,
+    redirectToCart : function(){
+
+    }
 };
 
 var workflowState = {

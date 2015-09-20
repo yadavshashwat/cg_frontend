@@ -39,7 +39,8 @@ var Commons = {
         'fetch_car_vas':'/api/fetch_car_vas/',
         'fetch_vas_details':'/api/fetch_vas_details/',
         'fetch_car_cleanings':'/api/fetch_all_cleaningcatservices/',
-        'fetch_car_tyres':'/api/fetch_all_cleaningcatservices/'
+        'fetch_car_tyres':'/api/fetch_all_cleaningcatservices/',
+        'add_to_cart':'/api/add_to_cart/'
     },
     getOrigin: function(){
         var origin = window.location.origin;
@@ -218,7 +219,7 @@ var Templates = {
             ]
         }],
         dealers:[{
-            "tag":"div","class":"dealer-list-item","data-id":"${id}", "children":[
+            "tag":"div","class":"dealer-list-item","data-id":"${id}", "data-name":"${dealer_cat}", "children":[
                 {"tag":"div","class":"td-info", "children":[
                     {"tag":"div", "class":"","html":"${dealer_cat}"}
                 ]},
@@ -265,7 +266,7 @@ var Templates = {
             }]
         },
         packages:[{
-            "tag":"div","class":"dealer-list-item","data-id":"${id}", "children":[
+            "tag":"div","class":"dealer-list-item","data-id":"${id}", "data-name":"${vendor}", "children":[
                 {"tag":"div","class":"td-info", "children":[
                     {"tag":"div", "class":"","html":"${service}"}
                 ]},
@@ -288,3 +289,69 @@ if (typeof String.prototype.toTitleCase != 'function') {
         return (this[0].toUpperCase() + this.slice(1));
     };
 }
+
+/*
+*   1   -   userid
+*   2   -   name
+*   3   -
+*   4   -
+*   5   -
+*
+total transaction data required -
+    booking_id         = models.IntegerField()
+    trans_timestamp    = models.CharField(max_length=200)
+    cust_name          = models.CharField(max_length=200)
+    cust_brand         = models.CharField(max_length=200)
+    cust_carname       = models.CharField(max_length=200)
+    cust_number        = models.CharField(max_length=200)
+    cust_email         = models.CharField(max_length=200)
+    cust_pickup_add    = models.CharField(max_length=200)
+    cust_drop_add      = models.CharField(max_length=200)
+    booking_vendor     = models.CharField(max_length=200)
+    booking_cat        = models.CharField(max_length=200)
+    booking_type       = models.CharField(max_length=200)
+    price_labour       = models.CharField(max_length=200)
+    price_parts        = models.CharField(max_length=200)
+    price_total        = models.CharField(max_length=200)
+    date_booking       = models.CharField(max_length=200)
+    time_booking       = models.CharField(max_length=200)
+    amount_paid        = models.BooleanField()
+    status             = models.CharField(max_length=200)
+    comments           = models.CharField(max_length=300)
+
+*
+* */
+
+var local = {
+    save:function(key, value){
+        var stringKey = 'clgacart';
+        if(key){
+            stringKey = key;
+        }
+        var stringVal = value;
+        if(value instanceof Object){
+            stringVal = JSON.stringify(value);
+        }
+        var dc_old = document.cookie;
+        document.cookie = key+"="+stringVal;
+    },
+    load:function(){
+        var dc_str = document.cookie;
+        var dc_arr = dc_str.split(';');
+        var dict = {};
+        $.each(dc_arr, function(idx, val){
+            dict[val.split('=')[0].trim()] = val.split('=')[1]
+        });
+        return dict;
+    },
+    clearKey:function(key){
+        var stringKey = 'clgacart';
+        if(key){
+            stringKey = key;
+        }
+        document.cookie = stringKey+'=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+    },
+    clearAll:function(){
+
+    }
+};
