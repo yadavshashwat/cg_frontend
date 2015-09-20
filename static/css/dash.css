@@ -11,7 +11,7 @@ text-decoration:none;
 
 }
 .main-content{
-    font:18px roboto regular;
+    font:18px roboto ;
     color:#616161;
     
 }
@@ -56,13 +56,13 @@ padding-top:12px;
     line-height: 30px
 
 }
-.inner-ul li a{
+.inner-ul-1 li a , .inner-ul-2 li a{
    padding-left: 40px;
     display: block;
     line-height: 20px;   
 }
 aside ul li a:hover{
-background:red;
+background:#4d5b94;
 }
 nav ul{
 float:right;
@@ -82,15 +82,7 @@ ul{
 list-style:none;
 margin:0 auto;
 }
-aside{
-min-width: 210px;
-    background: white;
-    height: 101vh;
-    position: relative;
-    float: left;
-    z-index: 11;
-    background:yellow;
-}
+
 .hide{
  display: none;
 }
@@ -124,21 +116,12 @@ margin-bottom: 12px;
     margin-bottom: 12px;   
 }
 .pad span{
- font:14px roboto regular;
+ font:13.3px Roboto ;
+    
 float:right;    
 }
-.pad button{
- margin-left: 82px;
-    width: 120px;
-    font:18px Roboto Regular;
-    height: 33px;
-    line-height: 26px;
-    margin-top: 12px;
-    background-color: #4d5b94;
-    border: 0;
-    color:#fff;
-    cursor: pointer;
-}
+
+
 form{
  width:350px;   
 }
@@ -168,15 +151,7 @@ vertical-align: top;
     margin-right: 37px;
     width: 169px;
 }
-.mycontainer{
-display:flex;
-padding-right: 15px;
-padding-left: 15px;
-margin-right: auto;
-margin-left: auto;
-justify-content:center;
-    
-}
+
 
 .saved_info_container{
 
@@ -202,11 +177,7 @@ background:red;
 padding:10px;
 }
 
-#container_cars{
-position:absolute;
-top:600px;
-left:250px;
-}
+
 .panel{
 
 margin-bottom: 20px;
@@ -224,12 +195,6 @@ top:900px;
 left:250px;
 
 }
-#container_orders_completed{
-
-position:absolute;
-top:1300px;
-left:250px;
-}
 
 aside ul {
     margin: 0;
@@ -239,7 +204,64 @@ aside ul {
 }
 label{
  line-height: 26px;
-font:14px Roboto Regular;
+font:14px Roboto ;
 color:#616161;    
     
+}
+
+.tablecontainer{
+display:flex;
+padding-right: 15px;
+padding-left: 24px;
+margin-right: auto;
+margin-left: auto;
+justify-content:flex-start;
+
+table thead{
+ font:Roboto 18px;
+    font-weight: bold;
+}
+
+}
+#completed{
+ padding-top:12px;   
+}
+ #completed .panel{
+     border:0;   
+    }
+table{
+border: 0;
+border-collapse: collapse;
+}
+
+#completed > div > table > tbody > tr:nth-child(1) > td{
+
+    line-height: 25px;
+    padding-bottom: 0;
+    height: 25px;
+    font-size: 12px;
+    font-family:Roboto;
+    font-weight: bold;
+    text-align: center;
+    color: #000;
+}
+
+#completed > div > table > tbody > tr p{
+    height: 20px;
+    font-size: 11px;
+    
+    vertical-align: -webkit-baseline-middle;
+    font-family: :Roboto;
+    font-weight: normal;
+    text-align: center;
+    color: #000;
+}
+#completed > div > table > tbody > tr > td div{
+    margin-bottom: 8px;
+ height: 32px;
+    background: grey;
+}
+table tr td button{
+ margin-top:10px;
+    margin-left: 4px;   
 }
