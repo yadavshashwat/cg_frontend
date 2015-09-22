@@ -161,16 +161,18 @@ var Global = {
     },
     loadCleaning : function(data){
         console.log(data);
-//        var container = $('.section-box .cleaning');
-//        container.html('');
-//        container.json2html(data, Templates.orderPage.cleaning.cleaning_group_head, {append:true});
+        var container = $('.section-box .cleaning');
+        container.html('');
+        container.json2html(data, Templates.orderPage.cleaning, {append:true});
 
-        var headHolder = $('.section-box .cleaning .list-head');
-        headHolder.html('');
-        headHolder.json2html(data, Templates.orderPage.cleaning.cleaning_group_head, {append:true});
-        var bodyHolder = $('.section-box .cleaning .list-body');
-        bodyHolder.html('');
-        bodyHolder.json2html(data, Templates.orderPage.cleaning.cleaning_group_body, {append:true});
+//        var headHolder = $('.section-box .cleaning .list-head');
+//        headHolder.html('');
+//        headHolder.json2html(data, Templates.orderPage.cleaning.cleaning_group_head, {append:true});
+//        var bodyHolder = $('.section-box .cleaning .list-body');
+//        bodyHolder.html('');
+//        bodyHolder.json2html(data, Templates.orderPage.cleaning.cleaning_group_body, {append:true});
+
+
 //        container.append(json2html.transform(data,Templates.orderPage.services));
         $.each(data, function(idx, val){
 

@@ -177,7 +177,7 @@ var Templates = {
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
-                        {"tag":"div", "class":"due-div", "html":function(){return "due at : <span>"+this.odometer + ' / '+ this.year+"</span>";}},
+                        {"tag":"div", "class":"due-div fl", "html":function(){return "due at : <span>"+this.odometer + ' / '+ this.year+"</span>";}},
                         {"tag":"div", "class":"price-div", "html":function(){return "Type : <span>"+this['paid_free']+"</span>";}}
                     ]}
                 ]},
@@ -218,6 +218,21 @@ var Templates = {
                 {"tag":"div", "class":"state-update none-i"}
             ]
         }],
+        cleaning:[{
+            "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
+                {"tag":"div", "class":"top-row", "children":[
+                    {"tag":"div", "class":"wrapper detail-wrapper", "children":[
+                        {"tag":"div", "class":"detail-div", "html":function(){return "<div> Details </div><i class='fa fa-ellipsis-h'></i>";}}
+                    ]},
+
+                    {"tag":"div", "class":"wrapper header-wrapper", "children":[
+                        {"tag":"div", "class":"due-div", "html":function(){return "Cleaning Type : <span>"+this.category +"</span>";}},
+//                        {"tag":"div", "class":"price-div", "html":function(){return "Type : <span>"+this['paid_free']+"</span>";}}
+                    ]}
+                ]},
+                {"tag":"div", "class":"state-update none-i"}
+            ]
+        }],
         dealers:[{
             "tag":"div","class":"dealer-list-item","data-id":"${id}", "data-name":"${dealer_cat}", "children":[
                 {"tag":"div","class":"td-info", "children":[
@@ -234,7 +249,7 @@ var Templates = {
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
         }],
-        cleaning:{
+        cleaning_old:{
             cleaning_group_head:[{
                 "tag":"div","class":"service-group-head", "data-name":"${name}", "data-id":"${id}",  "children":[
                     {"tag":"div", "class":"dealer-logo-wrapper", "html":function(){
