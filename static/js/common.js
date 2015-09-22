@@ -164,7 +164,11 @@ var logoMap = {
     '3M':'../static/img/dl-logo-3M.png',
     'Tee Car Care':'../static/img/dl-logo-Tee.png',
     'Exppress Car Wash':'../static/img/dl-logo-Exppress.png',
-    'ClickGarage On-The-Go':''
+    'ClickGarage On-The-Go':'',
+    'Authorized':'../static/img/brands/',
+    'Bosch':'../static/img/dl-logo-Bosch.jpg',
+    'ClickGarage Workshop':'',
+    'Mahindra First Choice':'../static/img/dl-logo-MFC.jpg'
 };
 
 var Templates = {
@@ -234,9 +238,20 @@ var Templates = {
             ]
         }],
         dealers:[{
-            "tag":"div","class":"dealer-list-item","data-id":"${id}", "data-name":"${dealer_cat}", "children":[
+            "tag":"div","class":"dealer-list-item","data-id":"${id}", "data-name":"${vendor}", "children":[
                 {"tag":"div","class":"td-info", "children":[
-                    {"tag":"div", "class":"","html":"${dealer_cat}"}
+                    {"tag":"div", "class":"none-i","html":"${vendor}"},
+                    {"tag":"div", "class":"dealer-logo-wrapper", "html":function(){
+                        if(this.vendor){
+                            if($.trim(this.vendor) == 'Authorized'){
+                                return '<img src="'+logoMap['Authorized']+ $.trim(this.brand)+'.jpg" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                            }else{
+                                return '<img src="'+logoMap[$.trim(this.vendor)]+'" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                            }
+                        }else{
+                            return 'N/A'
+                        }
+                    }},
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     {"tag":"div", "class":"dealer-checkout", "html":"Checkout"},
@@ -282,7 +297,22 @@ var Templates = {
         },
         packages:[{
             "tag":"div","class":"dealer-list-item","data-id":"${id}", "data-name":"${vendor}", "children":[
-                {"tag":"div","class":"td-info", "children":[
+                {"tag":"div","class":"td-dealer-info", "children":[
+                    {"tag":"div", "class":"none-i","html":"${vendor}"},
+                    {"tag":"div", "class":"dealer-logo-wrapper", "html":function(){
+                        if(this.vendor){
+                            if($.trim(this.vendor) == 'Authorized'){
+                                return '<img src="'+logoMap['Authorized']+ $.trim(this.brand)+'.jpg" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                            }else{
+                                return '<img src="'+logoMap[$.trim(this.vendor)]+'" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                            }
+                        }else{
+                            return 'N/A'
+                        }
+                    }},
+
+                ]},
+                {"tag":"div","class":"td-service-info", "children":[
                     {"tag":"div", "class":"","html":"${service}"}
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
