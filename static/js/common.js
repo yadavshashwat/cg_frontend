@@ -39,7 +39,8 @@ var Commons = {
         'fetch_car_vas':'/api/fetch_car_vas/',
         'fetch_vas_details':'/api/fetch_vas_details/',
         'fetch_car_cleanings':'/api/fetch_all_cleaningcatservices/',
-        'fetch_car_tyres':'/api/fetch_all_cleaningcatservices/'
+        'fetch_car_tyres':'/api/fetch_all_cleaningcatservices/',
+        'add_to_cart':'/api/add_to_cart/'
     },
     getOrigin: function(){
         var origin = window.location.origin;
@@ -163,7 +164,11 @@ var logoMap = {
     '3M':'../static/img/dl-logo-3M.png',
     'Tee Car Care':'../static/img/dl-logo-Tee.png',
     'Exppress Car Wash':'../static/img/dl-logo-Exppress.png',
-    'ClickGarage On-The-Go':''
+    'ClickGarage On-The-Go':'',
+    'Authorized':'../static/img/brands/',
+    'Bosch':'../static/img/dl-logo-Bosch.jpg',
+    'ClickGarage Workshop':'',
+    'Mahindra First Choice':'../static/img/dl-logo-MFC.jpg'
 };
 
 var Templates = {
@@ -176,7 +181,7 @@ var Templates = {
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
-                        {"tag":"div", "class":"due-div", "html":function(){return "due at : <span>"+this.odometer + ' / '+ this.year+"</span>";}},
+                        {"tag":"div", "class":"due-div fl", "html":function(){return "due at : <span>"+this.odometer + ' / '+ this.year+"</span>";}},
                         {"tag":"div", "class":"price-div", "html":function(){return "Type : <span>"+this['paid_free']+"</span>";}}
                     ]}
                 ]},
@@ -217,10 +222,40 @@ var Templates = {
                 {"tag":"div", "class":"state-update none-i"}
             ]
         }],
+        cleaning:[{
+            "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
+                {"tag":"div", "class":"top-row", "children":[
+                    {"tag":"div", "class":"wrapper detail-wrapper", "children":[
+                        {"tag":"div", "class":"detail-div", "html":function(){return "<div> Details </div><i class='fa fa-ellipsis-h'></i>";}}
+                    ]},
+
+                    {"tag":"div", "class":"wrapper header-wrapper", "children":[
+                        {"tag":"div", "class":"due-div", "html":function(){return "Cleaning Type : <span>"+this.category +"</span>";}},
+//                        {"tag":"div", "class":"price-div", "html":function(){return "Type : <span>"+this['paid_free']+"</span>";}}
+                    ]}
+                ]},
+                {"tag":"div", "class":"state-update none-i"}
+            ]
+        }],
         dealers:[{
-            "tag":"div","class":"dealer-list-item","data-id":"${id}", "children":[
-                {"tag":"div","class":"td-info", "children":[
-                    {"tag":"div", "class":"","html":"${dealer_cat}"}
+            "tag":"div","class":"dealer-list-item","data-id":"${id}", "data-name":"${vendor}", "children":[
+                {"tag":"div","class":"td-dealer-info", "children":[
+                    {"tag":"div", "class":"none-i","html":"${vendor}"},
+                    {"tag":"div", "class":"dealer-logo-wrapper", "html":function(){
+                        if(this.vendor){
+                            if($.trim(this.vendor) == 'Authorized'){
+                                return '<img src="'+logoMap['Authorized']+ $.trim(this.brand)+'.jpg" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                            }else{
+                                return '<img src="'+logoMap[$.trim(this.vendor)]+'" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                            }
+                        }else{
+                            return 'N/A'
+                        }
+                    }},
+                ]},
+                {"tag":"div","class":"td-service-info", "children":[
+                    {"tag":"div", "class":"text","html":"Regular Servicing"},
+                    {"tag":"div", "class":"sub-text","html":"(${odometer}km)"}
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     {"tag":"div", "class":"dealer-checkout", "html":"Checkout"},
@@ -233,7 +268,7 @@ var Templates = {
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
         }],
-        cleaning:{
+        cleaning_old:{
             cleaning_group_head:[{
                 "tag":"div","class":"service-group-head", "data-name":"${name}", "data-id":"${id}",  "children":[
                     {"tag":"div", "class":"dealer-logo-wrapper", "html":function(){
@@ -265,9 +300,25 @@ var Templates = {
             }]
         },
         packages:[{
-            "tag":"div","class":"dealer-list-item","data-id":"${id}", "children":[
-                {"tag":"div","class":"td-info", "children":[
-                    {"tag":"div", "class":"","html":"${service}"}
+            "tag":"div","class":"dealer-list-item","data-id":"${id}", "data-name":"${vendor}", "children":[
+                {"tag":"div","class":"td-dealer-info", "children":[
+                    {"tag":"div", "class":"none-i","html":"${vendor}"},
+                    {"tag":"div", "class":"dealer-logo-wrapper", "html":function(){
+                        if(this.vendor){
+                            if($.trim(this.vendor) == 'Authorized'){
+                                return '<img src="'+logoMap['Authorized']+ $.trim(this.brand)+'.jpg" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                            }else{
+                                return '<img src="'+logoMap[$.trim(this.vendor)]+'" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                            }
+                        }else{
+                            return 'N/A'
+                        }
+                    }},
+
+                ]},
+                {"tag":"div","class":"td-service-info", "children":[
+                    {"tag":"div", "class":"text","html":"${service}"},
+                    {"tag":"div", "class":"sub-text","html":"(${category})"}
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     {"tag":"div", "class":"dealer-checkout", "html":"Checkout"},
@@ -288,3 +339,69 @@ if (typeof String.prototype.toTitleCase != 'function') {
         return (this[0].toUpperCase() + this.slice(1));
     };
 }
+
+/*
+*   1   -   userid
+*   2   -   name
+*   3   -
+*   4   -
+*   5   -
+*
+total transaction data required -
+    booking_id         = models.IntegerField()
+    trans_timestamp    = models.CharField(max_length=200)
+    cust_name          = models.CharField(max_length=200)
+    cust_brand         = models.CharField(max_length=200)
+    cust_carname       = models.CharField(max_length=200)
+    cust_number        = models.CharField(max_length=200)
+    cust_email         = models.CharField(max_length=200)
+    cust_pickup_add    = models.CharField(max_length=200)
+    cust_drop_add      = models.CharField(max_length=200)
+    booking_vendor     = models.CharField(max_length=200)
+    booking_cat        = models.CharField(max_length=200)
+    booking_type       = models.CharField(max_length=200)
+    price_labour       = models.CharField(max_length=200)
+    price_parts        = models.CharField(max_length=200)
+    price_total        = models.CharField(max_length=200)
+    date_booking       = models.CharField(max_length=200)
+    time_booking       = models.CharField(max_length=200)
+    amount_paid        = models.BooleanField()
+    status             = models.CharField(max_length=200)
+    comments           = models.CharField(max_length=300)
+
+*
+* */
+
+var local = {
+    save:function(key, value){
+        var stringKey = 'clgacart';
+        if(key){
+            stringKey = key;
+        }
+        var stringVal = value;
+        if(value instanceof Object){
+            stringVal = JSON.stringify(value);
+        }
+        var dc_old = document.cookie;
+        document.cookie = key+"="+stringVal;
+    },
+    load:function(){
+        var dc_str = document.cookie;
+        var dc_arr = dc_str.split(';');
+        var dict = {};
+        $.each(dc_arr, function(idx, val){
+            dict[val.split('=')[0].trim()] = val.split('=')[1]
+        });
+        return dict;
+    },
+    clearKey:function(key){
+        var stringKey = 'clgacart';
+        if(key){
+            stringKey = key;
+        }
+        document.cookie = stringKey+'=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+    },
+    clearAll:function(){
+
+    }
+};
