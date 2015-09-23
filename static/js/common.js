@@ -239,7 +239,7 @@ var Templates = {
         }],
         dealers:[{
             "tag":"div","class":"dealer-list-item","data-id":"${id}", "data-name":"${vendor}", "children":[
-                {"tag":"div","class":"td-info", "children":[
+                {"tag":"div","class":"td-dealer-info", "children":[
                     {"tag":"div", "class":"none-i","html":"${vendor}"},
                     {"tag":"div", "class":"dealer-logo-wrapper", "html":function(){
                         if(this.vendor){
@@ -252,6 +252,10 @@ var Templates = {
                             return 'N/A'
                         }
                     }},
+                ]},
+                {"tag":"div","class":"td-service-info", "children":[
+                    {"tag":"div", "class":"text","html":"Regular Servicing"},
+                    {"tag":"div", "class":"sub-text","html":"(${odometer}km)"}
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     {"tag":"div", "class":"dealer-checkout", "html":"Checkout"},
@@ -313,7 +317,8 @@ var Templates = {
 
                 ]},
                 {"tag":"div","class":"td-service-info", "children":[
-                    {"tag":"div", "class":"","html":"${service}"}
+                    {"tag":"div", "class":"text","html":"${service}"},
+                    {"tag":"div", "class":"sub-text","html":"(${category})"}
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     {"tag":"div", "class":"dealer-checkout", "html":"Checkout"},
