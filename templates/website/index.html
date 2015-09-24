@@ -15,6 +15,53 @@
     <script type="text/javascript" src="{%  static "js/plugin.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/home.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/common.js" %}"></script>
+    
+    <!--Script Addition - Slider Start-->
+    <script type="text/javascript" src="{%  static "js/jssor.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/jssor.slider.js" %}"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            var options = {
+                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                $AutoPlaySteps: 1,                                  //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1
+                $AutoPlayInterval: 0,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
+                $PauseOnHover: 4,                               //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
+
+                $ArrowKeyNavigation: true,                          //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
+                $SlideEasing: $JssorEasing$.$EaseLinear,          //[Optional] Specifies easing for right to left animation, default value is $JssorEasing$.$EaseOutQuad
+                $SlideDuration: 5000,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
+                $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
+                $SlideWidth: 100,                                   //[Optional] Width of every slide in pixels, default value is width of 'slides' container
+                $SlideHeight: 100,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
+                $SlideSpacing: 50,                                  //[Optional] Space between each slide in pixels, default value is 0
+                $DisplayPieces: 8,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+                $ParkingPosition: 0,                              //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
+                $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
+                $PlayOrientation: 1,                                //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
+                $DragOrientation: 1                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
+            };
+
+            var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+
+            //responsive code begin
+            //you can remove responsive code if you don't want the slider scales while window resizes
+            function ScaleSlider() {
+                var bodyWidth = document.body.clientWidth;
+                if (bodyWidth)
+                    jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 1380));
+                else
+                    window.setTimeout(ScaleSlider, 30);
+            }
+            ScaleSlider();
+
+            $(window).bind("load", ScaleSlider);
+            $(window).bind("resize", ScaleSlider);
+            $(window).bind("orientationchange", ScaleSlider);
+            //responsive code end
+        });
+    </script>
+    <!--Script Addition - Slider end-->
+
     <script src="{%  static "js/legacy/less.min.js" %}"></script>
 
     {% load js %}
@@ -261,25 +308,74 @@
             </div>
         </div>
     </div>
+
+     <!--Script Addition - Slider Start-->
+     <div class="partners-platform">
+            <div class="text-holder">
+                Our Partners
+            </div>
+        </div>
+    <div id="slider1_container" style="position: relative; top: 35px; left: 0px; width: 980px; height: 200px; overflow: hidden; ">
+
+        <!-- Loading Screen -->
+        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                background-color: #000; top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+            <div style="position: absolute; display: block; background: url(../img/loading.gif) no-repeat center center;
+                top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+        </div>
+
+        <!-- Slides Container -->
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1200px; height: 200px; overflow: hidden;">
+            <div><img u="image" alt="partner" src="../../static/img/partners/Automotives India MFC.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Autovikas tata.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Autozone suzuki.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Capital Volkswagen.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/City cars bosch.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Courtesy Honda.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Deep Hyundai.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Delhi Scooters Yamaha.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Ess Aar Royal Enfield.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/JB Honda.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Kashyap Fiat.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Khanna hero.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Kukreja hero.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Riddi Ford.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Sidharth Auto - Yamaha.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Speed car wash.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Sri durga mahindra.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/TCS bajaj.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Tee car care.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Zaira bosch.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Express Windhield.jpg" /></div>
+            <div><img u="image" alt="partner" src="../../static/img/partners/Auto Glass Masters.jpg" /></div>
+
+
+        </div>
+        <a style="display: none" href="http://www.jssor.com">Bootstrap Slider</a>
+    </div>
+     <!--Script Addition - Slider End-->
     <div class="footer-pane">
         <div class="centered-content">
             <div class="content-holder">
                 <div class="column">
                     <ul>
-                        <lh> Click Garage </lh>
-                        <li>About Us</li>
-                        <li>Cities we are in</li>
-                        <li>Careers</li>
-                        <li>News & Blog</li>
-                        <li>Feedback</li>
+                        <lh>ClickGarage</lh>
+                        <li>    About Us</li>
+                        <li>    Cities we are in</li>
+                        <li>    Careers</li>
+                        <li>    News & Blog</li>
+                        <li>    Feedback</li>
                     </ul>
                 </div>
                 <div class="column">
                     <ul>
-                        <lh> Legal </lh>
-                        <li>Terms & Conditions</li>
-                        <li>Cancellations & Refund</li>
-                        <li>Privacy Policy</li>
+                        <lh>Legal</lh>
+                        <li>    Terms & Conditions</li>
+                        <li>    Cancellations & Refund</li>
+                        <li>    Privacy Policy</li>
                     </ul>
                 </div>
                 <div class="column"></div>
@@ -303,7 +399,7 @@
 {% endif %}
 </div>
 
-//Google Analytics Script
+<!--Google Analytics Script-->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -314,7 +410,7 @@
   ga('send', 'pageview');
 
 </script>
-//widget code//
+<!--//widget code//-->
 <script type='text/javascript'>var fc_CSS=document.createElement('link');fc_CSS.setAttribute('rel','stylesheet');var isSecured = (window.location && window.location.protocol == 'https:');var rtlSuffix = ((document.getElementsByTagName('html')[0].getAttribute('lang')) === 'ar') ? '-rtl' : '';fc_CSS.setAttribute('type','text/css');fc_CSS.setAttribute('href',((isSecured)? 'https://d36mpcpuzc4ztk.cloudfront.net':'http://assets1.chat.freshdesk.com')+'/css/visitor'+rtlSuffix+'.css');document.getElementsByTagName('head')[0].appendChild(fc_CSS);var fc_JS=document.createElement('script'); fc_JS.type='text/javascript';fc_JS.src=((isSecured)?'https://d36mpcpuzc4ztk.cloudfront.net':'http://assets.chat.freshdesk.com')+'/js/visitor.js';(document.body?document.body:document.getElementsByTagName('head')[0]).appendChild(fc_JS);window.freshchat_setting= 'eyJ3aWRnZXRfc2l0ZV91cmwiOiJjbGlja2dhcmFnZS5mcmVzaGRlc2suY29tIiwicHJvZHVjdF9pZCI6bnVsbCwibmFtZSI6IkNsaWNrZ2FyYWdlIiwid2lkZ2V0X2V4dGVybmFsX2lkIjpudWxsLCJ3aWRnZXRfaWQiOiIzODZlMDkyOS1kZTQyLTQ5OGEtYmIwYi0xOWFkZWI3MGMzZTQiLCJzaG93X29uX3BvcnRhbCI6ZmFsc2UsInBvcnRhbF9sb2dpbl9yZXF1aXJlZCI6ZmFsc2UsImlkIjo4MDAwMDA2NzAzLCJtYWluX3dpZGdldCI6dHJ1ZSwiZmNfaWQiOiI0ODAwYzgwMjkzY2E1NWNmNGVhMWQyMmE1MWJkOTUyNiIsInNob3ciOjEsInJlcXVpcmVkIjoyLCJoZWxwZGVza25hbWUiOiJDbGlja2dhcmFnZSIsIm5hbWVfbGFiZWwiOiJOYW1lIiwibWFpbF9sYWJlbCI6IkVtYWlsIiwibWVzc2FnZV9sYWJlbCI6Ik1lc3NhZ2UiLCJwaG9uZV9sYWJlbCI6IlBob25lIE51bWJlciIsInRleHRmaWVsZF9sYWJlbCI6IlRleHRmaWVsZCIsImRyb3Bkb3duX2xhYmVsIjoiRHJvcGRvd24iLCJ3ZWJ1cmwiOiJjbGlja2dhcmFnZS5mcmVzaGRlc2suY29tIiwibm9kZXVybCI6ImNoYXQuZnJlc2hkZXNrLmNvbSIsImRlYnVnIjoxLCJtZSI6Ik1lIiwiZXhwaXJ5IjoxNDQ1NzAyMjMzMDAwLCJlbnZpcm9ubWVudCI6InByb2R1Y3Rpb24iLCJkZWZhdWx0X3dpbmRvd19vZmZzZXQiOjMwLCJkZWZhdWx0X21heGltaXplZF90aXRsZSI6IkNoYXQgaW4gcHJvZ3Jlc3MiLCJkZWZhdWx0X21pbmltaXplZF90aXRsZSI6IkxldCdzIHRhbGshIiwiZGVmYXVsdF90ZXh0X3BsYWNlIjoiWW91ciBNZXNzYWdlIiwiZGVmYXVsdF9jb25uZWN0aW5nX21zZyI6IldhaXRpbmcgZm9yIGFuIGFnZW50IiwiZGVmYXVsdF93ZWxjb21lX21lc3NhZ2UiOiJIaSEgSG93IGNhbiB3ZSBoZWxwIHlvdSB0b2RheT8iLCJkZWZhdWx0X3dhaXRfbWVzc2FnZSI6Ik9uZSBvZiB1cyB3aWxsIGJlIHdpdGggeW91IHJpZ2h0IGF3YXksIHBsZWFzZSB3YWl0LiIsImRlZmF1bHRfYWdlbnRfam9pbmVkX21zZyI6Int7YWdlbnRfbmFtZX19IGhhcyBqb2luZWQgdGhlIGNoYXQiLCJkZWZhdWx0X2FnZW50X2xlZnRfbXNnIjoie3thZ2VudF9uYW1lfX0gaGFzIGxlZnQgdGhlIGNoYXQiLCJkZWZhdWx0X2FnZW50X3RyYW5zZmVyX21zZ190b192aXNpdG9yIjoiWW91ciBjaGF0IGhhcyBiZWVuIHRyYW5zZmVycmVkIHRvIHt7YWdlbnRfbmFtZX19IiwiZGVmYXVsdF90aGFua19tZXNzYWdlIjoiVGhhbmsgeW91IGZvciBjaGF0dGluZyB3aXRoIHVzLiBJZiB5b3UgaGF2ZSBhZGRpdGlvbmFsIHF1ZXN0aW9ucywgZmVlbCBmcmVlIHRvIHBpbmcgdXMhIiwiZGVmYXVsdF9ub25fYXZhaWxhYmlsaXR5X21lc3NhZ2UiOiJPdXIgYWdlbnRzIGFyZSB1bmF2YWlsYWJsZSByaWdodCBub3cuIFNvcnJ5IGFib3V0IHRoYXQsIGJ1dCBwbGVhc2UgbGVhdmUgdXMgYSBtZXNzYWdlIGFuZCB3ZSdsbCBnZXQgcmlnaHQgYmFjay4iLCJkZWZhdWx0X3ByZWNoYXRfbWVzc2FnZSI6IldlIGNhbid0IHdhaXQgdG8gdGFsayB0byB5b3UuIEJ1dCBmaXJzdCwgcGxlYXNlIHRlbGwgdXMgYSBiaXQgYWJvdXQgeW91cnNlbGYuIiwiYWdlbnRfdHJhbnNmZXJlZF9tc2ciOiJZb3VyIGNoYXQgaGFzIGJlZW4gdHJhbnNmZXJyZWQgdG8ge3thZ2VudF9uYW1lfX0iLCJhZ2VudF9yZW9wZW5fY2hhdF9tc2ciOiJ7e2FnZW50X25hbWV9fSByZW9wZW5lZCB0aGUgY2hhdCIsInZpc2l0b3Jfc2lkZV9pbmFjdGl2ZV9tc2ciOiJUaGlzIGNoYXQgaGFzIGJlZW4gaW5hY3RpdmUgZm9yIHRoZSBwYXN0IDIwIG1pbnV0ZXMuIiwiYWdlbnRfZGlzY29ubmVjdF9tc2ciOiJ7e2FnZW50X25hbWV9fSBoYXMgYmVlbiBkaXNjb25uZWN0ZWQiLCJzaXRlX2lkIjoiNDgwMGM4MDI5M2NhNTVjZjRlYTFkMjJhNTFiZDk1MjYiLCJhY3RpdmUiOnRydWUsIndpZGdldF9wcmVmZXJlbmNlcyI6eyJ3aW5kb3dfY29sb3IiOiIjNzc3Nzc3Iiwid2luZG93X3Bvc2l0aW9uIjoiQm90dG9tIFJpZ2h0Iiwid2luZG93X29mZnNldCI6IjMwIiwibWluaW1pemVkX3RpdGxlIjoiTGV0J3MgdGFsayEiLCJtYXhpbWl6ZWRfdGl0bGUiOiJDaGF0IGluIHByb2dyZXNzIiwidGV4dF9wbGFjZSI6IllvdXIgTWVzc2FnZSIsIndlbGNvbWVfbWVzc2FnZSI6IkhpISBIb3cgY2FuIHdlIGhlbHAgeW91IHRvZGF5PyIsInRoYW5rX21lc3NhZ2UiOiJUaGFuayB5b3UgZm9yIGNoYXR0aW5nIHdpdGggdXMuIElmIHlvdSBoYXZlIGFkZGl0aW9uYWwgcXVlc3Rpb25zLCBmZWVsIGZyZWUgdG8gcGluZyB1cyEiLCJ3YWl0X21lc3NhZ2UiOiJPbmUgb2YgdXMgd2lsbCBiZSB3aXRoIHlvdSByaWdodCBhd2F5LCBwbGVhc2Ugd2FpdC4iLCJhZ2VudF9qb2luZWRfbXNnIjoie3thZ2VudF9uYW1lfX0gaGFzIGpvaW5lZCB0aGUgY2hhdCIsImFnZW50X2xlZnRfbXNnIjoie3thZ2VudF9uYW1lfX0gaGFzIGxlZnQgdGhlIGNoYXQiLCJhZ2VudF90cmFuc2Zlcl9tc2dfdG9fdmlzaXRvciI6IllvdXIgY2hhdCBoYXMgYmVlbiB0cmFuc2ZlcnJlZCB0byB7e2FnZW50X25hbWV9fSIsImNvbm5lY3RpbmdfbXNnIjoiV2FpdGluZyBmb3IgYW4gYWdlbnQifSwicm91dGluZyI6bnVsbCwicHJlY2hhdF9mb3JtIjp0cnVlLCJwcmVjaGF0X21lc3NhZ2UiOiJXZSBjYW4ndCB3YWl0IHRvIHRhbGsgdG8geW91LiBCdXQgZmlyc3QsIHBsZWFzZSB0ZWxsIHVzIGEgYml0IGFib3V0IHlvdXJzZWxmLiIsInByZWNoYXRfZmllbGRzIjp7Im5hbWUiOnsidGl0bGUiOiJOYW1lIiwic2hvdyI6IjIifSwiZW1haWwiOnsidGl0bGUiOiJFbWFpbCIsInNob3ciOiIyIn0sInBob25lIjp7InRpdGxlIjoiUGhvbmUgTnVtYmVyIiwic2hvdyI6IjAifSwidGV4dGZpZWxkIjp7InRpdGxlIjoiVGV4dGZpZWxkIiwic2hvdyI6IjAifSwiZHJvcGRvd24iOnsidGl0bGUiOiJEcm9wZG93biIsInNob3ciOiIwIiwib3B0aW9ucyI6WyJsaXN0MSIsImxpc3QyIiwibGlzdDMiXX19LCJidXNpbmVzc19jYWxlbmRhciI6bnVsbCwibm9uX2F2YWlsYWJpbGl0eV9tZXNzYWdlIjp7InRleHQiOiJPdXIgYWdlbnRzIGFyZSB1bmF2YWlsYWJsZSByaWdodCBub3cuIFNvcnJ5IGFib3V0IHRoYXQsIGJ1dCBwbGVhc2UgbGVhdmUgdXMgYSBtZXNzYWdlIGFuZCB3ZSdsbCBnZXQgcmlnaHQgYmFjay4iLCJ0aWNrZXRfbGlua19vcHRpb24iOiIwIiwiY3VzdG9tX2xpbmtfdXJsIjoiIn0sInByb2FjdGl2ZV9jaGF0IjpmYWxzZSwicHJvYWN0aXZlX3RpbWUiOjE1LCJzaXRlX3VybCI6ImNsaWNrZ2FyYWdlLmZyZXNoZGVzay5jb20iLCJleHRlcm5hbF9pZCI6bnVsbCwiZGVsZXRlZCI6ZmFsc2UsIm9mZmxpbmVfY2hhdCI6eyJzaG93IjoiMSIsImZvcm0iOnsibmFtZSI6Ik5hbWUiLCJlbWFpbCI6IkVtYWlsIiwibWVzc2FnZSI6Ik1lc3NhZ2UifSwibWVzc2FnZXMiOnsidGl0bGUiOiJMZWF2ZSB1cyBhIG1lc3NhZ2UhIiwidGhhbmsiOiJUaGFuayB5b3UgZm9yIHdyaXRpbmcgdG8gdXMuIFdlIHdpbGwgZ2V0IGJhY2sgdG8geW91IHNob3J0bHkuIiwidGhhbmtfaGVhZGVyIjoiVGhhbmsgeW91ISJ9fSwibW9iaWxlIjp0cnVlLCJjcmVhdGVkX2F0IjoiMjAxNS0wOS0yNFQxNjowOTowMi4wMDBaIiwidXBkYXRlZF9hdCI6IjIwMTUtMDktMjRUMTY6MTA6MDIuMDAwWiJ9';</script>
 
 </body>
