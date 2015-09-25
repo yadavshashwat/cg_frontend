@@ -8,8 +8,8 @@ modal : 60 - 70
 */
 
 /**commons start*/
-@import url(http://fonts.googleapis.com/css?family=Raleway:600,400);
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Lato:600,400);
+@import url(http://fonts.googleapis.com/css?family=Lato:400,300,700);
 
 .fr{
   float:right;
@@ -131,13 +131,13 @@ modal : 60 - 70
       .logo-box{
         height: 70px;
         width: 250px;
-        background: url(../img/cg-logo-5.png) no-repeat;
+        background: url(../img/cg-logo-6.png) no-repeat;
         background-size: auto 100%;
       }
     }
     .right-items-holder{
       color:#fff;
-      font-family: Raleway;
+      font-family: Lato;
       font-size: 14px;
       position: relative;
       .menu-btn{
@@ -223,7 +223,7 @@ modal : 60 - 70
         z-index: 12;
     }
     .overlay-color.purple{
-      background: rgba(44,62,80, 0.4);
+      background: rgba(44,62,80, 0.5);
       z-index: 11;
     }
     .overlay-pat{
@@ -245,15 +245,16 @@ modal : 60 - 70
 //      overflow: auto;
 //    }
     .title-holder{
-    font-family: "Raleway";
     color: #fff;
     text-align: center;
     margin-bottom: 24px;
       .title{
+        font-family: "Lato-Bold";
         font-size: 48px;
         line-height: 60px;
       }
       .sub-title{
+        font-family: "Lato";
         font-size: 24px;
         line-height: 32px;
         margin-top: 36px;
@@ -265,7 +266,7 @@ modal : 60 - 70
       margin-top: 24px;
       line-height: 24px;
       z-index: -2;
-      font-family: Raleway;
+      font-family: Lato;
       position: relative;
       i, .fa, .fa::before{
         font-size: 8px;
@@ -285,7 +286,7 @@ modal : 60 - 70
     z-index: 50;
     text-align: center;
     .next-text{
-      font-family: Roboto;
+      font-family: Lato;
       color:#fff;
       font-size: 16px;
       line-height: 18px;
@@ -360,6 +361,24 @@ modal : 60 - 70
 //        display: inline-block;
           float:left;
 
+        .how-it-works{
+      .text-holder{
+        font-family: "Lato";
+        font-weight: 400;
+        font-size: 40px;
+        color: #c65169;
+//        color: #4d5b94;
+
+//        text-shadow: 2px 2px #000;
+        line-height: 48px;
+        padding: 32px 0px;
+        text-align: center;
+//        background-color: rgba(0,0,0,0.3);
+//        box-shadow: 0px 0px 60px 30px rgba(0,0,0,0.3);
+
+      }
+    }
+
         .wrapper{
           position: absolute;
           top:0px;
@@ -380,7 +399,7 @@ modal : 60 - 70
                 padding: 24px 0px;
                 font-size: 24px;
                 line-height: 32px;
-                font-family: Raleway;
+                font-family: Lato;
                 text-align: justify;
               }
             }
@@ -491,15 +510,15 @@ modal : 60 - 70
             .step-title{
               font-size:24px;
               line-height: 30px;
-              font-family: Raleway;
+              font-family: Lato;
               font-weight: 400;
               color:#c65169;
             }
             .step-summary{
-              font-size:14px;
+              font-size:16px;
               line-height: 24px;
-              font-family: Raleway;
-              font-weight: 600;
+              font-family: Lato;
+              font-weight: 400;
               color:#e89b76;
               height: 72px;
               overflow: hidden;
@@ -521,12 +540,14 @@ modal : 60 - 70
   }
   .features-pane{
     background: #4d5b94;
+    opacity: 1;
     border-top: 4px solid #4d7f94;
     box-sizing: border-box;
 
     .abouts-row{
       .text-holder{
-        font-family: "Raleway";
+        font-family: "Lato";
+        font-weight: 400;
         font-size: 40px;
         color: #fff;
 //        text-shadow: 2px 2px #000;
@@ -539,6 +560,20 @@ modal : 60 - 70
       }
     }
 
+    .goal-row{
+      .text-holder{
+        font-family: "Lato-Italic";
+        font-size: 35px;
+        color: #fff;
+//        text-shadow: 2px 2px #000;
+        line-height: 48px;
+        padding: 32px 0px;
+        text-align: center;
+//        background-color: rgba(0,0,0,0.3);
+//        box-shadow: 0px 0px 60px 30px rgba(0,0,0,0.3);
+
+      }
+    }
     .feats-row{
       padding-top: 24px;
       color:#eaeaea;
@@ -565,22 +600,24 @@ modal : 60 - 70
 //          background: rgba(76, 33, 6, 0.4);
           min-height: 150px;
           padding-bottom: 24px;
-          font-family: Raleway;
-          color: #DED6D2;
+          font-family: Lato;
+          
 
           .title{
     font-size: 26px;
     line-height: 32px;
-    font-weight: 300;
+    font-weight: 400;
     text-align: center;
     margin-bottom: 12px;
+    color: #fff;
           }
           .sub-title{
             padding: 12px;
             font-size: 20px;
             line-height: 24px;
-            font-weight: 400;
+            font-weight: 300;
             text-align: center;
+            color: #DED6D2;
 //            text-shadow: 2px 2px 4px #000;
 
           }
@@ -612,12 +649,47 @@ modal : 60 - 70
       }
     }
   }
+
+  .partners-platform{
+    background: #eaeaea;
+
+    border-top: 4px solid #fff;
+      .text-holder{
+       font-family: "Lato";
+        font-weight: 400;
+        font-size: 40px;
+        color: #c65169;
+//        color: #4d5b94;
+
+//        text-shadow: 2px 2px #000;
+        line-height: 48px;
+        padding: 32px 0px;
+        text-align: center;
+//        background-color: rgba(0,0,0,0.3);
+//        box-shadow: 0px 0px 60px 30px rgba(0,0,0,0.3);
+
+      }
+    }
+  .slider-partner{
+    background: #eaeaea;
+
+    }
+
   .stats-pane{
-    background: #e89b76;
-    border-top: 4px solid #c65169;
+    background: #c65169;
+    opacity: 0.85;
+    border-top: 4px solid #e89b76;
+    .stats-platform{
+    font-family: "Lato";
+        font-weight: 300;
+        font-size: 30px;
+        color: #fff;
+    text-align: center;
+
+    }
     .stats-row{
-      padding: 24px 12px;
-      font-family: Raleway;
+      padding: 12px 12px;
+      font-family: Lato;
       overflow: hidden;
       .stat-point{
         float:left;
@@ -629,7 +701,7 @@ modal : 60 - 70
           line-height: 64px;
           letter-spacing: 4px;
       color:#fff;
-          font-family: Raleway;
+          font-family: Lato;
         }
         .sub-text{
           font-size: 22.5px;
@@ -637,10 +709,14 @@ modal : 60 - 70
           letter-spacing: 1px;
       color: #fff;
         }
+      
       }
+
+
+
       .stat-point:first-child{
         margin-left: 10px;
-        border-right: 1px solid #e89b76;
+        border-right: 2px solid #e89b76;
       }
     }
 
@@ -655,7 +731,7 @@ modal : 60 - 70
       float: left;
       width: 24%;
       margin-left: 1%;
-      font-family: Raleway;
+      font-family: Lato;
       ul{
         list-style: none;
         lh{
@@ -713,7 +789,7 @@ modal : 60 - 70
     }
     .right-items-holder{
       color:#fff;
-      font-family: Raleway;
+      font-family: Lato;
       font-size: 14px;
       .menu-btn{
         margin-right:12px;
@@ -817,7 +893,7 @@ modal : 60 - 70
       display: inline-block;
       height: 30px;
       font-size: 14px;
-      font-family: Raleway;
+      font-family: Lato;
 
     }
     .sel-car-holder{
@@ -895,7 +971,7 @@ modal : 60 - 70
             line-height: 24px;
             text-align: center;
           color:#fff;
-          font-family: Roboto;
+          font-family: Lato;
           font-size: 16px;
             font-weight: 300;
           }
@@ -912,7 +988,7 @@ modal : 60 - 70
       }
       .section-listings{
         position: relative;
-        font-family: Roboto;
+        font-family: Lato;
 
         .section-content-item{
           position: absolute;
@@ -1134,7 +1210,7 @@ modal : 60 - 70
     .dealer-box{
       background: #fff;
       .material-box-shadow;
-      font-family: Roboto;
+      font-family: Lato;
 
       .dealer-headers{
         border-bottom:2px solid #d7d7d7;
@@ -1308,7 +1384,7 @@ modal : 60 - 70
     }
     .right-items-holder{
       color:#fff;
-      font-family: Raleway;
+      font-family: Lato;
       font-size: 14px;
       .menu-btn{
         margin-right:12px;
@@ -1578,7 +1654,7 @@ modal : 60 - 70
         margin-left: 50%;
     }
     .signup-benefits{
-      font-family: "Roboto";
+      font-family: "Lato";
       .title{
         font-weight: normal;
     font-size: 17px;
@@ -1764,7 +1840,7 @@ font-size: 13px;
     }
     .right-items-holder{
       color:#fff;
-      font-family: Raleway;
+      font-family: Lato;
       font-size: 14px;
       .menu-btn{
         margin-right:12px;
@@ -1801,7 +1877,7 @@ font-size: 13px;
     .material-box-shadow;
     .content-holder{
       position: relative;
-        font-family: Roboto;
+        font-family: Lato;
     }
   }
 
@@ -1842,7 +1918,7 @@ font-size: 13px;
     }
     .right-items-holder{
       color:#fff;
-      font-family: Raleway;
+      font-family: Lato;
       font-size: 14px;
       .menu-btn{
         margin-right:12px;
@@ -1879,7 +1955,7 @@ font-size: 13px;
     .material-box-shadow;
     .content-holder{
       position: relative;
-        font-family: Roboto;
+        font-family: Lato;
     }
 
     .table-holder{
@@ -1917,8 +1993,10 @@ font-size: 13px;
   .search-box-modal{
     padding:24px 36px 48px 36px;
     background: rgba(255,255,255,0.95);
+
   }
   .citybox-holder{
+
 
   }
   .omnibox-holder{
@@ -1937,6 +2015,7 @@ font-size: 13px;
     height:55px;
     width: 410px;
     background: #fff;
+    opacity: 0.9;
     margin-right: 15px;
     border-radius: 6px;
     .material-box-shadow;
@@ -1959,6 +2038,7 @@ font-size: 13px;
       line-height: 24px;
       font-size: 16px;
     }
+
     .mat-drp-slct-box{
       z-index: -1;
       ul{
@@ -1986,6 +2066,7 @@ font-size: 13px;
   }
   .citybox-holder{
     position: relative;
+    opacity: 0.9;
     height:55px;
     width: 140px;
     background: #fff;
@@ -2052,7 +2133,7 @@ font-size: 13px;
       color: #fff;
       line-height: 24px;
       height: 55px;
-      font-family: Raleway;
+      font-family: Lato;
       font-weight: 600;
       display: block;
       -webkit-appearance: none;
@@ -2064,6 +2145,30 @@ font-size: 13px;
       outline: none;
     }
   }
+
+
+.submit-btn-holder.purple-btn-1{
+              background: #4d5b94;
+              opacity:0.9;
+      border:1px solid #4d5b94;
+      .form-submit-btn{
+        color:#fff;
+      }
+  
+}
+.submit-btn-holder.purple-btn-1:hover{
+     background: #4d5b94;
+     opacity:1;
+    border: 1px solid #4d5b94;
+      .form-submit-btn{
+        color:#fff;
+      }
+
+}
+
+
+
+
 
 .submit-btn-holder.purple-btn{
               background: #4d5b94;
@@ -2117,6 +2222,31 @@ font-size: 13px;
 
     }
 
+    .submit-btn-holder.red-btn{
+      background: #fcae8a;
+    background-image: -webkit-linear-gradient(top, #fcae8a, #e89a76);
+    background-image: -moz-linear-gradient(top, #fcae8a, #e89a76);
+    background-image: -ms-linear-gradient(top, #fcae8a, #e89a76);
+    background-image: -o-linear-gradient(top, #fcae8a, #e89a76);
+    background-image: linear-gradient(to bottom, #fcae8a, #e89a76);
+    border: 1px solid #e89a76;
+      .form-submit-btn{
+        color:#333;
+      }
+    }
+    .submit-btn-holder.red-btn:hover{
+  background: #323c61;
+  background-image: -webkit-linear-gradient(top, #4d5b94, #323c61);
+  background-image: -moz-linear-gradient(top, #4d5b94, #323c61);
+  background-image: -ms-linear-gradient(top, #4d5b94, #323c61);
+  background-image: -o-linear-gradient(top, #4d5b94, #323c61);
+  background-image: linear-gradient(to bottom, #4d5b94, #323c61);
+      .form-submit-btn{
+        color:#666;
+      }
+
+    }
+
 }
 
 /* plugin css*/
@@ -2137,7 +2267,7 @@ font-size: 13px;
     margin: 0 0 15px 0;
     padding: 0;
     display: block;
-    font-family: Roboto;
+    font-family: Lato;
     font-weight: 700;
   }
   .mat-drp-slct-box{
@@ -2151,7 +2281,7 @@ font-size: 13px;
       opacity: 0;
       position: absolute;
 //      z-index: 999;
-      font-family: Roboto;
+      font-family: Lato;
       font-weight: 300;
       .material-box-shadow;
 //      will-change: width, height;
@@ -2291,13 +2421,13 @@ min-width: 210px;
 
 .outer-ul li a{
 
-    font-family: Roboto;
+    font-family: Lato;
     color: #616161;
 font:14px;
 }
 .outer-ul li a:hover{
     color:#fff;
-    font-family: Roboto;
+    font-family: Lato;
 font:14px;
 }
 }
@@ -2321,7 +2451,7 @@ justify-content:center;
 button{
  margin-left: 82px;
     width: 120px;
-    font:18px Roboto ;
+    font:18px Lato ;
     height: 33px;
     line-height: 26px;
     margin-top: 12px;
@@ -2333,7 +2463,7 @@ button{
 }
 #completed div button:nth-child(1),#completed div button:nth-child(2){    
   width: 120px;
-    font:18px Roboto ;
+    font:18px Lato ;
     height: 24px;
     font-weight: bold;
         margin-right: 10px;
