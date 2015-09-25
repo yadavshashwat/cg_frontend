@@ -61,7 +61,15 @@ var Global = {
            'marginTop':reqd_offset
         });
 
+         var asr = 1440/900;
+         var scr_asr = scrn_wd/scrn_ht;
+
+            /*breaks if height > 900
+            * breaks if width <
+            * */
         //video set
+            console.log(scr_asr, asr)
+         if(scr_asr > asr){
         if(scrn_ht > 850){
             var offBottom = scrn_ht-850;
 //            console.log(offBottom)
@@ -75,19 +83,41 @@ var Global = {
             $('.search-pane').find('.overlay-video video').css({
                 'bottom': offBottom
             }).attr('data-init', offBottom);
-            $('.search-pane').find('.overlay-image img').css({
-                'bottom': offBottom
-            }).attr('data-init', offBottom);
         }
+
         if(scrn_ht > 1080){
             $('.search-pane').find('.overlay-video video').css({
                 'width':'100%'
             })
-            $('.search-pane').find('.overlay-image img').css({
-                'width':'100%'
-            })
-
         }
+
+
+        $('.search-pane').find('.overlay-image img').css({
+            'width':'100%',
+            'height':'auto'
+        });
+        var img_ht = $('.search-pane').find('.overlay-image img').outerHeight();
+        var img_bot = $('.search-pane').find('.overlay-image img').css('bottom').split('px')[0];
+             img_bot = parseInt(img_bot)
+         if(scrn_ht > (img_ht+img_bot) ){
+            var offBottom = scrn_ht - img_ht;
+//            offBottom =  -280 + offBottom;
+//                 console.log(scrn_ht, offBottom, (offBottom-scrn_ht))
+            if(offBottom > 0){
+                offBottom = 0
+            }
+            $('.search-pane').find('.overlay-image img').css({
+                'bottom': offBottom
+            }).attr('data-init', offBottom);
+         }
+
+         }else{
+            $('.search-pane').find('.overlay-image img').css({
+                'height':'100%',
+                'width':'auto',
+                'bottom':'0'
+            }).attr('data-init', 0);
+         }
 
 //        var reqd_offset = scrn_ht/2 - 50;
 //        $('#home-search-set-holder').css({
