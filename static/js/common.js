@@ -164,7 +164,7 @@ var logoMap = {
     '3M':'../static/img/dl-logo-3M.png',
     'Tee Car Care':'../static/img/dl-logo-Tee.png',
     'Exppress Car Wash':'../static/img/dl-logo-Exppress.png',
-    'ClickGarage On-The-Go':'',
+    'ClickGarage On-The-Go':'../static/img/dl-logo-OntheGo.png',
     'Authorized':'../static/img/brands/',
     'Bosch':'../static/img/dl-logo-Bosch.jpg',
     'ClickGarage Workshop':'',
@@ -383,7 +383,7 @@ var local = {
             stringVal = JSON.stringify(value);
         }
         var dc_old = document.cookie;
-        document.cookie = key+"="+stringVal;
+        document.cookie = key+"="+stringVal+"; path=/";
     },
     load:function(){
         var dc_str = document.cookie;
@@ -399,7 +399,7 @@ var local = {
         if(key){
             stringKey = key;
         }
-        document.cookie = stringKey+'=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+        document.cookie = stringKey+'=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
     },
     clearAll:function(){
 

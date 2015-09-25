@@ -30,7 +30,6 @@ var Global = {
         Commons.eventHandlers();
         $('body').scrollTop(0);
         _this.autosliderObj.tmout = setInterval(function(){
-            console.log($('#point'+_this.autosliderObj.presentID))
             $('#point'+_this.autosliderObj.presentID).click();
             _this.autosliderObj.presentID += 1;
             if(_this.autosliderObj.presentID > 3){
@@ -76,9 +75,15 @@ var Global = {
             $('.search-pane').find('.overlay-video video').css({
                 'bottom': offBottom
             }).attr('data-init', offBottom);
+            $('.search-pane').find('.overlay-image img').css({
+                'bottom': offBottom
+            }).attr('data-init', offBottom);
         }
         if(scrn_ht > 1080){
             $('.search-pane').find('.overlay-video video').css({
+                'width':'100%'
+            })
+            $('.search-pane').find('.overlay-image img').css({
                 'width':'100%'
             })
 
@@ -106,15 +111,21 @@ var Global = {
         $(window).on('scroll', function(e){
             var scrn_ht = $(window).innerHeight();
             var scrollTop = $('body').scrollTop();
-            var initBot = $('.search-pane').find('.overlay-video video').attr('data-init');
+//            var initBot = $('.search-pane').find('.overlay-video video').attr('data-init');
+            var initBot = $('.search-pane').find('.overlay-image img').attr('data-init');
             initBot = parseInt(initBot);
             if(!initBot || isNaN(initBot)){
                 initBot = 0
             }
             var toScrollBot = initBot - scrollTop*0.5;
 //            console.log(toScrollBot, scrn_ht)
+//            if(toScrollBot < scrn_ht){
+//                $('.search-pane').find('.overlay-video video').css({
+//                    'bottom':toScrollBot
+//                });
+//            }
             if(toScrollBot < scrn_ht){
-                $('.search-pane').find('.overlay-video video').css({
+                $('.search-pane').find('.overlay-image img').css({
                     'bottom':toScrollBot
                 });
             }
@@ -176,10 +187,17 @@ var Global = {
         $('#home-search-form').on('submit', function(e){
 //           var value = $(this).find('#omni-search-box').attr('data-id');
             var c_id = $(this).find('#hidden-id-box').val();
+            var c_name = $(this).find('#omni-search-box').val();
             if (!c_id.length){
                 return false
             }else{
-               $(this).find('#omni-search-box').remove();
+                var loc = window.location.href;
+                loc = loc.split('.in/')[0]+'.in/';
+                local.save('clgacarid',c_id);
+                local.save('clgacarname',c_name);
+                window.location = loc + 'order/?c_id='+c_id;
+//               $(this).find('#omni-search-box').remove();
+                return false;
             }
         });
         $('.learn-more').on('click', function(e){

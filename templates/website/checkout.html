@@ -28,9 +28,9 @@
 
         <div class="login-step minimized collapsible-div">
             <div class="min-header  none-i">
-
+                <span>1. Login Detail</span>
             </div>
-            <div class="max-content">
+            <div class="max-content none-i">
                 <div class="dog-ear-header">
                     <span>1. Before you place your order! <span style="opacity: 0.8;"> Sign in </span></span>
                 </div>
@@ -106,14 +106,16 @@
                 </div>
 
             </div>
-            <div class="completed-summary  none-i">
+            <div class="completed-summary">
                 <div class="big-wrap">
                     <div class="dog-ear">
                         <i class="fa fa-check"></i>
                     </div>
                     <div class="info-div">
-                        <span class="label">1. LOGIN ID</span>
-                        <span class="info">8447021642</span>
+                    {% if user and not user.is_anonymous %}
+                        <span class="label">1. LOGGED IN AS : </span>
+                        <span class="info">{{ user.email }}</span>
+                    {% endif %}
                     </div>
 
                 </div>
@@ -123,7 +125,14 @@
             </div>
         </div>
         <div class="address-step collapsible-div">
-            <div class="min-header none-i"></div>
+            <div class="min-header none-i">
+                <div class="info-div">
+                    <span>2. Set Pick Up & Drop Off Details</span>
+                    <span>1 items</span>
+                    <span>Total: Rs. 599</span>
+                </div>
+
+            </div>
             <div class="max-content">
                 <!--
                 NAME, TEHDEPHONE, PICHKUOP DIOP TUME
@@ -133,11 +142,13 @@
                 </div>
                 <div class="wrapper">
                     <div class="address-count">
-                        You have <b>2</b> saved addresses
+                        You have <b>{{ address|length }}</b> saved addresses
                     </div>
                     <div class="address-list-holder">
                         <div class="address-item">
-                            <div class="address_detail ng-scope">
+                        {% if address|length|get_digit:"-1" %}=
+                        {% else %}
+                            <div class="address_detail">
                                 <a class="padding20 address-item">
                                     <div class="name rposition">
                                         <span class="tick-icon tick-mark ng-hide"
@@ -168,7 +179,7 @@
                                        tooltip-trigger="mouseenter" bind-log="editing address ADD13463938978866551"></i>
                                 </div>
                             </div>
-                            <div class="address_detail ng-scope">
+                            <div class="address_detail">
                                 <a class="padding20 address-item">
                                     <div class="name rposition">
                                         <span class="tick-icon tick-mark ng-hide"
@@ -182,12 +193,20 @@
                                     <p class="ng-binding">Delhi</p>
                                     <span class="phone ng-binding">8447021642</span>
 
-                                    <p class="select_btn btn btn-white">
+                                    <p class="select_btn btn btn-white" style="display: none;">
                                         <!-- ngIf: !isSelectedAddress(address.address_id) && addressType=='Delivery' -->
                                         <span class="ng-scope">Deliver Here</span>
                                         <!-- end ngIf: !isSelectedAddress(address.address_id) && addressType=='Delivery' -->
                                         <!-- ngIf: !isSelectedAddress(address.address_id) && addressType=='Billing' -->
                                         <!-- ngIf: isSelectedAddress(address.address_id) -->
+                                    </p>
+                                    <p class="">
+                                        <span class="checkbox-holder">
+                                        <input class="clean-inp-cbox set-pickup" type="checkbox"/><span>Pick Up</span>
+                                        </span>
+                                        <span class="checkbox-holder">
+                                        <input class="clean-inp-cbox set-dropoff" type="checkbox"/><span>Drop Off</span>
+                                        </span>
                                     </p>
                                 </a>
 
@@ -199,6 +218,12 @@
                                        tooltip-trigger="mouseenter" bind-log="editing address ADD13463938978866551"></i>
                                 </div>
                             </div>
+
+                            {% for addr in address %}
+
+                            {% endfor %}
+
+                        {% endif %}
                         </div>
                     </div>
                     <div class="add-address-row">
@@ -209,7 +234,7 @@
             </div>
             <div class="completed-summary  none-i"></div>
         </div>
-        <div class="comfirm-step minimized collapsible-div">
+        <div class="confirm-step minimized collapsible-div">
             <div class="min-header">
                 <div class="info-div">
                     <span>3. Order Summary</span>
@@ -230,5 +255,10 @@
 
     </div>
 </div>
+
+<div class="address-modal-container bootstrap-wrapper modal-container" style="display: none;">
+    {% include "website/address-popup.html" %}
+</div>
+
 </body>
 </html>
