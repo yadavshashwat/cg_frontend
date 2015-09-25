@@ -115,6 +115,45 @@ modal : 60 - 70
     z-index: 65;
   }
 }
+
+.solid-header{
+      .logged-user-drpdwn{
+        display: none;
+    position: absolute;
+        font-size: 12px;
+    top: 30px;
+    right: 12px;
+    width: 90px;
+
+        .tri-tip{
+              height: 0px;
+    width: 0px;
+    border: 6px solid;
+    border-color: transparent transparent #fff transparent;
+    position: absolute;
+    right: 4px;
+    opacity: 0.2;
+        }
+        .menu-square{
+          border: 1px solid rgba(255,255,255,0.2);
+          background-color: rgba(77,91,148, 0.8);
+          margin-top: 12px;
+          a{
+            text-decoration: none;
+            color: #fff;
+          }
+          .drpdwn-item, a.drpdwn-item{
+            padding: 3px 9px;
+            cursor:pointer;
+          }
+          .drpdwn-item:hover, a.drpdwn-item:hover{
+//            background: rgba(77,91,148,1);
+            background: rgba(255,255,255,0.2);
+          }
+        }
+      }
+}
+
 /**commons end*/
 
 .home-body{
@@ -791,6 +830,7 @@ modal : 60 - 70
       color:#fff;
       font-family: Lato;
       font-size: 14px;
+      position: relative;
       .menu-btn{
         margin-right:12px;
         height: 34px;
@@ -1386,6 +1426,7 @@ modal : 60 - 70
       color:#fff;
       font-family: Lato;
       font-size: 14px;
+      position: relative;
       .menu-btn{
         margin-right:12px;
         height: 34px;
@@ -1517,6 +1558,29 @@ modal : 60 - 70
     .btn.right_btn {
     padding: 7px 0 6px;
     width: 140px;
+    }
+    input.clean-inp-cbox{
+    -webkit-appearance: none;
+    border: 1px solid #c9c9c9;
+    height: 18px;
+    width: 18px;
+    margin: 0 auto;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 3px;
+    vertical-align: bottom;
+      text-align: center;
+      cursor: pointer;
+    }
+    input.clean-inp-cbox[type=checkbox]:checked::before{
+      display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+      line-height: 18px;
+        content: "\f00c";
     }
   }
   .completed-summary{
@@ -1801,6 +1865,17 @@ font-size: 13px;
         margin-top: 10px;
       }
 
+    .checkbox-holder{
+      display: inline-block;
+        width: 49%;
+      .clean-inp-cbox{
+        margin-right: 6px;
+      }
+      label{
+        line-height: 18px;
+      }
+    }
+
     }
   }
 
@@ -1842,6 +1917,7 @@ font-size: 13px;
       color:#fff;
       font-family: Lato;
       font-size: 14px;
+      position: relative;
       .menu-btn{
         margin-right:12px;
         height: 34px;
@@ -1920,6 +1996,7 @@ font-size: 13px;
       color:#fff;
       font-family: Lato;
       font-size: 14px;
+            position: relative;
       .menu-btn{
         margin-right:12px;
         height: 34px;
@@ -1958,6 +2035,11 @@ font-size: 13px;
         font-family: Lato;
     }
 
+    .title-holder{
+
+    }
+
+
     .table-holder{
       padding: 12px 15px;
       table{
@@ -1982,6 +2064,46 @@ font-size: 13px;
       tbody{
 
       }
+      .cart-table{
+        .dealer-logo-wrapper{
+          height:100%;
+          border: 1px solid #eaeaea;
+          line-height: 68px;
+          width: 120px;
+          text-align: center;
+          img{
+//            width: 98px;
+            height: auto;
+            max-height: 68px;
+            vertical-align: middle;
+            overflow: hidden;
+            line-height: 16px;
+            font-size: 12px;
+          }
+          .aligner{
+            display: inline-block;
+            height: 68px;
+            width: 0px;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+
+    .cart-btn-holder{
+      height: 30px;
+      .back-btn{
+        padding: 6px 12px;
+       background-color: #4d5b94;
+        color:#fff;
+        line-height: 18px;
+      }
+      .checkout-btn{
+        padding: 6px 12px;
+       background-color: #4d5b94;
+        color:#fff;
+      }
+
     }
   }
 
@@ -2407,6 +2529,11 @@ font-size: 13px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     }
   }
+}
+
+//bootstrap-wrapper
+.address-modal-container{
+
 }
 
 aside{

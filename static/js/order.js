@@ -12,12 +12,19 @@ var Global = {
         _this.setLayout();
         _this.eventHandlers();
         Commons.eventHandlers();
+        if(!_this.carSelected){
+            var cookDict = local.load();
+            if(cookDict['clgacarid'] && _this.carData){
+                _this.carSelected =  $.grep(_this.carData, function(e){ return e.id == cookDict['clgacarid']; })[0];
+
+            }
+        }
         if(_this.carSelected){
             $("#selected-details").show();
             $("#selected-details").find('.c-name').html(_this.carSelected.name);
             $("#selected-details").find('.c-make').html(_this.carSelected.make);
         }else{
-            _this.generateCarSelect();
+                _this.generateCarSelect();
         }
         workflowState.init();
         if(workflowState.step.state == 'service'){
@@ -127,6 +134,9 @@ var Global = {
             Commons.ajaxData('add_to_cart', {'cookie':newC, 'car_id':_this.carSelected.id, 'car_size':_this.carSelected.size}, "get", _this, _this.redirectToCart );
 
 //            Commons.ajaxData('add_to_cart', {})
+        });
+        $('#settings-drpdwn').on('click', function(e){
+            $(this).parent().find('.logged-user-drpdwn').toggle();
         });
 
 

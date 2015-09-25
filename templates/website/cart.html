@@ -28,7 +28,7 @@
         <div class="select-wrapper">
         <select  id="car-select-box">
      {% for key, list in cart.iteritems %}
-<option>{{ key }}</option>
+<option data-name="{{ list.0.car.make }} {{list.0.car.name}}" data-id="{{ list.0.car.id }}">{{ key }}</option>
 {% endfor %}
         </select>
         </div>
@@ -39,15 +39,43 @@
        <table data-id="{{ key }}" style="display:none;" class="cart-table">
         <thead>
         <tr>
-        <th>Service</th>
         <th>Dealer</th>
-        <th>Price</th>
-        <th>Total</th>
+        <th>Service</th>
+        <th>Description</th>
+        <th>Total Price</th>
         </tr>
         </thead>
         <tbody>
          {% for val in list %}
-            <tr>
+<tr>
+    <td data-id="{{val.dealer}}" data-name="{{val.car.make}}">
+        <div class="dealer-logo-wrapper">
+            <img class="dealer-logo" src="" alt="{{val.dealer}}" data-name="{{val.car.make}}" >
+        <div class="aligner"></div>
+        </div>
+    </td>
+    <td>
+    {% if val.service == "servicing" %}
+    <div> {{ val.service_detail.odometer }}km / {{ val.service_detail.year }}</div>
+    <div> Regular Servicing </div>
+    {% elif val.service == "cleaning" %}
+    <div> {{ val.service_detail.service }} </div>
+    <div> Cleaning <i class="fa fa-caret-right"></i> {{ val.service_detail.category }} </div>
+    {% endif %}
+    </td>
+    <td>
+
+    </td>
+        <td>
+    {% if val.service == "servicing" %}
+        <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}</div>
+    {% elif val.service == "cleaning" %}
+        <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}</div>
+    {% endif %}
+
+        </td>
+</tr>
+            <tr style="display:none;">
                <td>
         {% if val.service_detail %}
             {{ val.service_detail.name }}<br>
@@ -55,7 +83,7 @@
             {{ val.service_detail.brand }}<br>
             {{ val.car.name }}<br>
         {% else %}
-            {{ val.service }}
+            {{ val.total_price }}
         {% endif %}
 
                 </td>
@@ -88,8 +116,14 @@
        </table>
          {% endfor %}
                 </div>
-        <div class="title-holder">
-
+        <div class="cart-btn-holder">
+            <div class="left-btns fl">
+                <div class="back-btn"> <i class="fa fa-caret-left"></i> Continue Shopping</div>
+            </div>
+            <div class="right-btns fr">
+<!--                <div class="update-btn"></div>-->
+                <div class="checkout-btn">Checkout <i class="fa fa-caret-right"></i></div>
+            </div>
         </div>
 
             </div>
