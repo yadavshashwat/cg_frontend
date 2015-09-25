@@ -75,9 +75,15 @@ var Global = {
             $('.search-pane').find('.overlay-video video').css({
                 'bottom': offBottom
             }).attr('data-init', offBottom);
+            $('.search-pane').find('.overlay-image img').css({
+                'bottom': offBottom
+            }).attr('data-init', offBottom);
         }
         if(scrn_ht > 1080){
             $('.search-pane').find('.overlay-video video').css({
+                'width':'100%'
+            })
+            $('.search-pane').find('.overlay-image img').css({
                 'width':'100%'
             })
 
@@ -105,15 +111,21 @@ var Global = {
         $(window).on('scroll', function(e){
             var scrn_ht = $(window).innerHeight();
             var scrollTop = $('body').scrollTop();
-            var initBot = $('.search-pane').find('.overlay-video video').attr('data-init');
+//            var initBot = $('.search-pane').find('.overlay-video video').attr('data-init');
+            var initBot = $('.search-pane').find('.overlay-image img').attr('data-init');
             initBot = parseInt(initBot);
             if(!initBot || isNaN(initBot)){
                 initBot = 0
             }
             var toScrollBot = initBot - scrollTop*0.5;
 //            console.log(toScrollBot, scrn_ht)
+//            if(toScrollBot < scrn_ht){
+//                $('.search-pane').find('.overlay-video video').css({
+//                    'bottom':toScrollBot
+//                });
+//            }
             if(toScrollBot < scrn_ht){
-                $('.search-pane').find('.overlay-video video').css({
+                $('.search-pane').find('.overlay-image img').css({
                     'bottom':toScrollBot
                 });
             }
