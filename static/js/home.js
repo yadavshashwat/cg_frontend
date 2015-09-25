@@ -68,7 +68,7 @@ var Global = {
             * breaks if width <
             * */
         //video set
-//            console.log(scr_asr, asr)
+            console.log(scr_asr, asr)
          if(scr_asr > asr){
         if(scrn_ht > 850){
             var offBottom = scrn_ht-850;
@@ -109,8 +109,9 @@ var Global = {
          }else{
             $('.search-pane').find('.overlay-image img').css({
                 'height':'100%',
-                'width':'auto'
-            })
+                'width':'auto',
+                'bottom':'0'
+            }).attr('data-init', 0);
          }
 
 //        var reqd_offset = scrn_ht/2 - 50;
