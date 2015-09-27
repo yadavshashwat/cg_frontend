@@ -10,6 +10,7 @@ var zyxCart = {
     init : function(){
         var _this = this;
         _this.eventHandlers();
+        _this.setLogos();
     $('#date-time-pair .pick-up-time').timepicker({
         'showDuration': true,
         'timeFormat': 'g:ia'
@@ -24,6 +25,19 @@ var zyxCart = {
 //    var basicExampleEl = document.getElementById('date-time-pair');
 //    var datepair = new Datepair(basicExampleEl);
 
+    },
+    setLogos : function(){
+        $.each($('img.dealer-logo'), function(i, img){
+            var dealer = $(img).attr('alt');
+            var carMake = $(img).attr('data-name');
+            console.log(dealer)
+            if(dealer == 'Authorized'){
+                $(img).attr('src', logoMap['Authorized']+ $.trim(carMake)+'.jpg');
+            }else{
+                $(img).attr('src', logoMap[dealer]);
+//                $(img).attr('src', )
+            }
+        });
     },
     setLayout : function(){
 
@@ -78,7 +92,16 @@ var zyxCart = {
                 $('.payment-step').find('.min-header').removeClass('none-i');
 
                 var dataObj = formCheck.getSelectedAddress($('.address-form-holder'));
-                var formDispContainer = $('.address-step .completed-summary');
+                var formDispCont = $('.address-step .completed-summary .info');
+                zyxCart.orderObj = dataObj;
+                console.log($(formDispCont));
+                console.log(dataObj);
+                $(formDispCont).find('.name').text(dataObj.name);
+                $(formDispCont).find('.number').text(dataObj.number);
+                $(formDispCont).find('.st-address').text(dataObj.pick.street);
+                $(formDispCont).find('.pincode').text(dataObj.pick.pincode);
+                $(formDispCont).find('.city').text(dataObj.pick.city);
+
 
             }
         });
@@ -114,6 +137,25 @@ var zyxCart = {
                 $(form).find('#drop-off-col').find('input,textarea').removeAttr('disabled');
             }
         })
+
+        $('.confirm-step #place-order-btn').on('change', function(){
+            var orderObj = {};
+            if(!zyxCart.orderObj){
+                orderObj = zyxCart;
+            }else{
+                orderObj = formCheck.getSelectedAddress($('.address-form-holder'));
+            }
+            var trarray = $('.confirm-step .table-holder table').find('tr');
+            $.each(trarray, function(ix, tr){
+                var orderItem = {};
+                orderItem['ts'] = $(tr).attr('ts');
+                orderItem['service'] = $(tr).attr('service');
+                orderItem[]
+            });
+//            Commons.ajaxData('place_order', )
+
+        });
+
 
 
     }
