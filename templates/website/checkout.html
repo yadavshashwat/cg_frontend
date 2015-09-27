@@ -7,11 +7,17 @@
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.timepicker.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-datepicker.css' %}"/>
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.datetimepicker.css' %}"/>-->
     <link rel="stylesheet/less" type="text/css" href="{% static 'less/styles.less' %}"/>
     <link rel="stylesheet/less" type="text/css" href="{% static 'less/login-html.less' %}"/>
     <script type="text/javascript" src="{%  static 'js/legacy/jquery-2.1.4.min.js' %}"></script>
     <script type="text/javascript" src="{%  static 'js/legacy/json2html.js' %}"></script>
     <script type="text/javascript" src="{%  static 'js/legacy/jquery.json2html.js' %}"></script>
+    <!--<script type="text/javascript" src="{%  static 'js/legacy/jquery.datetimepicker.js' %}"></script>-->
+    <script type="text/javascript" src="{%  static 'js/legacy/bootstrap-datepicker.js' %}"></script>
+    <script type="text/javascript" src="{%  static 'js/legacy/jquery.timepicker.js' %}"></script>
     <script type="text/javascript" src="{%  static 'js/plugin.js' %}"></script>
     <script type="text/javascript" src="{%  static 'js/common.js' %}"></script>
     <script type="text/javascript" src="{%  static 'js/checkout.js' %}"></script>
@@ -23,237 +29,618 @@
     {% include "website/dash-header.html" %}
 </div>
 <div class="pane checkout-pane">
-    <div class="centered-content"></div>
-    <div class="cart-holder centered-content">
+<div class="centered-content"></div>
+<div class="cart-holder centered-content">
 
-        <div class="login-step minimized collapsible-div">
-            <div class="min-header  none-i">
-                <span>1. Login Detail</span>
+<div class="login-step minimized collapsible-div">
+    <div class="min-header  none-i">
+        <span>1. Login Detail</span>
+    </div>
+    <div class="max-content none-i">
+        <div class="dog-ear-header">
+            <span>1. Before you place your order! <span style="opacity: 0.8;"> Sign in </span></span>
+        </div>
+        <div class="wrapper">
+            {% if user and not user.is_anonymous %}
+            <div class="login-info">
+                Logged in as
+                <strong ng-if="loginId!=''"
+                        class="ng-scope ng-binding">{{user.get_full_name|default:user.username}}</strong>
+                .
             </div>
-            <div class="max-content none-i">
-                <div class="dog-ear-header">
-                    <span>1. Before you place your order! <span style="opacity: 0.8;"> Sign in </span></span>
-                </div>
-                <div class="wrapper">
-                    {% if user and not user.is_anonymous %}
-                        <div class="login-info">
-                            Logged in as
-                            <strong ng-if="loginId!=''" class="ng-scope ng-binding">{{user.get_full_name|default:user.username}}</strong>
-                            .
-                        </div>
-                    <div class="notif">
-                        <i class="alert-sign"></i> Please note that upon clicking "Sign out" you will lose items in your cart and will be redirected to Flipkart home page.
-                    </div>
-                    <div class="btn-row">
-                        <a class="btn btn-large btn-orange login-btn">Sign out </a>
+            <div class="notif">
+                <i class="alert-sign"></i> Please note that upon clicking "Sign out" you will lose items in your cart
+                and will be redirected to Flipkart home page.
+            </div>
+            <div class="btn-row">
+                <a class="btn btn-large btn-orange login-btn">Sign out </a>
                         <span class="continue-btn">
                             Continue with Checkout
                             <!--<a ng-click="!loading &amp;&amp; restoreStates()" class="fk-underline" alt="Continue with checkout">Continue with checkout</a>-->
                         </span>
-                    </div>
-
-                   {% else %}
-
-
-    <div class="medium-wrap">
-        <!-- ngRepeat: msg in model.msgs -->
-        <form name="loginForm" autofill-binder="!loading &amp;&amp; do_login(loginForm)" event-handler="submit" method="post" ng-hide="disallow_otp || show_captcha" class="ng-invalid ng-invalid-required ng-dirty">
-            <div ng-class="{show_error_msg:showEmailError}" ng-hide="model.loggedIn || login_type === 'has_account' || login_type === 'new_customer' || login_type === 'new_customer_email'" class="">
-                <div class="fk-font-18">
-                    <label for="email">Get started with our secure login flow</label>
-                </div>
-                <input id="email" type="text" name="email" class="fk-input ng-invalid ng-invalid-required ng-dirty" ng-model="email" required="" placeholder="Enter mobile number or email" autofill="" select-on="login_email">
-                <div class="fk-font-11 bpadding10 ng-hide" ng-show="showEmailError">Please enter a valid Email Address/Mobile Number</div>
             </div>
-            <div class="ng-hide" ng-show="(model.loggedIn || login_type === 'has_account' || login_type === 'new_customer' || login_type === 'new_customer_email') &amp;&amp; !otp_data.otp_sent"> <!-- ngIf: loginId!='' --><span class="fk-font-18 fk-bold ng-scope ng-binding" ng-if="loginId!=''"></span><!-- end ngIf: loginId!='' --> <!-- ngIf: !loginId && email!='' --><span class="fk-font-18 fk-bold ng-scope ng-binding" ng-if="!loginId &amp;&amp; email!=''"></span><!-- end ngIf: !loginId && email!='' --> <a href="#" class="edit-icon change lmargin20 lpadding15" ng-click="changeEmail()">Change</a> </div> <div class="tpadding15 mobile-number ng-hide" ng-hide="!model.loggedIn &amp;&amp; login_type !== 'new_customer_email'"> <div class="fk-font-17"><label for="mobile">Enter Mobile Number</label></div> <p class="fk-smallfont bpadding10 msg">(We'll send you a Verification Code to this number)</p> <div ng-class="{show_error_msg:showMobileError}"> <input type="text" value="+91" disabled="" class="unit fk-input phone_code"> <input id="mobile" type="number" name="mobile" class="fk-input phone_field ng-pristine ng-valid ng-valid-number ng-valid-maxlength ng-valid-minlength ng-valid-pattern" ng-model="mobile" placeholder="Enter mobile number" ng-pattern="/^[7-9][0-9]{9}$/" ng-minlength="10" ng-maxlength="10" ng-blur="validateMobile()" select-on="mobile-number"> <div class="fk-font-12 bpadding10 ng-hide" ng-show="showMobileError">Please enter a valid 10 digit mobile number</div> </div> </div> <div class="otp-email-text tpadding5 ng-hide" ng-show="otp_data.otp_sent">
- For security reasons, we've sent a Verification Code to <strong class="ng-binding"></strong>.
- <!-- ngIf: email!=='' && mobile=='' --> <a href="#" class="edit-icon change fk-font-13 lpadding15" ng-click="changeEmail()">Change</a> </div> <div class="tpadding15 ng-hide" ng-show="show_otp_form == true"> <label for="otp" class="fk-font-17">Enter the Code</label>
-            <div class="pure-g-r">
-                <div class="pure-u-1-2"> <input type="text" id="otp" name="otp" class="fk-input otp_field ng-pristine ng-valid ng-valid-maxlength ng-valid-minlength" ng-model="otp" ng-disabled="!otp_data.otp_sent || showOTPError===false" maxlength="6" ng-maxlength="6" ng-minlength="6" ng-change="verify_otp()" autocomplete="off" select-on="otp-text" disabled="disabled"> <input type="hidden" id="otp_key" name="otp_key" ng-value="otp_data.otp_key" ng-model="otp_key" ng-init="otp_key=otp_data.otp_key" class="ng-pristine ng-valid"> </div> <div class="pure-u-1-3 otp-status" ng-class="{show_error_msg:showOTPError}"> <span ng-class="{'otp-failure-icon': showOTPError===true, 'otp-success-icon': showOTPError===false}"></span> <span class="ng-binding"></span> </div> </div> <div class="opt-help" ng-hide="otp_data.otp_validated"> <span class="text">Trouble receiving Code?</span> <a href="javascript:" class="fk-underline" ng-click="generate_otp(true)">Resend Code</a> </div> </div> <div class="tpadding20 ng-hide" ng-show="(login_type === 'has_account' || login_type === 'new_customer') &amp;&amp; email!=='' &amp;&amp; login_type !== 'phone_sales'" ng-class="{show_error_msg:showPasswordError || showMinimumLengthError}"> <label for="password" class="fk-font-17" ng-class="{disabled:otp_data.otp_sent &amp;&amp; !otp_data.otp_validated}"> <!-- ngIf: login_type === 'has_account' && workflow!='guest_only' --> <!-- ngIf: login_type === 'new_customer' || workflow == 'guest_only' --> Password<sup>*</sup> </label> <input type="password" id="password" name="password" class="fk-input ng-pristine ng-valid" ng-model="password" autofill="" select-on="login-password" ng-disabled="otp_data.otp_sent &amp;&amp; !otp_data.otp_validated"> <div class="fk-font-11 bpadding10 ng-hide" ng-show="showPasswordError">Please enter password</div> <div class="fk-font-11 bpadding10 ng-hide" ng-show="showMinimumLengthError">Password must be at least 4 characters long</div> </div> <div class="tpadding10 ng-hide" ng-show="(login_type === 'new_customer' &amp;&amp; login_type !== 'phone_sales') || otp_data.otp_sent" ng-class="{show_error_msg:showConfirmPasswordError || showConfPassMismatchError}"> <label for="confirm_password" class="fk-font-17" ng-class="{disabled:otp_data.otp_sent &amp;&amp; !otp_data.otp_validated}">Confirm Password<sup>*</sup></label> <input type="password" id="confirm_password" name="confirm_password" class="fk-input ng-pristine ng-valid" ng-model="confirm_password" ng-disabled="otp_data.otp_sent &amp;&amp; !otp_data.otp_validated"> <div class="fk-font-11 bpadding10 ng-hide" ng-show="showConfirmPasswordError">Please confirm password</div> <div class="fk-font-11 bpadding10 ng-hide" ng-show="showConfPassMismatchError">Password mismatch</div> </div> <!-- ngIf: !(login_type === 'has_account' || login_type === 'new_customer') || login_type === 'phone_sales' || login_type ==='new_customer_email' --><input type="submit" class="btn btn-large btn-blue tmargin5 ng-scope" value="Continue" ng-if="!(login_type === 'has_account' || login_type === 'new_customer') || login_type === 'phone_sales' || login_type ==='new_customer_email'"><!-- end ngIf: !(login_type === 'has_account' || login_type === 'new_customer') || login_type === 'phone_sales' || login_type ==='new_customer_email' --> <!-- ngIf: (login_type === 'has_account' && email!=='' ) --> <!-- ngIf: (login_type === 'new_customer' && email!=='' ) --> <a href="javascript:" class="forgot-pwd-link fk-display-block tmargin10 ng-hide" ng-click="forgot_password()" ng-show="login_type === 'has_account' &amp;&amp; !otp_data.otp_sent" ng-disabled="otp_data.otp_sent &amp;&amp; !otp_data.otp_validated">Forgot Password?</a> </form> <div ng-show="disallow_otp" class="otp-exceeded ng-hide"> <!-- ngIf: attempts_exceeded --> <!-- ngIf: !attempts_exceeded --><p ng-if="!attempts_exceeded" class="ng-scope">
- For security reasons, to recover your password <br> <a href="https://www.flipkart.com/s/contact" target="_blank" class="fk-underline forgot-pwd-link">Contact customer support</a> </p><!-- end ngIf: !attempts_exceeded --> <span class="circular-bg">OR</span> <p>
- Try again with <a href="#" ng-click="changeEmail()" class="fk-underline forgot-pwd-link">Different Email Address or Mobile Number</a> </p> </div> <div ng-show="show_captcha" class="ng-hide"> <form name="captchaForm" id="captchaForm" autofill-binder="!loading &amp;&amp; verify_captcha()" event-handler="submit" method="post" class="ng-pristine ng-invalid ng-invalid-required"> <div> <p class="bmargin10">For security reasons, we need to establish the requests were indeed generated by you</p> <div> <img ng-src="../genImage.php?id=&amp;co_id=OD3037714097375680" class="bmargin20" src="../genImage.php?id=&amp;co_id=OD3037714097375680"> <p class="bmargin20">
- Can't read the code above? <a href="#" ng-click="generate_captcha()" class="fk-underline">Regenerate code</a> </p> </div> <div> <label for="captchaInput">Please enter the code below. Letters are not case-sensitive.</label> <input type="text" name="captchaInput" id="captchaInput" autocomplete="off" ng-maxlength="6" ng-required="true" maxlength="6" ng-pattern="/^[0-9a-zA-Z]+$/" class="fk-input tmargin8 ng-pristine ng-invalid ng-invalid-required ng-valid-maxlength ng-valid-pattern" ng-model="captchaInput" placeholder="Enter the characters" select-on="captcha_code" required="required"> <input type="submit" class="btn btn-large btn-orange" value="Continue"> </div> </div> </form> </div> </div>
-                    <div class="small-wrap" style="width: 16%;">
-    <div class="signup-divider">
-        <span class="or-icon"></span>
-    </div>
+
+            {% else %}
+
+
+            <div class="medium-wrap">
+                <!-- ngRepeat: msg in model.msgs -->
+                <form name="loginForm" autofill-binder="!loading &amp;&amp; do_login(loginForm)" event-handler="submit"
+                      method="post" ng-hide="disallow_otp || show_captcha"
+                      class="ng-invalid ng-invalid-required ng-dirty">
+                    <div ng-class="{show_error_msg:showEmailError}"
+                         ng-hide="model.loggedIn || login_type === 'has_account' || login_type === 'new_customer' || login_type === 'new_customer_email'"
+                         class="">
+                        <div class="fk-font-18">
+                            <label for="email">Get started with our secure login flow</label>
+                        </div>
+                        <input id="email" type="text" name="email"
+                               class="fk-input ng-invalid ng-invalid-required ng-dirty" ng-model="email" required=""
+                               placeholder="Enter mobile number or email" autofill="" select-on="login_email">
+
+                        <div class="fk-font-11 bpadding10 ng-hide" ng-show="showEmailError">Please enter a valid Email
+                            Address/Mobile Number
+                        </div>
                     </div>
-                    <div class="small-wrap" style="width: 30%;">
-    <div class="signup-benefits">
-        <h2 class="title">Advantages of Sign Up</h2>
-        <ul>
-            <li class="item">
-                <span class="list-icon"></span>
-                <p class="text">Manage your Orders</p>
-                <p class="small-text">Easily Track Orders, Hassle free Returns</p>
-            </li>
-            <li class="item">
-                <span class="list-icon"></span>
-                <p class="text">Make Informed Decisions</p>
-                <p class="small-text">Get Relevant Alerts and Recommendations</p>
-            </li>
-            <li class="item">
-                <span class="list-icon"></span>
-                <p class="text">Engage Socially</p>
-                <p class="small-text">With wishlists, Reviews, Ratings</p>
-            </li>
-        </ul>
+                    <div class="ng-hide"
+                         ng-show="(model.loggedIn || login_type === 'has_account' || login_type === 'new_customer' || login_type === 'new_customer_email') &amp;&amp; !otp_data.otp_sent">
+                        <!-- ngIf: loginId!='' --><span class="fk-font-18 fk-bold ng-scope ng-binding"
+                                                        ng-if="loginId!=''"></span><!-- end ngIf: loginId!='' -->
+                        <!-- ngIf: !loginId && email!='' --><span class="fk-font-18 fk-bold ng-scope ng-binding"
+                                                                  ng-if="!loginId &amp;&amp; email!=''"></span><!-- end ngIf: !loginId && email!='' -->
+                        <a href="#" class="edit-icon change lmargin20 lpadding15" ng-click="changeEmail()">Change</a>
+                    </div>
+                    <div class="tpadding15 mobile-number ng-hide"
+                         ng-hide="!model.loggedIn &amp;&amp; login_type !== 'new_customer_email'">
+                        <div class="fk-font-17"><label for="mobile">Enter Mobile Number</label></div>
+                        <p class="fk-smallfont bpadding10 msg">(We'll send you a Verification Code to this number)</p>
+
+                        <div ng-class="{show_error_msg:showMobileError}"><input type="text" value="+91" disabled=""
+                                                                                class="unit fk-input phone_code"> <input
+                                id="mobile" type="number" name="mobile"
+                                class="fk-input phone_field ng-pristine ng-valid ng-valid-number ng-valid-maxlength ng-valid-minlength ng-valid-pattern"
+                                ng-model="mobile" placeholder="Enter mobile number" ng-pattern="/^[7-9][0-9]{9}$/"
+                                ng-minlength="10" ng-maxlength="10" ng-blur="validateMobile()"
+                                select-on="mobile-number">
+
+                            <div class="fk-font-12 bpadding10 ng-hide" ng-show="showMobileError">Please enter a valid 10
+                                digit mobile number
+                            </div>
+                        </div>
+                    </div>
+                    <div class="otp-email-text tpadding5 ng-hide" ng-show="otp_data.otp_sent">
+                        For security reasons, we've sent a Verification Code to <strong class="ng-binding"></strong>.
+                        <!-- ngIf: email!=='' && mobile=='' --> <a href="#"
+                                                                   class="edit-icon change fk-font-13 lpadding15"
+                                                                   ng-click="changeEmail()">Change</a></div>
+                    <div class="tpadding15 ng-hide" ng-show="show_otp_form == true"><label for="otp" class="fk-font-17">Enter
+                        the Code</label>
+
+                        <div class="pure-g-r">
+                            <div class="pure-u-1-2"><input type="text" id="otp" name="otp"
+                                                           class="fk-input otp_field ng-pristine ng-valid ng-valid-maxlength ng-valid-minlength"
+                                                           ng-model="otp"
+                                                           ng-disabled="!otp_data.otp_sent || showOTPError===false"
+                                                           maxlength="6" ng-maxlength="6" ng-minlength="6"
+                                                           ng-change="verify_otp()" autocomplete="off"
+                                                           select-on="otp-text" disabled="disabled"> <input
+                                    type="hidden" id="otp_key" name="otp_key" ng-value="otp_data.otp_key"
+                                    ng-model="otp_key" ng-init="otp_key=otp_data.otp_key" class="ng-pristine ng-valid">
+                            </div>
+                            <div class="pure-u-1-3 otp-status" ng-class="{show_error_msg:showOTPError}"><span
+                                    ng-class="{'otp-failure-icon': showOTPError===true, 'otp-success-icon': showOTPError===false}"></span>
+                                <span class="ng-binding"></span></div>
+                        </div>
+                        <div class="opt-help" ng-hide="otp_data.otp_validated"><span class="text">Trouble receiving Code?</span>
+                            <a href="javascript:" class="fk-underline" ng-click="generate_otp(true)">Resend Code</a>
+                        </div>
+                    </div>
+                    <div class="tpadding20 ng-hide"
+                         ng-show="(login_type === 'has_account' || login_type === 'new_customer') &amp;&amp; email!=='' &amp;&amp; login_type !== 'phone_sales'"
+                         ng-class="{show_error_msg:showPasswordError || showMinimumLengthError}"><label for="password"
+                                                                                                        class="fk-font-17"
+                                                                                                        ng-class="{disabled:otp_data.otp_sent &amp;&amp; !otp_data.otp_validated}">
+                        <!-- ngIf: login_type === 'has_account' && workflow!='guest_only' -->
+                        <!-- ngIf: login_type === 'new_customer' || workflow == 'guest_only' --> Password<sup>*</sup>
+                    </label> <input type="password" id="password" name="password" class="fk-input ng-pristine ng-valid"
+                                    ng-model="password" autofill="" select-on="login-password"
+                                    ng-disabled="otp_data.otp_sent &amp;&amp; !otp_data.otp_validated">
+
+                        <div class="fk-font-11 bpadding10 ng-hide" ng-show="showPasswordError">Please enter password
+                        </div>
+                        <div class="fk-font-11 bpadding10 ng-hide" ng-show="showMinimumLengthError">Password must be at
+                            least 4 characters long
+                        </div>
+                    </div>
+                    <div class="tpadding10 ng-hide"
+                         ng-show="(login_type === 'new_customer' &amp;&amp; login_type !== 'phone_sales') || otp_data.otp_sent"
+                         ng-class="{show_error_msg:showConfirmPasswordError || showConfPassMismatchError}"><label
+                            for="confirm_password" class="fk-font-17"
+                            ng-class="{disabled:otp_data.otp_sent &amp;&amp; !otp_data.otp_validated}">Confirm
+                        Password<sup>*</sup></label> <input type="password" id="confirm_password"
+                                                            name="confirm_password"
+                                                            class="fk-input ng-pristine ng-valid"
+                                                            ng-model="confirm_password"
+                                                            ng-disabled="otp_data.otp_sent &amp;&amp; !otp_data.otp_validated">
+
+                        <div class="fk-font-11 bpadding10 ng-hide" ng-show="showConfirmPasswordError">Please confirm
+                            password
+                        </div>
+                        <div class="fk-font-11 bpadding10 ng-hide" ng-show="showConfPassMismatchError">Password
+                            mismatch
+                        </div>
+                    </div>
+                    <!-- ngIf: !(login_type === 'has_account' || login_type === 'new_customer') || login_type === 'phone_sales' || login_type ==='new_customer_email' --><input
+                        type="submit" class="btn btn-large btn-blue tmargin5 ng-scope" value="Continue"
+                        ng-if="!(login_type === 'has_account' || login_type === 'new_customer') || login_type === 'phone_sales' || login_type ==='new_customer_email'"><!-- end ngIf: !(login_type === 'has_account' || login_type === 'new_customer') || login_type === 'phone_sales' || login_type ==='new_customer_email' -->
+                    <!-- ngIf: (login_type === 'has_account' && email!=='' ) -->
+                    <!-- ngIf: (login_type === 'new_customer' && email!=='' ) --> <a href="javascript:"
+                                                                                     class="forgot-pwd-link fk-display-block tmargin10 ng-hide"
+                                                                                     ng-click="forgot_password()"
+                                                                                     ng-show="login_type === 'has_account' &amp;&amp; !otp_data.otp_sent"
+                                                                                     ng-disabled="otp_data.otp_sent &amp;&amp; !otp_data.otp_validated">Forgot
+                    Password?</a></form>
+                <div ng-show="disallow_otp" class="otp-exceeded ng-hide"> <!-- ngIf: attempts_exceeded -->
+                    <!-- ngIf: !attempts_exceeded --><p ng-if="!attempts_exceeded" class="ng-scope">
+                        For security reasons, to recover your password <br> <a href="https://www.flipkart.com/s/contact"
+                                                                               target="_blank"
+                                                                               class="fk-underline forgot-pwd-link">Contact
+                        customer support</a></p><!-- end ngIf: !attempts_exceeded --> <span
+                            class="circular-bg">OR</span>
+
+                    <p>
+                        Try again with <a href="#" ng-click="changeEmail()" class="fk-underline forgot-pwd-link">Different
+                        Email Address or Mobile Number</a></p></div>
+                <div ng-show="show_captcha" class="ng-hide">
+                    <form name="captchaForm" id="captchaForm" autofill-binder="!loading &amp;&amp; verify_captcha()"
+                          event-handler="submit" method="post" class="ng-pristine ng-invalid ng-invalid-required">
+                        <div><p class="bmargin10">For security reasons, we need to establish the requests were indeed
+                            generated by you</p>
+
+                            <div><img ng-src="../genImage.php?id=&amp;co_id=OD3037714097375680" class="bmargin20"
+                                      src="../genImage.php?id=&amp;co_id=OD3037714097375680">
+
+                                <p class="bmargin20">
+                                    Can't read the code above? <a href="#" ng-click="generate_captcha()"
+                                                                  class="fk-underline">Regenerate code</a></p></div>
+                            <div><label for="captchaInput">Please enter the code below. Letters are not
+                                case-sensitive.</label> <input type="text" name="captchaInput" id="captchaInput"
+                                                               autocomplete="off" ng-maxlength="6" ng-required="true"
+                                                               maxlength="6" ng-pattern="/^[0-9a-zA-Z]+$/"
+                                                               class="fk-input tmargin8 ng-pristine ng-invalid ng-invalid-required ng-valid-maxlength ng-valid-pattern"
+                                                               ng-model="captchaInput"
+                                                               placeholder="Enter the characters"
+                                                               select-on="captcha_code" required="required"> <input
+                                    type="submit" class="btn btn-large btn-orange" value="Continue"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="small-wrap" style="width: 16%;">
+                <div class="signup-divider">
+                    <span class="or-icon"></span>
+                </div>
+            </div>
+            <div class="small-wrap" style="width: 30%;">
+                <div class="signup-benefits">
+                    <h2 class="title">Advantages of Sign Up</h2>
+                    <ul>
+                        <li class="item">
+                            <span class="list-icon"></span>
+
+                            <p class="text">Manage your Orders</p>
+
+                            <p class="small-text">Easily Track Orders, Hassle free Returns</p>
+                        </li>
+                        <li class="item">
+                            <span class="list-icon"></span>
+
+                            <p class="text">Make Informed Decisions</p>
+
+                            <p class="small-text">Get Relevant Alerts and Recommendations</p>
+                        </li>
+                        <li class="item">
+                            <span class="list-icon"></span>
+
+                            <p class="text">Engage Socially</p>
+
+                            <p class="small-text">With wishlists, Reviews, Ratings</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+
+
+        </div>
+
+    </div>
+    <div class="completed-summary">
+        <div class="big-wrap">
+            <div class="dog-ear">
+                <i class="fa fa-check"></i>
+            </div>
+            <div class="info-div">
+                {% if user and not user.is_anonymous %}
+                <span class="label">1. LOGGED IN AS : </span>
+                <span class="info">{{ user.email }}</span>
+                {% endif %}
+            </div>
+
+        </div>
+        <div class="small-wrap">
+            <span class="btn btn-white right_btn change-login-btn">Change Login</span>
+        </div>
     </div>
 </div>
-                    {% endif %}
-
-
-                </div>
-
-            </div>
-            <div class="completed-summary">
-                <div class="big-wrap">
-                    <div class="dog-ear">
-                        <i class="fa fa-check"></i>
-                    </div>
-                    <div class="info-div">
-                    {% if user and not user.is_anonymous %}
-                        <span class="label">1. LOGGED IN AS : </span>
-                        <span class="info">{{ user.email }}</span>
-                    {% endif %}
-                    </div>
-
-                </div>
-                <div class="small-wrap">
-                    <span class="btn btn-white right_btn change-login-btn">Change Login</span>
-                </div>
-            </div>
+<div class="address-step collapsible-div">
+    <div class="min-header none-i">
+        <div class="info-div">
+            <span>2. Set Pick Up & Drop Off Details</span>
+            <span>1 items</span>
+            <span>Total: Rs. 599</span>
         </div>
-        <div class="address-step collapsible-div">
-            <div class="min-header none-i">
-                <div class="info-div">
-                    <span>2. Set Pick Up & Drop Off Details</span>
-                    <span>1 items</span>
-                    <span>Total: Rs. 599</span>
-                </div>
 
+    </div>
+    <div class="max-content">
+        <!--
+        NAME, TEHDEPHONE, PICHKUOP DIOP TUME
+        -->
+        <div class="dog-ear-header">
+            <span>2. Pickup Details</span>
+        </div>
+        <div class="wrapper">
+            <div class="address-count">
+                You have <b>{{ address|length }}</b> saved addresses
             </div>
-            <div class="max-content">
-                <!--
-                NAME, TEHDEPHONE, PICHKUOP DIOP TUME
-                -->
-                <div class="dog-ear-header">
-                    <span>2. Pickup Details</span>
-                </div>
-                <div class="wrapper">
-                    <div class="address-count">
-                        You have <b>{{ address|length }}</b> saved addresses
-                    </div>
-                    <div class="address-list-holder">
-                        <div class="address-item">
-                        {% if address|length|get_digit:"-1" %}=
-                        {% else %}
-                            <div class="address_detail">
-                                <a class="padding20 address-item">
-                                    <div class="name rposition">
+            {% if address|length|get_digit:"-1" %}
+            {% for addr in address %}
+
+            {% endfor %}
+            <div class="address-list-holder">
+                <div class="address-item">
+
+                    <div class="address_detail ">
+
+                        <a class="padding20 address-item">
+                            <div class="name rposition">
                                         <span class="tick-icon tick-mark ng-hide"
                                               ng-show="isSelectedAddress(address.address_id)"></span>
-                                        <span class="text-ellipsis ng-binding" title="V Rajeev">V Rajeev</span>
-                                    </div>
-                                    <p class="ng-binding">NB 13, Zanskar Hostel, IIT Delhi, Hauz Khas IIT Delhi</p>
-
-                                    <p class="ng-binding">110016, New Delhi</p>
-
-                                    <p class="ng-binding">Delhi</p>
-                                    <span class="phone ng-binding">8447021642</span>
-
-                                    <p class="select_btn btn btn-white">
-                                        <!-- ngIf: !isSelectedAddress(address.address_id) && addressType=='Delivery' -->
-                                        <span class="ng-scope">Deliver Here</span>
-                                        <!-- end ngIf: !isSelectedAddress(address.address_id) && addressType=='Delivery' -->
-                                        <!-- ngIf: !isSelectedAddress(address.address_id) && addressType=='Billing' -->
-                                        <!-- ngIf: isSelectedAddress(address.address_id) -->
-                                    </p>
-                                </a>
-
-                                <div class="address-icons">
-                                    <i class="delete-icon fa fa-trash-o" tooltip="Delete" tooltip-placement="bottom"
-                                       tooltip-trigger="mouseenter"
-                                       bind-log="deleting address ADD13463938978866551"></i>
-                                    <i class="address-edit-icon fa fa-pencil" tooltip="Edit" tooltip-placement="bottom"
-                                       tooltip-trigger="mouseenter" bind-log="editing address ADD13463938978866551"></i>
-                                </div>
+                                <span class="text-ellipsis ng-binding" title="V Rajeev">V Rajeev</span>
                             </div>
-                            <div class="address_detail">
-                                <a class="padding20 address-item">
-                                    <div class="name rposition">
+                            <p class="ng-binding">NB 13, Zanskar Hostel, IIT Delhi, Hauz Khas IIT Delhi</p>
+
+                            <p class="ng-binding">110016, New Delhi</p>
+
+                            <p class="ng-binding">Delhi</p>
+                            <span class="phone ng-binding">8447021642</span>
+
+                            <p class="select_btn btn btn-white">
+                                <!-- ngIf: !isSelectedAddress(address.address_id) && addressType=='Delivery' -->
+                                <span class="ng-scope">Deliver Here</span>
+                                <!-- end ngIf: !isSelectedAddress(address.address_id) && addressType=='Delivery' -->
+                                <!-- ngIf: !isSelectedAddress(address.address_id) && addressType=='Billing' -->
+                                <!-- ngIf: isSelectedAddress(address.address_id) -->
+                            </p>
+                        </a>
+
+                        <div class="address-icons">
+                            <i class="delete-icon fa fa-trash-o" tooltip="Delete" tooltip-placement="bottom"
+                               tooltip-trigger="mouseenter"
+                               bind-log="deleting address ADD13463938978866551"></i>
+                            <i class="address-edit-icon fa fa-pencil" tooltip="Edit" tooltip-placement="bottom"
+                               tooltip-trigger="mouseenter" bind-log="editing address ADD13463938978866551"></i>
+                        </div>
+                    </div>
+                    <div class="address_detail ">
+                        <a class="padding20 address-item">
+                            <div class="name rposition">
                                         <span class="tick-icon tick-mark ng-hide"
                                               ng-show="isSelectedAddress(address.address_id)"></span>
-                                        <span class="text-ellipsis ng-binding" title="V Rajeev">V Rajeev</span>
-                                    </div>
-                                    <p class="ng-binding">NB 13, Zanskar Hostel, IIT Delhi, Hauz Khas IIT Delhi</p>
+                                <span class="text-ellipsis ng-binding" title="V Rajeev">V Rajeev</span>
+                            </div>
+                            <p class="ng-binding">NB 13, Zanskar Hostel, IIT Delhi, Hauz Khas IIT Delhi</p>
 
-                                    <p class="ng-binding">110016, New Delhi</p>
+                            <p class="ng-binding">110016, New Delhi</p>
 
-                                    <p class="ng-binding">Delhi</p>
-                                    <span class="phone ng-binding">8447021642</span>
+                            <p class="ng-binding">Delhi</p>
+                            <span class="phone ng-binding">8447021642</span>
 
-                                    <p class="select_btn btn btn-white" style="display: none;">
-                                        <!-- ngIf: !isSelectedAddress(address.address_id) && addressType=='Delivery' -->
-                                        <span class="ng-scope">Deliver Here</span>
-                                        <!-- end ngIf: !isSelectedAddress(address.address_id) && addressType=='Delivery' -->
-                                        <!-- ngIf: !isSelectedAddress(address.address_id) && addressType=='Billing' -->
-                                        <!-- ngIf: isSelectedAddress(address.address_id) -->
-                                    </p>
-                                    <p class="">
+                            <p class="select_btn btn btn-white" style="display: none;">
+                                <!-- ngIf: !isSelectedAddress(address.address_id) && addressType=='Delivery' -->
+                                <span class="ng-scope">Deliver Here</span>
+                                <!-- end ngIf: !isSelectedAddress(address.address_id) && addressType=='Delivery' -->
+                                <!-- ngIf: !isSelectedAddress(address.address_id) && addressType=='Billing' -->
+                                <!-- ngIf: isSelectedAddress(address.address_id) -->
+                            </p>
+
+                            <p class="">
                                         <span class="checkbox-holder">
                                         <input class="clean-inp-cbox set-pickup" type="checkbox"/><span>Pick Up</span>
                                         </span>
                                         <span class="checkbox-holder">
                                         <input class="clean-inp-cbox set-dropoff" type="checkbox"/><span>Drop Off</span>
                                         </span>
-                                    </p>
-                                </a>
+                            </p>
+                        </a>
 
-                                <div class="address-icons">
-                                    <i class="delete-icon fa fa-trash-o" tooltip="Delete" tooltip-placement="bottom"
-                                       tooltip-trigger="mouseenter"
-                                       bind-log="deleting address ADD13463938978866551"></i>
-                                    <i class="address-edit-icon fa fa-pencil" tooltip="Edit" tooltip-placement="bottom"
-                                       tooltip-trigger="mouseenter" bind-log="editing address ADD13463938978866551"></i>
-                                </div>
-                            </div>
-
-                            {% for addr in address %}
-
-                            {% endfor %}
-
-                        {% endif %}
+                        <div class="address-icons">
+                            <i class="delete-icon fa fa-trash-o" tooltip="Delete" tooltip-placement="bottom"
+                               tooltip-trigger="mouseenter"
+                               bind-log="deleting address ADD13463938978866551"></i>
+                            <i class="address-edit-icon fa fa-pencil" tooltip="Edit" tooltip-placement="bottom"
+                               tooltip-trigger="mouseenter" bind-log="editing address ADD13463938978866551"></i>
                         </div>
                     </div>
-                    <div class="add-address-row">
-                        <span class="add-address-btn btn btn-white-yellow">+ Add new Address</span>
+
+
+                </div>
+            </div>
+
+            {% else %}
+            <div class="address-form-holder clean-form-holder">
+                <div class="form-col">
+                    <div class="label-div">User Details :</div>
+                    <div class="form-row mt12">
+                        <div class="label-div">Name</div>
+                    </div>
+                    <div class="form-row mt12">
+                    {% if user and not user.is_anonymous and user.first_name %}
+                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-name" type="text" value="{{ user.first_name }}"/></div>
+                    {% else %}
+                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-name" type="text"/></div>
+                    {% endif %}
+
+                    </div>
+                    <div class="form-row mt16">
+                        <div class="label-div">Phone</div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-number" type="text"/></div>
+                    </div>
+                    <div class="form-row mt16">
+                        <div class="label-div">Pick Up Time</div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="clean-inp-wrapper" id="date-time-pair">
+                            <input class="clean-inp-tbox pick-up-date" type="text" style="width:55%;"/>
+                            <input class="clean-inp-tbox pick-up-time" type="text" style="width:40%; "/>
+                        </div>
                     </div>
                 </div>
+                <div class="form-col" id="pick-up-col">
+                    <div class="label-div">Pickup Address :</div>
+                    <div class="form-row mt12" style="height: 80px;">
+                        <div class="label-div">Address</div>
+                        <div class="clean-inp-wrapper"><textarea class="clean-inp-tabox pick-addr" type="" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">Pincode</div>
+                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox pick-pin" type=""/></div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">Landmark</div>
+                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox pick-lmark" type=""/></div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">City</div>
+                        <div class="clean-inp-wrapper">
+                            <!--<input class="clean-inp-tbox drop-city" disabled type=""/>-->
+                            <label class="clean-sbox-wrapper">
+                            <select class="clean-inp-sbox pick-city">
+                                <option value="delhi">Delhi</option>
+                                <option value="gurgaon">Gurgaon</option>
+                            </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">Country</div>
+                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox" value="India" type="" disabled/></div>
+                    </div>
+                    <div class="form-row mt12">
+                        <input class="clean-inp-cbox" id="pick-drop-toggle" checked type="checkbox"/>
+                        <div class="label-div">Set this as Dropoff Address</div>
+                    </div>
+                </div>
+                <div class="form-col disabled" id="drop-off-col">
+                    <div class="label-div">Dropoff Address :</div>
+                    <div class="form-row mt12" style="height: 80px;">
+                        <div class="label-div">Address</div>
+                        <div class="clean-inp-wrapper"><textarea class="clean-inp-tabox drop-addr" disabled type="" rows="3"></textarea></div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">Pincode</div>
+                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox drop-pin" disabled type=""/></div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">Landmark</div>
+                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox drop-lmark" disabled type=""/></div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">City</div>
+                        <div class="clean-inp-wrapper">
+                            <!--<input class="clean-inp-tbox drop-city" disabled type=""/>-->
+                            <label class="clean-sbox-wrapper">
+                            <select class="clean-inp-sbox drop-city" disabled>
+                                <option value="delhi">Delhi</option>
+                                <option value="gurgaon">Gurgaon</option>
+                            </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">Country</div>
+                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox" value="India" type="" disabled/></div>
+                    </div>
 
-            </div>
-            <div class="completed-summary  none-i"></div>
-        </div>
-        <div class="confirm-step minimized collapsible-div">
-            <div class="min-header">
-                <div class="info-div">
-                    <span>3. Order Summary</span>
-                    <span>1 items</span>
-                    <span>Total: Rs. 599</span>
+                </div>
+                <div class="form-submit-row" style="">
+                    <span class="form-submit-btn continue-btn btn btn-white-yellow">Continue</span>
                 </div>
             </div>
-            <div class="max-content none-i"></div>
-            <div class="completed-summary  none-i"></div>
-        </div>
-        <div class="payment-step minimized collapsible-div">
-            <div class="min-header">
-                <span>4. Payment Method</span>
+            {% endif %}
+
+            <div class="add-address-row none-i">
+                <span class="add-address-btn btn btn-white-yellow">+ Add new Address</span>
             </div>
-            <div class="max-content none-i"></div>
-            <div class="completed-summary none-i"></div>
         </div>
 
     </div>
+    <div class="completed-summary  none-i">
+        <div class="big-wrap">
+            <div class="dog-ear">
+                <i class="fa fa-check"></i>
+            </div>
+            <div class="info-div">
+                <span class="label">2. DELIVERY ADDRESS : </span>
+                <span class="info">
+                    <span class="name"></span>
+                    <span class="number"></span>
+                    <span class="st-address cb"></span>
+                    <span class="pincode"></span>
+                    <span class="city"></span>
+                </span>
+            </div>
+
+        </div>
+        <div class="small-wrap">
+            <span class="btn btn-white right_btn change-address-btn">Change Address</span>
+        </div>
+    </div>
+</div>
+<div class="confirm-step minimized collapsible-div">
+    <div class="min-header">
+        <div class="info-div">
+            <span>3. Order Summary</span>
+            <span>1 items</span>
+            <span>Total: Rs. 599</span>
+        </div>
+    </div>
+    <div class="max-content none-i">
+                <div class="title-holder">
+                    <div class="select-wrapper">
+                        <select id="car-select-box">
+                            {% for key, list in cart.iteritems %}
+                            <option data-name="{{ list.0.car.make }} {{list.0.car.name}}" data-id="{{ list.0.car.id }}">
+                                {{ key }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                </div>
+                <div class="table-holder">
+                    {% for key, list in cart.iteritems %}
+                    <table data-id="{{ key }}" style="display:block;" class="cart-table">
+                        <thead>
+                        <tr>
+                            <th>Dealer</th>
+                            <th>Service</th>
+                            <th>Description</th>
+                            <th>Total Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for val in list %}
+                        <tr ts="{{ val.ts }}">
+                            <td data-id="{{val.dealer}}" data-name="{{val.car.make}}">
+                                <div class="dealer-logo-wrapper">
+                                    <img class="dealer-logo" src="" alt="{{val.dealer}}" data-name="{{val.car.make}}">
+
+                                    <div class="aligner"></div>
+                                </div>
+                            </td>
+                            <td>
+                                {% if val.service == "servicing" %}
+                                <div> {{ val.service_detail.odometer }}km / {{ val.service_detail.year }}</div>
+                                <div> Regular Servicing</div>
+                                {% elif val.service == "cleaning" %}
+                                <div> {{ val.service_detail.service }}</div>
+                                <div> Cleaning <i class="fa fa-caret-right"></i> {{ val.service_detail.category }}</div>
+                                {% endif %}
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                {% if val.service == "servicing" %}
+                                <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}
+                                </div>
+                                {% elif val.service == "cleaning" %}
+                                <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}
+                                </div>
+                                {% endif %}
+
+                            </td>
+                        </tr>
+                        <tr style="display:none;">
+                            <td>
+                                {% if val.service_detail %}
+                                {{ val.service_detail.name }}<br>
+                                {{ val.service_detail.odometer }}<br>
+                                {{ val.service_detail.brand }}<br>
+                                {{ val.car.name }}<br>
+                                {% else %}
+                                {{ val.total_price }}
+                                {% endif %}
+
+                            </td>
+                            <td>{{ val.dealer }}</td>
+                            <td>
+                                {% if val.service_detail %}
+                                {% if val.service == "servicing" %}
+
+                                {{ val.service_detail.parts_price }}<br>
+                                {{ val.service_detail.labour_price }}<br>
+                                {{ val.service_detail.wa_price }}<br>
+                                {{ val.service_detail.wb_price }}<br>
+                                {% elif val.service == "cleaning" %}
+                                {{ val.service_detail.parts_price }}<br>
+                                {{ val.service_detail.labour_price }}<br>
+                                {% else %}
+                                <p>else</p>
+                                {% endif %}
+                                {% else %}
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>{{ val.service_detail }}</td>
+
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endfor %}
+                </div>
+                <div class="cart-btn-holder">
+                    <div class="left-btns fl">
+                        <div class="back-btn"><i class="fa fa-caret-left"></i> Continue Shopping</div>
+                    </div>
+                    <div class="right-btns fr">
+                        <!--                <div class="update-btn"></div>-->
+                        <div class="checkout-btn">Checkout <i class="fa fa-caret-right"></i></div>
+                    </div>
+                </div>
+
+    </div>
+    <div class="completed-summary  none-i"></div>
+</div>
+<div class="payment-step minimized collapsible-div">
+    <div class="min-header">
+        <span>4. Payment Method</span>
+    </div>
+    <div class="max-content none-i">
+
+
+    </div>
+    <div class="completed-summary none-i"></div>
+</div>
+
+</div>
 </div>
 
 <div class="address-modal-container bootstrap-wrapper modal-container" style="display: none;">

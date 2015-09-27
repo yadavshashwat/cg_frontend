@@ -405,3 +405,119 @@ var local = {
 
     }
 };
+
+var formCheck = {
+    addressForm : function(container){
+
+        var valid = function(str){
+            if(!str || !(str.length)){
+                return false
+            }
+            return true;
+        };
+        var user_name = $(container).find('.user-name').val();
+        var user_number = $(container).find('.user-number').val();
+
+        var pick_addr = $(container).find('.pick-addr').val();
+        var pick_pin = $(container).find('.pick-pin').val();
+        var pick_lmark = $(container).find('.pick-lmark').val();
+
+        var dropMatch = $(container).find('.pick-drop-toggle').is(':checked');
+
+        var drop_addr = $(container).find('.drop-addr').val();
+        var drop_pin = $(container).find('.drop-pin').val();
+        var drop_lmark = $(container).find('.drop-lmark').val();
+
+        if(!valid(user_name)){
+            $(container).find('.user-name').addClass('error');
+            return false
+        }
+        if(!valid(user_number)){
+            $(container).find('.user-number').addClass('error');
+            return false
+        }else{
+            if(isNaN(parseInt(user_number)) || user_number.length != 10){
+                $(container).find('.user-number').addClass('error');
+                return false
+            }
+        }
+
+
+        if(!valid(pick_addr)){
+            $(container).find('.pick-addr').addClass('error');
+            return false
+        }
+        if(!valid(pick_pin)){
+            $(container).find('.pick-pin').addClass('error');
+            return false
+        }else{
+            console.log(pick_pin.length)
+            if(isNaN(parseInt(pick_pin)) || pick_pin.length != 6){
+                $(container).find('.pick-pin').addClass('error');
+                return false
+            }
+        }
+        if(!valid(pick_addr)){
+            $(container).find('.pick-addr').addClass('error');
+            return false
+        }
+        if(!valid(pick_pin)){
+            $(container).find('.pick-pin').addClass('error');
+            return false
+        }else{
+//            console.log(pick_pin.length)
+            if(isNaN(parseInt(pick_pin)) || pick_pin.length != 6){
+                $(container).find('.pick-pin').addClass('error');
+                return false
+            }
+        }
+//        if(!valid(pick_lmark)){
+//            $(container).find('.pick-lmark').addClass('error');
+//            return false
+//        }
+        return true;
+    },
+    clearErrorEvent : function(e){
+        if($(this).val() && $(this).val().length){
+            $(this).removeClass('error');
+        }
+    },
+    setSelectedAddress : function(){
+
+    },
+    getSelectedAddress : function(container){
+        var user_name = $(container).find('.user-name').val();
+        var user_number = $(container).find('.user-number').val();
+        var pick_addr = $(container).find('.pick-addr').val();
+        var pick_pin = $(container).find('.pick-pin').val();
+        var pick_lmark = $(container).find('.pick-lmark').val();
+        var pick_city = $(container).find('.pick-city').val();
+        var pick_time = $(container).find('.pick-up-time').val();
+        var pick_date = $(container).find('.pick-up-date').val();
+        var drop_addr = $(container).find('.drop-addr').val();
+        var drop_pin = $(container).find('.drop-pin').val();
+        var drop_lmark = $(container).find('.drop-lmark').val();
+        var drop_city = $(container).find('.drop-city').val();
+        var obj = {
+            name : user_name,
+            number : user_number,
+            pick:{
+                street : pick_addr,
+                pincode : pick_pin,
+                landmark : pick_lmark,
+                city : pick_city,
+                time : pick_time,
+                date : pick_date
+            },
+            drop:{
+                street : drop_addr,
+                pincode : drop_pin,
+                landmark : drop_lmark,
+                city : drop_city
+            }
+        };
+        return obj;
+    }
+
+
+};

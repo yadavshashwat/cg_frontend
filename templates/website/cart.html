@@ -47,7 +47,7 @@
         </thead>
         <tbody>
          {% for val in list %}
-<tr>
+<tr ts="{{ val.ts }}">
     <td data-id="{{val.dealer}}" data-name="{{val.car.make}}">
         <div class="dealer-logo-wrapper">
             <img class="dealer-logo" src="" alt="{{val.dealer}}" data-name="{{val.car.make}}" >
