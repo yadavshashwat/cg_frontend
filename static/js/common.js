@@ -178,32 +178,15 @@ var Templates = {
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
-                        {"tag":"div", "class":"detail-div", "html":function(){return "<div> Details </div><i class='fa fa-ellipsis-h'></i>";}}
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Choose Vendor </div>";}}
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
-                        {"tag":"div", "class":"due-div fl", "html":function(){return "due at : <span>"+this.odometer + ' / '+ this.year+"</span>";}},
-                        {"tag":"div", "class":"price-div", "html":function(){return "Type : <span>"+this['paid_free']+"</span>";}}
-                    ]}
-                ]},
-                {"tag":"div", "class":"bot-row", "children":[
-                    {"tag":"div", "class":"row", "children":[
-                         {"tag":"div", "class":"fr", "html":function(){
-                                return 'Cleaning <i class="fa fa-check"></i>';
-                         }},
-                         {"tag":"div", "class":"fr", "html":function(){
-                             if(this['regular_checks'] && this['regular_checks'].length){
-                                return 'Regular Checks <i class="fa fa-check"></i>';
-                             }else{
-                                 return '<span class="disabled">Regular Checks</span>';
-                             }
-                         }},
-//                         {"tag":"div", "class":"carname-div", "html":function(){return this['car_name']+" Servicing"; }},
-                    ]},
-                    {"tag":"div", "class":"row", "children":[
-                        {"tag":"div", "class":"parts-label fl", "html":function(){
-                            return "Parts Replaced : ";
-                        }},
+                        {"tag":"div", "class":"due-div fl", "html":function(){return "Due at <span>"+ String(this.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+ ' km / '+ this.year+"</span>";}},
+                        
+                    {"tag":"div", "class":"service-details", "children":[  
+                        {"tag":"div", "class":"checks-div", "html":function(){return 'Washing';}},
+                        {"tag":"div", "class":"checks-div", "html":function(){return 'Regular Checks';}},        
                         {"tag":"div", "class":"parts-div", "html":function(){
                             var html = '';
                             if(this['parts_replaced'] && this['parts_replaced'].length){
@@ -214,12 +197,11 @@ var Templates = {
     //                            return "Regular Checks :" + this['parts_replaced'].join(', ');
                             }
                             else
-                                return "None";
-                        }}
-
+                                return "None";}}
+                            ]}
                     ]}
-
                 ]},
+            
                 {"tag":"div", "class":"state-update none-i"}
             ]
         }],
@@ -227,11 +209,11 @@ var Templates = {
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
-                        {"tag":"div", "class":"detail-div", "html":function(){return "<div> Details </div><i class='fa fa-ellipsis-h'></i>";}}
+                           {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Choose Vendor </div>";}}
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
-                        {"tag":"div", "class":"due-div", "html":function(){return "Cleaning Type : <span>"+this.category +"</span>";}},
+                        {"tag":"div", "class":"due-div", "html":function(){return "<span>"+this.category +"</span>";}},
 //                        {"tag":"div", "class":"price-div", "html":function(){return "Type : <span>"+this['paid_free']+"</span>";}}
                     ]}
                 ]},
@@ -263,8 +245,8 @@ var Templates = {
                     {"tag":"div", "class":"dealer-add-to-cart", "html":"Add to Cart"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
-                    {"tag":"div", "html":"${labour_price}"},
-                    {"tag":"div", "html":"${parts_price}"}
+                    {"tag":"div", "html":"Labour : Rs. "+"${labour_price}"},
+                    {"tag":"div", "html":"Parts : Rs. "+"${parts_price}"}
                 ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
