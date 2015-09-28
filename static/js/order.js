@@ -12,12 +12,19 @@ var Global = {
         _this.setLayout();
         _this.eventHandlers();
         Commons.eventHandlers();
+        if(!_this.carSelected){
+            var cookDict = local.load();
+            if(cookDict['clgacarid'] && _this.carData){
+                _this.carSelected =  $.grep(_this.carData, function(e){ return e.id == cookDict['clgacarid']; })[0];
+
+            }
+        }
         if(_this.carSelected){
             $("#selected-details").show();
             $("#selected-details").find('.c-name').html(_this.carSelected.name);
             $("#selected-details").find('.c-make').html(_this.carSelected.make);
         }else{
-            _this.generateCarSelect();
+                _this.generateCarSelect();
         }
         workflowState.init();
         if(workflowState.step.state == 'service'){
@@ -70,6 +77,7 @@ var Global = {
             if($target.closest('.header-wrapper').length || $target.closest('.state-update').length){
                 var classy = $(this).closest('.section-content-item').attr('data-class');
                 var s_id = $(this).attr('data-id');
+                _this.selectedSection = classy;
                 if(classy == 'servicing' || classy == 'cleaning' || classy == 'vas'){
                     var data = {};
                     data.state = 'dealer';
@@ -107,6 +115,30 @@ var Global = {
                 bodyHolder.find('.service-group-item[data-name="'+name+'"]').show();
             }
         });
+        $('.dealer-box ').on('click', '.dealer-checkout, .dealer-add-to-cart', function(e){
+            var obj = {};
+            obj.timestamp = (new Date()).getTime();
+            obj.service = _this.selectedSection;
+            obj.dealer = $(this).closest('.dealer-list-item').attr('data-name');
+            obj.s_id = $(this).closest('.dealer-list-item').attr('data-id');
+            console.log(obj)
+            var cook_obj = local.load();
+            var oldC = '';
+            if(cook_obj['clgacart']){
+                oldC = cook_obj['clgacart'];
+                oldC += ','
+            }
+            var newC = [obj.timestamp,obj.service, obj.dealer, obj.s_id].join('*');
+            oldC += newC;
+            local.save('clgacart', oldC);
+            Commons.ajaxData('add_to_cart', {'cookie':newC, 'car_id':_this.carSelected.id, 'car_size':_this.carSelected.size}, "get", _this, _this.redirectToCart );
+
+//            Commons.ajaxData('add_to_cart', {})
+        });
+        $('#settings-drpdwn').on('click', function(e){
+            $(this).parent().find('.logged-user-drpdwn').toggle();
+        });
+
 
 
     },
@@ -139,16 +171,18 @@ var Global = {
     },
     loadCleaning : function(data){
         console.log(data);
-//        var container = $('.section-box .cleaning');
-//        container.html('');
-//        container.json2html(data, Templates.orderPage.cleaning.cleaning_group_head, {append:true});
+        var container = $('.section-box .cleaning');
+        container.html('');
+        container.json2html(data, Templates.orderPage.cleaning, {append:true});
 
-        var headHolder = $('.section-box .cleaning .list-head');
-        headHolder.html('');
-        headHolder.json2html(data, Templates.orderPage.cleaning.cleaning_group_head, {append:true});
-        var bodyHolder = $('.section-box .cleaning .list-body');
-        bodyHolder.html('');
-        bodyHolder.json2html(data, Templates.orderPage.cleaning.cleaning_group_body, {append:true});
+//        var headHolder = $('.section-box .cleaning .list-head');
+//        headHolder.html('');
+//        headHolder.json2html(data, Templates.orderPage.cleaning.cleaning_group_head, {append:true});
+//        var bodyHolder = $('.section-box .cleaning .list-body');
+//        bodyHolder.html('');
+//        bodyHolder.json2html(data, Templates.orderPage.cleaning.cleaning_group_body, {append:true});
+
+
 //        container.append(json2html.transform(data,Templates.orderPage.services));
         $.each(data, function(idx, val){
 
@@ -241,7 +275,10 @@ var Global = {
         container.append(overlay).append(content);
         return container;
     },
-    carData:null
+    carData:null,
+    redirectToCart : function(){
+
+    }
 };
 
 var workflowState = {

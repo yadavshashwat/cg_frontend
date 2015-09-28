@@ -30,7 +30,6 @@ var Global = {
         Commons.eventHandlers();
         $('body').scrollTop(0);
         _this.autosliderObj.tmout = setInterval(function(){
-            console.log($('#point'+_this.autosliderObj.presentID))
             $('#point'+_this.autosliderObj.presentID).click();
             _this.autosliderObj.presentID += 1;
             if(_this.autosliderObj.presentID > 3){
@@ -62,7 +61,15 @@ var Global = {
            'marginTop':reqd_offset
         });
 
+         var asr = 1440/900;
+         var scr_asr = scrn_wd/scrn_ht;
+
+            /*breaks if height > 900
+            * breaks if width <
+            * */
         //video set
+            console.log(scr_asr, asr)
+         if(scr_asr > asr){
         if(scrn_ht > 850){
             var offBottom = scrn_ht-850;
 //            console.log(offBottom)
@@ -77,12 +84,40 @@ var Global = {
                 'bottom': offBottom
             }).attr('data-init', offBottom);
         }
+
         if(scrn_ht > 1080){
             $('.search-pane').find('.overlay-video video').css({
                 'width':'100%'
             })
-
         }
+
+
+        $('.search-pane').find('.overlay-image img').css({
+            'width':'100%',
+            'height':'auto'
+        });
+        var img_ht = $('.search-pane').find('.overlay-image img').outerHeight();
+        var img_bot = $('.search-pane').find('.overlay-image img').css('bottom').split('px')[0];
+             img_bot = parseInt(img_bot)
+         if(scrn_ht > (img_ht+img_bot) ){
+            var offBottom = scrn_ht - img_ht;
+//            offBottom =  -280 + offBottom;
+//                 console.log(scrn_ht, offBottom, (offBottom-scrn_ht))
+            if(offBottom > 0){
+                offBottom = 0
+            }
+            $('.search-pane').find('.overlay-image img').css({
+                'bottom': offBottom
+            }).attr('data-init', offBottom);
+         }
+
+         }else{
+            $('.search-pane').find('.overlay-image img').css({
+                'height':'100%',
+                'width':'auto',
+                'bottom':'0'
+            }).attr('data-init', 0);
+         }
 
 //        var reqd_offset = scrn_ht/2 - 50;
 //        $('#home-search-set-holder').css({
@@ -106,15 +141,21 @@ var Global = {
         $(window).on('scroll', function(e){
             var scrn_ht = $(window).innerHeight();
             var scrollTop = $('body').scrollTop();
-            var initBot = $('.search-pane').find('.overlay-video video').attr('data-init');
+//            var initBot = $('.search-pane').find('.overlay-video video').attr('data-init');
+            var initBot = $('.search-pane').find('.overlay-image img').attr('data-init');
             initBot = parseInt(initBot);
             if(!initBot || isNaN(initBot)){
                 initBot = 0
             }
             var toScrollBot = initBot - scrollTop*0.5;
 //            console.log(toScrollBot, scrn_ht)
+//            if(toScrollBot < scrn_ht){
+//                $('.search-pane').find('.overlay-video video').css({
+//                    'bottom':toScrollBot
+//                });
+//            }
             if(toScrollBot < scrn_ht){
-                $('.search-pane').find('.overlay-video video').css({
+                $('.search-pane').find('.overlay-image img').css({
                     'bottom':toScrollBot
                 });
             }
@@ -176,10 +217,17 @@ var Global = {
         $('#home-search-form').on('submit', function(e){
 //           var value = $(this).find('#omni-search-box').attr('data-id');
             var c_id = $(this).find('#hidden-id-box').val();
+            var c_name = $(this).find('#omni-search-box').val();
             if (!c_id.length){
                 return false
             }else{
-               $(this).find('#omni-search-box').remove();
+                var loc = window.location.href;
+                loc = loc.split('.in/')[0]+'.in/';
+                local.save('clgacarid',c_id);
+                local.save('clgacarname',c_name);
+                window.location = loc + 'order/?c_id='+c_id;
+//               $(this).find('#omni-search-box').remove();
+                return false;
             }
         });
         $('.learn-more').on('click', function(e){

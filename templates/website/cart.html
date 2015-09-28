@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>ClickGarage.in - Your One Stop for All Car Solutions</title>
+
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.min.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/custom.css" %}" />
+    <link rel="stylesheet/less" type="text/css" href="{% static "less/styles.less" %}" />
+    <link rel="stylesheet/less" type="text/css" href="{% static "less/login-html.less" %}" />
+    <script type="text/javascript" src="{%  static "js/legacy/jquery-2.1.4.min.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/legacy/json2html.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/legacy/jquery.json2html.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/plugin.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/common.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/cart.js" %}"></script>
+    <script src="{%  static "js/legacy/less.min.js" %}"></script>
+
+</head>
+<body class="cart-body">
+    <div class="solid-header">
+        {% include "website/dash-header.html" %}
+    </div>
+    <div class="pane order-pane">
+        <div class="centered-content">
+            <div class="content-holder">
+        <div class="title-holder">
+        <div class="select-wrapper">
+        <select  id="car-select-box">
+     {% for key, list in cart.iteritems %}
+<option data-name="{{ list.0.car.make }} {{list.0.car.name}}" data-id="{{ list.0.car.id }}">{{ key }}</option>
+{% endfor %}
+        </select>
+        </div>
+
+        </div>
+            <div class="table-holder">
+     {% for key, list in cart.iteritems %}
+       <table data-id="{{ key }}" style="display:none;" class="cart-table">
+        <thead>
+        <tr>
+        <th>Dealer</th>
+        <th>Service</th>
+        <th>Description</th>
+        <th>Total Price</th>
+        </tr>
+        </thead>
+        <tbody>
+         {% for val in list %}
+<tr ts="{{ val.ts }}">
+    <td data-id="{{val.dealer}}" data-name="{{val.car.make}}">
+        <div class="dealer-logo-wrapper">
+            <img class="dealer-logo" src="" alt="{{val.dealer}}" data-name="{{val.car.make}}" >
+        <div class="aligner"></div>
+        </div>
+    </td>
+    <td>
+    {% if val.service == "servicing" %}
+    <div> {{ val.service_detail.odometer }}km / {{ val.service_detail.year }}</div>
+    <div> Regular Servicing </div>
+    {% elif val.service == "cleaning" %}
+    <div> {{ val.service_detail.service }} </div>
+    <div> Cleaning <i class="fa fa-caret-right"></i> {{ val.service_detail.category }} </div>
+    {% endif %}
+    </td>
+    <td>
+
+    </td>
+        <td>
+    {% if val.service == "servicing" %}
+        <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}</div>
+    {% elif val.service == "cleaning" %}
+        <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}</div>
+    {% endif %}
+
+        </td>
+</tr>
+            <tr style="display:none;">
+               <td>
+        {% if val.service_detail %}
+            {{ val.service_detail.name }}<br>
+            {{ val.service_detail.odometer }}<br>
+            {{ val.service_detail.brand }}<br>
+            {{ val.car.name }}<br>
+        {% else %}
+            {{ val.total_price }}
+        {% endif %}
+
+                </td>
+               <td>{{ val.dealer }}</td>
+               <td>
+{% if val.service_detail %}
+    {% if val.service == "servicing" %}
+
+{{ val.service_detail.parts_price }}<br>
+{{ val.service_detail.labour_price }}<br>
+{{ val.service_detail.wa_price }}<br>
+{{ val.service_detail.wb_price }}<br>
+        {% elif val.service == "cleaning" %}
+{{ val.service_detail.parts_price }}<br>
+{{ val.service_detail.labour_price }}<br>
+        {% else %}
+<p>else</p>
+        {% endif %}
+{% else %}
+
+{% endif %}
+
+               </td>
+
+               <td>{{ val.service_detail }}</td>
+
+            </tr>
+         {% endfor %}
+        </tbody>
+       </table>
+         {% endfor %}
+                </div>
+        <div class="cart-btn-holder">
+            <div class="left-btns fl">
+                <div class="back-btn"> <i class="fa fa-caret-left"></i> Continue Shopping</div>
+            </div>
+            <div class="right-btns fr">
+<!--                <div class="update-btn"></div>-->
+                <div class="checkout-btn">Checkout <i class="fa fa-caret-right"></i></div>
+            </div>
+        </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
