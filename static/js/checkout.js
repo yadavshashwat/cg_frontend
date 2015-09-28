@@ -171,7 +171,20 @@ var zyxCart = {
 
     },
     onOrderPlace : function(){
-
+                $('.login-step').find('.max-content,.min-header').addClass('none-i');
+                $('.login-step').find('.completed-summary').removeClass('none-i');
+                $('.address-step').find('.max-content,.min-header').addClass('none-i');
+                $('.address-step').find('.completed-summary').removeClass('none-i');
+                $('.confirm-step').find('.max-content,.min-header').addClass('none-i');
+                $('.confirm-step').find('.completed-summary').removeClass('none-i');
+                //set present
+                $('.payment-step').find('.completed-summary,.min-header').addClass('none-i');
+                $('.payment-step').find('.max-content').removeClass('none-i');
+                //minimize forward steps
+//                $('.payment-step').find('.max-content,.completed-summary').addClass('none-i');
+//                $('.payment-step').find('.min-header').removeClass('none-i');
+                $('.login-step').find('.change-login-btn').off('click').hide();
+                $('.address-step').find('.change-address-btn').off('click').hide();
     }
 
 };

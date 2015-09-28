@@ -586,7 +586,24 @@
                 </div>
 
     </div>
-    <div class="completed-summary  none-i"></div>
+    <div class="completed-summary  none-i">
+        <div class="big-wrap">
+            <div class="dog-ear">
+                <i class="fa fa-check"></i>
+            </div>
+            <div class="info-div">
+                {% if user and not user.is_anonymous %}
+                <span class="label">3. ORDER PLACED : </span>
+                <span class="info"></span>
+                {% endif %}
+            </div>
+
+        </div>
+        <div class="small-wrap">
+            <!--<span class="btn btn-white right_btn change-login-btn">Change Login</span>-->
+        </div>
+
+    </div>
 </div>
 <div class="payment-step minimized collapsible-div">
     <div class="min-header">
@@ -594,7 +611,9 @@
     </div>
     <div class="max-content none-i">
 
+        You will receive an email & sms confirmation shortly!
 
+        Thank You!
     </div>
     <div class="completed-summary none-i"></div>
 </div>
