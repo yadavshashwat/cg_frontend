@@ -26,7 +26,6 @@ var Global = {
 //                $(img).attr('src', )
             }
         });
-
     },
     setLayout : function(){
         var _this = this;

@@ -10,6 +10,7 @@ var zyxCart = {
     init : function(){
         var _this = this;
         _this.eventHandlers();
+        _this.setLogos();
     $('#date-time-pair .pick-up-time').timepicker({
         'showDuration': true,
         'timeFormat': 'g:ia'
@@ -25,6 +26,19 @@ var zyxCart = {
 //    var datepair = new Datepair(basicExampleEl);
 
     },
+    setLogos : function(){
+        $.each($('img.dealer-logo'), function(i, img){
+            var dealer = $(img).attr('alt');
+            var carMake = $(img).attr('data-name');
+            console.log(dealer)
+            if(dealer == 'Authorized'){
+                $(img).attr('src', logoMap['Authorized']+ $.trim(carMake)+'.jpg');
+            }else{
+                $(img).attr('src', logoMap[dealer]);
+//                $(img).attr('src', )
+            }
+        });
+    },
     setLayout : function(){
 
     },
@@ -32,6 +46,7 @@ var zyxCart = {
 
     },
     eventHandlers : function(){
+        var _this = this;
         $('.login-step .change-login-btn').on('click', function(){
             //summarize previous steps
             //set present
@@ -78,7 +93,16 @@ var zyxCart = {
                 $('.payment-step').find('.min-header').removeClass('none-i');
 
                 var dataObj = formCheck.getSelectedAddress($('.address-form-holder'));
-                var formDispContainer = $('.address-step .completed-summary');
+                var formDispCont = $('.address-step .completed-summary .info');
+                zyxCart.orderObj = dataObj;
+                console.log($(formDispCont));
+                console.log(dataObj);
+                $(formDispCont).find('.name').text(dataObj.name);
+                $(formDispCont).find('.number').text(dataObj.number);
+                $(formDispCont).find('.st-address').text(dataObj.pick.street);
+                $(formDispCont).find('.pincode').text(dataObj.pick.pincode);
+                $(formDispCont).find('.city').text(dataObj.pick.city);
+
 
             }
         });
@@ -115,7 +139,52 @@ var zyxCart = {
             }
         })
 
+        $('.confirm-step #place-order-btn').on('click', function(){
+            var orderObj = {};
+            if(zyxCart.orderObj){
+                orderObj = zyxCart.orderObj;
+            }else{
+                orderObj = formCheck.getSelectedAddress($('.address-form-holder'));
+            }
 
+            orderObj['pick'] = JSON.stringify(orderObj['pick']);
+            orderObj['drop'] = JSON.stringify(orderObj['drop']);
+            var trarray = $('.confirm-step .table-holder table tbody').find('tr');
+            var arry = [];
+            $.each(trarray, function(ix, tr){
+                var orderItem = {};
+                orderItem['ts'] = $(tr).attr('ts');
+                orderItem['service'] = $(tr).attr('service');
+                orderItem['service_id'] = $(tr).attr('id');
+                arry.push(orderItem);
+//                arry.push(JSON.stringify(orderItem));
+            });
+            orderObj['order_list'] = JSON.stringify(arry);
+            orderObj['car_id'] = $('.confirm-step .table-holder table').attr('data-id');
+            orderObj['car_name'] = $('.confirm-step .table-holder table').attr('data-name');
+//            console.log('')
+            Commons.ajaxData('place_order', orderObj,"GET", _this, _this.onOrderPlace);
+
+        });
+
+
+
+    },
+    onOrderPlace : function(){
+                $('.login-step').find('.max-content,.min-header').addClass('none-i');
+                $('.login-step').find('.completed-summary').removeClass('none-i');
+                $('.address-step').find('.max-content,.min-header').addClass('none-i');
+                $('.address-step').find('.completed-summary').removeClass('none-i');
+                $('.confirm-step').find('.max-content,.min-header').addClass('none-i');
+                $('.confirm-step').find('.completed-summary').removeClass('none-i');
+                //set present
+                $('.payment-step').find('.completed-summary,.min-header').addClass('none-i');
+                $('.payment-step').find('.max-content').removeClass('none-i');
+                //minimize forward steps
+//                $('.payment-step').find('.max-content,.completed-summary').addClass('none-i');
+//                $('.payment-step').find('.min-header').removeClass('none-i');
+                $('.login-step').find('.change-login-btn').off('click').hide();
+                $('.address-step').find('.change-address-btn').off('click').hide();
     }
 
 };
