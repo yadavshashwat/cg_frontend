@@ -1060,11 +1060,19 @@ modal : 60 - 70
           width:100%;
           box-sizing: border-box;
           padding: 0px 12px;
+          max-height: 240px;
+          overflow-y: scroll;
+
           .service-list-item{
+            line-height: 24px;
+            text-align: Left;
+            color:#636262;
+            font-family: Lato;
+            font-size: 16px;
+            font-weight: 400;
             width: 100%;
             border: 1px solid transparent;
             border-bottom: 3px solid #e89b76;
-            height: 63px;
             box-sizing: border-box;
             .header-wrapper{
               margin-right: 90px;
@@ -1075,14 +1083,82 @@ modal : 60 - 70
             .wrapper{
               padding: 18px 15px;
             }
+
             .top-row{
+            .vendor-div{
+            .fr;
+
+                text-align: center;
+                width:75px;
+          -webkit-border-radius: 4px;
+          -moz-border-radius: 4px;
+          border-radius: 4pxpx;
+          font-family: Arial;
+          color: #ffffff;
+          font-size: 14px;
+          line-height: 18px;
+          padding: 6px 9px 6px 9px;
+          text-decoration: none;
+          width: 90px;
+          text-align: center;
+          float: left;
+          clear:both;
+          background: #fcae8a;
+          background-image: -webkit-linear-gradient(top, #fcae8a, #e89a76);
+          background-image: -moz-linear-gradient(top, #fcae8a, #e89a76);
+          background-image: -ms-linear-gradient(top, #fcae8a, #e89a76);
+          background-image: -o-linear-gradient(top, #fcae8a, #e89a76);
+          background-image: linear-gradient(to bottom, #fcae8a, #e89a76);
+          border:1px solid #e89a76;
+          }
+          .vendor-div:hover{
+            background: #e89a76;
+            background-image: -webkit-linear-gradient(top, #e89a76, #fcae8a);
+            background-image: -moz-linear-gradient(top, #e89a76, #fcae8a);
+            background-image: -ms-linear-gradient(top, #e89a76, #fcae8a);
+            background-image: -o-linear-gradient(top, #e89a76, #fcae8a);
+            background-image: linear-gradient(to bottom, #e89a76, #fcae8a);
+          }
+          
               cursor: pointer;
               .due-div{
                 height: 24px;
               }
-              .price-div{
-                margin-left: 330px;
-                height: 24px;
+              .service-details{
+                display: block;
+                margin-left: 240px;
+                  position: relative;
+                  line-height: 32px;
+                  white-space: normal;
+                .checks-div{
+                    display: inline-block;
+                    font-size: 12px;
+                    background: #c65169;
+                    border: 1px solid #c65169;
+                    border-radius: 12px;
+                    line-height: 18px;
+                    padding: 3px 6px;
+                    color:#fff;
+                    margin-right: 12px;
+                    white-space: nowrap;
+                
+                }
+
+                .parts-div{
+                 .token-class{
+                    display: inline-block;
+                    font-size: 12px;
+                    background: #4d5b94;
+                    border: 1px solid #4d5b94;
+                    border-radius: 12px;
+                    line-height: 18px;
+                    padding: 3px 6px;
+                    color:#fff;
+                    margin-right: 12px;
+                    white-space: nowrap;
+
+                  }
+                }
               }
               .detail-div{
                 .fr;
@@ -1103,7 +1179,7 @@ modal : 60 - 70
               }
               .parts-div{
                 margin-left: 120px;
-                .token-class{
+                .token-class1{
                   display: inline-block;
                   font-size: 12px;
                   background: #4d5b94;
