@@ -50,10 +50,10 @@
             </div>
             <div class="notif">
                 <i class="alert-sign"></i> Please note that upon clicking "Sign out" you will lose items in your cart
-                and will be redirected to Flipkart home page.
+                and will be redirected to ClickGarage home page.
             </div>
             <div class="btn-row">
-                <a class="btn btn-large btn-orange login-btn">Sign out </a>
+                <a class="btn btn-large btn-orange login-btn" href="{% url 'auth:logout' %}?next={{ request.path }}">Sign out </a>
                         <span class="continue-btn">
                             Continue with Checkout
                             <!--<a ng-click="!loading &amp;&amp; restoreStates()" class="fk-underline" alt="Continue with checkout">Continue with checkout</a>-->
@@ -277,8 +277,8 @@
     <div class="min-header none-i">
         <div class="info-div">
             <span>2. Set Pick Up & Drop Off Details</span>
-            <span>1 items</span>
-            <span>Total: Rs. 599</span>
+            <!--<span>{{ cart_number }} items</span>-->
+            <!--<span>Total: --</span>-->
         </div>
 
     </div>
@@ -514,12 +514,12 @@
     <div class="min-header">
         <div class="info-div">
             <span>3. Order Summary</span>
-            <span>1 items</span>
-            <span>Total: Rs. 599</span>
+            <span>{{ cart_number }} items</span>
+            <span>Total: --</span>
         </div>
     </div>
     <div class="max-content none-i">
-                <div class="title-holder">
+                <div class="title-holder none-i">
                     <div class="select-wrapper">
                         <select id="car-select-box">
                             {% for key, list in cart.iteritems %}
@@ -533,7 +533,7 @@
                 </div>
                 <div class="table-holder">
                     {% for key, list in cart.iteritems %}
-                    <table data-id="{{ key }}" style="display:block;" class="cart-table">
+                    <table data-name="{{ key }}" style="display:block;" data-id="{{ list.0.car.id }}" class="cart-table">
                         <thead>
                         <tr>
                             <th>Dealer</th>
@@ -544,7 +544,7 @@
                         </thead>
                         <tbody>
                         {% for val in list %}
-                        <tr ts="{{ val.ts }}">
+                        <tr ts="{{ val.ts }}" service="{{ val.service }}" id="{{ val.service_id }}">
                             <td data-id="{{val.dealer}}" data-name="{{val.car.make}}">
                                 <div class="dealer-logo-wrapper">
                                     <img class="dealer-logo" src="" alt="{{val.dealer}}" data-name="{{val.car.make}}">
@@ -574,42 +574,7 @@
                                 {% endif %}
 
                             </td>
-                        </tr>
-                        <tr style="display:none;">
-                            <td>
-                                {% if val.service_detail %}
-                                {{ val.service_detail.name }}<br>
-                                {{ val.service_detail.odometer }}<br>
-                                {{ val.service_detail.brand }}<br>
-                                {{ val.car.name }}<br>
-                                {% else %}
-                                {{ val.total_price }}
-                                {% endif %}
-
-                            </td>
-                            <td>{{ val.dealer }}</td>
-                            <td>
-                                {% if val.service_detail %}
-                                {% if val.service == "servicing" %}
-
-                                {{ val.service_detail.parts_price }}<br>
-                                {{ val.service_detail.labour_price }}<br>
-                                {{ val.service_detail.wa_price }}<br>
-                                {{ val.service_detail.wb_price }}<br>
-                                {% elif val.service == "cleaning" %}
-                                {{ val.service_detail.parts_price }}<br>
-                                {{ val.service_detail.labour_price }}<br>
-                                {% else %}
-                                <p>else</p>
-                                {% endif %}
-                                {% else %}
-
-                                {% endif %}
-
-                            </td>
-
-                            <td>{{ val.service_detail }}</td>
-
+                            <td></td>
                         </tr>
                         {% endfor %}
                         </tbody>
@@ -617,13 +582,7 @@
                     {% endfor %}
                 </div>
                 <div class="cart-btn-holder">
-                    <div class="left-btns fl">
-                        <div class="back-btn"><i class="fa fa-caret-left"></i> Continue Shopping</div>
-                    </div>
-                    <div class="right-btns fr">
-                        <!--                <div class="update-btn"></div>-->
-                        <div class="checkout-btn">Checkout <i class="fa fa-caret-right"></i></div>
-                    </div>
+                    <span class="place-order-btn btn btn-white-yellow" id="place-order-btn">Place Order</span>
                 </div>
 
     </div>
@@ -631,7 +590,7 @@
 </div>
 <div class="payment-step minimized collapsible-div">
     <div class="min-header">
-        <span>4. Payment Method</span>
+        <span>4. Confirmation</span>
     </div>
     <div class="max-content none-i">
 

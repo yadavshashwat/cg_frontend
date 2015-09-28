@@ -40,7 +40,8 @@ var Commons = {
         'fetch_vas_details':'/api/fetch_vas_details/',
         'fetch_car_cleanings':'/api/fetch_all_cleaningcatservices/',
         'fetch_car_tyres':'/api/fetch_all_cleaningcatservices/',
-        'add_to_cart':'/api/add_to_cart/'
+        'add_to_cart':'/api/add_to_cart/',
+        'place_order':'/api/place_order/'
     },
     getOrigin: function(){
         var origin = window.location.origin;
@@ -457,17 +458,17 @@ var formCheck = {
                 return false
             }
         }
-        if(!valid(pick_addr)){
-            $(container).find('.pick-addr').addClass('error');
+        if(!valid(drop_addr)){
+            $(container).find('.drop-addr').addClass('error');
             return false
         }
-        if(!valid(pick_pin)){
-            $(container).find('.pick-pin').addClass('error');
+        if(!valid(drop_pin)){
+            $(container).find('.drop-pin').addClass('error');
             return false
         }else{
 //            console.log(pick_pin.length)
-            if(isNaN(parseInt(pick_pin)) || pick_pin.length != 6){
-                $(container).find('.pick-pin').addClass('error');
+            if(isNaN(parseInt(drop_pin)) || drop_pin.length != 6){
+                $(container).find('.drop-pin').addClass('error');
                 return false
             }
         }

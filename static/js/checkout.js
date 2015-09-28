@@ -46,6 +46,7 @@ var zyxCart = {
 
     },
     eventHandlers : function(){
+        var _this = this;
         $('.login-step .change-login-btn').on('click', function(){
             //summarize previous steps
             //set present
@@ -138,25 +139,38 @@ var zyxCart = {
             }
         })
 
-        $('.confirm-step #place-order-btn').on('change', function(){
+        $('.confirm-step #place-order-btn').on('click', function(){
             var orderObj = {};
-            if(!zyxCart.orderObj){
-                orderObj = zyxCart;
+            if(zyxCart.orderObj){
+                orderObj = zyxCart.orderObj;
             }else{
                 orderObj = formCheck.getSelectedAddress($('.address-form-holder'));
             }
-            var trarray = $('.confirm-step .table-holder table').find('tr');
+
+            orderObj['pick'] = JSON.stringify(orderObj['pick']);
+            orderObj['drop'] = JSON.stringify(orderObj['drop']);
+            var trarray = $('.confirm-step .table-holder table tbody').find('tr');
+            var arry = [];
             $.each(trarray, function(ix, tr){
                 var orderItem = {};
                 orderItem['ts'] = $(tr).attr('ts');
                 orderItem['service'] = $(tr).attr('service');
-                orderItem[]
+                orderItem['service_id'] = $(tr).attr('id');
+                arry.push(orderItem);
+//                arry.push(JSON.stringify(orderItem));
             });
-//            Commons.ajaxData('place_order', )
+            orderObj['order_list'] = JSON.stringify(arry);
+            orderObj['car_id'] = $('.confirm-step .table-holder table').attr('data-id');
+            orderObj['car_name'] = $('.confirm-step .table-holder table').attr('data-name');
+//            console.log('')
+            Commons.ajaxData('place_order', orderObj,"GET", _this, _this.onOrderPlace);
 
         });
 
 
+
+    },
+    onOrderPlace : function(){
 
     }
 
