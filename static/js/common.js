@@ -208,7 +208,7 @@ var Templates = {
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
-                           {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Choose Vendor </div>";}}
+                            {"tag":"div", "class":"detail-div", "html":function(){return "<div> Details </div><i class='fa fa-ellipsis-h'></i>";}}
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
