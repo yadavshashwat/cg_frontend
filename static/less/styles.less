@@ -11,7 +11,12 @@ modal : 60 - 70
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,300);
 @import url(http://fonts.googleapis.com/css?family=Raleway:600,400);
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
 
+.freshwidget-theme{
+  font-family:lato;
+  font-weight:100;
+}
 .cb{
   clear:both;
   display: block;
@@ -167,6 +172,16 @@ modal : 60 - 70
           }
         }
       }
+}
+
+.menu-item{
+        a{
+        color: #fff;
+        font-family: Lato;
+        text-decoration: none;
+        font-size: 14px;
+        }
+
 }
 
 /**commons end*/
@@ -791,6 +806,15 @@ modal : 60 - 70
     background: #4d5b94;
     position: absolute;
     bottom: 0;
+    .column li{
+    cursor:pointer;
+    }
+    a{
+      color: #fff;
+      font-family: Lato;
+      text-decoration: none;
+      font-size: 14px;
+    }
     width: 100%;
     .column{
       float: left;
@@ -801,7 +825,8 @@ modal : 60 - 70
         list-style: none;
         lh{
           font-size: 14px;
-          color:#eaeaea;
+          font-weight:700;
+          color:#e89b76;
           padding: 12px 0px;
         }
         li{
@@ -835,7 +860,7 @@ modal : 60 - 70
   .solid-header{
     top:0px;
     position: fixed;
-    padding: 16px 0px;
+    padding: 10px 0px 4px 0px;
     width: 100%;
     background: #4d5b94;
     border-bottom: 4px solid #4d7f94;
@@ -849,6 +874,12 @@ modal : 60 - 70
     height:34px;
     width: 960px;
     margin:0 auto;
+    .menu-logo{
+        height: 50px;
+        width: 250px;
+        background: url(../img/cg-logo-6.png) no-repeat;
+        background-size: auto 100%;
+      }
     .left-items-holder{
 
     }
@@ -857,6 +888,7 @@ modal : 60 - 70
       font-family: Lato;
       font-size: 14px;
       position: relative;
+      padding:10px 0px 0px 0px;
       .menu-btn{
         margin-right:12px;
         height: 34px;
@@ -1508,7 +1540,7 @@ modal : 60 - 70
   .solid-header{
     top:0px;
     position: fixed;
-    padding: 16px 0px;
+    padding: 10px 4px;
     width: 100%;
     background: #4d5b94;
     border-bottom: 4px solid #4d7f94;
@@ -1525,6 +1557,7 @@ modal : 60 - 70
 
     }
     .right-items-holder{
+      padding:12px 0px;
       color:#fff;
       font-family: Lato;
       font-size: 14px;
@@ -2233,6 +2266,15 @@ font-size: 13px;
   .pane{
     position: relative;
     margin-top: 72px;
+    .tnc-header{
+      padding: 10px 0px;
+      text-align: center;
+      font-family: Lato;
+      font-weight:400;
+      font-size: 25px;
+      position: relative;
+
+    }
   }
   .solid-header{
     top:0px;
@@ -2284,10 +2326,11 @@ font-size: 13px;
       }
     }
   }
+
   .centered-content{
     position: relative;
     width:960px;
-    padding: 10px 0px;
+    //padding: 10px 0px;
     margin:0 auto;
     z-index: 20;
     background: #fff;
@@ -2295,6 +2338,7 @@ font-size: 13px;
     .content-holder{
       position: relative;
         font-family: Lato;
+
     }
   }
 
@@ -2981,7 +3025,7 @@ th:nth-child(4){
 }
 
 .accordion h4{
- text-align: center;   
+ text-align: Center;   
 }
 
 .accordion dl,
@@ -3014,10 +3058,12 @@ th:nth-child(4){
 .accordion__Heading {
  background-color:#4d5b94; 
    text-align:center;
-     font-weight:700; 
+   font-family:lato;
+     font-weight:500; 
           padding:2em;
           display:block;
           text-decoration:none;
+          text-transform: uppercase;
           color:#fff;
           transition:background-color 0.5s ease-in-out;
   border-bottom:1px solid darken(#4d5b94, 5%);

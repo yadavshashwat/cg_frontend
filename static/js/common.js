@@ -245,8 +245,8 @@ var Templates = {
                     {"tag":"div", "class":"dealer-add-to-cart", "html":"Add to Cart"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
-                    {"tag":"div", "html":"Labour : Rs. "+"${labour_price}"},
-                    {"tag":"div", "html":"Parts : Rs. "+"${parts_price}"}
+                    {"tag":"div", "html":"Labour : <i class='fa fa-inr'></i>"+"${labour_price}"},
+                    {"tag":"div", "html":"Parts : <i class='fa fa-inr'></i>"+"${parts_price}"}
                 ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
@@ -308,8 +308,7 @@ var Templates = {
                     {"tag":"div", "class":"dealer-add-to-cart", "html":"Add to Cart"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
-                    {"tag":"div", "html":"${price_labour}"},
-                    {"tag":"div", "html":"${price_parts}"}
+                    {"tag":"div", "html":"<i class='fa fa-inr'>${total_price}"},
                 ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]

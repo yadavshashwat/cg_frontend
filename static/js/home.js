@@ -235,6 +235,30 @@ var Global = {
                 {'scrollTop':$('.search-pane').outerHeight()},
                 500
             );
+        });
+        $('.menu-item.fl.hw').on('click', function(e){
+            $('body').animate(
+                {'scrollTop':$('.search-pane').outerHeight()},
+                500
+            );
+        });
+        $('.menu-item.fl.au').on('click', function(e){
+            $('body').animate(
+                {'scrollTop':$('.steps-pane').outerHeight()+$('.search-pane').outerHeight()},
+                500
+            );
+        });
+        $('.footer-hw').on('click', function(e){
+            $('body').animate(
+                {'scrollTop':$('.search-pane').outerHeight()},
+                500
+            );
+        });
+        $('.footer-au').on('click', function(e){
+            $('body').animate(
+                {'scrollTop':$('.steps-pane').outerHeight()+$('.search-pane').outerHeight()},
+                500
+            );
         })
     },
     paneScrolls:function(){
