@@ -1564,7 +1564,7 @@
 
 			.pane{
 				position: relative;
-				margin-top: 72px;
+				margin-top: 80px;
 			}
 			.solid-header{
 				top:0px;
@@ -1831,6 +1831,7 @@
 
 			}
 			.completed-summary{
+				border-top: 2px solid #eaeaea;
 				padding: 10px 5px;
 				background: #f9f9f9;
 				font-size: 0;
@@ -1912,6 +1913,7 @@
 			}
 
 			.max-content{
+    				min-height: 100px;
 				.dog-ear-header{
 					position: relative;
 					width: 97%;
@@ -1940,13 +1942,21 @@
 					font-size:14px;
 					display: inline-block;
 				}
+				.confirm-message{
+					padding: 50px 50px;
+
+				}
 
 
 			}
 
 			.login-step{
+				font-family: lato;
 				.wrapper{
 					padding: 0px 80px 20px;
+				}
+				.minimized{
+					border-bottom: 1px solid #eaeaea;
 				}
 
 
@@ -1956,10 +1966,12 @@
 					margin-top: 10px;
 				}
 				.login-btn{
+					text-decoration: none;
 
 				}
 				.continue-btn{
-					text-decoration: underline;
+					cursor: pointer;
+					text-decoration: none;
 					font-weight: 900;
 					margin-left: 24px;
 				}
@@ -2011,9 +2023,20 @@
 			}
 
 			.address-step{
+				font-family: lato;
 				.address-count{
 					padding: 0 0 10px 0;
 					text-align: center;
+				}
+				.min-header{
+					position: relative;
+					width: 97%;
+					font-size: 18px;
+					padding: 11px 20px 11px 25px;
+					margin: 0 10px 10px -8px;
+					color: #fff;
+					background-color: #16b594;
+
 				}
 				.address-list-holder{
 					overflow: auto;
@@ -2207,7 +2230,44 @@
 				}
 			}
 
+
+			.payment-step{
+				font-family: lato;
+				.min-header{
+					position: relative;
+					width: 97%;
+					font-size: 18px;
+					padding: 11px 20px 11px 25px;
+					margin: 0 10px 10px -8px;
+					color: #fff;
+					background-color: #16b594;
+				}
+
+
+			}
 			.confirm-step{
+				font-family: lato;
+
+				.min-header{
+					position: relative;
+					width: 97%;
+					font-size: 18px;
+					padding: 11px 20px 11px 25px;
+					margin: 0 10px 10px -8px;
+					color: #fff;
+					background-color: #16b594;
+				}
+
+				.dog-ear-header{
+
+					position: relative;
+					width: 97%;
+					font-size: 18px;
+					padding: 11px 20px 11px 25px;
+					margin: 0 10px 10px -8px;
+					color: #fff;
+					background-color: #16b594;}
+
 				.title-holder{
 
 				}
@@ -2218,18 +2278,32 @@
 					table{
 						table-layout: fixed;
 						width: 900px;
+
+					}
+					td{
+						border-bottom: 1px solid #eaeaea;
+					}
+					
+					th{
+						border-bottom: 2px solid #d7d7d7;
+
 					}
 					th:nth-child(0), td:nth-child(0){
 						width: 300px;
+						text-align: center;
 					}
 					th:nth-child(1), td:nth-child(1){
 						width: 250px;
+						text-align: center;
 					}
 					th:nth-child(2), td:nth-child(2){
 						width: 250px;
+						text-align: center;
 					}
 					th:nth-child(3), td:nth-child(3){
 						width: 200px;
+						text-align: center;
+
 					}
 					thead{
 
@@ -2238,7 +2312,12 @@
 
 					}
 					.cart-table{
+						
+						font-family: Lato;
+						color:#616161;
+
 						.dealer-logo-wrapper{
+							margin-left: 60px;
 							height:100%;
 							border: 1px solid #eaeaea;
 							line-height: 68px;
@@ -2258,6 +2337,10 @@
 								height: 68px;
 								width: 0px;
 								vertical-align: middle;
+							}
+							.price-div{
+						padding-right: 80px;
+						text-align: right;
 							}
 						}
 					}
