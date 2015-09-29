@@ -166,9 +166,10 @@ var logoMap = {
     'Tee Car Care':'../static/img/dl-logo-Tee.png',
     'Exppress Car Wash':'../static/img/dl-logo-Exppress.png',
     'ClickGarage On-The-Go':'../static/img/dl-logo-OntheGo.png',
+    'ClickGarage Doorstep':'../static/img/dl-logo-doorstep.png',
     'Authorized':'../static/img/brands/',
     'Bosch':'../static/img/dl-logo-Bosch.jpg',
-    'ClickGarage Workshop':'',
+    'ClickGarage Verified':'../static/img/dl-logo-cgverified.png',
     'Mahindra First Choice':'../static/img/dl-logo-MFC.jpg'
 };
 
@@ -182,7 +183,7 @@ var Templates = {
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
-                        {"tag":"div", "class":"due-div fl", "html":function(){return "Due at <span>"+ String(this.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+ ' km / '+ this.year+"</span>";}},
+                        {"tag":"div", "class":"due-div fl", "html":function(){return "Due at <span>"+ String(this.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+ ' km ' + (this.year == "" ? '': '/ ') + this.year+"</span>";}},
                         
                     {"tag":"div", "class":"service-details", "children":[  
                         {"tag":"div", "class":"checks-div", "html":function(){return 'Washing';}},
@@ -209,7 +210,7 @@ var Templates = {
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
-                            {"tag":"div", "class":"detail-div", "html":function(){return "<div> Details </div><i class='fa fa-ellipsis-h'></i>";}}
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Choose Vendor </div>";}}
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
@@ -308,7 +309,7 @@ var Templates = {
                     {"tag":"div", "class":"dealer-add-to-cart", "html":"Add to Cart"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
-                    {"tag":"div", "html":"<i class='fa fa-inr'>${total_price}"},
+                    {"tag":"div", "html":"${total_price}"},
                 ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]

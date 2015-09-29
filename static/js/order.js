@@ -74,14 +74,14 @@ var Global = {
         });
         $('.section-box .section-content-item').on('click', '.service-list-item', function(e){
             var $target  = $(e.target);
-            if($target.closest('.header-wrapper').length || $target.closest('.state-update').length){
+            if($target.closest('.vendor-div').length || $target.closest('.state-update').length){
                 var classy = $(this).closest('.section-content-item').attr('data-class');
                 var s_id = $(this).attr('data-id');
                 _this.selectedSection = classy;
                 if(classy == 'servicing' || classy == 'cleaning' || classy == 'vas'){
                     var data = {};
                     data.state = 'dealer';
-                    if($target.closest('.header-wrapper').length){
+                    if($target.closest('.vendor-div').length){
                         workflowState.pushToHistory(data.state, data, '#'+data.state+'?s_id='+s_id);
                         workflowState.setWorkflow(data.state, data, '#'+data.state+'?s_id='+s_id);
                         workflowState.workflowBarUpdate(data.state);
