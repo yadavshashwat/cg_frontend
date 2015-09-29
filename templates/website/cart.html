@@ -18,116 +18,133 @@
 
 </head>
 <body class="cart-body">
+    <div class="overlay overlay-pat"></div>
     <div class="solid-header">
         {% include "website/dash-header.html" %}
     </div>
     <div class="pane order-pane">
+
         <div class="centered-content">
-            <div class="content-holder">
-        <div class="title-holder">
-        <div class="select-wrapper">
-        <select  id="car-select-box">
-     {% for key, list in cart.iteritems %}
-<option data-name="{{ list.0.car.make }} {{list.0.car.name}}" data-id="{{ list.0.car.id }}">{{ key }}</option>
-{% endfor %}
-        </select>
+         <div class="dog-ear-header">
+            <i class="fa fa-shopping-cart"><span> Your Cart </span></i>
         </div>
 
-        </div>
-            <div class="table-holder">
-     {% for key, list in cart.iteritems %}
-       <table data-id="{{ key }}" style="display:none;" class="cart-table">
-        <thead>
-        <tr>
-        <th>Dealer</th>
-        <th>Service</th>
-        <th>Description</th>
-        <th>Total Price</th>
-        </tr>
-        </thead>
-        <tbody>
-         {% for val in list %}
-<tr ts="{{ val.ts }}">
-    <td data-id="{{val.dealer}}" data-name="{{val.car.make}}">
-        <div class="dealer-logo-wrapper">
-            <img class="dealer-logo" src="" alt="{{val.dealer}}" data-name="{{val.car.make}}" >
-        <div class="aligner"></div>
-        </div>
-    </td>
-    <td>
-    {% if val.service == "servicing" %}
-    <div> {{ val.service_detail.odometer }}km / {{ val.service_detail.year }}</div>
-    <div> Regular Servicing </div>
-    {% elif val.service == "cleaning" %}
-    <div> {{ val.service_detail.service }} </div>
-    <div> Cleaning <i class="fa fa-caret-right"></i> {{ val.service_detail.category }} </div>
-    {% endif %}
-    </td>
-    <td>
-
-    </td>
-        <td>
-    {% if val.service == "servicing" %}
-        <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}</div>
-    {% elif val.service == "cleaning" %}
-        <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}</div>
-    {% endif %}
-
-        </td>
-</tr>
-            <tr style="display:none;">
-               <td>
-        {% if val.service_detail %}
-            {{ val.service_detail.name }}<br>
-            {{ val.service_detail.odometer }}<br>
-            {{ val.service_detail.brand }}<br>
-            {{ val.car.name }}<br>
-        {% else %}
-            {{ val.total_price }}
-        {% endif %}
-
-                </td>
-               <td>{{ val.dealer }}</td>
-               <td>
-{% if val.service_detail %}
-    {% if val.service == "servicing" %}
-
-{{ val.service_detail.parts_price }}<br>
-{{ val.service_detail.labour_price }}<br>
-{{ val.service_detail.wa_price }}<br>
-{{ val.service_detail.wb_price }}<br>
-        {% elif val.service == "cleaning" %}
-{{ val.service_detail.parts_price }}<br>
-{{ val.service_detail.labour_price }}<br>
-        {% else %}
-<p>else</p>
-        {% endif %}
-{% else %}
-
-{% endif %}
-
-               </td>
-
-               <td>{{ val.service_detail }}</td>
-
-            </tr>
-         {% endfor %}
-        </tbody>
-       </table>
-         {% endfor %}
-                </div>
         <div class="cart-btn-holder">
             <div class="left-btns fl">
-                <div class="back-btn"> <i class="fa fa-caret-left"></i> Continue Shopping</div>
+                <div class="back-btn"> <i class="fa fa-caret-left"><a href='/order'></i>  Continue Shopping  </a></div>
             </div>
             <div class="right-btns fr">
-<!--                <div class="update-btn"></div>-->
-                <div class="checkout-btn">Checkout <i class="fa fa-caret-right"></i></div>
+                <!--                <div class="update-btn"></div>-->
+                <div class="checkout-btn"><a href='/checkout'>  Checkout  <i class="fa fa-caret-right"></i></a></div>
             </div>
         </div>
+        
+        <div class="content-holder">
+            <div class="title-holder">
 
-            </div>
-        </div>
+                <div class="select-wrapper"><i class="fa fa-car"></i> / <i class="fa fa-motorcycle"></i>
+                    <select  id="car-select-box">
+                     {% for key, list in cart.iteritems %}
+                     <option data-name="{{ list.0.car.make }} {{list.0.car.name}}" data-id="{{ list.0.car.id }}">{{ key }}</option>
+                     {% endfor %}
+                 </select>
+             </div>
+
+         </div>
+         <div class="table-holder">
+             {% for key, list in cart.iteritems %}
+             <table data-id="{{ key }}" style="display:none;" class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Dealer</th>
+                        <th>Service</th>
+                        <th>Description</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                 {% for val in list %}
+                 <tr ts="{{ val.ts }}">
+                    <td data-id="{{val.dealer}}" data-name="{{val.car.make}}">
+                        <div class="dealer-logo-wrapper">
+                            <img class="dealer-logo" src="" alt="{{val.dealer}}" data-name="{{val.car.make}}" >
+                            <div class="aligner"></div>
+                        </div>
+                    </td>
+                    <td>
+                        {% if val.service == "servicing" %}
+                        <div> {{ val.service_detail.odometer }}km / {{ val.service_detail.year }}</div>
+                        <div> Regular Servicing </div>
+                        {% elif val.service == "cleaning" %}
+                        <div> {{ val.service_detail.service }} </div>
+                        <div> Cleaning <i class="fa fa-caret-right"></i> {{ val.service_detail.category }} </div>
+                        {% endif %}
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        {% if val.service == "servicing" %}
+                        <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}</div>
+                        {% elif val.service == "cleaning" %}
+                        <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}</div>
+                        {% endif %}
+
+                    </td>
+                </tr>
+                <tr style="display:none;">
+                   <td>
+                    {% if val.service_detail %}
+                    {{ val.service_detail.name }}<br>
+                    {{ val.service_detail.odometer }}<br>
+                    {{ val.service_detail.brand }}<br>
+                    {{ val.car.name }}<br>
+                    {% else %}
+                    {{ val.total_price }}
+                    {% endif %}
+
+                </td>
+                <td>{{ val.dealer }}</td>
+                <td>
+                    {% if val.service_detail %}
+                    {% if val.service == "servicing" %}
+
+                    {{ val.service_detail.parts_price }}<br>
+                    {{ val.service_detail.labour_price }}<br>
+                    {{ val.service_detail.wa_price }}<br>
+                    {{ val.service_detail.wb_price }}<br>
+                    {% elif val.service == "cleaning" %}
+                    {{ val.service_detail.parts_price }}<br>
+                    {{ val.service_detail.labour_price }}<br>
+                    {% else %}
+                    <p>else</p>
+                    {% endif %}
+                    {% else %}
+
+                    {% endif %}
+
+                </td>
+
+                <td>{{ val.service_detail }}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
+</div>
+<div class="cart-btn-holder">
+    <div class="left-btns fl">
+        <div class="back-btn"> <i class="fa fa-caret-left"><a href='/order'></i> Continue Shopping</a></div>
     </div>
+    <div class="right-btns fr">
+        <!--                <div class="update-btn"></div>-->
+        <div class="checkout-btn"><a href='/checkout'>Checkout <i class="fa fa-caret-right"></i></a></div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
 </body>
 </html>

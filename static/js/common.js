@@ -168,6 +168,8 @@ var logoMap = {
     'ClickGarage On-The-Go':'../static/img/dl-logo-OntheGo.png',
     'ClickGarage Doorstep':'../static/img/dl-logo-doorstep.png',
     'Authorized':'../static/img/brands/',
+    'Authorized Bike':'../static/img/brands/Bike/',
+    'Authorized Car':'../static/img/brands/Car/',
     'Bosch':'../static/img/dl-logo-Bosch.jpg',
     'ClickGarage Verified':'../static/img/dl-logo-cgverified.png',
     'Mahindra First Choice':'../static/img/dl-logo-MFC.jpg'
@@ -228,7 +230,7 @@ var Templates = {
                     {"tag":"div", "class":"dealer-logo-wrapper", "html":function(){
                         if(this.vendor){
                             if($.trim(this.vendor) == 'Authorized'){
-                                return '<img src="'+logoMap['Authorized']+ $.trim(this.brand)+'.jpg" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                                return '<img src="'+ logoMap['Authorized'] + $.trim(this.brand)+'.jpg" alt="'+this.vendor+'" /><div class="aligner"></div>';
                             }else{
                                 return '<img src="'+logoMap[$.trim(this.vendor)]+'" alt="'+this.vendor+'" /><div class="aligner"></div>';
                             }
@@ -242,7 +244,7 @@ var Templates = {
                     {"tag":"div", "class":"sub-text","html":"(${odometer}km)"}
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
-                    {"tag":"div", "class":"dealer-checkout", "html":"Checkout"},
+                    {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
                     {"tag":"div", "class":"dealer-add-to-cart", "html":"Add to Cart"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
@@ -305,7 +307,7 @@ var Templates = {
                     {"tag":"div", "class":"sub-text","html":"(${category})"}
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
-                    {"tag":"div", "class":"dealer-checkout", "html":"Checkout"},
+                    {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
                     {"tag":"div", "class":"dealer-add-to-cart", "html":"Add to Cart"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
