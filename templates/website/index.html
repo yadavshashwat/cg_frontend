@@ -12,6 +12,7 @@
     <!-- {{ STATIC_URL }}-->s
     <!--<link rel="stylesheet" type="text/css" href="{{ STATIC_URL}}css/font-awesome.min.css" />-->
     <link rel="shortcut icon" type="image/png" href="../../static/img/favicon.png"/>
+      <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css'>
     <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.min.css" %}" />
     <link rel="stylesheet" type="text/css" href="{% static "css/custom.css" %}" />
     <link rel="stylesheet/less" type="text/css" href="{% static "less/styles.less" %}" />
@@ -448,7 +449,14 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");</script>
                     </ul>
                 </div>
                 <div class="column"></div>
-                <div class="column"></div>
+                <div class="fr social">
+                <script src="../../static/js/social.js"></script>
+                    <a href="http://twitter.com/minimalmonkey" class="icon-button twitter"><i class="icon-twitter"></i><span></span></a>
+    <a href="http://facebook.com" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a>
+<a href="http://plus.google.com" class="icon-button google-plus"><i class="icon-google-plus"></i><span></span></a>
+    
+        
+                </div>
             </div>
         </div>
     </div>
