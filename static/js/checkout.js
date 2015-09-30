@@ -167,8 +167,6 @@ var zyxCart = {
 
         });
 
-
-
     },
     onOrderPlace : function(){
                 $('.login-step').find('.max-content,.min-header').addClass('none-i');
