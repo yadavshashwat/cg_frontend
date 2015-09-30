@@ -9,7 +9,7 @@
     
     {% load staticfiles %}
     <!-- {% static "css/font.css" %}-->
-    <!-- {{ STATIC_URL }}-->
+    <!-- {{ STATIC_URL }}-->s
     <!--<link rel="stylesheet" type="text/css" href="{{ STATIC_URL}}css/font-awesome.min.css" />-->
     <link rel="shortcut icon" type="image/png" href="../../static/img/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.min.css" %}" />
@@ -86,6 +86,14 @@
 {#    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script>#}
 
 
+<!-- start Mixpanel -->
+<script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
+mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");</script>
+<!-- end Mixpanel -->
+
+
+
 </head>
 
 
@@ -145,7 +153,7 @@
                 </div>
                 <div class="omnibox-holder" id="home-omnibox-holder">
                     <input type="hidden" id="hidden-id-box" name="c_id" style="display: none;" />
-                    <input type="text" id="omni-search-box" class="omni-search-box" name="car_name" placeholder="Select Your Car">
+                    <input type="text" id="omni-search-box" class="omni-search-box" name="car_name" placeholder="Select Your Car or Bike">
                     <i class="icon fa fa-search"></i>
                     <label for="omni-search-box" class="omni-drop-box" style="display: none;">
 {#                        <div class="drop-ttl">Dropdown</div>#}
@@ -191,6 +199,10 @@
     </div>
     <div class="overlay overlay-pat"></div>
 </div>
+
+
+
+
 <div class="pane steps-pane">
     
     <div class="centered-content">
@@ -267,6 +279,15 @@
     </div>
     <div class="overlay overlay-pat"></div>
 </div>
+
+<div class = "pane android-pane">
+    <!-- <div class="centered-content"> -->
+        <div class="content-holder">
+        <div><img u="Android" src="../../static/img/android_pane.png" /></div>
+        </div>
+    <!-- </div> -->
+</div>
+
 <div class="pane features-pane">
     <a name="about-us">
     <div class="centered-content">
@@ -321,6 +342,8 @@
 
 </div>
  
+
+
 <div class="pane">
     <div class="stats-pane">
         
