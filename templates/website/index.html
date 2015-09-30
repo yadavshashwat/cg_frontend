@@ -82,6 +82,7 @@
 {#            <p>No polls are available.</p>#}
 {#        {% endif %}#}
         Global.carData = {{ cars | js}};
+    Global.logReq = {{ loginFlag | js}};
     </script>
 {#    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>#}
 {#    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script>#}
@@ -154,7 +155,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");</script>
                 </div>
                 <div class="omnibox-holder" id="home-omnibox-holder">
                     <input type="hidden" id="hidden-id-box" name="c_id" style="display: none;" />
-                    <input type="text" id="omni-search-box" class="omni-search-box" name="car_name" placeholder="Select Your Car or Bike">
+                    <input type="text" id="omni-search-box" class="omni-search-box" name="car_name" placeholder="Select Your Car or Bike" autocomplete="off">
                     <i class="icon fa fa-search"></i>
                     <label for="omni-search-box" class="omni-drop-box" style="display: none;">
 {#                        <div class="drop-ttl">Dropdown</div>#}
