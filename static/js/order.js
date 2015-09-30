@@ -315,6 +315,8 @@ var workflowState = {
         var _this = this;
         var already_set = window.location.hash;
         console.log(already_set)
+        if(already_set == '_=_')
+            already_set = null
         if(!already_set || (already_set && $.inArray(already_set,["service","dealer"]) ) ){
             var data = _this.getWorkflow();
             console.log(data)
