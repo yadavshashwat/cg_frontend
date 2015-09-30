@@ -36,6 +36,11 @@ var Global = {
                 _this.autosliderObj.presentID = 1;
             }
         }, 2000);
+        console.log(Global.logReq)
+        if(Global.logReq){
+            console.log('true')
+            $('#sign-up-in-home').click();
+        }
     },
     autosliderObj : {
         tmout:null,
