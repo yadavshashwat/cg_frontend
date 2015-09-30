@@ -20,6 +20,7 @@ var zyxCart = {
         'format': 'm/d/yyyy',
         'autoclose': true
     });
+        local.clearKey('clgacart');
 
     // initialize datepair
 //    var basicExampleEl = document.getElementById('date-time-pair');

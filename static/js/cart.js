@@ -13,6 +13,7 @@ var Global = {
             $('#car-select-box').val(cookDict['clgacarname']);
         }
         $('#car-select-box').trigger('change');
+        local.clearKey('clgacart');
     },
     setLogos : function(){
         $.each($('img.dealer-logo'), function(i, img){
@@ -37,6 +38,12 @@ var Global = {
             console.log(carVal);
             $('table.cart-table').hide();
             $('table.cart-table[data-id="'+carVal+'"]').show();
+
+                var c_name = $(this).find('option:selected').attr('data-name');
+                var c_id = $(this).find('option:selected').attr('data-id');
+//            console.log(c_name, c_id);
+            local.save('clgacarid',c_id);
+            local.save('clgacarname',c_name);
         });
         $('#settings-drpdwn').on('click', function(e){
             $(this).parent().find('.logged-user-drpdwn').toggle();

@@ -36,6 +36,11 @@ var Global = {
                 _this.autosliderObj.presentID = 1;
             }
         }, 2000);
+        console.log(Global.logReq)
+        if(Global.logReq){
+            console.log('true')
+            $('#sign-up-in-home').click();
+        }
     },
     autosliderObj : {
         tmout:null,
@@ -223,6 +228,7 @@ var Global = {
             }else{
                 var loc = window.location.href;
                 loc = loc.split('.in/')[0]+'.in/';
+                local.clearKey('clgacart');
                 local.save('clgacarid',c_id);
                 local.save('clgacarname',c_name);
                 window.location = loc + 'order/?c_id='+c_id;
