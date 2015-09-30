@@ -145,6 +145,9 @@ var Global = {
         $('#settings-drpdwn').on('click', function(e){
             $(this).parent().find('.logged-user-drpdwn').toggle();
         });
+        $('#selected-details .edit-btn').on('click', function(e){
+            Global.generateCarSelect();
+        });
 
 
 
@@ -218,20 +221,19 @@ var Global = {
     },
     generateCarSelect : function(){
         var _this = this;
-        var modalCarContent = '<div class="search-set-holder" id="popup-search-set-holder">'+
+        var modalCarContent = '<form class="search-set-holder" id="popup-search-set-holder">'+
                 '<div class="citybox-holder" id="popup-citybox-holder">'+
-                    '<input type="text" id="city-search-box" class="city-search-box" readonly="true" value="City">'+
+                    '<input type="text" id="city-search-box" class="city-search-box" readonly="true" value="delhi">'+
                     '<i class="icon fa fa-caret-down"></i>'+
                     '<label for="city-search-box" class="city-drop-box" style="display: none;">'+
                         '<ul>'+
-                            '<li>Delhi</li>'+
-                            '<li>Mumbai</li>'+
-                            '<li>Bangalore</li>'+
-                            '<li>Madras</li>'+
+                            '<li>delhi</li>'+
+                            '<li>gurgaon</li>'+
                         '</ul>'+
                     '</label>'+
                 '</div>'+
                 '<div class="omnibox-holder" id="popup-omnibox-holder">'+
+                    '<input type="hidden" id="hidden-id-box" name="c_id" style="display: none;" />'+
                     '<input type="text" id="omni-search-box" class="omni-search-box" placeholder="Select Your Car">'+
                     '<i class="icon fa fa-search"></i>'+
                     '<label for="omni-search-box" class="omni-drop-box" style="display: none;">'+
@@ -239,7 +241,10 @@ var Global = {
                         '</ul>'+
                     '</label>'+
                 '</div>'+
-            '</div>';
+                '<div class="submit-btn-holder purple-btn-1" id="order-submit-holder">'+
+                    '<button class="form-submit-btn" type="submit">Get Started</button>'+
+                '</div>'+
+            '</form>';
         $('.order-body').append(_this.genericModal(modalCarContent));
         var cityBoxHolder = $('#popup-citybox-holder');
         if(cityBoxHolder.length){
@@ -263,6 +268,22 @@ var Global = {
         $('.modal-content').css({
             'top': ($(window).innerHeight() - h)/2,
             'left':($(window).innerWidth() - w)/2
+        });
+        $('#popup-search-set-holder').on('submit', function(){
+            var c_id = $(this).find('#hidden-id-box').val();
+            var c_name = $(this).find('#omni-search-box').val();
+            if (!c_id.length){
+                return false
+            }else{
+                var loc = window.location.href;
+                loc = loc.split('.in/')[0]+'.in/';
+                local.clearKey('clgacart');
+                local.save('clgacarid',c_id);
+                local.save('clgacarname',c_name);
+                window.location = loc + 'order/?c_id='+c_id;
+                return false;
+            }
+
         });
 
     },
