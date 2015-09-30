@@ -384,6 +384,7 @@ var local = {
         if(key){
             stringKey = key;
         }
+        document.cookie = stringKey+'=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
         document.cookie = stringKey+'=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
     },
     clearAll:function(){

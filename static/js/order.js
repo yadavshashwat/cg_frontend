@@ -119,9 +119,11 @@ var Global = {
             var obj = {};
             obj.timestamp = (new Date()).getTime();
             obj.service = _this.selectedSection;
-            obj.dealer = $(this).closest('.dealer-list-item').attr('data-name');
+            var dealer = $(this).closest('.dealer-list-item').attr('data-name');
+            obj.dealer = dealer.split(' ').join('#$');
             obj.s_id = $(this).closest('.dealer-list-item').attr('data-id');
-            console.log(obj)
+//            console.log(obj)
+//            console.log(local.load());
             var cook_obj = local.load();
             var oldC = '';
             if(cook_obj['clgacart']){
@@ -130,6 +132,7 @@ var Global = {
             }
             var newC = [obj.timestamp,obj.service, obj.dealer, obj.s_id].join('*');
             oldC += newC;
+            console.log(oldC);
             local.save('clgacart', oldC);
             Commons.ajaxData('add_to_cart', {'cookie':newC, 'car_id':_this.carSelected.id, 'car_size':_this.carSelected.size}, "get", _this, _this.redirectToCart );
 

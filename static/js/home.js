@@ -223,6 +223,7 @@ var Global = {
             }else{
                 var loc = window.location.href;
                 loc = loc.split('.in/')[0]+'.in/';
+                local.clearKey('clgacart');
                 local.save('clgacarid',c_id);
                 local.save('clgacarname',c_name);
                 window.location = loc + 'order/?c_id='+c_id;
