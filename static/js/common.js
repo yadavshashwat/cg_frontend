@@ -311,7 +311,7 @@ var Templates = {
                     {"tag":"div", "class":"dealer-add-to-cart", "html":"Add to Cart"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
-                    {"tag":"div", "html":"${total_price}"},
+                    {"tag":"div", "html":"<i class='fa fa-inr'></i>${total_price}"},
                 ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
