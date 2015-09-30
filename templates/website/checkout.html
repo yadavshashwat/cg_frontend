@@ -2,9 +2,10 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>ClickGarage.in - Your One Stop for All Car Solutions</title>
+    <title>ClickGarage - Car and Bike Servicing, Cleaning</title>
 
     {% load staticfiles %}
+    <link rel="shortcut icon" type="image/png" href="../../static/img/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.timepicker.css' %}"/>
@@ -381,7 +382,7 @@
             {% else %}
             <div class="address-form-holder clean-form-holder">
                 <div class="form-col">
-                    <div class="label-div">User Details :</div>
+                    <div class="label-div"><b>User Details</b></div>
                     <div class="form-row mt12">
                         <div class="label-div">Name</div>
                     </div>
@@ -400,7 +401,7 @@
                         <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-number" type="text"/></div>
                     </div>
                     <div class="form-row mt16">
-                        <div class="label-div">Pick Up Time</div>
+                        <div class="label-div">Pick Up Date & Time:</div>
                     </div>
                     <div class="form-row mt12">
                         <div class="clean-inp-wrapper" id="date-time-pair">
@@ -410,7 +411,7 @@
                     </div>
                 </div>
                 <div class="form-col" id="pick-up-col">
-                    <div class="label-div">Pickup Address :</div>
+                    <div class="label-div"><b>Pickup Address</b></div>
                     <div class="form-row mt12" style="height: 80px;">
                         <div class="label-div">Address</div>
                         <div class="clean-inp-wrapper"><textarea class="clean-inp-tabox pick-addr" type="" rows="3"></textarea>
@@ -430,8 +431,8 @@
                             <!--<input class="clean-inp-tbox drop-city" disabled type=""/>-->
                             <label class="clean-sbox-wrapper">
                             <select class="clean-inp-sbox pick-city">
-                                <option value="delhi">Delhi</option>
-                                <option value="gurgaon">Gurgaon</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Gurgaon">Gurgaon</option>
                             </select>
                             </label>
                         </div>
@@ -446,7 +447,7 @@
                     </div>
                 </div>
                 <div class="form-col disabled" id="drop-off-col">
-                    <div class="label-div">Dropoff Address :</div>
+                    <div class="label-div"><b>Dropoff Address</b></div>
                     <div class="form-row mt12" style="height: 80px;">
                         <div class="label-div">Address</div>
                         <div class="clean-inp-wrapper"><textarea class="clean-inp-tabox drop-addr" disabled type="" rows="3"></textarea></div>
