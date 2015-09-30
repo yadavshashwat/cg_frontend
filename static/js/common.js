@@ -308,7 +308,7 @@ var Templates = {
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
-                    {"tag":"div", "class":"dealer-add-to-cart", "html":"Add to Cart"}
+                    {"tag":"div", "class":"dealer-add-to-cart", "html":"<a href='/cart'>Add to Cart</a>"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
                     {"tag":"div", "html":"<i class='fa fa-inr'></i>${total_price}"},
