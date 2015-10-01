@@ -12,13 +12,19 @@ var zyxCart = {
         _this.eventHandlers();
         _this.setLogos();
     $('#date-time-pair .pick-up-time').timepicker({
-        'showDuration': true,
-        'timeFormat': 'g:ia'
+//        'showDuration': true,
+//        timeFormat: 'hh:mm p',
+        // year, month, day and seconds are not important
+        minTime: new Date(0, 0, 0, 9, 0, 0),
+        maxTime: new Date(0, 0, 0, 16, 0, 0),
+        // items in the dropdown are separated by at interval minutes
+        interval: 30,
     });
 
     $('#date-time-pair .pick-up-date').datepicker({
         'format': 'm/d/yyyy',
-        'autoclose': true
+//        'autoclose': true,
+        'minDate': new Date()
     });
         local.clearKey('clgacart');
 
