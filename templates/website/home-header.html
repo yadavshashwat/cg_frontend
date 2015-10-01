@@ -4,16 +4,14 @@
     </div>
     <div class="right-items-holder fr">
         <div class="menu-item fl hw">How it Works</div>
-        <div class="menu-item fl"><a href="//blog.clickgarage.in">Blog</a></div>
+        <div class="menu-item fl"><a href="//blog.clickgarage.in" target="_blank">Blog</a></div>
         <div class="menu-item fl au">About Us</div>
     {% if user and not user.is_anonymous %}
         <div class="menu-item fl" id="settings-drpdwn">Hi, {{ user.first_name }} &nbsp; <i class="fa fa-caret-down"></i></div>
         <div class="logged-user-drpdwn">
             <div class="tri-tip"></div>
             <div class="menu-square">
-                <div class="drpdwn-item">Account</div>
-                <div class="drpdwn-item">History</div>
-                <div class="drpdwn-item"><a href="www.clickgarage.in/cart">Cart</div>
+                <a href='/history'><div class="drpdwn-item">Bookings</div></a>
                 <div class="drpdwn-item"><a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a></div>
             </div>
         </div>

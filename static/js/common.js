@@ -42,7 +42,11 @@ var Commons = {
         'fetch_car_cleanings':'/api/fetch_all_cleaningcatservices/',
         'fetch_car_tyres':'/api/fetch_all_cleaningcatservices/',
         'add_to_cart':'/api/add_to_cart/',
-        'place_order':'/api/place_order/'
+        'place_order':'/api/place_order/',
+        'fetch_car_booking':'/api/fetch_car_booking/',
+        'fetch_car_cancelled':'/api/fetch_car_cancelled/',
+        'cancel_booking':'/api/cancel_booking/'
+
     },
     getOrigin: function(){
         var origin = window.location.origin;
@@ -182,7 +186,7 @@ var Templates = {
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
-                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Choose Vendor </div>";}}
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select this Service </div>";}}
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
@@ -213,7 +217,7 @@ var Templates = {
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
-                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Choose Vendor </div>";}}
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select this Service </div>";}}
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
@@ -245,8 +249,9 @@ var Templates = {
                     {"tag":"div", "class":"sub-text","html":"(${odometer}km)"}
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
-                    {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
-                    {"tag":"div", "class":"dealer-add-to-cart", "html":"Add to Cart"}
+                    // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
+
+                    {"tag":"div", "class":"dealer-add-to-cart",  "html":"<a href='/cart'>Add to Cart</a>"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
                     {"tag":"div", "html":"Labour : <i class='fa fa-inr'></i>"+"${labour_price}"},
@@ -308,7 +313,7 @@ var Templates = {
                     {"tag":"div", "class":"sub-text","html":"(${category})"}
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
-                    {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
+                    // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
                     {"tag":"div", "class":"dealer-add-to-cart", "html":"<a href='/cart'>Add to Cart</a>"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
@@ -317,7 +322,70 @@ var Templates = {
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
         }]
-    }
+    },
+    bookingPage:{
+        booking:[{
+            "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
+                {"tag":"div", "class":"top-row", "children":[
+                    {"tag":"div", "class":"wrapper detail-wrapper", "children":[
+                        {"tag":"div", "id":"cancel-booking",  "tran_id":"${tran_id}", "class":"vendor-div", "html":function(){return "<div> Cancel Booking </div>";}}
+                    ]},
+
+                    {"tag":"div", "class":"wrapper header-wrapper", "children":[
+                        {"tag":"div", "class":"booking id booking_id", "html":function(){return '#'+(this.booking_id);}},
+                        {"tag":"div", "class":"booking car booking_car", "html":function(){return (this.cust_carname);}},
+                        {"tag":"div", "class":"booking date booking_date", "html":function(){return (this.date_booking) + ' ('+this.time_booking+')';}},
+                        {"tag":"div", "class":"booking list booking_list", "html":function(){
+                            var s = '<ul class="service-components">'
+                            $.each(this.service_items,function(i,elem){
+                                if(elem.service == 'servicing'){
+                                s += '<li class="indiv_booking">'+elem.served_data.dealer_cat+'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.odometer+'km (Regular Sevicing) </li>'
+                                }else{
+                                s += '<li class="indiv_booking">'+elem.served_data.vendor +'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.service+' ( '+elem.served_data.category+' ) </li>'
+                                }
+                            })
+                            s += '</ul>'
+                            return s
+                        }
+                        },    
+                        
+                        ]},
+    
+
+                ]},
+        
+            ]
+        }],
+        cancelled:[{
+            "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
+                {"tag":"div", "class":"top-row", "children":[
+                    
+                    {"tag":"div", "class":"wrapper header-wrapper", "children":[
+                        {"tag":"div", "class":"booking id booking_id", "html":function(){return '#'+(this.booking_id);}},
+                        {"tag":"div", "class":"booking car booking_car", "html":function(){return (this.cust_carname);}},
+                        {"tag":"div", "class":"booking date booking_date", "html":function(){return (this.date_booking) + ' ('+this.time_booking+')';}},
+                        {"tag":"div", "class":"booking list booking_list", "html":function(){
+                            var s = '<ul class="service-components">'
+                            $.each(this.service_items,function(i,elem){
+                             if(elem.service == 'servicing'){
+                                s += '<li class="indiv_booking">'+elem.served_data.dealer_cat+'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.odometer+'km (Regular Sevicing) </li>'
+                                }else{
+                                s += '<li class="indiv_booking">'+elem.served_data.vendor +'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.service+' ( '+elem.served_data.category+' ) </li>'
+                                }
+                            })
+                            s += '</ul>'
+                            return s
+                        }
+                        },    
+                        
+                        ]},
+    
+
+                ]},
+        
+            ]
+        }]}
+
 };
 
 if (typeof String.prototype.toTitleCase != 'function') {

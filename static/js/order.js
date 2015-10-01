@@ -152,6 +152,7 @@ var Global = {
 
 
     },
+    
     loadServicing : function(data){
         console.log(data)
         var container = $('.section-box .servicing');
