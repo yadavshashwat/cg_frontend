@@ -449,8 +449,7 @@ var formCheck = {
             $(container).find('.car-reg-no').addClass('error');
             return false
         }else{
-            console.log(car_reg_number.length)
-            if(isNaN(parseInt(car_reg_number)) || car_reg_number.length != 10){
+            if(car_reg_number.length != 10){
                 $(container).find('.car-reg-no').addClass('error');
                 return false
             }
