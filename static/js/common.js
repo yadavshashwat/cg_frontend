@@ -403,6 +403,7 @@ var formCheck = {
         };
         var user_name = $(container).find('.user-name').val();
         var user_number = $(container).find('.user-number').val();
+        var car_reg_number = $(container).find('.car-reg-no').val();
 
         var pick_addr = $(container).find('.pick-addr').val();
         var pick_pin = $(container).find('.pick-pin').val();
@@ -443,6 +444,16 @@ var formCheck = {
                 return false
             }
         }
+        if(!valid(car_reg_number)){
+            $(container).find('.car-reg-no').addClass('error');
+            return false
+        }else{
+            console.log(car_reg_number.length)
+            if(isNaN(parseInt(car_reg_number)) || car_reg_number.length != 6){
+                $(container).find('.car-reg-no').addClass('error');
+                return false
+            }
+        }
         if(!valid(drop_addr)){
             $(container).find('.drop-addr').addClass('error');
             return false
@@ -474,6 +485,7 @@ var formCheck = {
     getSelectedAddress : function(container){
         var user_name = $(container).find('.user-name').val();
         var user_number = $(container).find('.user-number').val();
+        var car_reg_number = $(container).find('.car-reg-no').val();
         var pick_addr = $(container).find('.pick-addr').val();
         var pick_pin = $(container).find('.pick-pin').val();
         var pick_lmark = $(container).find('.pick-lmark').val();
@@ -487,6 +499,7 @@ var formCheck = {
         var obj = {
             name : user_name,
             number : user_number,
+            reg_no : car_reg_number,
             pick:{
                 street : pick_addr,
                 pincode : pick_pin,
