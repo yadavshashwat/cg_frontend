@@ -315,8 +315,11 @@ var workflowState = {
         var _this = this;
         var already_set = window.location.hash;
         console.log(already_set)
-        if(already_set == '#_=_')
+        if(already_set == '#_=_'){
             already_set = null
+            window.location.hash = ''
+
+        }
         if(!already_set || (already_set && $.inArray(already_set,["service","dealer"]) ) ){
             var data = _this.getWorkflow();
             console.log(data)
@@ -374,6 +377,7 @@ var workflowState = {
         if (!data){
             data = {};
             var _state = returnLocation.hash;
+            console.log(_state)
             if (_state.length > 1){
                 data = { state: _state.split('#')[1].split('?')[0] };
 //                data = $.extend(data, getparams(url));
