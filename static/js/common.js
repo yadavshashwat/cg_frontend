@@ -24,6 +24,7 @@ var Commons = {
                 type:callType
 
             }).always(function(res){
+                    console.log(res)
                     if(res.status){
                         bind(success_cb, bindObj, [res.result])
                     }
@@ -449,7 +450,7 @@ var formCheck = {
             return false
         }else{
             console.log(car_reg_number.length)
-            if(isNaN(parseInt(car_reg_number)) || car_reg_number.length != 6){
+            if(isNaN(parseInt(car_reg_number)) || car_reg_number.length != 10){
                 $(container).find('.car-reg-no').addClass('error');
                 return false
             }

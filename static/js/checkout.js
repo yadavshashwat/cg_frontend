@@ -176,6 +176,7 @@ var zyxCart = {
 
     },
     onOrderPlace : function(){
+        console.log('[')
                 $('.login-step').find('.max-content,.min-header').addClass('none-i');
                 $('.login-step').find('.completed-summary').removeClass('none-i');
                 $('.address-step').find('.max-content,.min-header').addClass('none-i');
