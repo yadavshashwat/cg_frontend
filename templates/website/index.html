@@ -14,6 +14,7 @@
     <link rel="shortcut icon" type="image/png" href="../../static/img/favicon.png"/>
     <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css'>
     <link href="../../static/css/jquery-video-lightning.css" rel="stylesheet" type="text/css">
+    
     <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.min.css" %}" />
     <link rel="stylesheet" type="text/css" href="{% static "css/custom.css" %}" />
     <link rel="stylesheet/less" type="text/css" href="{% static "less/styles.less" %}" />
@@ -22,6 +23,17 @@
     <script type="text/javascript" src="{%  static "js/plugin.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/home.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/common.js" %}"></script>
+    <script>
+    $(function() {
+    $(".video-link").jqueryVideoLightning({
+    autoplay: 1,
+    backdrop_color: "#ddd",
+    backdrop_opacity: 0.6,
+    glow: 20,
+    glow_color: "#000"
+    });
+    });
+    </script>
 
     <!--Script Addition - Slider Start-->
     <script type="text/javascript" src="{%  static "js/jssor.js" %}"></script>
@@ -113,8 +125,6 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
  -->
 
 <body class="home-body">
-
-<span class="video-link" data-video-id="y-VHrLPs3_1Fs">Youtube</span>
 <div class="pane search-pane fit-width">
     <div class="centered-content">
         <div class="transparent-header">
@@ -123,6 +133,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
         <div class="content-holder">
             <div class="title-holder">
                     <div class="title">
+                       
                         Car And Bike Care. Made Hassle Free.
                     </div>
                     <div class="sub-title">
@@ -183,7 +194,13 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                 One Stop Shop &nbsp;<i class="fa fa-circle"></i>&nbsp;Doorstep Service&nbsp;<i class="fa fa-circle"></i>&nbsp;Instant Cost Estimate
             </div>
         </div>
-
+        <div class="video-embed">  
+            <span class="video-link" data-video-id="y-v-zV_Z0_wJM">
+            <div class="video-icon">
+                    <img src="../../static/img/icon-video.png" alt=""/>
+            </div> 
+            <div class="video-text">Watch Video</div></span>
+        </div>
     </div>
     <div class="move-next-row">
         <div class="next-text">
@@ -400,7 +417,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
             <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
                 background-color: #000; top: 0px; left: 0px;width: 100%;height:100%;">
             </div>
-            <div style="position: absolute; display: block; background: url(../img/loading.gif) no-repeat center center;
+            <div style="position: absolute; display: block; background: url(../../static/img/loading.gif) no-repeat center center;
                 top: 0px; left: 0px;width: 100%;height:100%;">
             </div>
         </div>
@@ -462,9 +479,9 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                 <div class="column"></div>
                     <div class="fr social">
                         <script src="../../static/js/social.js"></script>
-                        <a href="http://twitter.com/theclickgarage" class="icon-button twitter"><i class="icon-twitter"></i><span></span></a>
-                        <a href="http://facebook.com/theclickgarage" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a>
-                        <a href="http://plus.google.com/theclickgarage" class="icon-button google-plus"><i class="icon-google-plus"></i><span></span></a>
+                        <a href="http://twitter.com/theclickgarage"  target="_blank" class="icon-button twitter"><i class="icon-twitter"></i><span></span></a>
+                        <a href="http://facebook.com/theclickgarage"  target="_blank" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a>
+                        <a href="http://plus.google.com/+theclickgarage" target="_blank" class="icon-button google-plus"><i class="icon-google-plus"></i><span></span></a>
                     </div>
                 </div>
             </div>

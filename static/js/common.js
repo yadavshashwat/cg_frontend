@@ -190,7 +190,7 @@ var Templates = {
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
-                        {"tag":"div", "class":"due-div fl", "html":function(){return "Due at <span>"+ String(this.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+ ' km ' + (this.year == "" ? '': '/ ') + this.year+"</span>";}},
+                        {"tag":"div", "class":"due-div fl", "html":function(){return "<span class='due-at-read'>Due at</span> <span class='odo-read'>"+ String(this.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+ ' km ' + (this.year == "" ? '': '/ ') + this.year+"</span>";}},
                         
                     {"tag":"div", "class":"service-details fix_servicedetails", "children":[  
                         {"tag":"div", "class":"checks-div", "html":function(){return 'Washing';}},
@@ -221,7 +221,7 @@ var Templates = {
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
-                        {"tag":"div", "class":"due-div", "html":function(){return "<span>"+this.category +"</span>";}},
+                        {"tag":"div", "class":"due-div", "html":function(){return "<span class='clean-cat'>"+this.category +"</span>";}},
 //                        {"tag":"div", "class":"price-div", "html":function(){return "Type : <span>"+this['paid_free']+"</span>";}}
                     ]}
                 ]},

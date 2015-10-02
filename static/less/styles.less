@@ -287,8 +287,24 @@
 					width: 100%;
 				}
 				.content-holder{
-					position: relative;
+					position: relative;   
 				}
+                .video-embed{
+                    position: absolute;
+				    bottom: -140px;
+				    left: 0%;
+				    z-index: 50;
+                    display: inline;
+                   
+                    color:#fff;
+                        font-family: lato;
+                        padding-top: 50px;
+                        img{
+						position: absolute;
+						height: 50px;;}
+                    .video-text{padding:17px 60px;
+                    }
+                    }
 			}
 
 			.search-pane{
@@ -1173,13 +1189,15 @@
 								font-weight: 400;
 								width: 100%;
 								border: 1px solid transparent;
-								border-bottom: 3px solid #e89b76;
+								border-bottom: 2px solid #eaeaea;
 								box-sizing: border-box;
 								.header-wrapper{
 									margin-right: 90px;
-									margin-top:12px;
-									margin-bottom:12px;
-									 padding: 18px 15px;
+									margin-top:6px;
+									margin-bottom:8px;
+								    padding-top: 22px;
+                                    padding-bottom:10px;
+                                    padding-left:15px;
 								}
 								.detail-wrapper{
 									float:right;
@@ -1223,12 +1241,20 @@
 								background-image: -o-linear-gradient(top, #e89a76, #fcae8a);
 								background-image: linear-gradient(to bottom, #e89a76, #fcae8a);
 							}
-							
+							     .clean-cat{
+                                    font-weight: 700;}
 							
 							
 									.due-div{
+                
 										height: 24px;
+                                        .due-at-read{
+                                        font-size:11px;}
+                                        .odo-read{
+                                            font-size:16px;
+                                        font-weight:700;}
 									}
+                                    
 									.service-details{
 										display: block;
 										margin-left: 240px;
@@ -1458,45 +1484,53 @@
 					background: #fff;
 					.material-box-shadow;
 					font-family: Lato;
+                    
 
 					.dealer-headers{
+                        background: #4d5b94;
 						border-bottom:2px solid #d7d7d7;
 						height: 50px;
 						line-height: 24px;
 						padding: 12px;
 						box-sizing: border-box;
 						.col-head{
+                            
 							height: 24px;
 							width: 150px;
 							font-weight: 500;
-							color: #616161;
-							display:inline!important;
-							.fr;
+							color: #fff;
+							float: left;
+							
 						}
 						.col-head.th-info{
-							float:left;
 							text-align: center;
+                            padding: 0px 20px;
+
+
 						}
 						.th-rating{
 
 						}
-						.th-price{padding-left: 254px;
-
+						.th-price{
+padding-left: 200px;
 						}
 						.th-dist{
 
 						}
-						.th-Service{padding-left: 49px;
-
+						.th-Service{
+padding: 0px 40px;
 							
 						}
 					}
 
 					.dealer-listings{
-
+                        
+                        font-family: Lato;
+						color:#616161;
 						.dealer-list-item{
 							height:68px;
 							padding: 12px;
+                            border-bottom: 1px solid #eaeaea;
 
 						}
 						.td-info{
@@ -1541,6 +1575,7 @@
 						.td-dealer-info{
 							width:200px;
 							float:left;
+                            padding-left: 30px;
 						}
 						.td-rating{
 							float:right;
@@ -1548,6 +1583,7 @@
 						}
 						.td-price{
 							float:right;
+                            padding-top: 10px;
 							width: 150px;
 						}
 						.td-dealer-select{
