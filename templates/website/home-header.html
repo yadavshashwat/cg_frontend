@@ -4,7 +4,7 @@
     </div>
     <div class="right-items-holder fr">
         <div class="menu-item fl hw">How It Works</div>
-        <div class="menu-item fl"><a href="//blog.clickgarage.in" target="_blank">Blog</a></div>
+        <a href="//blog.clickgarage.in" target="_blank"><div class="menu-item fl">Blog</div></a>
         <div class="menu-item fl au">About Us</div>
     {% if user and not user.is_anonymous %}
         <div class="menu-item fl" id="settings-drpdwn">Hi, {{ user.first_name }} &nbsp; <i class="fa fa-caret-down"></i></div>
@@ -12,7 +12,7 @@
             <div class="tri-tip"></div>
             <div class="menu-square">
                 <a href='/history'><div class="drpdwn-item">Bookings</div></a>
-                <div class="drpdwn-item"><a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a></div>
+                <a href="{% url 'auth:logout' %}?next={{ request.path }}"><div class="drpdwn-item">Logout</div></a>
             </div>
         </div>
 
