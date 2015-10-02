@@ -192,7 +192,7 @@ var Templates = {
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
                         {"tag":"div", "class":"due-div fl", "html":function(){return "Due at <span>"+ String(this.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+ ' km ' + (this.year == "" ? '': '/ ') + this.year+"</span>";}},
                         
-                    {"tag":"div", "class":"service-details", "children":[  
+                    {"tag":"div", "class":"service-details fix_servicedetails", "children":[  
                         {"tag":"div", "class":"checks-div", "html":function(){return 'Washing';}},
                         {"tag":"div", "class":"checks-div", "html":function(){return 'Regular Checks';}},        
                         {"tag":"div", "class":"parts-div", "html":function(){
@@ -251,9 +251,9 @@ var Templates = {
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
 
-                    {"tag":"div", "class":"dealer-add-to-cart",  "html":"<a href='/cart'>Add to Cart</a>"}
+                    {"tag":"div", "html":"<a class='dealer-add-to-cart', href='/cart'>Add to Cart</a>"}
                 ]},
-                {"tag":"div","class":"col-item td-price", "children":[
+                {"tag":"div","class":"col-item td-price fix_topmargin fix_bottommargin", "children":[
                     {"tag":"div", "html":"Labour : <i class='fa fa-inr'></i>"+"${labour_price}"},
                     {"tag":"div", "html":"Parts : <i class='fa fa-inr'></i>"+"${parts_price}"}
                 ]},
@@ -314,10 +314,10 @@ var Templates = {
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
-                    {"tag":"div", "class":"dealer-add-to-cart", "html":"<a href='/cart'>Add to Cart</a>"}
+                    {"tag":"div", "html":"<a class='dealer-add-to-cart', href='/cart'>Add to Cart</a>"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
-                    {"tag":"div", "html":"<i class='fa fa-inr'></i>${total_price}"},
+                    {"tag":"div","html":"<i class='fa fa-inr'></i>${total_price}"},
                 ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]

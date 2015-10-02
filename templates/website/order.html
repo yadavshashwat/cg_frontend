@@ -16,7 +16,16 @@
     <script type="text/javascript" src="{%  static "js/common.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/order.js" %}"></script>
     <script src="{%  static "js/legacy/less.min.js" %}"></script>
+<script>
+$(function(){
+    $("body > div.pane.order-pane > div > div > div.section-select-holder > div > div.section-headers > div.section-menu-item.active").click(function(){
 
+
+$("#fc_chat_layout").addClass("fc-expanded"); 
+$("#fc_chat_layout").removeClass("fc-collapsed");
+});
+});
+</script>
     {% load js %}
     <script type="text/javascript">
 {#        {% if cars %}#}
