@@ -8,10 +8,10 @@
 
     
     {% load staticfiles %}
-    <!-- {% static "css/font.css" %}-->
-    <!-- {{ STATIC_URL }}-->
-    <!--<link rel="stylesheet" type="text/css" href="{{ STATIC_URL}}css/font-awesome.min.css" />-->
-    <link rel="shortcut icon" type="image/png" href="../../static/img/favicon.png"/>
+     {% static "css/font.css" %}
+    {{ STATIC_URL }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL}}css/font-awesome.min.css" />
+   <link rel="shortcut icon" type="image/png" href="../../static/img/favicon.png"/>
     <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css'>
     <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.min.css" %}" />
     <link rel="stylesheet" type="text/css" href="{% static "css/custom.css" %}" />
@@ -22,9 +22,13 @@
     <script type="text/javascript" src="{%  static "js/home.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/common.js" %}"></script>
 
+    
+
     <!--Script Addition - Slider Start-->
     <script type="text/javascript" src="{%  static "js/jssor.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/jssor.slider.js" %}"></script>
+ 
+    
     <script>
         jQuery(document).ready(function ($) {
             var options = {
@@ -70,7 +74,7 @@
 
     <script src="{%  static "js/legacy/less.min.js" %}"></script>
 
-    {% load js %}
+   {% load js %}
     <script type="text/javascript">
 {#        {% if cars %}#}
 {#            <ul>#}
@@ -84,10 +88,11 @@
         Global.carData = {{ cars | js}};
     Global.logReq = {{ loginFlag | js}};
     </script>
-{#    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>#}
-{#    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script>#}
+{#    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script> #}
+{# <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script> #}
+        
 
-
+ 
 <!-- start Mixpanel -->
 <script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
 for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
@@ -106,15 +111,15 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
 </head>
 
 
-<!-- <script type="text/javascript" src="../../static/js/gotop.js"></script>
- -->
+ <script type="text/javascript" src="../../static/js/gotop.js"></script>
+ 
 
 <body class="home-body">
 
 <div class="pane search-pane fit-width">
     <div class="centered-content">
         <div class="transparent-header">
-            {% include "website/home-header.html" %}
+           {% include "website/home-header.html" %}
         </div>
         <div class="content-holder">
             <div class="title-holder">
@@ -353,7 +358,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
  
 
 
-<div class="pane">
+<div class="pane fix_pane">
     <div class="stats-pane">
         
        <!--
@@ -456,7 +461,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                     </ul>
                 </div>
                 <div class="column"></div>
-                    <div class="fr social">
+                    <div class="fr social fix_social">
                         <script src="../../static/js/social.js"></script>
                         <a href="http://twitter.com/theclickgarage" class="icon-button twitter"><i class="icon-twitter"></i><span></span></a>
                         <a href="http://facebook.com/theclickgarage" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a>
@@ -464,7 +469,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                     </div>
                 </div>
             </div>
-            <div class="fl company"><i class="fa fa-copyright"></i>Sui Generis Innovations Pvt. Ltd.</div>
+            <div class="fl company fix_name"><i class="fa fa-copyright"></i>Sui Generis Innovations Pvt. Ltd.</div>
         </div>
     </div>
 

@@ -1,11 +1,11 @@
 <div class="modal fade login" id="loginModal" aria-hidden="false" style="display: block;">
-    <div class="modal-dialog login animated">
+    <div class="modal-dialog login animated fix_modaldialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close none-i" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" style="text-align:center;">Login with</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body fix_modalbody">
                 <div class="box">
                     {% if user and not user.is_anonymous %}
                     <div class="content">
@@ -19,20 +19,22 @@
 
                     <div class="content">
                         <div class="social">
+                            <h2>sign in with</h2>
                             <div>
-                            <a id="google_login" class="circle google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">
+                            <a id="google_login" class="circle google fix_logincircle" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">
                                 <i class="fa fa-google-plus fa-fw"></i>
                             </a>
-                            <a style=" height: 50px; width: 2px; display: inline-block; background-color: #000; vertical-align: bottom;"></a>
-                            <a id="facebook_login" class="circle facebook" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">
+                                or
+                            <a style=" height: 50px; width: 2px; background-color: #000; vertical-align: bottom;"></a>
+                            <a id="facebook_login" class="circle facebook fix_logincircle" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">
                                 <i class="fa fa-facebook fa-fw"></i>
                             </a>
                             </div>
                            <div>
-                            <a id="" class="circle google" style="background-color: transparent; color: #F74933; margin-right: 17px;">
+                            <a id="" class="circle google fix_logincircle " style="background-color: transparent; color: #F74933; margin-right: 17px;">
                                 <i>Google</i>
                             </a>
-                            <a id="" class="circle facebook"  style="background-color: transparent; color: #455CA8; margin-left: 20px;">
+                            <a id="" class="circle facebook "  style="background-color: transparent; color: #455CA8; margin-left: 20px;">
                                 <i>Facebook</i>
                             </a>
                             </div>

@@ -3,7 +3,7 @@
 <head>
    <title>ClickGarage - Car and Bike Servicing, Cleaning</title>
 
-    {% load staticfiles %}
+   {% load staticfiles %}
     <link rel="shortcut icon" type="image/png" href="../../static/img/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.min.css" %}" />
     <link rel="stylesheet" type="text/css" href="{% static "css/custom.css" %}" />
@@ -31,9 +31,9 @@
         Global.carData = {{ cars | js}};
         Global.carSelected = {{ carSelected | js}};
     </script>
-{#    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>#}
-{#    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script>#}
-
+{# <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script> #}   
+{# <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script> #}   
+    
 </head>
 <body class="order-body">
     <div class="solid-header">
