@@ -74,6 +74,9 @@ var zyxCart = {
             $('.confirm-step,.payment-step').find('.max-content,.completed-summary').addClass('none-i');
             $('.confirm-step,.payment-step').find('.min-header').removeClass('none-i');
         });
+        $('#settings-drpdwn').on('click', function(e){
+            $(this).parent().find('.logged-user-drpdwn').toggle();
+        });
         $('.address-step .change-address-btn').on('click', function(){
             //summarize previous steps
 //            $('.login-step').find('.completed-summary,.min-header').addClass('none-i');

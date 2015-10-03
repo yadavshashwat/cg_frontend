@@ -142,9 +142,11 @@ var Global = {
 
 //            Commons.ajaxData('add_to_cart', {})
         });
+
         $('#settings-drpdwn').on('click', function(e){
             $(this).parent().find('.logged-user-drpdwn').toggle();
         });
+
         $('#selected-details .edit-btn').on('click', function(e){
             Global.generateCarSelect();
         });
