@@ -253,10 +253,9 @@ var Templates = {
 
                     {"tag":"div", "html":"<a class='dealer-add-to-cart', href='/cart'>Add to Cart</a>"}
                 ]},
-                {"tag":"div","class":"col-item td-price fix_topmargin fix_bottommargin", "children":[
-                    {"tag":"div", "html":"Labour : <i class='fa fa-inr'></i>"+"${labour_price}"},
-                    {"tag":"div", "html":"Parts : <i class='fa fa-inr'></i>"+"${parts_price}"}
-                ]},
+                {"tag":"div","class":"td-price", "children":[
+                    {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+this.labour_price+"</td></tr><tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+this.parts_price+"</td></tr><tr id = 'total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.parts_price)+parseInt(this.labour_price))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '100')+"</td></tr></table>";}}
+                    ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
         }],
@@ -310,15 +309,19 @@ var Templates = {
                 ]},
                 {"tag":"div","class":"td-service-info", "children":[
                     {"tag":"div", "class":"text","html":"${service}"},
-                    {"tag":"div", "class":"sub-text","html":"(${category})"}
+                    {"tag":"div", "class":"sub-text","html":"(${category})"},
+                    {"tag":"div", "class":"doorstep-div", "html":function(){
+                        if(this.doorstep=="1"){return "<span class='doorstep'><i class='fa fa-home'></i>&nbspDoorstep Service</span>"
+                        }else{
+                            return ''
+                        }}}
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
                     {"tag":"div", "html":"<a class='dealer-add-to-cart', href='/cart'>Add to Cart</a>"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
-                    {"tag":"div","html":"<i class='fa fa-inr'></i>${total_price}"},
-                ]},
+    {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Service Price</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+this.total_price+"</td></tr>"+ (this.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>0</td></tr>" : '')+"</table>";}}                ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
         }]
