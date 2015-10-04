@@ -397,22 +397,24 @@
                         <div class="label-div">Phone</div>
                     </div>
                     <div class="form-row">
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-number" onfocus="if(this.value == '7676767676') { this.value = ''; }" onblur="if(this.value == '') { this.value = '7676767676'; }" value="7676767676" type="text"/></div>
+                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-number" onfocus="if(this.value == 'eg. 7676767676') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'eg. 7676767676'; }" value="eg. 7676767676" type="text"/></div>
                     </div>
                     <div class="form-row mt12">
                         <div class="label-div">Pick Up Date & Time:</div>
                     </div>
                     <div class="form-row">
                         <div class="clean-inp-wrapper" id="date-time-pair">
-                            <input class="clean-inp-tbox pick-up-date" data-date-start-date="0d"onfocus="if(this.value == '10/20/2015') { this.value = ''; }" onblur="if(this.value == '') { this.value = '10/20/2015'; }" value="10/20/2015" type="text" style="width:55%;"/>
-                            <input class="clean-inp-tbox pick-up-time" onfocus="if(this.value == '9:00am') { this.value = ''; }" onblur="if(this.value == '') { this.value = '9:00am'; }" value="9:00am"type="text" style="width:40%; "/>
+                            <input class="clean-inp-tbox pick-up-date" data-date-start-date="0d"onfocus="if(this.value == 'dd/mm/yyyy') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'dd/mm/yyyy'; }" value="dd/mm/yyyy" type="text" style="width:55%;"/>
+                            <input class="clean-inp-tbox pick-up-time" onfocus="if(this.value == 'H:MM') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'H:MM'; }" value="H:MM"type="text" style="width:40%; "/>
                         </div>
                     </div>
                     <div class="form-row mt12">
                         <div class="label-div">Car Reg. No.</div>
                     </div>
                     <div class="form-row">
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox car-reg-no" type="text"/></div>
+                        <div class="clean-inp-wrapper">
+                            <input class="clean-inp-tbox car-reg-no" onfocus="if(this.value == 'eg. RJ02CC4222') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'eg. RJ02CC4222'; }" value="eg. RJ02CC4222" type="text" style="width:55%;"/>
+                        </div>
                     </div>
                 </div>
                 <div class="form-col" id="pick-up-col">
