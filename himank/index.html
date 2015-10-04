@@ -1,0 +1,507 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>ClickGarage - Car and Bike Servicing, Cleaning</title>
+    <meta name="description" content="Solution to all your vehicle needs. Book servicing, cleaning from the authorized/ multi-brand vendor and our auto experts will get the work done ensuring utmost quality. All you got to do is just click.">
+    <meta name="keywords" content="Nissan Servicing ,Datsun Servicing ,Volkswagen Servicing ,Toyota Servicing ,Tata Servicing ,Skoda Servicing ,Renault Servicing ,Maruti Suzuki Servicing ,Mahindra Servicing ,Hyundai Servicing ,Honda Servicing ,Ford Servicing ,Fiat Servicing ,Chevrolet Servicing, Royal Enfield Servicing ,Suzuki Servicing ,TVS Servicing ,Bajaj Servicing ,KTM Servicing ,Yamaha Servicing ,Hero Servicing, car servicing, bike servicing, car cleaning, car dry cleaning, car interior cleaning, car exterior cleaning">
+
+
+
+    <link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css" />
+   <link rel="shortcut icon" type="image/png" href="../static/img/favicon.png"/>
+    <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css'>
+<!--    <link href="../static/css/jquery-video-lightning.css" rel="stylesheet" type="text/css">-->
+
+    <link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/custom.css" />
+    <link rel="stylesheet/less" type="text/css" href="../static/less/styles.less" />
+    <link rel="stylesheet/less" type="text/css" href="../static/less/login-html.less" />
+    <script type="text/javascript" src="../static/js/legacy/jquery-2.1.4.min.js"></script>
+    <!--<script type="text/javascript" src="../static/js/plugin.js" %}"></script>-->
+    <!--<script type="text/javascript" src="../static/js/home.js" %}"></script>-->
+    <!--<script type="text/javascript" src="../static/js/common.js" %}"></script>-->
+
+
+
+    <!--Script Addition - Slider Start-->
+    <script type="text/javascript" src="../static/js/jssor.js"></script>
+    <script type="text/javascript" src="../static/js/jssor.slider.js"></script>
+    <script src="../static/js/jquery-video-lightning.js"></script>
+
+    <script>
+        jQuery(document).ready(function ($) {
+            var options = {
+                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                $AutoPlaySteps: 1,                                  //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1
+                $AutoPlayInterval: 0,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
+                $PauseOnHover: 4,                               //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
+
+                $ArrowKeyNavigation: true,                          //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
+                $SlideEasing: $JssorEasing$.$EaseLinear,          //[Optional] Specifies easing for right to left animation, default value is $JssorEasing$.$EaseOutQuad
+                $SlideDuration: 5000,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
+                $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
+                $SlideWidth: 100,                                   //[Optional] Width of every slide in pixels, default value is width of 'slides' container
+                $SlideHeight: 100,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
+                $SlideSpacing: 50,                                  //[Optional] Space between each slide in pixels, default value is 0
+                $DisplayPieces: 8,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+                $ParkingPosition: 0,                              //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
+                $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
+                $PlayOrientation: 1,                                //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
+                $DragOrientation: 1                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
+            };
+
+            var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+
+            //responsive code begin
+            //you can remove responsive code if you don't want the slider scales while window resizes
+            function ScaleSlider() {
+                var bodyWidth = document.body.clientWidth;
+                if (bodyWidth)
+                    jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 1380));
+                else
+                    window.setTimeout(ScaleSlider, 30);
+            }
+            ScaleSlider();
+
+            $(window).bind("load", ScaleSlider);
+            $(window).bind("resize", ScaleSlider);
+            $(window).bind("orientationchange", ScaleSlider);
+            //responsive code end
+        });
+    </script>
+    <!--Script Addition - Slider end-->
+
+    <script src="../static/js/legacy/less.min.js"></script>
+
+
+<!-- start Mixpanel -->
+<script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
+mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
+
+</script>
+
+<script type="text/javascript">
+   mixpanel.track("Sign Up");
+</script>
+
+<!-- end Mixpanel -->
+
+
+ <script type="text/javascript" src="../static/js/gotop.js"></script>
+
+
+</head>
+
+
+
+<body class="home-body">
+<div class="pane search-pane fit-width">
+    <div class="centered-content">
+        <div class="transparent-header">
+           <!--{% include "website/home-header.html" %}-->
+        </div>
+        <div class="content-holder">
+            <div class="title-holder">
+                    <div class="title">
+
+                        Car And Bike Care. Made Hassle Free.
+                    </div>
+                    <div class="sub-title">
+                        Select Your Vehicle To Compare And Book Services
+                    </div>
+
+                </div>
+
+            <div class="search-set-holder" id="home-search-set-holder">
+                <div style="display: none;">
+                    <!--
+   {% if user and not user.is_anonymous %}
+     <li>
+       <a>Hello {{ user.get_full_name|default:user.username }}!</a>
+     </li>
+     <li>
+       <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
+     </li>
+   {% else %}
+     <li>
+       <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
+     </li>
+     <li>
+       <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Login with Google</a>
+     </li>
+     <li>
+       <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Login with Twitter</a>
+     </li>
+   {% endif %}
+                    -->
+                </div>
+                <form id="home-search-form" method="get" action="/order/" data-remote="true" accept-charset="UTF-8">
+                <div class="citybox-holder" id="home-citybox-holder">
+                    <input type="text" id="city-search-box" class="city-search-box" name="city" readonly="true" value="delhi">
+                    <i class="icon fa fa-caret-down"></i>
+                    <label for="city-search-box" class="city-drop-box" style="display: none;">
+{#                        <div class="drop-ttl">Dropdown</div>#}
+                        <ul>
+                            <li>delhi</li>
+                            <li>gurgaon</li>
+                        </ul>
+                    </label>
+                </div>
+                <div class="omnibox-holder" id="home-omnibox-holder">
+                    <input type="hidden" id="hidden-id-box" name="c_id" style="display: none;" />
+                    <input type="text" id="omni-search-box" class="omni-search-box" name="car_name" placeholder="Select Your Car or Bike" autocomplete="off">
+                    <i class="icon fa fa-search"></i>
+                    <label for="omni-search-box" class="omni-drop-box" style="display: none;">
+{#                        <div class="drop-ttl">Dropdown</div>#}
+                        <ul>
+                        </ul>
+                    </label>
+                </div>
+                <div class="submit-btn-holder purple-btn-1" id="home-submit-holder">
+                    <button class="form-submit-btn" type="submit">Get Started</button>
+                </div>
+                </form>
+            </div>
+            <div class="sub-text">
+                One Stop Shop &nbsp;<i class="fa fa-circle"></i>&nbsp;Doorstep Service&nbsp;<i class="fa fa-circle"></i>&nbsp;Instant Cost Estimate
+            </div>
+        </div>
+        <div class="video-embed">
+            <span class="video-link" data-video-id="y-v-zV_Z0_wJM">
+            <div class="video-icon">
+                    <img src="../static/img/icon-video.png" alt=""/>
+            </div>
+            <div class="video-text">Watch Video</div></span>
+        </div>
+    </div>
+    <div class="move-next-row">
+        <div class="next-text">
+            Learn More
+        </div>
+            <div class="learn-more">
+
+            <span>
+                <i class="fa fa-angle-down fa-2x"></i>
+            </span>
+            </div>
+    </div>
+
+    <!--<div class="overlay overlay-color purple"></div>-->
+    <div class="overlay overlay-image">
+        <img src="../static/img/bg_4.jpg" alt="" data-init="-230" />
+    </div>
+    <div class="overlay overlay-color purple"></div>
+    <div class="overlay overlay-video none-i">
+<!--         <video autoplay loop poster="static/vid/website_loop_snapshot.png" id="bgvid" data-init="-230">
+            <source src="static/vid/website_loop.webm" type="video/webm">
+            <source src="static/vid/website_loop.mp4" type="video/mp4">
+        </video>
+ -->
+
+    </div>
+    <div class="overlay overlay-pat"></div>
+</div>
+
+
+
+
+<div class="pane steps-pane">
+
+    <div class="centered-content">
+        <div class="content-holder">
+
+            <div class="lined-box preview-box" id="preview-box">
+
+            <div class="how-it-works"><a name="how-it-works">
+                <div class="text-holder">
+                How It Works
+            </div>
+
+            </div>
+                <div class="wrapper">
+                    <div class="detail detail-point1" style="opacity: 1; display: block;">
+                        <div class="text-holder">
+                            <div class="big-text">
+                                Select your vehicle and browse through our service catalogue.
+                            </div>
+                        </div>
+                        <div class="img-holder">
+                            <img src="../static/img/pane-select-1.png" alt="#"/><span>.</span>
+                        </div>
+                    </div>
+                    <div class="detail detail-point2">
+                        <div class="text-holder">
+                            <div class="big-text">
+                                Select a service provider that suits your needs best and compare price estimates.
+                            </div>
+                        </div>
+                        <div class="img-holder">
+                            <img src="../static/img/pane-compare.png" alt="#"/><span>.</span>
+                        </div>
+                    </div>
+                    <div class="detail detail-point3">
+                        <div class="text-holder">
+                            <div class="big-text">
+                                Book a slot based on your convenience. Our auto experts will get the work done so that you don’t have to waste your valuable time.
+                            </div>
+                        </div>
+                        <div class="img-holder">
+                            <img src="../static/img/pane-relax-1.png" alt="#"/><span>.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="lined-box workflow-box" id="workflow-box">
+                <div class="pusher-wrapper">
+                    <div id="pusher">
+                    </div>
+                </div>
+                <div class="marker-holder">
+                    <div class="marker-line"></div>
+                    <div class="marker-point" id="point1"></div>
+                    <div class="marker-point" id="point2"></div>
+                    <div class="marker-point" id="point3"></div>
+                </div>
+                <div class="list-holder">
+                    <div class="text-holder" id="text1" data-id="point1">
+                        <div class="step-title">Tell us what you need</div>
+                        <div class="step-summary">Select your vehicle and browse through our service catalogue.</div>
+                    </div>
+                    <div class="text-holder" id="text2" data-id="point2">
+                        <div class="step-title">Compare prices</div>
+                        <div class="step-summary">Select a service provider that suits your needs best and compare price estimates.</div>
+                    </div>
+                    <div class="text-holder" id="text3" data-id="point3">
+                        <div class="step-title">Book a time slot and relax</div>
+                        <div class="step-summary">Book a slot based on your convenience. Our auto experts will get the work done.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay overlay-pat"></div>
+</div>
+
+ <div class = "pane android-pane">
+
+         <div class="content-holder">
+         <div><img u="Android" src="../static/img/android-pane-3.jpg" /></div>
+
+     </div>
+ </div>
+
+<div class="pane features-pane">
+    <a name="about-us">
+    <div class="centered-content">
+        <div class="abouts-row">
+            <div class="text-holder">
+                What Sets Us Apart
+            </div>
+        </div>
+        <div class="feats-row">
+            <div class="feature-point">
+                <div class="feat-icon">
+                    <img src="../static/img/icon-mech.png" alt=""/>
+{#                    <i class="fa fa-search"></i>#}
+                </div>
+                <div class="feat-text">
+                    <div class="title">Personal Advisors</div>
+                    <div class="sub-title">Industry experts who ensure that you pay for only what you need.</div>
+                </div>
+            </div>
+            <div class="feature-point">
+                <div class="feat-icon">
+                    <img src="../static/img/icon-veri.png" alt=""/>
+{#                <i class="fa fa-mouse-pointer"></i>#}
+                </div>
+                <div class="feat-text">
+                    <div class="title">ClickGarage Workshops</div>
+                    <div class="sub-title">Best of both worlds. Assurance of quality, in multi-brand garages.</div>
+                </div>
+            </div>
+            <div class="feature-point">
+                <div class="feat-icon">
+                    <img src="../static/img/icon-data.png" alt=""/>
+{#                    <i class="fa fa-opencart"></i>#}
+                </div>
+                <div class="feat-text">
+                    <div class="title">Instant Estimates</div>
+                    <div class="sub-title">Power of informed choice with cost estimates generated from our extensive data.</div>
+                </div>
+            </div>
+        </div>
+        <div class="goal-row">
+            <div class="text-holder">
+                "Providing Convenient and Quality Auto Care."
+            </div>
+        </div>
+    </div>
+    <div class="overlay overlay-pat"></div>
+    <!--<div class="overlay overlay-color black"></div>-->
+    <!--<div class="overlay overlay-image">-->
+        <!--<img src="../static/img/about-bg.jpg" alt=""/>-->
+    <!--</div>-->
+
+</div>
+
+
+
+<div class="pane fix_pane">
+    <div class="stats-pane">
+
+       <!--
+        <div class="stats-platform">
+            <div class="text-holder">
+                Currently On ClickGarage
+            </div>
+        </div>
+        -->
+        <div class="centered-content">
+            <div class="content-holder">
+        <div class="stats-row">
+            <div class="stat-point">
+                <div class="figure">80+</div>
+                <div class="sub-text">Partners</div>
+            </div>
+            <div class="stat-point">
+
+                <div class="figure">250+</div>
+                <div class="sub-text">Models</div>
+            </div>
+        </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+     <!--Script Addition - Slider Start-->
+    <div class="partners-platform">
+            <div class="text-holder">
+                Our Partners
+            </div>
+        </div>
+    <div class = "slider-partner" id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 980px; height: 200px; overflow: hidden; ">
+
+        <!-- Loading Screen -->
+        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                background-color: #000; top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+            <div style="position: absolute; display: block; background: url(../static/img/loading.gif) no-repeat center center;
+                top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+        </div>
+
+        <!-- Slides Container -->
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1200px; height: 200px; overflow: hidden;">
+            <div><img u="image" alt="partner" src="../static/img/partners/Automotives India MFC.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Autovikas tata.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Autozone suzuki.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Capital Volkswagen.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/City cars bosch.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Courtesy Honda.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Deep Hyundai.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Delhi Scooters Yamaha.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Ess Aar Royal Enfield.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/JB Honda.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Kashyap Fiat.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Khanna hero.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Kukreja hero.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Riddi Ford.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Sidharth Auto - Yamaha.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Speed car wash.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Sri durga mahindra.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/TCS bajaj.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Tee car care.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Zaira bosch.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Express Windhield.jpg" /></div>
+            <div><img u="image" alt="partner" src="../static/img/partners/Auto Glass Masters.jpg" /></div>
+
+
+        </div>
+        <a style="display: none" href="http://www.jssor.com">Bootstrap Slider</a>
+    </div>
+     <!--Script Addition - Slider End-->
+
+
+
+
+    <div class="footer-pane">
+        <div class="centered-content">
+            <div class="content-holder">
+                <div class="column">
+                    <ul>
+                        <lh>ClickGarage</lh>
+                        <li></li>
+                        <li class="footer-hw">How it works</li>
+                        <li class="footer-au">About Us</li>
+                        <li><a href="//blog.clickgarage.in" target="_blank">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <ul>
+                        <lh>Legal</lh>
+                        <li></li>
+                        <li><a href="/tnc">Terms & Conditions</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="column"></div>
+                    <div class="fr social fix_social">
+                        <script src="../static/js/social.js"></script>
+                        <a href="http://twitter.com/theclickgarage" class="icon-button twitter"><i class="icon-twitter"></i><span></span></a>
+                        <a href="http://facebook.com/theclickgarage" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a>
+                        <a href="http://plus.google.com/theclickgarage" class="icon-button google-plus"><i class="icon-google-plus"></i><span></span></a>
+                    <!--<div class="fr social">-->
+<!--&lt;!&ndash;                        <script src="../static/js/social.js"></script>&ndash;&gt;-->
+                        <!--<a href="http://twitter.com/theclickgarage"  target="_blank" class="icon-button twitter"><i class="icon-twitter"></i><span></span></a>-->
+                        <!--<a href="http://facebook.com/theclickgarage"  target="_blank" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a>-->
+                        <!--<a href="http://plus.google.com/+theclickgarage" target="_blank" class="icon-button google-plus"><i class="icon-google-plus"></i><span></span></a>-->
+                    </div>
+                </div>
+            </div>
+            <div class="fl company fix_name"><i class="fa fa-copyright"></i>Sui Generis Innovations Pvt. Ltd.</div>
+        </div>
+    </div>
+
+
+<div class="login-modal-container bootstrap-wrapper modal-container" style="display: none;">
+    {% include "website/login-popup.html" %}
+</div>
+<div style="display: none;">
+{% if cars %}
+    <ul>
+    {% for car in cars %}
+        <li>{{ car.name }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No cars are available.</p>
+{% endif %}
+</div>
+
+<!--Google Analytics Script-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68064927-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- feedback code -->
+<script type="text/javascript" src="http://assets.freshdesk.com/widget/freshwidget.js"></script>
+<script type="text/javascript">
+    FreshWidget.init("", {"queryString": "&widgetType=popup&formTitle=Feedback&searchArea=no&responsive=no", "utf8": "✓", "widgetType": "popup", "buttonType": "text", "buttonText": "Feedback", "buttonColor": "white", "buttonBg": "#4D5B94", "alignment": "2", "offset": "350px", "formHeight": "400px", "responsive": "no", "url": "https://clickgarage.freshdesk.com"} );
+</script>
+
+<!--//widget code//-->
+<script type='text/javascript'>var fc_CSS=document.createElement('link');fc_CSS.setAttribute('rel','stylesheet');var isSecured = (window.location && window.location.protocol == 'https:');var rtlSuffix = ((document.getElementsByTagName('html')[0].getAttribute('lang')) === 'ar') ? '-rtl' : '';fc_CSS.setAttribute('type','text/css');fc_CSS.setAttribute('href',((isSecured)? 'https://d36mpcpuzc4ztk.cloudfront.net':'http://assets1.chat.freshdesk.com')+'/css/visitor'+rtlSuffix+'.css');document.getElementsByTagName('head')[0].appendChild(fc_CSS);var fc_JS=document.createElement('script'); fc_JS.type='text/javascript';fc_JS.src=((isSecured)?'https://d36mpcpuzc4ztk.cloudfront.net':'http://assets.chat.freshdesk.com')+'/js/visitor.js';(document.body?document.body:document.getElementsByTagName('head')[0]).appendChild(fc_JS);window.freshchat_setting= 'eyJ3aWRnZXRfc2l0ZV91cmwiOiJjbGlja2dhcmFnZS5mcmVzaGRlc2suY29tIiwicHJvZHVjdF9pZCI6bnVsbCwibmFtZSI6IkNsaWNrZ2FyYWdlIiwid2lkZ2V0X2V4dGVybmFsX2lkIjpudWxsLCJ3aWRnZXRfaWQiOiIzODZlMDkyOS1kZTQyLTQ5OGEtYmIwYi0xOWFkZWI3MGMzZTQiLCJzaG93X29uX3BvcnRhbCI6ZmFsc2UsInBvcnRhbF9sb2dpbl9yZXF1aXJlZCI6ZmFsc2UsImlkIjo4MDAwMDA2NzAzLCJtYWluX3dpZGdldCI6dHJ1ZSwiZmNfaWQiOiI0ODAwYzgwMjkzY2E1NWNmNGVhMWQyMmE1MWJkOTUyNiIsInNob3ciOjEsInJlcXVpcmVkIjoyLCJoZWxwZGVza25hbWUiOiJDbGlja2dhcmFnZSIsIm5hbWVfbGFiZWwiOiJOYW1lIiwibWFpbF9sYWJlbCI6IkVtYWlsIiwibWVzc2FnZV9sYWJlbCI6Ik1lc3NhZ2UiLCJwaG9uZV9sYWJlbCI6IlBob25lIE51bWJlciIsInRleHRmaWVsZF9sYWJlbCI6IlRleHRmaWVsZCIsImRyb3Bkb3duX2xhYmVsIjoiRHJvcGRvd24iLCJ3ZWJ1cmwiOiJjbGlja2dhcmFnZS5mcmVzaGRlc2suY29tIiwibm9kZXVybCI6ImNoYXQuZnJlc2hkZXNrLmNvbSIsImRlYnVnIjoxLCJtZSI6Ik1lIiwiZXhwaXJ5IjoxNDQ1NzAyMjMzMDAwLCJlbnZpcm9ubWVudCI6InByb2R1Y3Rpb24iLCJkZWZhdWx0X3dpbmRvd19vZmZzZXQiOjMwLCJkZWZhdWx0X21heGltaXplZF90aXRsZSI6IkNoYXQgaW4gcHJvZ3Jlc3MiLCJkZWZhdWx0X21pbmltaXplZF90aXRsZSI6IkxldCdzIHRhbGshIiwiZGVmYXVsdF90ZXh0X3BsYWNlIjoiWW91ciBNZXNzYWdlIiwiZGVmYXVsdF9jb25uZWN0aW5nX21zZyI6IldhaXRpbmcgZm9yIGFuIGFnZW50IiwiZGVmYXVsdF93ZWxjb21lX21lc3NhZ2UiOiJIaSEgSG93IGNhbiB3ZSBoZWxwIHlvdSB0b2RheT8iLCJkZWZhdWx0X3dhaXRfbWVzc2FnZSI6Ik9uZSBvZiB1cyB3aWxsIGJlIHdpdGggeW91IHJpZ2h0IGF3YXksIHBsZWFzZSB3YWl0LiIsImRlZmF1bHRfYWdlbnRfam9pbmVkX21zZyI6Int7YWdlbnRfbmFtZX19IGhhcyBqb2luZWQgdGhlIGNoYXQiLCJkZWZhdWx0X2FnZW50X2xlZnRfbXNnIjoie3thZ2VudF9uYW1lfX0gaGFzIGxlZnQgdGhlIGNoYXQiLCJkZWZhdWx0X2FnZW50X3RyYW5zZmVyX21zZ190b192aXNpdG9yIjoiWW91ciBjaGF0IGhhcyBiZWVuIHRyYW5zZmVycmVkIHRvIHt7YWdlbnRfbmFtZX19IiwiZGVmYXVsdF90aGFua19tZXNzYWdlIjoiVGhhbmsgeW91IGZvciBjaGF0dGluZyB3aXRoIHVzLiBJZiB5b3UgaGF2ZSBhZGRpdGlvbmFsIHF1ZXN0aW9ucywgZmVlbCBmcmVlIHRvIHBpbmcgdXMhIiwiZGVmYXVsdF9ub25fYXZhaWxhYmlsaXR5X21lc3NhZ2UiOiJPdXIgYWdlbnRzIGFyZSB1bmF2YWlsYWJsZSByaWdodCBub3cuIFNvcnJ5IGFib3V0IHRoYXQsIGJ1dCBwbGVhc2UgbGVhdmUgdXMgYSBtZXNzYWdlIGFuZCB3ZSdsbCBnZXQgcmlnaHQgYmFjay4iLCJkZWZhdWx0X3ByZWNoYXRfbWVzc2FnZSI6IldlIGNhbid0IHdhaXQgdG8gdGFsayB0byB5b3UuIEJ1dCBmaXJzdCwgcGxlYXNlIHRlbGwgdXMgYSBiaXQgYWJvdXQgeW91cnNlbGYuIiwiYWdlbnRfdHJhbnNmZXJlZF9tc2ciOiJZb3VyIGNoYXQgaGFzIGJlZW4gdHJhbnNmZXJyZWQgdG8ge3thZ2VudF9uYW1lfX0iLCJhZ2VudF9yZW9wZW5fY2hhdF9tc2ciOiJ7e2FnZW50X25hbWV9fSByZW9wZW5lZCB0aGUgY2hhdCIsInZpc2l0b3Jfc2lkZV9pbmFjdGl2ZV9tc2ciOiJUaGlzIGNoYXQgaGFzIGJlZW4gaW5hY3RpdmUgZm9yIHRoZSBwYXN0IDIwIG1pbnV0ZXMuIiwiYWdlbnRfZGlzY29ubmVjdF9tc2ciOiJ7e2FnZW50X25hbWV9fSBoYXMgYmVlbiBkaXNjb25uZWN0ZWQiLCJzaXRlX2lkIjoiNDgwMGM4MDI5M2NhNTVjZjRlYTFkMjJhNTFiZDk1MjYiLCJhY3RpdmUiOnRydWUsIndpZGdldF9wcmVmZXJlbmNlcyI6eyJ3aW5kb3dfY29sb3IiOiIjNzc3Nzc3Iiwid2luZG93X3Bvc2l0aW9uIjoiQm90dG9tIFJpZ2h0Iiwid2luZG93X29mZnNldCI6IjMwIiwibWluaW1pemVkX3RpdGxlIjoiTGV0J3MgdGFsayEiLCJtYXhpbWl6ZWRfdGl0bGUiOiJDaGF0IGluIHByb2dyZXNzIiwidGV4dF9wbGFjZSI6IllvdXIgTWVzc2FnZSIsIndlbGNvbWVfbWVzc2FnZSI6IkhpISBIb3cgY2FuIHdlIGhlbHAgeW91IHRvZGF5PyIsInRoYW5rX21lc3NhZ2UiOiJUaGFuayB5b3UgZm9yIGNoYXR0aW5nIHdpdGggdXMuIElmIHlvdSBoYXZlIGFkZGl0aW9uYWwgcXVlc3Rpb25zLCBmZWVsIGZyZWUgdG8gcGluZyB1cyEiLCJ3YWl0X21lc3NhZ2UiOiJPbmUgb2YgdXMgd2lsbCBiZSB3aXRoIHlvdSByaWdodCBhd2F5LCBwbGVhc2Ugd2FpdC4iLCJhZ2VudF9qb2luZWRfbXNnIjoie3thZ2VudF9uYW1lfX0gaGFzIGpvaW5lZCB0aGUgY2hhdCIsImFnZW50X2xlZnRfbXNnIjoie3thZ2VudF9uYW1lfX0gaGFzIGxlZnQgdGhlIGNoYXQiLCJhZ2VudF90cmFuc2Zlcl9tc2dfdG9fdmlzaXRvciI6IllvdXIgY2hhdCBoYXMgYmVlbiB0cmFuc2ZlcnJlZCB0byB7e2FnZW50X25hbWV9fSIsImNvbm5lY3RpbmdfbXNnIjoiV2FpdGluZyBmb3IgYW4gYWdlbnQifSwicm91dGluZyI6bnVsbCwicHJlY2hhdF9mb3JtIjp0cnVlLCJwcmVjaGF0X21lc3NhZ2UiOiJXZSBjYW4ndCB3YWl0IHRvIHRhbGsgdG8geW91LiBCdXQgZmlyc3QsIHBsZWFzZSB0ZWxsIHVzIGEgYml0IGFib3V0IHlvdXJzZWxmLiIsInByZWNoYXRfZmllbGRzIjp7Im5hbWUiOnsidGl0bGUiOiJOYW1lIiwic2hvdyI6IjIifSwiZW1haWwiOnsidGl0bGUiOiJFbWFpbCIsInNob3ciOiIyIn0sInBob25lIjp7InRpdGxlIjoiUGhvbmUgTnVtYmVyIiwic2hvdyI6IjAifSwidGV4dGZpZWxkIjp7InRpdGxlIjoiVGV4dGZpZWxkIiwic2hvdyI6IjAifSwiZHJvcGRvd24iOnsidGl0bGUiOiJEcm9wZG93biIsInNob3ciOiIwIiwib3B0aW9ucyI6WyJsaXN0MSIsImxpc3QyIiwibGlzdDMiXX19LCJidXNpbmVzc19jYWxlbmRhciI6bnVsbCwibm9uX2F2YWlsYWJpbGl0eV9tZXNzYWdlIjp7InRleHQiOiJPdXIgYWdlbnRzIGFyZSB1bmF2YWlsYWJsZSByaWdodCBub3cuIFNvcnJ5IGFib3V0IHRoYXQsIGJ1dCBwbGVhc2UgbGVhdmUgdXMgYSBtZXNzYWdlIGFuZCB3ZSdsbCBnZXQgcmlnaHQgYmFjay4iLCJ0aWNrZXRfbGlua19vcHRpb24iOiIwIiwiY3VzdG9tX2xpbmtfdXJsIjoiIn0sInByb2FjdGl2ZV9jaGF0IjpmYWxzZSwicHJvYWN0aXZlX3RpbWUiOjE1LCJzaXRlX3VybCI6ImNsaWNrZ2FyYWdlLmZyZXNoZGVzay5jb20iLCJleHRlcm5hbF9pZCI6bnVsbCwiZGVsZXRlZCI6ZmFsc2UsIm9mZmxpbmVfY2hhdCI6eyJzaG93IjoiMSIsImZvcm0iOnsibmFtZSI6Ik5hbWUiLCJlbWFpbCI6IkVtYWlsIiwibWVzc2FnZSI6Ik1lc3NhZ2UifSwibWVzc2FnZXMiOnsidGl0bGUiOiJMZWF2ZSB1cyBhIG1lc3NhZ2UhIiwidGhhbmsiOiJUaGFuayB5b3UgZm9yIHdyaXRpbmcgdG8gdXMuIFdlIHdpbGwgZ2V0IGJhY2sgdG8geW91IHNob3J0bHkuIiwidGhhbmtfaGVhZGVyIjoiVGhhbmsgeW91ISJ9fSwibW9iaWxlIjp0cnVlLCJjcmVhdGVkX2F0IjoiMjAxNS0wOS0yNFQxNjowOTowMi4wMDBaIiwidXBkYXRlZF9hdCI6IjIwMTUtMDktMjRUMTY6MTA6MDIuMDAwWiJ9';</script>
+
+</body>
+</html>
