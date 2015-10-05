@@ -43,6 +43,13 @@
     <script src="../../static/js/jquery-video-lightning.js"></script>
 
     <script>
+
+        $(document).ready( function() {
+	// The HTML tag must have a class of fsvs
+	    var fsvs = $.fn.fsvs({
+		speed : 1000
+        });
+});
         jQuery(document).ready(function ($) {
             var options = {
                 $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
@@ -237,7 +244,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
 
 
 <div class="pane steps-pane">
-    
+
     <div class="centered-content">
         <div class="content-holder">
         
