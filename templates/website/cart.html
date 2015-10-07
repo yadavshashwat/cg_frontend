@@ -67,6 +67,9 @@
                  {% for val in list %}
                  <tr ts="{{ val.ts }}">
                     <td data-id="{{val.dealer}}" data-name="{{val.car.make}}">
+                        <div class="delete-icon-wrapper fl">
+                            <i class="delete-icon fa fa-trash-o"></i>
+                        </div>
                         <div class="dealer-logo-wrapper">
                             <img class="dealer-logo" src="" alt="{{val.dealer}}" data-name="{{val.car.make}}" >
                             <div class="aligner"></div>
