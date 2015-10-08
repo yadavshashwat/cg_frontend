@@ -2,7 +2,8 @@
 <html> 
 <head> 
 	<title>My Page</title> 
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
@@ -57,14 +58,18 @@
 
 
 <!-- Don't Delete -- Start of third page -->
-<div data-role="page" id="step2">
-    <div class="page-holder">
-        <div class="service-header">
-             <img src="/img/servicing.jpg" alt="" />
-        </div>
-        <div class="service-list-items">
-
-        </div>
+<div data-role="page" class="order-body" id="step2">
+<div class="service-image-holder">
+    <img src="img/servicing.jpg">
+</div>
+    <div class="service-list">
+           <ul data-role="listview" data-inset="true">
+               <li><a href="#"><h1>10000km or 1year</h1><p>Part 1</p></a></li>
+               <li><a href="#"><h1>20000km or 2year</h1><p>Part 2</p></a></li>
+               <li><a href="#"><h1>30000km or 3year</h1><p>Part 3</p></a></li>
+               <li><a href="#"><h1>40000km or 4year</h1><p>Part 4</p></a></li>
+               <li><a href="#"><h1>50000km or 5year</h1><p>Part 5</p></a></li>
+            </ul>
     </div>
 </div>
 

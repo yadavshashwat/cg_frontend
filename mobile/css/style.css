@@ -1,4 +1,11 @@
 /* Landing Page background color*/
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,300);
+@import url(http://fonts.googleapis.com/css?family=Raleway:600,400);
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
+
+
+
 #index {
     background: #4d5b94;
     .img-holder-full-width{
@@ -7,4 +14,16 @@
         align:middle;
         }
     } 
+}
+
+/*<Shashwat styling>*/
+
+
+.order-body{
+    font-size:16px;
+    background:#fff;
+    font-family:lato;
+}
+.order-body img{
+    width:100%;
 }
