@@ -1,10 +1,31 @@
-/* Landing Page background color*/
+/* Landing Page Styles*/
 #index {
     background: #4d5b94;
-    .img-holder-full-width{
-        width: 100%;
-        #logo{
-        align:middle;
-        }
-    } 
+}
+
+#index #logo {
+    display: block;
+    max-width: 50%;
+/*    max-height: 20%;*/
+    margin-top: 2%;
+/*    margin-bottom: 10%;*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#index .ui-select, .ui-btn{
+    margin-left: 5%;
+    margin-right: 5%;        
+}
+
+#index .ui-btn-corner-all{
+        border-radius: 0px;
+}    
+
+#index form .ui-btn-inner{
+    background: #e89b76;
+}
+
+#index form .ui-btn-up-c{
+    color: #fff;
 }
