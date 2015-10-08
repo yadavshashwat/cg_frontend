@@ -45,6 +45,14 @@
     z-index:10;
 }
 
+.order-body .selected-category{
+    padding: 30px 0px;
+    background:#eaeaea;
+    text-align: center;
+    color:#4d5b94;
+
+}
+
 .order-body .ui-btn-inner{
     font-family:lato;
     background-color: #ffffff;
