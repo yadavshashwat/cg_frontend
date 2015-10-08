@@ -18,11 +18,43 @@
 
 /*<Shashwat styling>*/
 
-
 .order-body{
-    font-size:16px;
+    font-size:20px;
     background:#fff;
+    font-family:Lato;
+    text-shadow: none;
+
+}
+
+.order-body .service-image-holder{
+ position:relative;
+}
+
+.order-body .service-selection{
+
+ position:relative;
+}
+
+.order-body .category-name{
+    color:#ffffff;
+    position:absolute;
+    bottom:20px;
+    width:100px;
+    margin-left: -50px;
+    left: 50%;
+    z-index:10;
+}
+
+.order-body .ui-btn-inner{
     font-family:lato;
+    background-color: #ffffff;
+}
+.order-body .ui-btn-inner img{
+    border:1px solid #000000;
+    position:absolute;
+    top:0;
+    bottom:0;
+    margin:auto;
 }
 .order-body img{
     width:100%;
