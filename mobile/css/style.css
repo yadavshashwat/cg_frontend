@@ -1,0 +1,10 @@
+/* Landing Page background color*/
+#index {
+    background: #4d5b94;
+    .img-holder-full-width{
+        width: 100%;
+        #logo{
+        align:middle;
+        }
+    } 
+}
