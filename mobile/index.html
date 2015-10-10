@@ -22,7 +22,7 @@
     
     
 <!-- Don't Delete -- Start of first page -->
-<div data-role="page" id="index">    
+<div data-role="page" class="landing-page" id="index">    
     <div data-role="header"> <a href="#menuA" data-rel="panel" class="ui-btn">Theme</a></div>
     <div data-role="content">
         <!--<div class="img-holder-full-width">-->
@@ -41,21 +41,21 @@
 <div class="ui-field-contain">
     <select name="select-custom-22" id="brand-dropdown" data-native-menu="false">
         <option value="choose-one" data-placeholder="true">Select Brand</option>
-        <option value="1">Honda</option>
-        <option value="2">Toyota</option>
+        <option value="Honda">Honda</option>
+        <option value="Toyota">Toyota</option>
     </select>
 </div>
     
 <div class="ui-field-contain">
-    <select name="select-custom-23" id="make-dropdown" data-native-menu="false">
+    <select name="select-custom-23" id="make-dropdown" data-native-menu="false" disabled>
         <option value="choose-one" data-placeholder="true">Select Model</option>
-        <div id = "make-list">
-        </div>    
+        <div id = "make-list"></div>    
     </select>
 </div>     
         
 <form>
-    <input value="Submit" type="submit" id="submit-button">
+    <input value="Submit" type="submit" id="submit-button" disabled data-theme="e">
+<!--    <a href="#services" data-role="button" id="submit-button" data-theme="b">Swatch a</a>-->
 </form>
 </div>        
 </div>
@@ -124,6 +124,39 @@
     </div>
 </div>
 <!-- Don't Delete -- End of fourth page -->
+
+
+<!-- Don't Delete -- Start of fifth (cart) page -->
+<div data-role="page" class="cart" id="cart">
+<div data-role="header"> <a href="#menuA" data-rel="panel" class="ui-btn">Theme</a></div>
+<div data-role="content">
+
+<div class="ui-field-contain">
+    <select name="select-custom-21" id="car-dropdown" data-native-menu="false">
+        <option value="choose-one" data-placeholder="true">Choose Your Car</option>
+        <option value="1">Toyota Altis Petrol</option>
+        <option value="2">Honda Amaze</option>
+    </select>
+</div>        
+            
+<div class="service-list">
+    <ul data-role="listview" data-inset="true" data-icon="check">
+        <li><a href="#"><img src="img/brands/Honda.jpg"><h2>Authorized</h2><p>Rs. 1000</p></a></li>
+        <li><a href="#"><img src="img/dl-logo-Bosch.jpg"><h2>Bosch</h2><p>Rs. 1000</p></a</li>
+        <li><a href="#"><img src="img/dl-logo-MFC.jpg"><h2>Mahindra First Choice</h2><p>Rs. 1000</p></a></li>
+    </ul>
+</div>
+
+<div id="cart-buttons">
+    <a href="#" class="ui-btn ui-btn-inline">Continue Shopping</a>
+    <a href="#" class="ui-btn ui-btn-inline">Checkout</a>    
+</div>    
+
+</div>
+</div>
+
+<!-- Don't Delete -- End of fifth (cart) page page -->
+
 
 <div data-role="panel" id="menuA" data-display="push" data-position="left" data-theme="a" data-icon="bars" data-shadow="true" data-iconshadow="true">
     <div data-role="content">
