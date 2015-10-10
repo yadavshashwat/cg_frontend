@@ -16,15 +16,15 @@
 }
 
 /* Landing Page Styles - Sanskar*/
-#index {
+.landing-page {
     background: #4d5b94;
 }
 
-#index .ui-panel-wrapper{
+.landing-page .ui-panel-wrapper{
     background: transparent;
 }
 
-#index #logo {
+.landing-page #logo {
     display: block;
     max-width: 50%;
 /*    max-height: 100%;*/
@@ -34,24 +34,24 @@
     margin-right: auto;
 }
 
-#index .ui-select, .ui-btn{
+.landing-page .ui-btn {
     margin-left: 5%;
     margin-right: 5%;        
 }
 
-#index .ui-field-contain .ui-select{
-    width: 90%;        
+.landing-page .ui-field-contain .ui-select{
+/*    width: 90%;        */
 }
 
-#index .ui-btn-corner-all{
+.landing-page .ui-btn-corner-all{
         border-radius: 0px;
 }    
 
-#index form .ui-btn-inner{
+.landing-page form #submit-button{
     background: #e89b76;
 }
 
-#index form .ui-btn-up-c{
+.landing-page form .ui-btn-up-c{
     color: #fff;
 }
     
@@ -139,4 +139,11 @@ white-space: nowrap;
 }
 .order-body img{
     width:100%;
+}
+
+
+/* Cart Page Styles - Sanskar */
+
+.cart #cart-buttons{
+    width: 100%;
 }
