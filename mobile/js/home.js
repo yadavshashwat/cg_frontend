@@ -3,7 +3,7 @@ Global = {
         var _this = this;
     $("[data-role=panel]").panel().enhanceWithin();  
         _this.events();
-        $('#submit-button').button('disable');
+        //$('#submit-button').button('disable');
     },
     events:function(){
         var _this = this;
