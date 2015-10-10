@@ -4,9 +4,24 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
 
 
+.ui-panel-wrapper{
+    background: transparent;
+}
+.ui-panel-wrapper .ui-content{
+    padding: 0px;
+}
+.ui-panel-wrapper .ui-header{
+    position: absolute;
+    z-index: 99;
+}
+
 /* Landing Page Styles - Sanskar*/
 #index {
     background: #4d5b94;
+}
+
+#index .ui-panel-wrapper{
+    background: transparent;
 }
 
 #index #logo {
