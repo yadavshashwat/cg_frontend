@@ -4,7 +4,7 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
 
 
-/* Landing Page Styles*/
+/* Landing Page Styles - Sanskar*/
 #index {
     background: #4d5b94;
 }
@@ -12,7 +12,7 @@
 #index #logo {
     display: block;
     max-width: 50%;
-/*    max-height: 20%;*/
+/*    max-height: 100%;*/
     margin-top: 2%;
 /*    margin-bottom: 10%;*/
     margin-left: auto;
@@ -22,6 +22,10 @@
 #index .ui-select, .ui-btn{
     margin-left: 5%;
     margin-right: 5%;        
+}
+
+#index .ui-field-contain .ui-select{
+    width: 90%;        
 }
 
 #index .ui-btn-corner-all{
