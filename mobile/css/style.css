@@ -1,3 +1,4 @@
+
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,300);
 @import url(http://fonts.googleapis.com/css?family=Raleway:600,400);
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
@@ -91,18 +92,28 @@
 
 }
 
-.order-body .ui-btn-inner{
+.order-body .list-services{
+    margin: 0px;
+}
+.order-body .ui-btn{
     font-family:lato;
     background-color: #ffffff;
 }
 
-.order-body .ui-btn-inner .header-div{
+.order-body .ui-btn .header-div{
     font-size:16px;
     font-weight:700;
+    font-family: Lato;
+    color: #616161;
 
 }
 
-.order-body .ui-btn-inner .parts-div{
+.order-body .parts-div{
+    white-space: pre-wrap;
+    text-shadow: none;
+}
+
+.order-body .part{
     display: inline-block;
 	font-size: 10px;  background: #4d5b94;
 	border: 1px solid #4d5b94;
@@ -112,11 +123,12 @@
 	color:#fff;
 	margin-right: 12px;
 	white-space: nowrap;
-        font-weight: 200;
+    font-weight: 100;
+    margin-top: 5px;
 }
 
-
-.order-body .ui-btn-inner .checks-div{
+.order-body .checks-div{
+    text-shadow: none;
 display: inline-block;
 font-size: 10px;
 background: #c65169;
@@ -128,9 +140,15 @@ color:#fff;
 margin-right: 12px;
 white-space: nowrap;
     font-weight: 200;
+    padding-bottom: 5px;
+    margin-top: 5px;
 }
 
-.order-body .ui-btn-inner img{
+.order-body .ui-listview{
+    margin: 0px;
+}
+
+.order-body .ui-btn img{
     border:1px solid #000000;
     position:absolute;
     top:0;
@@ -141,19 +159,49 @@ white-space: nowrap;
     width:100%;
 }
 
-<<<<<<< Updated upstream
+.selected-category .header .odo-read{
+    font-size:16px;
+    font-weight:700;
+    font-family: Lato;
+    color: #616161;
+}
+.selected-category .header .sub-cat{
+    font-size:10px;
+    font-weight:300;
+    font-family: Lato;
+    color: #616161;
+}
+
+.vendor-list .ui-btn{
+    font-size:16px;
+    font-weight:700;
+    font-family: Lato;
+    color: #616161;
+}
+
+.vendor-list .ui-btn .prices{
+    font-size:12px;
+    font-weight:300;
+}
+
+.vendor-list .total-row{
+    font-size:14px;
+    font-weight:700;
+}
+
+
 
 /* Cart Page Styles - Sanskar */
 
 .cart #cart-buttons{
     width: 100%;
 }
-=======
+
 .fix_slider{
     left: -65px !important;
  }
 
-//for services selection page (second page) - Bhuvan//
+/*for services selection page (second page) - Bhuvan*/
 
 .service-img-wrapper{
 opacity:0.5;
@@ -201,4 +249,4 @@ opacity:0.5;
         }
     }
 }
->>>>>>> Stashed changes
+
