@@ -42,7 +42,9 @@ Global = {
     
 };
 
-
+$(".menu-toggle-btn").click(function() {
+			$(this).toggleClass("open");
+		});
 
 
 document.onreadystatechange = function () {

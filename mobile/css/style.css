@@ -141,9 +141,64 @@ white-space: nowrap;
     width:100%;
 }
 
+<<<<<<< Updated upstream
 
 /* Cart Page Styles - Sanskar */
 
 .cart #cart-buttons{
     width: 100%;
 }
+=======
+.fix_slider{
+    left: -65px !important;
+ }
+
+//for services selection page (second page) - Bhuvan//
+
+.service-img-wrapper{
+opacity:0.5;
+	padding:5px;
+}
+.padded{
+	padding:5px;
+}
+
+.service-img{
+	width:100%;
+	border-radius: 10px;
+}
+
+.menu-toggle-btn{
+    margin: 15px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    
+    span{
+        background: #1d1d1b;
+        display: block;
+        width: 30px;
+        height: 4px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        -webkit-transition: all 0.5s linear;
+        transition: all 0.3s linear;
+    }
+    &.open{
+        span{
+            &:nth-child(1),
+            &:nth-child(3){
+                transform: translate(0px, 13px) rotate(-45deg) scalex(1.3);
+                    margin: 0;
+            }
+            &:nth-child(2){
+                height: 0;
+                    margin: 0;
+            }
+            &:nth-child(3){
+                transform: translate(0px, 9px) rotate(45deg) scalex(1.3);               
+            }
+        }
+    }
+}
+>>>>>>> Stashed changes
