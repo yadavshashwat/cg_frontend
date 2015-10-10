@@ -138,6 +138,7 @@ Global = {
     
 };
 
+
 var logoMap = {
     '3M':'img/dl-logo-3M.png',
     'Tee Car Care':'img/dl-logo-Tee.png',
@@ -152,7 +153,9 @@ var logoMap = {
     'Mahindra First Choice':'img/dl-logo-MFC.jpg'
 };
 
-
+$(".menu-toggle-btn").click(function() {
+			$(this).toggleClass("open");
+		});
 
 document.onreadystatechange = function () {
       Global.init();
