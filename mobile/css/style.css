@@ -76,6 +76,41 @@
     font-family:lato;
     background-color: #ffffff;
 }
+
+.order-body .ui-btn-inner .header-div{
+    font-size:16px;
+    font-weight:700;
+
+}
+
+.order-body .ui-btn-inner .parts-div{
+    display: inline-block;
+	font-size: 10px;  background: #4d5b94;
+	border: 1px solid #4d5b94;
+	border-radius: 12px;
+	line-height: 18px;
+	padding: 3px 6px;
+	color:#fff;
+	margin-right: 12px;
+	white-space: nowrap;
+        font-weight: 200;
+}
+
+
+.order-body .ui-btn-inner .checks-div{
+display: inline-block;
+font-size: 10px;
+background: #c65169;
+border: 1px solid #c65169;
+border-radius: 12px;
+line-height: 18px;
+padding: 3px 6px;
+color:#fff;
+margin-right: 12px;
+white-space: nowrap;
+    font-weight: 200;
+}
+
 .order-body .ui-btn-inner img{
     border:1px solid #000000;
     position:absolute;
