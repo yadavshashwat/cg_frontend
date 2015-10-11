@@ -184,11 +184,41 @@ white-space: nowrap;
 .vendor-list .ui-btn .prices{
     font-size:12px;
     font-weight:300;
+    padding-top: 5px;
 }
 
 .vendor-list .total-row{
     font-size:14px;
     font-weight:700;
+}
+
+.vendor-list .vendor-name{
+
+}
+
+.vendor-list .doorstep{
+    text-shadow: none;
+display: inline-block;
+font-size: 10px;
+background: #c65169;
+border: 1px solid #c65169;
+border-radius: 12px;
+line-height: 18px;
+padding: 3px 6px;
+color:#fff;
+margin-right: 12px;
+white-space: nowrap;
+    font-weight: 200;
+    padding-bottom: 5px;
+    margin-top: 5px;
+
+}
+
+.vendor-list .service-name{
+font-weight: 400;
+}
+.vendor-list .description{
+white-space: pre-wrap;
 }
 
 
@@ -318,5 +348,5 @@ opacity:0.5;
         }
     }
 }
->>>>>>> 8c63cafe974694b61dd62fafa9beebf102cb116b
+
 

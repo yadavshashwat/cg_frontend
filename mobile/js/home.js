@@ -188,13 +188,16 @@ Global = {
                     html+= logoMap[val.vendor] + '>';
 
             if(val.vendor=="Authorized")
-                html+= '<div class="vendor-name">' + val.brand + ' Authorized | ' + val.service ;
+                html+= '<div class="vendor-name">' + val.brand + ' Authorized ';
             else
-                html+= '<div class="vendor-name">' + val.vendor + ' | ' + val.service;
+                html+= '<div class="vendor-name">' + val.vendor;
 
-            html+= "</div><div class='description prices'>" + val.description;
+            html += "</div><div class='service-name'>" + val.service;
+            html += "</div><div class='description prices'>" + val.description;
             html += "</div><div class='prices'>"
-            html += "<table> <tr><td>Service Price</td><td>:&nbsp;&nbsp;&#8377;"+val.total_price+"</td></tr>"+ (val.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike>&nbsp;&nbsp;&#8377;200</strike>&nbsp;&nbsp;&#8377;0</td></tr>" : '')+" <tr><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+val.total_price+"</td></tr></table>";
+            html += "<table> <tr><td>Service Price</td><td>:&nbsp;&nbsp;&#8377;"+val.total_price+"</td></tr>"+ (val.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike>&nbsp;&nbsp;&#8377;200</strike>&nbsp;&nbsp;&#8377;0</td></tr>" : '')+" <tr class='total-row' ><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+val.total_price+"</td></tr></table>";
+            if(val.doorstep=="1")
+                html+= '<div class="doorstep"> &#x2302; Doorstep Service </div>';
             html += '</div></div>';
 
         });
