@@ -20,8 +20,28 @@ Global = {
                 $('#submit-button').button('enable');
             }
         });
+    
+//    Signup link show script    
+    $("#signup-link").click(function(){
+    $("#login-btn").hide();
+    $("#signup-link").hide();
+    $("#signup-btn").css({'display':'block'});
+    $("#login-link").css({'display':'block'});
+    $("#name").show();
+    $("#password2").show();    
+    });
+        
+//    Signup link hide script    
+    $("#login-link").click(function(){
+    $("#login-btn").show();
+    $("#signup-link").show();
+    $("#signup-btn").css({'display':'none'});
+    $("#login-link").css({'display':'none'});
+    $("#name").hide();
+    $("#password2").hide();    
+    });        
 
-    },
+},
     loadCarMake : function(data){
         console.log(data)
         var container = $('#make-dropdown');
@@ -48,3 +68,5 @@ Global = {
 document.onreadystatechange = function () {
       Global.init();
 }
+
+

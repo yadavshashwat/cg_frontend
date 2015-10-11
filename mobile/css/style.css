@@ -3,7 +3,6 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
 
-
 .ui-panel-wrapper{
     background: transparent;
 }
@@ -142,8 +141,73 @@ white-space: nowrap;
 }
 
 
+
 /* Cart Page Styles - Sanskar */
 
-.cart #cart-buttons{
-    width: 100%;
+.cart #continue-shopping {
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: #64dd17;
 }
+
+.cart #checkout {
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: #e89b76;
+}
+
+
+
+/* login Page Styles - Sanskar */
+
+.login-page h4 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.login-page #facebook{
+    background-color: #4d5b94;
+    color: #fff;
+    margin-left: 5%;
+    margin-right: 5%;
+    align-self: left;
+}
+
+.login-page #google {
+    background-color: #e74c3c;
+    color: #fff;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.login-page a img {
+    float: left;
+}
+
+.login-page .text-box {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.login-page .text-box #name,#password2 {
+    display: none;
+}
+
+.login-page #login-btn,#signup-btn {
+    background-color: #ff5722;
+    color: #fff;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.login-page #signup-btn {
+    display: none;
+}
+
+.login-page .login-link{
+    display:none;
+}
+
+
+
