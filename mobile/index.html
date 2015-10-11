@@ -2,7 +2,8 @@
 <html> 
 <head> 
 	<title>My Page</title> 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
@@ -11,7 +12,6 @@
 <!--	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>-->
     <script src="js/lib/jquery-2.1.4.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <!--<script src="js/car-make.js"></script>-->
     <script src="js/common.js"></script>
     <script src="js/home.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -60,6 +60,7 @@
     <input value="Submit" type="submit" id="submit-button" disabled data-theme="e">
 <!--    <a href="#services" data-role="button" id="submit-button" data-theme="b">Swatch a</a>-->
 </form>
+    
 </div>        
 </div>
 <!-- Don't Delete -- End of first page -->
@@ -173,25 +174,58 @@
         <option value="1">Toyota Altis Petrol</option>
         <option value="2">Honda Amaze</option>
     </select>
-</div>        
-            
-<div class="service-list">
+</div>
+    
+<div class="cart-entries">
     <ul data-role="listview" data-inset="true" data-icon="check">
-        <li><a href="#"><img src="img/brands/Honda.jpg"><h2>Authorized</h2><p>Rs. 1000</p></a></li>
-        <li><a href="#"><img src="img/dl-logo-Bosch.jpg"><h2>Bosch</h2><p>Rs. 1000</p></a</li>
-        <li><a href="#"><img src="img/dl-logo-MFC.jpg"><h2>Mahindra First Choice</h2><p>Rs. 1000</p></a></li>
+        <li><a href="#"><img src="img/dl-logo-cgverified.png"><h2>Regular Servicing</h2><p>Rs.3000</p></a></li>
+        <li><a href="#"><img src="img/3M.jpg"><h2>Exterior Detailing</h2><p>Rs.2000</p></a</li>
     </ul>
 </div>
 
-<div id="cart-buttons">
-    <a href="#" class="ui-btn ui-btn-inline">Continue Shopping</a>
-    <a href="#" class="ui-btn ui-btn-inline">Checkout</a>    
-</div>    
+    
+<a href="../index#step2" class="ui-btn" id="continue-shopping">Continue Shopping</a>
+<a href="#" class="ui-btn" id="checkout">Checkout</a>
+    
+<!--<a href="#services" data-role="button" id="continue-shopping" data-theme="b">Continue Shopping</a>-->
+<!--<a href="" data-role="button" id="checkout" data-theme="b">Checkout</a>    -->
+    
+<!--<div id="cart-buttons">-->
+<!--    <a href="#" class="ui-btn ui-btn-inline">Continue Shopping</a>-->
+<!--    <a href="#" class="ui-btn ui-btn-inline">Checkout</a>    -->
+<!--</div>    -->
 
 </div>
 </div>
 
 <!-- Don't Delete -- End of fifth (cart) page page -->
+    
+    
+    
+<!-- Don't Delete -- Start of nth (signup) page -->
+<div data-role="page" class="login-page" id="login">
+
+<a href="#" class="ui-btn" id="facebook"><img src="img/login/facebook.png" class="ui-li-icon">Login with Facebook</a>
+<a href="#" class="ui-btn" id="google"><img src="img/login/google.png" class="ui-li-icon">Login with Google</a>
+<h4 class="or"> OR </h4>
+
+<div class="text-box">
+    <input placeholder="Name" data-clear-btn="true" id="name" value="">
+    <input type="email" placeholder="Email Address" data-clear-btn="true" id="email" value="">  
+    <input type="password" placeholder="Password" data-clear-btn="true" id="password" value="">
+    <input type="password" placeholder="Re-Enter Password" data-clear-btn="true" id="password2" value="">
+</div>
+    
+<a href="#" class="ui-btn ui-icon-delete" id="login-btn">Login</a>
+<a href="#" class="ui-btn ui-icon-delete" id="signup-btn">Signup</a>    
+
+<h4 class="signup-link" id="signup-link">Not an existing user? <a>Sign Up</a> for free.</h4>
+<h4 class="login-link" id="login-link">I want to <a>login</a> with my existing account.</h4>    
+    
+</div>    
+<!-- Don't Delete -- End of nth (signup) page page -->    
+    
+    
 
 
 <div data-role="panel" id="menuA" data-display="push" data-position="left" data-theme="a" data-icon="bars" data-shadow="true" data-iconshadow="true">

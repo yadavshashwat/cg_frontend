@@ -20,7 +20,28 @@ Global = {
                 $('#submit-button').button('enable');
             }
         });
-        $( window ).on( "navigate", function( event, data ) {
+    
+//    Signup link show script    
+    $("#signup-link").click(function(){
+    $("#login-btn").hide();
+    $("#signup-link").hide();
+    $("#signup-btn").css({'display':'block'});
+    $("#login-link").css({'display':'block'});
+    $("#name").show();
+    $("#password2").show();    
+    });
+        
+//    Signup link hide script    
+    $("#login-link").click(function(){
+    $("#login-btn").show();
+    $("#signup-link").show();
+    $("#signup-btn").css({'display':'none'});
+    $("#login-link").css({'display':'none'});
+    $("#name").hide();
+    $("#password2").hide();    
+    });        
+
+    $( window ).on( "navigate", function( event, data ) {
           console.log( data.state.info );
           console.log( data.state.direction )
           console.log( data.state.url )
@@ -223,3 +244,5 @@ $(".menu-toggle-btn").click(function() {
 document.onreadystatechange = function () {
       Global.init();
 }
+
+
