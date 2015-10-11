@@ -58,6 +58,7 @@
     
 /*<Shashwat styling>*/
 
+/*Step 2 styling*/
 .order-body{
     font-size:20px;
     background:#fff;
@@ -159,6 +160,8 @@ white-space: nowrap;
     width:100%;
 }
 
+/*step 3 styling*/
+
 .selected-category .header .odo-read{
     font-size:16px;
     font-weight:700;
@@ -202,6 +205,14 @@ white-space: nowrap;
  }
 
 /*for services selection page (second page) - Bhuvan*/
+
+
+/*.ui-panel-wrapper{*/
+				/*background: url('../img/tools-pat.png');*/
+				/*background-size: 300px auto;*/
+				/*opacity: .12;*/
+				/*z-index: 10;*/
+			/*}*/
 
 .service-img-wrapper{
 opacity:0.5;

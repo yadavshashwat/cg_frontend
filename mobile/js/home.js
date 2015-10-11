@@ -27,13 +27,14 @@ Global = {
           console.log( data.state.hash )
             switch(data.state.hash){
                 case "#step2":
-                        Commons.ajaxData('fetch_car_servicing', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f54d4"},"get",_this, _this.loadServicing)
+                        //Commons.ajaxData('fetch_car_servicing', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f54d4"},"get",_this, _this.loadServicing)
+                        Commons.ajaxData('fetch_car_cleaning', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f54d4"},"get",_this, _this.loadCleaning)
                     break;
                 case "#step3":
-                        Commons.ajaxData('fetch_servicing_details', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",service_id:"5613ebd85e1b2d2c5f94aadb"},"get",_this, _this.loadServicingDetails)
+                        //Commons.ajaxData('fetch_servicing_details', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",service_id:"5613ebd85e1b2d2c5f94aadb"},"get",_this, _this.loadServicingDetails)
+                        Commons.ajaxData('fetch_cleaning_details', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f5502",service_id:"560982095e1b2d72585fa9c8"},"get",_this, _this.loadCleaningDetails)
                     break;
                 default:
-
                     break;
             }
         });
@@ -75,8 +76,33 @@ Global = {
         });
         container.html(html);
         container.listview("refresh")
-
+         var container2 = $('.service-image-holder');
+        container2.html('');
+        var html = '';
+        html +=  "<img src='img/servicing1.jpg'>"
+        container2.html(html);
     },
+    loadCleaning : function(data){
+        console.log(data)
+        var container = $('.service-list .list-services');
+        container.html('');
+        var html = '';
+        $.each(data, function(idx, val){
+            html += '<li><a href="#"><div class="header-div">';
+            html += val.category;
+            html += '</div></a></li>';
+        });
+        container.html(html);
+        container.listview("refresh")
+         var container2 = $('.service-image-holder');
+        container2.html('');
+        var html = '';
+        html +=  "<img src='img/cleaning1.jpg'>"
+        container2.html(html);
+    },
+
+
+
 
     loadServicingDetails : function(data){
         console.log(data)
@@ -111,13 +137,50 @@ Global = {
                 html+= '<div class="vendor-name">' + val.vendor;
 
             html += '</div><div class=prices>'
-            html += "<table> <tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(val.parts_price)+"</td></tr><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil(val.labour_price)+"</td></tr> <tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((val.labour_price*0.14))+"</td></tr> <tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (val.car_bike == 'Car' ? '0': '0')+"</td></tr><tr class='total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(val.parts_price)+parseInt(Math.ceil((val.labour_price)))+parseInt(Math.ceil((val.labour_price*0.14)))+parseInt((val.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
+            html += "<table> <tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;"+parseInt(val.parts_price)+"</td></tr><tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil(val.labour_price)+"</td></tr> <tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil((val.labour_price*0.14))+"</td></tr> <tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;<strike>&#8377;200</strike>&nbsp;&nbsp;&#8377;"+ (val.car_bike == 'Car' ? '0': '0')+"</td></tr><tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+(parseInt(val.parts_price)+parseInt(Math.ceil((val.labour_price)))+parseInt(Math.ceil((val.labour_price*0.14)))+parseInt((val.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
             html += '</div></div>';
 
         });
         container2.html(html);
         container2.listview("refresh")
     },
+    loadCleaningDetails : function(data){
+        console.log(data)
+        var container = $('.service-selection .selected-category');
+        container.html('');
+        var html = '';
+        var val = data[0]
+            html += ' <div class="header">';
+            html += '<span class = "Category odo-read">' + (val.category) + ' (Cleaning) </span></div>';
+            html += '</div>';
+
+        container.html(html);
+        //container.listview("refresh")
+        var container2 = $('.vendor-list .vendors');
+        container2.html('');
+        var html = '';
+        $.each(data, function(idx, val){
+            html += '<li><a href="#"><img src=';
+                if(val.vendor=="Authorized")
+                    html+= logoMap['Authorized Car'] + val.brand + '.jpg >';
+                else
+                    html+= logoMap[val.vendor] + '>';
+
+            if(val.vendor=="Authorized")
+                html+= '<div class="vendor-name">' + val.brand + ' Authorized | ' + val.service ;
+            else
+                html+= '<div class="vendor-name">' + val.vendor + ' | ' + val.service;
+
+            html+= "</div><div class='description prices'>" + val.description;
+            html += "</div><div class='prices'>"
+            html += "<table> <tr><td>Service Price</td><td>:&nbsp;&nbsp;&#8377;"+val.total_price+"</td></tr>"+ (val.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike>&nbsp;&nbsp;&#8377;200</strike>&nbsp;&nbsp;&#8377;0</td></tr>" : '')+" <tr><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+val.total_price+"</td></tr></table>";
+            html += '</div></div>';
+
+        });
+        container2.html(html);
+        container2.listview("refresh")
+    },
+
     loadCarMake : function(data){
         console.log(data)
         var container = $('#make-dropdown');
