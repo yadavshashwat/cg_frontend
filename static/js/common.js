@@ -574,6 +574,23 @@ var local = {
 };
 
 var formCheck = {
+    getDateFromFormat : function(date, format) {
+        if (date instanceof Date){
+            function one2two(val) {
+                if (val < 9) {
+                    val = '0' + val;
+                }
+                return val;
+            }
+        if (format == 'dd/mm/yyyy') {
+            return one2two(date.getDate()) + '/' + (one2two(date.getMonth() + 1) + '/' + (1900 + date.getYear()));
+        } else if (format == 'mm/dd/yyyy') {
+            return (one2two(date.getMonth() + 1) + '/' + one2two(date.getDate()) + '/' + (1900 + date.getYear()));
+        }
+        }else{
+            return 'invalid date'
+        }
+    },
     addressForm : function(container){
 
         var valid = function(str){
@@ -629,7 +646,7 @@ var formCheck = {
             $(container).find('.car-reg-no').addClass('error');
             return false
         }else{
-            if(car_reg_number.length != 10){
+            if(car_reg_number.length > 10){
                 $(container).find('.car-reg-no').addClass('error');
                 return false
             }
@@ -696,7 +713,46 @@ var formCheck = {
             }
         };
         return obj;
-    }
+    },
+    updateTime : function(container){
+            var todayFlag = false;
+            var sameDay = false;
+            if($(container).find('#date-time-pair .pick-up-date').val() == formCheck.getDateFromFormat((new Date()), 'mm/dd/yyyy')){
+                todayFlag = true;
+            }
+            if($('#same-day-toggle').is(':checked')){
+                sameDay = true;
+            }
+
+            var thisHour = (new Date()).getHours() + 2;
+            var thisMinute = (new Date()).getMinutes();
+            if(thisMinute > 30)
+                thisHour += 1
+            if(thisHour < 8)
+                thisHour = 8
+
+            var minTime = new Date(0,0,0,thisHour,0,0);
+            //var maxTime = new Date(0,0,0,12,0,0);
+            if(todayFlag){
+                $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'minTime',minTime);
+                $(container).find('#date-time-pair .pick-up-time').timepicker('setTime',minTime);
+            }else{
+                $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'minTime',new Date(0,0,0,8,0,0));
+            }
+        if(todayFlag && sameDay && thisHour>11){
+            alert('We are unable to process any same day delivery bookings for today. Please book for any other day for same day delivery.');
+            $(container).find('#same-day-toggle').prop('checked', false);
+        }else{
+            if(sameDay){
+                $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'maxTime',new Date(0,0,0,11,0,0));
+                $(container).find('#date-time-pair .pick-up-time').timepicker('setTime',new Date(0,0,0,11,0,0));
+            }else{
+                $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'maxTime',new Date(0,0,0,16,0,0));
+            }
+        }
+            //$(container).find('.pick-up-time').data('timepicker');
+
+    },
 
 
 };
