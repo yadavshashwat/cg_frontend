@@ -343,7 +343,7 @@ var Templates = {
         }]
     },
     bookingPage:{
-        booking:[{
+        booking_new:[{
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
@@ -390,7 +390,7 @@ var Templates = {
         
             ]
         }],
-        cancelled:[{
+        cancelled_new:[{
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     
@@ -418,7 +418,85 @@ var Templates = {
                 ]},
         
             ]
-        }]}
+        }]},
+        booking:[{
+                "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
+                    {"tag":"div", "class":"top-row", "children":[
+                        {"tag":"div", "class":"wrapper detail-wrapper", "children":[
+                            {"tag":"div", "id":"cancel-booking",  "tran_id":"${tran_id}", "class":"vendor-div", "html":function(){return "<div> Cancel Booking </div>";}}
+                        ]},
+
+                        {"tag":"div", "class":"wrapper header-wrapper", "children":[
+                            {"tag":"div", "class":"booking id booking_id", "html":function(){return '#'+(this.booking_id);}},
+                            {"tag":"div", "class":"booking car booking_car", "html":function(){return (this.cust_carname);}},
+                            {"tag":"div", "class":"booking date booking_date", "html":function(){return (this.date_booking) + ' ('+this.time_booking+')';}},
+                            {"tag":"div", "class":"booking list booking_list", "html":function(){
+                                var s = '<ul class="service-components">'
+                                $.each(this.service_items,function(i,elem){
+                                    if(elem.service == 'servicing'){
+                                    s += '<li class="indiv_booking">'+elem.served_data.dealer_cat+'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.odometer+'km (Regular Sevicing) </li>'
+                                    }else{
+                                    s += '<li class="indiv_booking">'+elem.served_data.vendor +'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.service+' ( '+elem.served_data.category+' ) </li>'
+                                    }
+                                })
+                                s += '</ul>'
+                                return s
+                            }
+                            },
+
+                            ]},
+
+
+                    ]},
+
+                ]
+            }],
+        cancelled:[{
+            "tag": "div", "class": "service-list-item minimized", "data-id": "${id}", "children": [
+                {
+                    "tag": "div", "class": "top-row", "children": [
+
+                    {
+                        "tag": "div", "class": "wrapper header-wrapper", "children": [
+                        {
+                            "tag": "div", "class": "booking id booking_id", "html": function () {
+                            return '#' + (this.booking_id);
+                        }
+                        },
+                        {
+                            "tag": "div", "class": "booking car booking_car", "html": function () {
+                            return (this.cust_carname);
+                        }
+                        },
+                        {
+                            "tag": "div", "class": "booking date booking_date", "html": function () {
+                            return (this.date_booking) + ' (' + this.time_booking + ')';
+                        }
+                        },
+                        {
+                            "tag": "div", "class": "booking list booking_list", "html": function () {
+                            var s = '<ul class="service-components">'
+                            $.each(this.service_items, function (i, elem) {
+                                if (elem.service == 'servicing') {
+                                    s += '<li class="indiv_booking">' + elem.served_data.dealer_cat + '  <i class="fa fa-caret-right"></i>  ' + elem.served_data.odometer + 'km (Regular Sevicing) </li>'
+                                } else {
+                                    s += '<li class="indiv_booking">' + elem.served_data.vendor + '  <i class="fa fa-caret-right"></i>  ' + elem.served_data.service + ' ( ' + elem.served_data.category + ' ) </li>'
+                                }
+                            })
+                            s += '</ul>'
+                            return s
+                        }
+                        },
+
+                    ]
+                    },
+
+
+                ]
+                },
+
+            ]
+        }]
 
 };
 
