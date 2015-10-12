@@ -17,6 +17,12 @@
     <script type="text/javascript" src="{%  static "js/cart.js" %}"></script>
     <script src="{%  static "js/legacy/less.min.js" %}"></script>
 
+
+   {% load js %}
+    <script type="text/javascript">
+        Global.loginFlag = {{login_flag | js}};
+    </script>
+
 </head>
 <body class="cart-body">
     <div class="overlay overlay-pat"></div>
@@ -36,7 +42,12 @@
             </div>
             <div class="right-btns fr">
                 <!--                <div class="update-btn"></div>-->
+            {% if user and not user.is_anonymous %}
                 <a href='/checkout'><div class="checkout-btn">  Checkout  <i class="fa fa-caret-right"></i></div></a>
+            {% else %}
+                <div class="checkout-btn login-in">  Checkout  <i class="fa fa-caret-right"></i></div>
+            {% endif %}
+
             </div>
         </div>
         
@@ -143,12 +154,22 @@
     </div>
     <div class="right-btns fr">
         <!--                <div class="update-btn"></div>-->
-       <a href='/checkout'> <div class="checkout-btn">Checkout <i class="fa fa-caret-right"></i></div></a>
+        {% if user and not user.is_anonymous %}
+            <a href='/checkout'><div class="checkout-btn">  Checkout  <i class="fa fa-caret-right"></i></div></a>
+        {% else %}
+            <div class="checkout-btn login-in">  Checkout  <i class="fa fa-caret-right"></i></div>
+        {% endif %}
     </div>
 </div>
 
 </div>
 </div>
 </div>
+
+<div class="login-modal-container bootstrap-wrapper modal-container" style="display: none;">
+    {% include "website/login-popup.html" with next_url='/cart' %}
+</div>
+
+
 </body>
 </html>
