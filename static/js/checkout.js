@@ -15,10 +15,10 @@ var zyxCart = {
 //        'showDuration': true,
 //        timeFormat: 'hh:mm p',
         // year, month, day and seconds are not important
-        minTime: new Date(0, 0, 0, 9, 0, 0),
+        minTime: new Date(0, 0, 0, 8, 0, 0),
         maxTime: new Date(0, 0, 0, 16, 0, 0),
         // items in the dropdown are separated by at interval minutes
-        interval: 30,
+        interval: 60,
     });
 
     $('#date-time-pair .pick-up-date').datepicker({
