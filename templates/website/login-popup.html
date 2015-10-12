@@ -21,12 +21,12 @@
                         <div class="social">
                             <h2>Sign In with</h2>
                             <div>
-                            <a id="google_login" class="circle google fix_logincircle" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">
+                            <a id="google_login" class="circle google fix_logincircle" href="{% url 'social:begin' 'google-oauth2' %}?next={{ next_url }}">
                                 <i class="fa fa-google-plus fa-fw"></i>
                             </a>
                                 or
                             <a style=" height: 50px; width: 2px; background-color: #000; vertical-align: bottom;"></a>
-                            <a id="facebook_login" class="circle facebook fix_logincircle" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">
+                            <a id="facebook_login" class="circle facebook fix_logincircle" href="{% url 'social:begin' 'facebook' %}?next={{ next_url }}">
                                 <i class="fa fa-facebook fa-fw"></i>
                             </a>
                             </div>

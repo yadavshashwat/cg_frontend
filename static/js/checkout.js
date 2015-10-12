@@ -11,15 +11,32 @@ var zyxCart = {
         var _this = this;
         _this.eventHandlers();
         _this.setLogos();
+    var thisHour = (new Date()).getHours() + 2;
+    var thisMinute = (new Date()).getMinutes();
+    if(thisMinute > 30)
+        thisHour += 1
+        if(thisHour > 11){
+            $('#same-day-toggle').prop('checked', false);
+        }
+
+
     $('#date-time-pair .pick-up-time').timepicker({
-//        'showDuration': true,
-//        timeFormat: 'hh:mm p',
+        timeFormat: 'h:i A',
         // year, month, day and seconds are not important
+
         minTime: new Date(0, 0, 0, 8, 0, 0),
-        maxTime: new Date(0, 0, 0, 16, 0, 0),
+        maxTime: new Date(0, 0, 0, 15, 0, 0),
+        // time entries start being generated at 6AM but the plugin
+        // shows only those within the [minTime, maxTime] interval
+        //startHour: 6,
+        // the value of the first item in the dropdown, when the input
+        // field is empty. This overrides the startHour and startMinute
+        // options
+        startTime: new Date(0, 0, 0, 8, 20, 0),
         // items in the dropdown are separated by at interval minutes
-        interval: 60,
+        step: 60,
     });
+
 
     $('#date-time-pair .pick-up-date').datepicker({
         'format': 'm/d/yyyy',
@@ -31,6 +48,30 @@ var zyxCart = {
     // initialize datepair
 //    var basicExampleEl = document.getElementById('date-time-pair');
 //    var datepair = new Datepair(basicExampleEl);
+
+    },
+    defaults:{
+      time:{
+        timeFormat: 'h:i A',
+        // year, month, day and seconds are not important
+
+        minTime: new Date(0, 0, 0, 8, 0, 0),
+        maxTime: new Date(0, 0, 0, 15, 0, 0),
+        // time entries start being generated at 6AM but the plugin
+        // shows only those within the [minTime, maxTime] interval
+        //startHour: 6,
+        // the value of the first item in the dropdown, when the input
+        // field is empty. This overrides the startHour and startMinute
+        // options
+        startTime: new Date(0, 0, 0, 8, 20, 0),
+        // items in the dropdown are separated by at interval minutes
+        step: 60,
+      },
+      date:{
+        'format': 'm/d/yyyy',
+//        'autoclose': true,
+        'minDate': new Date()
+      }
 
     },
     setLogos : function(){
@@ -112,8 +153,6 @@ var zyxCart = {
                 $(formDispCont).find('.st-address').text(dataObj.pick.street);
                 $(formDispCont).find('.pincode').text(dataObj.pick.pincode);
                 $(formDispCont).find('.city').text(dataObj.pick.city);
-
-
             }
         });
 
@@ -148,7 +187,14 @@ var zyxCart = {
                 $(form).find('#drop-off-col').find('input,textarea').removeAttr('disabled');
             }
         })
-
+        $('.address-form-holder #date-time-pair').on('change','.pick-up-date', function(){
+            console.log($(this).val());
+            //console.log($(this).data('timepicker').getTime());
+            formCheck.updateTime($('.address-form-holder'))
+        });
+        $('.address-form-holder #same-day-toggle').on('change', function() {
+            formCheck.updateTime($('.address-form-holder'))
+        });
         $('.confirm-step #place-order-btn').on('click', function(){
             var orderObj = {};
             if(zyxCart.orderObj){
