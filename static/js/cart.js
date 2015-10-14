@@ -8,12 +8,15 @@ var Global = {
         _this.eventHandlers();
         Commons.eventHandlers();
         var cookDict = local.load();
+        console.log(cookDict)
         var carSelected = null;
         if(cookDict['clgacarname']){
             $('#car-select-box').val(cookDict['clgacarname']);
         }
         $('#car-select-box').trigger('change');
-        local.clearKey('clgacart');
+        if(Global.loginFlag){
+            local.clearKey('clgacart');
+        }
     },
     setLogos : function(){
         $.each($('img.dealer-logo'), function(i, img){
@@ -58,7 +61,11 @@ var Global = {
                 Commons.ajaxData('add_to_cart', {'cookie':ts, 'delete':true}, "get", _this, function(){});
             }
         });
-
+        if(!Global.loginFlag){
+            $('.checkout-btn.login-in').on('click', function(){
+                $('#sign-up-in-dash').click();
+            });
+        }
     }
 
 }

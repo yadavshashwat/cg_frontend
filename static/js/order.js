@@ -237,7 +237,7 @@ var Global = {
                 '</div>'+
                 '<div class="omnibox-holder" id="popup-omnibox-holder">'+
                     '<input type="hidden" id="hidden-id-box" name="c_id" style="display: none;" />'+
-                    '<input type="text" id="omni-search-box" class="omni-search-box" placeholder="Select Your Car">'+
+                    '<input type="text" id="omni-search-box" class="omni-search-box" placeholder="Select Your Car" autocomplete="off">'+
                     '<i class="icon fa fa-search"></i>'+
                     '<label for="omni-search-box" class="omni-drop-box" style="display: none;">'+
                         '<ul>'+

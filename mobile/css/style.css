@@ -5,6 +5,12 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
 
 /*
+.menu-small-btn{
+line-height: 14px;
+}
+
+
+>>>>>>> origin/master
 .ui-panel-wrapper{
     background: transparent;
 }
@@ -223,8 +229,6 @@ font-weight: 400;
 .vendor-list .description{
 white-space: pre-wrap;
 }
-
-
 
 
 /* Cart Page Styles - Sanskar */
