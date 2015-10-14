@@ -4,6 +4,7 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
 
+/*
 .ui-panel-wrapper{
     background: transparent;
 }
@@ -14,6 +15,7 @@
     position: absolute;
     z-index: 99;
 }
+*/
 
 
 /* Landing Page Styles - Sanskar*/
@@ -304,7 +306,7 @@ white-space: pre-wrap;
 			/*}*/
 
 .service-img-wrapper{
-opacity:0.5;
+
 	padding:5px;
 }
 .padded{
@@ -352,14 +354,17 @@ opacity:0.5;
 }
 
 
-/*Header styling - Sanskar*/
 
-.header-box {
+/*Header styling - Sanskar*/
+/*
+header-box {
     background: #4d5b94;
     float: left;
     margin-bottom: 5%;
 }
+*/
 
+/*
 .header-box .hamburger-icon {
     margin-left: 5%;
     float: left;
@@ -373,4 +378,31 @@ opacity:0.5;
     margin-left: 15%;
     width:20%;
 }
+*/
 
+/*
+.menu-small-btn{
+line-height: 10px;
+}
+*/
+.header-body {
+    background-color: #4d5b94 !important;
+}
+
+.header-body .call-helpline{
+    background-color: #4d5b94 !important;
+    border: none;
+}
+
+.header-body h1 {
+    color: #fff;
+    text-shadow: none;
+    font-family: Raleway;
+    font-style: initial;
+    font-weight: 400;
+   
+}
+.hlogo{
+    padding-left: 5px;
+    padding-top: 5px;
+}
