@@ -250,7 +250,7 @@ var Global = {
         });
         $('.menu-item.fl.au').on('click', function(e){
             $('body').animate(
-                {'scrollTop':$('.steps-pane').outerHeight()+$('.search-pane').outerHeight()},
+                {'scrollTop':$('.steps-pane').outerHeight()+$('.search-pane').outerHeight()+$('.android-pane').outerHeight()},
                 500
             );
         });
@@ -262,7 +262,7 @@ var Global = {
         });
         $('.footer-au').on('click', function(e){
             $('body').animate(
-                {'scrollTop':$('.steps-pane').outerHeight()+$('.search-pane').outerHeight()},
+                {'scrollTop':$('.steps-pane').outerHeight()+$('.search-pane').outerHeight()+$('.android-pane').outerHeight()},
                 500
             );
         })
