@@ -730,12 +730,14 @@ var formCheck = {
                 thisHour += 1
             if(thisHour < 8)
                 thisHour = 8
+            if(thisHour >16)
+                thisHour = 16
 
             var minTime = new Date(0,0,0,thisHour,0,0);
             //var maxTime = new Date(0,0,0,12,0,0);
             if(todayFlag){
                 $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'minTime',minTime);
-                $(container).find('#date-time-pair .pick-up-time').timepicker('setTime',minTime);
+//                $(container).find('#date-time-pair .pick-up-time').timepicker('setTime',minTime);
             }else{
                 $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'minTime',new Date(0,0,0,8,0,0));
             }
@@ -745,7 +747,7 @@ var formCheck = {
         }else{
             if(sameDay){
                 $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'maxTime',new Date(0,0,0,11,0,0));
-                $(container).find('#date-time-pair .pick-up-time').timepicker('setTime',new Date(0,0,0,11,0,0));
+//                $(container).find('#date-time-pair .pick-up-time').timepicker('setTime',new Date(0,0,0,11,0,0));
             }else{
                 $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'maxTime',new Date(0,0,0,16,0,0));
             }
