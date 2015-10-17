@@ -1,10 +1,3 @@
-/**
- * Created with PyCharm.
- * User: vociferous
- * Date: 25/07/15
- * Time: 7:30 PM
- * To change this template use File | Settings | File Templates.
- */
 
 var Global = {
     init:function(){
@@ -232,15 +225,6 @@ var Global = {
 
     
 };
-
-
-         }else{
-            $('.search-pane').find('.overlay-image img').css({
-                'height':'100%',
-                'width':'auto',
-                'bottom':'0'
-            }).attr('data-init', 0);
-         }
 
 
 var logoMap = {
