@@ -5,6 +5,12 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
 
 /*
+.menu-small-btn{
+line-height: 14px;
+}
+
+
+>>>>>>> origin/master
 .ui-panel-wrapper{
     background: transparent;
 }
@@ -225,8 +231,6 @@ white-space: pre-wrap;
 }
 
 
-
-
 /* Cart Page Styles - Sanskar */
 
 .cart #continue-shopping {
@@ -385,9 +389,6 @@ header-box {
 line-height: 10px;
 }
 */
-
-/*Header styling - Bhuvan*/
-
 .header-body {
     background-color: #4d5b94 !important;
 }
@@ -403,62 +404,9 @@ line-height: 10px;
     font-family: Raleway;
     font-style: initial;
     font-weight: 400;
-    font-size: initial !important;
    
 }
 .hlogo{
     padding-left: 5px;
     padding-top: 5px;
 }
-/*End of header styling*/
-
-/*Checkout form styling - Bhuvan*/
-/*
-.form .ui-page { 
-background:#eaeaea;
-}
-*/
-
-/*
-.form .ui-body-c {
-    font-family: Raleway;
-    font-size:80%;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 400;
-	line-height: 20px;
-}
-*/
-
-.form{
-color:#4d5b94;
-font-family: Raleway;
-font-size:80%;
-font-style: normal;
-font-variant: normal;
-font-weight: 400;
-line-height: 20px;
-}
-
-.form .ui-input-text{
-    border-width: 0px;
-}
-
-
-/*
-.form.label{
-font-size: 80%;
-}
-*/
-
-/*
-.form .pickup{
- font-size:100%
-}
-
-.form .dropoff{
-font-size:100%    
-}
-*/
-
-/*End of checkout form styling*/

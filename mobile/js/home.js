@@ -56,12 +56,12 @@ var Global = {
           console.log( data.state.hash )
             switch(data.state.hash){
                 case "#step2":
-                        //Commons.ajaxData('fetch_car_servicing', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f54d4"},"get",_this, _this.loadServicing)
-                        Commons.ajaxData('fetch_car_cleaning', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f54d4"},"get",_this, _this.loadCleaning)
+                        Commons.ajaxData('fetch_car_servicing', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f54d4"},"get",_this, _this.loadServicing)
+                        //Commons.ajaxData('fetch_car_cleaning', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f54d4"},"get",_this, _this.loadCleaning)
                     break;
                 case "#step3":
-                        //Commons.ajaxData('fetch_servicing_details', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",service_id:"5613ebd85e1b2d2c5f94aadb"},"get",_this, _this.loadServicingDetails)
-                        Commons.ajaxData('fetch_cleaning_details', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f5502",service_id:"560982095e1b2d72585fa9c8"},"get",_this, _this.loadCleaningDetails)
+                        Commons.ajaxData('fetch_servicing_details', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",service_id:"5613ebd85e1b2d2c5f94aadb"},"get",_this, _this.loadServicingDetails)
+                        //Commons.ajaxData('fetch_cleaning_details', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f5502",service_id:"560982095e1b2d72585fa9c8"},"get",_this, _this.loadCleaningDetails)
                     break;
                 default:
                     break;
