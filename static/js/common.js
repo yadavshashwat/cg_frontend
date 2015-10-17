@@ -372,10 +372,13 @@ var Templates = {
                                 var _booking = this;
                                 var s = ''
                                 $.each(this.service_items,function(i,elem){
-                                    if(elem.service == 'servicing'){
-                                    s += '<li class="indiv_booking" style="height: 90px;">'+elem.served_data.dealer_cat+'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.odometer+'km (Regular Sevicing) <div id="cancel-booking" tran_id="'+_booking.tran_id+'" item_id="'+elem.served_data.ts+'" class="vendor-div" style="padding: 0px; float: right;"><div> Cancel Booking </div></div></li>'
-                                    }else{
-                                    s += '<li class="indiv_booking" style="height: 90px;">'+elem.served_data.vendor +'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.service+' ( '+elem.served_data.category+' ) <div id="cancel-booking" tran_id="'+_booking.tran_id+'" item_id="'+elem.served_data.ts+'" class="vendor-div" style="padding: 0px; float: right;"><div> Cancel Booking </div></div></li>'
+                                    if(elem.served_data){
+                                        if(elem.service == 'servicing'){
+                                        s += '<li class="indiv_booking" style="height: 90px;">'+elem.served_data.dealer_cat+'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.odometer+'km (Regular Sevicing) <div id="cancel-booking" tran_id="'+_booking.tran_id+'" item_id="'+elem.served_data.ts+'" class="vendor-div" style="padding: 0px; float: right;"><div> Cancel Booking </div></div></li>'
+                                        }else{
+                                        s += '<li class="indiv_booking" style="height: 90px;">'+elem.served_data.vendor +'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.service+' ( '+elem.served_data.category+' ) <div id="cancel-booking" tran_id="'+_booking.tran_id+'" item_id="'+elem.served_data.ts+'" class="vendor-div" style="padding: 0px; float: right;"><div> Cancel Booking </div></div></li>'
+                                        }
+
                                     }
                                 })
                                 return s;
