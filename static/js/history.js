@@ -19,13 +19,13 @@ var Global = {
 
             }
         }
-        if(_this.carSelected){
-            $("#selected-details").show();
-            $("#selected-details").find('.c-name').html(_this.carSelected.name);
-            $("#selected-details").find('.c-make').html(_this.carSelected.make);
-        }else{
-                _this.generateCarSelect();
-        }
+//        if(_this.carSelected){
+//            $("#selected-details").show();
+//            $("#selected-details").find('.c-name').html(_this.carSelected.name);
+//            $("#selected-details").find('.c-make').html(_this.carSelected.make);
+//        }else{
+//                _this.generateCarSelect();
+//        }
        
       
       
@@ -83,6 +83,8 @@ var Global = {
         console.log(data)
         var container = $('.section-box .booking');
         container.html('');
+        console.log(container)
+        console.log(Templates.bookingPage.booking)
         container.json2html(data, Templates.bookingPage.booking, {append:true});
 //        container.append(json2html.transform(data,Templates.bookingPage.services));
         $.each(data, function(idx, val){

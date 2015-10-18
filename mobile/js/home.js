@@ -1,4 +1,5 @@
-Global = {
+
+var Global = {
     init:function(){
         var _this = this;
     $("[data-role=panel]").panel().enhanceWithin();  

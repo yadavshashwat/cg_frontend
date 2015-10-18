@@ -480,6 +480,7 @@ var Templates = {
                                 var _booking = this;
                                 var s = ''
                                 $.each(this.service_items,function(i,elem){
+
                                     if(elem.service == 'servicing'){
                                         s += '<li class="indiv_booking" style="height: 90px;">'+elem.served_data.dealer_cat+'  <i class="fa fa-caret-right"></i>  '
                                         if(elem.served_data.type_service == "Not Defined"){
@@ -869,12 +870,14 @@ var formCheck = {
                 thisHour += 1
             if(thisHour < 8)
                 thisHour = 8
+            if(thisHour >16)
+                thisHour = 16
 
             var minTime = new Date(0,0,0,thisHour,0,0);
             //var maxTime = new Date(0,0,0,12,0,0);
             if(todayFlag){
                 $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'minTime',minTime);
-                $(container).find('#date-time-pair .pick-up-time').timepicker('setTime',minTime);
+//                $(container).find('#date-time-pair .pick-up-time').timepicker('setTime',minTime);
             }else{
                 $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'minTime',new Date(0,0,0,8,0,0));
             }
@@ -884,7 +887,7 @@ var formCheck = {
         }else{
             if(sameDay){
                 $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'maxTime',new Date(0,0,0,11,0,0));
-                $(container).find('#date-time-pair .pick-up-time').timepicker('setTime',new Date(0,0,0,11,0,0));
+//                $(container).find('#date-time-pair .pick-up-time').timepicker('setTime',new Date(0,0,0,11,0,0));
             }else{
                 $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'maxTime',new Date(0,0,0,16,0,0));
             }
