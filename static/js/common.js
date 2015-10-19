@@ -49,7 +49,8 @@ var Commons = {
         'place_order':'/api/place_order/',
         'fetch_car_booking':'/api/fetch_car_booking/',
         'fetch_car_cancelled':'/api/fetch_car_cancelled/',
-        'cancel_booking':'/api/cancel_booking/'
+        'cancel_booking':'/api/cancel_booking/',
+        'fetch_all_booking':'/api/fetch_all_booking/',
 
     },
     getOrigin: function(){
