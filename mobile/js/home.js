@@ -4,6 +4,19 @@ var Global = {
         var _this = this;
     $("[data-role=panel]").panel().enhanceWithin();  
         _this.events();
+        
+        $("#checkoutForm").validate({
+            rules: {
+                    name: {
+                        required:true,
+                        minlength:3
+                    }
+            },
+		errorPlacement: function(error, element) {
+				error.insertAfter($(element).parent());
+		}
+
+	});
         //$('#submit-button').button('disable');
     },
     events:function(){
