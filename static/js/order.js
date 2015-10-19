@@ -51,7 +51,7 @@ var Global = {
 
                 }else{
                     if(classy == 'servicing' || classy == 'cleaning' || classy == 'vas'){
-                        Commons.ajaxData('fetch_car_'+classy, {c_id:_this.carSelected.id},"get",_this, eval("_this.load"+classy.toTitleCase()))
+                        Commons.ajaxData('fetch_car_'+classy , {c_id:_this.carSelected.id},"get",_this, eval("_this.load"+classy.toTitleCase()))
                     }
                 }
             }else{
@@ -166,11 +166,13 @@ var Global = {
         });
 
     },
+
+
     loadServicingDetails : function(data){
         console.log('p',data);
         if(data && data.length){
             var common_data = {};
-            var common_keys = ["odometer", "parts_list", "wa_wb_present"];
+            var common_keys = ["type_service", "parts_list", "wa_wb_present"];
             $.each(common_keys, function(idx, val){
                 common_data[val] = data[0][val]
             });
@@ -205,7 +207,7 @@ var Global = {
         console.log('cleaning details',data);
         if(data && data.length){
             var common_data = {};
-            var common_keys = ["odometer", "parts_list", "wa_wb_present"];
+            var common_keys = ["type_service", "parts_list", "wa_wb_present"];
             $.each(common_keys, function(idx, val){
                 common_data[val] = data[0][val]
             });

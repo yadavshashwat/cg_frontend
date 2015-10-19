@@ -572,8 +572,11 @@
                             </td>
                             <td>
                                 {% if val.service == "servicing" %}
-                                <div> {{ val.service_detail.odometer }}km / {{ val.service_detail.year }}</div>
-                                <div> Regular Servicing</div>
+                                 {% if val.service_detail.type_service == "Not Defined" %}
+                                <div>Minor Servicing</div>
+                            {% else %}
+                            <div> {{ val.service_detail.type_service }}</div>
+                            {% endif %}
                                 {% elif val.service == "cleaning" %}
                                 <div> {{ val.service_detail.service }}</div>
                                 <div> Cleaning <i class="fa fa-caret-right"></i> {{ val.service_detail.category }}</div>
@@ -584,8 +587,15 @@
                             </td>
                             <td>
                                 {% if val.service == "servicing" %}
-                                <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}
-                                </div>
+                                {% if val.service_detail.dealer_cat == "Authorized" %}
+                         <div class="price-div">
+                            Service Centre<br>Bill Amount
+                        </div>
+                         {% else %}
+                        <div class="price-div"><i class="fa fa-inr"></i>
+                            {{ val.service_detail.total_price }}
+                        </div>
+                        {% endif %}
                                 {% elif val.service == "cleaning" %}
                                 <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}
                                 </div>

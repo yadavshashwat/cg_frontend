@@ -33,8 +33,12 @@ var Commons = {
     },
     URLFromName : {
         'fetch_all_cars':'/api/fetch_all_cars/',
-        'fetch_car_servicing':'/api/fetch_car_servicing/',
-        'fetch_servicing_details':'/api/fetch_servicing_details/',
+        //'fetch_car_servicing':'/api/fetch_car_servicing/',
+        //'fetch_servicing_details':'/api/fetch_servicing_details/',
+
+        'fetch_car_servicing':'/api/fetch_car_servicing_new/',
+        'fetch_servicing_details':'/api/fetch_servicing_details_new/',
+
         'fetch_car_cleaning':'/api/fetch_car_cleaning/',
         'fetch_cleaning_details':'/api/fetch_cleaning_details/',
         'fetch_car_vas':'/api/fetch_car_vas/',
@@ -177,12 +181,14 @@ var logoMap = {
     'Authorized Car':'../static/img/brands/Car/',
     'Bosch':'../static/img/dl-logo-Bosch.jpg',
     'ClickGarage Verified':'../static/img/dl-logo-cgverified.png',
-    'Mahindra First Choice':'../static/img/dl-logo-MFC.jpg'
+    'Mahindra First Choice':'../static/img/dl-logo-MFC.jpg',
+    'ClickGarage Workshop':'../static/img/dl-logo-cgverified.png',
+    'Bosch Car Care':'../static/img/dl-logo-Bosch.jpg',
 };
 
 var Templates = {
     orderPage:{
-        servicing:[{
+        servicing_old:[{
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
@@ -213,6 +219,45 @@ var Templates = {
                 {"tag":"div", "class":"state-update none-i"}
             ]
         }],
+        servicing:[{
+            "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
+                {"tag":"div", "class":"top-row", "children":[
+                    {"tag":"div", "class":"wrapper detail-wrapper", "children":[
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select this Service </div>";}}
+                    ]},
+                    {"tag":"div", "class":"wrapper header-wrapper", "children":[
+                        {"tag":"div", "class":"due-div fl", "html":function(){return "<span class='odo-read'>"+  (this.type_service == "Not Defined" ? 'I am not sure<br> <span class="due-at-read">- I will go with minor servicing and <br> would  like post check-up recommendation</span>': this.type_service)+"</span>";}},
+
+                    {"tag":"div", "class":"service-details fix_servicedetails", "children":[
+                        {"tag":"div", "class":"checks-div", "html":function(){return 'Washing';}},
+                        {"tag":"div", "class":"checks-div", "html":function(){return 'Regular Checks';}},
+                        {"tag":"div", "class":"parts-div", "html":function(){
+                            var html = '';
+                            if(this['car_bike']=="Bike"){
+                                html += '<span class="token-class">Engine Oil</span>&nbsp;';
+                                html += '<span class="token-class">Oil Filter</span>&nbsp;';
+                                html += '<span class="token-class">Other Parts as required</span>&nbsp;';
+                                return html;
+                            }else{
+                                if(this['parts_replaced'] && this['parts_replaced'].length){
+                                $.each(this['parts_replaced'], function(i, part){
+                                    html += '<span class="token-class">'+part+'</span>&nbsp;';
+                                });
+                                return html;
+    //                            return "Regular Checks :" + this['parts_replaced'].join(', ');
+                            }
+                            else
+                                return "None";
+
+                            }
+                            }}
+                            ]}
+                    ]}
+                ]},
+
+                {"tag":"div", "class":"state-update none-i"}
+            ]
+        }],
         cleaning:[{
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
@@ -228,7 +273,7 @@ var Templates = {
                 {"tag":"div", "class":"state-update none-i"}
             ]
         }],
-        dealers:[{
+        dealers_old:[{
             "tag":"div","class":"dealer-list-item","data-id":"${id}", "data-name":"${vendor}", "children":[
                 {"tag":"div","class":"td-dealer-info", "children":[
                     {"tag":"div", "class":"vendor-name","html":function(){
@@ -266,6 +311,69 @@ var Templates = {
                 ]},
                 {"tag":"div","class":"td-price", "children":[
                     {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.parts_price)+"</td></tr><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr><tr id = 'total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.parts_price)+parseInt(Math.ceil((this.labour_price)))+parseInt(Math.ceil((this.labour_price*0.14)))+parseInt((this.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";}}
+                    ]},
+                {"tag":"div","class":"col-item td-rating", "html":""}
+            ]
+        }],
+                dealers:[{
+            "tag":"div","class":"dealer-list-item","data-id":"${id}", "data-name":"${vendor}", "children":[
+                {"tag":"div","class":"td-dealer-info", "children":[
+                    {"tag":"div", "class":"vendor-name","html":function(){
+                         if($.trim(this.vendor) == 'Authorized'){
+                                     return this.brand + ' Authorized';
+                                }else{
+                                    return this.vendor;
+                                }
+                    }},
+                    {"tag":"div", "class":"dealer-logo-wrapper", "html":function(){
+                        if(this.vendor){
+                            if($.trim(this.vendor) == 'Authorized'){
+                                if(this.car_bike=='Bike'){
+                                     return '<img src="'+ logoMap['Authorized Bike'] + $.trim(this.brand)+'.jpg" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                                }else{
+                                     return '<img src="'+ logoMap['Authorized Car'] + $.trim(this.brand)+'.jpg" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                                }
+
+                            }else{
+                                return '<img src="'+logoMap[$.trim(this.vendor)]+'" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                            }
+                        }else{
+                            return 'N/A'
+                        }
+                    }},
+                ]},
+                {"tag":"div","class":"td-service-info", "children":[
+                    {"tag":"div", "class":"text","html":function(){
+                         if(this.type_service == 'Not Defined'){
+                                    return 'Minor Servicing';
+                                }else{
+                                    return this.type_service;
+                                }}},
+                    //{"tag":"div", "class":"sub-text","html":"(${odometer}km)"}
+                ]},
+                {"tag":"div","class":"col-item td-dealer-select", "children":[
+                    // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
+
+                    {"tag":"div", "html":"<a class='dealer-add-to-cart', href='/cart'>Add to Cart</a>"}
+                ]},
+                {"tag":"div","class":"td-price", "children":[
+                    {"tag":"div", "class":"table-parts","html":function(){
+                        if(this.vendor=='Authorized'){
+                            if(this.car_bike=='Bike'){
+                                var s = '<Table>'
+                                $.each(this.part_dic,function(i,elem){
+                                    s += '<tr><td>'+elem.part_name+"</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.part_price)+"</td></tr>"
+                                    })
+                                    s += "<tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr>"
+                                    s += '</table>'
+                                    return s
+
+                            }else{
+                           return "<table><tr>&nbspService Centre Bill Amount</tr><tr><td></td><td>+</td></tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr></table>";
+                            }
+                        }else{
+                            return "<table><tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.parts_price)+"</td></tr><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr><tr id = 'total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.parts_price)+parseInt(Math.ceil((this.labour_price)))+parseInt(Math.ceil((this.labour_price*0.14)))+parseInt((this.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
+                    }}}
                     ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
@@ -372,8 +480,15 @@ var Templates = {
                                 var _booking = this;
                                 var s = ''
                                 $.each(this.service_items,function(i,elem){
+
                                     if(elem.service == 'servicing'){
-                                    s += '<li class="indiv_booking" style="height: 90px;">'+elem.served_data.dealer_cat+'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.odometer+'km (Regular Sevicing) <div id="cancel-booking" tran_id="'+_booking.tran_id+'" item_id="'+elem.served_data.ts+'" class="vendor-div" style="padding: 0px; float: right;"><div> Cancel Booking </div></div></li>'
+                                        s += '<li class="indiv_booking" style="height: 90px;">'+elem.served_data.dealer_cat+'  <i class="fa fa-caret-right"></i>  '
+                                        if(elem.served_data.type_service == "Not Defined"){
+                                            s+="Minor Servicing</li>"
+                                        }else{
+                                            s+=elem.served_data.type_service + '</li>'
+                                        }
+                                        s += '</li><div id="cancel-booking" tran_id="'+_booking.tran_id+'" item_id="'+elem.served_data.ts+'" class="vendor-div" style="padding: 0px; float: right;"><div> Cancel Booking </div></div></li>'
                                     }else{
                                     s += '<li class="indiv_booking" style="height: 90px;">'+elem.served_data.vendor +'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.service+' ( '+elem.served_data.category+' ) <div id="cancel-booking" tran_id="'+_booking.tran_id+'" item_id="'+elem.served_data.ts+'" class="vendor-div" style="padding: 0px; float: right;"><div> Cancel Booking </div></div></li>'
                                     }
@@ -402,7 +517,13 @@ var Templates = {
                             var s = '<ul class="service-components">'
                             $.each(this.service_items,function(i,elem){
                              if(elem.service == 'servicing'){
-                                s += '<li class="indiv_booking">'+elem.served_data.dealer_cat+'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.odometer+'km (Regular Sevicing) </li>'
+                                s += '<li class="indiv_booking">'+elem.served_data.dealer_cat+'  <i class="fa fa-caret-right"></i>  '
+                                 if(elem.served_data.type_service=="Not Defined"){
+                                     s+="Minor Servicing"
+                                 }else{
+                                     s+=elem.served_data.type_service
+                                 }
+                                 s += '</li>'
                                 }else{
                                 s += '<li class="indiv_booking">'+elem.served_data.vendor +'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.service+' ( '+elem.served_data.category+' ) </li>'
                                 }
@@ -431,10 +552,19 @@ var Templates = {
                             {"tag":"div", "class":"booking car booking_car", "html":function(){return (this.cust_carname);}},
                             {"tag":"div", "class":"booking date booking_date", "html":function(){return (this.date_booking) + ' ('+this.time_booking+')';}},
                             {"tag":"div", "class":"booking list booking_list", "html":function(){
-                                var s = '<ul cslass="service-components">'
+                                var s = '<ul class="service-components">'
                                 $.each(this.service_items,function(i,elem){
                                     if(elem.service == 'servicing'){
-                                    s += '<li class="indiv_booking">'+elem.served_data.dealer_cat+'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.odometer+'km (Regular Sevicing) </li>'
+                                        if(elem.served_data){
+                                        s += '<li class="indiv_booking">'+elem.served_data.dealer_cat+'  <i class="fa fa-caret-right"></i>  '
+                                            if(elem.served_data.type_service && elem.served_data.type_service=="Not Defined"){
+                                                s+="Minor Servicing </li>"
+                                            }else if(elem.served_data.type_service){
+                                                s+= elem.served_data.type_service + '</li>'
+                                            }else{
+                                                s += elem.served_data.odometer+'km / '+elem.served_data.year
+                                            }
+                                        }
                                     }else{
                                     s += '<li class="indiv_booking">'+elem.served_data.vendor +'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.service+' ( '+elem.served_data.category+' ) </li>'
                                     }
@@ -478,7 +608,16 @@ var Templates = {
                             var s = '<ul class="service-components">'
                             $.each(this.service_items, function (i, elem) {
                                 if (elem.service == 'servicing') {
-                                    s += '<li class="indiv_booking">' + elem.served_data.dealer_cat + '  <i class="fa fa-caret-right"></i>  ' + elem.served_data.odometer + 'km (Regular Sevicing) </li>'
+                                    if(elem.served_data) {
+                                        s += '<li class="indiv_booking">' + elem.served_data.dealer_cat + '  <i class="fa fa-caret-right"></i>  '
+                                        if (elem.served_data.type_service && elem.served_data.type_service == "Not Defined") {
+                                            s += "Minor Servicing </li>"
+                                        } else if(elem.served_data.type_service) {
+                                            s += elem.served_data.type_service + '</li>'
+                                        } else {
+                                            s += elem.served_data.odometer+'km / '+elem.served_data.year
+                                        }
+                                    }
                                 } else {
                                     s += '<li class="indiv_booking">' + elem.served_data.vendor + '  <i class="fa fa-caret-right"></i>  ' + elem.served_data.service + ' ( ' + elem.served_data.category + ' ) </li>'
                                 }
@@ -496,7 +635,8 @@ var Templates = {
                 },
 
             ]
-        }]}
+        }]
+    }
 
 };
 
