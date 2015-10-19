@@ -34,8 +34,10 @@ var Commons = {
     },
     URLFromName : {
         'fetch_all_cars':'/api/fetch_all_cars/',
-        'fetch_car_servicing':'/api/fetch_car_servicing/',
-        'fetch_servicing_details':'/api/fetch_servicing_details/',
+        //'fetch_car_servicing':'/api/fetch_car_servicing/',
+        //'fetch_servicing_details':'/api/fetch_servicing_details/',
+        'fetch_car_servicing':'/api/fetch_car_servicing_new/',
+        'fetch_servicing_details':'/api/fetch_servicing_details_new/',
         'fetch_car_cleaning':'/api/fetch_car_cleaning/',
         'fetch_cleaning_details':'/api/fetch_cleaning_details/',
         'fetch_car_vas':'/api/fetch_car_vas/',
