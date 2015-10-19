@@ -387,6 +387,8 @@ header-box {
 line-height: 10px;
 }
 */
+
+/*Start - Header Styling - Bhuvan */
 .header-body {
     background-color: #4d5b94 !important;
 }
@@ -408,3 +410,25 @@ line-height: 10px;
     padding-left: 5px;
     padding-top: 5px;
 }
+/*End - Header Styling - Bhuvan */
+
+/*Start - Checkout form - Bhuvan*/
+form{
+color:#4d5b94;
+font-family: Raleway;
+font-size:80%;
+font-style: normal;
+font-variant: normal;
+font-weight: 400;
+line-height: 20px;
+}
+
+form .ui-input-text{
+    border-width: 0px;
+}
+
+form label.error {
+    color:crimson;
+    font-size: small;
+}
+/*End - Checkout form - Bhuvan*/
