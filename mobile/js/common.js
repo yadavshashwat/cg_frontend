@@ -181,7 +181,9 @@ var logoMap = {
     'Authorized Car':'../static/img/brands/Car/',
     'Bosch':'../static/img/dl-logo-Bosch.jpg',
     'ClickGarage Verified':'../static/img/dl-logo-cgverified.png',
-    'Mahindra First Choice':'../static/img/dl-logo-MFC.jpg'
+    'Mahindra First Choice':'../static/img/dl-logo-MFC.jpg',
+    'ClickGarage Workshop':'../static/img/dl-logo-cgverified.png',
+    'Bosch Car Care':'../static/img/dl-logo-Bosch.jpg',
 };
 
 var Templates = {

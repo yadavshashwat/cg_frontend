@@ -438,7 +438,8 @@ var Templates = {
                         if(this.doorstep=="1"){return "<span class='doorstep'><i class='fa fa-home'></i>&nbspDoorstep Service</span>"
                         }else{
                             return ''
-                        }}}
+                        }}},
+                    {"tag":"div", "class":"description none-i","html":"${description}"},
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},

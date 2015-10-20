@@ -62,11 +62,13 @@ var Global = {
           console.log( data.state.hash )
             switch(data.state.hash){
                 case "#step2":
-                        Commons.ajaxData('fetch_car_servicing', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f54d4"},"get",_this, _this.loadServicing)
+                        //Commons.ajaxData('fetch_car_servicing', {c_id:"56097f3c5e1b2d72585f54d4"},"get",_this, _this.loadServicing)
+                    Commons.ajaxData('fetch_car_servicing', {c_id:"56097f3c5e1b2d72585f5502"},"get",_this, _this.loadServicing)
                         //Commons.ajaxData('fetch_car_cleaning', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f54d4"},"get",_this, _this.loadCleaning)
                     break;
                 case "#step3":
-                        Commons.ajaxData('fetch_servicing_details', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",service_id:"5613ebd85e1b2d2c5f94aadb"},"get",_this, _this.loadServicingDetails)
+                        //Commons.ajaxData('fetch_servicing_details', {service_id:"5623c4715e1b2d6c3d50d4ed"},"get",_this, _this.loadServicingDetails)
+                        Commons.ajaxData('fetch_servicing_details', {service_id:"5623c4715e1b2d6c3d50d4ec"},"get",_this, _this.loadServicingDetails)
                         //Commons.ajaxData('fetch_cleaning_details', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f5502",service_id:"560982095e1b2d72585fa9c8"},"get",_this, _this.loadCleaningDetails)
                     break;
                 default:
@@ -85,16 +87,20 @@ var Global = {
         var html = '';
         $.each(data, function(idx, val){
             html += '<li><a href="#"><div class="header-div">';
-            if(val.odometer)
-                html += String(val.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+'km';
+            if(val.type_service)
+                if(val.type_service=='Not Defined')
+                    html += "I am not sure <div class = 'description'>I will go with minor servicing and would like post check up recommendations</div>"
+                //html += String(val.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+'km';
+                else
+                    html += val.type_service;
             else
-                html += '--km';
-            html += ' or ';
+                html += 'Regular Servicing';
+            //html += ' or ';
 
-            if(val.year)
-                html += val.year;
-            else
-                html += '--year';
+            //if(val.year)
+            //    html += val.year;
+            //else
+            //    html += '--year';
             html += '</div>';
             html += '<div class="checks-div">Regular Checks</div>';
             html += '<div class="checks-div">Washing</div>';
@@ -102,9 +108,12 @@ var Global = {
             html += '<div class="parts-div">';
             // push the list
 
-            $.each(val.parts_replaced, function(i, part){
-               html += '<span class="part">' + part + '</span>';
-            });
+            if(val.car_bike=="Bike")
+                html += '<span class="part">Engine Oil</span>'+'<span class="part">Oil Filter</span>'+'<span class="part">Other Parts As Required</span>';
+            else
+                $.each(val.parts_replaced, function(i, part){
+                   html += '<span class="part">' + part + '</span>';
+                });
 
             html += '</div></a></li>';
 
@@ -146,14 +155,20 @@ var Global = {
         var html = '';
         var val = data[0]
             html += ' <div class="header">';
-            html += '<span class = "odo-read">' + String(val.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+'km </span><span class = "sub-cat">(Regular Servicing)</span></div>';
+            //html += '<span class = "odo-read">' + String(val.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+'km </span><span class = "sub-cat">(Regular Servicing)</span></div>';
+            html += '<span class = "odo-read">' + String(val.type_service) +'</span></div>';
+
             html += '</div>';
             html += '<div class="checks-div">Regular Checks</div>';
             html += '<div class="checks-div">Washing</div>';
              html += '<div class="parts-div">';
+        if(val.car_bike=="Bike")
+            html += '<span class="part">Engine Oil</span>'+'<span class="part">Oil Filter</span>'+'<span class="part">Other Parts As Required</span>';
+        else
             $.each(val.parts_list, function(i, part){
                html += '<span class="part">' + part + '</span>';
             });
+
         container.html(html);
         //container.listview("refresh")
         var container2 = $('.vendor-list .vendors');
