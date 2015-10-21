@@ -127,6 +127,9 @@ var Commons = {
             $('.logged-user-drpdwn').hide();
             }
         });
+        $('body').on('click', '.modal-container .close-btn', function(e){
+            $(this).closest('.modal-container').remove();
+        });
         $('#sign-up-in-home').on('click', function(e){
 //            console.log($('.modal-container'))
             $('.login-modal-container').show().animate({
@@ -378,7 +381,16 @@ var Templates = {
                             return "<table><tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.parts_price)+"</td></tr><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr><tr id = 'total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.parts_price)+parseInt(Math.ceil((this.labour_price)))+parseInt(Math.ceil((this.labour_price*0.14)))+parseInt((this.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
                     }}}
                     ]},
-                {"tag":"div","class":"col-item td-rating", "html":""}
+                {"tag":"div","class":"col-item td-rating", "html":""},
+                {"tag":"div","class":"none-i", "html":function(){
+                    if(Global && Global.dealerAddressObj){
+                        if(this.vendor == 'Authorized'){
+                            Global.dealerAddressObj[this.brand] = this.dealer_details;
+                        }
+                    }
+                    return JSON.stringify({'dealer_details':this.dealer_details, 'brand':this.brand, 'vendor':this.vendor});
+                }}
+
             ]
         }],
         cleaning_old:{

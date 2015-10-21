@@ -115,6 +115,16 @@ var Global = {
                 bodyHolder.find('.service-group-item[data-name="'+name+'"]').show();
             }
         });
+        $('.dealer-box ').on('click', '.dealer-checkout, .servicing-form-generate', function(e){
+            var obj = {};
+            obj.timestamp = (new Date()).getTime();
+            obj.service = _this.selectedSection;
+            obj.dealer = $(this).closest('.dealer-list-item').attr('data-name');
+            obj.s_id = $(this).closest('.dealer-list-item').attr('data-id');
+            _this.generateServiceDetailForm(obj);
+
+
+        });
         $('.dealer-box ').on('click', '.dealer-checkout, .dealer-add-to-cart', function(e){
             var obj = {};
             obj.timestamp = (new Date()).getTime();
@@ -142,7 +152,6 @@ var Global = {
 
 //            Commons.ajaxData('add_to_cart', {})
         });
-
         $('#settings-drpdwn').on('click', function(e){
             $(this).parent().find('.logged-user-drpdwn').toggle();
         });
@@ -250,7 +259,7 @@ var Global = {
                     '<button class="form-submit-btn" type="submit">Get Started</button>'+
                 '</div>'+
             '</form>';
-        $('.order-body').append(_this.genericModal(modalCarContent));
+        $('.order-body').append(_this.genericModal(modalCarContent, false));
         var cityBoxHolder = $('#popup-citybox-holder');
         if(cityBoxHolder.length){
             $(cityBoxHolder).materialDropDown({
@@ -259,7 +268,6 @@ var Global = {
             });
         }
         var omniBoxHolder = $('#popup-omnibox-holder');
-        console.log(omniBoxHolder)
         if(omniBoxHolder.length){
             $(omniBoxHolder).materialAutoSuggest({
                 input:".omni-search-box",
@@ -292,7 +300,196 @@ var Global = {
         });
 
     },
-    genericModal : function(popupHTML){
+    generateServiceDetailForm : function(serviceObj){
+        var _this = this;
+
+        var modalCarContent = '<div class="form-wrapper" id="dealer-pick-form">' +
+                'Currently Unable to process this form. Please select add to cart'+
+                '<div class="form-row additional">' +
+                    '<div class="form-col label-col"><div class="label-div">Additional Queries</div></div>' +
+                    '<div class="form-col inp-col-1"></div>' +
+                    '<div class="form-col inp-col-2"></div>' +
+                '</div>' +
+                '<div class="form-row additional">' +
+                    '<div class="form-col label-col"><div class="label-div">Custom Requests</div></div>' +
+                    '<div class="form-col inp-col-double"><div class="clean-inp-wrapper"><textarea class="clean-inp-tabox pick-addr" type="" rows="3"></textarea></div></div>' +
+                '</div>';
+        if(serviceObj.dealer == 'Authorized'){
+           modalCarContent+= '<div class="separator"></div>'+
+                '<div class="form-row ">' +
+                '<div class="form-col label-col"><div class>Select dealer:</div></div>'+
+                '<div class="form-col inp-col-1"><div class="clean-inp-wrapper"><input type="radio" name="dealer-group-by" value="region">By Region</div></div>' +
+                '<div class="form-col inp-col-2"><div class="clean-inp-wrapper"><input type="radio" name="dealer-group-by" value="dealer">By Dealer</div></div>' +
+                '</div>' +
+                '<div class="form-row dealer-grouped">' +
+                    '<div class="form-col">' +
+                        '<div class="label-div">Dealer</div>'+
+                        '<div class="clean-inp-wrapper">'+
+                            '<label class="clean-sbox-wrapper">'+
+                            '<select class="clean-inp-sbox dealer-name">'+
+                            '</select>'+
+                            '</label>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="form-col">' +
+                        '<div class="label-div">Address</div>'+
+                        '<div class="clean-inp-wrapper">'+
+                            '<label class="clean-sbox-wrapper">'+
+                            '<select class="clean-inp-sbox dealer-address">'+
+                            '</select>'+
+                            '</label>'+
+                        '</div>'+
+                    '</div>'+
+                 '</div>' +
+                '<div class="form-row region-grouped">' +
+                    '<div class="form-col">' +
+                        '<div class="label-div">Pick City</div>'+
+                        '<div class="clean-inp-wrapper">'+
+                            '<label class="clean-sbox-wrapper">'+
+                            '<select class="clean-inp-sbox dealer-city">'+
+                            '</select>'+
+                            '</label>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="form-col">' +
+                        '<div class="label-div">Pick Region</div>'+
+                        '<div class="clean-inp-wrapper">'+
+                            '<label class="clean-sbox-wrapper">'+
+                            '<select class="clean-inp-sbox dealer-region">'+
+                            '</select>'+
+                            '</label>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="form-col">' +
+                        '<div class="label-div">Pick Dealer</div>'+
+                        '<div class="clean-inp-wrapper">'+
+                            '<label class="clean-sbox-wrapper">'+
+                            '<select class="clean-inp-sbox dealer-name-address">'+
+                            '</select>'+
+                            '</label>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>';
+           }
+           modalCarContent += '<div class="form-row" style="text-align: center;"><a class="detail-add-to-cart" href="/cart">Add to Cart</a></div>' +
+               '</div>';
+        $('.order-body').append(_this.genericModal(modalCarContent, true));
+        var addFeat = _this.additionalFeatures['car'];
+        if(_this.carSelected['car_bike'].toLowerCase() == 'bike'){
+            addFeat = _this.additionalFeatures['bike'];
+        }
+        $.each(addFeat, function(i,v){
+            var num = (i%2)+1;
+            $('.modal-content').find('.form-row.additional').eq(0).find('.inp-col-'+num).append('<div class="clean-inp-wrapper"><input class="clean-inp-cbox" id="pick-drop-toggle" checked type="checkbox"><div class="label-div">'+v+'</div><div>');
+        });
+        if(serviceObj.dealer == 'Authorized'){
+
+            var brand = _this.carSelected['make'];
+            $.each(_this.dealerAddressObj[brand], function(i,v){
+                var city = v['city'];
+                var name = v['name'];
+                var region = v['region'];
+                if(city){
+                    if(!_this.dealerAddressObj['activeRegionGrouped'][city]){
+                        _this.dealerAddressObj['activeRegionGrouped'][city] = {};
+                    }
+                    if(region){
+                        if(!_this.dealerAddressObj['activeRegionGrouped'][city][region]){
+                            _this.dealerAddressObj['activeRegionGrouped'][city][region] = [];
+                        }
+                        _this.dealerAddressObj['activeRegionGrouped'][city][region].push({'address':v['address'],'name':v['name']});
+                    }
+                }
+                if(name){
+                    if(!_this.dealerAddressObj['activeDealerGrouped'][name]){
+                        _this.dealerAddressObj['activeDealerGrouped'][name] = [];
+                    }
+                    _this.dealerAddressObj['activeDealerGrouped'][name].push({'address':v['address'],'name':v['name']});
+                }
+            });
+            $.each(Object.keys(Global.dealerAddressObj.activeDealerGrouped), function(i,v){
+                $('.modal-content').find('.form-row.dealer-grouped').eq(0).find('select.dealer-name').append('<option value="'+v+'">'+v+'</option>');
+            });
+            $.each(Object.keys(Global.dealerAddressObj.activeRegionGrouped), function(i,v){
+                $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-city').append('<option value="'+v+'">'+v+'</option>');
+            });
+        }
+        $('.modal-content').addClass('extra-form-modal').attr('data-name', serviceObj.dealer).attr('data-id', serviceObj.s_id);
+        var w = $('.modal-content').width();
+        var h = $('.modal-content').height();
+        $('.modal-content').css({
+            'top': ($(window).innerHeight() - h)/2,
+            'left':($(window).innerWidth() - w)/2
+        });
+        $('.modal-content').find('.detail-add-to-cart').on('click', function(e){
+            var data_id = $(this).closest('.modal-content').attr('data-id');
+            $('.dealer-box').find('.dealer-list-item[data-id="'+data_id+'"]').find('.dealer-add-to-cart').click();
+        });
+        $('#popup-search-set-holder').on('submit', function(){
+            var c_id = $(this).find('#hidden-id-box').val();
+            var c_name = $(this).find('#omni-search-box').val();
+            if (!c_id.length){
+                return false
+            }else{
+                var loc = window.location.href;
+                loc = loc.split('.in/')[0]+'.in/';
+                local.clearKey('clgacart');
+                local.save('clgacarid',c_id);
+                local.save('clgacarname',c_name);
+                window.location = loc + 'order/?c_id='+c_id;
+                return false;
+            }
+
+        });
+
+
+        if(serviceObj.dealer == 'Authorized'){
+            $('#dealer-pick-form').on('change', 'input[name="dealer-group-by"]',function(e){
+                    var val = $(this).val();
+                if(val == 'dealer'){
+                    $('#dealer-pick-form').find('.form-row.region-grouped').hide();
+                    $('#dealer-pick-form').find('.form-row.dealer-grouped').show();
+                }else if(val == 'region'){
+                    $('#dealer-pick-form').find('.form-row.region-grouped').show();
+                    $('#dealer-pick-form').find('.form-row.dealer-grouped').hide();
+                }
+
+            });
+            $('#dealer-pick-form').find('.form-row.dealer-grouped').on('change', 'select.dealer-name',function(e){
+                var val = $(this).val();
+                        $('.modal-content').find('.form-row.dealer-grouped').eq(0).find('select.dealer-address').html('');
+
+                if(Global.dealerAddressObj.activeDealerGrouped[val]){
+                    $.each(Global.dealerAddressObj.activeDealerGrouped[val], function(ix,vl){
+                        $('.modal-content').find('.form-row.dealer-grouped').eq(0).find('select.dealer-address').append('<option value="'+vl['address']+'">'+vl['address']+'</option>');
+                    });
+                }
+            });
+            $('#dealer-pick-form').find('.form-row.region-grouped').on('change', 'select.dealer-city',function(e){
+                var val = $(this).val();
+                        $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-region').html('');
+                if(Global.dealerAddressObj.activeRegionGrouped[val]){
+                    $.each(Global.dealerAddressObj.activeRegionGrouped[val], function(ix,vl){
+                        $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-region').append('<option value="'+ix+'">'+ix+'</option>');
+                    });
+                }
+               $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-region').trigger('change');
+            });
+            $('#dealer-pick-form').find('.form-row.region-grouped').on('change', 'select.dealer-region',function(e){
+                var val = $(this).val();
+                var val2 = $(this).closest('.form-row').find('.dealer-city').val();
+                        $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-name-address').html('');
+                if(Global.dealerAddressObj.activeRegionGrouped[val2] && Global.dealerAddressObj.activeRegionGrouped[val2][val]){
+                    $.each(Global.dealerAddressObj.activeRegionGrouped[val2][val], function(ix,vl){
+                        $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-name-address').append('<option value="'+vl['address']+'">'+vl['address']+'</option>');
+                    });
+                }
+            });
+            $('#dealer-pick-form').find('select.dealer-name').trigger('change');
+            $('#dealer-pick-form').find('select.dealer-city').trigger('change');
+        }
+    },
+    genericModal : function(popupHTML, closeFlag){
         var scrn_ht = $(window).innerHeight();
         var scrn_wd = $(window).innerWidth();
         var _body = $(document).find('.order-body');
@@ -306,9 +503,20 @@ var Global = {
         });
         content.html(popupHTML);
         container.append(overlay).append(content);
+        if(closeFlag){
+         container.find('.modal-content').append('<i class="close-btn fa fa-close"></i>');
+       }
         return container;
     },
     carData:null,
+    dealerAddressObj : {
+        'activeDealerGrouped':{},
+        'activeRegionGrouped':{}
+    },
+    additionalFeatures : {
+        car : ['Clutch Overhaul', 'Interior Dry-cleaning', 'Brake Repair', 'Wheel Balancing', 'Wheel Alignment', 'AC Servicing', 'Injector Cleaning'],
+        bike : ['Front Brake Repair',  'Rear Brake repair', 'Wheel Balancing', 'Wheel Alignment']
+    },
     redirectToCart : function(){
 
     }
