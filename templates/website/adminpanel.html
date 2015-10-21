@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+   <title>ClickGarage - Car and Bike Servicing, Cleaning</title>
+
+    {% load staticfiles %}
+    <link rel="shortcut icon" type="image/png" href="../../static/img/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.min.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/custom.css" %}" />
+    <link rel="stylesheet/less" type="text/css" href="{% static "less/styles.less" %}" />
+    <link rel="stylesheet/less" type="text/css" href="{% static "less/sms-popup.less" %}" />
+    <script type="text/javascript" src="{%  static "js/legacy/jquery-2.1.4.min.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/legacy/json2html.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/legacy/jquery.json2html.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/plugin.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/common.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/adminpanel.js" %}"></script>
+<!--    <script type="text/javascript" src="{%  static "js/sms-popup.js" %}"></script>-->
+    <script src="{%  static "js/legacy/less.min.js" %}"></script>
+
+<!--
+    {% load js %}
+    <script type="text/javascript">
+{#        {% if cars %}#}
+{#            <ul>#}
+{#            {% for car in cars %}#}
+{#                <li>{{ car.name }}</li>#}
+{#            {% endfor %}#}
+{#            </ul>#}
+{#        {% else %}#}
+{#            <p>No polls are available.</p>#}
+{#        {% endif %}#}
+        Global.carData = {{ cars | js}};
+        Global.carSelected = {{ carSelected | js}};
+    </script>
+-->
+{#    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>#}
+{#    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script>#}
+
+</head>
+<body class="adminpanel-body order-body">
+    <div class="solid-header">
+        {% include "website/dash-header.html" %}
+    </div>
+    <div class="pane order-pane">
+        <div class="centered-content">
+            <div class="content-holder">
+                <div class="search-div">
+                    <div class="search-box" id="search-by-id">
+                        <p>Search by BookingID</p>
+                        <input type="text" class="search-text" id="bookingid" placeholder="Enter BookingID" autocomplete="off">
+                        <button class="booking-search">Submit</button>
+                    </div>
+                    <div class="search-box" id="search-by-date">
+                        <p>Search by date</p>
+                        <input type="text" class="search-text" id="bookingdate" placeholder="Select Date" autocomplete="off">
+                    </div>
+                </div>                
+                <div class="section-select-holder">
+                    <div class="section-box ">
+                        <div class="section-headers">
+                            <div class="list-head">
+                                <p>ID#</p>
+                                <p>Booking Details</p>
+                                <p>Car Details</p>                                
+                                <p>Customer Details</p>
+                                <p>Status</p>
+                                <p>Actions</p>
+                            </div>                     
+                        </div>
+                        <div class="section-listings">
+                            <div class="section-content-item booking" data-class="booking"></div>
+<!--                            <div class="list-body"></div>-->
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="overlay overlay-pat"></div>
+
+    <div class="sms-popup" style="display: none;">
+        {% include "website/sms-popup.html" %}
+    </div>
+
+
+</body>
+</html>
