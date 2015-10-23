@@ -1240,6 +1240,7 @@
 							.icon.icon-cleaning{background-image:url(../img/wf_carclean_w.svg); }
 							.icon.icon-tyres{background-image:url(../img/wf_wheelboth_w.svg); }
 							.icon.icon-windshield{background-image:url(../img/wf_windshield_w.svg); }
+							.icon.icon-repair{background-image:url(../img/wf_repair_w.svg); }
 							.icon.icon-emergency{background-image:url(../img/wf_emergency_w.svg); }
 							.icon.icon-others{background-image:url(../img/wf_otherservice_w.svg); }
 							.icon-text{
@@ -1446,6 +1447,108 @@
 						}
 						.servicing{
 						}
+						.vas{
+							.list-head{
+								float:left;
+								width:120px;
+								border-right: 1px solid #eaeaea;
+								.service-group-head{
+									padding: 10px;
+									position: relative;
+									height: 100px;
+									background-color: #eaeaea;
+									border-bottom: 1px solid #dadada;
+		//              width: 78px;
+									.dealer-logo-wrapper{
+										height:100%;
+										border: 1px solid #eaeaea;
+										line-height: 72px;
+										img{
+											width: 98px;
+											height: auto;
+											max-height: 98px;
+											vertical-align: middle;
+											overflow: hidden;
+											line-height: 16px;
+											font-size: 12px;
+										}
+										.aligner{
+											display: inline-block;
+											height: 72px;
+											width: 0px;
+											vertical-align: middle;
+										}
+									}
+									.dealer-number-label{
+										position: absolute;
+										right: 12px;
+										bottom:12px;
+										padding: 3px 3px;
+										height: 18px;
+										line-height: 18px;
+										width: 18px;
+										text-align: center;
+										border-radius: 6px;
+										background-color: #fff;
+										border: 1px solid #dedede;
+									}
+									.pointer{
+										position: absolute;
+										right: 0;
+										top: 54px;
+										display: none;
+										.left-triangle(6px, #000 );
+									}
+									.select-border{
+										position: absolute;
+										right: -1px;
+										width: 3px;
+										display: none;
+										top: 0px;
+										height: 120px;
+										background: #000;
+
+									}
+
+								}
+								.service-group-head.selected{
+										display: block;
+									.select-border,.pointer{
+										display: block;
+									}
+								}
+								.service-group-head:last-child{
+									border-bottom :  none;
+								}
+								.service-group-head:hover{
+									background-color: #fff;
+								}
+							}
+							.list-body{
+								margin-left:91px;
+								.service-group-item{
+									width: 100%;
+									border: 1px solid transparent;
+									border-bottom: 3px solid #e89b76;
+									display: none;
+		//              height: 63px;
+									.bot-row{
+
+										display: none;
+									.service-list-item{
+										border-bottom: none;
+									}
+									}
+								}
+								.service-group-item.expanded{
+									height: auto;
+									.bot-row{
+										display: block;
+									}
+								}
+
+							}
+						}
 						.cleaning{
 							.list-head{
 								float:left;
@@ -1633,6 +1736,11 @@ padding: 0px 40px;
                         .cleaning{
                           height:90px !important;
                         }
+					    .vas{
+                          height:90px !important;
+                        }
+
+
 						.td-info{
 							float:left;
 						}
@@ -1660,6 +1768,7 @@ padding: 0px 40px;
 						}
 
 						.td-service-info{
+						  width:250px;
 							float:left;
                           .doorstep{  font-size: 12px;
                             background: #c65169;
