@@ -400,7 +400,7 @@ var Global = {
         }
         $.each(addFeat, function(i,v){
             var num = (i%2)+1;
-            $('.modal-content').find('.form-row.additional').eq(0).find('.inp-col-'+num).append('<div class="clean-inp-wrapper"><input class="clean-inp-cbox" id="pick-drop-toggle" name="'+v+'" checked type="checkbox"><div class="label-div">'+v+'</div><div>');
+            $('.modal-content').find('.form-row.additional').eq(0).find('.inp-col-'+num).append('<div class="clean-inp-wrapper"><input class="clean-inp-cbox" id="pick-drop-toggle" name="'+v+'"  type="checkbox"><div class="label-div">'+v+'</div><div>');
         });
         if(serviceObj.dealer == 'Authorized'){
 
