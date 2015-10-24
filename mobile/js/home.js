@@ -67,9 +67,9 @@ var Global = {
                         //Commons.ajaxData('fetch_car_cleaning', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f54d4"},"get",_this, _this.loadCleaning)
                     break;
                 case "#step3":
-                        //Commons.ajaxData('fetch_servicing_details', {service_id:"5623c4715e1b2d6c3d50d4ed"},"get",_this, _this.loadServicingDetails)
-                        Commons.ajaxData('fetch_servicing_details', {service_id:"5623c4715e1b2d6c3d50d4ec"},"get",_this, _this.loadServicingDetails)
-                        //Commons.ajaxData('fetch_cleaning_details', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f5502",service_id:"560982095e1b2d72585fa9c8"},"get",_this, _this.loadCleaningDetails)
+                        //Commons.ajaxData('fetch_servicing_details', {service_id:"56294e1f5e1b2d3a19257d42"},"get",_this, _this.loadServicingDetails)
+                        //Commons.ajaxData('fetch_servicing_details', {service_id:"56294e1b5e1b2d3a19257bad"},"get",_this, _this.loadServicingDetails)
+                        Commons.ajaxData('fetch_cleaning_details', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f5502",service_id:"560982095e1b2d72585fa9c8"},"get",_this, _this.loadCleaningDetails)
                     break;
                 default:
                     break;
@@ -119,7 +119,7 @@ var Global = {
 
         });
         container.html(html);
-        container.listview("refresh")
+        container.listview().listview("refresh")
          var container2 = $('.service-image-holder');
         container2.html('');
         var html = '';
@@ -137,7 +137,7 @@ var Global = {
             html += '</div></a></li>';
         });
         container.html(html);
-        container.listview("refresh")
+        container.listview().listview("refresh")
          var container2 = $('.service-image-holder');
         container2.html('');
         var html = '';
@@ -177,7 +177,10 @@ var Global = {
         $.each(data, function(idx, val){
             html += '<li><a href="#"><img src=';
                 if(val.vendor=="Authorized")
-                    html+= logoMap['Authorized Car'] + val.brand + '.jpg >';
+                    if(val.car_bike=="Bike")
+                        html+= logoMap['Authorized Bike'] + val.brand + '.jpg >';
+                    else
+                        html+= logoMap['Authorized Car'] + val.brand + '.jpg >';
                 else
                     html+= logoMap[val.vendor] + '>';
 
@@ -192,7 +195,7 @@ var Global = {
 
         });
         container2.html(html);
-        container2.listview("refresh")
+        container2.listview().listview("refresh")
     },
     loadCleaningDetails : function(data){
         console.log(data)
@@ -224,14 +227,14 @@ var Global = {
             html += "</div><div class='service-name'>" + val.service;
             html += "</div><div class='description prices'>" + val.description;
             html += "</div><div class='prices'>"
-            html += "<table> <tr><td>Service Price</td><td>:&nbsp;&nbsp;&#8377;"+val.total_price+"</td></tr>"+ (val.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike>&nbsp;&nbsp;&#8377;200</strike>&nbsp;&nbsp;&#8377;0</td></tr>" : '')+" <tr class='total-row' ><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+val.total_price+"</td></tr></table>";
+            html += "<table><tr><td>Service Price</td><td>:&nbsp;&nbsp;"+(val.discount=='0' ? '' : "<strike>")+"&#8377;"+val.total_price + (val.discount=='0' ? '' : "</strike>&nbsp;&#8377;")+ (val.discount=='0' ? '' : parseInt(parseFloat(val.total_price)*(1.0-parseFloat(val.discount))))+"</td></tr>"+ (val.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike>&nbsp;&nbsp;&#8377;200</strike>&nbsp;&nbsp;&#8377;0</td></tr>" : '')+" <tr class='total-row' ><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+parseInt(parseFloat(val.total_price)*(1.0-parseFloat(val.discount)))+"</td></tr></table>";
             if(val.doorstep=="1")
                 html+= '<div class="doorstep"> &#x2302; Doorstep Service </div>';
             html += '</div></div>';
 
         });
         container2.html(html);
-        container2.listview("refresh")
+        container2.listview().listview("refresh")
     },
 
     loadCarMake : function(data){
@@ -266,8 +269,12 @@ var logoMap = {
     'Authorized Car':'img/brands/Car/',
     'Bosch':'img/dl-logo-Bosch.jpg',
     'ClickGarage Verified':'img/dl-logo-cgverified.png',
-    'Mahindra First Choice':'img/dl-logo-MFC.jpg'
+    'Mahindra First Choice':'img/dl-logo-MFC.jpg',
+    'ClickGarage Workshop':'img/dl-logo-cgverified.png',
+    'Bosch Car Care':'img/dl-logo-Bosch.jpg'
 };
+
+
 
 $(".menu-toggle-btn").click(function() {
 			$(this).toggleClass("open");
