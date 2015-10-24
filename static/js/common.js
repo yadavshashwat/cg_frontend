@@ -277,6 +277,21 @@ var Templates = {
                 {"tag":"div", "class":"state-update none-i"}
             ]
         }],
+        vas:[{
+            "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
+                {"tag":"div", "class":"top-row", "children":[
+                    {"tag":"div", "class":"wrapper detail-wrapper", "children":[
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select this Service </div>";}}
+                    ]},
+
+                    {"tag":"div", "class":"wrapper header-wrapper", "children":[
+                        {"tag":"div", "class":"due-div", "html":function(){return "<span class='clean-cat'>"+this.category +"</span>";}},
+//                        {"tag":"div", "class":"price-div", "html":function(){return "Type : <span>"+this['paid_free']+"</span>";}}
+                    ]}
+                ]},
+                {"tag":"div", "class":"state-update none-i"}
+            ]
+        }],
         dealers_old:[{
             "tag":"div","class":"dealer-list-item","data-id":"${id}", "data-name":"${vendor}", "children":[
                 {"tag":"div","class":"td-dealer-info", "children":[
@@ -425,6 +440,47 @@ var Templates = {
             }]
         },
         packages:[{
+            "tag":"div","class":"dealer-list-item cleaning","data-id":"${id}", "data-name":"${vendor}", "children":[
+                {"tag":"div","class":"td-dealer-info", "children":[
+                    {"tag":"div", "class":"vendor-name","html":function(){
+                         if($.trim(this.vendor) == 'Authorized'){
+                                     return this.brand + ' Authorized';
+                                }else{
+                                    return this.vendor;
+                                }}},
+                    {"tag":"div", "class":"dealer-logo-wrapper", "html":function(){
+                        if(this.vendor){
+                            if($.trim(this.vendor) == 'Authorized'){
+                                return '<img src="'+logoMap['Authorized']+ $.trim(this.brand)+'.jpg" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                            }else{
+                                return '<img src="'+logoMap[$.trim(this.vendor)]+'" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                            }
+                        }else{
+                            return 'N/A'
+                        }
+                    }},
+
+                ]},
+                {"tag":"div","class":"td-service-info", "children":[
+                    {"tag":"div", "class":"text","html":"${service}"},
+                    {"tag":"div", "class":"sub-text","html":"(${category})"},
+                    {"tag":"div", "class":"doorstep-div", "html":function(){
+                        if(this.doorstep=="1"){return "<span class='doorstep'><i class='fa fa-home'></i>&nbspDoorstep Service</span>"
+                        }else{
+                            return ''
+                        }}},
+                    {"tag":"div", "class":"description none-i","html":"${description}"},
+                ]},
+                {"tag":"div","class":"col-item td-dealer-select", "children":[
+                    // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
+                    {"tag":"div", "html":"<a class='dealer-add-to-cart' href='/cart'>Add to Cart</a>"}
+                ]},
+                {"tag":"div","class":"col-item td-price", "children":[
+    {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Service Price</td><td>:"+(this.discount=='0' ? '' : "<strike>")+"<i style='padding-left:10px' class='fa fa-inr'></i>"+this.total_price + (this.discount=='0' ? '' : "</strike>&nbsp<i style='padding-left:10px' class='fa fa-inr'></i>") + (this.discount=='0' ? '' : parseInt(parseFloat(this.total_price)*(1.0-parseFloat(this.discount))))+ "</td></tr>"+ (this.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>0</td></tr>" : '')+"<tr><td>Total</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(parseFloat(this.total_price)*(1.0-parseFloat(this.discount)))+"</td></tr></table>";}}                ]},
+                {"tag":"div","class":"col-item td-rating", "html":""}
+            ]
+        }],
+        packages_vas:[{
             "tag":"div","class":"dealer-list-item cleaning","data-id":"${id}", "data-name":"${vendor}", "children":[
                 {"tag":"div","class":"td-dealer-info", "children":[
                     {"tag":"div", "class":"vendor-name","html":function(){
