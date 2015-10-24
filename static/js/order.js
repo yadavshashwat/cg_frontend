@@ -325,7 +325,6 @@ var Global = {
         var _this = this;
 
         var modalCarContent = '<div class="form-wrapper" id="dealer-pick-form">' +
-                'Currently Unable to process this form. Please select add to cart'+
                 '<div class="form-row additional">' +
                     '<div class="form-col label-col"><div class="label-div">Additional Queries</div></div>' +
                     '<div class="form-col inp-col-1"></div>' +
