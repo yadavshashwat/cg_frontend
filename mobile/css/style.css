@@ -417,12 +417,13 @@ line-height: 10px;
     border: none;
 }
 
-.header-body h1 {
+.header-body .ui-title {
     color: #fff;
     text-shadow: none;
     font-family: Raleway;
     font-style: initial;
     font-weight: 400;
+    font-size: 15px;
    
 }
 .hlogo{
@@ -451,3 +452,46 @@ form label.error {
     font-size: small;
 }
 /*End - Checkout form - Bhuvan*/
+/*Start - Emergency - Bhuvan*/
+.emergency-body{
+    font-size:20px;
+    background:#fff;
+    font-family:Lato;
+    text-shadow: none;
+
+}
+.emergency-body .ui-content{
+    padding:0px;
+}
+
+.emergency-body .ui-listview{
+    margin: 0px;
+}
+
+
+/*End - Emergency - Bhuvan*/
+
+/* Start -  Denting styling*/
+
+.denting-body{
+    font-size:20px;
+    background:#fff;
+    font-family:Lato;
+    text-shadow: none;
+
+}
+
+.denting-body .ui-content{
+    padding:0px;
+}
+
+.denting-body .ui-listview{
+    margin: 0px;
+}
+/* End -  Denting styling*/
+
+.panel-img {
+    width: 160px;
+    height: 100px;
+    padding-top: 59px !important;
+}
