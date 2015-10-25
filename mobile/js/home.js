@@ -65,9 +65,16 @@ var Global = {
             var service_type = $(this).attr('id');
             $('#order-page-service').text(service_type);
             console.log(loc);
+            console.log(service_type);
 //            window.location.href = loc + '#order';
-            window.location.hash = '#order';
-//            $.mobile.changePage('#order',{'allowSamePageTransition':true});
+            if(service_type=="denting"){
+                window.location.hash = '#denting';
+                $.mobile.changePage('#denting',{'allowSamePageTransition':true});
+            }else{
+                window.location.hash = '#order';
+                $.mobile.changePage('#order',{'allowSamePageTransition':true});
+            }
+
         });
         
         $('.service-list .list-services').on('click', 'a', function(e){
@@ -219,10 +226,12 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         container.html('');
         var html = '';
         $.each(data, function(idx, val){
+            //console.log('alfa')
             html += '<li><a data-id=' + val.id + '  href="#"><div class="header-div">';
             html += val.category;
             html += '</div></a></li>';
         });
+        console.log(html)
         container.html(html);
         container.listview().listview("refresh")
          var container2 = $('.service-image-holder');
