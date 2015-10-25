@@ -53,7 +53,7 @@ var Commons = {
         'fetch_car_cancelled':'/api/fetch_car_cancelled/',
         'cancel_booking':'/api/cancel_booking/',
         'fetch_all_booking':'/api/fetch_all_booking/',
-
+        'fetch_additional_details':'/api/fetch_additional_details/',
     },
     getOrigin: function(){
         var origin = window.location.origin;
