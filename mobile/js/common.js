@@ -11,12 +11,13 @@ var Commons = {
     ajaxData : function(name, params, type, bindObj, success_cb, fail_cb){
         var _this = this;
         var url = _this.getOrigin() + _this.URLFromName[name];
-//        var url = 'http://www.clickgarage.in/' + _this.URLFromName[name];
+//        var url = 'http://local.clickgarage.in/' + _this.URLFromName[name];
         var callType = "GET";
         if(type == "POST" || type == "GET"){
             callType = type
         }
         console.log(name)
+        console.log(url)
         if(name){
             $.ajax({
                 url:url,
@@ -47,7 +48,10 @@ var Commons = {
         'fetch_car_booking':'/api/fetch_car_booking/',
         'fetch_car_cancelled':'/api/fetch_car_cancelled/',
         'cancel_booking':'/api/cancel_booking/',
-        'fetch_car_list':'/api/fetch_car_list/'
+        'fetch_car_list':'/api/fetch_car_list/',
+        'fetch_car_autocomplete':'/api/fetch_car_autocomplete/',
+        'fetch_Servicing_details':'/api/fetch_servicing_details/',
+        'fetch_Cleaning_details':'/api/fetch_cleaning_details/',
 
     },
     getOrigin: function(){
