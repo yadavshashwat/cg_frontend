@@ -140,7 +140,7 @@ var Global = {
                 oldC += ','
             }
             var newC = [obj.timestamp,obj.service, obj.dealer, obj.s_id].join('*');
-            Commons.ajaxData('add_to_cart', {'cookie':newC, 'car_id':_this.carSelected.id, 'car_size':_this.carSelected.size}, "get", _this, _this.redirectToCart );
+            Commons.ajaxData('add_to_cart', {'cookie':newC, 'car_id':_this.carSelected.id, 'car_size':_this.carSelected.size}, "POST", _this, _this.redirectToCart );
 
             var dealer = $(this).closest('.dealer-list-item').attr('data-name');
             obj.dealer = dealer.split(' ').join('#$');
@@ -319,29 +319,12 @@ var Global = {
             'top': ($(window).innerHeight() - h)/2,
             'left':($(window).innerWidth() - w)/2
         });
-        $('#popup-search-set-holder').on('submit', function(){
-            var c_id = $(this).find('#hidden-id-box').val();
-            var c_name = $(this).find('#omni-search-box').val();
-            if (!c_id.length){
-                return false
-            }else{
-                var loc = window.location.href;
-                loc = loc.split('.in/')[0]+'.in/';
-                local.clearKey('clgacart');
-                local.save('clgacarid',c_id);
-                local.save('clgacarname',c_name);
-                window.location = loc + 'order/?c_id='+c_id;
-                return false;
-            }
-
-        });
 
     },
     generateServiceDetailForm : function(serviceObj){
         var _this = this;
 
         var modalCarContent = '<div class="form-wrapper" id="dealer-pick-form">' +
-                'Currently Unable to process this form. Please select add to cart'+
                 '<div class="form-row additional">' +
                     '<div class="form-col label-col"><div class="label-div">Additional Queries</div></div>' +
                     '<div class="form-col inp-col-1"></div>' +
@@ -349,7 +332,7 @@ var Global = {
                 '</div>' +
                 '<div class="form-row additional">' +
                     '<div class="form-col label-col"><div class="label-div">Custom Requests</div></div>' +
-                    '<div class="form-col inp-col-double"><div class="clean-inp-wrapper"><textarea class="clean-inp-tabox pick-addr" type="" rows="3"></textarea></div></div>' +
+                    '<div class="form-col inp-col-double"><div class="clean-inp-wrapper"><textarea class="clean-inp-tabox cust-req" type="" rows="3"></textarea></div></div>' +
                 '</div>';
         if(serviceObj.dealer == 'Authorized'){
            modalCarContent+= '<div class="separator"></div>'+
@@ -417,7 +400,7 @@ var Global = {
         }
         $.each(addFeat, function(i,v){
             var num = (i%2)+1;
-            $('.modal-content').find('.form-row.additional').eq(0).find('.inp-col-'+num).append('<div class="clean-inp-wrapper"><input class="clean-inp-cbox" id="pick-drop-toggle" checked type="checkbox"><div class="label-div">'+v+'</div><div>');
+            $('.modal-content').find('.form-row.additional').eq(0).find('.inp-col-'+num).append('<div class="clean-inp-wrapper"><input class="clean-inp-cbox" id="pick-drop-toggle" name="'+v+'"  type="checkbox"><div class="label-div">'+v+'</div><div>');
         });
         if(serviceObj.dealer == 'Authorized'){
 
@@ -460,7 +443,68 @@ var Global = {
         });
         $('.modal-content').find('.detail-add-to-cart').on('click', function(e){
             var data_id = $(this).closest('.modal-content').attr('data-id');
-            $('.dealer-box').find('.dealer-list-item[data-id="'+data_id+'"]').find('.dealer-add-to-cart').click();
+            var data_name = $(this).closest('.modal-content').attr('data-name');
+
+            var obj = {};
+            obj.timestamp = (new Date()).getTime();
+            obj.service = _this.selectedSection;
+            obj.dealer = data_name;//$(this).closest('.dealer-list-item').attr('data-name');
+            obj.s_id = data_id;//$(this).closest('.dealer-list-item').attr('data-id');
+
+            var cook_obj = local.load();
+            var oldC = '';
+            if(cook_obj['clgacart']){
+                oldC = cook_obj['clgacart'];
+                oldC += ','
+            }
+            var newC = [obj.timestamp,obj.service, obj.dealer, obj.s_id].join('*');
+
+            var additional_info = {};
+
+
+            var addFeat = _this.additionalFeatures['car'];
+            if(_this.carSelected['car_bike'].toLowerCase() == 'bike'){
+                addFeat = _this.additionalFeatures['bike'];
+            }
+            $.each(addFeat, function(i,v){
+                var val = $('.modal-content').find('.form-row.additional').eq(0).find('.clean-inp-cbox[name="'+v+'"]').prop('checked');
+                additional_info[v] = val;
+//                var num = (i%2)+1;
+//                $('.modal-content').find('.form-row.additional').eq(0).find('.inp-col-'+num).append('<div class="clean-inp-wrapper"><input class="clean-inp-cbox" id="pick-drop-toggle" name="'+v+'" checked type="checkbox"><div class="label-div">'+v+'</div><div>');
+            });
+
+            additional_info['Custom Requests'] =  $('.modal-content').find('.form-row.additional').eq(1).find('.cust-req').val();
+
+            if( (data_name == 'Authorized') && ($('#dealer-pick-form').find('input[name="dealer-group-by"]:checked').length) ){
+                var dealerSort = $('#dealer-pick-form').find('input[name="dealer-group-by"]:checked').val();
+//                console.log(dealerSort)
+                if(dealerSort == 'dealer'){
+                    additional_info['Selected Authorized'] = {};
+                    additional_info['Selected Authorized']['address'] = $('#dealer-pick-form').find('.dealer-grouped .dealer-address').val();
+                    additional_info['Selected Authorized']['name'] = $('#dealer-pick-form').find('.dealer-grouped .dealer-name').val();
+                    //clean-inp-sbox dealer-name-address
+//                    additional_info['Selected Authorized'] = {};
+
+                }else if(dealerSort == 'region'){
+                    additional_info['Selected Authorized'] = {};
+                    additional_info['Selected Authorized']['address'] = $('#dealer-pick-form').find('.region-grouped .dealer-name-address').val();
+                    additional_info['Selected Authorized']['name'] = $('#dealer-pick-form').find('.region-grouped .dealer-name-address option:selected').attr('data-name');
+//                    additional_info['Selected Authorized'] = {};
+                }
+            }
+
+//            console.log(additional_info)
+
+            Commons.ajaxData('add_to_cart', {'cookie':newC, 'car_id':_this.carSelected.id, 'car_size':_this.carSelected.size, 'additional':JSON.stringify(additional_info)}, "POST", _this, _this.redirectToCart );
+
+            var dealer = data_name;//$(this).closest('.dealer-list-item').attr('data-name');
+            obj.dealer = dealer.split(' ').join('#$');
+            newC = [obj.timestamp,obj.service, obj.dealer, obj.s_id].join('*');
+            oldC += newC;
+            local.save('clgacart', oldC);
+
+
+//            $('.dealer-box').find('.dealer-list-item[data-id="'+data_id+'"]').find('.dealer-add-to-cart').click();
         });
         $('#popup-search-set-holder').on('submit', function(){
             var c_id = $(this).find('#hidden-id-box').val();
@@ -498,7 +542,7 @@ var Global = {
 
                 if(Global.dealerAddressObj.activeDealerGrouped[val]){
                     $.each(Global.dealerAddressObj.activeDealerGrouped[val], function(ix,vl){
-                        $('.modal-content').find('.form-row.dealer-grouped').eq(0).find('select.dealer-address').append('<option value="'+vl['address']+'">'+vl['address']+'</option>');
+                        $('.modal-content').find('.form-row.dealer-grouped').eq(0).find('select.dealer-address').append('<option value='+"'"+vl['address']+"'"+'>'+vl['address']+'</option>');
                     });
                 }
             });
@@ -518,7 +562,7 @@ var Global = {
                         $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-name-address').html('');
                 if(Global.dealerAddressObj.activeRegionGrouped[val2] && Global.dealerAddressObj.activeRegionGrouped[val2][val]){
                     $.each(Global.dealerAddressObj.activeRegionGrouped[val2][val], function(ix,vl){
-                        $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-name-address').append('<option value="'+vl['address']+'">'+vl['address']+'</option>');
+                        $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-name-address').append('<option data-name="'+vl['name']+'" value='+"'"+vl['address']+"'"+'>'+vl['address']+'</option>');
                     });
                 }
             });
@@ -540,9 +584,12 @@ var Global = {
         });
         content.html(popupHTML);
         container.append(overlay).append(content);
+
+
+
         if(closeFlag){
          container.find('.modal-content').append('<i class="close-btn fa fa-close"></i>');
-       }
+        }
         return container;
     },
     carData:null,
