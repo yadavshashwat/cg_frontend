@@ -28,7 +28,7 @@
 
 <body>
     
-    
+
 <!-- Don't Delete -- Start of first page -->
 
 <div data-role="page" class="landing-page" id="index">    
@@ -114,50 +114,57 @@
 
 
 
-    <div data-role="main" class="ui-content">    
-
-  
-	<div data-role="grid" data-control-title="Home" id="page1">
+    <div data-role="main" class="ui-content">
+        
+    <div>
+        <p id="service-page-car"></p>
+    </div>
+        
+    <div data-role="grid" data-control-title="Home" id="page1">
     <div class="ui-grid-a">
 	<!--ROW 1-->
 		<div class="ui-block-a">
 		<div class="service-img-wrapper padded">
-		<a href="1">
-		<img class="service-img" src="img/servicing1.jpg" alt="img1" />
+		<a class="service-option" id="Servicing">
+        <img class="service-img" src="img/servicing1.jpg" alt="img1" />
 		</a>
 		</div>
 		</div>
 		<div class="ui-block-b">
 		<div class="service-img-wrapper padded">
-		<a href="2"><img class="service-img"  src="img/cleaning1.jpg"  alt="img4" /></a>
+		<a class="service-option" id="Cleaning">
+        <img class="service-img"  src="img/cleaning1.jpg"  alt="img4" /></a>
 		</div>
 		<div class="imgCaption"></div>
 		</div>
 		<div class="ui-block-a">
 		<div class="service-img-wrapper padded">
-		<a href="3"><img class="service-img"  src="img/carcare.jpg"  alt="img4" /></a>
+		<a class="service-option" id="Carcare">
+        <img class="service-img"  src="img/carcare.jpg"  alt="img4" /></a>
 		</div>
 		<div class="imgCaption"></div>
 		</div>
 		<div class="ui-block-b">
 		<div class="service-img-wrapper padded">
-		<a href="3"><img class="service-img"  src="img/windshield1.jpg"  alt="img4" /></a>
+		<a class="service-option" id="Windshield">
+        <img class="service-img"  src="img/windshield1.jpg"  alt="img4" /></a>
 		</div>
 		<div class="imgCaption"></div>
 		</div>
 		<div class="ui-block-a">
 		<div class="service-img-wrapper padded">
-		<a href="3"><img class="service-img"  src="img/wheels1.jpg"  alt="img4" /></a>
+		<a class="service-option" id="Wheels">
+        <img class="service-img"  src="img/wheels1.jpg"  alt="img4" /></a>
 		</div>
 		<div class="imgCaption"></div>
 		</div>
 		<div class="ui-block-b">
 		<div class="service-img-wrapper ">
-		<a href="3"><img class="service-img"  src="img/emergency1.jpg"  alt="img4" /></a>
+		<a class="service-option" id="Emergency">
+        <img class="service-img"  src="img/emergency1.jpg"  alt="img4" /></a>
 		</div>
 		<div class="imgCaption"></div>
-		</div>
-		
+		</div>		
 	</div>
 	
 	</div>
@@ -170,7 +177,7 @@
 
 <!-- Don't Delete -- Start of third page -->
 
-<div data-role="page" class="order-body" id="step2">
+<div data-role="page" class="order-body" id="order">
     
 <!--CG Header-->
 	<div data-role="header" class="header-body" data-theme="a">
@@ -184,6 +191,9 @@
     
     <div data-role="content">
     
+    <div id="order-page-service-div">
+        <p id="order-page-service"></p>
+    </div>    
         
     <div class="service-image-holder">
 </div>
@@ -199,7 +209,7 @@
 <!-- Don't Delete -- End of third page -->
 
 <!-- Don't Delete -- Start of fourth page -->
-<div data-role="page" class="order-body" id="step3">
+<div data-role="page" class="order-body" id="vendor">
     
     <!--CG Header-->
 	<div data-role="header" class="header-body" data-theme="">
@@ -304,13 +314,9 @@
 </div>
 </div>
 
-
-
-
-
-
-    
 <!-- Don't Delete -- End of Booking page -->
+    
+    
 
 <!-- Don't Delete -- Start of nth (signup) page -->
 <div data-role="page" class="login-page" id="login">

@@ -86,13 +86,14 @@
                             <div class="aligner"></div>
                         </div>
                     </td>
-                    <td>
+                    <td class="detail">
                         {% if val.service == "servicing" %}
                             {% if val.service_detail.type_service == "Not Defined" %}
                                 <div>Minor Servicing</div>
                             {% else %}
                             <div> {{ val.service_detail.type_service }}</div>
                             {% endif %}
+                        <div class="additional"></div>
                         <!--<div> Regular Servicing </div>-->
                         {% elif val.service == "cleaning" %}
                         <div> {{ val.service_detail.service }} </div>

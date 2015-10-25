@@ -2,6 +2,11 @@
 var Global = {
     init:function(){
         var _this = this;
+        if(!_this.readyState){
+        _this.readyState = true;            
+        }else{
+            return;
+        }
     $("[data-role=panel]").panel().enhanceWithin();  
         _this.events();
         
@@ -17,23 +22,66 @@ var Global = {
 		}
 
 	});
-        //$('#submit-button').button('disable');
+//        $('#submit-button').button('disable');
     },
     events:function(){
         var _this = this;
         console.log('adding hanlder')
+        
         $('#brand-dropdown').on('change', function(){
             var brand = $(this).val();
-            console.log('p')
             Commons.ajaxData('fetch_car_list', {m_id:brand,cb_id:"Car"},"get",_this,_this.loadCarMake);
         });
+        
         $('#make-dropdown').on('change', function(){
-            console.log('p')
             var carmake = $(this).val();
             if(carmake){
                 $('#submit-button').button('enable');
             }
         });
+        
+        $('#submit-button').on('click', function(){
+            var car_model = $('#make-dropdown option:selected').text();
+            var car_brand = $('#brand-dropdown option:selected').text();
+            var car_fullname = [car_brand, car_model].join(' ');
+            var selected_c_id = $('#make-dropdown option:selected').attr('data-id');
+            Global.carSelected = {
+                'model':car_model,
+                'brand':car_brand,
+                'fullname':car_fullname,
+                'id':selected_c_id
+            }
+//            var loc = window.location.href;
+//            console.log(loc);
+//            window.location.hash = '#services';
+            window.location.hash = '#services';
+            console.log(car_fullname, selected_c_id)
+//            $.mobile.changePage('#services',{'allowSamePageTransition':true});
+            return false;
+        });
+        
+        $('#services .service-option').on('click', function(){
+            var loc = window.location.href;
+            var service_type = $(this).attr('id');
+            $('#order-page-service').text(service_type);
+            console.log(loc);
+//            window.location.href = loc + '#order';
+            window.location.hash = '#order';
+//            $.mobile.changePage('#order',{'allowSamePageTransition':true});
+        });
+        
+        $('.service-list .list-services').on('click', 'a', function(e){
+//            var $target  = $(e.target);
+            var serviceName = $('#order-page-service').text();
+            var serviceId = $(this).attr('data-id');
+//            console.log(classy);
+            Global.serviceSelected = {
+                'service':serviceName,
+                'id':serviceId                
+            }
+            window.location.hash = '#vendor';
+        });
+        
     
 //    Signup link show script    
     $("#signup-link").click(function(){
@@ -55,29 +103,62 @@ var Global = {
     $("#password2").hide();    
     });        
 
-    $( window ).on( "navigate", function( event, data ) {
+    $(window).on( "navigate", function( event, data ) {
           console.log( data.state.info );
           console.log( data.state.direction )
           console.log( data.state.url )
           console.log( data.state.hash )
             switch(data.state.hash){
-                case "#step2":
-                        //Commons.ajaxData('fetch_car_servicing', {c_id:"56097f3c5e1b2d72585f54d4"},"get",_this, _this.loadServicing)
-                    Commons.ajaxData('fetch_car_servicing', {c_id:"56097f3c5e1b2d72585f5502"},"get",_this, _this.loadServicing)
+                case "#services":
+//                        var param_autocomplete = $('#service-page-car').text().split(' ').join('%20');
+//                        console.log(param_autocomplete)
+//                        Commons.ajaxData('fetch_car_autocomplete', {query:param_autocomplete},"get",_this, _this.loadCid)
+                    if(!(Global.carSelected && Global.carSelected.id)){
+                        console.log('pageinit')
+                        window.location.hash = '#index';
+                    }
+
+                    break;
+                case "#order":
+                    console.log('p')
+                    console.log("_this.load"+$('#order-page-service').text())    
+                    if(!(Global.carSelected && Global.carSelected.id)){
+                        console.log('pageinit')
+                        window.location.hash = '#index';
+                        return;
+                    }
+                    Commons.ajaxData('fetch_car_servicing', {c_id:Global.carSelected.id},"get",_this,eval("_this.load"+$('#order-page-service').text()))
                         //Commons.ajaxData('fetch_car_cleaning', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f54d4"},"get",_this, _this.loadCleaning)
                     break;
-                case "#step3":
-                        //Commons.ajaxData('fetch_servicing_details', {service_id:"56294e1f5e1b2d3a19257d42"},"get",_this, _this.loadServicingDetails)
-                        //Commons.ajaxData('fetch_servicing_details', {service_id:"56294e1b5e1b2d3a19257bad"},"get",_this, _this.loadServicingDetails)
-                        Commons.ajaxData('fetch_cleaning_details', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f5502",service_id:"560982095e1b2d72585fa9c8"},"get",_this, _this.loadCleaningDetails)
+                case "#vendor":
+                    if(!(Global.carSelected && Global.carSelected.id && Global.serviceSelected)){
+                        console.log('pageinit')
+                        window.location.hash = '#index';
+                        return;
+                    }
+                    if(Global.serviceSelected.service == 'Servicing' || Global.serviceSelected.service == 'Cleaning'){
+                        Commons.ajaxData('fetch_'+Global.serviceSelected.service+'_details', {service_id:Global.serviceSelected.id, c_id:Global.carSelected.id, city_id:'Delhi'},"get",_this, eval("_this.load"+Global.serviceSelected.service.toTitleCase()+"Details"))
+                    }
                     break;
                 default:
                     break;
             }
         });
 
+$( document ).delegate("#order", "pageinit", function() {
+    if(!(Global.carSelected && Global.carSelected.id)){
+        console.log('pageinit')
+        window.location.hash = '#index';
+    }
+});        
+$( document ).delegate("#order", "pagebeforeload", function() {
+    if(!(Global.carSelected && Global.carSelected.id)){
+        console.log('pagebeforeload')
+        window.location.hash = '#index';
+    }
+});        
+        
     },
-
 
 
     loadServicing : function(data){
@@ -86,13 +167,18 @@ var Global = {
         container.html('');
         var html = '';
         $.each(data, function(idx, val){
-            html += '<li><a href="#"><div class="header-div">';
+            html += '<li><a data-id=' + val.id + ' href="#"><div class="header-div">';
+            //if(val.odometer)
+            //    html += String(val.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+'km';
+//=======
+//            html += '<li><a href="#"><div class="header-div">';
             if(val.type_service)
                 if(val.type_service=='Not Defined')
                     html += "I am not sure <div class = 'description'>I will go with minor servicing and would like post check up recommendations</div>"
                 //html += String(val.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+'km';
                 else
                     html += val.type_service;
+//>>>>>>> f0475a412421ded7713e6ec74648106c094d6356
             else
                 html += 'Regular Servicing';
             //html += ' or ';
@@ -126,6 +212,7 @@ var Global = {
         html +=  "<img src='img/servicing1.jpg'>"
         container2.html(html);
     },
+    
     loadCleaning : function(data){
         console.log(data)
         var container = $('.service-list .list-services');
@@ -144,9 +231,6 @@ var Global = {
         html +=  "<img src='img/cleaning1.jpg'>"
         container2.html(html);
     },
-
-
-
 
     loadServicingDetails : function(data){
         console.log(data)
@@ -197,6 +281,7 @@ var Global = {
         container2.html(html);
         container2.listview().listview("refresh")
     },
+    
     loadCleaningDetails : function(data){
         console.log(data)
         var container = $('.service-selection .selected-category');
@@ -243,7 +328,7 @@ var Global = {
         container.html('');
             var html = '<option value="choose-one" data-placeholder="true">Select Model</option>'
         $.each(data, function(ix, val){
-            html += '<option value="'+val.name+'">'+val.name+'</option>';
+            html += '<option data-id="'+val.id+'" value="'+val.name+'">'+val.name+'</option>';
 
         })
         container.html(html);

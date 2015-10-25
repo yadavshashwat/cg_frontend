@@ -40,6 +40,8 @@ var Commons = {
         'fetch_servicing_details':'/api/fetch_servicing_details_new/',
 
         'fetch_car_cleaning':'/api/fetch_car_cleaning/',
+        'fetch_car_windshield':'/api/fetch_car_windshield/',
+        'fetch_windshield_details':'/api/fetch_windshield_details/',
         'fetch_cleaning_details':'/api/fetch_cleaning_details/',
         'fetch_car_vas':'/api/fetch_car_vas/',
         'fetch_vas_details':'/api/fetch_vas_details/',
@@ -51,7 +53,7 @@ var Commons = {
         'fetch_car_cancelled':'/api/fetch_car_cancelled/',
         'cancel_booking':'/api/cancel_booking/',
         'fetch_all_booking':'/api/fetch_all_booking/',
-
+        'fetch_additional_details':'/api/fetch_additional_details/',
     },
     getOrigin: function(){
         var origin = window.location.origin;
@@ -188,6 +190,7 @@ var logoMap = {
     'Mahindra First Choice':'../static/img/dl-logo-MFC.jpg',
     'ClickGarage Workshop':'../static/img/dl-logo-cgverified.png',
     'Bosch Car Care':'../static/img/dl-logo-Bosch.jpg',
+    'AIS':'../static/img/ais.png',
 };
 
 var Templates = {
@@ -276,6 +279,19 @@ var Templates = {
                 ]},
                 {"tag":"div", "class":"state-update none-i"}
             ]
+        }],
+        windshield:[{
+            "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
+                {"tag":"div", "class":"top-row", "children":[
+                    {"tag":"div", "class":"wrapper detail-wrapper", "children":[
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select this Product </div>";}}
+                    ]},
+
+                    {"tag":"div", "class":"wrapper header-wrapper", "children":[
+                        {"tag":"div", "class":"due-div", "html":function(){return "<span class='service-cat'>"+this.ws_type +"</span>";}},
+                        ]
+                    }]
+                }]
         }],
         vas:[{
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
@@ -518,6 +534,43 @@ var Templates = {
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
     {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Service Price</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+this.total_price+"</td></tr>"+ (this.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>0</td></tr>" : '')+"<tr><td>Total</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+this.total_price+"</td></tr></table>";}}                ]},
+                {"tag":"div","class":"col-item td-rating", "html":""}
+            ]
+        }],
+        
+        ws_subtype:[{
+            "tag":"div","class":"dealer-list-item","data-id":"${id}", "data-name":"${vendor}", "children":[
+                {"tag":"div","class":"td-dealer-info", "children":[
+                    {"tag":"div", "class":"vendor-name","html":function(){
+                        return this.vendor;
+                    }},
+                    {"tag":"div", "class":"dealer-logo-wrapper", "html":function(){
+                        return '<img src="'+logoMap[$.trim(this.vendor)]+'" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                    }},
+                ]},
+                {"tag":"div","class":"td-service-info", "children":[
+                    {"tag":"div", "class":"text","html":function(){
+                        if($.this.ws_type=='Front Windshield'){
+                            return '';
+                        }
+                        else if($.this.ws_type=='Rear Windshield'){
+                            return '<p>Type : '+this.ws_subtype+'<p>'; 
+                        }
+                        else{
+                            return '<p>Position : '+this.ws_subtype+'<p>'; 
+                        }
+                    }},
+                ]},
+                {"tag":"div","class":"col-item td-dealer-select", "children":[
+                    // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
+
+                    {"tag":"div", "html":"<a class='dealer-add-to-cart', href='/cart'>Add to Cart</a>"}
+                ]},
+                {"tag":"div","class":"td-price", "children":[
+                    {"tag":"div", "class":"table-parts","html":function(){
+                        return "Price:"+parseInt(Math.ceil((this.price_total)));
+                    }}
+                    ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
         }]

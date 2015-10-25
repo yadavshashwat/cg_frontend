@@ -16,6 +16,8 @@ var Global = {
         $('#car-select-box').trigger('change');
         if(Global.loginFlag){
             local.clearKey('clgacart');
+           Commons.ajaxData('fetch_additional_details', {}, "GET", _this, _this.updateCartItems );
+
         }
     },
     setLogos : function(){
@@ -61,11 +63,62 @@ var Global = {
                 Commons.ajaxData('add_to_cart', {'cookie':ts, 'delete':true}, "get", _this, function(){});
             }
         });
+        $('.table-holder').on('click', '.max-min', function(e){
+            var minDiv = $(this).closest('.additional');
+            if(minDiv.hasClass('minimized')){
+                minDiv.removeClass('minimized').addClass('maximized');
+            }else if(minDiv.hasClass('maximized')){
+                minDiv.removeClass('maximized').addClass('minimized');
+            }else{
+                minDiv.addClass('minimized');
+            }
+        });
         if(!Global.loginFlag){
             $('.checkout-btn.login-in').on('click', function(){
                 $('#sign-up-in-dash').click();
             });
         }
+    },
+    updateCartItems : function(data){
+        $.each(data, function(ts, iData){
+            if(iData.additional_data){
+                if( $('.table-holder').find('tr[ts="'+ts+'"]') && $('.table-holder').find('tr[ts="'+ts+'"]').length ){
+                    var trDiv = $('.table-holder').find('tr[ts="'+ts+'"]').eq(0).find('td.detail .additional');
+                    console.log(iData.additional_data)
+                    var html_feat = '';
+                    var html_custom = '';
+                    var html_address = '';
+                    $.each(iData.additional_data, function(feat,val){
+                        if(feat == 'Custom Requests' && val && val.length){
+                            html_custom = '<div>Custom Requests : <span class="cust-feat">'+val+'</span></div>';
+                        }else if(feat == 'Selected Authorized'){
+                            html_address = '<div>Dealer Name : <span class="d-name">';
+//                            console.log(val.name)
+                            if(val.name){
+                                html_address += val.name
+                            }
+                            html_address += '</span><br/>Dealer Address : <span  class="d-address">';
+                            if(val.address){
+                                html_address += val.address
+                            }
+                            html_address += '</span></div>';
+                        }else{
+                            if(val && val != 'false'){
+                                html_feat += '<span class="ad-feat">'+feat+'</span>';
+                            }
+                        }
+                    });
+                    console.log(html_address)
+                    html_feat = '<div> Additional Requests : '+html_feat+'</div>';
+//                    $(trDiv).text(JSON.stringify(iData.additional_data));
+                    $(trDiv).html(html_feat+html_custom+html_address)
+                    if($(trDiv).height() > 40){
+                        $(trDiv).addClass('minimized').append('<i class="fa max-min"></i>');
+                    }
+
+                }
+            }
+        });
     }
 
 }

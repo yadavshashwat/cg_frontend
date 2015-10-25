@@ -3193,7 +3193,59 @@ label.clean-sbox-wrapper {
 
 					}
 					tbody{
+                      .detail{
+                        .additional{
+                          position: relative;
+                          overflow: hidden;
+                          font-weight: bold;
+                          line-height: 18px;
+                          .ad-feat{
+                            margin-right: 6px;
+                            font-weight: normal;
+                          }
+                          .ad-feat::after{
+                            content: ",";
+                          }
+                          .feat:last-child{
+                            margin-right: 6px;
+                          }
+                          .feat:last-child::after{
+                            content: ".";
+                          }
+                          .cust-feat{
+                            font-weight: normal;
+                          }
+                          .d-name, .d-address{
+                            font-weight: normal;
+                          }
+                        }
+                        .max-min{
+                          position: absolute;
+                          right:0px;
+                          bottom: 0px;
+                          font-size:12px;
+                          cursor: pointer;
+                          line-height: 14px;
+                        }
+                        .minimized{
+                          max-height: 36px;
+                          .max-min::before{
+                            content: '...';
+                            margin-right: 4px;
+                          }
+                          .max-min::after{
+//                            content: "\f0fe";
+                            content: "more";
+                          }
+                        }
+                        .maximized{
+                          .max-min::after{
+//                            content: "\f146";
+                            content: "less";
+                          }
 
+                        }
+                      }
 					}
 					.cart-table{
 						

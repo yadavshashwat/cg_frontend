@@ -50,7 +50,7 @@ var Global = {
                 if(mine.hasClass('loaded')){
 
                 }else{
-                    if(classy == 'servicing' || classy == 'cleaning' || classy == 'vas'){
+                    if(classy == 'servicing' || classy == 'cleaning' || classy == 'vas' || classy == 'windshield'){
                         Commons.ajaxData('fetch_car_'+classy , {c_id:_this.carSelected.id},"get",_this, eval("_this.load"+classy.toTitleCase()))
                     }
                 }
@@ -77,8 +77,9 @@ var Global = {
             if($target.closest('.vendor-div').length || $target.closest('.state-update').length){
                 var classy = $(this).closest('.section-content-item').attr('data-class');
                 var s_id = $(this).attr('data-id');
+//                console.log('s_id:'+s_id)
                 _this.selectedSection = classy;
-                if(classy == 'servicing' || classy == 'cleaning' || classy == 'vas'){
+                if(classy == 'servicing' || classy == 'cleaning' || classy == 'vas' || classy == 'windshield'){
                     var data = {};
                     data.state = 'dealer';
                     if($target.closest('.vendor-div').length){
@@ -87,7 +88,7 @@ var Global = {
                         workflowState.workflowBarUpdate(data.state);
                     }
                     console.log("_this.load"+classy.toTitleCase()+"Details");
-                    Commons.ajaxData('fetch_'+classy+'_details', {service_id:s_id, c_id:_this.carSelected.id},"get",_this, eval("_this.load"+classy.toTitleCase()+"Details") )
+                    Commons.ajaxData('fetch_'+classy+'_details', {service_id:s_id, c_id:_this.carSelected.id, city_id:'Delhi'},"get",_this, eval("_this.load"+classy.toTitleCase()+"Details") )
                 }
             }else if($target.closest('.detail-wrapper').length){
                 if($(this).hasClass('minimized')){
@@ -227,7 +228,38 @@ var Global = {
             container.json2html(data, Templates.orderPage.packages, {append:true});
         }
     },
+    
+    loadWindshield : function(data){
+        console.log(data)
+        var container = $('.section-box .windshield');
+        container.html('');
+        container.json2html(data, Templates.orderPage.windshield, {append:true});
+//        container.append(json2html.transform(data,Templates.orderPage.services));
+        $.each(data, function(idx, val){
 
+        });
+
+    },
+    
+    loadWindshieldDetails : function(data){
+        console.log('windshield details',data);
+        if(data && data.length){
+            var common_data = {};
+            var common_keys = ["type_service", "parts_list", "wa_wb_present"];
+            $.each(common_keys, function(idx, val){
+                common_data[val] = data[0][val]
+            });
+            $('.section-select-holder').hide();
+            $('.dealer-select-holder').show();
+            var container = $('.dealer-box .dealer-listings');
+            container.html('');
+            container.json2html(data, Templates.orderPage.ws_subtype, {append:true});
+        }
+    },
+    
+    loadVas : function(data){
+        console.log(data);
+    },
     //Uncomment this
 
 //    loadVas : function(data){
