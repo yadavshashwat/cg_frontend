@@ -129,6 +129,9 @@ var Commons = {
             $('.logged-user-drpdwn').hide();
             }
         });
+        $('body').on('click', '.modal-container .close-btn', function(e){
+            $(this).closest('.modal-container').remove();
+        });
         $('#sign-up-in-home').on('click', function(e){
 //            console.log($('.modal-container'))
             $('.login-modal-container').show().animate({
@@ -286,6 +289,19 @@ var Templates = {
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
                         {"tag":"div", "class":"due-div", "html":function(){return "<span class='service-cat'>"+this.ws_type +"</span>";}},
+                        ]
+                    }]
+                }]
+        }],
+        vas:[{
+            "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
+                {"tag":"div", "class":"top-row", "children":[
+                    {"tag":"div", "class":"wrapper detail-wrapper", "children":[
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select this Service </div>";}}
+                    ]},
+
+                    {"tag":"div", "class":"wrapper header-wrapper", "children":[
+                        {"tag":"div", "class":"due-div", "html":function(){return "<span class='clean-cat'>"+this.category +"</span>";}},
 //                        {"tag":"div", "class":"price-div", "html":function(){return "Type : <span>"+this['paid_free']+"</span>";}}
                     ]}
                 ]},
@@ -326,7 +342,8 @@ var Templates = {
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
 
-                    {"tag":"div", "html":"<a class='dealer-add-to-cart', href='/cart'>Add to Cart</a>"}
+                    {"tag":"div", "html":"<a class='dealer-add-to-cart' href='/cart'>Add to Cart</a>"}
+
                 ]},
                 {"tag":"div","class":"td-price", "children":[
                     {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.parts_price)+"</td></tr><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr><tr id = 'total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.parts_price)+parseInt(Math.ceil((this.labour_price)))+parseInt(Math.ceil((this.labour_price*0.14)))+parseInt((this.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";}}
@@ -373,7 +390,8 @@ var Templates = {
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
 
-                    {"tag":"div", "html":"<a class='dealer-add-to-cart', href='/cart'>Add to Cart</a>"}
+                    {"tag":"div", "html":"<a class='dealer-add-to-cart' href='/cart'>Add to Cart</a>", "class":"none-i"},
+                    {"tag":"div", "html":"<a class='servicing-form-generate'>Add to Cart</a>"}
                 ]},
                 {"tag":"div","class":"td-price", "children":[
                     {"tag":"div", "class":"table-parts","html":function(){
@@ -394,7 +412,16 @@ var Templates = {
                             return "<table><tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.parts_price)+"</td></tr><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr><tr id = 'total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.parts_price)+parseInt(Math.ceil((this.labour_price)))+parseInt(Math.ceil((this.labour_price*0.14)))+parseInt((this.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
                     }}}
                     ]},
-                {"tag":"div","class":"col-item td-rating", "html":""}
+                {"tag":"div","class":"col-item td-rating", "html":""},
+                {"tag":"div","class":"none-i", "html":function(){
+                    if(Global && Global.dealerAddressObj){
+                        if(this.vendor == 'Authorized'){
+                            Global.dealerAddressObj[this.brand] = this.dealer_details;
+                        }
+                    }
+                    return JSON.stringify({'dealer_details':this.dealer_details, 'brand':this.brand, 'vendor':this.vendor});
+                }}
+
             ]
         }],
         cleaning_old:{
@@ -457,11 +484,53 @@ var Templates = {
                         if(this.doorstep=="1"){return "<span class='doorstep'><i class='fa fa-home'></i>&nbspDoorstep Service</span>"
                         }else{
                             return ''
-                        }}}
+                        }}},
+                    {"tag":"div", "class":"description none-i","html":"${description}"},
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
-                    {"tag":"div", "html":"<a class='dealer-add-to-cart', href='/cart'>Add to Cart</a>"}
+                    {"tag":"div", "html":"<a class='dealer-add-to-cart' href='/cart'>Add to Cart</a>"}
+                ]},
+                {"tag":"div","class":"col-item td-price", "children":[
+    {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Service Price</td><td>:"+(this.discount=='0' ? '' : "<strike>")+"<i style='padding-left:10px' class='fa fa-inr'></i>"+this.total_price + (this.discount=='0' ? '' : "</strike>&nbsp<i style='padding-left:10px' class='fa fa-inr'></i>") + (this.discount=='0' ? '' : parseInt(parseFloat(this.total_price)*(1.0-parseFloat(this.discount))))+ "</td></tr>"+ (this.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>0</td></tr>" : '')+"<tr><td>Total</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(parseFloat(this.total_price)*(1.0-parseFloat(this.discount)))+"</td></tr></table>";}}                ]},
+                {"tag":"div","class":"col-item td-rating", "html":""}
+            ]
+        }],
+        packages_vas:[{
+            "tag":"div","class":"dealer-list-item cleaning","data-id":"${id}", "data-name":"${vendor}", "children":[
+                {"tag":"div","class":"td-dealer-info", "children":[
+                    {"tag":"div", "class":"vendor-name","html":function(){
+                         if($.trim(this.vendor) == 'Authorized'){
+                                     return this.brand + ' Authorized';
+                                }else{
+                                    return this.vendor;
+                                }}},
+                    {"tag":"div", "class":"dealer-logo-wrapper", "html":function(){
+                        if(this.vendor){
+                            if($.trim(this.vendor) == 'Authorized'){
+                                return '<img src="'+logoMap['Authorized']+ $.trim(this.brand)+'.jpg" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                            }else{
+                                return '<img src="'+logoMap[$.trim(this.vendor)]+'" alt="'+this.vendor+'" /><div class="aligner"></div>';
+                            }
+                        }else{
+                            return 'N/A'
+                        }
+                    }},
+
+                ]},
+                {"tag":"div","class":"td-service-info", "children":[
+                    {"tag":"div", "class":"text","html":"${service}"},
+                    {"tag":"div", "class":"sub-text","html":"(${category})"},
+                    {"tag":"div", "class":"doorstep-div", "html":function(){
+                        if(this.doorstep=="1"){return "<span class='doorstep'><i class='fa fa-home'></i>&nbspDoorstep Service</span>"
+                        }else{
+                            return ''
+                        }}},
+                    {"tag":"div", "class":"description none-i","html":"${description}"},
+                ]},
+                {"tag":"div","class":"col-item td-dealer-select", "children":[
+                    // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
+                    {"tag":"div", "html":"<a class='dealer-add-to-cart' href='/cart'>Add to Cart</a>"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
     {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Service Price</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+this.total_price+"</td></tr>"+ (this.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>0</td></tr>" : '')+"<tr><td>Total</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+this.total_price+"</td></tr></table>";}}                ]},
@@ -922,18 +991,33 @@ var formCheck = {
 
             var thisHour = (new Date()).getHours() + 2;
             var thisMinute = (new Date()).getMinutes();
-            if(thisMinute > 30)
                 thisHour += 1
             if(thisHour < 8)
                 thisHour = 8
             if(thisHour >16)
                 thisHour = 16
+                var hr =  $(container).find('#date-time-pair .pick-up-time').val();
+                var ampm = $(container).find('#date-time-pair .pick-up-time').val();
+                if(hr){
+                    hr = hr.split(':')[0];
+                    hr = parseInt(hr);
+                }
+        if(ampm){
+            ampm = ampm.split(' ')[1];
+        }
+        if(hr && !isNaN(hr) && (hr != 12) && ampm == 'PM'){
+            hr = hr + 12
+        }
 
             var minTime = new Date(0,0,0,thisHour,0,0);
             //var maxTime = new Date(0,0,0,12,0,0);
             if(todayFlag){
                 $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'minTime',minTime);
-//                $(container).find('#date-time-pair .pick-up-time').timepicker('setTime',minTime);
+//                console.log(hr, thisHour)
+                if(hr < thisHour){
+                $(container).find('#date-time-pair .pick-up-time').timepicker('setTime',minTime);
+                    alert('Pick up time slots start from 2 hours after booking time');
+                }
             }else{
                 $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'minTime',new Date(0,0,0,8,0,0));
             }
@@ -942,7 +1026,20 @@ var formCheck = {
             $(container).find('#same-day-toggle').prop('checked', false);
         }else{
             if(sameDay){
-                $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'maxTime',new Date(0,0,0,11,0,0));
+                var maxSameDayHr = 11;
+                if(zyxCart.carData && zyxCart.carData.car_bike == 'Bike'){
+                    maxSameDayHr = 12
+                }
+                if(hr > maxSameDayHr){
+                    $('#same-day-toggle').prop('checked', false);
+                    if(maxSameDayHr >= 12){
+                    alert('Same day delivery can only be checked for bookings before 12 Noon')
+                    }else{
+                    alert('Same day delivery can only be checked for bookings before '+maxSameDayHr+' AM');
+                    }
+                }else{
+                $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'maxTime',new Date(0,0,0,maxSameDayHr,0,0));
+                }
 //                $(container).find('#date-time-pair .pick-up-time').timepicker('setTime',new Date(0,0,0,11,0,0));
             }else{
                 $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'maxTime',new Date(0,0,0,16,0,0));

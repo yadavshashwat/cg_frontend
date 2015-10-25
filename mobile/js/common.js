@@ -35,8 +35,10 @@ var Commons = {
     },
     URLFromName : {
         'fetch_all_cars':'/api/fetch_all_cars/',
-        'fetch_car_servicing':'/api/fetch_car_servicing/',
-        'fetch_servicing_details':'/api/fetch_servicing_details/',
+        //'fetch_car_servicing':'/api/fetch_car_servicing/',
+        //'fetch_servicing_details':'/api/fetch_servicing_details/',
+        'fetch_car_servicing':'/api/fetch_car_servicing_new/',
+        'fetch_servicing_details':'/api/fetch_servicing_details_new/',
         'fetch_car_cleaning':'/api/fetch_car_cleaning/',
         'fetch_cleaning_details':'/api/fetch_cleaning_details/',
         'fetch_car_vas':'/api/fetch_car_vas/',
@@ -183,7 +185,9 @@ var logoMap = {
     'Authorized Car':'../static/img/brands/Car/',
     'Bosch':'../static/img/dl-logo-Bosch.jpg',
     'ClickGarage Verified':'../static/img/dl-logo-cgverified.png',
-    'Mahindra First Choice':'../static/img/dl-logo-MFC.jpg'
+    'Mahindra First Choice':'../static/img/dl-logo-MFC.jpg',
+    'ClickGarage Workshop':'../static/img/dl-logo-cgverified.png',
+    'Bosch Car Care':'../static/img/dl-logo-Bosch.jpg',
 };
 
 var Templates = {

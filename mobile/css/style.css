@@ -121,7 +121,13 @@ line-height: 14px;
     font-weight:700;
     font-family: Lato;
     color: #616161;
+    white-space: nowrap;
+}
 
+.order-body .description{
+    font-weight: 200;
+    font-size: 10px;
+    white-space: pre-wrap;
 }
 
 .order-body .parts-div{

@@ -167,17 +167,27 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         container.html('');
         var html = '';
         $.each(data, function(idx, val){
+<<<<<<< HEAD
             html += '<li><a data-id=' + val.id + ' href="#"><div class="header-div">';
             if(val.odometer)
                 html += String(val.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+'km';
+=======
+            html += '<li><a href="#"><div class="header-div">';
+            if(val.type_service)
+                if(val.type_service=='Not Defined')
+                    html += "I am not sure <div class = 'description'>I will go with minor servicing and would like post check up recommendations</div>"
+                //html += String(val.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+'km';
+                else
+                    html += val.type_service;
+>>>>>>> f0475a412421ded7713e6ec74648106c094d6356
             else
-                html += '--km';
-            html += ' or ';
+                html += 'Regular Servicing';
+            //html += ' or ';
 
-            if(val.year)
-                html += val.year;
-            else
-                html += '--year';
+            //if(val.year)
+            //    html += val.year;
+            //else
+            //    html += '--year';
             html += '</div>';
             html += '<div class="checks-div">Regular Checks</div>';
             html += '<div class="checks-div">Washing</div>';
@@ -185,9 +195,12 @@ $( document ).delegate("#order", "pagebeforeload", function() {
             html += '<div class="parts-div">';
             // push the list
 
-            $.each(val.parts_replaced, function(i, part){
-               html += '<span class="part">' + part + '</span>';
-            });
+            if(val.car_bike=="Bike")
+                html += '<span class="part">Engine Oil</span>'+'<span class="part">Oil Filter</span>'+'<span class="part">Other Parts As Required</span>';
+            else
+                $.each(val.parts_replaced, function(i, part){
+                   html += '<span class="part">' + part + '</span>';
+                });
 
             html += '</div></a></li>';
 
@@ -227,14 +240,20 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         var html = '';
         var val = data[0]
             html += ' <div class="header">';
-            html += '<span class = "odo-read">' + String(val.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+'km </span><span class = "sub-cat">(Regular Servicing)</span></div>';
+            //html += '<span class = "odo-read">' + String(val.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+'km </span><span class = "sub-cat">(Regular Servicing)</span></div>';
+            html += '<span class = "odo-read">' + String(val.type_service) +'</span></div>';
+
             html += '</div>';
             html += '<div class="checks-div">Regular Checks</div>';
             html += '<div class="checks-div">Washing</div>';
              html += '<div class="parts-div">';
+        if(val.car_bike=="Bike")
+            html += '<span class="part">Engine Oil</span>'+'<span class="part">Oil Filter</span>'+'<span class="part">Other Parts As Required</span>';
+        else
             $.each(val.parts_list, function(i, part){
                html += '<span class="part">' + part + '</span>';
             });
+
         container.html(html);
         //container.listview("refresh")
         var container2 = $('.vendor-list .vendors');
