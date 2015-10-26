@@ -1065,7 +1065,7 @@ var formCheck = {
                     pincode : pick_pin,
                     landmark : pick_lmark,
                     city : pick_city,
-                    time : ((date.getHours()) + ':' + (date.getMinutes())),
+                    time : ((hrs) + ':' + (mts)),
                     date : ((date.getMonth()+1) + '/' + (date.getDate()) + '/' +(date.getYear()))
                 }
             };
