@@ -143,7 +143,33 @@ var zyxCart = {
                 $('.payment-step').find('.max-content,.completed-summary').addClass('none-i');
                 $('.payment-step').find('.min-header').removeClass('none-i');
 
-                var dataObj = formCheck.getSelectedAddress($('.address-form-holder'));
+                var dataObj = formCheck.getSelectedAddress($('.address-form-holder'),'regular');
+                var formDispCont = $('.address-step .completed-summary .info');
+                zyxCart.orderObj = dataObj;
+                console.log($(formDispCont));
+                console.log(dataObj);
+                $(formDispCont).find('.name').text(dataObj.name);
+                $(formDispCont).find('.number').text(dataObj.number);
+                $(formDispCont).find('.st-address').text(dataObj.pick.street);
+                $(formDispCont).find('.pincode').text(dataObj.pick.pincode);
+                $(formDispCont).find('.city').text(dataObj.pick.city);
+            }
+        });
+        $('.address-step .emerg-continue-btn').on('click', function(){
+            if(formCheck.emergAddressForm($('.address-form-holder'))){
+                //summarize previous steps
+                $('.login-step').find('.max-content,.min-header').addClass('none-i');
+                $('.login-step').find('.completed-summary').removeClass('none-i');
+                $('.address-step').find('.max-content,.min-header').addClass('none-i');
+                $('.address-step').find('.completed-summary').removeClass('none-i');
+                //set present
+                $('.confirm-step').find('.completed-summary,.min-header').addClass('none-i');
+                $('.confirm-step').find('.max-content').removeClass('none-i');
+                //minimize forward steps
+                $('.payment-step').find('.max-content,.completed-summary').addClass('none-i');
+                $('.payment-step').find('.min-header').removeClass('none-i');
+
+                var dataObj = formCheck.getSelectedAddress($('.address-form-holder'),'emergency');
                 var formDispCont = $('.address-step .completed-summary .info');
                 zyxCart.orderObj = dataObj;
                 console.log($(formDispCont));
@@ -197,14 +223,18 @@ var zyxCart = {
         });
         $('.confirm-step #place-order-btn').on('click', function(){
             var orderObj = {};
-            if(zyxCart.orderObj){
-                orderObj = zyxCart.orderObj;
+            if(zyxCart.emergency){
+                orderObj = formCheck.getSelectedAddress($('.address-form-holder'),'emergency');
             }else{
-                orderObj = formCheck.getSelectedAddress($('.address-form-holder'));
+                if(zyxCart.orderObj){
+                    orderObj = zyxCart.orderObj;
+                }else{
+                    orderObj = formCheck.getSelectedAddress($('.address-form-holder'),'regular');
+                }
             }
 
             orderObj['pick'] = JSON.stringify(orderObj['pick']);
-            orderObj['drop'] = JSON.stringify(orderObj['drop']);
+//            orderObj['drop'] = JSON.stringify(orderObj['drop']);
             var trarray = $('.confirm-step .table-holder table tbody').find('tr');
             var arry = [];
             $.each(trarray, function(ix, tr){
@@ -219,8 +249,12 @@ var zyxCart = {
             orderObj['car_id'] = $('.confirm-step .table-holder table').attr('data-id');
             orderObj['car_name'] = $('.confirm-step .table-holder table').attr('data-name');
 //            console.log('')
-            Commons.ajaxData('place_order', orderObj,"GET", _this, _this.onOrderPlace);
+                if(zyxCart.emergency){
+                    Commons.ajaxData('place_emergency_order', orderObj,"GET", _this, _this.onOrderPlace);
+                }else{
 
+                    Commons.ajaxData('place_order', orderObj,"GET", _this, _this.onOrderPlace);
+                }
         });
 
     },
