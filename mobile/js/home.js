@@ -65,9 +65,16 @@ var Global = {
             var service_type = $(this).attr('id');
             $('#order-page-service').text(service_type);
             console.log(loc);
+            console.log(service_type);
 //            window.location.href = loc + '#order';
-            window.location.hash = '#order';
-//            $.mobile.changePage('#order',{'allowSamePageTransition':true});
+            if(service_type=="denting"){
+                window.location.hash = '#denting';
+                $.mobile.changePage('#denting',{'allowSamePageTransition':true});
+            }else{
+                window.location.hash = '#order';
+                $.mobile.changePage('#order',{'allowSamePageTransition':true});
+            }
+
         });
         
         $('.service-list .list-services').on('click', 'a', function(e){
@@ -127,7 +134,7 @@ var Global = {
                         window.location.hash = '#index';
                         return;
                     }
-                    Commons.ajaxData('fetch_car_servicing', {c_id:Global.carSelected.id},"get",_this,eval("_this.load"+$('#order-page-service').text()))
+                    Commons.ajaxData('fetch_car_'+$('#order-page-service').text().toLowerCase(), {c_id:Global.carSelected.id},"get",_this,eval("_this.load"+$('#order-page-service').text()))
                         //Commons.ajaxData('fetch_car_cleaning', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f54d4"},"get",_this, _this.loadCleaning)
                     break;
                 case "#vendor":
@@ -167,19 +174,18 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         container.html('');
         var html = '';
         $.each(data, function(idx, val){
-<<<<<<< HEAD
             html += '<li><a data-id=' + val.id + ' href="#"><div class="header-div">';
-            if(val.odometer)
-                html += String(val.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+'km';
-=======
-            html += '<li><a href="#"><div class="header-div">';
+            //if(val.odometer)
+            //    html += String(val.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+'km';
+//=======
+//            html += '<li><a href="#"><div class="header-div">';
             if(val.type_service)
                 if(val.type_service=='Not Defined')
                     html += "I am not sure <div class = 'description'>I will go with minor servicing and would like post check up recommendations</div>"
                 //html += String(val.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+'km';
                 else
                     html += val.type_service;
->>>>>>> f0475a412421ded7713e6ec74648106c094d6356
+//>>>>>>> f0475a412421ded7713e6ec74648106c094d6356
             else
                 html += 'Regular Servicing';
             //html += ' or ';
@@ -206,7 +212,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
 
         });
         container.html(html);
-        container.listview("refresh")
+        container.listview().listview("refresh")
          var container2 = $('.service-image-holder');
         container2.html('');
         var html = '';
@@ -220,12 +226,14 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         container.html('');
         var html = '';
         $.each(data, function(idx, val){
-            html += '<li><a href="#"><div class="header-div">';
+            //console.log('alfa')
+            html += '<li><a data-id=' + val.id + '  href="#"><div class="header-div">';
             html += val.category;
             html += '</div></a></li>';
         });
+        console.log(html)
         container.html(html);
-        container.listview("refresh")
+        container.listview().listview("refresh")
          var container2 = $('.service-image-holder');
         container2.html('');
         var html = '';
@@ -262,7 +270,10 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         $.each(data, function(idx, val){
             html += '<li><a href="#"><img src=';
                 if(val.vendor=="Authorized")
-                    html+= logoMap['Authorized Car'] + val.brand + '.jpg >';
+                    if(val.car_bike=="Bike")
+                        html+= logoMap['Authorized Bike'] + val.brand + '.jpg >';
+                    else
+                        html+= logoMap['Authorized Car'] + val.brand + '.jpg >';
                 else
                     html+= logoMap[val.vendor] + '>';
 
@@ -272,12 +283,24 @@ $( document ).delegate("#order", "pagebeforeload", function() {
                 html+= '<div class="vendor-name">' + val.vendor;
 
             html += '</div><div class=prices>'
-            html += "<table> <tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;"+parseInt(val.parts_price)+"</td></tr><tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil(val.labour_price)+"</td></tr> <tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil((val.labour_price*0.14))+"</td></tr> <tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;<strike>&#8377;200</strike>&nbsp;&nbsp;&#8377;"+ (val.car_bike == 'Car' ? '0': '0')+"</td></tr><tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+(parseInt(val.parts_price)+parseInt(Math.ceil((val.labour_price)))+parseInt(Math.ceil((val.labour_price*0.14)))+parseInt((val.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
+
+
+
+            //html += "<table> <tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;"+parseInt(val.parts_price)+"</td></tr><tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil(val.labour_price)+"</td></tr> <tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil((val.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;<strike>&#8377;200</strike>&nbsp;&nbsp;&#8377;"+ (val.car_bike == 'Car' ? '0': '0')+"</td></tr><tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+(parseInt(val.parts_price)+parseInt(Math.ceil((val.labour_price)))+parseInt(Math.ceil((val.labour_price*0.14)))+parseInt((val.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
+
+            if(val.car_bike=="Car")
+                if(val.vendor=="Authorized")
+                    html +="<table><tr>Service Centre Bill Amount</tr><tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;<strike>&#8377;200</strike>&nbsp;&nbsp;&#8377;"+ (val.car_bike == 'Car' ? '0': '0')+"</td></tr></table>"
+                else
+                    html += "<table><tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;"+parseInt(val.parts_price)+"</td></tr><tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil(val.labour_price)+"</td></tr> <tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil((val.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;<strike>&#8377;200</strike>&nbsp;&nbsp;&#8377;"+ (val.car_bike == 'Car' ? '0': '0')+"</td></tr><tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+(parseInt(val.parts_price)+parseInt(Math.ceil((val.labour_price)))+parseInt(Math.ceil((val.labour_price*0.14)))+parseInt((val.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
+            else
+                html += "<table> <tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;"+parseInt(val.parts_price)+"</td></tr><tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil(val.labour_price)+"</td></tr> <tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil((val.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;<strike>&#8377;200</strike>&nbsp;&nbsp;&#8377;"+ (val.car_bike == 'Car' ? '0': '0')+"</td></tr><tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+(parseInt(val.parts_price)+parseInt(Math.ceil((val.labour_price)))+parseInt(Math.ceil((val.labour_price*0.14)))+parseInt((val.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
+
             html += '</div></div>';
 
         });
         container2.html(html);
-        container2.listview("refresh")
+        container2.listview().listview("refresh")
     },
     
     loadCleaningDetails : function(data){
@@ -310,14 +333,14 @@ $( document ).delegate("#order", "pagebeforeload", function() {
             html += "</div><div class='service-name'>" + val.service;
             html += "</div><div class='description prices'>" + val.description;
             html += "</div><div class='prices'>"
-            html += "<table> <tr><td>Service Price</td><td>:&nbsp;&nbsp;&#8377;"+val.total_price+"</td></tr>"+ (val.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike>&nbsp;&nbsp;&#8377;200</strike>&nbsp;&nbsp;&#8377;0</td></tr>" : '')+" <tr class='total-row' ><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+val.total_price+"</td></tr></table>";
+            html += "<table><tr><td>Service Price</td><td>:&nbsp;&nbsp;"+(val.discount=='0' ? '' : "<strike>")+"&#8377;"+val.total_price + (val.discount=='0' ? '' : "</strike>&nbsp;&#8377;")+ (val.discount=='0' ? '' : parseInt(parseFloat(val.total_price)*(1.0-parseFloat(val.discount))))+"</td></tr>"+ (val.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike>&nbsp;&nbsp;&#8377;200</strike>&nbsp;&nbsp;&#8377;0</td></tr>" : '')+" <tr class='total-row' ><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+parseInt(parseFloat(val.total_price)*(1.0-parseFloat(val.discount)))+"</td></tr></table>";
             if(val.doorstep=="1")
                 html+= '<div class="doorstep"> &#x2302; Doorstep Service </div>';
             html += '</div></div>';
 
         });
         container2.html(html);
-        container2.listview("refresh")
+        container2.listview().listview("refresh")
     },
 
     loadCarMake : function(data){
@@ -352,8 +375,12 @@ var logoMap = {
     'Authorized Car':'img/brands/Car/',
     'Bosch':'img/dl-logo-Bosch.jpg',
     'ClickGarage Verified':'img/dl-logo-cgverified.png',
-    'Mahindra First Choice':'img/dl-logo-MFC.jpg'
+    'Mahindra First Choice':'img/dl-logo-MFC.jpg',
+    'ClickGarage Workshop':'img/dl-logo-cgverified.png',
+    'Bosch Car Care':'img/dl-logo-Bosch.jpg'
 };
+
+
 
 $(".menu-toggle-btn").click(function() {
 			$(this).toggleClass("open");

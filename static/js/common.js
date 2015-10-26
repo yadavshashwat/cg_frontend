@@ -559,17 +559,27 @@ var Templates = {
                     }},
                 ]},
                 {"tag":"div","class":"td-service-info", "children":[
-                    {"tag":"div", "class":"text","html":function(){
-                        if($.this.ws_type=='Front Windshield'){
-                            return '';
-                        }
-                        else if($.this.ws_type=='Rear Windshield'){
-                            return '<p>Type : '+this.ws_subtype+'<p>'; 
+                    {"tag":"div", "class":"parts-div","html":function(){
+                        var html = '';
+                        if(this.ws_type=='Door Glass'){
+                            html += this.ws_subtype+' '+this.ws_type;
                         }
                         else{
-                            return '<p>Position : '+this.ws_subtype+'<p>'; 
+                            html += this.ws_type;
                         }
+                        return html;
                     }},
+                    {"tag":"div", "class":"parts-div","html":function(){
+                        var html = '';
+                        if(this.ws_subtype=='With Defogger'){
+                                html += '<span class="token-class">'+this.ws_subtype+'</span>&nbsp;';}
+                        if(this.colour=='Green'){
+                                html += '<span class="token-class">Green Tinted</span>&nbsp;';}
+                        return html;
+                    }},
+                    {"tag":"div", "class":"text","html":function(){
+                        return '<span class="doorstep"><i class="fa fa-home"></i>&nbspDoorstep Service</span>';
+                    }}
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
@@ -577,8 +587,13 @@ var Templates = {
                     {"tag":"div", "html":"<a class='dealer-add-to-cart', href='/cart'>Add to Cart</a>"}
                 ]},
                 {"tag":"div","class":"td-price", "children":[
-                    {"tag":"div", "class":"table-parts","html":function(){
-                        return "Price:"+parseInt(Math.ceil((this.price_total)));
+                    {"tag":"div", "class":"text","html":function(){
+                        if(this.price_total=='NA'){
+                            return "Conveyed post booking"
+                        }
+                        else {
+                            return 'Price (incl taxes) :'+'<i style="padding-left:10px" class="fa fa-inr"></i> '+parseInt(Math.ceil((this.price_total)));
+                        }
                     }}
                     ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}

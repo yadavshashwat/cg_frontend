@@ -267,40 +267,40 @@ var Global = {
     },
     //Uncomment this
 
-//    loadVas : function(data){
-//        console.log(data);
-//        var container = $('.section-box .vas');
-//        container.html('');
-//        container.json2html(data, Templates.orderPage.vas, {append:true});
-//
-////        var headHolder = $('.section-box .cleaning .list-head');
-////        headHolder.html('');
-////        headHolder.json2html(data, Templates.orderPage.cleaning.cleaning_group_head, {append:true});
-////        var bodyHolder = $('.section-box .cleaning .list-body');
-////        bodyHolder.html('');
-////        bodyHolder.json2html(data, Templates.orderPage.cleaning.cleaning_group_body, {append:true});
-//
-//
-////        container.append(json2html.transform(data,Templates.orderPage.services));
-//        $.each(data, function(idx, val){
-//
-//        });
-//    },
-//    loadVasDetails : function(data){
-//        console.log('cleaning details',data);
-//        if(data && data.length){
-//            var common_data = {};
-//            var common_keys = ["type_service", "parts_list", "wa_wb_present"];
-//            $.each(common_keys, function(idx, val){
-//                common_data[val] = data[0][val]
-//            });
-//            $('.section-select-holder').hide();
-//            $('.dealer-select-holder').show();
-//            var container = $('.dealer-box .dealer-listings');
-//            container.html('');
-//            container.json2html(data, Templates.orderPage.packages_vas, {append:true});
-//        }
-//    },
+    loadVas : function(data){
+        console.log(data);
+        var container = $('.section-box .vas');
+        container.html('');
+        container.json2html(data, Templates.orderPage.vas, {append:true});
+
+//        var headHolder = $('.section-box .cleaning .list-head');
+//        headHolder.html('');
+//        headHolder.json2html(data, Templates.orderPage.cleaning.cleaning_group_head, {append:true});
+//        var bodyHolder = $('.section-box .cleaning .list-body');
+//        bodyHolder.html('');
+//        bodyHolder.json2html(data, Templates.orderPage.cleaning.cleaning_group_body, {append:true});
+
+
+//        container.append(json2html.transform(data,Templates.orderPage.services));
+        $.each(data, function(idx, val){
+
+        });
+    },
+    loadVasDetails : function(data){
+        console.log('cleaning details',data);
+        if(data && data.length){
+            var common_data = {};
+            var common_keys = ["type_service", "parts_list", "wa_wb_present"];
+            $.each(common_keys, function(idx, val){
+                common_data[val] = data[0][val]
+            });
+            $('.section-select-holder').hide();
+            $('.dealer-select-holder').show();
+            var container = $('.dealer-box .dealer-listings');
+            container.html('');
+            container.json2html(data, Templates.orderPage.packages_vas, {append:true});
+        }
+    },
     //loadVas : function(data){
     //    console.log(data);
     //},
