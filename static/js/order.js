@@ -51,7 +51,9 @@ var Global = {
 
                 }else{
                     if(classy == 'servicing' || classy == 'cleaning' || classy == 'vas' || classy == 'windshield'){
-                        Commons.ajaxData('fetch_car_'+classy , {c_id:_this.carSelected.id},"get",_this, eval("_this.load"+classy.toTitleCase()))
+                        Commons.ajaxData('fetch_car_'+classy , {c_id:_this.carSelected.id},"get",_this, eval("_this.load"+classy.toTitleCase()));
+                    }else if(classy == 'repairs'){
+                    }else if( classy == 'emergency'){
                     }
                 }
             }else{
@@ -78,6 +80,7 @@ var Global = {
                 var classy = $(this).closest('.section-content-item').attr('data-class');
                 var s_id = $(this).attr('data-id');
 //                console.log('s_id:'+s_id)
+                console.log(classy);
                 _this.selectedSection = classy;
                 if(classy == 'servicing' || classy == 'cleaning' || classy == 'vas' || classy == 'windshield'){
                     var data = {};
@@ -89,6 +92,49 @@ var Global = {
                     }
                     console.log("_this.load"+classy.toTitleCase()+"Details");
                     Commons.ajaxData('fetch_'+classy+'_details', {service_id:s_id, c_id:_this.carSelected.id, city_id:'Delhi'},"get",_this, eval("_this.load"+classy.toTitleCase()+"Details") )
+                }else if(classy == 'repair'){
+//                    var s_id = $(this).attr('data-id');
+                   var data = {};
+                    data.state = 'dealer';
+                    if($target.closest('.vendor-div').length){
+                        workflowState.pushToHistory(data.state, data, '#'+data.state+'?s_id='+s_id);
+                        workflowState.setWorkflow(data.state, data, '#'+data.state+'?s_id='+s_id);
+                        workflowState.workflowBarUpdate(data.state);
+                    }
+                    _this.loadRepairDetails(s_id);
+                }else if( classy == 'emergency'){
+                    var obj = {};
+                    obj.timestamp = (new Date()).getTime();
+                    obj.service = 'emergency';
+        //            obj.dealer = $(this).closest('.dealer-list-item').attr('data-name');
+                    obj.s_id = $(this).closest('.service-list-item').attr('data-id');
+
+                    var cook_obj = local.load();
+                    var oldC = '';
+                    if(cook_obj['clgacart']){
+                        oldC = cook_obj['clgacart'];
+                        oldC += ','
+                    }
+                    var newC = [obj.timestamp,obj.service, '--', obj.s_id].join('*');
+                    var modalHTML = '<div class="ajax-wait" style="color:#fff;">Waiting for server response</div>';
+                    $('.order-body').append(_this.genericModal(modalHTML, false));
+                    var w = $('.modal-content').width();
+                    var h = $('.modal-content').height();
+                    $('.modal-content').css({
+                        'top': ($(window).innerHeight() - h)/2,
+                        'left':($(window).innerWidth() - w)/2
+                    });
+
+                    Commons.ajaxData('add_to_cart', {'cookie':newC, 'car_id':_this.carSelected.id, 'car_size':_this.carSelected.size}, "POST", _this, _this.redirectToCheckout );
+        //            var dealer = $(this).closest('.dealer-list-item').attr('data-name');
+        //            obj.dealer = dealer.split(' ').join('#$');
+                    newC = [obj.timestamp,obj.service, '--', obj.s_id].join('*');
+                    oldC += newC;
+        //            console.log(oldC);
+                    local.save('clgacart', oldC);
+//                    return false;
+
+//                    Commons.ajaxData('fetch_'+classy+'_details', {service_id:s_id, c_id:_this.carSelected.id, city_id:'Delhi'},"get",_this, eval("_this.load"+classy.toTitleCase()+"Details") )
                 }
             }else if($target.closest('.detail-wrapper').length){
                 if($(this).hasClass('minimized')){
@@ -150,7 +196,6 @@ var Global = {
             console.log(oldC);
             local.save('clgacart', oldC);
 
-
 //            Commons.ajaxData('add_to_cart', {})
         });
         $('.dealer-box').on('click', '.info-icon', function(e){
@@ -161,12 +206,35 @@ var Global = {
         $('#settings-drpdwn').on('click', function(e){
             $(this).parent().find('.logged-user-drpdwn').toggle();
         });
+        $('.dealer-box').on('click', '.repair-add-to-cart', function(e){
+            var obj = {};
+            obj.timestamp = (new Date()).getTime();
+            obj.service = 'repair';
+//            obj.dealer = $(this).closest('.dealer-list-item').attr('data-name');
+            obj.s_id = $(this).closest('.dealer-list-item').attr('data-id');
 
+            var cook_obj = local.load();
+            var oldC = '';
+            if(cook_obj['clgacart']){
+                oldC = cook_obj['clgacart'];
+                oldC += ','
+            }
+            var newC = [obj.timestamp,obj.service, '--', obj.s_id].join('*');
+
+            Commons.ajaxData('add_to_cart', {'cookie':newC, 'car_id':_this.carSelected.id, 'car_size':_this.carSelected.size}, "POST", _this, _this.redirectToCart );
+//            var dealer = $(this).closest('.dealer-list-item').attr('data-name');
+//            obj.dealer = dealer.split(' ').join('#$');
+            newC = [obj.timestamp,obj.service, '--', obj.s_id].join('*');
+            oldC += newC;
+//            console.log(oldC);
+            local.save('clgacart', oldC);
+            return false;
+        });
+        $('.dealer-box').on('click', '.emergency-checkout', function(e){
+        });
         $('#selected-details .edit-btn').on('click', function(e){
             Global.generateCarSelect();
         });
-
-
 
     },
     
@@ -193,6 +261,7 @@ var Global = {
             });
             $('.section-select-holder').hide();
             $('.dealer-select-holder').show();
+            $('.dealer-select-holder .dealer-headers').show();
             var container = $('.dealer-box .dealer-listings');
             container.html('');
             container.json2html(data, Templates.orderPage.dealers, {append:true});
@@ -228,6 +297,7 @@ var Global = {
             });
             $('.section-select-holder').hide();
             $('.dealer-select-holder').show();
+            $('.dealer-select-holder .dealer-headers').show();
             var container = $('.dealer-box .dealer-listings');
             container.html('');
             container.json2html(data, Templates.orderPage.packages, {append:true});
@@ -256,6 +326,8 @@ var Global = {
             });
             $('.section-select-holder').hide();
             $('.dealer-select-holder').show();
+            $('.dealer-select-holder .dealer-headers').show();
+
             var container = $('.dealer-box .dealer-listings');
             container.html('');
             container.json2html(data, Templates.orderPage.ws_subtype, {append:true});
@@ -296,6 +368,7 @@ var Global = {
             });
             $('.section-select-holder').hide();
             $('.dealer-select-holder').show();
+            $('.dealer-select-holder .dealer-headers').show();
             var container = $('.dealer-box .dealer-listings');
             container.html('');
             container.json2html(data, Templates.orderPage.packages_vas, {append:true});
@@ -305,6 +378,74 @@ var Global = {
     //    console.log(data);
     //},
     paneScrolls:function(){
+
+    },
+    loadRepairDetails : function(id){
+        console.log(id);
+        var _this = this;
+        var container = $('.dealer-box .dealer-listings');
+        if(id == 'custom'){
+            $('.section-select-holder').hide();
+            $('.dealer-select-holder').show();
+            $('.dealer-select-holder .dealer-headers').hide();
+            container.html('');
+            var html = '<div class="form-wrapper" id="repair-detail-form">' +
+                '<div class="form-row additional">' +
+                    '<div class="form-col label-col"><div class="label-div">Additional Queries</div></div>' +
+                    '<div class="form-col inp-col-1"></div>' +
+                    '<div class="form-col inp-col-2"></div>' +
+                '</div>' +
+                '<div class="form-row additional">' +
+                    '<div class="form-col label-col"><div class="label-div">Custom Requests</div></div>' +
+                    '<div class="form-col inp-col-double"><div class="clean-inp-wrapper"><textarea class="clean-inp-tabox cust-req" type="" rows="3"></textarea></div></div>' +
+                '</div>';
+           html += '<div class="form-row" style="text-align: center;"><a class="repair-add-to-cart" href="/cart">Add to Cart</a></div>' +
+               '</div>';
+            $(container).html(html);
+        var addFeat = _this.additionalRepairs['car'];
+        if(_this.carSelected['car_bike'].toLowerCase() == 'bike'){
+            addFeat = _this.additionalRepairs['bike'];
+        }
+        $.each(addFeat, function(i,v){
+            var num = (i%2)+1;
+            $(container).find('.form-row.additional').eq(0).find('.inp-col-'+num).append('<div class="clean-inp-wrapper"><input class="clean-inp-cbox" id="pick-drop-toggle" name="'+v+'"  type="checkbox"><div class="label-div">'+v+'</div><div>');
+        });
+
+        }else if(id == 'dent-paint'){
+            $('.section-select-holder').hide();
+            $('.dealer-select-holder').show();
+            $('.dealer-select-holder .dealer-headers').hide();
+            container.html('');
+            var html = '<div class="form-wrapper" id="repair-detail-form"  style="padding-top: 40px;">' +
+                '<div class="form-row additional">' +
+                    '<div class="form-col label-col"><div class="label-div">Details about the damage</div></div>' +
+                    '<div class="form-col inp-col-double"><div class="clean-inp-wrapper"><textarea class="clean-inp-tabox cust-req" type="" rows="3"></textarea></div></div>' +
+                '</div>'+
+                '<div class="form-row ">' +
+                '<div class="form-col label-col"><div class>Type of damage:</div></div>'+
+                '<div class="form-col inp-col-1"><div class="clean-inp-wrapper"><input type="radio" name="damage-type" value="replacement">Part Replacement</div></div>' +
+                '<div class="form-col inp-col-2"><div class="clean-inp-wrapper"><input type="radio" name="damage-type" value="repair">Repair/Paint</div></div>' +
+                '</div>';
+           html += '<div class="form-row" style="text-align: center;"><a class="repair-add-to-cart" href="/cart">Add to Cart</a></div>' +
+               '</div>';
+            $(container).html(html);
+        }else if(id == 'diagnostics'){
+            $('.section-select-holder').hide();
+            $('.dealer-select-holder').show();
+            var html = '<div class="form-wrapper" id="repair-detail-form"  style="padding-top: 40px;">' +
+                '<div class="form-row additional">' +
+                '<div class="form-col label-col"><div class="label-div">Tell us about the issue</div></div>' +
+                '<div class="form-col inp-col-double"><div class="clean-inp-wrapper"><textarea class="clean-inp-tabox cust-req" type="" rows="3"></textarea></div></div>' +
+                '</div>'+
+                '<div class="form-row" style="text-align: center;">We will get in touch with you soon!</div>';
+            $('.dealer-select-holder .dealer-headers').hide();
+            container.html('');
+           html += '<div class="form-row" style="text-align: center;"><a class="repair-add-to-cart" href="/cart">Add to Cart</a></div>' +
+               '</div>';
+            $(container).html(html);
+        }else{
+
+        }
 
     },
     generateCarSelect : function(){
@@ -362,7 +503,12 @@ var Global = {
         var _this = this;
 
         var modalCarContent = '<div class="form-wrapper" id="dealer-pick-form">' +
-                '<div class="form-row additional">' +
+                                '<div class="form-row ">' +
+                '<div class="form-col label-col"><div class>Select dealer:</div></div>'+
+                '<div class="form-col inp-col-1"><div class="clean-inp-wrapper"><input type="radio" name="dealer-group-by" value="region">By Region</div></div>' +
+                '<div class="form-col inp-col-2"><div class="clean-inp-wrapper"><input type="radio" name="dealer-group-by" value="dealer">By Dealer</div></div>' +
+                '</div>' +
+'<div class="form-row additional">' +
                     '<div class="form-col label-col"><div class="label-div">Additional Queries</div></div>' +
                     '<div class="form-col inp-col-1"></div>' +
                     '<div class="form-col inp-col-2"></div>' +
@@ -373,11 +519,6 @@ var Global = {
                 '</div>';
         if(serviceObj.dealer == 'Authorized'){
            modalCarContent+= '<div class="separator"></div>'+
-                '<div class="form-row ">' +
-                '<div class="form-col label-col"><div class>Select dealer:</div></div>'+
-                '<div class="form-col inp-col-1"><div class="clean-inp-wrapper"><input type="radio" name="dealer-group-by" value="region">By Region</div></div>' +
-                '<div class="form-col inp-col-2"><div class="clean-inp-wrapper"><input type="radio" name="dealer-group-by" value="dealer">By Dealer</div></div>' +
-                '</div>' +
                 '<div class="form-row dealer-grouped">' +
                     '<div class="form-col">' +
                         '<div class="label-div">Dealer</div>'+
@@ -638,8 +779,17 @@ var Global = {
         car : ['Clutch Overhaul', 'Interior Dry-cleaning', 'Brake Repair', 'Wheel Balancing', 'Wheel Alignment', 'AC Servicing', 'Injector Cleaning'],
         bike : ['Front Brake Repair',  'Rear Brake repair', 'Wheel Balancing', 'Wheel Alignment']
     },
+    additionalRepairs : {
+        car : ['Clutch Overhaul', 'Interior Dry-cleaning', 'Brake Repair', 'Wheel Balancing', 'Wheel Alignment', 'AC Servicing', 'Injector Cleaning'],
+        bike : ['Front Brake Repair',  'Rear Brake repair', 'Wheel Balancing', 'Wheel Alignment']
+    },
+
     redirectToCart : function(){
 
+    },
+    redirectToCheckout: function(){
+        $('.ajax-wait').text('redirecting to checkout page....');
+        document.location.href = Commons.getOrigin()+'/checkout';
     }
 };
 

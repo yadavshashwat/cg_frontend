@@ -49,6 +49,7 @@ var Commons = {
         'fetch_car_tyres':'/api/fetch_all_cleaningcatservices/',
         'add_to_cart':'/api/add_to_cart/',
         'place_order':'/api/place_order/',
+        'place_emergency_order':'/api/place_emergency_order/',
         'fetch_car_booking':'/api/fetch_car_booking/',
         'fetch_car_cancelled':'/api/fetch_car_cancelled/',
         'cancel_booking':'/api/cancel_booking/',
@@ -961,6 +962,67 @@ var formCheck = {
 //        }
         return true;
     },
+    emergAddressForm : function(container){
+
+        var valid = function(str){
+            if(!str || !(str.length)){
+                return false
+            }
+            return true;
+        };
+        var user_name = $(container).find('.user-name').val();
+        var user_number = $(container).find('.user-number').val();
+        var car_reg_number = $(container).find('.car-reg-no').val();
+
+        var pick_addr = $(container).find('.pick-addr').val();
+        var pick_pin = $(container).find('.pick-pin').val();
+        var pick_lmark = $(container).find('.pick-lmark').val();
+
+
+        if(!valid(user_name)){
+            $(container).find('.user-name').addClass('error');
+            return false
+        }
+        if(!valid(user_number)){
+            $(container).find('.user-number').addClass('error');
+            return false
+        }else{
+            if(isNaN(parseInt(user_number)) || user_number.length != 10){
+                $(container).find('.user-number').addClass('error');
+                return false
+            }
+        }
+
+
+        if(!valid(pick_addr)){
+            $(container).find('.pick-addr').addClass('error');
+            return false
+        }
+        if(!valid(pick_pin)){
+            $(container).find('.pick-pin').addClass('error');
+            return false
+        }else{
+            console.log(pick_pin.length)
+            if(isNaN(parseInt(pick_pin)) || pick_pin.length != 6){
+                $(container).find('.pick-pin').addClass('error');
+                return false
+            }
+        }
+        if(!valid(car_reg_number)){
+            $(container).find('.car-reg-no').addClass('error');
+            return false
+        }else{
+            if(car_reg_number.length > 10){
+                $(container).find('.car-reg-no').addClass('error');
+                return false
+            }
+        }
+//        if(!valid(pick_lmark)){
+//            $(container).find('.pick-lmark').addClass('error');
+//            return false
+//        }
+        return true;
+    },
     clearErrorEvent : function(e){
         if($(this).val() && $(this).val().length){
             $(this).removeClass('error');
@@ -969,7 +1031,7 @@ var formCheck = {
     setSelectedAddress : function(){
 
     },
-    getSelectedAddress : function(container){
+    getSelectedAddress : function(container,formType){
         var user_name = $(container).find('.user-name').val();
         var user_number = $(container).find('.user-number').val();
         var car_reg_number = $(container).find('.car-reg-no').val();
@@ -983,25 +1045,54 @@ var formCheck = {
         var drop_pin = $(container).find('.drop-pin').val();
         var drop_lmark = $(container).find('.drop-lmark').val();
         var drop_city = $(container).find('.drop-city').val();
-        var obj = {
-            name : user_name,
-            number : user_number,
-            reg_no : car_reg_number,
-            pick:{
-                street : pick_addr,
-                pincode : pick_pin,
-                landmark : pick_lmark,
-                city : pick_city,
-                time : pick_time,
-                date : pick_date
-            },
-            drop:{
-                street : drop_addr,
-                pincode : drop_pin,
-                landmark : drop_lmark,
-                city : drop_city
+        var obj = {}
+        if(formType = 'emergency'){
+            var date = new Date();
+            var hrs = date.getHours();
+            if(hrs<10){
+                hrs = '0'+hrs
             }
-        };
+            var mts = date.getMinutes();
+            if(mts<10){
+                mts = '0'+mts
+            }
+            obj = {
+                name : user_name,
+                number : user_number,
+                reg_no : car_reg_number,
+                pick:{
+                    street : pick_addr,
+                    pincode : pick_pin,
+                    landmark : pick_lmark,
+                    city : pick_city,
+                    time : ((date.getHours()) + ':' + (date.getMinutes())),
+                    date : ((date.getMonth()+1) + '/' + (date.getDate()) + '/' +(date.getYear()))
+                }
+            };
+//                orderItem['date'] = (date.getMonth()+1) + '/' + (date.getDate()) + '/' +(date.getYear());
+//                orderItem['time'] = (date.getHours()) + ':' + (date.getMinutes());
+
+        }else{
+            obj = {
+                name : user_name,
+                number : user_number,
+                reg_no : car_reg_number,
+                pick:{
+                    street : pick_addr,
+                    pincode : pick_pin,
+                    landmark : pick_lmark,
+                    city : pick_city,
+                    time : pick_time,
+                    date : pick_date
+                },
+                drop:{
+                    street : drop_addr,
+                    pincode : drop_pin,
+                    landmark : drop_lmark,
+                    city : drop_city
+                }
+            };
+        }
         return obj;
     },
     updateTime : function(container){
