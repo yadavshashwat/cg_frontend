@@ -58,6 +58,32 @@
 				-webkit-user-select: none;
 				-o-user-select: none;
 		}
+        .tooltip-wrapper{
+          z-index: 99;
+            position: absolute;
+          display: none;
+//            top: 32px;
+//            right: -6px;
+          .tri-tip{
+            position: absolute;
+//            top: -6px;
+            right: 6px;
+            height: 0px;
+            width: 0px;
+            border: 6px solid;
+            border-color: transparent transparent #c65169 transparent;
+            position: absolute;
+            right: 4px;
+          }
+          .tooltip-box{
+            margin-top: 10px;
+            background: #e89b76;
+            padding: 6px;
+            border-radius: 4px;
+            border: 3px solid #c65169;
+            color: #a63149;
+          }
+        }
 		.overlay{
 			position: absolute;
 			left:0px;
@@ -1768,6 +1794,7 @@ padding: 0px 40px;
 						}
 
 						.td-service-info{
+                          position: relative;
 						  width:250px;
 							float:left;
                           .doorstep{  font-size: 12px;
@@ -1783,12 +1810,23 @@ padding: 0px 40px;
 
                           }
 
-						  .description{}
+						  .description.tooltip-wrapper{
+                            top: 15px;
+                            right: -4px;
+                          }
 							.text{
 				font-size: 16px;
 				line-height: 32px;
 				font-weight: 500;
 							}
+                          .info-icon{
+                            margin-right: 6px;
+                            font-size: 12px;
+                            cursor: pointer;
+                            position: absolute;
+                            top: -6px;
+                            right: -6px;
+                          }
 							.sub-text{
 				font-size: 14px;
 				line-height: 24px;

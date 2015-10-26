@@ -153,6 +153,11 @@ var Global = {
 
 //            Commons.ajaxData('add_to_cart', {})
         });
+        $('.dealer-box').on('click', '.info-icon', function(e){
+            var parent = $(this).closest('.td-service-info');
+            $('.dealer-box').find('.td-service-info').not(parent).find('.description').hide();
+            var tooltip = $(parent).find('.description').toggle();
+        });
         $('#settings-drpdwn').on('click', function(e){
             $(this).parent().find('.logged-user-drpdwn').toggle();
         });

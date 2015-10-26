@@ -126,7 +126,10 @@ var Commons = {
         $('body').on('click', function(e){
             var $target = $(e.target);
             if( !$target.closest('.logged-user-drpdwn').length && !$target.closest('#settings-drpdwn').length ){
-            $('.logged-user-drpdwn').hide();
+                $('.logged-user-drpdwn').hide();
+            }
+            if( !$target.closest('.description.tooltip-wrapper').length && !$target.closest('.info-icon').length){
+                $('.description.tooltip-wrapper:visible').hide();
             }
         });
         $('body').on('click', '.modal-container .close-btn', function(e){
@@ -478,13 +481,20 @@ var Templates = {
 
                 ]},
                 {"tag":"div","class":"td-service-info", "children":[
-                    {"tag":"div", "class":"text","html":"${service}"},
+                    {"tag":"div", "class":"text", "children":[
+                        {"tag":"span", "html":"${service}"},
+                        {"tag":"span", "class":"info-icon fr","html":"Info <i class='fa fa-info-circle'></i>"},
+                    ]},
                     {"tag":"div", "class":"sub-text","html":"(${category})"},
                     {"tag":"div", "class":"doorstep-div", "html":function(){
                         if(this.doorstep=="1"){return "<span class='doorstep'><i class='fa fa-home'></i>&nbspDoorstep Service</span>"
                         }else{
                             return ''
                         }}},
+                    {"tag":"div","class":"description tooltip-wrapper","children":[
+                        {"tag":"div","class":"tri-tip"},
+                        {"tag":"div","class":"tooltip-box","html":"${description}"}
+                    ]},
                     {"tag":"div", "class":"description none-i","html":"${description}"},
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
