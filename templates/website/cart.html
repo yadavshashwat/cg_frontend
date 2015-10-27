@@ -100,7 +100,7 @@
                         <div> Cleaning <i class="fa fa-caret-right"></i> {{ val.service_detail.category }} </div>
                         {% elif val.service == "vas" %}
                         <div> {{ val.service_detail.service }} </div>
-                        <div> Cleaning <i class="fa fa-caret-right"></i> {{ val.service_detail.category }} </div>
+                        <div> Car Care <i class="fa fa-caret-right"></i> {{ val.service_detail.category }} </div>
                         {% endif %}
                     </td>
                     <!--<td>-->
@@ -118,6 +118,8 @@
                         </div>
                         {% endif %}
                         {% elif val.service == "cleaning" %}
+                        <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}</div>
+                        {% elif val.service == "vas" %}
                         <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}</div>
                         {% endif %}
 
