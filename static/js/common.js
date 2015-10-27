@@ -1046,7 +1046,7 @@ var formCheck = {
         var drop_lmark = $(container).find('.drop-lmark').val();
         var drop_city = $(container).find('.drop-city').val();
         var obj = {}
-        if(formType = 'emergency'){
+        if(formType && formType == 'emergency'){
             var date = new Date();
             var hrs = date.getHours();
             if(hrs<10){
