@@ -101,6 +101,9 @@
                         {% elif val.service == "vas" %}
                         <div> {{ val.service_detail.service }} </div>
                         <div> Car Care <i class="fa fa-caret-right"></i> {{ val.service_detail.category }} </div>
+                        {% elif val.service == "windshield" %}
+                        <div> {{ val.service_detail.service }} </div>
+                        <div> Windshield <i class="fa fa-caret-right"></i> {{ val.service_detail.ws_subtype }}&nbsp;({{ val.service_detail.ws_type }}) </div>
                         {% endif %}
                     </td>
                     <!--<td>-->
@@ -121,6 +124,14 @@
                         <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}</div>
                         {% elif val.service == "vas" %}
                         <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}</div>
+                        {% elif val.service == "windshield" %}
+                        {% if val.service_detail.price_total == "NA" %}
+                         <div class="price-div">
+                            Conveyed post booking
+                        </div>
+                         {% else %}
+                        <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.price_total }}</div>
+                        {% endif %}
                         {% endif %}
 
                     </td>

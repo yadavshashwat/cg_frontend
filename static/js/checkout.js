@@ -232,9 +232,8 @@ var zyxCart = {
                     orderObj = formCheck.getSelectedAddress($('.address-form-holder'),'regular');
                 }
             }
-
             orderObj['pick'] = JSON.stringify(orderObj['pick']);
-//            orderObj['drop'] = JSON.stringify(orderObj['drop']);
+            orderObj['drop'] = JSON.stringify(orderObj['drop']);
             var trarray = $('.confirm-step .table-holder table tbody').find('tr');
             var arry = [];
             $.each(trarray, function(ix, tr){
