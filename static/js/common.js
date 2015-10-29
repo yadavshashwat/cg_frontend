@@ -483,7 +483,7 @@ var Templates = {
                 ]},
                 {"tag":"div","class":"td-service-info", "children":[
                     {"tag":"div", "class":"text", "children":[
-                        {"tag":"span", "html":"${service}"},
+                        {"tag":"span","class":"car-care", "html":"${service}"},
                         {"tag":"span", "class":"info-icon fr","html":"Info <i class='fa fa-info-circle'></i>"},
                     ]},
                     {"tag":"div", "class":"sub-text","html":"(${category})"},
@@ -530,13 +530,20 @@ var Templates = {
 
                 ]},
                 {"tag":"div","class":"td-service-info", "children":[
-                    {"tag":"div", "class":"text","html":"${service}"},
+                    {"tag":"div", "class":"text", "children":[
+                        {"tag":"span","class":"car-care", "html":"${service}"},
+                        {"tag":"span", "class":"info-icon fr","html":"Info <i class='fa fa-info-circle'></i>"},
+                    ]},
                     {"tag":"div", "class":"sub-text","html":"(${category})"},
                     {"tag":"div", "class":"doorstep-div", "html":function(){
                         if(this.doorstep=="1"){return "<span class='doorstep'><i class='fa fa-home'></i>&nbspDoorstep Service</span>"
                         }else{
                             return ''
                         }}},
+                    {"tag":"div","class":"description tooltip-wrapper","children":[
+                        {"tag":"div","class":"tri-tip"},
+                        {"tag":"div","class":"tooltip-box","html":"${description}"}
+                    ]},
                     {"tag":"div", "class":"description none-i","html":"${description}"},
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
@@ -544,7 +551,7 @@ var Templates = {
                     {"tag":"div", "html":"<a class='dealer-add-to-cart' href='/cart'>Add to Cart</a>"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
-    {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Service Price</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+this.total_price+"</td></tr>"+ (this.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>0</td></tr>" : '')+"<tr><td>Total</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+this.total_price+"</td></tr></table>";}}                ]},
+    {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Service Price</td><td>:"+(this.discount=='0' ? '' : "<strike>")+"<i style='padding-left:10px' class='fa fa-inr'></i>"+this.total_price + (this.discount=='0' ? '' : "</strike>&nbsp<i style='padding-left:10px' class='fa fa-inr'></i>") + (this.discount=='0' ? '' : parseInt(parseFloat(this.total_price)*(1.0-parseFloat(this.discount))))+ "</td></tr>"+ (this.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>0</td></tr>" : '')+"<tr><td>Total</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(parseFloat(this.total_price)*(1.0-parseFloat(this.discount)))+"</td></tr></table>";}}                ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
         }],
