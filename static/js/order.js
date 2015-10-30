@@ -528,11 +528,6 @@ var Global = {
         var _this = this;
 
         var modalCarContent = '<div class="form-wrapper" id="dealer-pick-form">' +
-                                '<div class="form-row ">' +
-                '<div class="form-col label-col"><div class>Select dealer:</div></div>'+
-                '<div class="form-col inp-col-1"><div class="clean-inp-wrapper"><input type="radio" name="dealer-group-by" value="region">By Region</div></div>' +
-                '<div class="form-col inp-col-2"><div class="clean-inp-wrapper"><input type="radio" name="dealer-group-by" value="dealer">By Dealer</div></div>' +
-                '</div>' +
 '<div class="form-row additional">' +
                     '<div class="form-col label-col"><div class="label-div">Additional Queries</div></div>' +
                     '<div class="form-col inp-col-1"></div>' +
@@ -541,6 +536,11 @@ var Global = {
                 '<div class="form-row additional">' +
                     '<div class="form-col label-col"><div class="label-div">Custom Requests</div></div>' +
                     '<div class="form-col inp-col-double"><div class="clean-inp-wrapper"><textarea class="clean-inp-tabox cust-req" type="" rows="3"></textarea></div></div>' +
+                '</div>'+
+            '<div class="form-row ">' +
+                '<div class="form-col label-col"><div class>Select dealer:</div></div>'+
+                '<div class="form-col inp-col-1"><div class="clean-inp-wrapper"><input type="radio" name="dealer-group-by" value="region">By Region</div></div>' +
+                '<div class="form-col inp-col-2"><div class="clean-inp-wrapper"><input type="radio" name="dealer-group-by" value="dealer">By Dealer</div></div>' +
                 '</div>';
         if(serviceObj.dealer == 'Authorized'){
            modalCarContent+= '<div class="separator"></div>'+
@@ -620,14 +620,14 @@ var Global = {
                         if(!_this.dealerAddressObj['activeRegionGrouped'][city][region]){
                             _this.dealerAddressObj['activeRegionGrouped'][city][region] = [];
                         }
-                        _this.dealerAddressObj['activeRegionGrouped'][city][region].push({'address':v['address'],'name':v['name']});
+                        _this.dealerAddressObj['activeRegionGrouped'][city][region].push({'address':v['address'],'name':v['name'],'locality':v['locality']});
                     }
                 }
                 if(name){
                     if(!_this.dealerAddressObj['activeDealerGrouped'][name]){
                         _this.dealerAddressObj['activeDealerGrouped'][name] = [];
                     }
-                    _this.dealerAddressObj['activeDealerGrouped'][name].push({'address':v['address'],'name':v['name']});
+                    _this.dealerAddressObj['activeDealerGrouped'][name].push({'address':v['address'],'name':v['name'],'locality':v['locality']});
                 }
             });
             $.each(Object.keys(Global.dealerAddressObj.activeDealerGrouped), function(i,v){
@@ -745,7 +745,7 @@ var Global = {
 
                 if(Global.dealerAddressObj.activeDealerGrouped[val]){
                     $.each(Global.dealerAddressObj.activeDealerGrouped[val], function(ix,vl){
-                        $('.modal-content').find('.form-row.dealer-grouped').eq(0).find('select.dealer-address').append('<option value='+"'"+vl['address']+"'"+'>'+vl['address']+'</option>');
+                        $('.modal-content').find('.form-row.dealer-grouped').eq(0).find('select.dealer-address').append('<option value='+"'"+vl['address']+"'"+'>'+vl['locality']+'</option>');
                     });
                 }
             });
@@ -765,7 +765,7 @@ var Global = {
                         $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-name-address').html('');
                 if(Global.dealerAddressObj.activeRegionGrouped[val2] && Global.dealerAddressObj.activeRegionGrouped[val2][val]){
                     $.each(Global.dealerAddressObj.activeRegionGrouped[val2][val], function(ix,vl){
-                        $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-name-address').append('<option data-name="'+vl['name']+'" value='+"'"+vl['address']+"'"+'>'+vl['address']+'</option>');
+                        $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-name-address').append('<option data-name="'+vl['name']+'" value='+"'"+vl['address']+"'"+'>'+vl['name']+'&nbsp;-&nbsp;'+vl['locality']+'</option>');
                     });
                 }
             });
