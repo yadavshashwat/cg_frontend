@@ -591,6 +591,9 @@
                                 {% elif val.service == "windshield" %}
                                 <div> {{ val.service_detail.service }} </div>
                                 <div> Windshield <i class="fa fa-caret-right"></i> {{ val.service_detail.ws_subtype }}&nbsp;({{ val.service_detail.ws_type }}) </div>
+                                {% elif val.service == "repair" %}
+                                <div> {{ val.service_detail.service }} </div>
+                                <div> Repair <i class="fa fa-caret-right"></i> {{ val.service_detail.category }} </div>
                                 {% endif %}
                             </td>
                             <!--<td>-->
@@ -621,6 +624,8 @@
                                     {% else %}
                                 <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.price_total }}</div>
                                 {% endif %}
+                        {% elif val.service == "repair" %}
+                            <div class="price-div">Price estimate N/A for repairs</div>
                                 {% endif %}
 
                             </td>
