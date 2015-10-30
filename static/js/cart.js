@@ -91,6 +91,9 @@ var Global = {
                     $.each(iData.additional_data, function(feat,val){
                         if(feat == 'Custom Requests' && val && val.length){
                             html_custom = '<div>Custom Requests : <span class="cust-feat">'+val+'</span></div>';
+                        }else if(feat == 'Damage Type'){
+                            if(val && val.length)
+                                html_feat = '<div>Damage Type : <span class="cust-feat">'+val+'</span></div>';
                         }else if(feat == 'Selected Authorized'){
                             html_address = '<div>Dealer Name : <span class="d-name">';
 //                            console.log(val.name)
