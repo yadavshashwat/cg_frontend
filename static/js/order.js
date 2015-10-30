@@ -253,7 +253,7 @@ var Global = {
             oldC += newC;
 //            console.log(oldC);
             local.save('clgacart', oldC);
-            return false;
+//            return false;
         });
         $('.dealer-box').on('click', '.emergency-checkout', function(e){
         });
