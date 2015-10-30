@@ -211,7 +211,7 @@ var Global = {
             obj.timestamp = (new Date()).getTime();
             obj.service = 'repair';
 //            obj.dealer = $(this).closest('.dealer-list-item').attr('data-name');
-            obj.s_id = $(this).closest('.dealer-list-item').attr('data-id');
+            obj.s_id = $(this).closest('.form-wrapper').attr('data-id');
 
             var cook_obj = local.load();
             var oldC = '';
@@ -221,7 +221,32 @@ var Global = {
             }
             var newC = [obj.timestamp,obj.service, '--', obj.s_id].join('*');
 
-            Commons.ajaxData('add_to_cart', {'cookie':newC, 'car_id':_this.carSelected.id, 'car_size':_this.carSelected.size}, "POST", _this, _this.redirectToCart );
+            var additional_info = {};
+            if(obj.s_id == 'custom'){
+
+                var addFeat = _this.additionalFeatures['car'];
+                if(_this.carSelected['car_bike'].toLowerCase() == 'bike'){
+                    addFeat = _this.additionalFeatures['bike'];
+                }
+                $.each(addFeat, function(i,v){
+                    var val = $('.dealer-box #repair-detail-form').find('.form-row.additional').eq(0).find('.clean-inp-cbox[name="'+v+'"]').prop('checked');
+                    additional_info[v] = val;
+    //                var num = (i%2)+1;
+    //                $('.modal-content').find('.form-row.additional').eq(0).find('.inp-col-'+num).append('<div class="clean-inp-wrapper"><input class="clean-inp-cbox" id="pick-drop-toggle" name="'+v+'" checked type="checkbox"><div class="label-div">'+v+'</div><div>');
+                });
+
+                additional_info['Custom Requests'] =  $('.dealer-box #repair-detail-form').find('.form-row.additional').eq(1).find('.cust-req').val();
+            }else if(obj.s_id == 'dent-paint'){
+
+                additional_info['Damage Type'] =  $('.dealer-box #repair-detail-form').find('.form-row').find('input[name="damage-type"]:checked').val();
+                additional_info['Custom Requests'] =  $('.dealer-box #repair-detail-form').find('.form-row.additional').find('.cust-req').val();
+
+            }else if(obj.s_id == 'diagnostics'){
+                additional_info['Custom Requests'] =  $('.dealer-box #repair-detail-form').find('.form-row.additional').find('.cust-req').val();
+
+            }
+
+            Commons.ajaxData('add_to_cart', {'cookie':newC, 'car_id':_this.carSelected.id, 'car_size':_this.carSelected.size,'additional':JSON.stringify(additional_info)}, "POST", _this, _this.redirectToCart );
 //            var dealer = $(this).closest('.dealer-list-item').attr('data-name');
 //            obj.dealer = dealer.split(' ').join('#$');
             newC = [obj.timestamp,obj.service, '--', obj.s_id].join('*');
@@ -389,7 +414,7 @@ var Global = {
             $('.dealer-select-holder').show();
             $('.dealer-select-holder .dealer-headers').hide();
             container.html('');
-            var html = '<div class="form-wrapper" id="repair-detail-form">' +
+            var html = '<div class="form-wrapper" id="repair-detail-form" data-id="custom">' +
                 '<div class="form-row additional">' +
                     '<div class="form-col label-col"><div class="label-div">Additional Queries</div></div>' +
                     '<div class="form-col inp-col-1"></div>' +
@@ -416,7 +441,7 @@ var Global = {
             $('.dealer-select-holder').show();
             $('.dealer-select-holder .dealer-headers').hide();
             container.html('');
-            var html = '<div class="form-wrapper" id="repair-detail-form"  style="padding-top: 40px;">' +
+            var html = '<div class="form-wrapper" id="repair-detail-form"  data-id="dent-paint"  style="padding-top: 40px;">' +
                 '<div class="form-row additional">' +
                     '<div class="form-col label-col"><div class="label-div">Details about the damage</div></div>' +
                     '<div class="form-col inp-col-double"><div class="clean-inp-wrapper"><textarea class="clean-inp-tabox cust-req" type="" rows="3"></textarea></div></div>' +
@@ -432,7 +457,7 @@ var Global = {
         }else if(id == 'diagnostics'){
             $('.section-select-holder').hide();
             $('.dealer-select-holder').show();
-            var html = '<div class="form-wrapper" id="repair-detail-form"  style="padding-top: 40px;">' +
+            var html = '<div class="form-wrapper" id="repair-detail-form"  data-id="diagnostics" style="padding-top: 40px;">' +
                 '<div class="form-row additional">' +
                 '<div class="form-col label-col"><div class="label-div">Tell us about the issue</div></div>' +
                 '<div class="form-col inp-col-double"><div class="clean-inp-wrapper"><textarea class="clean-inp-tabox cust-req" type="" rows="3"></textarea></div></div>' +
