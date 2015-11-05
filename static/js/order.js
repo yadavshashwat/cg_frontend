@@ -551,7 +551,8 @@ var Global = {
         var _this = this;
 
         var modalCarContent = '<div class="form-wrapper" id="dealer-pick-form">' +
-'<div class="form-row additional">' +
+                '<div><center>Servicing Details</center></div>'+
+            '<div class="form-row additional">' +
                     '<div class="form-col label-col"><div class="label-div">Additional Queries</div></div>' +
                     '<div class="form-col inp-col-1"></div>' +
                     '<div class="form-col inp-col-2"></div>' +

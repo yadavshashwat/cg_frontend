@@ -16,6 +16,7 @@ var Global = {
         $('#car-select-box').trigger('change');
         if(Global.loginFlag){
             local.clearKey('clgacart');
+            local.clearKey('clgacartaddi');
 
         }
            Commons.ajaxData('fetch_additional_details', {}, "GET", _this, _this.updateCartItems );
