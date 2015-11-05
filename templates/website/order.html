@@ -52,6 +52,14 @@
 {#        {% endif %}#}
         Global.carData = {{ cars | js}};
         Global.carSelected = {{ carSelected | js}};
+    {% if user and not user.is_anonymous %}
+        Global.userInfo = {};
+        Global.userInfo['name'] = "{{user.username}}";
+        Global.userInfo['first_name'] = "{{user.first_name}}";
+        Global.userInfo['last_name'] = "{{user.last_name}}";
+    {% else %}
+            Global.userInfo = null;
+    {% endif %}
     </script>
 {# <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script> #}   
 {# <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script> #}   
