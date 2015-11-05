@@ -24,7 +24,7 @@ var Global = {
             $("#selected-details").find('.c-name').html(_this.carSelected.name);
             $("#selected-details").find('.c-make').html(_this.carSelected.make);
         }else{
-                _this.generateCarSelect();
+            _this.generateCarSelect();
         }
         workflowState.init();
         if(workflowState.step.state == 'service'){
@@ -56,6 +56,12 @@ var Global = {
                     }else if( classy == 'emergency'){
                     }
                 }
+                var data = {};
+                data.state = 'service';
+                window.location.hash = '#service?cat='+classy;
+//                workflowState.pushToHistory(data.state, data, '#'+data.state+'?cat='+classy);
+//                workflowState.setWorkflow(data.state, data, '#'+data.state+'?cat='+classy);
+
             }else{
 
             }
@@ -103,35 +109,40 @@ var Global = {
                     }
                     _this.loadRepairDetails(s_id);
                 }else if( classy == 'emergency'){
-                    var obj = {};
-                    obj.timestamp = (new Date()).getTime();
-                    obj.service = 'emergency';
-        //            obj.dealer = $(this).closest('.dealer-list-item').attr('data-name');
-                    obj.s_id = $(this).closest('.service-list-item').attr('data-id');
+                    if(Global.userInfo){
+                        var obj = {};
+                        obj.timestamp = (new Date()).getTime();
+                        obj.service = 'emergency';
+            //            obj.dealer = $(this).closest('.dealer-list-item').attr('data-name');
+                        obj.s_id = $(this).closest('.service-list-item').attr('data-id');
 
-                    var cook_obj = local.load();
-                    var oldC = '';
-                    if(cook_obj['clgacart']){
-                        oldC = cook_obj['clgacart'];
-                        oldC += ','
+                        var cook_obj = local.load();
+                        var oldC = '';
+                        if(cook_obj['clgacart']){
+                            oldC = cook_obj['clgacart'];
+                            oldC += ','
+                        }
+                        var newC = [obj.timestamp,obj.service, '--', obj.s_id].join('*');
+                        var modalHTML = '<div class="ajax-wait" style="color:#fff;">Waiting for server response</div>';
+                        $('.order-body').append(_this.genericModal(modalHTML, false));
+                        var w = $('.modal-content').width();
+                        var h = $('.modal-content').height();
+                        $('.modal-content').css({
+                            'top': ($(window).innerHeight() - h)/2,
+                            'left':($(window).innerWidth() - w)/2
+                        });
+
+                        Commons.ajaxData('add_to_cart', {'cookie':newC, 'car_id':_this.carSelected.id, 'car_size':_this.carSelected.size}, "POST", _this, _this.redirectToCheckout );
+            //            var dealer = $(this).closest('.dealer-list-item').attr('data-name');
+            //            obj.dealer = dealer.split(' ').join('#$');
+                        newC = [obj.timestamp,obj.service, '--', obj.s_id].join('*');
+                        oldC += newC;
+            //            console.log(oldC);
+                        local.save('clgacart', oldC);
+                    }else{
+                        $('#sign-up-in-dash').click();
+                        return false;
                     }
-                    var newC = [obj.timestamp,obj.service, '--', obj.s_id].join('*');
-                    var modalHTML = '<div class="ajax-wait" style="color:#fff;">Waiting for server response</div>';
-                    $('.order-body').append(_this.genericModal(modalHTML, false));
-                    var w = $('.modal-content').width();
-                    var h = $('.modal-content').height();
-                    $('.modal-content').css({
-                        'top': ($(window).innerHeight() - h)/2,
-                        'left':($(window).innerWidth() - w)/2
-                    });
-
-                    Commons.ajaxData('add_to_cart', {'cookie':newC, 'car_id':_this.carSelected.id, 'car_size':_this.carSelected.size}, "POST", _this, _this.redirectToCheckout );
-        //            var dealer = $(this).closest('.dealer-list-item').attr('data-name');
-        //            obj.dealer = dealer.split(' ').join('#$');
-                    newC = [obj.timestamp,obj.service, '--', obj.s_id].join('*');
-                    oldC += newC;
-        //            console.log(oldC);
-                    local.save('clgacart', oldC);
 //                    return false;
 
 //                    Commons.ajaxData('fetch_'+classy+'_details', {service_id:s_id, c_id:_this.carSelected.id, city_id:'Delhi'},"get",_this, eval("_this.load"+classy.toTitleCase()+"Details") )
@@ -253,6 +264,18 @@ var Global = {
             oldC += newC;
 //            console.log(oldC);
             local.save('clgacart', oldC);
+            var addInfoData = cook_obj['clgacartaddi'];
+            console.log(addInfoData);
+            if( !(addInfoData && addInfoData.length) ){
+                addInfoData = '{}'
+            }
+            addInfoData = JSON.parse(decodeURIComponent(addInfoData));
+            if(!addInfoData[obj.timestamp]){
+                addInfoData[obj.timestamp] = additional_info
+            }
+
+            local.save('clgacartaddi', encodeURIComponent(JSON.stringify(addInfoData)) );
+
 //            return false;
         });
         $('.dealer-box').on('click', '.emergency-checkout', function(e){
@@ -706,6 +729,17 @@ var Global = {
             oldC += newC;
             local.save('clgacart', oldC);
 
+            var addInfoData = cook_obj['clgacartaddi'];
+            if( !(addInfoData && addInfoData.length) ){
+                addInfoData = '{}'
+            }
+            addInfoData = JSON.parse(decodeURIComponent(addInfoData));
+            if(!addInfoData[obj.timestamp]){
+                addInfoData[obj.timestamp] = additional_info
+            }
+            local.save('clgacartaddi', encodeURIComponent(JSON.stringify(addInfoData)) );
+
+
 
 //            $('.dealer-box').find('.dealer-list-item[data-id="'+data_id+'"]').find('.dealer-add-to-cart').click();
         });
@@ -852,6 +886,13 @@ var workflowState = {
 //                _this.setWorkflow(data.state, data, '#'+data.state);
 //                _this.pushToHistory(data.state);
                 _this.workflowBarUpdate('service');
+                console.log(params)
+                if(params['cat']){
+                    var cat = params['cat'];
+                    if(['servicing','cleaning','repair','windshield','vas','emergency'].indexOf(cat)){
+                        $('.section-select-holder').find('.section-menu-item[data-class="'+cat+'"]').click();
+                    }
+                }
                 $('.dealer-select-holder').hide();
                 $('.section-select-holder').show();
 
@@ -890,6 +931,15 @@ var workflowState = {
             if (_state.length > 1){
                 data = { state: _state.split('#')[1].split('?')[0] };
 //                data = $.extend(data, getparams(url));
+                var hash = _state.split('#')[1]
+                if(hash.split('?')[1]){
+                    var params = {}
+                    $.each(hash.split('?')[1].split('&'), function(i, pStr){
+                        params[pStr.split('=')[0]] = pStr.split('=')[1];
+                    });
+                    data['params'] = params;
+            }
+
             }else{
                 data = this.defaultState;
             }

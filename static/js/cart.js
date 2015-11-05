@@ -16,9 +16,10 @@ var Global = {
         $('#car-select-box').trigger('change');
         if(Global.loginFlag){
             local.clearKey('clgacart');
-           Commons.ajaxData('fetch_additional_details', {}, "GET", _this, _this.updateCartItems );
 
         }
+           Commons.ajaxData('fetch_additional_details', {}, "GET", _this, _this.updateCartItems );
+
     },
     setLogos : function(){
         $.each($('img.dealer-logo'), function(i, img){
