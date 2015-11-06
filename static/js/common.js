@@ -195,6 +195,7 @@ var logoMap = {
     'ClickGarage Workshop':'../static/img/dl-logo-cgverified.png',
     'Bosch Car Care':'../static/img/dl-logo-Bosch.jpg',
     'AIS':'../static/img/ais.png',
+    '--':'../static/img/dl-logo-cgverified.png',
 };
 
 var Templates = {
