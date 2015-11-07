@@ -125,9 +125,9 @@ var Global = {
                         var newC = [obj.timestamp,obj.service, '--', obj.s_id].join('*');
                         var modalHTML = '<div class="ajax-wait" style="color:#fff;">Waiting for server response</div>';
                         $('.order-body').append(_this.genericModal(modalHTML, false));
-                        var w = $('.modal-content').width();
-                        var h = $('.modal-content').height();
-                        $('.modal-content').css({
+                        var w = $('.modal-container .modal-content').width();
+                        var h = $('.modal-container .modal-content').height();
+                        $('.modal-container .modal-content').css({
                             'top': ($(window).innerHeight() - h)/2,
                             'left':($(window).innerWidth() - w)/2
                         });
@@ -282,6 +282,22 @@ var Global = {
         });
         $('#selected-details .edit-btn').on('click', function(e){
             Global.generateCarSelect();
+        });
+        $('body').on('submit', '#popup-search-set-holder' ,function(){
+            var c_id = $(this).find('#hidden-id-box').val();
+            var c_name = $(this).find('#omni-search-box').val();
+            if (!c_id.length){
+                return false
+            }else{
+                var loc = window.location.href;
+                loc = loc.split('.in/')[0]+'.in/';
+                local.clearKey('clgacart');
+                local.save('clgacarid',c_id);
+                local.save('clgacarname',c_name);
+                window.location = loc + 'order/?c_id='+c_id;
+                return false;
+            }
+
         });
 
     },
@@ -538,10 +554,11 @@ var Global = {
                 data:_this.carData
             });
         }
-        $('.modal-content').addClass('search-box-modal');
-        var w = $('.modal-content').width();
-        var h = $('.modal-content').height();
-        $('.modal-content').css({
+        $('.modal-container .modal-content').addClass('search-box-modal');
+        var w = $('.modal-container .modal-content').width();
+        var h = $('.modal-container .modal-content').height();
+        console.log(w,h);
+        $('.modal-container .modal-content').css({
             'top': ($(window).innerHeight() - h)/2,
             'left':($(window).innerWidth() - w)/2
         });
@@ -627,7 +644,7 @@ var Global = {
         }
         $.each(addFeat, function(i,v){
             var num = (i%2)+1;
-            $('.modal-content').find('.form-row.additional').eq(0).find('.inp-col-'+num).append('<div class="clean-inp-wrapper"><input class="clean-inp-cbox" id="pick-drop-toggle" name="'+v+'"  type="checkbox"><div class="label-div">'+v+'</div><div>');
+            $('.modal-container .modal-content').find('.form-row.additional').eq(0).find('.inp-col-'+num).append('<div class="clean-inp-wrapper"><input class="clean-inp-cbox" id="pick-drop-toggle" name="'+v+'"  type="checkbox"><div class="label-div">'+v+'</div><div>');
         });
         if(serviceObj.dealer == 'Authorized'){
 
@@ -655,20 +672,20 @@ var Global = {
                 }
             });
             $.each(Object.keys(Global.dealerAddressObj.activeDealerGrouped), function(i,v){
-                $('.modal-content').find('.form-row.dealer-grouped').eq(0).find('select.dealer-name').append('<option value="'+v+'">'+v+'</option>');
+                $('.modal-container .modal-content').find('.form-row.dealer-grouped').eq(0).find('select.dealer-name').append('<option value="'+v+'">'+v+'</option>');
             });
             $.each(Object.keys(Global.dealerAddressObj.activeRegionGrouped), function(i,v){
-                $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-city').append('<option value="'+v+'">'+v+'</option>');
+                $('.modal-container .modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-city').append('<option value="'+v+'">'+v+'</option>');
             });
         }
-        $('.modal-content').addClass('extra-form-modal').attr('data-name', serviceObj.dealer).attr('data-id', serviceObj.s_id);
-        var w = $('.modal-content').width();
-        var h = $('.modal-content').height();
-        $('.modal-content').css({
+        $('.modal-container .modal-content').addClass('extra-form-modal').attr('data-name', serviceObj.dealer).attr('data-id', serviceObj.s_id);
+        var w = $('.modal-container .modal-content').width();
+        var h = $('.modal-container .modal-content').height();
+        $('.modal-container .modal-content').css({
             'top': ($(window).innerHeight() - h)/2,
             'left':($(window).innerWidth() - w)/2
         });
-        $('.modal-content').find('.detail-add-to-cart').on('click', function(e){
+        $('.modal-container .modal-content').find('.detail-add-to-cart').on('click', function(e){
             var data_id = $(this).closest('.modal-content').attr('data-id');
             var data_name = $(this).closest('.modal-content').attr('data-name');
 
@@ -694,13 +711,13 @@ var Global = {
                 addFeat = _this.additionalFeatures['bike'];
             }
             $.each(addFeat, function(i,v){
-                var val = $('.modal-content').find('.form-row.additional').eq(0).find('.clean-inp-cbox[name="'+v+'"]').prop('checked');
+                var val = $('.modal-container .modal-content').find('.form-row.additional').eq(0).find('.clean-inp-cbox[name="'+v+'"]').prop('checked');
                 additional_info[v] = val;
 //                var num = (i%2)+1;
 //                $('.modal-content').find('.form-row.additional').eq(0).find('.inp-col-'+num).append('<div class="clean-inp-wrapper"><input class="clean-inp-cbox" id="pick-drop-toggle" name="'+v+'" checked type="checkbox"><div class="label-div">'+v+'</div><div>');
             });
 
-            additional_info['Custom Requests'] =  $('.modal-content').find('.form-row.additional').eq(1).find('.cust-req').val();
+            additional_info['Custom Requests'] =  $('.modal-container .modal-content').find('.form-row.additional').eq(1).find('.cust-req').val();
 
             if( (data_name == 'Authorized') && ($('#dealer-pick-form').find('input[name="dealer-group-by"]:checked').length) ){
                 var dealerSort = $('#dealer-pick-form').find('input[name="dealer-group-by"]:checked').val();
@@ -744,22 +761,6 @@ var Global = {
 
 //            $('.dealer-box').find('.dealer-list-item[data-id="'+data_id+'"]').find('.dealer-add-to-cart').click();
         });
-        $('#popup-search-set-holder').on('submit', function(){
-            var c_id = $(this).find('#hidden-id-box').val();
-            var c_name = $(this).find('#omni-search-box').val();
-            if (!c_id.length){
-                return false
-            }else{
-                var loc = window.location.href;
-                loc = loc.split('.in/')[0]+'.in/';
-                local.clearKey('clgacart');
-                local.save('clgacarid',c_id);
-                local.save('clgacarname',c_name);
-                window.location = loc + 'order/?c_id='+c_id;
-                return false;
-            }
-
-        });
 
 
         if(serviceObj.dealer == 'Authorized'){
@@ -776,31 +777,31 @@ var Global = {
             });
             $('#dealer-pick-form').find('.form-row.dealer-grouped').on('change', 'select.dealer-name',function(e){
                 var val = $(this).val();
-                        $('.modal-content').find('.form-row.dealer-grouped').eq(0).find('select.dealer-address').html('');
+                        $('.modal-container .modal-content').find('.form-row.dealer-grouped').eq(0).find('select.dealer-address').html('');
 
                 if(Global.dealerAddressObj.activeDealerGrouped[val]){
                     $.each(Global.dealerAddressObj.activeDealerGrouped[val], function(ix,vl){
-                        $('.modal-content').find('.form-row.dealer-grouped').eq(0).find('select.dealer-address').append('<option value='+"'"+vl['address']+"'"+'>'+vl['locality']+'</option>');
+                        $('.modal-container .modal-content').find('.form-row.dealer-grouped').eq(0).find('select.dealer-address').append('<option value='+"'"+vl['address']+"'"+'>'+vl['locality']+'</option>');
                     });
                 }
             });
             $('#dealer-pick-form').find('.form-row.region-grouped').on('change', 'select.dealer-city',function(e){
                 var val = $(this).val();
-                        $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-region').html('');
+                        $('.modal-container .modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-region').html('');
                 if(Global.dealerAddressObj.activeRegionGrouped[val]){
                     $.each(Global.dealerAddressObj.activeRegionGrouped[val], function(ix,vl){
-                        $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-region').append('<option value="'+ix+'">'+ix+'</option>');
+                        $('.modal-container .modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-region').append('<option value="'+ix+'">'+ix+'</option>');
                     });
                 }
-               $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-region').trigger('change');
+               $('.modal-container .modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-region').trigger('change');
             });
             $('#dealer-pick-form').find('.form-row.region-grouped').on('change', 'select.dealer-region',function(e){
                 var val = $(this).val();
                 var val2 = $(this).closest('.form-row').find('.dealer-city').val();
-                        $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-name-address').html('');
+                        $('.modal-container .modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-name-address').html('');
                 if(Global.dealerAddressObj.activeRegionGrouped[val2] && Global.dealerAddressObj.activeRegionGrouped[val2][val]){
                     $.each(Global.dealerAddressObj.activeRegionGrouped[val2][val], function(ix,vl){
-                        $('.modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-name-address').append('<option data-name="'+vl['name']+'" value='+"'"+vl['address']+"'"+'>'+vl['name']+'&nbsp;-&nbsp;'+vl['locality']+'</option>');
+                        $('.modal-container .modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-name-address').append('<option data-name="'+vl['name']+'" value='+"'"+vl['address']+"'"+'>'+vl['name']+'&nbsp;-&nbsp;'+vl['locality']+'</option>');
                     });
                 }
             });
@@ -812,7 +813,8 @@ var Global = {
         var scrn_ht = $(window).innerHeight();
         var scrn_wd = $(window).innerWidth();
         var _body = $(document).find('.order-body');
-        _body.find('.modal-container').remove();
+        _body.find('.modal-container').hide();
+        _body.find('.modal-container').not('.login-modal-container').remove();
         var container = $("<div></div>").addClass('modal-container');
         var overlay = $("<div></div>").addClass('modal-overlay');
         var content = $("<div></div>").addClass('modal-content').append('<i class="fa fa-times-circle"></i>');
