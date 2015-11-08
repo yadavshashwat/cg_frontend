@@ -10,14 +10,19 @@ var Global = {
         var cookDict = local.load();
         console.log(cookDict)
         var carSelected = null;
+        if($('#emergency-table').find('tr').length){
+            $('#emergency-table').show();
+            $('.emergency-msg').show();
+        $('#car-select-box').css({'pointer-events':'none'}).hide();
+        }else{
         if(cookDict['clgacarname']){
             $('#car-select-box').val(cookDict['clgacarname']);
         }
         $('#car-select-box').trigger('change');
+        }
         if(Global.loginFlag){
             local.clearKey('clgacart');
             local.clearKey('clgacartaddi');
-
         }
            Commons.ajaxData('fetch_additional_details', {}, "GET", _this, _this.updateCartItems );
 
@@ -62,6 +67,10 @@ var Global = {
             $(this).closest('tr').remove();
             if(ts && ts.length){
     //            http://local.clickgarage.in/api/add_to_cart/?cookie=1444236368751&delete=true
+                console.log($(this).closest('tr').hasClass('emergency'));
+                if($(this).closest('tr').hasClass('emergency')){
+                    ts = ts+'*emergency';
+                }
                 Commons.ajaxData('add_to_cart', {'cookie':ts, 'delete':true}, "get", _this, function(){});
             }
         });
