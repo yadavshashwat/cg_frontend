@@ -402,13 +402,14 @@ var Templates = {
                     {"tag":"div", "class":"table-parts","html":function(){
                         if(this.vendor=='Authorized'){
                             if(this.car_bike=='Bike'){
-                                var s = '<Table>'
-                                $.each(this.part_dic,function(i,elem){
-                                    s += '<tr><td>'+elem.part_name+"</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.part_price)+"</td></tr>"
-                                    })
-                                    s += "<tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr>"
-                                    s += '</table>'
-                                    return s
+                                 return "<table><tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.parts_price)+"</td></tr><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr><tr id = 'total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.parts_price)+parseInt(Math.ceil((this.labour_price)))+parseInt(Math.ceil((this.labour_price*0.14)))+parseInt((this.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>Note - Price can vary depending on additional parts required";
+                                //var s = '<Table>'
+                                //$.each(this.part_dic,function(i,elem){
+                                //    s += '<tr><td>'+elem.part_name+"</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.part_price)+"</td></tr>"
+                                //    })
+                                //    s += "<tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr>"
+                                //    s += '</table>'
+                                //    return s
 
                             }else{
                            return "<table><tr>&nbspService Centre Bill Amount</tr><tr><td></td><td>+</td></tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr></table>";
