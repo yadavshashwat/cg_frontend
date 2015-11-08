@@ -133,6 +133,12 @@ var Commons = {
                 $('.description.tooltip-wrapper:visible').hide();
             }
         });
+        $('body').on('click', '.modal-container .modal-overlay', function(e){
+            var $target = $(e.target);
+            if(!$target.closest('.modal-content').length && !$target.closest('.persist').length){
+                $(this).closest('.modal-container').remove();
+            }
+        });
         $('body').on('click', '.modal-container .close-btn', function(e){
             $(this).closest('.modal-container').remove();
         });
