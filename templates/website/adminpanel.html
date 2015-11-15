@@ -33,7 +33,11 @@
         Global.carData = {{ cars | js}};
         Global.carSelected = {{ carSelected | js}};
     </script>
--->
+<!--&ndash;&gt;-->
+     <script>
+    $(document).ready(function(e){
+    $("#submit-btn").click();});
+    </script>
 {#    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>#}
 {#    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script>#}
 
@@ -49,7 +53,7 @@
                     <div class="search-box" id="search-by-id">
                         <p>Search by BookingID</p>
                         <input type="text" class="search-text" id="bookingid" placeholder="Enter BookingID" autocomplete="off">
-                        <button class="booking-search">Submit</button>
+                        <button id ="submit-btn" class="booking-search">Submit</button>
                     </div>
                     <div class="search-box" id="search-by-date">
                         <p>Search by date</p>
@@ -68,9 +72,8 @@
                                 <p>Actions</p>
                             </div>                     
                         </div>
-                        <div class="section-listings">
+                        <div class="section-listings adminlist">
                             <div class="section-content-item booking" data-class="booking"></div>
-<!--                            <div class="list-body"></div>-->
                         </div>
                         </div>
                     </div>

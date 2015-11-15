@@ -953,6 +953,7 @@
 			}
 			.booking{
 								display: inline;
+			  					//min-height: 30px;
 							}
 
 							.booking.car{
@@ -1318,9 +1319,23 @@
 							background: rgba(232, 155, 118, 0.6);
 						}
 					}
+				  	.adminlist{
+					  min-height: 360px;
+					}
+
 					.section-listings{
 						position: relative;
 						font-family: Lato;
+					  	//min-height: 100px;
+					  .booking{
+						display: inline!important;
+						max-height: 440px!important;
+						.booking-entry{
+						  padding-bottom: 15px!important;
+						  border-bottom: 1px solid #eaeaea;
+						}
+
+					  }
 
 						.section-content-item{
                           display: none;
@@ -1328,7 +1343,6 @@
 							width:100%;
 							box-sizing: border-box;
 							border-bottom: 3px solid #e89b76;
-
 							padding: 0px 12px;
 							max-height: 360px;
 							overflow-y: scroll;

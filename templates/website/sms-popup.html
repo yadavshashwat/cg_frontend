@@ -17,12 +17,27 @@
         <option value="driver5">Varun (Mob: 9810693445)</option>
     </select>
     
-    <select name="select-vendor">
-    </select>
+    Service Centre Details:
+    <br>
+    <textarea name="paragraph_text" cols="50" rows="10" id="service_centre"></textarea>
+    <br>
+    <br>
+    <!--<form>-->
+    Due Amount:
+    <input type="number" id ="due_amount">
+    <!--</form>-->
+    <br>
+    <br>
+
+    <div class="details">
+        Name : <span class = "cust-name" id="name_cust"></span>&nbsp;|&nbsp;Number :<span class = "cust-contact" id="number_cust"></span>
+        <br>Driver : <span class = "driver-details" id="driver_details"></span>&nbsp;|&nbsp;Advisor :<span class="advisor-details" id="advisor_details"></span>
+    </div>
+
 
     <div class="sms-entry" id="sms-entry0">
         <div class="sms-content" id="sms-content0">
-            <p>Booking ID: <span class="booking-id"></span> | Service: <span class="service"></span> | Name: <span class="cust-name"></span> | Phone number: <span class="cust-contact"></span> | Pickup Address: <span class="cust-address"></span> | Vehicle: <span class="vehicle"></span> | Pickup time: <span class="pickup-time"></span> | Service Center: <span class="vendor-details"></span>	
+            <p>Booking ID: <span class="booking-id"></span> | Service: <span class="service"></span> | Name: <span class="cust-name"></span> | Phone number: <span class="cust-contact" id="number"></span> | Pickup Address: <span class="cust-address"></span> | Vehicle: <span class="vehicle"></span> | Pickup time: <span class="pickup-time"></span> | Service Center: <span class="vendor-details"></span>
             </p>
         </div>
         <div class="send-button-div">
@@ -32,51 +47,51 @@
     
     <div class="sms-entry" id="sms-entry1">
         <div class="sms-content" id="sms-content1">
-            <p>Hi Mr.<span class="cust-name"></span>! We have assigned our AutoExpert Mr.<span class="advisor-details"></span> for assisting you during your appointment. He will get in touch with you shortly. Your bike will be serviced at the closest service center - <span class="vendor-details"></span>	
+            <p>Hi <span class="cust-name"></span>! We have assigned our AutoExpert Mr.<span class="advisor-details"></span> for assisting you during your appointment. If you have any question regarding the booking/ estimate amount feel free to contact the advisor.<span class="vendor-details"></span>
             </p>
         </div>
         <div class="send-button-div">
-            <button class="send-button" id="send-button1">Send this SMS</button>
+            <button class="send-button" id="send-button2">Send this SMS</button>
         </div>        
     </div>
     
     <div class="sms-entry" id="sms-entry2">
         <div class="sms-content" id="sms-content2">
-            <p>Hi Mr.<span class="cust-name"></span>, our driver <span class="driver-details"></span> is out to pick your bike. He will reach your location at around <span class="pickup-time"></span>. Kindly keep your RC and Service Booklet handy.
+            <p>Hi <span class="cust-name"></span>, our driver <span class="driver-details"></span> is out to pick your vehicle. He will reach your location at around <span class="pickup-time"></span>. Kindly keep your RC and Service Booklet handy.
             </p>
         </div>
         <div class="send-button-div">
-            <button class="send-button" id="send-button1">Send this SMS</button>
+            <button class="send-button" id="send-button3">Send this SMS</button>
         </div>
     </div>
     
     <div class="sms-entry" id="sms-entry3">
         <div class="sms-content" id="sms-content3">
-            <p>Hi Mr.<span class="cust-name"></span>, your bike was safely checked-in at <span class="vendor-details"></span> at <span class="current-time"></span>. A revised cost estimate will be shared wih you post inspection.	
+            <p>Hi <span class="cust-name"></span>, your vehicle was safely checked-in<span class="vendor-details_1"></span> at <span class="current-time"></span>. A revised cost estimate will be shared with you post inspection.
             </p>
         </div>
         <div class="send-button-div">
-            <button class="send-button" id="send-button1">Send this SMS</button>
+            <button class="send-button" id="send-button4">Send this SMS</button>
         </div>
     </div>
     
     <div class="sms-entry" id="sms-entry4">
         <div class="sms-content" id="sms-content4">
-            <p>Hi Mr.<span class="cust-name"></span>, our driver <span class="driver-details"></span> is out to deliver your vehicle. He will need the due payment (Rs.<span class="due-amount"></span>) and receiving form for handing over the bike.	
+            <p>Hi <span class="cust-name"></span>, our driver <span class="driver-details"></span> is out to deliver your vehicle. He will need the due payment (Rs. <span class="due-amount"></span>) and receiving form for handing over the vehicle.
             </p>
         </div>
         <div class="send-button-div">
-            <button class="send-button" id="send-button1">Send this SMS</button>
+            <button class="send-button" id="send-button5">Send this SMS</button>
         </div>
     </div>
     
     <div class="sms-entry" id="sms-entry5">
         <div class="sms-content" id="sms-content5">
-            <p>Hi Mr.<span class="cust-name"></span>, your bike was dropped by our driver. It was a pleasure serving you. Kindly share your valuable feedback by replying to our short survey email.
+            <p>Hi <span class="cust-name"></span>, your vehicle was dropped by our driver. It was a pleasure serving you. Kindly share your valuable feedback by replying to our short survey email which you'll receive shortly.
             </p>
         </div>
         <div class="send-button-div">
-            <button class="send-button" id="send-button1">Send this SMS</button>
+            <button class="send-button" id="send-button6">Send this SMS</button>
         </div>
     </div>
     
