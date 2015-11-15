@@ -60,11 +60,48 @@
                      <option data-name="{{ car.make }} {{ car.name}}" data-id="{{ car.id }}">{{ car.make }} {{ car.name }}</option>
                      {% endfor %}
                  </select>
+                    <div class="emergency-msg">Please checkout/delete emergency cart items to proceed to standard cart </div>
              </div>
 
          </div>
          <div class="table-holder">
              {% for key, list in cart.iteritems %}
+             {% if key == "emergency" %}
+             <table data-id="{{ key }}" id="emergency-table" style="display:none;" class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Dealer</th>
+                        <th>Service</th>
+                        <!--<th></th>-->
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                 {% for val in list %}
+                 <tr ts="{{ val.ts }}" class="emergency">
+                    <td data-name="{{val.car.make}}">
+                        <div class="delete-icon-wrapper fl">
+                            <i class="delete-icon fa fa-trash-o"></i>
+                        </div>
+                        <div class="dealer-logo-wrapper">
+                            <img class="dealer-logo" src="" alt="emergency" data-name="{{val.car.make}}" >
+                            <div class="aligner"></div>
+                        </div>
+                    </td>
+                    <td class="detail">
+                        <div>{{val.service_id}}</div>
+                        <div>{{val.car.make}}</div>
+                        <div>{{val.car.make}}&nbsp;{{val.car.name}}</div>
+                    </td>
+                    <td>
+                        <div>{{val.datetime}}</div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+             {% else %}
              <table data-id="{{ key }}" style="display:none;" class="cart-table">
                 <thead>
                     <tr>
@@ -181,7 +218,8 @@
             {% endfor %}
         </tbody>
     </table>
-    {% endfor %}
+             {% endif %}
+             {% endfor %}
 </div>
 <div class="cart-btn-holder">
     <div class="left-btns fl">
