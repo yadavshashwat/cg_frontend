@@ -199,6 +199,7 @@ var Global = {
              xhr.send();
              //   alert(amount);
             }
+
         );
 
 //    $('.action-button').on('click', function(e){
@@ -240,7 +241,27 @@ var Global = {
         $('.sms-popup .advisor-details').text(advisor_det);        
             }
         );
-    
+
+        $(".section-listings").on('click','#cancel-button',function(e){
+            if(!$(this).hasClass('cancelled')){
+                var elem = $(this);
+                elem.addClass('cancelled')
+                var tran_id = elem.attr('tran_id')
+                var classy = 'Booking'
+                Commons.ajaxData('cancel_booking', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==", tran_id:tran_id},"get",_this, eval("_this.afterCancel"+classy.toTitleCase()))
+
+            }
+        });
+        $(".section-listings").on('click','#order-complete',function(e){
+            if(!$(this).hasClass('complete')){
+                var elem = $(this);
+                elem.addClass('complete')
+                var tran_id = elem.attr('tran_id')
+                var classy = 'Complete'
+                Commons.ajaxData('order_complete', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==", tran_id:tran_id},"get",_this, eval("_this.after"+classy.toTitleCase()))
+
+            }
+        })
     
     },
 
@@ -294,8 +315,12 @@ var Global = {
 //            actions-div starts
             html += '<div class="booking-entry-cat" id="actions-div">';
             html += '<button class="action-button" id="sms-button">Send SMS</button>';
-            html += '<button class="action-button" id="email-button">Send E-mail</button>';
-            html += '<button class="action-button" id="change-status">Change Status</button>';
+            html += '<button class="action-button" tran_id=';
+            html +=val.tran_id;
+            html+= " id='cancel-button'>Cancel Order</button>";
+            html += '<button class="action-button" tran_id=';
+            html +=val.tran_id;
+            html += " id='order-complete'>Order Complete</button>";
             html += '</div>';
 //            bookings-div closing tag here
             html += '</div>';

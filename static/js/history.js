@@ -67,8 +67,6 @@ var Global = {
 
             }
         })
-       
-
 
     },
 
@@ -77,6 +75,12 @@ var Global = {
         var btn = $('[tran_id="'+data['cancelled_id']+'"]')
         btn.find('div').text('Booking Cancelled')
         btn.addClass('cancelled_booking')
+    },
+    afterComplete: function(data){
+        console.log(data)
+        var btn = $('[tran_id="'+data['complete_id']+'"]')
+        btn.find('div').text('Booking Complete')
+        btn.addClass('complete_booking')
     },
 
     loadBooking : function(data){
