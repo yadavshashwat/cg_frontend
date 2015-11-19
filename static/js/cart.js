@@ -10,7 +10,7 @@ var Global = {
         var cookDict = local.load();
         console.log(cookDict)
         var carSelected = null;
-        if($('#emergency-table').find('tr').length){
+        if($('#emergency-table tbody').find('tr').length){
             $('#emergency-table').show();
             $('.emergency-msg').show();
         $('#car-select-box').css({'pointer-events':'none'}).hide();
