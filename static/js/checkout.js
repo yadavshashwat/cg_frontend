@@ -247,11 +247,21 @@ var zyxCart = {
             orderObj['order_list'] = JSON.stringify(arry);
             orderObj['car_id'] = $('.confirm-step .table-holder table').attr('data-id');
             orderObj['car_name'] = $('.confirm-step .table-holder table').attr('data-name');
+            var couponData = {};
+            if (local.load() && local.load()['clgacoup']) {
+                couponData = local.load()['clgacoup'];
+                couponData = JSON.parse(couponData);
+            }
+            if (couponData.Global) {
+                $.each(couponData.Global, function(coup,msg){
+                });
+                orderObj['global_coupon'] = JSON.stringify(couponData.Global);
+            }
+
 //            console.log('')
                 if(zyxCart.emergency){
                     Commons.ajaxData('place_emergency_order', orderObj,"GET", _this, _this.onOrderPlace);
                 }else{
-
                     Commons.ajaxData('place_order', orderObj,"GET", _this, _this.onOrderPlace);
                 }
         });

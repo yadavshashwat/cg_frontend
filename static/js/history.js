@@ -82,7 +82,6 @@ var Global = {
         btn.find('div').text('Booking Complete')
         btn.addClass('complete_booking')
     },
-
     loadBooking : function(data){
         console.log(data)
         var container = $('.section-box .booking');
