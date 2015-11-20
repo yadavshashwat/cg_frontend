@@ -265,7 +265,6 @@ var zyxCart = {
                     Commons.ajaxData('place_order', orderObj,"GET", _this, _this.onOrderPlace);
                 }
         });
-
     },
     onOrderPlace : function(){
         console.log('[')

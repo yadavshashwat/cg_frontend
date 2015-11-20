@@ -911,7 +911,8 @@ var formCheck = {
         var user_name = $(container).find('.user-name').val();
         var user_number = $(container).find('.user-number').val();
         var car_reg_number = $(container).find('.car-reg-no').val();
-
+        var pick_date = $(container).find('.pick-up-date').val();
+        var pick_time = $(container).find('.pick-up-time').val();
         var pick_addr = $(container).find('.pick-addr').val();
         var pick_pin = $(container).find('.pick-pin').val();
         var pick_lmark = $(container).find('.pick-lmark').val();
@@ -935,7 +936,14 @@ var formCheck = {
                 return false
             }
         }
-
+        if(!valid(pick_date)){
+            $(container).find('.pick-up-date').addClass('error');
+            return false
+        }
+        if(!valid(pick_time)){
+            $(container).find('.pick-up-time').addClass('error');
+            return false
+        }
 
         if(!valid(pick_addr)){
             $(container).find('.pick-addr').addClass('error');
