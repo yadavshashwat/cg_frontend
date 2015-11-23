@@ -6,6 +6,7 @@ var Global = {
         _this.events();
         //$('#submit-button').button('disable');
 
+
     },
     events:function(){
         var _this = this;
@@ -21,6 +22,39 @@ var Global = {
 //          Commons.ajaxData('fetch_all_cars', {},"get",_this, _this.loadBookings)
             }
         );
+
+        $('#send-button-custom').on('click', function(e){
+             var number_cust = document.getElementById('number_cust');
+             number_cust_content =  number_cust.textContent;
+
+             var src = document.getElementById("service_centre").value;
+             $('.sms-popup .vendor-details').text(src);
+
+             var number_driver = document.getElementById('driver_details');
+             number_driver_content =  String(number_driver.textContent);
+             var n = parseInt(number_driver_content.search("Mob")) + 5;
+             var driver_number = number_driver_content.substring(n ,n+10);
+
+             var number_advisor = document.getElementById('advisor_details');
+             number_advisor_content =  String(number_advisor.textContent);
+             var k = parseInt(number_advisor_content.search("Mob")) + 5;
+             var advisor_number = number_advisor_content.substring(k ,k+10);
+
+            var smstext = document.getElementById("custom-sms").value;
+             //$('.sms-popup .vendor-details').text(src);
+             //var smstext = document.getElementById('custom-sms');
+            //window.alert(smstext);
+                //window.alert(String(smstext.textContent));
+             smstext_content = smstext;
+
+             var url = "http://sms.hspsms.com:8090/sendSMS?username=clickgarage&message="+ smstext_content + "&sendername=CLKGRG&smstype=TRANS&numbers=" + number_cust_content + "&apikey=ab33f626-fba5-4bff-9a2b-68a7e9eed43c"
+             //window.location(url);
+             var xhr = new XMLHttpRequest();
+             xhr.open("GET", url, false);
+             xhr.send();
+            }
+        );
+
 
         $('#send-button1').on('click', function(e){
              var number_cust = document.getElementById('number_cust');
@@ -173,6 +207,7 @@ var Global = {
              //   alert(amount);
             }
         );
+
         $('#send-button6').on('click', function(e){
              var number_cust = document.getElementById('number_cust');
              number_cust_content =  number_cust.textContent.trim();
@@ -201,6 +236,36 @@ var Global = {
             }
 
         );
+            $('#date-time-pair .pick-up-time').timepicker({
+        timeFormat: 'h:i A',
+        // year, month, day and seconds are not important
+
+        minTime: new Date(0, 0, 0, 8, 0, 0),
+        maxTime: new Date(0, 0, 0, 15, 0, 0),
+        // time entries start being generated at 6AM but the plugin
+        // shows only those within the [minTime, maxTime] interval
+        //startHour: 6,
+        // the value of the first item in the dropdown, when the input
+        // field is empty. This overrides the startHour and startMinute
+        // options
+        startTime: new Date(0, 0, 0, 8, 20, 0),
+        // items in the dropdown are separated by at interval minutes
+        step: 60,
+    });
+
+
+    $('#date-time-pair .pick-up-date').datepicker({
+        'format': 'm/d/yyyy',
+//        'autoclose': true,
+        'minDate': new Date()
+    });
+        //local.clearKey('clgacart');
+
+    // initialize datepair
+//    var basicExampleEl = document.getElementById('date-time-pair');
+//    var datepair = new Datepair(basicExampleEl);
+
+
 
 //    $('.action-button').on('click', function(e){
     $('.centered-content').on('click', '#sms-button', function(e){
@@ -229,6 +294,35 @@ var Global = {
         $('.sms-popup').show()
             }
         );
+
+
+        $('.centered-content').on('click', '#add-trans', function(e){
+        //console.log('testing');
+        //var obj = {};
+        //var parent_div = $(this).closest('.booking-entry')
+        //obj.bkg_id = parent_div.find('#id-div p').text();
+        //obj.service = parent_div.find('#service-div #service-type').text().replace("Service: ","");
+        //obj.pickup_time = parent_div.find('#service-div #pickup-time').text().replace("Pickup-time: ","");
+        //obj.cust_name = parent_div.find('#cust-div #cust-name').text().replace("Name: ","");
+        //obj.cust_contact = parent_div.find('#cust-div #cust-contact').text().replace("Phone: ","");
+        //obj.cust_email = parent_div.find('#cust-div #cust-email').text().replace("Email: ","");
+        //obj.cust_address = parent_div.find('#cust-div #cust-address').text().replace("Address: ","");
+        //obj.brand = parent_div.find('#car-div #brand').text().replace("Brand: ","");
+        //obj.make = parent_div.find('#car-div #make').text().replace("Make: ","");
+        //obj.regn = parent_div.find('#car-div #regn').text().replace("Regn#: ","");
+        //console.log(obj);
+        //$('.sms-popup .booking-id').text(obj.bkg_id);
+        //$('.sms-popup .service').text(obj.service);
+        //$('.sms-popup .cust-name').text(obj.cust_name);
+        //$('.sms-popup .cust-contact').text(obj.cust_contact);
+        //$('.sms-popup .cust-address').text(obj.cust_address);
+        //$('.sms-popup .vehicle').text(obj.brand + ' ' + obj.make);
+        //$('.sms-popup .pickup-time').text(obj.pickup_time);
+        ////$('.sms-popup .current-time').text(obj.pickup_time);
+        $('.add-trans-popup').show()
+            }
+        );
+
 
     $('#select-driver').on('change', function(e){
         var driver_det = $('#select-driver option:selected').text();

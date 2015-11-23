@@ -10,13 +10,20 @@
     <link rel="stylesheet/less" type="text/css" href="{% static "less/styles.less" %}" />
     <link rel="stylesheet/less" type="text/css" href="{% static "less/sms-popup.less" %}" />
     <script type="text/javascript" src="{%  static "js/legacy/jquery-2.1.4.min.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.timepicker.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-datepicker.css' %}"/>
     <script type="text/javascript" src="{%  static "js/legacy/json2html.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/legacy/jquery.json2html.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/plugin.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/common.js" %}"></script>
+    <!--<script type="text/javascript" src="{%  static "js/checkout.js" %}"></script>-->
     <script type="text/javascript" src="{%  static "js/adminpanel.js" %}"></script>
 <!--    <script type="text/javascript" src="{%  static "js/sms-popup.js" %}"></script>-->
     <script src="{%  static "js/legacy/less.min.js" %}"></script>
+    <script type="text/javascript" src="{%  static 'js/legacy/bootstrap-datepicker.js' %}"></script>
+    <script type="text/javascript" src="{%  static 'js/legacy/jquery.timepicker.js' %}"></script>
+        <script type="text/javascript" src="{%  static 'js/legacy/json2html.js' %}"></script>
+    <script type="text/javascript" src="{%  static 'js/legacy/jquery.json2html.js' %}"></script>
 
 <!--
     {% load js %}
@@ -49,6 +56,11 @@
     <div class="pane order-pane">
         <div class="centered-content">
             <div class="content-holder">
+                <div class="Add Guest Transaction">
+                    <button id ="add-trans" class="trans-add">Add Guest Transaction</button>
+                </div>
+
+
                 <div class="search-div">
                     <div class="search-box" id="search-by-id">
                         <p>Search by BookingID</p>
@@ -85,7 +97,9 @@
     <div class="sms-popup" style="display: none;">
         {% include "website/sms-popup.html" %}
     </div>
-
+    <div class="add-trans-popup" style="display: none;">
+        {% include "website/add-trans-popup.html" %}
+    </div>
 
 </body>
 </html>

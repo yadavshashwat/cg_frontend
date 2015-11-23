@@ -1,0 +1,138 @@
+<div class="white-area">
+
+
+<div class="address-form-holder clean-form-holder">
+                <!--<div class="booking-type">-->
+
+
+
+                <!--</div>-->
+
+                <div class="form-col">
+                    <div class="label-div"><b>User Details</b></div>
+                    <div class="form-row mt12">
+                        <div class="label-div">Name</div>
+                    </div>
+                    <div class="form-row">
+                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-name txtbox" type="text" /></div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">Phone</div>
+                    </div>
+                    <div class="form-row">
+                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-number txtbox" placeholder="eg. 7676767676" type="text"/></div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">Pick Up Date & Time:</div>
+                    </div>
+                    <div class="form-row mt12">
+                        <input class="clean-inp-cbox" id="same-day-toggle" checked type="checkbox"/>
+                        <div class="label-div">Same day delivery</div>
+                    </div>
+                    <div class="form-row">
+                        <div class="clean-inp-wrapper" id="date-time-pair">
+                            <input class="clean-inp-tbox pick-up-date txtbox" data-date-start-date="0d" placeholder="mm/dd/yyyy" type="text" style="width:50%;"/>
+                            <input class="clean-inp-tbox pick-up-time txtbox" placeholder="H:MM" style="width:30%; "/>
+                        </div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">Car Reg. No.</div>
+                    </div>
+                    <div class="form-row">
+                        <div class="clean-inp-wrapper">
+                            <input class="clean-inp-tbox car-reg-no txtbox" placeholder= 'eg. RJ02CC4222' type="text";"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-col" id="pick-up-col">
+                    <div class="label-div"><b>Pickup Address</b></div>
+                    <div class="form-row mt12" style="height: 80px;">
+                        <div class="label-div">Address</div>
+                        <div class="clean-inp-wrapper"><textarea placeholder = "House No., Street" class="clean-inp-tabox pick-addr txtbox" type="" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">Pincode</div>
+                        <div class="clean-inp-wrapper"><input placeholder = "eg. 110016" class="clean-inp-tbox pick-pin txtbox" type=""/></div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">Landmark</div>
+                        <div class="clean-inp-wrapper"><input placeholder = "eg. XYZ Mall"  class="clean-inp-tbox pick-lmark txtbox" type=""/></div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">City</div>
+                        <div class="clean-inp-wrapper">
+                            <!--<input class="clean-inp-tbox drop-city" disabled type=""/>-->
+                            <label class="clean-sbox-wrapper">
+                            <select class="clean-inp-sbox pick-city txtbox">
+                                <option value="Delhi">Delhi</option>
+                                <option value="Gurgaon">Gurgaon</option>
+                            </select>
+                            </label>
+                        </div>
+                    </div>
+                    <!--<div class="form-row mt12">-->
+                        <!--<div class="label-div">Country</div>-->
+                        <!--<div class="clean-inp-wrapper"><input class="clean-inp-tbox" value="India" type="" disabled/></div>-->
+                    <!--</div>-->
+                    <div class="form-row mt12">
+                        <input class="clean-inp-cbox" id="pick-drop-toggle" checked type="checkbox"/>
+                        <div class="label-div">Set this as Dropoff Address</div>
+                    </div>
+                </div>
+                <div class="form-col disabled" id="drop-off-col">
+                    <div class="label-div"><b>Dropoff Address</b></div>
+                    <div class="form-row mt12" style="height: 80px;">
+                        <div class="label-div">Address</div>
+                        <div class="clean-inp-wrapper"><textarea placeholder = "House No., Street"  class="clean-inp-tabox drop-addr txtbox" disabled type="" rows="3"></textarea></div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">Pincode</div>
+                        <div class="clean-inp-wrapper"><input placeholder = "eg. 110016"  class="clean-inp-tbox drop-pin txtbox" disabled type=""/></div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">Landmark</div>
+                        <div class="clean-inp-wrapper"><input placeholder = "eg. XYZ Mall"   class="clean-inp-tbox drop-lmark txtbox" disabled type=""/></div>
+                    </div>
+                    <div class="form-row mt12">
+                        <div class="label-div">City</div>
+                        <div class="clean-inp-wrapper">
+                            <!--<input class="clean-inp-tbox drop-city" disabled type=""/>-->
+                            <label class="clean-sbox-wrapper">
+                            <select class="clean-inp-sbox drop-city txtbox" disabled>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Gurgaon">Gurgaon</option>
+                            </select>
+                            </label>
+                        </div>
+                    </div>
+                    <!--<div class="form-row mt12">-->
+                        <!--<div class="label-div">Country</div>-->
+                        <!--<div class="clean-inp-wrapper"><input class="clean-inp-tbox" value="India" type="" disabled/></div>-->
+                    <!--</div>-->
+                </div>
+                </div>
+
+                <div class = "select-service" >
+                     <div class="ui-field-contain">
+                         <select name="select-custom-22" id="car-bike-dropdown" data-native-menu="false">
+                             <option value="choose-one" data-placeholder="true">Select Car/ Bike</option>
+                             <option value="Car">Car</option>
+                             <option value="Bike">Bike</option>
+                             <!--<option value="TVS">TVS</option>-->
+                         </select>
+                     </div>
+
+                     <div class="ui-field-contain">
+                         <select name="select-custom-23" id="make-dropdown" data-native-menu="false" disabled>
+                             <option value="choose-one" data-placeholder="true">Select Model</option>
+                             <div id="make-list"></div>
+                         </select>
+                     </div>
+
+
+                </div>
+                <!--<div class="Add Guest Transaction">-->
+                    <!--<button id ="add-trans" class="trans-add">Place Guest Order</button>-->
+                <!--</div>-->
+</div>    
