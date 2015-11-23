@@ -8,8 +8,10 @@
 
 var Global = {
     init:function(){
+        var jsslider = null;
         var _this = this;
         _this.setLayout();
+        _this.jssor_1_slider_init();
         var cityBoxHolder = $('#home-citybox-holder');
         if(cityBoxHolder.length){
             $(cityBoxHolder).materialDropDown({
@@ -61,7 +63,7 @@ var Global = {
         });
         var searchContentHolder = $('.search-pane').find('.content-holder');
         var givenHt = searchContentHolder.outerHeight();
-        var reqd_offset = (scrn_ht - givenHt)/2;
+        var reqd_offset = (scrn_ht - givenHt)/2-40;
         searchContentHolder.css({
            'marginTop':reqd_offset
         });
@@ -135,10 +137,64 @@ var Global = {
         $('.lined-box.preview-box .wrapper').css({
             'top':toppy
         });
+            
+        //    Slider carousel
+//        $("#owl-demo").owlCarousel({
+//            console.log('carousel js reached');
+//            autoPlay: 3000, //Set AutoPlay to 3 seconds
+//            navigation : true, // Show next and prev buttons
+//            slideSpeed : 300,
+//            paginationSpeed : 400,
+//            singleItem:true  
+//        });    
 
 
 //        $('#preview-box').find('')
     },
+    jssor_1_slider_init:function() {
+        
+            console.log('slider function');
+            
+            var jssor_1_SlideshowTransitions = [
+              {$Duration:900,$Opacity:2}
+            ];
+            
+            var jssor_1_options = {
+              $AutoPlay: true,
+              $FillMode: 5,
+              $SlideshowOptions: {
+                $Class: $JssorSlideshowRunner$,
+                $Transitions: jssor_1_SlideshowTransitions,
+                $TransitionsOrder: 1
+              },
+              $ArrowNavigatorOptions: {
+                $Class: $JssorArrowNavigator$
+              },
+              $BulletNavigatorOptions: {
+                $Class: $JssorBulletNavigator$
+              }
+            };
+            
+            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+            jsslider = jssor_1_slider;
+            //responsive code begin
+            //you can remove responsive code if you don't want the slider scales while window resizes
+            function ScaleSlider() {
+                var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
+                if (refSize) {
+                    refSize = Math.min(refSize, 640);
+                    jssor_1_slider.$ScaleWidth(refSize);
+                }
+                else {
+                    window.setTimeout(ScaleSlider, 30);
+                }
+            }
+            ScaleSlider();
+            $Jssor$.$AddEvent(window, "load", ScaleSlider);
+            $Jssor$.$AddEvent(window, "resize", $Jssor$.$WindowResizeFilter(window, ScaleSlider));
+            $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+            //responsive code end
+        },
     eventHandlers:function(){
         $(window).on('resize', function(){
             Global.setLayout();
@@ -220,9 +276,24 @@ var Global = {
             $(this).parent().find('.logged-user-drpdwn').toggle();
         });
         $('#home-search-form').on('submit', function(e){
-//           var value = $(this).find('#omni-search-box').attr('data-id');
-            var c_id = $(this).find('#hidden-id-box').val();
-            var c_name = $(this).find('#omni-search-box').val();
+            console.log('sumbit button clicked')
+            var c_id1 = $(this).find('#hidden-id-box').val();
+            var c_name1 = $(this).find('#omni-search-box').val();
+            var c_id2 = $(this).find('#hidden-id-box2').val();
+            var c_name2 = $('#brandSelect option:selected').val() + " " + $('#modelSelect option:selected').val();
+            var c_id = "";
+            var c_name = "";
+            if (c_id2.length && !c_id1.length) {
+                console.log('going for box1')
+                c_id = c_id + c_id2;
+                c_name = c_name + c_name2;
+                console.log("c_id: " + c_id)
+                console.log("c_name: " + c_name)
+            }else{
+                console.log('going for box2')
+                c_id = c_id + c_id1;
+                c_name = c_name + c_name1;
+            }   
             if (!c_id.length){
                 return false
             }else{
@@ -265,11 +336,68 @@ var Global = {
                 {'scrollTop':$('.steps-pane').outerHeight()+$('.search-pane').outerHeight()+$('.android-pane').outerHeight()},
                 500
             );
-        })
+        });
+        $('.radio-btn-div .vehicleRadio').on('click', function(e){
+            console.log('v_type change detected');
+            var v_type = $(this).attr('value');
+            var container = $('#brandSelect');
+            container.html('');
+            var carBrands = ['Chevrolet','Fiat','Ford','Honda','Hyundai','Mahindra','Maruti Suzuki','Nissan','Renault','Skoda','Tata','Toyota','Volkswagen'];
+            var bikeBrands = ['Bajaj','Hero','Honda','KTM','Royal Enfield','Suzuki','TVS','Yamaha'];
+            html = '<option selected disabled>Select brand</option>';
+            if (v_type=='Car'){
+                for (i=0; i<carBrands.length; i++){
+                    html += '<option>' + carBrands[i] + '</option>';
+                }
+            }
+            else if (v_type=='Bike'){
+                for (i=0; i<bikeBrands.length; i++){
+                    html += '<option>' + bikeBrands[i] + '</option>';
+                }
+            }
+        container.html(html);
+        });
+        $('.vehicle-dropdown-div #brandSelect').on('change', function(){
+            console.log('brand change detected');
+            var v_brand = $(this).val();
+            var v_type = '';
+            if (document.getElementById('carRadio').checked){
+                v_type = v_type+'Car';
+            }
+            else{
+                v_type = v_type+'Bike';
+            }            
+            console.log(v_brand);
+            Commons.ajaxData('fetch_car_list', {m_id:v_brand,cb_id:v_type},"get",Global,Global.loadCarMake);
+        });
+        $('.vehicle-dropdown-div #modelSelect').on('change', function(){
+            console.log('model change detected');
+            var c_id = $('option:selected', this).attr("data-id");
+            console.log(c_id);
+            document.getElementById('hidden-id-box2').value = c_id;            
+        });
     },
     paneScrolls:function(){
 
     },
+    
+    loadCarMake:function(data){
+        console.log('function reached');
+        console.log(data);
+        var container = $('#modelSelect');
+        container.html('');
+        var html = '<option selected disabled>Select model</option>';
+        $.each(data, function(ix, val){
+            html += '<option data-id="'+val.id+'" value="'+val.name+'">'+val.name+'</option>';
+        })
+        container.html(html);
+//        container.selectmenu('enable');
+//        container.selectmenu('refresh');
+//        container.json2html(data, Templates2.carMake, {append:true});
+//        $.each(data, function(idx, val){
+//        });
+    },
+    
     carData:null
 };
 
@@ -288,4 +416,5 @@ var Global = {
 
 $(document).ready(function(){
     Global.init();
+    
 });

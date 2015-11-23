@@ -23,6 +23,7 @@
     <script type="text/javascript" src="{%  static "js/plugin.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/home.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/common.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/legacy/jssor.slider.debug.js" %}"></script>
     <script>
     $(function() {
     $(".video-link").jqueryVideoLightning({
@@ -133,20 +134,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
         <div class="transparent-header">
            {% include "website/home-header.html" %}
         </div>
-        <div class="content-holder">
-            <div class="title-holder">
-                    <div class="title">
-                       
-                        Car And Bike Care. Made Hassle Free.
-                    </div>
-                    <div class="sub-title">
-                        Select Your Vehicle To Compare And Book Services
-                    </div>
-
-                </div>
-
-            <div class="search-set-holder" id="home-search-set-holder">
-                <div style="display: none;">
+        <div style="display: none;">
    {% if user and not user.is_anonymous %}
      <li>
        <a>Hello {{ user.get_full_name|default:user.username }}!</a>
@@ -166,37 +154,107 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
      </li>
    {% endif %}
                 </div>
-                <form id="home-search-form" method="get" action="/order/" data-remote="true" accept-charset="UTF-8">
-                <div class="citybox-holder" id="home-citybox-holder">
-                    <input type="text" id="city-search-box" class="city-search-box" name="city" readonly="true" value="delhi">
-                    <i class="icon fa fa-caret-down"></i>
-                    <label for="city-search-box" class="city-drop-box" style="display: none;">
-{#                        <div class="drop-ttl">Dropdown</div>#}
-                        <ul>
-                            <li>delhi</li>
-                            <li>gurgaon</li>
-                        </ul>
-                    </label>
-                </div>
-                <div class="omnibox-holder" id="home-omnibox-holder">
-                    <input type="hidden" id="hidden-id-box" name="c_id" style="display: none;" />
-                    <input type="text" id="omni-search-box" class="omni-search-box" name="car_name" placeholder="Select Your Car or Bike" autocomplete="off">
-                    <i class="icon fa fa-search"></i>
-                    <label for="omni-search-box" class="omni-drop-box" style="display: none;">
-{#                        <div class="drop-ttl">Dropdown</div>#}
-                        <ul>
-                        </ul>
-                    </label>
-                </div>
-                <div class="submit-btn-holder purple-btn-1" id="home-submit-holder">
-                    <button class="form-submit-btn" type="submit">Get Started</button>
-                </div>
-                </form>
+        <div class="content-holder">   
+            <div class="title-holder">
+                    <div class="title">
+                       Car And Bike Care. Made Hassle Free.
+                    </div>
+                    <div class="sub-text">
+                        One Stop Shop &nbsp;<i class="fa fa-circle"></i>&nbsp;Doorstep Service&nbsp;<i class="fa fa-circle"></i>&nbsp;Instant Cost Estimate
+                    </div>
             </div>
-            <div class="sub-text">
-                One Stop Shop &nbsp;<i class="fa fa-circle"></i>&nbsp;Doorstep Service&nbsp;<i class="fa fa-circle"></i>&nbsp;Instant Cost Estimate
+            <div class="dropdown-plus-slider-div">
+                <div class="dropdown-div">
+                    <div class="sub-title">
+                        Select vehicle to compare and book services
+                    </div>            
+                    <div class="radio-btn-div">
+                        <form>
+                            <input type="radio" class="vehicleRadio" id="carRadio" name="vehicleRadio" value="Car" checked>Car
+                            <input type="radio" class="vehicleRadio" id="bikeRadio" name="vehicleRadio" value="Bike">Bike
+                        </form>      
+                    </div>
+                    <div class="vehicle-dropdown-div">
+                        <select class="custom-select" name="brandSelect" id="brandSelect" >
+                            <option selected disabled>Select brand</option>
+                            <option value="Chevrolet">Chevrolet</option>
+                            <option value="Fiat">Fiat</option>
+                            <option value="Ford">Ford</option>
+                            <option value="Honda">Honda</option>
+                            <option value="Hyundai">Hyundai</option>
+                            <option value="Mahindra">Mahindra</option>
+                            <option value="Maruti Suzuki">Maruti Suzuki</option>
+                            <option value="Nissan">Nissan</option>
+                            <option value="Renault">Renault</option>
+                            <option value="Skoda">Skoda</option>
+                            <option value="TATA">TATA</option>
+                            <option value="Toyota">Toyota</option>
+                            <option value="Volkswagen">Volkswagen</option>
+                        </select>
+                        <select class="custom-select" name="modelSelect" id="modelSelect" >
+                            <option selected disabled>Select model</option>
+                        </select>
+                    </div>
+                    <div class="separator-line">
+                        <div class="sep-line"><hr></div>
+                        <div class="or-text">or</div>
+                        <div class="sep-line"><hr></div>
+                    </div>                    
+                    <div class="search-set-holder" id="home-search-set-holder">
+                        <form id="home-search-form" method="get" action="/order/" data-remote="true" accept-charset="UTF-8">
+                            <div class="omnibox-holder" id="home-omnibox-holder">
+                                <input type="hidden" id="hidden-id-box" name="c_id" style="display: none;" />
+                                <input type="hidden" id="hidden-id-box2" name="c_id2" style="display: none;" />
+                                <input type="text" id="omni-search-box" class="omni-search-box" name="car_name" placeholder="Type your car/bike model" autocomplete="off">
+                                <i class="icon fa fa-search"></i>
+                                <label for="omni-search-box" class="omni-drop-box" style="display: none;">
+{#                                  <div class="drop-ttl">Dropdown</div>#}
+                                    <ul></ul>
+                                </label>
+                            </div>
+                            <div class="submit-btn-holder purple-btn-1" id="home-submit-holder">
+                                <button class="form-submit-btn" type="submit">Get Started</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="slider-div" style="position:relative;">
+                    
+                    <div id="jssor_1">
+                    <!-- Loading Screen -->
+                        <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
+                            <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+                            <div style="position:absolute;display:block;background:url('/static/img/slider/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
+                        </div>
+                        <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 30px; right:30px; width: 640px; height: 300px; overflow: hidden;">
+                            <div data-p="100" style="display: none;">
+                                <img data-u="image" src="/static/img/slider/02.jpg" />
+                            </div>  
+                            <div data-p="112.50" style="display: none;">
+                                <img data-u="image" src="/static/img/slider/04.jpg" />
+                            </div>
+                            <div data-p="112.50" style="display: none;">
+                                <img data-u="image" src="/static/img/slider/05.jpg" />
+                            </div>
+                            <div data-p="112.50" style="display: none;">
+                                <img data-u="image" src="/static/img/slider/09.jpg" />
+                            </div>
+                        </div>
+        <!-- Bullet Navigator -->
+                        <div data-u="navigator" class="jssorb05" data-autocenter="1">
+                            <!-- bullet navigator item prototype -->
+                            <div data-u="prototype" style="width:16px;height:16px;"></div>
+                        </div>
+                        <!-- Arrow Navigator -->
+                        <span data-u="arrowleft" class="jssora12l" style="width:30px;height:46px;" data-autocenter="2"></span>
+                        <span data-u="arrowright" class="jssora12r" style="width:50px;height:46px;" data-autocenter="2"></span>
+<!--                        <a href="http://www.jssor.com" style="display:none">Jssor Slider</a>-->
+                    </div>
+                    
+                </div>
             </div>
         </div>
+<!--
         <div class="video-embed">  
             <span class="video-link" data-video-id="y-v-zV_Z0_wJM">
             <div class="video-icon">
@@ -204,15 +262,16 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
             </div> 
             <div class="video-text">Watch Video</div></span>
         </div>
+-->
+<!--
         <div class="app-link">
-            <!--<span class="video-link" data-video-id="y-v-zV_Z0_wJM">-->
             <a href="https://play.google.com/store/apps/details?id=innovations.generis.sui.clickgarage" target="_blank">
             <div class="app-icon">
                     <img src="../../static/img/google_play.png" alt=""/>
             </div>
             </a>
-            <!--<div class="video-text">Watch Video</div></span>-->
         </div>
+-->
 
     </div>
     <div class="move-next-row">

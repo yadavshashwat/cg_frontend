@@ -56,6 +56,7 @@ var Commons = {
         'order_complete':'/api/order_complete/',
         'fetch_all_booking':'/api/fetch_all_booking/',
         'fetch_additional_details':'/api/fetch_additional_details/',
+        'fetch_car_list':'/api/fetch_car_list/',
     },
     getOrigin: function(){
         var origin = window.location.origin;
