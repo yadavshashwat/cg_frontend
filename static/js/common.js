@@ -49,6 +49,7 @@ var Commons = {
         'fetch_car_tyres':'/api/fetch_all_cleaningcatservices/',
         'add_to_cart':'/api/add_to_cart/',
         'place_order':'/api/place_order/',
+        'add_guest_transaction':'/api/add_guest_transaction/',
         'place_emergency_order':'/api/place_emergency_order/',
         'fetch_car_booking':'/api/fetch_car_booking/',
         'fetch_car_cancelled':'/api/fetch_car_cancelled/',
@@ -57,6 +58,7 @@ var Commons = {
         'fetch_all_booking':'/api/fetch_all_booking/',
         'fetch_additional_details':'/api/fetch_additional_details/',
         'apply_coupon':'/api/apply_coupon/',
+        'fetch_car_list':'/api/fetch_car_list'
 
     },
     getOrigin: function(){

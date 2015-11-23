@@ -17,6 +17,12 @@
                         <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-name txtbox" type="text" /></div>
                     </div>
                     <div class="form-row mt12">
+                        <div class="label-div">Email</div>
+                    </div>
+                    <div class="form-row">
+                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox email txtbox" type="text" /></div>
+                    </div>
+                    <div class="form-row mt12">
                         <div class="label-div">Phone</div>
                     </div>
                     <div class="form-row">
@@ -114,8 +120,9 @@
                 </div>
 
                 <div class = "select-service" >
+                    Select Service
                      <div class="ui-field-contain">
-                         <select name="select-custom-22" id="car-bike-dropdown" data-native-menu="false">
+                         <select name="select-custom-22" id="car-bike-select" data-native-menu="false">
                              <option value="choose-one" data-placeholder="true">Select Car/ Bike</option>
                              <option value="Car">Car</option>
                              <option value="Bike">Bike</option>
@@ -124,15 +131,50 @@
                      </div>
 
                      <div class="ui-field-contain">
-                         <select name="select-custom-23" id="make-dropdown" data-native-menu="false" disabled>
+                         <select name="select-custom-23" id="brand-select" data-native-menu="false">
+                             <option value="choose-one" data-placeholder="true">Select Brand</option>
+                             <div id="make-list"></div>
+                         </select>
+                     </div>
+                     <div class="ui-field-contain">
+                         <select name="select-custom-23" id="car-select" data-native-menu="false">
                              <option value="choose-one" data-placeholder="true">Select Model</option>
                              <div id="make-list"></div>
                          </select>
                      </div>
+                    <div class="ui-field-contain">
+                         <select name="select-custom-22" id="category-select" data-native-menu="false">
+                             <!--<option value="choose-one" data-placeholder="true">Select Category</option>-->
+                             <option value="servicing">Servicing</option>
+                             <option value="cleaning">Cleaning</option>
+                             <option value="vas">Vas</option>
+                             <!--<option value="TVS">TVS</option>-->
+                         </select>
+                     </div>
+                    <div class="ui-field-contain">
+                         <select name="select-custom-22" id="sub-cat-select" data-native-menu="false">
+                             <option value="choose-one" data-placeholder="true">Select Sub Category</option>
+                             <!--<option value="servicing">Servicing</option>-->
+                             <!--<option value="cleaning">Cleaning</option>-->
+                             <!--<option value="vas">Vas</option>-->
+                             <!--<option value="TVS">TVS</option>-->
+                         </select>
+                     </div>
+                    <div class="ui-field-contain">
+                         <select name="select-custom-22" id="service-select" data-native-menu="false">
+                             <option value="choose-one" data-placeholder="true">Select Service</option>
+                             <!--<option value="servicing">Servicing</option>-->
+                             <!--<option value="cleaning">Cleaning</option>-->
+                             <!--<option value="vas">Vas</option>-->
+                             <!--<option value="TVS">TVS</option>-->
+                         </select>
+                     </div>
+
 
 
                 </div>
-                <!--<div class="Add Guest Transaction">-->
-                    <!--<button id ="add-trans" class="trans-add">Place Guest Order</button>-->
-                <!--</div>-->
+                <div class="Add Guest Transaction">
+                        <button id ="place-guest-trans" class="trans-add">Place Guest Order</button>
+                </div>
+
 </div>    
