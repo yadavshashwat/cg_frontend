@@ -708,7 +708,6 @@ var Templates = {
     
 
                 ]},
-        
             ]
         }],
         booking:[{
@@ -736,8 +735,10 @@ var Templates = {
                                                 s += elem.served_data.odometer+'km / '+elem.served_data.year
                                             }
                                         }
+                                      } else if (elem.service == 'emergency' || elem.service == 'repair') {
+                                        s += '<li class="indiv_booking">' + elem.service.toTitleCase() + '</li>'
                                     }else{
-                                    s += '<li class="indiv_booking">'+elem.served_data.vendor +'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.service+' ( '+elem.served_data.category+' ) </li>'
+                                    s += '<li class="indiv_booking">'+ elem.served_data.vendor +'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.service +' ( '+elem.served_data.category+' ) </li>'
                                     }
                                 })
                                 s += '</ul>'
@@ -789,6 +790,8 @@ var Templates = {
                                             s += elem.served_data.odometer+'km / '+elem.served_data.year
                                         }
                                     }
+                                } else if (elem.service == 'emergency' || elem.service == 'repair' ) {
+                                    s += '<li class="indiv_booking">' + elem.service.toTitleCase() + '</li>'
                                 } else {
                                     s += '<li class="indiv_booking">' + elem.served_data.vendor + '  <i class="fa fa-caret-right"></i>  ' + elem.served_data.service + ' ( ' + elem.served_data.category + ' ) </li>'
                                 }
