@@ -654,7 +654,7 @@ var Global = {
 //            bookings-div closing tag here
             html += '</div>';
         });
-        container.html(html);
+        container.show().html(html);
     }
 
 };
