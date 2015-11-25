@@ -1120,36 +1120,54 @@
 				.column li{
 				cursor:pointer;
 				}
-				a{
+                .company{
+                    position: absolute;
+                    top: 10px;
+                    right: 2em;
+                    left: auto;                    
+                }
+                .social{
+                    position: absolute;
+                    top: 40px;
+                    right: 2em;
+                    left: auto;                    
+                }
+
+                a{
 					color: #fff;
 					font-family: Lato;
 					text-decoration: none;
 					font-size: 14px;
 				}
-				width: 100%;
-				.column{
-					float: left;
-					width: 24%;
-					margin-left: 1%;
-					font-family: Lato;
-					ul{
-						list-style: none;
-						lh{
-							font-size: 14px;
-							font-weight:700;
-							color:#e89b76;
-							padding: 12px 0px;
-						}
-						li{
-							font-size: 13px;
+                .horizontal-headers{
+                    width:15%;
+                    float: left;
+                    lh {
+                        display: block;
+                        font-family: Lato;
+                        font-size: 14px;
+				        font-weight:700;
+				        color:#e89b76;
+                        margin-bottom: 16px;
+                    }
+                }
+                .horizontal-lists{
+                    width: 70%;
+                    float: left;
+                    ul{
+                        display: block;
+                        width: 100%;
+                        li{
+                            float: left;
+                            list-style: none;
+                            font-family: Lato;
+                            font-size: 14px;
 							color:#fff;
-							padding: 6px 0px;
-						}
-					}
-				}
-				.column:first-child{
-					margin-left: 0px;
-				}
+							padding: 0px 6px;
+                            cursor: pointer;
+                        }
+                    }
+                }
 			}
 		}
 
