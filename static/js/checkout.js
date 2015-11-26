@@ -21,7 +21,7 @@ var zyxCart = {
 
 
     $('#date-time-pair .pick-up-time').timepicker({
-        timeFormat: 'h:i A',
+        timeFormat: 'hA-jB',
         // year, month, day and seconds are not important
 
         minTime: new Date(0, 0, 0, 8, 0, 0),
@@ -52,7 +52,7 @@ var zyxCart = {
     },
     defaults:{
       time:{
-        timeFormat: 'h:i A',
+        timeFormat: 'hA-jB',
         // year, month, day and seconds are not important
 
         minTime: new Date(0, 0, 0, 8, 0, 0),

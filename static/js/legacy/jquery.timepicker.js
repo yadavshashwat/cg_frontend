@@ -1022,6 +1022,11 @@
 					output += (time.getHours() > 11) ? _lang.PM : _lang.AM;
 					break;
 
+				case 'B':
+					output += (time.getHours()+1 > 11) ? _lang.PM : _lang.AM;
+					break;
+
+
 				case 'g':
 					hour = time.getHours() % 12;
 					output += (hour === 0) ? '12' : hour;
@@ -1040,6 +1045,19 @@
 						hour = '0'+hour;
 					}
 
+					output += (hour === 0) ? '12' : hour;
+					break;
+				case 'j':
+					hour = time.getHours() % 12;
+					if (hour<12){
+						hour = hour + 1
+					}else{
+						hour = 1
+					}
+
+					if (hour !== 0 && hour < 10) {
+						hour = '0'+hour;
+					}
 					output += (hour === 0) ? '12' : hour;
 					break;
 
