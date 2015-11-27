@@ -21,7 +21,7 @@ var zyxCart = {
 
 
     $('#date-time-pair .pick-up-time').timepicker({
-        timeFormat: 'h:i A',
+        timeFormat: 'hA-jB',
         // year, month, day and seconds are not important
 
         minTime: new Date(0, 0, 0, 8, 0, 0),
@@ -52,7 +52,7 @@ var zyxCart = {
     },
     defaults:{
       time:{
-        timeFormat: 'h:i A',
+        timeFormat: 'hA-jB',
         // year, month, day and seconds are not important
 
         minTime: new Date(0, 0, 0, 8, 0, 0),
@@ -247,15 +247,24 @@ var zyxCart = {
             orderObj['order_list'] = JSON.stringify(arry);
             orderObj['car_id'] = $('.confirm-step .table-holder table').attr('data-id');
             orderObj['car_name'] = $('.confirm-step .table-holder table').attr('data-name');
+            var couponData = {};
+            if (local.load() && local.load()['clgacoup']) {
+                couponData = local.load()['clgacoup'];
+                couponData = JSON.parse(couponData);
+            }
+            if (couponData.Global) {
+                $.each(couponData.Global, function(coup,msg){
+                });
+                orderObj['global_coupon'] = JSON.stringify(couponData.Global);
+            }
+
 //            console.log('')
                 if(zyxCart.emergency){
                     Commons.ajaxData('place_emergency_order', orderObj,"GET", _this, _this.onOrderPlace);
                 }else{
-
                     Commons.ajaxData('place_order', orderObj,"GET", _this, _this.onOrderPlace);
                 }
         });
-
     },
     onOrderPlace : function(){
         console.log('[')

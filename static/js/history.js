@@ -52,7 +52,6 @@ var Global = {
                     }
                 }
             }else{
-
             }
 //            var stateObj = { foo: "bar" };
         });
@@ -82,7 +81,6 @@ var Global = {
         btn.find('div').text('Booking Complete')
         btn.addClass('complete_booking')
     },
-
     loadBooking : function(data){
         console.log(data)
         var container = $('.section-box .booking');
@@ -92,9 +90,7 @@ var Global = {
         container.json2html(data, Templates.bookingPage.booking, {append:true});
 //        container.append(json2html.transform(data,Templates.bookingPage.services));
         $.each(data, function(idx, val){
-
         });
-
     },
 
     loadCancelled : function(data){

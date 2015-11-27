@@ -10,7 +10,7 @@ var Global = {
         var cookDict = local.load();
         console.log(cookDict)
         var carSelected = null;
-        if($('#emergency-table').find('tr').length){
+        if($('#emergency-table tbody').find('tr').length){
             $('#emergency-table').show();
             $('.emergency-msg').show();
         $('#car-select-box').css({'pointer-events':'none'}).hide();
@@ -84,10 +84,70 @@ var Global = {
                 minDiv.addClass('minimized');
             }
         });
+        $('.coupon-holder').on('click', '.apply-div', function(e){
+                var elem = $(this);
+                elem.addClass('applied')
+                var coupon = document.getElementById("coupon_code").value.toUpperCase();
+                var container = $('.coupon-holder .coupon-message');
+                container.html('');
+                //ccode = String(coupon.textContent)
+                //window.alert(coupon);
+
+                Commons.ajaxData('apply_coupon', {c_cd:coupon},"get",_this, eval("_this.loadCoupon"));
+        });
+
         if(!Global.loginFlag){
             $('.checkout-btn.login-in').on('click', function(){
                 $('#sign-up-in-dash').click();
             });
+        }
+    },
+    loadCoupon : function(data) {
+        //console.log(res)
+        console.log(data)
+        //if (length(data)){
+        //
+        //}
+        if (data.status) {
+
+        var container = $('.coupon-holder .coupon-message');
+        container.html('');
+        var html = '<span class="message-test">'+data.message+'</span>';
+        var couponData = {}
+        if (local.load() && local.load()['clgacoup']) {
+            couponData = local.load()['clgacoup'];
+            couponData = JSON.parse(couponData);
+        }
+        if (!couponData.Global) {
+            console.log('no data')
+            couponData.Global = {}
+            couponData.Global[data['coupon_code']] = data['message']
+        }
+        else {
+            if (!couponData.Global[data['coupon_code']]) {
+                couponData.Global[data['coupon_code']] = data['message']
+            } else {
+                //already applied
+            }
+        }
+        local.save('clgacoup', JSON.stringify(couponData));
+        //for now we only have global coupons;
+        //so skip this
+            /*
+        var ts_array = [];
+        $.each($('.table-holder').find('table[data-id="' + car + '"]').find('tbody tr'), function (i, v) {
+            if ($(v).is(':visible')) {
+                //var ts = $(v).attr('ts');
+                //if(ts && ts.length){
+                //
+                //}
+                ts_array.push();
+            }
+        });
+            */
+        container.html(html);
+    }else{
+
         }
     },
     updateCartItems : function(data){
@@ -129,7 +189,6 @@ var Global = {
                     if($(trDiv).height() > 40){
                         $(trDiv).addClass('minimized').append('<i class="fa max-min"></i>');
                     }
-
                 }
             }
         });

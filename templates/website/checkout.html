@@ -98,13 +98,13 @@
                                                                   ng-if="!loginId &amp;&amp; email!=''"></span><!-- end ngIf: !loginId && email!='' -->
                         <a href="#" class="edit-icon change lmargin20 lpadding15" ng-click="changeEmail()">Change</a>
                     </div>
-                    <div class="tpadding15 mobile-number ng-hide" 
+                    <div class="tpadding15 mobile-number ng-hide"
                          ng-hide="!model.loggedIn &amp;&amp; login_type !== 'new_customer_email'">
                         <div class="fk-font-17"><label for="mobile">Enter Mobile Number</label></div>
                         <p class="fk-smallfont bpadding10 msg">(We'll send you a Verification Code to this number)</p>
 
                         <div ng-class="{show_error_msg:showMobileError}"><input type="text" value="+91" disabled=""
-                                              
+
                                 class="fk-input phone_field ng-pristine ng-valid ng-valid-number ng-valid-maxlength ng-valid-minlength ng-valid-pattern"
                                 ng-model="mobile" placeholder="Enter mobile number" ng-pattern="/^[7-9][0-9]{9}$/"
                                            class="unit fk-input phone_code"> <input
@@ -296,9 +296,9 @@
             <span>2. PICKUP DETAILS</span>
         </div>
         <div class="wrapper">
-            <div class="address-count">
-                You have <b>{{ address|length }}</b> saved addresses
-            </div>
+            <!--<div class="address-count">-->
+                <!--You have <b>{{ address|length }}</b> saved addresses-->
+            <!--</div>-->
             {% if address|length|get_digit:"-1" %}
             {% for addr in address %}
 
@@ -392,9 +392,9 @@
                     </div>
                     <div class="form-row">
                     {% if user and not user.is_anonymous and user.first_name %}
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-name" type="text" value="{{ user.first_name }}"/></div>
+                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-name txtbox" type="text" value="{{ user.first_name }}"/></div>
                     {% else %}
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-name" type="text"/></div>
+                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-name txtbox" type="text"/></div>
                     {% endif %}
 
                     </div>
@@ -402,51 +402,52 @@
                         <div class="label-div">Phone</div>
                     </div>
                     <div class="form-row">
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-number" onfocus="if(this.value == 'eg. 7676767676') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'eg. 7676767676'; }" value="eg. 7676767676" type="text"/></div>
+                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-number txtbox" placeholder="eg. 7676767676" type="text"/></div>
                     </div>
                     <div class="form-row mt12">
                         <div class="label-div">Pick Up Date & Time:</div>
                     </div>
+                    <div class="form-row mt12">
+                        <input class="clean-inp-cbox" id="same-day-toggle" checked type="checkbox"/>
+                        <div class="label-div">Same day delivery</div>
+                    </div>
                     <div class="form-row">
                         <div class="clean-inp-wrapper" id="date-time-pair">
-                            <input class="clean-inp-tbox pick-up-date" data-date-start-date="0d" onfocus="if(this.value == 'dd/mm/yyyy') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'dd/mm/yyyy'; }" value="dd/mm/yyyy" type="text" style="width:55%;"/>
-                            <input class="clean-inp-tbox pick-up-time" onfocus="if(this.value == 'H:MM') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'H:MM'; }" value="H:MM"type="text" style="width:40%; "/>
+                            <input class="clean-inp-tbox pick-up-date txtbox" data-date-start-date="1d" placeholder="mm/dd/yyyy" type="text" style="width:45%;"/>
+                            <input class="clean-inp-tbox pick-up-time txtbox" placeholder="Time Slot" style="width:35%; "/>
                         </div>
                     </div>
+
                     <div class="form-row mt12">
                         <div class="label-div">Car Reg. No.</div>
                     </div>
                     <div class="form-row">
                         <div class="clean-inp-wrapper">
-                            <input class="clean-inp-tbox car-reg-no" onfocus="if(this.value == 'eg. RJ02CC4222') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'eg. RJ02CC4222'; }" value="eg. RJ02CC4222" type="text" style="width:55%;"/>
+                            <input class="clean-inp-tbox car-reg-no txtbox" placeholder= 'eg. RJ02CC4222' type="text";"/>
                         </div>
-                    </div>
-                    <div class="form-row mt12">
-                        <input class="clean-inp-cbox" id="same-day-toggle" checked type="checkbox"/>
-                        <div class="label-div">Same day delivery</div>
                     </div>
                 </div>
                 <div class="form-col" id="pick-up-col">
                     <div class="label-div"><b>Pickup Address</b></div>
                     <div class="form-row mt12" style="height: 80px;">
                         <div class="label-div">Address</div>
-                        <div class="clean-inp-wrapper"><textarea class="clean-inp-tabox pick-addr" type="" rows="3"></textarea>
+                        <div class="clean-inp-wrapper"><textarea placeholder = "House No., Street" class="clean-inp-tabox pick-addr txtbox" type="" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="form-row mt12">
                         <div class="label-div">Pincode</div>
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox pick-pin" type=""/></div>
+                        <div class="clean-inp-wrapper"><input placeholder = "eg. 110016" class="clean-inp-tbox pick-pin txtbox" type=""/></div>
                     </div>
                     <div class="form-row mt12">
                         <div class="label-div">Landmark</div>
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox pick-lmark" type=""/></div>
+                        <div class="clean-inp-wrapper"><input placeholder = "eg. XYZ Mall"  class="clean-inp-tbox pick-lmark txtbox" type=""/></div>
                     </div>
                     <div class="form-row mt12">
                         <div class="label-div">City</div>
                         <div class="clean-inp-wrapper">
                             <!--<input class="clean-inp-tbox drop-city" disabled type=""/>-->
                             <label class="clean-sbox-wrapper">
-                            <select class="clean-inp-sbox pick-city">
+                            <select class="clean-inp-sbox pick-city txtbox">
                                 <option value="Delhi">Delhi</option>
                                 <option value="Gurgaon">Gurgaon</option>
                             </select>
@@ -466,22 +467,22 @@
                     <div class="label-div"><b>Dropoff Address</b></div>
                     <div class="form-row mt12" style="height: 80px;">
                         <div class="label-div">Address</div>
-                        <div class="clean-inp-wrapper"><textarea class="clean-inp-tabox drop-addr" disabled type="" rows="3"></textarea></div>
+                        <div class="clean-inp-wrapper"><textarea placeholder = "House No., Street"  class="clean-inp-tabox drop-addr txtbox" disabled type="" rows="3"></textarea></div>
                     </div>
                     <div class="form-row mt12">
                         <div class="label-div">Pincode</div>
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox drop-pin" disabled type=""/></div>
+                        <div class="clean-inp-wrapper"><input placeholder = "eg. 110016"  class="clean-inp-tbox drop-pin txtbox" disabled type=""/></div>
                     </div>
                     <div class="form-row mt12">
                         <div class="label-div">Landmark</div>
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox drop-lmark" disabled type=""/></div>
+                        <div class="clean-inp-wrapper"><input placeholder = "eg. XYZ Mall"   class="clean-inp-tbox drop-lmark txtbox" disabled type=""/></div>
                     </div>
                     <div class="form-row mt12">
                         <div class="label-div">City</div>
                         <div class="clean-inp-wrapper">
                             <!--<input class="clean-inp-tbox drop-city" disabled type=""/>-->
                             <label class="clean-sbox-wrapper">
-                            <select class="clean-inp-sbox drop-city" disabled>
+                            <select class="clean-inp-sbox drop-city txtbox" disabled>
                                 <option value="Delhi">Delhi</option>
                                 <option value="Gurgaon">Gurgaon</option>
                             </select>
@@ -670,7 +671,10 @@
         </div>
         <div class="confirm-message">
                 Thank you for your booking!
-                You will receive an email & sms confirmation shortly. If further assistance is needed, please contact us on 09717353148.
+                <br><br>
+                You will receive an email & sms confirmation shortly. If further assistance is needed, please contact us on 09620839801.
+                <br>
+                Kindly keep your RC and service booklet handy at time of pick up.
         </div>
        
 

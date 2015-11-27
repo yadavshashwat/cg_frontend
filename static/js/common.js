@@ -49,6 +49,7 @@ var Commons = {
         'fetch_car_tyres':'/api/fetch_all_cleaningcatservices/',
         'add_to_cart':'/api/add_to_cart/',
         'place_order':'/api/place_order/',
+        'add_guest_transaction':'/api/add_guest_transaction/',
         'place_emergency_order':'/api/place_emergency_order/',
         'fetch_car_booking':'/api/fetch_car_booking/',
         'fetch_car_cancelled':'/api/fetch_car_cancelled/',
@@ -57,6 +58,8 @@ var Commons = {
         'fetch_all_booking':'/api/fetch_all_booking/',
         'fetch_additional_details':'/api/fetch_additional_details/',
         'fetch_car_list':'/api/fetch_car_list/',
+        'apply_coupon':'/api/apply_coupon/',
+        'fetch_car_list':'/api/fetch_car_list'
     },
     getOrigin: function(){
         var origin = window.location.origin;
@@ -705,7 +708,6 @@ var Templates = {
     
 
                 ]},
-        
             ]
         }],
         booking:[{
@@ -733,8 +735,10 @@ var Templates = {
                                                 s += elem.served_data.odometer+'km / '+elem.served_data.year
                                             }
                                         }
+                                      } else if (elem.service == 'emergency' || elem.service == 'repair') {
+                                        s += '<li class="indiv_booking">' + elem.service.toTitleCase() + '</li>'
                                     }else{
-                                    s += '<li class="indiv_booking">'+elem.served_data.vendor +'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.service+' ( '+elem.served_data.category+' ) </li>'
+                                    s += '<li class="indiv_booking">'+ elem.served_data.vendor +'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.service +' ( '+elem.served_data.category+' ) </li>'
                                     }
                                 })
                                 s += '</ul>'
@@ -786,6 +790,8 @@ var Templates = {
                                             s += elem.served_data.odometer+'km / '+elem.served_data.year
                                         }
                                     }
+                                } else if (elem.service == 'emergency' || elem.service == 'repair' ) {
+                                    s += '<li class="indiv_booking">' + elem.service.toTitleCase() + '</li>'
                                 } else {
                                     s += '<li class="indiv_booking">' + elem.served_data.vendor + '  <i class="fa fa-caret-right"></i>  ' + elem.served_data.service + ' ( ' + elem.served_data.category + ' ) </li>'
                                 }
@@ -910,7 +916,8 @@ var formCheck = {
         var user_name = $(container).find('.user-name').val();
         var user_number = $(container).find('.user-number').val();
         var car_reg_number = $(container).find('.car-reg-no').val();
-
+        var pick_date = $(container).find('.pick-up-date').val();
+        var pick_time = $(container).find('.pick-up-time').val();
         var pick_addr = $(container).find('.pick-addr').val();
         var pick_pin = $(container).find('.pick-pin').val();
         var pick_lmark = $(container).find('.pick-lmark').val();
@@ -934,7 +941,14 @@ var formCheck = {
                 return false
             }
         }
-
+        if(!valid(pick_date)){
+            $(container).find('.pick-up-date').addClass('error');
+            return false
+        }
+        if(!valid(pick_time)){
+            $(container).find('.pick-up-time').addClass('error');
+            return false
+        }
 
         if(!valid(pick_addr)){
             $(container).find('.pick-addr').addClass('error');
