@@ -266,7 +266,7 @@
                         font-size: 16px;
                     }
                     .mat-drp-slct-box{
-                        z-index: -1;
+                        z-index: 100;
                         ul{
                             width:100%;
                             padding:0px;
@@ -503,7 +503,7 @@
                                 .jssora12l, .jssora12r {
                                     display: block;
                                     position: absolute;
-                                    margin-top:130px;
+                                    margin-top:125px;
                                     /* size of arrow element */
                                     width: 30px;
                                     height: 46px;
@@ -512,17 +512,17 @@
                                     overflow: hidden;
                                 }
                                 .jssora12l { 
-                                    left: 13%;
+                                    left: 1%;
                                     background-position: -16px -37px;
                                 }
                                 .jssora12r {
-                                    right:10%;
+                                    right: -2%;
                                     background-position: -75px -37px; 
                                 }
                                 .jssora12l:hover { background-position: -136px -37px; }
                                 .jssora12r:hover { background-position: -195px -37px; }
-                                .jssora12l.jssora12ldn { background-position: -256px -37px; }
-                                .jssora12r.jssora12rdn { background-position: -315px -37px; }
+//                                .jssora12l.jssora12ldn { background-position: -256px -37px; }
+//                                .jssora12r.jssora12rdn { background-position: -315px -37px; }
                                 #jssor_1 div{
                                     transform: none !important;
                                     visibility: visible !important;
@@ -537,30 +537,32 @@
 				    left: 0%;
 				    z-index: 50;
                     display: inline;
-                   
                     color:#fff;
-                        font-family: lato;
-                        padding-top: 50px;
-                        img{
-						position: absolute;
-						height: 50px;;}
-                    .video-text{padding:17px 60px;
+                    font-family: lato;
+                    height: 50px;
+                    padding-top: 50px;
+                    img{
+                        position: absolute;
+                        height: 50px;
                     }
+                    .video-text{
+                        padding:17px 60px;
                     }
-			  .app-link{
-                    position: absolute;
-				    bottom: -120px;
-				    right: 0%;
-				    z-index: 50;
-                    //display: inline;
-					 padding-top: 50px;
-                    color:#fff;
-                        font-family: lato;
-                        //padding-top: 50px;
-                        img{
-						height: 50px;}
-
-                    }
+                }
+//			  .app-link{
+//                    position: absolute;
+//				    bottom: -120px;
+//				    right: 0%;
+//				    z-index: 50;
+//                    //display: inline;
+//					 padding-top: 50px;
+//                    color:#fff;
+//                        font-family: lato;
+//                        //padding-top: 50px;
+//                        img{
+//						height: 50px;}
+//
+//                    }
 //                }
             }
 
@@ -3235,6 +3237,7 @@ label.clean-sbox-wrapper {
 						text-align: center;
 						padding: 15px;
 					.form-submit-btn{
+                        z-index:-1;
 						width:200px;
 						margin: 0 auto;
 					}
@@ -3873,6 +3876,7 @@ label.clean-sbox-wrapper {
 //			width:100%px;
 			margin:0 auto;
 			.omnibox-holder{
+                z-index: 99;
 				position: relative;
 				height:40px;
 				width: 100%;
@@ -3903,7 +3907,7 @@ label.clean-sbox-wrapper {
 					font-size: 20px;
 				}
 				.mat-drp-slct-box{
-					z-index: -1;
+					z-index: 100;
 					ul{
 						width:100%;
 						padding:0px;
