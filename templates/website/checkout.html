@@ -603,9 +603,17 @@
                             <td>
                                 {% if val.service == "servicing" %}
                                 {% if val.service_detail.dealer_cat == "Authorized" %}
+                         {% if val.service_detail.car_bike == "Bike" %}
                          <div class="price-div">
+                             Service Centre Bill Amount <br>
+                             + <br>
+                             Pick Up Fees :<i style='padding-left:10px' class='fa fa-inr'></i>150
+                        </div>
+                        {% else %}
+                        <div class="price-div">
                             Service Centre Bill Amount
                         </div>
+                        {% endif %}
                          {% else %}
                         <div class="price-div"><i class="fa fa-inr"></i>
                             {{ val.service_detail.total_price }}
