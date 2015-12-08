@@ -192,21 +192,21 @@ function bind(f, obj, args)
 }
 
 var logoMap = {
-    '3M':'../static/img/dl-logo-3M.png',
-    'Tee Car Care':'../static/img/dl-logo-Tee.png',
-    'Exppress Car Wash':'../static/img/dl-logo-Exppress.png',
-    'ClickGarage On-The-Go':'../static/img/dl-logo-OntheGo.png',
-    'ClickGarage Doorstep':'../static/img/dl-logo-doorstep.png',
-    'Authorized':'../static/img/brands/',
-    'Authorized Bike':'../static/img/brands/Bike/',
-    'Authorized Car':'../static/img/brands/Car/',
-    'Bosch':'../static/img/dl-logo-Bosch.jpg',
-    'ClickGarage Verified':'../static/img/dl-logo-cgverified.png',
-    'Mahindra First Choice':'../static/img/dl-logo-MFC.jpg',
-    'ClickGarage Workshop':'../static/img/dl-logo-cgverified.png',
-    'Bosch Car Care':'../static/img/dl-logo-Bosch.jpg',
-    'AIS':'../static/img/ais.png',
-    '--':'../static/img/dl-logo-cgverified.png',
+    '3M':'/static/img/dl-logo-3M.png',
+    'Tee Car Care':'/static/img/dl-logo-Tee.png',
+    'Exppress Car Wash':'/static/img/dl-logo-Exppress.png',
+    'ClickGarage On-The-Go':'/static/img/dl-logo-OntheGo.png',
+    'ClickGarage Doorstep':'/static/img/dl-logo-doorstep.png',
+    'Authorized':'/static/img/brands/',
+    'Authorized Bike':'/static/img/brands/Bike/',
+    'Authorized Car':'/static/img/brands/Car/',
+    'Bosch':'/static/img/dl-logo-Bosch.jpg',
+    'ClickGarage Verified':'/static/img/dl-logo-cgverified.png',
+    'Mahindra First Choice':'/static/img/dl-logo-MFC.jpg',
+    'ClickGarage Workshop':'/static/img/dl-logo-cgverified.png',
+    'Bosch Car Care':'/static/img/dl-logo-Bosch.jpg',
+    'AIS':'/static/img/ais.png',
+    '--':'/static/img/dl-logo-cgverified.png',
 };
 
 var Templates = {
@@ -619,7 +619,8 @@ var Templates = {
                     ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
-        }]
+        }],
+        package_popup:{}
     },
     bookingPage:{
         booking_new:[{
