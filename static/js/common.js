@@ -59,7 +59,8 @@ var Commons = {
         'fetch_additional_details':'/api/fetch_additional_details/',
         'fetch_car_list':'/api/fetch_car_list/',
         'apply_coupon':'/api/apply_coupon/',
-        'fetch_car_list':'/api/fetch_car_list'
+        'fetch_car_list':'/api/fetch_car_list/',
+        'send_contact':'/api/send_contact/'
     },
     getOrigin: function(){
         var origin = window.location.origin;
@@ -129,6 +130,22 @@ var Commons = {
 
     },
     eventHandlers : function(){
+            var _this = this;
+        console.log('here')
+        $('#contact-form').on('submit', function(){
+                 var name =  $('#id_name').val();
+
+                 var email =  $('#id_email').val();
+
+                 var message =  $('#id_message').val();
+
+
+                //elem.addClass('sent')
+                //var tran_id = elem.attr('tran_id')
+                //var classy = 'Booking'
+                Commons.ajaxData('send_contact', {name:name, email:email,message:message},"get",_this, eval("_this.afterSendContact"))
+            return false;
+        })
         $('body').on('click', function(e){
             var $target = $(e.target);
             if( !$target.closest('.logged-user-drpdwn').length && !$target.closest('#settings-drpdwn').length ){
@@ -1126,6 +1143,12 @@ var formCheck = {
             };
         }
         return obj;
+    },
+     afterSendContact: function(data){
+        console.log(data)
+        //var btn = $('[tran_id="'+data['cancelled_id']+'"]')
+        btn.find('div').text('Sent')
+        //btn.addClass('cancelled_booking')
     },
     updateTime : function(container){
             var todayFlag = false;

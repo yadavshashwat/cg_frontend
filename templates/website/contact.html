@@ -6,6 +6,7 @@
     {% load staticfiles %}
     <link rel="shortcut icon" type="image/png" href="../../static/img/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.min.css" %}" />
+        <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css'>
     <link rel="stylesheet" type="text/css" href="{% static "css/custom.css" %}" />
     <link rel="stylesheet/less" type="text/css" href="{% static "less/styles.less" %}" />
      <link rel="stylesheet" type="text/css" href="{% static "css/contact.css" %}" />
@@ -14,15 +15,14 @@
     <script type="text/javascript" src="{%  static "js/legacy/json2html.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/legacy/jquery.json2html.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/plugin.js" %}"></script>
-    <script type="text/javascript" src="{%  static "js/common.js" %}"></script>
-    <script type="text/javascript" src="{%  static "js/cart.js" %}"></script>
+   <script type="text/javascript" src="{%  static "js/common.js" %}"></script>
+    <script type="text/javascript">
+$(document).ready(function(){
+    Commons.eventHandlers();
+});
+    </script>
     <script src="{%  static "js/legacy/less.min.js" %}"></script>
 
-
-   {% load js %}
-    <script type="text/javascript">
-        Global.loginFlag = {{login_flag | js}};
-    </script>
 
 </head>
 <body class="cart-body">
@@ -37,8 +37,11 @@
                 <span> Contact Us </span>
             </div>
             <!--<div class="form">-->
-                <form id="contact-form" class="styled-form" action="" method="post" accept-charset="utf-8">
-                    <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="8ece95d139633656ad0371bf53c45b2d"></div>
+                <!--<form id="contact-form" class="styled-form" action="" method="post" accept-charset="utf-8">-->
+                <form id="contact-form" class="styled-form" accept-charset="utf-8">
+                    <div style="display:none">
+                        <!--<input type="hidden" name="csrfmiddlewaretoken" value="8ece95d139633656ad0371bf53c45b2d">-->
+                    </div>
                         <h1 class="pagetitle">Contact us</h1>
 
                         <div class="note">
@@ -47,17 +50,17 @@
                         </div>
 
                         <p class="row half first">
-                          <label for="id_name">Name: <span class="required">*</span></label>
+                          <label for="id_name">Name: </label>
                           <span class="field"><input type="text" name="name" id="id_name"></span>
                         </p>
 
                         <p class="row half">
-                            <label for="id_email">Email: <span class="required">*</span></label>
+                            <label for="id_email">Email:</label>
                             <span class="field"><input type="text" name="email" id="id_email"></span>
                         </p>
 
                         <p class="row">
-                          <label for="id_message">Message: <span class="required">*</span></label>
+                          <label for="id_message">Message:</label>
                           <span class="field"><textarea cols="40" rows="5" name="message" id="id_message"></textarea></span>
                         </p>
 
@@ -70,7 +73,7 @@
                         <!--</p>-->
 
                         <p class="submit-row">
-                          <button type="submit">SEND</button>
+                          <button type="submit" id="send-btn-contact" class="send-btn">SEND</button>
                         </p>
 
                         </form>
@@ -97,7 +100,16 @@
                                   Pin: 110016<br>
                                 </address>
                               </dd>
-                                            <div class="fr social fix_social">
+
+
+
+
+                              <!--<dd class="social-links">-->
+                                <!--<a class="fb" href="http://www.facebook.com/theclickgarage" title="Find us on Facebook">Facebook</a>-->
+                                <!--<a class="tt" href="http://twitter.com/theclickgarage" title="Find us on Twitter">Twitter</a>-->
+                              <!--</dd>-->
+                            </dl>
+                             <div class="fr social fix_social">
                 <a href="http://twitter.com/theclickgarage" class="icon-button twitter"><i class="icon-twitter"></i><span></span></a>
                 <a href="http://facebook.com/theclickgarage" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a>
                 <a href="http://plus.google.com/theclickgarage" class="icon-button google-plus"><i class="icon-google-plus"></i><span></span></a>
@@ -107,14 +119,6 @@
                 <!--<a href="http://facebook.com/theclickgarage"  target="_blank" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a>-->
                 <!--<a href="http://plus.google.com/+theclickgarage" target="_blank" class="icon-button google-plus"><i class="icon-google-plus"></i><span></span></a>-->
             </div>
-
-
-
-                              <!--<dd class="social-links">-->
-                                <!--<a class="fb" href="http://www.facebook.com/theclickgarage" title="Find us on Facebook">Facebook</a>-->
-                                <!--<a class="tt" href="http://twitter.com/theclickgarage" title="Find us on Twitter">Twitter</a>-->
-                              <!--</dd>-->
-                            </dl>
                           </aside>
                           <!--</div>-->
             <!--</div>-->

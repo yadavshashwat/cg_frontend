@@ -11,7 +11,7 @@ address { font-style: normal; }
 #register-link { position: absolute; right: 0; top: -30px; }
 #contact-form { position: relative; display: inline; float: left; width: 622px; padding: 25px 30px; }
 #contact-form .submit-row { text-align: right; }
-#contact-info { position: absolute; right: 0; top: 0; height: 100%; border: 10px solid white; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; width: 306px; padding: 30px 25px; background: white url('../img/wave-pattern-white.png?1350403306') repeat; }
+#contact-info {position: absolute; right: 0; top: 0; height: 100%; border: 10px solid white; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; width: 306px; padding: 30px 25px; background: white url('../img/pattern_contacts.png') repeat;     background-size: 300px auto; }
 #contact-info dt { text-transform: uppercase; font-family: "brandon-grotesque", Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: 1px; font-size: 12px; color: #e8554e; }
 #contact-info dd { margin-bottom: 25px; }
 #contact-info dd, #contact-info dd a { color: #204a65; }
@@ -20,9 +20,16 @@ address { font-style: normal; }
 #contact-info .social-links a.tt { background-position: -592px -8px; }
 .contact{overflow: hidden;}
 .header-strip{z-index: 200;}
-.form.info{background-color: blue;
+.info{background-color: blue;
     overflow: hidden;
-    height: inherit;}
+    height: inherit;
+font-size:14px;}
+
+.note{
+    font-family: Raleway;
+    font-size: 14px;
+
+}
 
 .styled-form .pagetitle { margin-bottom: 5px; }
 .styled-form .note { margin-bottom: 40px; }
@@ -37,6 +44,7 @@ address { font-style: normal; }
 .styled-form .row.half { width: 46%; margin-left: 8%; }
 .styled-form .row.half.first { margin-left: 0; clear: left; }
 .styled-form .submit-row { clear: both;}
+
 
 
 /*.competition-modal .modal-content { width: 840px; height: 302px; min-height: 300px; top: 50%; margin-top: -151px; }*/

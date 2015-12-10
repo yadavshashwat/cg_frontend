@@ -96,12 +96,16 @@ var Global = {
                 Commons.ajaxData('apply_coupon', {c_cd:coupon},"get",_this, eval("_this.loadCoupon"));
         });
 
+
         if(!Global.loginFlag){
             $('.checkout-btn.login-in').on('click', function(){
                 $('#sign-up-in-dash').click();
             });
         }
     },
+
+
+
     loadCoupon : function(data) {
         //console.log(res)
         console.log(data)
