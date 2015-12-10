@@ -74,14 +74,17 @@ var Global = {
                 window.location.hash = '#order';
                 $.mobile.changePage('#order',{'allowSamePageTransition':true});
             }
+            Global.serviceCat = {
+                'serviceType':service_type     
+            }
 
         });
+        
         
         $('.service-list .list-services').on('click', 'a', function(e){
 //            var $target  = $(e.target);
             var serviceName = $('#order-page-service').text();
             var serviceId = $(this).attr('data-id');
-//            console.log(classy);
             Global.serviceSelected = {
                 'service':serviceName,
                 'id':serviceId                
@@ -89,6 +92,78 @@ var Global = {
             window.location.hash = '#vendor';
         });
         
+        
+        $('.vendor-list .vendors').on('click', 'a', function(e){
+            var vendorType = $('#vendor-select').text();
+            Global.vendorSelected = {
+                'vendor':vendorType                
+            }
+            window.location.hash = '#checkout';
+        });
+        
+        
+        $('#checkout #checkout-submit').on('click', function(e){
+            
+            console.log('place order requested change detected');
+            var classy = Global.serviceCat.serviceType;            
+            var car_select = Global.carSelected.fullname
+            var servicename = Global.serviceSelected.id;
+            var name = $('#checkout #name').val();
+            var email = $('#checkout #email').val();
+            var phone = $('#checkout #phonenumber').val();
+            var pick_date = $('#dateinput option:selected').text();
+            var pick_time = $('#pick-up-time option:selected').text();
+            var car_reg_number = $('#checkout #regn').val();
+            var pick_addr = $('#checkout #pickupadd1').val();
+            var pick_pin = $('#checkout #pincode1').val();
+            var pick_lmark = $('#checkout #landmark1').val();
+            var pick_city = $('#city1 option:selected').text();
+            var drop_addr = $('#checkout #pickupadd2').val();
+            var drop_pin = $('#checkout #pincode2').val();
+            var drop_lmark = $('#checkout #landmark2').val();
+            var drop_city = $('#city2 option:selected').text();
+            var timeStamp = Math.floor(Date.now() / 1000);
+
+            var pick = {
+                     street : pick_addr,
+                     pincode : pick_pin,
+                     landmark : pick_lmark,
+                     city : pick_city,
+                     time : pick_time,
+                     date : pick_date
+                 };
+
+            var drop = {
+                     street : pick_addr,
+                     pincode : pick_pin,
+                     landmark : pick_lmark,
+                     city : pick_city
+                 };
+            
+            var order_list = [{
+                ts : timeStamp,
+                service_id : servicename,
+                service : classy,
+                status: true
+            }];
+
+            Commons.ajaxData('add_guest_transaction', {
+                         email             : email,
+                         name              : name,
+                         number            : phone,
+                         reg_no:             car_reg_number ,
+                         order_list        : JSON.stringify(order_list),
+                         car_name          : car_select,
+                         pick:JSON.stringify(pick),
+                         drop:JSON.stringify(drop),
+                     },"GET", _this, _this.loadPlaced);
+            
+        });
+        
+        $('#checkout #checkbox-mini-0').on('change', function(e) {
+            console.log('tick box clicked');
+            $('#checkout .dropoff-toggle').toggle();            
+        });    
     
 //    Signup link show script    
     $("#signup-link").click(function(){

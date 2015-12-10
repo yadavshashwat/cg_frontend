@@ -236,17 +236,20 @@
     </div>
     <!--CG Header-->
 
-    <div data-role="content">
-
+    <div data-role="content">        
+        <div id="vendor-select-div">
+            <p id="vendor-select"></p>
+        </div>
         <div class="service-selection">
             <div class="selected-category">
             </div>
-        </div>
+        </div>        
         <div class="vendor-list">
             <ul class="vendors" data-role="listview" data-inset="true" data-icon="check">
             </ul>
-        </div>
+        </div>        
     </div>
+    
 </div>
 
 <!-- Don't Delete -- End of fourth page -->
@@ -418,6 +421,11 @@
                 <label for="email">Email:</label>
                 <input type="email" class="required" name="email" id="email" placeholder="abc@xyzmail.com">
             </fieldset>
+            
+            <fieldset data-role="fieldcontain">
+                <label for="regn">Vehicle Regn#:</label>
+                <input type="test" class="required" name="regn" id="regn" placeholder="RJ02CC4222">
+            </fieldset>
 
             <fieldset data-role="fieldcontain">
                 <label for="pick-up-time">Pick-Up time:</label>
@@ -467,25 +475,24 @@
                 <input type="text" class="required" name="landmark1" id="landmark1">
             </fieldset>
 
-            <p></p>
-            <center class="dropoff">Dropoff Details</center>
-            <p></p>
-
             <input type="checkbox" name="checkbox-0" id="checkbox-mini-0" class="custom" data-mini="true"/>
-            <label for="checkbox-mini-0" class="ui-input-text">Same as Pick up</label>
+            <label for="checkbox-mini-0" class="ui-input-text">I want a different drop location</label>
+            
+            <p></p>
+            <center class="dropoff-toggle"  style="display:none;">Dropoff Details</center>
+            <p></p>
 
-
-            <fieldset data-role="fieldcontain">
-                <label for="pickupadd" class="ui-input-text">Pick up Address:</label>
+            <fieldset data-role="fieldcontain" class="dropoff-toggle" style="display:none;">
+                <label for="pickupadd" class="ui-input-text">Drop off Address:</label>
                 <input type="text" name="pickupadd2" id="pickupadd2" class="required">
             </fieldset>
 
-            <fieldset data-role="fieldcontain">
+            <fieldset data-role="fieldcontain" class="dropoff-toggle" style="display:none;">
                 <label for="pincode" class="ui-input-text">Pincode:</label>
                 <input type="number" name="pincode2" id="pincode2" class="required" minlength="6">
             </fieldset>
 
-            <fieldset data-role="fieldcontain">
+            <fieldset data-role="fieldcontain" class="dropoff-toggle" style="display:none;">
                 <label for="select-choice-min" class="select ui-input-text">City:</label>
                 <select name="select-choice-min" id="city2" data-mini="true" class="required">
                     <option value="selectone">Select One</option>
@@ -495,14 +502,14 @@
                 </select>
             </fieldset>
 
-            <fieldset data-role="fieldcontain">
+            <fieldset data-role="fieldcontain" class="dropoff-toggle" style="display:none;">
                 <label for="landmark" class="ui-input-text">Landmark:</label>
                 <input type="text" name="landmark2" id="landmark2" class="required">
             </fieldset>
 
 
             <!--            <a href="i" data-role="button" data-mini="true">Submit</a>-->
-            <input type="submit" value="Submit">
+            <input type="submit" id="checkout-submit" value="Submit">
 
         </form>
 
