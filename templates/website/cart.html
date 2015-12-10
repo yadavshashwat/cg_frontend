@@ -170,8 +170,10 @@
                         </div>
                         {% endif %}
                         {% elif val.service == "cleaning" %}
+
                         <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}</div>
                         {% elif val.service == "vas" %}
+                        
                         <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}</div>
                         {% elif val.service == "windshield" %}
                             {% if val.service_detail.price_total == "NA" %}
