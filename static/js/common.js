@@ -972,39 +972,39 @@ var formCheck = {
             $(container).find('.pick-addr').addClass('error');
             return false
         }
-        if(!valid(pick_pin)){
-            $(container).find('.pick-pin').addClass('error');
-            return false
-        }else{
-            console.log(pick_pin.length)
-            if(isNaN(parseInt(pick_pin)) || pick_pin.length != 6){
-                $(container).find('.pick-pin').addClass('error');
-                return false
-            }
-        }
-        if(!valid(car_reg_number)){
-            $(container).find('.car-reg-no').addClass('error');
-            return false
-        }else{
-            if(car_reg_number.length > 10){
-                $(container).find('.car-reg-no').addClass('error');
-                return false
-            }
-        }
+        //if(!valid(pick_pin)){
+        //    $(container).find('.pick-pin').addClass('error');
+        //    return false
+        //}else{
+        //    console.log(pick_pin.length)
+        //    if(isNaN(parseInt(pick_pin)) || pick_pin.length != 6){
+        //        $(container).find('.pick-pin').addClass('error');
+        //        return false
+        //    }
+        //}
+        //if(!valid(car_reg_number)){
+        //    $(container).find('.car-reg-no').addClass('error');
+        //    return false
+        //}else{
+        //    if(car_reg_number.length > 10){
+        //        $(container).find('.car-reg-no').addClass('error');
+        //        return false
+        //    }
+        //}
         if(!valid(drop_addr)){
             $(container).find('.drop-addr').addClass('error');
             return false
         }
-        if(!valid(drop_pin)){
-            $(container).find('.drop-pin').addClass('error');
-            return false
-        }else{
-//            console.log(pick_pin.length)
-            if(isNaN(parseInt(drop_pin)) || drop_pin.length != 6){
-                $(container).find('.drop-pin').addClass('error');
-                return false
-            }
-        }
+//        if(!valid(drop_pin)){
+//            $(container).find('.drop-pin').addClass('error');
+//            return false
+//        }else{
+////            console.log(pick_pin.length)
+//            if(isNaN(parseInt(drop_pin)) || drop_pin.length != 6){
+//                $(container).find('.drop-pin').addClass('error');
+//                return false
+//            }
+//        }
 //        if(!valid(pick_lmark)){
 //            $(container).find('.pick-lmark').addClass('error');
 //            return false
