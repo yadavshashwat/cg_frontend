@@ -186,7 +186,7 @@ var zyxCart = {
 
         $('.address-step #pick-up-col').on('focusout', 'textarea,input,select', function(){
             var check = $('#pick-drop-toggle').prop('checked');
-            if(check){
+            if(!check){
                 var this_cls = $(this).attr('class').split(' ')[1];
                 if(this_cls){
                     var that_cls = this_cls.replace('pick', 'drop');
@@ -205,7 +205,7 @@ var zyxCart = {
         $('.address-form-holder #pick-drop-toggle').on('change', function(){
             var val = $(this).prop('checked');
             var form = $(this).closest('.address-form-holder');
-            if(val){
+            if(!val){
                 $(form).find('#drop-off-col').addClass('disabled');
                 $(form).find('#drop-off-col').find('input,textarea').attr('disabled', true);
             }else{

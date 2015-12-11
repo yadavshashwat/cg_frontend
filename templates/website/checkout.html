@@ -293,7 +293,7 @@
         NAME, TEHDEPHONE, PICHKUOP DIOP TUME
         -->
         <div class="dog-ear-header">
-            <span>2. PICKUP DETAILS</span>
+            <span>2. ADDITIONAL DETAILS</span>
         </div>
         <div class="wrapper">
             <!--<div class="address-count">-->
@@ -388,7 +388,7 @@
                 <div class="form-col">
                     <div class="label-div"><b>User Details</b></div>
                     <div class="form-row mt12">
-                        <div class="label-div">Name</div>
+                        <div class="label-div">Name*</div>
                     </div>
                     <div class="form-row">
                     {% if user and not user.is_anonymous and user.first_name %}
@@ -399,13 +399,13 @@
 
                     </div>
                     <div class="form-row mt12">
-                        <div class="label-div">Phone</div>
+                        <div class="label-div">Phone*</div>
                     </div>
                     <div class="form-row">
                         <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-number txtbox" placeholder="eg. 7676767676" type="text"/></div>
                     </div>
                     <div class="form-row mt12">
-                        <div class="label-div">Pick Up Date & Time:</div>
+                        <div class="label-div">Date & Time Slot*</div>
                     </div>
                     <div class="form-row mt12">
                         <input class="clean-inp-cbox" id="same-day-toggle" checked type="checkbox"/>
@@ -428,22 +428,22 @@
                     </div>
                 </div>
                 <div class="form-col" id="pick-up-col">
-                    <div class="label-div"><b>Pickup Address</b></div>
+                    <div class="label-div"><b>Pickup Address/ Doorstep Service Location</b></div>
                     <div class="form-row mt12" style="height: 80px;">
-                        <div class="label-div">Address</div>
+                        <div class="label-div">Address*</div>
                         <div class="clean-inp-wrapper"><textarea placeholder = "House No., Street" class="clean-inp-tabox pick-addr txtbox" type="" rows="3"></textarea>
                         </div>
                     </div>
+                    <!--<div class="form-row mt12">-->
+                        <!--<div class="label-div">Pincode</div>-->
+                        <!--<div class="clean-inp-wrapper"><input placeholder = "eg. 110016" class="clean-inp-tbox pick-pin txtbox" type=""/></div>-->
+                    <!--</div>-->
                     <div class="form-row mt12">
-                        <div class="label-div">Pincode</div>
-                        <div class="clean-inp-wrapper"><input placeholder = "eg. 110016" class="clean-inp-tbox pick-pin txtbox" type=""/></div>
-                    </div>
-                    <div class="form-row mt12">
-                        <div class="label-div">Landmark</div>
+                        <div class="label-div">Landmark*</div>
                         <div class="clean-inp-wrapper"><input placeholder = "eg. XYZ Mall"  class="clean-inp-tbox pick-lmark txtbox" type=""/></div>
                     </div>
                     <div class="form-row mt12">
-                        <div class="label-div">City</div>
+                        <div class="label-div">City*</div>
                         <div class="clean-inp-wrapper">
                             <!--<input class="clean-inp-tbox drop-city" disabled type=""/>-->
                             <label class="clean-sbox-wrapper">
@@ -459,26 +459,26 @@
                         <!--<div class="clean-inp-wrapper"><input class="clean-inp-tbox" value="India" type="" disabled/></div>-->
                     <!--</div>-->
                     <div class="form-row mt12">
-                        <input class="clean-inp-cbox" id="pick-drop-toggle" checked type="checkbox"/>
-                        <div class="label-div">Set this as Dropoff Address</div>
+                        <input class="clean-inp-cbox" id="pick-drop-toggle" type="checkbox"/>
+                        <div class="label-div">&nbsp;&nbsp;Set Different Dropoff Address</div>
                     </div>
                 </div>
                 <div class="form-col disabled" id="drop-off-col">
                     <div class="label-div"><b>Dropoff Address</b></div>
                     <div class="form-row mt12" style="height: 80px;">
-                        <div class="label-div">Address</div>
+                        <div class="label-div">Address*</div>
                         <div class="clean-inp-wrapper"><textarea placeholder = "House No., Street"  class="clean-inp-tabox drop-addr txtbox" disabled type="" rows="3"></textarea></div>
                     </div>
+                    <!--<div class="form-row mt12">-->
+                        <!--<div class="label-div">Pincode</div>-->
+                        <!--<div class="clean-inp-wrapper"><input placeholder = "eg. 110016"  class="clean-inp-tbox drop-pin txtbox" disabled type=""/></div>-->
+                    <!--</div>-->
                     <div class="form-row mt12">
-                        <div class="label-div">Pincode</div>
-                        <div class="clean-inp-wrapper"><input placeholder = "eg. 110016"  class="clean-inp-tbox drop-pin txtbox" disabled type=""/></div>
-                    </div>
-                    <div class="form-row mt12">
-                        <div class="label-div">Landmark</div>
+                        <div class="label-div">Landmark*</div>
                         <div class="clean-inp-wrapper"><input placeholder = "eg. XYZ Mall"   class="clean-inp-tbox drop-lmark txtbox" disabled type=""/></div>
                     </div>
                     <div class="form-row mt12">
-                        <div class="label-div">City</div>
+                        <div class="label-div">City*</div>
                         <div class="clean-inp-wrapper">
                             <!--<input class="clean-inp-tbox drop-city" disabled type=""/>-->
                             <label class="clean-sbox-wrapper">
