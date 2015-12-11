@@ -179,7 +179,7 @@ var Global = {
             obj.service = _this.selectedSection;
             obj.dealer = $(this).closest('.dealer-list-item').attr('data-name');
             obj.s_id = $(this).closest('.dealer-list-item').attr('data-id');
-            _this.generateServiceDetailForm(obj);
+            _this.generateServiceDetailFormNew(obj);
 
 
         });
@@ -810,6 +810,229 @@ var Global = {
             $('#dealer-pick-form').find('select.dealer-city').trigger('change');
             $('#dealer-pick-form').find('input[name="dealer-group-by"]').eq(0).prop('checked',true).trigger('change');
         }
+    },
+    generateServiceDetailFormNew : function(serviceObj){
+        var _this = this;
+        var tempObj = {
+            additionalFeaturesOdd:[],
+            additionalFeaturesEven:[]
+        };
+        var addFeat = _this.additionalFeatures['car'];
+        if(_this.carSelected['car_bike'].toLowerCase() == 'bike'){
+            addFeat = _this.additionalFeatures['bike'];
+        }
+        $.each(addFeat, function(idx,val){
+            if(idx%2){
+                tempObj.additionalFeaturesEven.push(val);
+            }else{
+                tempObj.additionalFeaturesOdd.push(val);
+            }
+        });
+        tempObj['dealer'] = serviceObj['dealer'];
+        if(serviceObj.dealer == 'Authorized'){
+
+            var brand = _this.carSelected['make'];
+            $.each(_this.dealerAddressObj[brand], function(i,v){
+                var city = v['city'];
+                var name = v['name'];
+                var region = v['region'];
+                if(city){
+                    if(!_this.dealerAddressObj['activeRegionGrouped'][city]){
+                        _this.dealerAddressObj['activeRegionGrouped'][city] = {};
+                    }
+                    if(region){
+                        if(!_this.dealerAddressObj['activeRegionGrouped'][city][region]){
+                            _this.dealerAddressObj['activeRegionGrouped'][city][region] = [];
+                        }
+                        _this.dealerAddressObj['activeRegionGrouped'][city][region].push({'address':v['address'],'name':v['name'],'locality':v['locality']});
+                    }
+                }
+                if(name){
+                    if(!_this.dealerAddressObj['activeDealerGrouped'][name]){
+                        _this.dealerAddressObj['activeDealerGrouped'][name] = [];
+                    }
+                    _this.dealerAddressObj['activeDealerGrouped'][name].push({'address':v['address'],'name':v['name'],'locality':v['locality']});
+                }
+            });
+            tempObj['dealerGrouped'] = Object.keys(Global.dealerAddressObj.activeDealerGrouped);
+            tempObj['regionGrouped'] = Object.keys(Global.dealerAddressObj.activeRegionGrouped);
+
+//            $.each(Object.keys(Global.dealerAddressObj.activeDealerGrouped), function(i,v){
+//                $('.modal-container .modal-content').find('.form-row.dealer-grouped').eq(0).find('select.dealer-name').append('<option value="'+v+'">'+v+'</option>');
+//            });
+//            $.each(Object.keys(Global.dealerAddressObj.activeRegionGrouped), function(i,v){
+//                $('.modal-container .modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-city').append('<option value="'+v+'">'+v+'</option>');
+//            });
+        }
+        $('.order-body').append(_this.genericModal(json2html.transform(tempObj, Templates.orderPage.package_popup.servicing), true));
+        $('.modal-container .modal-content').addClass('extra-form-modal').attr('data-name', serviceObj.dealer).attr('data-id', serviceObj.s_id);
+        var w = $('.modal-container .modal-content').width();
+        var h = $('.modal-container .modal-content').height();
+        $('.modal-container .modal-content').css({
+            'top': ($(window).innerHeight() - h)/2,
+            'left':($(window).innerWidth() - w)/2
+        });
+        $('.modal-container .modal-content').find('.detail-form-next').on('click', function(e){
+            $(this).parent().hide();
+            $(this).closest('.form-btn-holder').find('.detail-form-prev').parent().show();
+            $(this).closest('.form-btn-holder').find('.detail-add-to-cart').parent().show();
+            $('.modal-container .modal-content').find('.form-workflow .step-3').removeClass('todo').addClass('current');
+            $('.modal-container .modal-content').find('.form-workflow .step-2').removeClass('current').addClass('done');
+            $('.modal-container .modal-content').find('.form-step-holder .step-3').show();
+            $('.modal-container .modal-content').find('.form-step-holder .step-2').hide();
+        });
+        $('.modal-container .modal-content').find('.detail-form-prev').on('click', function(e){
+            $(this).parent().hide();
+            $(this).closest('.form-btn-holder').find('.detail-form-next').parent().show();
+            $(this).closest('.form-btn-holder').find('.detail-add-to-cart').parent().hide();
+            $('.modal-container .modal-content').find('.form-workflow .step-2').removeClass('done').addClass('current');
+            $('.modal-container .modal-content').find('.form-workflow .step-3').removeClass('current').addClass('todo');
+            $('.modal-container .modal-content').find('.form-step-holder .step-2').show();
+            $('.modal-container .modal-content').find('.form-step-holder .step-3').hide();
+        });
+        $('.modal-container .modal-content').find('.detail-add-to-cart').on('click', function(e){
+            var data_id = $(this).closest('.modal-content').attr('data-id');
+            var data_name = $(this).closest('.modal-content').attr('data-name');
+
+            var obj = {};
+            obj.timestamp = (new Date()).getTime();
+            obj.service = _this.selectedSection;
+            obj.dealer = data_name;//$(this).closest('.dealer-list-item').attr('data-name');
+            obj.s_id = data_id;//$(this).closest('.dealer-list-item').attr('data-id');
+
+            var cook_obj = local.load();
+            var oldC = '';
+            if(cook_obj['clgacart']){
+                oldC = cook_obj['clgacart'];
+                oldC += ','
+            }
+            var newC = [obj.timestamp,obj.service, obj.dealer, obj.s_id].join('*');
+
+            var additional_info = {};
+
+
+            var addFeat = _this.additionalFeatures['car'];
+            if(_this.carSelected['car_bike'].toLowerCase() == 'bike'){
+                addFeat = _this.additionalFeatures['bike'];
+            }
+            $.each(addFeat, function(i,v){
+                var val = $('.modal-container .modal-content').find('.form-row.additional').eq(0).find('.clean-inp-cbox[name="'+v+'"]').prop('checked');
+                additional_info[v] = val;
+//                var num = (i%2)+1;
+//                $('.modal-content').find('.form-row.additional').eq(0).find('.inp-col-'+num).append('<div class="clean-inp-wrapper"><input class="clean-inp-cbox" id="pick-drop-toggle" name="'+v+'" checked type="checkbox"><div class="label-div">'+v+'</div><div>');
+            });
+
+            additional_info['Custom Requests'] =  $('.modal-container .modal-content').find('.form-row.additional').eq(1).find('.cust-req').val();
+
+            if( (data_name == 'Authorized') && ($('#dealer-pick-form').find('input[name="dealer-group-by"]:checked').length) ){
+                var dealerSort = $('#dealer-pick-form').find('input[name="dealer-group-by"]:checked').val();
+                var dealerPick = $('#dealer-pick-form').find('input[name="dealer-show-hide"]:checked').val()
+//                console.log(dealerSort)
+                    additional_info['Dealer Preference'] =  dealerPick;
+                if(dealerPick && dealerPick == 'hide'){
+                 }
+                else{
+                    if(dealerSort == 'dealer'){
+                        additional_info['Selected Authorized'] = {};
+                        additional_info['Selected Authorized']['address'] = $('#dealer-pick-form').find('.dealer-grouped .dealer-address').val();
+                        additional_info['Selected Authorized']['name'] = $('#dealer-pick-form').find('.dealer-grouped .dealer-name').val();
+                        //clean-inp-sbox dealer-name-address
+    //                    additional_info['Selected Authorized'] = {};
+
+                    }else if(dealerSort == 'region'){
+                        additional_info['Selected Authorized'] = {};
+                        additional_info['Selected Authorized']['address'] = $('#dealer-pick-form').find('.region-grouped .dealer-name-address').val();
+                        additional_info['Selected Authorized']['name'] = $('#dealer-pick-form').find('.region-grouped .dealer-name-address option:selected').attr('data-name');
+    //                    additional_info['Selected Authorized'] = {};
+                    }
+                }
+            }
+
+//            console.log(additional_info)
+
+            Commons.ajaxData('add_to_cart', {'cookie':newC, 'car_id':_this.carSelected.id, 'car_size':_this.carSelected.size, 'additional':JSON.stringify(additional_info)}, "POST", _this, _this.redirectToCart );
+
+            var dealer = data_name;//$(this).closest('.dealer-list-item').attr('data-name');
+            obj.dealer = dealer.split(' ').join('#$');
+            newC = [obj.timestamp,obj.service, obj.dealer, obj.s_id].join('*');
+            oldC += newC;
+            local.save('clgacart', oldC);
+
+            var addInfoData = cook_obj['clgacartaddi'];
+            if( !(addInfoData && addInfoData.length) ){
+                addInfoData = '{}'
+            }
+            addInfoData = JSON.parse(decodeURIComponent(addInfoData));
+            if(!addInfoData[obj.timestamp]){
+                addInfoData[obj.timestamp] = additional_info
+            }
+            local.save('clgacartaddi', encodeURIComponent(JSON.stringify(addInfoData)) );
+
+
+
+//            $('.dealer-box').find('.dealer-list-item[data-id="'+data_id+'"]').find('.dealer-add-to-cart').click();
+        });
+        if(serviceObj.dealer == 'Authorized'){
+            $('#dealer-pick-form').on('change', 'input[name="dealer-show-hide"]',function(e){
+                var val = $(this).val();
+                if(val == 'show'){
+                    $('#dealer-pick-form').find('.form-row.group-pick').show();
+                    $('#dealer-pick-form').find('.form-row.region-grouped').show();
+                    $('#dealer-pick-form').find('.form-row.dealer-grouped').show();
+                    $('#dealer-pick-form').find('input[name="dealer-group-by"]').eq(0).prop('checked',true).trigger('change');
+                }else if(val == 'hide'){
+                    $('#dealer-pick-form').find('.form-row.group-pick').hide();
+                    $('#dealer-pick-form').find('.form-row.region-grouped').hide();
+                    $('#dealer-pick-form').find('.form-row.dealer-grouped').hide();
+                }
+            });
+            $('#dealer-pick-form').on('change', 'input[name="dealer-group-by"]',function(e){
+                    var val = $(this).val();
+                if(val == 'dealer'){
+                    $('#dealer-pick-form').find('.form-row.region-grouped').hide();
+                    $('#dealer-pick-form').find('.form-row.dealer-grouped').show();
+                }else if(val == 'region'){
+                    $('#dealer-pick-form').find('.form-row.region-grouped').show();
+                    $('#dealer-pick-form').find('.form-row.dealer-grouped').hide();
+                }
+
+            });
+            $('#dealer-pick-form').find('.form-row.dealer-grouped').on('change', 'select.dealer-name',function(e){
+                var val = $(this).val();
+                        $('.modal-container .modal-content').find('.form-row.dealer-grouped').eq(0).find('select.dealer-address').html('');
+
+                if(Global.dealerAddressObj.activeDealerGrouped[val]){
+                    $.each(Global.dealerAddressObj.activeDealerGrouped[val], function(ix,vl){
+                        $('.modal-container .modal-content').find('.form-row.dealer-grouped').eq(0).find('select.dealer-address').append('<option value='+"'"+vl['address']+"'"+'>'+vl['locality']+'</option>');
+                    });
+                }
+            });
+            $('#dealer-pick-form').find('.form-row.region-grouped').on('change', 'select.dealer-city',function(e){
+                var val = $(this).val();
+                        $('.modal-container .modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-region').html('');
+                if(Global.dealerAddressObj.activeRegionGrouped[val]){
+                    $.each(Global.dealerAddressObj.activeRegionGrouped[val], function(ix,vl){
+                        $('.modal-container .modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-region').append('<option value="'+ix+'">'+ix+'</option>');
+                    });
+                }
+               $('.modal-container .modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-region').trigger('change');
+            });
+            $('#dealer-pick-form').find('.form-row.region-grouped').on('change', 'select.dealer-region',function(e){
+                var val = $(this).val();
+                var val2 = $(this).closest('.form-row').find('.dealer-city').val();
+                        $('.modal-container .modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-name-address').html('');
+                if(Global.dealerAddressObj.activeRegionGrouped[val2] && Global.dealerAddressObj.activeRegionGrouped[val2][val]){
+                    $.each(Global.dealerAddressObj.activeRegionGrouped[val2][val], function(ix,vl){
+                        $('.modal-container .modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-name-address').append('<option data-name="'+vl['name']+'" value='+"'"+vl['address']+"'"+'>'+vl['name']+'&nbsp;-&nbsp;'+vl['locality']+'</option>');
+                    });
+                }
+            });
+            $('#dealer-pick-form').find('select.dealer-name').trigger('change');
+            $('#dealer-pick-form').find('select.dealer-city').trigger('change');
+            $('#dealer-pick-form').find('input[name="dealer-show-hide"]').eq(1).prop('checked',true).trigger('change');
+
+        }
+
     },
     genericModal : function(popupHTML, closeFlag){
         var scrn_ht = $(window).innerHeight();
