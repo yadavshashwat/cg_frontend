@@ -58,6 +58,35 @@ var Global = {
             }
         );
 
+        $('#send-button-clean').on('click', function(e){
+             //var number_cust = document.getElementById('number_cust');
+             //number_cust_content =  number_cust.textContent.trim();
+
+             var number_driver = document.getElementById('driver_details');
+             number_driver_content =  String(number_driver.textContent);
+             var n = parseInt(number_driver_content.search("Mob")) + 5;
+             var driver_number = number_driver_content.substring(n ,n+10);
+
+             //var number_advisor = document.getElementById('advisor_details');
+             //number_advisor_content =  String(number_advisor.textContent);
+             //var k = parseInt(number_advisor_content.search("Mob")) + 5;
+             //var advisor_number = number_advisor_content.substring(k ,k+10);
+
+             var amount = document.getElementById("due_amount").value;
+             $('.sms-popup .due-amount').text(amount);
+
+             var smstext = document.getElementById('sms-content-clean');
+             smstext_content = smstext.textContent.trim();
+
+             var url = "http://sms.hspsms.com:8090/sendSMS?username=clickgarage&message="+ smstext_content + "&sendername=CLKGRG&smstype=TRANS&numbers=" + driver_number + "&apikey=ab33f626-fba5-4bff-9a2b-68a7e9eed43c"
+             var xhr = new XMLHttpRequest();
+             xhr.open("GET", url, false);
+             xhr.send();
+             //   alert(amount);
+            }
+        );
+
+
 
         $('#send-button1').on('click', function(e){
              var number_cust = document.getElementById('number_cust');
@@ -282,7 +311,7 @@ var Global = {
         obj.cust_contact = parent_div.find('#cust-div #cust-contact').text().replace("Phone: ","");
         obj.cust_email = parent_div.find('#cust-div #cust-email').text().replace("Email: ","");
         obj.cust_address = parent_div.find('#cust-div #cust-address').text().replace("Address: ","");
-        obj.brand = parent_div.find('#car-div #brand').text().replace("Brand: ","");
+        obj.brand = parent_div.find('#car-div #brand').text().replace("Car: ","");
         obj.make = parent_div.find('#car-div #make').text().replace("Make: ","");
         obj.regn = parent_div.find('#car-div #regn').text().replace("Regn#: ","");
         console.log(obj);
@@ -291,7 +320,7 @@ var Global = {
         $('.sms-popup .cust-name').text(obj.cust_name);
         $('.sms-popup .cust-contact').text(obj.cust_contact);
         $('.sms-popup .cust-address').text(obj.cust_address);
-        $('.sms-popup .vehicle').text(obj.brand + ' ' + obj.make);
+        $('.sms-popup .vehicle').text(obj.brand);
         $('.sms-popup .pickup-time').text(obj.pickup_time);
         //$('.sms-popup .current-time').text(obj.pickup_time);
         $('.sms-popup').show()
@@ -608,21 +637,31 @@ var Global = {
 ////            service-div starts here
             html += '<div class="booking-entry-cat" id="service-div">';
 
-            try{
-            html += '<p id="service-type">Service: ' + String(val.service_items[0].served_data.type_service) + '</p>';
-            html += '<p id="vendor-type">Vendor: ' + String(val.service_items[0].served_data.dealer_cat) + '</p>';
-                }
-            catch(err){
-                html += '<p id="service-type">Service: ' + String(val.service_items[0].service) + '</p>';
-                //html += '<p id="vendor-type">Vendor: ' + String(val.service_items[0].served_data.dealer_cat) + '</p>';
+
+            if (val.service_items[0].service == "servicing")
+            {
+                html += '<p id="service-type">Service: ' + String(val.service_items[0].served_data.type_service) + '</p>';
+                html += '<p id="vendor-type">Vendor: ' + String(val.service_items[0].served_data.dealer_cat) + '</p>';
+            } else if (val.service_items[0].service == "cleaning"){
+                html += '<p id="service-type">Service: ' + String(val.service_items[0].served_data.service) + '</p>';
+                html += '<p id="vendor-type">Vendor: ' + String(val.service_items[0].served_data.vendor) + '</p>';
             }
+            else if (val.service_items[0].service == "repair"){
+                html += '<p id="service-type">Service: ' + String(val.service_items[0].service) + '</p>';
+                //html += '<p id="vendor-type">Vendor: ' + String(val.service_items[0].served_data.vendor) + '</p>';
+            }
+            //catch(err){
+            //    html += '<p id="service-type">Service: ' + String(val.service_items[0].service) + '</p>';
+            //    //html += '<p id="vendor-type">Vendor: ' + String(val.service_items[0].served_data.dealer_cat) + '</p>';
+            //}
             html += '<p id="pickup-time">Pickup-time: ' + String(val.time_booking) + '</p>';
+            html += '<p id="pickup-date">Pickup-date: ' + String(val.date_booking) + '</p>';
             html += '</div>';
 ////            car-div starts
             html += '<div class="booking-entry-cat" id="car-div">';
             try {
-                html += '<p id="brand">Brand: ' + String(val.service_items[0].served_data.brand) + '</p>';
-                html += '<p id="make">Make: ' + String(val.service_items[0].served_data.car).replace(String(val.service_items[0].served_data.brand), "") + '</p>';
+                html += '<p id="brand">Car: ' + String(val.cust_carname) + '</p>';
+                //html += '<p id="make">Make: ' + String(val.service_items[0].served_data.car).replace(String(val.service_items[0].served_data.brand), "") + '</p>';
                 html += '<p id="regn">Regn#: ' + String(val.cust_carnumber) + '</p>';
             }
             catch(err){
