@@ -640,8 +640,13 @@ var Global = {
 
             if (val.service_items[0].service == "servicing")
             {
-                html += '<p id="service-type">Service: ' + String(val.service_items[0].served_data.type_service) + '</p>';
-                html += '<p id="vendor-type">Vendor: ' + String(val.service_items[0].served_data.dealer_cat) + '</p>';
+                try {
+                    html += '<p id="service-type">Service: ' + String(val.service_items[0].served_data.type_service) + '</p>';
+                    html += '<p id="vendor-type">Vendor: ' + String(val.service_items[0].served_data.dealer_cat) + '</p>';
+                }
+                catch(err){
+                    html += '<p id="service-type">Service: ' + String(val.service_items[0].service) + '</p>';
+                }
             } else if (val.service_items[0].service == "cleaning"){
                 html += '<p id="service-type">Service: ' + String(val.service_items[0].served_data.service) + '</p>';
                 html += '<p id="vendor-type">Vendor: ' + String(val.service_items[0].served_data.vendor) + '</p>';
