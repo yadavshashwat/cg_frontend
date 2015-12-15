@@ -33,7 +33,7 @@ var Commons = {
     },
     URLFromName : {
         'fetch_all_cars':'/api/fetch_all_cars/',
-        //'fetch_car_servicing':'/api/fetch_car_servicing/',
+        'fetch_car_servicing_old':'/api/fetch_car_servicing/',
         //'fetch_servicing_details':'/api/fetch_servicing_details/',
 
         'fetch_car_servicing':'/api/fetch_car_servicing_new/',
