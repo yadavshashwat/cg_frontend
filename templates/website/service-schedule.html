@@ -8,24 +8,14 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.min.css" %}" />
     <link rel="stylesheet" type="text/css" href="{% static "css/custom.css" %}" />
     <link rel="stylesheet/less" type="text/css" href="{% static "less/styles.less" %}" />
-    <link rel="stylesheet/less" type="text/css" href="{% static "less/sms-popup.less" %}" />
     <script type="text/javascript" src="{%  static "js/legacy/jquery-2.1.4.min.js" %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.timepicker.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-datepicker.css' %}"/>
     <script type="text/javascript" src="{%  static "js/legacy/json2html.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/legacy/jquery.json2html.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/plugin.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/common.js" %}"></script>
-    <!--<script type="text/javascript" src="{%  static "js/checkout.js" %}"></script>-->
     <script type="text/javascript" src="{%  static "js/service-schedule.js" %}"></script>
-<!--    <script type="text/javascript" src="{%  static "js/sms-popup.js" %}"></script>-->
     <script src="{%  static "js/legacy/less.min.js" %}"></script>
-        <script type="text/javascript" src="{%  static "js/legacy/jquery-2.1.4.min.js" %}"></script>
-    <script type="text/javascript" src="{%  static 'js/legacy/bootstrap-datepicker.js' %}"></script>
-    <script type="text/javascript" src="{%  static 'js/legacy/jquery.timepicker.js' %}"></script>
-        <script type="text/javascript" src="{%  static 'js/legacy/json2html.js' %}"></script>
-    <script type="text/javascript" src="{%  static 'js/legacy/jquery.json2html.js' %}"></script>
-
+<!--    <script type="text/javascript" src="{%  static "js/legacy/jquery-2.1.4.min.js" %}"></script>    -->
 
     {% load js %}
     <script type="text/javascript">
@@ -43,43 +33,10 @@
     </div>
     <div class="pane order-pane">        
         <div class="centered-content">                      
-<!--
-            <div class="dropdown-div">
-                <div class="sub-title">
-                    Select vehicle to compare and book services
-                </div>            
-                <div class="radio-btn-div">
-                    <form>
-                        <input type="radio" class="vehicleRadio" id="carRadio" name="vehicleRadio" value="Car" checked>Car
-                        <input type="radio" class="vehicleRadio" id="bikeRadio" name="vehicleRadio" value="Bike">Bike
-                    </form>      
-                </div>
-                <div class="vehicle-dropdown-div">
-                    <select class="custom-select" name="brandSelect" id="brandSelect" >
-                        <option selected disabled>Select brand</option>
-                        <option value="Chevrolet">Chevrolet</option>
-                        <option value="Fiat">Fiat</option>
-                        <option value="Ford">Ford</option>
-                        <option value="Honda">Honda</option>
-                        <option value="Hyundai">Hyundai</option>
-                        <option value="Mahindra">Mahindra</option>
-                        <option value="Maruti Suzuki">Maruti Suzuki</option>
-                        <option value="Nissan">Nissan</option>
-                        <option value="Renault">Renault</option>
-                        <option value="Skoda">Skoda</option>
-                        <option value="TATA">TATA</option>
-                        <option value="Toyota">Toyota</option>
-                        <option value="Volkswagen">Volkswagen</option>
-                    </select>
-                    <select class="custom-select" name="modelSelect" id="modelSelect" >
-                        <option selected disabled>Select model</option>
-                    </select>
-                    <button class="schedule-submit">Get Schedule</button>
-                </div>
-            </div>
--->
             <div class="content-holder">
-                
+                <div class="warning-text-div">
+                    This service schedule can be outdated because of modifications in the newer variants or error in reporting. Please refer to the manufacturer's website or your service manual for the latest and most accurate service schedule.
+                </div>
                 <div class="selected-data-holder" id="selected-details">
                     <div class="sel-car-holder">
                         <div class="icon-holder">

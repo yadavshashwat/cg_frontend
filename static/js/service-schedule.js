@@ -32,51 +32,19 @@ var Global = {
             Global.generateCarSelect();
         });
         
-//        $('.radio-btn-div .vehicleRadio').on('click', function(e){
-//            console.log('v_type change detected');
-//            var v_type = $(this).attr('value');
-//            var container = $('#brandSelect');
-//            container.html('');
-//            var carBrands = ['Chevrolet','Fiat','Ford','Honda','Hyundai','Mahindra','Maruti Suzuki','Nissan','Renault','Skoda','Tata','Toyota','Volkswagen'];
-//            var bikeBrands = ['Bajaj','Hero','Honda','KTM','Royal Enfield','Suzuki','TVS','Yamaha'];
-//            html = '<option selected disabled>Select brand</option>';
-//            if (v_type=='Car'){
-//                for (i=0; i<carBrands.length; i++){
-//                    html += '<option>' + carBrands[i] + '</option>';
-//                }
-//            }
-//            else if (v_type=='Bike'){
-//                for (i=0; i<bikeBrands.length; i++){
-//                    html += '<option>' + bikeBrands[i] + '</option>';
-//                }
-//            }
-//        container.html(html);
-//        });
-//        
-//        $('.vehicle-dropdown-div #brandSelect').on('change', function(){
-//            console.log('brand change detected');
-//            var v_brand = $(this).val();
-//            var v_type = '';
-//            if (document.getElementById('carRadio').checked){
-//                v_type = v_type+'Car';
-//            }
-//            else{
-//                v_type = v_type+'Bike';
-//            }            
-//            console.log(v_brand);
-//            Commons.ajaxData('fetch_car_list', {m_id:v_brand,cb_id:v_type},"get",Global,Global.loadCarMake);
-//        });
-//        
-//        $('.schedule-submit').on('click', function(){
-//            console.log('navigating to different car schedule');
-//            var c_id = $('.vehicle-dropdown-div #modelSelect option:selected').attr("data-id");
-//            console.log(c_id);
-////            Commons.ajaxData('fetch_car_servicing_old', {c_id : _this.carSelected.id},"get", _this, _this.loadParts);
-//            var carBrand = $('.vehicle-dropdown-div #brandSelect').val().replace(" ","-");
-//            var carMake = $('.vehicle-dropdown-div #modelSelect option:selected').val().replace(" ","-");
-//            window.location.replace('../'+carBrand+'-'+carMake);
-//        });
-
+        $('body').on('submit', '#popup-search-set-holder' ,function(){
+            var c_id = $(this).find('#hidden-id-box').val();
+            var c_name = $(this).find('#omni-search-box').val();
+            if (!c_id.length){
+                return false
+            }else{
+                var loc = window.location.href;
+                window.location = '../'+c_name.replace(/\s/g, '-');
+//                window.location = loc + 'service-schedule/'+c_name.replace(" ","-");
+                return false;
+            }
+        });
+        
     },
 
     loadParts : function(data){
@@ -171,21 +139,7 @@ var Global = {
         }
         return container;
     }
-    
-    
-//    loadCarMake:function(data){
-//        console.log('function reached');
-//        console.log(data);
-//        var container = $('#modelSelect');
-//        container.html('');
-//        var html = '<option selected disabled>Select model</option>';
-//        $.each(data, function(ix, val){
-//            html += '<option data-id="'+val.id+'" value="'+val.name+'">'+val.name+'</option>';
-//        })
-//        container.html(html);
-//    },
-
-    
+            
 };
 
 
