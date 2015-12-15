@@ -637,7 +637,149 @@ var Templates = {
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
         }],
-        package_popup:{}
+        package_popup:{
+            servicing:[
+                {"tag":"div","class":"form-wrapper","id":"dealer-pick-form","children":[
+                    {"tag":"div","class":"form-title","html":function(){}},
+                    {"tag":"div","class":"form-workflow", "children":[
+                        {"tag":"div", "class":"f-step step-1 done", "html":"<div class='f-circle'>1</div> <div class='f-text'>Select Your Service</div><div class='f-checky'><i class='fa fa-check'></i></div>"},
+                        {"tag":"div", "class":"f-step step-2 current", "html":"<div class='f-circle'>2</div> <div class='f-text'>Specify Additional Details</div><div class='f-checky'><i class='fa fa-check'></i></div>"},
+                        {"tag":"div", "class":"f-step step-3 todo", "style":function(){
+                            if(this.dealer != 'Authorized'){
+                                return "display:none;"
+                            }else{
+                                return ""
+                            }
+                        }, "html":"<div class='f-circle'>3</div> <div class='f-text'>Select Service Center</div><div class='f-checky'><i class='fa fa-check'></i></div>"}
+                    ]},
+                    {"tag":"div","class":"form-step-holder","children":[
+                        {"tag":"div","class":"additional-queries step-2","children":[
+                            {"tag":"div", "class":"form-row additional", "children":[
+                                {"tag":"div", "class":"form-col label-col", "children":[
+                                    {"tag":"div", "class":"label-div","html":"Additional Queries"}
+                                ]},
+                                {"tag":"div", "class":"form-col inp-col-1", "html":function(){
+                                    return((json2html.transform(this.additionalFeaturesOdd, Templates.orderPage.package_popup.features)));
+                                }},
+                                {"tag":"div", "class":"form-col inp-col-2", "html":function(){
+                                    return((json2html.transform(this.additionalFeaturesEven, Templates.orderPage.package_popup.features)));
+                                }}
+                            ]},
+                            {"tag":"div", "class":"form-row additional", "children":[
+                                {"tag":"div", "class":"form-col label-col", "children":[
+                                    {"tag":"div", "class":"label-div","html":"Custom Requests"}
+                                ]},
+                                {"tag":"div", "class":"form-col inp-col-double", "children":[
+                                    {"tag":"div", "class":"clean-inp-wrapper", "html":"<textarea class='clean-inp-tabox cust-req' type='' rows='3'></textarea>"}
+                                ]}
+                            ]},
+                        ]},
+                        {"tag":"div","class":"select-dealer step-3", "style":"display:none", "children":[
+                            {"tag":"div", "class":"form-row","children":[
+                                {"tag":"div", "class":"form-col label-col", "html":"<div>&nbsp;</div>"},
+                                {"tag":"div", "class":"form-col inp-col-double", "html":"<div class='clean-inp-wrapper'><input type='radio' name='dealer-show-hide' value='show'>I have a preferred service center</div>"}
+                            ]},
+                            {"tag":"div", "class":"form-row","children":[
+                                {"tag":"div", "class":"form-col label-col", "html":"<div>&nbsp;</div>"},
+                                {"tag":"div", "class":"form-col inp-col-double", "html":"<div class='clean-inp-wrapper'><input type='radio' name='dealer-show-hide' value='hide'>Choose a service center for me</div>"}
+                            ]},
+                            {"tag":"div", "class":"form-row group-pick", "style":"display:none;", "children":[
+                                {"tag":"div", "class":"form-col label-col", "html":"<div>Select dealer:</div>"},
+                                {"tag":"div", "class":"form-col inp-col-1", "html":"<div class='clean-inp-wrapper'><input type='radio' name='dealer-group-by' value='region'>By Region</div>"},
+                                {"tag":"div", "class":"form-col inp-col-2", "html":"<div class='clean-inp-wrapper'><input type='radio' name='dealer-group-by' value='dealer'>By Dealer</div>"}
+                            ]},
+                            {"tag":"div", "class":"form-row dealer-grouped","children":[
+                                {"tag":"div", "class":"form-col", "children":[
+                                    {"tag":"div", "class":"label-div", "html":"Dealer"},
+                                    {"tag":"div", "class":"clean-inp-wrapper", "children":[
+                                        {"tag":"label", "class":"clean-sbox-wrapper", "children":[
+                                            {"tag":"select", "class":"clean-inp-sbox dealer-name", "html":function(){
+                                                var html = '';
+                                                if(this.dealerGrouped){
+                                                $.each(this.dealerGrouped, function(i,v){
+                                                    html += '<option value="'+v+'">'+v+'</option>';
+                                                });
+                                                }
+                                                return html;
+                                            }}
+                                        ]}
+                                    ]}
+                                ]},
+                                {"tag":"div", "class":"form-col", "children":[
+                                    {"tag":"div", "class":"label-div", "html":"Address"},
+                                    {"tag":"div", "class":"clean-inp-wrapper", "children":[
+                                        {"tag":"label", "class":"clean-sbox-wrapper", "children":[
+                                            {"tag":"select", "class":"clean-inp-sbox dealer-address", "html":""}
+                                        ]}
+                                    ]}
+
+                                ]}
+                            ]},
+                            {"tag":"div", "class":"form-row region-grouped","children":[
+                                {"tag":"div", "class":"form-col", "children":[
+                                    {"tag":"div", "class":"label-div", "html":"Pick City"},
+                                    {"tag":"div", "class":"clean-inp-wrapper", "children":[
+                                        {"tag":"label", "class":"clean-sbox-wrapper", "children":[
+                                            {"tag":"select", "class":"clean-inp-sbox dealer-city", "html":function(){
+                                                var html = '';
+                                                if(this.regionGrouped){
+                                                $.each(this.regionGrouped, function(i,v){
+                                                    html += '<option value="'+v+'">'+v+'</option>';
+                                                });
+                                                }
+                                                return html;
+                                            }}
+                                        ]}
+                                    ]}
+                                ]},
+                                {"tag":"div", "class":"form-col", "children":[
+                                    {"tag":"div", "class":"label-div", "html":"Pick Region"},
+                                    {"tag":"div", "class":"clean-inp-wrapper", "children":[
+                                        {"tag":"label", "class":"clean-sbox-wrapper", "children":[
+                                            {"tag":"select", "class":"clean-inp-sbox dealer-region", "html":""}
+                                        ]}
+                                    ]}
+                                ]},
+                                {"tag":"div", "class":"form-col", "children":[
+                                    {"tag":"div", "class":"label-div", "html":"Pick Dealer"},
+                                    {"tag":"div", "class":"clean-inp-wrapper", "children":[
+                                        {"tag":"label", "class":"clean-sbox-wrapper", "children":[
+                                            {"tag":"select", "class":"clean-inp-sbox dealer-name-address", "html":""}
+                                        ]}
+                                    ]}
+                                ]}
+                            ]},
+                        ]}
+
+                    ]},
+                    {"tag":"div","class":"form-btn-holder","children":[
+                        {"tag":"div", "class":"form-btn", "style":function(){
+                            if(this.dealer == 'Authorized'){
+                                return "display:none;"
+                            }else{
+                                return ""
+                            }
+                        }, "html":"<a class='detail-add-to-cart' href='/cart'>Add to Cart</a>"},
+                        {"tag":"div", "class":"form-btn form-nav-btn next", "style":function(){
+                            if(this.dealer != 'Authorized'){
+                                return "display:none;"
+                            }else{
+                                return ""
+                            }
+                        }, "html":"<span class='detail-form-next'>Next</span>"},
+                        {"tag":"div", "class":"form-btn form-nav-btn prev", "style":"display:none;", "html":"<span class='detail-form-prev'>Back</span>"}
+                    ]}
+                ]},
+//                {"tag":"i","class":"close-btn fa fa-close"}
+            ],
+            features:[
+                {"tag":"div", "class":"clean-inp-wrapper", "children":[
+                    {"tag":"input", "class":"clean-inp-cbox", "id":"pick-drop-toggle","name":function(){return this;},"type":"checkbox"},
+                    {"tag":"div","class":"label-div","html":function(){return this;}}
+                ]}
+            ]
+        }
+
     },
     bookingPage:{
         booking_new:[{

@@ -20,9 +20,145 @@ var Global = {
 		errorPlacement: function(error, element) {
 				error.insertAfter($(element).parent());
 		}
-
 	});
+
 //        $('#submit-button').button('disable');
+    },
+    initFBHandlers:function(FBApi){
+        $('#login').find('#facebook').on('click', function(evt){
+
+          FBApi.getLoginStatus(function(response) {
+      console.log(response)
+      if(response.status && response.status == 'connected'){
+          //user present
+
+      }else{
+          //user present
+        FBApi.login(function(response){
+            if (response.authResponse) {
+             console.log('Welcome!  Fetching your information.... ');
+                $('#login').find('.login-container').hide();
+                $('#login').find('.logout-container').show();
+                $('#login').find('.logout-container').find('.text-box h4').html('Welcome!  Fetching your information.... ');
+             FBApi.api('/me', function(response) {
+               console.log('Good to see you, ' + response.name + '.');
+                $('#login').find('.logout-container').find('.text-box h4').html('You are logged in as <span class="username">'+response.name+'</span>');
+             });
+            } else {
+             console.log('User cancelled login or did not fully authorize.');
+            }
+        })
+
+      }
+//    statusChangeCallback(response);
+  });
+
+        });
+        FBApi.getLoginStatus(function(response) {
+          if(response.status && response.status == 'connected'){
+              //user present
+                    $('#login').find('.login-container').hide();
+                    $('#login').find('.logout-container').show();
+                    $('#login').find('.logout-container').find('.text-box h4').html('Welcome!  Fetching your information.... ');
+                    $('#logout-btn').attr('data-state', 'facebook');
+                 FBApi.api('/me', function(response) {
+                   console.log('Good to see you, ' + response.name + '.');
+                    $('#login').find('.logout-container').find('.text-box h4').html('You are logged in as <span class="username">'+response.name+'</span>');
+                 });
+          }else{
+
+          }
+        });
+
+    },
+    initGoogleHandlers:function(){
+
+     var OAUTHURL    =   'https://accounts.google.com/o/oauth2/auth?';
+        var VALIDURL    =   'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=';
+        var SCOPE       =   'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
+        var CLIENTID    =   '280103750695-c5eiv9cp9hp4qoj3kdaa2eiajpa25sfo.apps.googleusercontent.com';
+        var REDIRECT    =   'http://m.clickgarage.in/'
+        var LOGOUT      =   'http://m.clickgarage.in#login';
+        var TYPE        =   'token';
+        var _url        =   OAUTHURL + 'scope=' + SCOPE + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE;
+        var acToken;
+        var tokenType;
+        var expiresIn;
+        var user;
+        var loggedIn    =   false;
+
+        function login() {
+            var win         =   window.open(_url, "windowname1", 'width=800, height=600');
+
+            var pollTimer   =   window.setInterval(function() {
+                try {
+                    console.log(win.document.URL);
+                    if (win.document.URL.indexOf(REDIRECT) != -1) {
+                        window.clearInterval(pollTimer);
+                        var url =   win.document.URL;
+                        acToken =   gup(url, 'access_token');
+                        tokenType = gup(url, 'token_type');
+                        expiresIn = gup(url, 'expires_in');
+                        win.close();
+
+                        validateToken(acToken);
+                    }
+                } catch(e) {
+                    console.log(e);
+                }
+            }, 500);
+        }
+
+        function validateToken(token) {
+            $.ajax({
+                url: VALIDURL + token,
+                data: null,
+                success: function(responseText){
+                    getUserInfo();
+                    loggedIn = true;
+                    $('#loginText').hide();
+                    $('#logoutText').show();
+                },
+                dataType: "jsonp"
+            });
+        }
+
+        function getUserInfo() {
+            $.ajax({
+                url: 'https://www.googleapis.com/oauth2/v1/userinfo?access_token=' + acToken,
+                data: null,
+                success: function(resp) {
+                    user    =   resp;
+                    console.log(user);
+                    $('#uName').text('Welcome ' + user.name);
+                    $('#imgHolder').attr('src', user.picture);
+                },
+                dataType: "jsonp"
+            });
+        }
+
+        //credits: http://www.netlobo.com/url_query_string_javascript.html
+        function gup(url, name) {
+            name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+            var regexS = "[\\#&]"+name+"=([^&#]*)";
+            var regex = new RegExp( regexS );
+            var results = regex.exec( url );
+            if( results == null )
+                return "";
+            else
+                return results[1];
+        }
+
+        function startLogoutPolling() {
+            $('#loginText').show();
+            $('#logoutText').hide();
+            loggedIn = false;
+            $('#uName').text('Welcome ');
+            $('#imgHolder').attr('src', 'none.jpg');
+        }
+        login();
+
+
     },
     events:function(){
         var _this = this;
@@ -54,8 +190,11 @@ var Global = {
 //            var loc = window.location.href;
 //            console.log(loc);
 //            window.location.hash = '#services';
+            var carObjStr = JSON.stringify(Global.carSelected);
+            local.clearKey('clgacarobj');
+            local.save('clgacarobj', carObjStr);
             window.location.hash = '#services';
-            console.log(car_fullname, selected_c_id)
+            console.log(car_fullname, selected_c_id);
 //            $.mobile.changePage('#services',{'allowSamePageTransition':true});
             return false;
         });
@@ -67,9 +206,17 @@ var Global = {
             console.log(loc);
             console.log(service_type);
 //            window.location.href = loc + '#order';
+            var serviceObj = {'service':service_type};
+            var serviceObjStr = JSON.stringify(serviceObj)
+            local.clearKey('clgaserviceobj');
+            local.save('clgaserviceobj', serviceObjStr);
+            Global.serviceSelected = serviceObj
             if(service_type=="denting"){
                 window.location.hash = '#denting';
                 $.mobile.changePage('#denting',{'allowSamePageTransition':true});
+            }else if(service_type=="diagnostic"){
+                $.mobile.changePage('#denting',{'allowSamePageTransition':true});
+
             }else{
                 window.location.hash = '#order';
                 $.mobile.changePage('#order',{'allowSamePageTransition':true});
@@ -85,6 +232,7 @@ var Global = {
 //            var $target  = $(e.target);
             var serviceName = $('#order-page-service').text();
             var serviceId = $(this).attr('data-id');
+
             Global.serviceSelected = {
                 'service':serviceName,
                 'id':serviceId                
@@ -164,8 +312,23 @@ var Global = {
             console.log('tick box clicked');
             $('#checkout .dropoff-toggle').toggle();            
         });    
-    
-//    Signup link show script    
+
+        $('.vendor-list .vendors').on('click', '.servicing-item-detail', function(e){
+            var servicingID = $(this).attr('data-id');
+            var vendor = $(this).attr('data-name');
+            Global.serviceSelected['detail-id'] = servicingID;
+            Global.serviceSelected['vendor'] = vendor.split(' ').join('#$');
+            window.location.hash = '#checkout';
+        });
+        $('.vendor-list .vendors').on('click', '.cleaning-item-detail', function(e){
+            var cleaningID = $(this).attr('data-id');
+            var vendor = $(this).attr('data-name');
+            Global.serviceSelected['detail-id'] = cleaningID;
+            Global.serviceSelected['vendor'] = vendor.split(' ').join('#$');
+            window.location.hash = '#checkout';
+        });
+
+//    Signup link show script
     $("#signup-link").click(function(){
     $("#login-btn").hide();
     $("#signup-link").hide();
@@ -186,60 +349,84 @@ var Global = {
     });        
 
     $(window).on( "navigate", function( event, data ) {
-          console.log( data.state.info );
+          console.log( data.state.info )
           console.log( data.state.direction )
           console.log( data.state.url )
           console.log( data.state.hash )
             switch(data.state.hash){
+                case "#/":
+
+                    break;
                 case "#services":
 //                        var param_autocomplete = $('#service-page-car').text().split(' ').join('%20');
 //                        console.log(param_autocomplete)
 //                        Commons.ajaxData('fetch_car_autocomplete', {query:param_autocomplete},"get",_this, _this.loadCid)
-                    if(!(Global.carSelected && Global.carSelected.id)){
-                        console.log('pageinit')
-                        window.location.hash = '#index';
-                    }
-
+                    Global.servicesPageInit();
                     break;
                 case "#order":
-                    console.log('p')
-                    console.log("_this.load"+$('#order-page-service').text())    
-                    if(!(Global.carSelected && Global.carSelected.id)){
-                        console.log('pageinit')
-                        window.location.hash = '#index';
-                        return;
-                    }
-                    Commons.ajaxData('fetch_car_'+$('#order-page-service').text().toLowerCase(), {c_id:Global.carSelected.id},"get",_this,eval("_this.load"+$('#order-page-service').text()))
+//                    console.log('p')
+//                    console.log("_this.load"+$('#order-page-service').text())
+
+                    Global.orderPageInit();
                         //Commons.ajaxData('fetch_car_cleaning', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f54d4"},"get",_this, _this.loadCleaning)
                     break;
                 case "#vendor":
-                    if(!(Global.carSelected && Global.carSelected.id && Global.serviceSelected)){
-                        console.log('pageinit')
-                        window.location.hash = '#index';
-                        return;
-                    }
-                    if(Global.serviceSelected.service == 'Servicing' || Global.serviceSelected.service == 'Cleaning'){
-                        Commons.ajaxData('fetch_'+Global.serviceSelected.service+'_details', {service_id:Global.serviceSelected.id, c_id:Global.carSelected.id, city_id:'Delhi'},"get",_this, eval("_this.load"+Global.serviceSelected.service.toTitleCase()+"Details"))
-                    }
+                    console.log('vendor load')
+//                    if(!(Global.carSelected && Global.carSelected.id && Global.serviceSelected)){
+//                        console.log('pageinit')
+//                        window.location.hash = '#index';
+//                        return;
+//                    }
+//                    if(Global.serviceSelected.service == 'servicing' || Global.serviceSelected.service == 'cleaning'){
+//                        Commons.ajaxData('fetch_'+Global.serviceSelected.service.toTitleCase()+'_details', {service_id:Global.serviceSelected.id, c_id:Global.carSelected.id, city_id:'Delhi'},"get",_this, eval("_this.load"+Global.serviceSelected.service.toTitleCase()+"Details"))
+//                    }
+                    Global.vendorPageInit();
                     break;
+                case "#checkout":
+                    Global.checkoutPageInit();
+                    break;
+                case "#additional":
+                    Global.additionalPageInit();
+                    break;
+
                 default:
                     break;
             }
+            return;
         });
 
+$( document ).delegate("#services", "pageinit", function() {
+    Global.servicesPageInit();
+});
 $( document ).delegate("#order", "pageinit", function() {
-    if(!(Global.carSelected && Global.carSelected.id)){
-        console.log('pageinit')
-        window.location.hash = '#index';
-    }
-});        
+    Global.orderPageInit();
+});
+$( document ).delegate("#denting", "pageinit", function() {
+    Global.dentingPageInit();
+});
+$( document ).delegate("#checkout", "pageinit", function() {
+    Global.servicesPageInit();
+});
+$( document ).delegate("#cart", "pageinit", function() {
+    Global.checkoutPageInit();
+});
+$( document ).delegate("#booking", "pageinit", function() {
+    Global.bookingPageInit();
+});
+$( document ).delegate("#additional", "pageinit", function() {
+    Global.additionalPageInit();
+});
+$( document ).delegate("#emergency", "pageinit", function() {
+    Global.emergencyPageInit();
+});
+
 $( document ).delegate("#order", "pagebeforeload", function() {
     if(!(Global.carSelected && Global.carSelected.id)){
         console.log('pagebeforeload')
         window.location.hash = '#index';
     }
-});        
-        
+});
+
     },
 
 
@@ -343,7 +530,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         container2.html('');
         var html = '';
         $.each(data, function(idx, val){
-            html += '<li><a href="#"><img src=';
+            html += '<li><a data-id="'+val.id+'" data-name="'+val.vendor+'" class="servicing-item-detail"><img src=';
                 if(val.vendor=="Authorized")
                     if(val.car_bike=="Bike")
                         html+= logoMap['Authorized Bike'] + val.brand + '.jpg >';
@@ -394,7 +581,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         container2.html('');
         var html = '';
         $.each(data, function(idx, val){
-            html += '<li><a href="#"><img src=';
+            html += '<li><a data-id="'+val.id+'" data-name="'+val.vendor+'" class="cleaning-item-detail"><img src=';
                 if(val.vendor=="Authorized")
                     html+= logoMap['Authorized Car'] + val.brand + '.jpg >';
                 else
@@ -433,9 +620,89 @@ $( document ).delegate("#order", "pagebeforeload", function() {
 //        container.json2html(data, Templates2.carMake, {append:true});
 //        $.each(data, function(idx, val){
 //        });
-    }   
+    },
 
-    
+    servicesPageInit : function(){
+
+        var carData = null;
+        if(!Global.carSelected || !Global.carSelected.id){
+            if(!carData && local.load() && local.load()['clgacarobj']){
+                carData = JSON.parse(local.load()['clgacarobj']);
+                Global.carSelected = carData;
+            }
+        }
+
+        if(!Global.carSelected || !Global.carSelected.id){
+            window.location.hash = '#index';
+        }
+
+    },
+    orderPageInit : function(){
+        if(!Global.carSelected || !Global.carSelected.id){
+            if(local.load() && local.load()['clgacarobj']){
+                var carData = JSON.parse(local.load()['clgacarobj']);
+                Global.carSelected = carData;
+            }
+        }
+
+        if(!Global.serviceSelected){
+            if(local.load() && local.load()['clgaserviceobj']){
+                var serviceData = JSON.parse(local.load()['clgaserviceobj']);
+                Global.serviceSelected = serviceData;
+            }
+        }
+
+        if(!(Global.carSelected && Global.carSelected.id) || !(Global.serviceSelected && Global.serviceSelected.service)){
+            window.location.hash = '#index';
+            return;
+        }else{
+            Commons.ajaxData('fetch_car_'+Global.serviceSelected.service.toLowerCase(), {c_id:Global.carSelected.id},"get",Global,eval("Global.load"+Global.serviceSelected.service))
+        }
+    },
+    vendorPageInit : function(){
+//            $('#order-page-service').text(service_type);
+        if(!Global.carSelected || !Global.carSelected.id){
+            if(local.load() && local.load()['clgacarobj']){
+                var carData = JSON.parse(local.load()['clgacarobj']);
+                Global.carSelected = carData;
+            }
+        }
+
+        if(!Global.serviceSelected){
+            if(local.load() && local.load()['clgaserviceobj']){
+                var serviceData = JSON.parse(local.load()['clgaserviceobj']);
+                Global.serviceSelected = serviceData;
+            }
+        }
+
+        if(!(Global.carSelected && Global.carSelected.id) || !(Global.serviceSelected && Global.serviceSelected.service && Global.serviceSelected.id )){
+            window.location.hash = '#index';
+            return;
+        }else{
+            if(Global.serviceSelected.service == 'servicing' || Global.serviceSelected.service == 'cleaning'){
+                Commons.ajaxData('fetch_'+Global.serviceSelected.service+'_details', {service_id:Global.serviceSelected.id, c_id:Global.carSelected.id, city_id:'Delhi'},"get",Global, eval("Global.load"+Global.serviceSelected.service.toTitleCase()+"Details"))
+    //            Commons.ajaxData('fetch_car_'+Global.serviceSelected.service.toLowerCase(), {c_id:Global.carSelected.id},"get",Global,eval("Global.load"+Global.serviceSelected.service))
+            }
+        }
+    },
+    dentingPageInit : function(){
+
+    },
+    checkoutPageInit : function(){
+
+    },
+    cartPageInit : function(){
+
+    },
+    bookingPageInit : function(){
+
+    },
+    additionalPageInit : function(){
+
+    },
+    emergencyPageInit : function(){
+
+    }
 };
 
 
@@ -459,10 +726,17 @@ var logoMap = {
 
 $(".menu-toggle-btn").click(function() {
 			$(this).toggleClass("open");
-		});
+});
 
 document.onreadystatechange = function () {
+    console.log('onreadystatechange')
       Global.init();
+}
+document.onload = function(){
+    console.log('p')
+     if(FB){
+        FB.getLoginStatus(function(response) {console.log(response);});
+    }
 }
 
 

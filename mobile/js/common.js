@@ -16,8 +16,17 @@ var Commons = {
         if(type == "POST" || type == "GET"){
             callType = type
         }
+
         console.log(name)
         console.log(url)
+        if(params){
+            if(params instanceof Object){
+            params['loc'] = 'mobile'
+            }
+        }else{
+            params = {'loc':'mobile'}
+        }
+        console.log(params)
         if(name){
             $.ajax({
                 url:url,
@@ -26,7 +35,7 @@ var Commons = {
                 type:callType
 
             }).always(function(res){
-                    console.log(res)
+//                    console.log(res)
                     if(res.status){
                         bind(success_cb, bindObj, [res.result])
                     }
