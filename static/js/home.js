@@ -272,9 +272,9 @@ var Global = {
             DisplayPoint(cls);
             $(this).closest('.workflow-box').find('#pusher').removeClass().addClass(cls);
         });
-        $('#settings-drpdwn').on('click', function(e){
-            $(this).parent().find('.logged-user-drpdwn').toggle();
-        });
+//        $('#settings-drpdwn').on('click', function(e){
+//            $(this).parent().find('.logged-user-drpdwn').toggle();
+//        });
         $('#home-search-form').on('submit', function(e){
             console.log('sumbit button clicked')
             var c_id1 = $(this).find('#hidden-id-box').val();

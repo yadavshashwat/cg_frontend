@@ -214,9 +214,9 @@ var Global = {
             $('.dealer-box').find('.td-service-info').not(parent).find('.description').hide();
             var tooltip = $(parent).find('.description').toggle();
         });
-        $('#settings-drpdwn').on('click', function(e){
-            $(this).parent().find('.logged-user-drpdwn').toggle();
-        });
+//        $('#settings-drpdwn').on('click', function(e){
+//            $(this).parent().find('.logged-user-drpdwn').toggle();
+//        });
         $('.dealer-box').on('click', '.repair-add-to-cart', function(e){
             var obj = {};
             obj.timestamp = (new Date()).getTime();
