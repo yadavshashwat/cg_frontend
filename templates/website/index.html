@@ -150,9 +150,6 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
      <li>
        <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Login with Google</a>
      </li>
-     <li>
-       <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Login with Twitter</a>
-     </li>
    {% endif %}
                 </div>
         <div class="content-holder">   
@@ -188,9 +185,24 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                             <option value="Nissan">Nissan</option>
                             <option value="Renault">Renault</option>
                             <option value="Skoda">Skoda</option>
-                            <option value="TATA">TATA</option>
+                            <option value="Tata">Tata</option>
                             <option value="Toyota">Toyota</option>
                             <option value="Volkswagen">Volkswagen</option>
+                            <option value="Audi">Audi</option>
+                            <option value="Bentley">Bentley</option>
+                            <option value="BMW">BMW</option>
+                            <option value="Bugatti">Bugatti</option>
+                            <option value="Ferrari">Ferrari</option>
+                            <option value="Isuzu">Isuzu</option>
+                            <option value="Jaguar">Jaguar</option>
+                            <option value="Lamborghini">Lamborghini</option>
+                            <option value="Land Rover">Land Rover</option>
+                            <option value="Mercedes-Benz">Mercedes-Benz</option>
+                            <option value="Mini">Mini</option>
+                            <option value="Porsche">Porsche</option>
+                            <option value="Rolls-Royce">Rolls-Royce</option>
+                            <option value="Ssangyong">Ssangyong</option>
+                            <option value="Volvo">Volvo</option>
                         </select>
                         <select class="custom-select" name="modelSelect" id="modelSelect" >
                             <option selected disabled>Select model</option>
@@ -490,55 +502,47 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
 
 
      <!--Script Addition - Slider Start-->
-    <div class="partners-platform">
+        <div class="partners-platform" style="position: relative; display: float;">
             <div class="text-holder">
                 Our Partners
             </div>
-        </div>
-    <div class = "slider-partner" id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 980px; height: 200px; overflow: hidden; ">
-
-        <!-- Loading Screen -->
-        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
-            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
-                background-color: #000; top: 0px; left: 0px;width: 100%;height:100%;">
+            <div class = "slider-partner" id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 980px; height: 200px; overflow: hidden;">
+                <!-- Slides Container -->
+                <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 100%; height: 200px; overflow: hidden;">
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Automotives India MFC.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Autovikas tata.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Autozone suzuki.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Capital Volkswagen.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/City cars bosch.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Courtesy Honda.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Deep Hyundai.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Delhi Scooters Yamaha.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Ess Aar Royal Enfield.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/JB Honda.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Kashyap Fiat.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Khanna hero.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Kukreja hero.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Riddi Ford.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Sidharth Auto - Yamaha.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Speed car wash.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Sri durga mahindra.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/TCS bajaj.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Tee car care.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Zaira bosch.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Express Windhield.jpg" /></div>
+                    <div><img u="image" alt="partner" src="../../static/img/partners/Auto Glass Masters.jpg" /></div>
+                </div>
+                <a style="display: none" href="http://www.jssor.com">Bootstrap Slider</a>
             </div>
-            <div style="position: absolute; display: block; background: url(../../static/img/loading.gif) no-repeat center center;
-                top: 0px; left: 0px;width: 100%;height:100%;">
-            </div>
         </div>
-
-        <!-- Slides Container -->
-        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1200px; height: 200px; overflow: hidden;">
-            <div><img u="image" alt="partner" src="../../static/img/partners/Automotives India MFC.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Autovikas tata.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Autozone suzuki.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Capital Volkswagen.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/City cars bosch.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Courtesy Honda.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Deep Hyundai.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Delhi Scooters Yamaha.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Ess Aar Royal Enfield.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/JB Honda.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Kashyap Fiat.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Khanna hero.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Kukreja hero.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Riddi Ford.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Sidharth Auto - Yamaha.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Speed car wash.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Sri durga mahindra.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/TCS bajaj.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Tee car care.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Zaira bosch.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Express Windhield.jpg" /></div>
-            <div><img u="image" alt="partner" src="../../static/img/partners/Auto Glass Masters.jpg" /></div>
-
-
-        </div>
-        <a style="display: none" href="http://www.jssor.com">Bootstrap Slider</a>
-    </div>
      <!--Script Addition - Slider End-->
 
-    
+<!--
+    <div class="coupon-partners">
+        <div><img u="image" alt="partner" src="../../static/img/partners/Automotives India MFC.jpg" /></div>
+        <div><img u="image" alt="partner" src="../../static/img/partners/Autovikas tata.jpg" /></div>    
+    </div>
+-->
 
 
     <div class="footer-pane">
@@ -552,6 +556,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                         <lh>Legal</lh>
                         <lh>Bike Manufacturers</lh>
                         <lh>Car Manufacturers</lh>
+                        <lh>Coupon Partners</lh>
                     </ul>   
                 </div>
                 <div class="horizontal-lists">
@@ -596,6 +601,20 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                         <li><a href="http://www.chevrolet.co.in/">Chevrolet</a></li>
                         <li><a href="https://www.nissan.in/">Nissan</a></li>
                         <li><a href="http://www.mahindra.com/business/automotive">Mahindra</a></li>
+                    </ul>
+                </div>
+                <div class="horizontal-lists">
+                    <ul>
+                        <li>
+                            <a href="http://www.couponrani.com/">
+                                <img u="image" alt="couponrani" src="../../static/img/coupon-partners/couponrani.png" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.coupontrends.in/">
+                                <img u="image" alt="coupontrends" src="../../static/img/coupon-partners/coupontrends.png" />
+                            </a>
+                        </li>
                     </ul>
                 </div>
 <!--

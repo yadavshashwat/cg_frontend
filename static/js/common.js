@@ -146,6 +146,9 @@ var Commons = {
                 Commons.ajaxData('send_contact', {name:name, email:email,message:message},"get",_this, eval("_this.afterSendContact"))
             return false;
         })
+        $('#settings-drpdwn').off().on('click', function(e){
+            $(this).parent().find('.logged-user-drpdwn').toggle();
+        });
         $('body').on('click', function(e){
             var $target = $(e.target);
             if( !$target.closest('.logged-user-drpdwn').length && !$target.closest('#settings-drpdwn').length ){
