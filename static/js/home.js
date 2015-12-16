@@ -342,7 +342,7 @@ var Global = {
             var v_type = $(this).attr('value');
             var container = $('#brandSelect');
             container.html('');
-            var carBrands = ['Chevrolet','Fiat','Ford','Honda','Hyundai','Mahindra','Maruti Suzuki','Nissan','Renault','Skoda','Tata','Toyota','Volkswagen'];
+            var carBrands = ['Chevrolet','Fiat','Ford','Honda','Hyundai','Mahindra','Maruti Suzuki','Nissan','Renault','Skoda','Tata','Toyota','Volkswagen','Audi','Bentley','BMW','Bugatti','Ferrari','Isuzu','Jaguar','Lamborghini','Land Rover','Mercedes-Benz','Mini','Porsche','Rolls-Royce','Ssangyong','Volvo'];
             var bikeBrands = ['Bajaj','Hero','Honda','KTM','Royal Enfield','Suzuki','TVS','Yamaha'];
             html = '<option selected disabled>Select brand</option>';
             if (v_type=='Car'){
