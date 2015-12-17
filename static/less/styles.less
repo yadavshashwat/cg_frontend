@@ -1574,10 +1574,11 @@
 				.marker-mover{
 					.marker{
 		//        position: absolute;
-						height: 60px;
+						height: 30px;
 						width: 45px;
 						background: url('../img/marker.svg') no-repeat;
-						background-size: 100% auto;
+    background-size: auto 100%;
+    background-position: 10px 0;
 					}
 					.marker.mark-0{margin-left:0px;}
 					.marker.mark-1{margin-left:200px;}
@@ -1655,15 +1656,15 @@
 					.edit-btn{
 						padding: 0px 3px;
 						border-radius: 3px;
-						width:50px;
+						width:140px;
 						text-align: left;
 						.label{
-							display: none;
+							//display: none;
 						}
 					}
 				}
 				.sel-car-holder:hover{
-					opacity: 0.8;
+					//opacity: 0.8;
 					.edit-btn{
 		//        border: 1px solid #000;
 						.label{
@@ -1750,13 +1751,15 @@
 							box-sizing: border-box;
 							border-bottom: 3px solid #e89b76;
 							padding: 0px 12px;
-							max-height: 360px;
+							//min-height: 360px;
+							  background: white;
 							overflow-y: scroll;
 
 							.service-list-item{
 								display:block;
 								line-height: 24px;
 								text-align: Left;
+
 								color:#636262;
 								font-family: Lato;
 								font-size: 16px;
@@ -2247,7 +2250,7 @@ padding: 0px 40px;
 							min-height:115px;
 							padding: 12px;
                             border-bottom: 1px solid #eaeaea;
-		//				  	overflow:hidden;
+						  	overflow:auto;
 
 						}
                         .cleaning{
@@ -4482,6 +4485,7 @@ position: absolute;
 				font-size: 14px;
 				line-height: 1.428571429;
 				color: #333333;
+		  position: fixed;
 			height: 100%;
 			width: 100%;
 			background: rgba(0,0,0,0.5);

@@ -199,7 +199,7 @@ var Global = {
         $(window).on('resize', function(){
             Global.setLayout();
         })
-        $(window).on('scroll', function(e){
+        $(window).on('scroll2', function(e){
             var scrn_ht = $(window).innerHeight();
             var scrollTop = $('body').scrollTop();
 //            var initBot = $('.search-pane').find('.overlay-video video').attr('data-init');
@@ -308,31 +308,31 @@ var Global = {
             }
         });
         $('.learn-more').on('click', function(e){
-            $('body').animate(
+            $('body,html').animate(
                 {'scrollTop':$('.search-pane').outerHeight()},
                 500
             );
         });
         $('.menu-item.fl.hw').on('click', function(e){
-            $('body').animate(
+            $('body,html').animate(
                 {'scrollTop':$('.search-pane').outerHeight()},
                 500
             );
         });
         $('.menu-item.fl.au').on('click', function(e){
-            $('body').animate(
+            $('body,html').animate(
                 {'scrollTop':$('.steps-pane').outerHeight()+$('.search-pane').outerHeight()+$('.android-pane').outerHeight()},
                 500
             );
         });
         $('.footer-hw').on('click', function(e){
-            $('body').animate(
+            $('body,html').animate(
                 {'scrollTop':$('.search-pane').outerHeight()},
                 500
             );
         });
         $('.footer-au').on('click', function(e){
-            $('body').animate(
+            $('body,html').animate(
                 {'scrollTop':$('.steps-pane').outerHeight()+$('.search-pane').outerHeight()+$('.android-pane').outerHeight()},
                 500
             );

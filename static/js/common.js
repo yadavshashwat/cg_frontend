@@ -135,7 +135,7 @@ var Commons = {
         $('#contact-form').on('submit', function(){
                  var name =  $('#id_name').val();
 
-                 var email =  $('#id_email').val();
+                 var phone =  $('#id_phone').val();
 
                  var message =  $('#id_message').val();
 
@@ -143,7 +143,7 @@ var Commons = {
                 //elem.addClass('sent')
                 //var tran_id = elem.attr('tran_id')
                 //var classy = 'Booking'
-                Commons.ajaxData('send_contact', {name:name, email:email,message:message},"get",_this, eval("_this.afterSendContact"))
+                Commons.ajaxData('send_contact', {name:name, phone:phone,message:message},"get",_this, eval("_this.afterSendContact"))
             return false;
         })
         $('#settings-drpdwn').off().on('click', function(e){
@@ -235,7 +235,7 @@ var Templates = {
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
-                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select this Service </div>";}}
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select This Service </div>";}}
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
@@ -266,7 +266,7 @@ var Templates = {
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
-                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select this Service </div>";}}
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select This Service </div>";}}
                     ]},
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
                         {"tag":"div", "class":"due-div fl", "html":function(){return "<span class='odo-read'>"+  (this.type_service == "Not Defined" ? 'I am not sure<br> <span class="due-at-read">- I will go with minor servicing and <br> would  like post check-up recommendation</span>': this.type_service)+"</span>";}},
@@ -305,7 +305,7 @@ var Templates = {
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
-                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select this Service </div>";}}
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select This Service </div>";}}
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
@@ -320,7 +320,7 @@ var Templates = {
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
-                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select this Product </div>";}}
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select This Product </div>";}}
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
@@ -333,7 +333,7 @@ var Templates = {
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
-                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select this Service </div>";}}
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select This Service </div>";}}
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
