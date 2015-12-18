@@ -1043,6 +1043,7 @@ var Global = {
         var container = $("<div></div>").addClass('modal-container');
         var overlay = $("<div></div>").addClass('modal-overlay');
         var content = $("<div></div>").addClass('modal-content').append('<i class="fa fa-times-circle"></i>');
+        scrn_ht = $(".centered-content").height()+75
         container.css({
             height : scrn_ht,
             width : scrn_wd
