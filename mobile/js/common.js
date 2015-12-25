@@ -47,9 +47,11 @@ var Commons = {
         //'fetch_car_servicing':'/api/fetch_car_servicing/',
         //'fetch_servicing_details':'/api/fetch_servicing_details/',
         'fetch_car_servicing':'/api/fetch_car_servicing_new/',
-        'fetch_Servicing_details':'/api/fetch_servicing_details_new/',
+        'fetch_servicing_details':'/api/fetch_servicing_details_new/',
         'fetch_car_cleaning':'/api/fetch_car_cleaning/',
-        'fetch_Cleaning_details':'/api/fetch_cleaning_details/',
+        'fetch_cleaning_details':'/api/fetch_cleaning_details/',
+        'fetch_car_windshield':'/api/fetch_car_windshield/',
+        'fetch_windshield_details':'/api/fetch_windshield_details/',
         'fetch_car_vas':'/api/fetch_car_vas/',
         'fetch_vas_details':'/api/fetch_vas_details/',
         'fetch_car_cleanings':'/api/fetch_all_cleaningcatservices/',
@@ -186,6 +188,7 @@ function bind(f, obj, args)
 
 var logoMap = {
     '3M':'../static/img/dl-logo-3M.png',
+    'AIS':'../static/img/dl-logo-ais.png',
     'Tee Car Care':'../static/img/dl-logo-Tee.png',
     'Exppress Car Wash':'../static/img/dl-logo-Exppress.png',
     'ClickGarage On-The-Go':'../static/img/dl-logo-OntheGo.png',

@@ -201,25 +201,37 @@ var Global = {
         
         $('#services .service-option').on('click', function(){
             var loc = window.location.href;
-            var service_type = $(this).attr('id');
+            var service_type = $(this).attr('id').toLowerCase();
             $('#order-page-service').text(service_type);
             console.log(loc);
             console.log(service_type);
 //            window.location.href = loc + '#order';
-            var serviceObj = {'service':service_type};
-            var serviceObjStr = JSON.stringify(serviceObj)
-            local.clearKey('clgaserviceobj');
-            local.save('clgaserviceobj', serviceObjStr);
-            Global.serviceSelected = serviceObj
-            if(service_type=="denting"){
-                window.location.hash = '#denting';
-                $.mobile.changePage('#denting',{'allowSamePageTransition':true});
-            }else if(service_type=="diagnostic"){
-                $.mobile.changePage('#denting',{'allowSamePageTransition':true});
+            if(['denting','additional'].indexOf(service_type)>=0){
+                var serviceObj = {'service':'repair'};
+                if(service_type == 'denting'){
+                    serviceObj['id'] = 'dent-paint';
+                }else if(service_type == 'additional'){
+                    serviceObj['id'] = 'custom';
+                }
+                var serviceObjStr = JSON.stringify(serviceObj);
+                local.clearKey('clgaserviceobj');
+                local.save('clgaserviceobj', serviceObjStr);
+                Global.serviceSelected = serviceObj;
 
-            }else{
+                window.location.hash = '#'+service_type;
+                $.mobile.changePage('#'+service_type,{'allowSamePageTransition':true});
+            }else if(['servicing','cleaning','windshield'].indexOf(service_type)>=0){
+                var serviceObj = {'service':service_type.toLowerCase()};
+                var serviceObjStr = JSON.stringify(serviceObj);
+                local.clearKey('clgaserviceobj');
+                local.save('clgaserviceobj', serviceObjStr);
+                Global.serviceSelected = serviceObj;
+
                 window.location.hash = '#order';
                 $.mobile.changePage('#order',{'allowSamePageTransition':true});
+            }else if(service_type == 'emergency'){
+                window.location.hash = '#'+service_type;
+                $.mobile.changePage('#'+service_type,{'allowSamePageTransition':true});
             }
             Global.serviceCat = {
                 'serviceType':service_type     
@@ -230,32 +242,48 @@ var Global = {
         
         $('.service-list .list-services').on('click', 'a', function(e){
 //            var $target  = $(e.target);
-            var serviceName = $('#order-page-service').text();
+//            var serviceName = $('#order-page-service').text();
             var serviceId = $(this).attr('data-id');
 
-            Global.serviceSelected = {
-                'service':serviceName,
-                'id':serviceId                
-            }
+            Global.serviceSelected['id'] = serviceId;
             window.location.hash = '#vendor';
         });
         
         
         $('.vendor-list .vendors').on('click', 'a', function(e){
             var vendorType = $('#vendor-select').text();
+            var vendorID = $(this).attr('data-id');
+            var vendorName = $(this).attr('data-name');
+
             Global.vendorSelected = {
-                'vendor':vendorType                
-            }
+                'vendor':vendorName,
+                'id':vendorID
+            };
             window.location.hash = '#checkout';
         });
-        
+        $('#emergency .list-services').on('click', 'a', function(e){
+            var serviceId = $(this).text();
+            serviceId = serviceId.toLowerCase().split(' ').join('-');
+            Global.serviceSelected['id'] = serviceId;
+            window.location.hash = '#checkout';
+        });
+        $('#additionalCheckout').on('submit', function(e){
+            var additionalInfo = {};
+            var inps = $(this).find('input:checked');
+            $.each(inps, function(i,inp){
+               additionalInfo[$(inp).parent().find('label').text()] = true;
+            });
+            Global.serviceSelected['additional'] = additionalInfo;
+            window.location.hash = '#checkout';
+            return false;
+        });
         
         $('#checkout #checkout-submit').on('click', function(e){
             
             console.log('place order requested change detected');
-            var classy = Global.serviceCat.serviceType;            
-            var car_select = Global.carSelected.fullname
-            var servicename = Global.serviceSelected.id;
+//            var classy = Global.serviceCat.serviceType;
+            var car_select = Global.carSelected.fullname;
+//            var servicename = Global.serviceSelected.id;
             var name = $('#checkout #name').val();
             var email = $('#checkout #email').val();
             var phone = $('#checkout #phonenumber').val();
@@ -287,25 +315,73 @@ var Global = {
                      landmark : pick_lmark,
                      city : pick_city
                  };
-            
+
+            /*
             var order_list = [{
                 ts : timeStamp,
                 service_id : servicename,
                 service : classy,
                 status: true
             }];
+            */
+            var service_type = Global.serviceSelected['service'];
+            var service_id = null;
+            var vendor_name = null;
+            var additional = null;
+            var order_list = [];
+            if(['denting','additional'].indexOf(service_type)>=0){
+                service_id = Global.serviceSelected['id'];
+                vendor_name = '--';
+                additional = Global.serviceSelected.additional;
+                var orderObj =  {
+                    ts:timeStamp,
+                    service_id:service_id,
+                    service:service_type
+                }
+                if(additional){
+                    orderObj['additional'] = JSON.stringify(additional);
+                }
+                order_list.push(orderObj);
 
-            Commons.ajaxData('add_guest_transaction', {
-                         email             : email,
-                         name              : name,
-                         number            : phone,
-                         reg_no:             car_reg_number ,
-                         order_list        : JSON.stringify(order_list),
-                         car_name          : car_select,
-                         pick:JSON.stringify(pick),
-                         drop:JSON.stringify(drop),
-                     },"GET", _this, _this.loadPlaced);
-            
+                Commons.ajaxData('add_guest_transaction', {
+                             email             : email,
+                             name              : name,
+                             number            : phone,
+                             reg_no:             car_reg_number ,
+                             order_list        : JSON.stringify(order_list),
+                             car_name          : car_select,
+                             pick:JSON.stringify(pick),
+                             drop:JSON.stringify(drop),
+                             loc:'mobile'
+                         },"GET", _this, _this.loadPlaced);
+
+            }else if(['servicing','cleaning','windshield'].indexOf(service_type)>=0){
+                service_id = Global.vendorSelected['id'];
+                vendor_name = Global.vendorSelected['vendor'];
+                var orderObj =  {
+                    ts:timeStamp,
+                    service_id:service_id,
+                    service:service_type
+                }
+                order_list.push(orderObj);
+
+                Commons.ajaxData('place_order', {
+                             email             : email,
+                             name              : name,
+                             number            : phone,
+                             reg_no:             car_reg_number ,
+                             order_list        : JSON.stringify(order_list),
+                             car_name          : car_select,
+                             pick:JSON.stringify(pick),
+                             drop:JSON.stringify(drop),
+                             loc:'mobile'
+                         },"GET", _this, _this.loadPlaced);
+
+            }else if(service_type == 'emergency'){
+
+            }
+
+
         });
         
         $('#checkout #checkbox-mini-0').on('change', function(e) {
@@ -363,6 +439,9 @@ var Global = {
 //                        Commons.ajaxData('fetch_car_autocomplete', {query:param_autocomplete},"get",_this, _this.loadCid)
                     Global.servicesPageInit();
                     break;
+                case "#additional":
+                    Global.additionalPageInit();
+                    break;
                 case "#order":
 //                    console.log('p')
 //                    console.log("_this.load"+$('#order-page-service').text())
@@ -385,10 +464,6 @@ var Global = {
                 case "#checkout":
                     Global.checkoutPageInit();
                     break;
-                case "#additional":
-                    Global.additionalPageInit();
-                    break;
-
                 default:
                     break;
             }
@@ -503,6 +578,25 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         container2.html(html);
     },
 
+    loadWindshield : function(data){
+        var container = $('.service-list .list-services');
+        container.html('');
+        var html = '';
+        $.each(data, function(idx, val){
+            //console.log('alfa')
+            html += '<li><a data-id=' + val.id + '  href="#"><div class="header-div">';
+            html += val.ws_type;
+            html += '</div></a></li>';
+        });
+        container.html(html);
+        container.listview().listview("refresh")
+         var container2 = $('.service-image-holder');
+        container2.html('');
+        var html = '';
+        html +=  "<img src='img/windshield1.jpg'>"
+        container2.html(html);
+    },
+
     loadServicingDetails : function(data){
         console.log(data)
         var container = $('.service-selection .selected-category');
@@ -604,6 +698,60 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         container2.html(html);
         container2.listview().listview("refresh")
     },
+    loadWindshieldDetails : function(data){
+        console.log(data)
+        var container = $('.service-selection .selected-category');
+        container.html('');
+        var html = '';
+        var val = data[0]
+            html += ' <div class="header">';
+            html += '<span class = "Category odo-read">' + (val.ws_type) + ' (Windshield) </span></div>';
+            html += '</div>';
+
+
+        container.html(html);
+        //container.listview("refresh")
+        var container2 = $('.vendor-list .vendors');
+        container2.html('');
+        var html = '';
+        $.each(data, function(idx, val){
+            html += '<li><a data-id="'+val.id+'" data-name="'+val.vendor+'" class="windshield-item-detail"><img src=';
+                if(val.vendor=="Authorized")
+                    html+= logoMap['Authorized Car'] + val.brand + '.jpg >';
+                else
+                    html+= logoMap[val.vendor] + '>';
+
+            if(val.vendor=="Authorized")
+                html+= '<div class="vendor-name">' + val.brand + ' Authorized ';
+            else
+                html+= '<div class="vendor-name">' + val.vendor;
+            var service = '';
+            if(val.ws_type=='Door Glass'){
+                service += val.ws_subtype+' '+val.ws_type;
+            }
+            else{
+                service += val.ws_type;
+            }
+
+            html += "</div><div class='service-name'>" + service;
+            html += "</div><div class='description prices'>" + val.description;
+            if(val.ws_subtype=='With Defogger'){
+                    html += '<span class="part">'+val.ws_subtype+'</span>&nbsp;';
+            }
+            if(val.colour=='Green'){
+                    html += '<span class="part">Green Tinted</span>&nbsp;';
+            }
+
+            html += "</div><div class='prices'>"
+//            html += "<table><tr><td>Service Price</td><td>:&nbsp;&nbsp;"+(val.discount=='0' ? '' : "<strike>")+"&#8377;"+val.total_price + (val.discount=='0' ? '' : "</strike>&nbsp;&#8377;")+ (val.discount=='0' ? '' : parseInt(parseFloat(val.total_price)*(1.0-parseFloat(val.discount))))+"</td></tr>"+ (val.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike>&nbsp;&nbsp;&#8377;200</strike>&nbsp;&nbsp;&#8377;0</td></tr>" : '')+" <tr class='total-row' ><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+parseInt(parseFloat(val.total_price)*(1.0-parseFloat(val.discount)))+"</td></tr></table>";
+//            if(val.doorstep=="1")
+                html+= '<div class="doorstep"> &#x2302; Doorstep Service </div>';
+            html += '</div></div>';
+
+        });
+        container2.html(html);
+        container2.listview().listview("refresh")
+    },
 
     loadCarMake : function(data){
         console.log(data)
@@ -656,7 +804,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
             window.location.hash = '#index';
             return;
         }else{
-            Commons.ajaxData('fetch_car_'+Global.serviceSelected.service.toLowerCase(), {c_id:Global.carSelected.id},"get",Global,eval("Global.load"+Global.serviceSelected.service))
+            Commons.ajaxData('fetch_car_'+Global.serviceSelected.service.toLowerCase(), {c_id:Global.carSelected.id},"get",Global,eval("Global.load"+Global.serviceSelected.service.toTitleCase()))
         }
     },
     vendorPageInit : function(){
@@ -674,12 +822,11 @@ $( document ).delegate("#order", "pagebeforeload", function() {
                 Global.serviceSelected = serviceData;
             }
         }
-
         if(!(Global.carSelected && Global.carSelected.id) || !(Global.serviceSelected && Global.serviceSelected.service && Global.serviceSelected.id )){
             window.location.hash = '#index';
             return;
         }else{
-            if(Global.serviceSelected.service == 'servicing' || Global.serviceSelected.service == 'cleaning'){
+            if(Global.serviceSelected.service == 'servicing' || Global.serviceSelected.service == 'cleaning' || Global.serviceSelected.service == 'windshield'){
                 Commons.ajaxData('fetch_'+Global.serviceSelected.service+'_details', {service_id:Global.serviceSelected.id, c_id:Global.carSelected.id, city_id:'Delhi'},"get",Global, eval("Global.load"+Global.serviceSelected.service.toTitleCase()+"Details"))
     //            Commons.ajaxData('fetch_car_'+Global.serviceSelected.service.toLowerCase(), {c_id:Global.carSelected.id},"get",Global,eval("Global.load"+Global.serviceSelected.service))
             }
@@ -708,6 +855,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
 
 var logoMap = {
     '3M':'img/dl-logo-3M.png',
+    'AIS':'img/dl-logo-ais.png',
     'Tee Car Care':'img/dl-logo-Tee.png',
     'Exppress Car Wash':'img/dl-logo-Exppress.png',
     'ClickGarage On-The-Go':'img/dl-logo-OntheGo.png',

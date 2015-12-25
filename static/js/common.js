@@ -225,7 +225,7 @@ var logoMap = {
     'Mahindra First Choice':'/static/img/dl-logo-MFC.jpg',
     'ClickGarage Workshop':'/static/img/dl-logo-cgverified.png',
     'Bosch Car Care':'/static/img/dl-logo-Bosch.jpg',
-    'AIS':'/static/img/ais.png',
+    'AIS':'/static/img/dl-logo-ais.png',
     '--':'/static/img/dl-logo-cgverified.png',
 };
 
