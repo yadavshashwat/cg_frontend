@@ -187,7 +187,10 @@ var Global = {
                         }
                     });
                     console.log(html_address)
-                    html_feat = '<div> Additional Requests : '+html_feat+'</div>';
+                    if(html_feat.length)
+                        html_feat = '<div> Additional Requests : '+html_feat+'</div>';
+                    else
+                        html_feat = '<div> Additional Requests : None</div>';
 //                    $(trDiv).text(JSON.stringify(iData.additional_data));
                     $(trDiv).html(html_feat+html_custom+html_address)
                     if($(trDiv).height() > 40){
