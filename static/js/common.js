@@ -776,10 +776,12 @@ var Templates = {
 //                {"tag":"i","class":"close-btn fa fa-close"}
             ],
             features:[
-                {"tag":"div", "class":"clean-inp-wrapper", "children":[
-                    {"tag":"input", "class":"clean-inp-cbox", "id":"pick-drop-toggle","name":function(){return this;},"type":"checkbox"},
-                    {"tag":"div","class":"label-div","html":function(){return this;}}
-                ]}
+                {"tag":"div", "class":"clean-inp-wrapper", "html":function(){
+                    var html = '';
+                    html += '<input class="clean-inp-cbox" name="'+this+'" type="checkbox">';
+                    html += '<div class="label-div">'+this+'</div>';
+                    return html;
+                }}
             ]
         }
 
