@@ -1679,9 +1679,9 @@
 				.section-box{
 					margin: 0 auto;
 					width:960px;
-					min-height: 480px;
+					min-height: 200px;
 					background: #fff;
-					.material-box-shadow;
+					//.material-box-shadow;
 
 
 
@@ -1847,31 +1847,66 @@
 										.checks-div{
 												display: inline-block;
 												font-size: 12px;
-												background: #c65169;
-												border: 1px solid #c65169;
+												//background: #c65169;
+										  		background: #4d5b94;
+										  		//border: 1px solid #c65169;
+										  		border: 1px solid #4d5b94;
+
 												border-radius: 12px;
 												line-height: 18px;
 												padding: 3px 6px;
 												color:#fff;
 												margin-right: 12px;
 												white-space: nowrap;
+										  margin-bottom: 6px;
 										
 										}
 
 										.parts-div{
+										  //margin-top: 10px;
+										  .desc{
+											font-weight: 700;
+											text-decoration: underline;
+											margin-top: 4px;
+										  }
+										  .action-wrapper{
+											margin-top:6px;
+											.action-name::after{
+											  content:":";
+											  float:right;
+											}
+											.action-name{
+											  float: left;
+											  font-size: 14px;
+											  line-height: 18px;
+											  padding-right: 6px;
+											  width: 150px;
+											}
+											.action-list{
+											  margin-left:160px;
+											}
+										  }
 										 .token-class{
 												display: inline-block;
-												font-size: 12px;
-												background: #4d5b94;
-												border: 1px solid #4d5b94;
+												font-size: 14px;
+												//background: #4d5b94;
+												//border: 1px solid #4d5b94;
 												border-radius: 12px;
 												line-height: 18px;
-												padding: 3px 6px;
-												color:#fff;
+												//padding: 3px 6px;
+												//color:#fff;
+										   color:#4d5b94;
 												margin-right: 12px;
+												//margin-bottom: 6px;
 												white-space: nowrap;
 
 											}
+										  .token-class::after{
+											content:",";
+										  }
+										  .token-class:last-child::after{
+											content:"";
+										  }
 										}
 
 									}
@@ -2210,7 +2245,7 @@ padding: 0px 40px;
 					}
 
 					.dealer-listings{
-					  min-height: 400px;
+					  min-height: 100px;
                       .form-wrapper{
     width: 540px;
     margin: 20px auto;
@@ -2251,6 +2286,13 @@ padding: 0px 40px;
 							padding: 12px;
                             border-bottom: 1px solid #eaeaea;
 						  	overflow:auto;
+						  .total-row{
+							font-weight: bold;
+							border-collapse: collapse;
+							td{
+							  border-top:1px solid #444;
+							}
+						  }
 
 						}
                         .cleaning{
@@ -3729,6 +3771,7 @@ label.clean-sbox-wrapper {
 						display: inline-block;
 						line-height: 50px;
 						.clean-inp-tbox{
+						  width:125px;
 						   border: 2px solid white;
 							-webkit-box-shadow:
 							  inset 0 0 4px  rgba(0,0,0,0.1),
@@ -4258,16 +4301,14 @@ position: absolute;
 				}
 			}
           }
-
 		}
-
 		.search-set-holder{
 			height:40px;
 //			padding:5px;
 //			width:100%px;
 			margin:0 auto;
 			.omnibox-holder{
-                z-index: 99;
+                z-index: 0;
 				position: relative;
 				height:40px;
 				width: 100%;

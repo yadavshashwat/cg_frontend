@@ -242,8 +242,8 @@ var Templates = {
                         {"tag":"div", "class":"due-div fl", "html":function(){return "<span class='due-at-read'>Due at</span> <span class='odo-read'>"+ String(this.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+ ' km ' + (this.year == "" ? '': '/ ') + this.year+"</span>";}},
                         
                     {"tag":"div", "class":"service-details fix_servicedetails", "children":[  
-                        {"tag":"div", "class":"checks-div", "html":function(){return 'Washing';}},
-                        {"tag":"div", "class":"checks-div", "html":function(){return 'Regular Checks';}},        
+                        //{"tag":"div", "class":"checks-div", "html":function(){return 'Washing';}},
+                        //{"tag":"div", "class":"checks-div", "html":function(){return 'Regular Checks';}},
                         {"tag":"div", "class":"parts-div", "html":function(){
                             var html = '';
                             if(this['parts_replaced'] && this['parts_replaced'].length){
@@ -269,31 +269,59 @@ var Templates = {
                         {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select This Service </div>";}}
                     ]},
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
-                        {"tag":"div", "class":"due-div fl", "html":function(){return "<span class='odo-read'>"+  (this.type_service == "Not Defined" ? 'I am not sure<br> <span class="due-at-read">- I will go with minor servicing and <br> would  like post check-up recommendation</span>': this.type_service)+"</span>";}},
+                        {"tag":"div", "class":"due-div fl", "html":function(){return "<span class='odo-read'>"+  (this.type_service == "Not Defined" ? 'I am not sure<br> <span class="due-at-read">I will go with minor servicing and <br> would  like post check-up recommendation</span>': this.type_service)+"</span>";}},
 
                     {"tag":"div", "class":"service-details fix_servicedetails", "children":[
-                        {"tag":"div", "class":"checks-div", "html":function(){return 'Washing';}},
-                        {"tag":"div", "class":"checks-div", "html":function(){return 'Regular Checks';}},
+                        {"tag":"div", "class":"checks-div", "html":function(){return 'Exterior Washing';}},
+                        {"tag":"div", "class":"checks-div", "html":function(){return 'Interior Vacuuming';}},
+                        {"tag":"div", "class":"checks-div", "html":function(){return 'Dashboard Polish';}},
+                        {"tag":"div", "class":"checks-div", "html":function(){return 'Parts Check & Replacement';}},
+                        //{"tag":"div", "class":"checks-div", "html":function(){return '/';}},
                         {"tag":"div", "class":"parts-div", "html":function(){
                             var html = '';
-                            if(this['car_bike']=="Bike"){
-                                html += '<span class="token-class">Engine Oil</span>&nbsp;';
-                                html += '<span class="token-class">Oil Filter</span>&nbsp;';
-                                html += '<span class="token-class">Other Parts as required</span>&nbsp;';
-                                return html;
-                            }else{
-                                if(this['parts_replaced'] && this['parts_replaced'].length){
-                                $.each(this['parts_replaced'], function(i, part){
-                                    html += '<span class="token-class">'+part+'</span>&nbsp;';
+                            html +='<span class="desc">Description</span>';
+                            ////if(this['car_bike']=="Bike"){
+                            ////    html += '<span class="token-class">Engine Oil</span>&nbsp;';
+                            ////    html += '<span class="token-class">Oil Filter</span>&nbsp;';
+                            ////    html += '<span class="token-class">Other Parts as required</span>&nbsp;';
+                            ////    return html;
+                            ////}
+                            //else{
+                                var properObj = {
+                                    'Parts/ Fluids Replaced':[],
+                                    'Fluids Top-up':[],
+                                    'Filters Cleaned':[],
+                                    'Checks Done':[]
+                                };
+                                if(this['part_dic'] && this['part_dic'].length){
+                                    $.each(this.part_dic, function(i,part){
+                                        if(!properObj[part.part_action]){
+                                            properObj[part.part_action]=[];
+                                        }
+                                        properObj[part.part_action].push(part.part_name);
+                                    });
+                                }
+                                $.each(properObj, function(action,list){
+                                    if(list.length) {
+                                        html += '<div class="action-wrapper"><span class="action-name">' + action + '</span><div class="action-list">';
+                                        html += json2html.transform(list, Templates.orderPage.parts);
+                                        html += '</div></div>';
+                                    }
                                 });
+                                html += "<span>Parts in healthy condition won't be replaced.</span>"
                                 return html;
+                                /*
+                                if(this['parts_replaced'] && this['parts_replaced'].length){
+                                //$.each(this['parts_replaced'], function(i, part){
+                                //    html += '<span class="token-class">'+part+'</span>&nbsp;';
+                                //});
     //                            return "Regular Checks :" + this['parts_replaced'].join(', ');
+                                }
+                                else
+                                    return "None";
+                            */
+                                }
                             }
-                            else
-                                return "None";
-
-                            }
-                            }}
                             ]}
                     ]}
                 ]},
@@ -301,6 +329,7 @@ var Templates = {
                 {"tag":"div", "class":"state-update none-i"}
             ]
         }],
+        parts:[{"tag":"span", "class":"token-class", "html":function(){return this}}],
         cleaning:[{
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
@@ -382,7 +411,7 @@ var Templates = {
 
                 ]},
                 {"tag":"div","class":"td-price", "children":[
-                    {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.parts_price)+"</td></tr><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr><tr id = 'total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.parts_price)+parseInt(Math.ceil((this.labour_price)))+parseInt(Math.ceil((this.labour_price*0.14)))+parseInt((this.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";}}
+                    {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.parts_price)+"</td></tr><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr><tr id = 'total-row' class='total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.parts_price)+parseInt(Math.ceil((this.labour_price)))+parseInt(Math.ceil((this.labour_price*0.14)))+parseInt((this.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";}}
                     ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
@@ -431,9 +460,9 @@ var Templates = {
                 ]},
                 {"tag":"div","class":"td-price", "children":[
                     {"tag":"div", "class":"table-parts","html":function(){
-                        if(this.vendor=='Authorized'){
+                        //if(this.vendor=='Authorized'){
                             if(this.car_bike=='Bike'){
-                                 return "<table><tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.parts_price)+"</td></tr><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>150</td></tr><tr id = 'total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.parts_price)+parseInt(Math.ceil((this.labour_price)))+parseInt(Math.ceil((this.labour_price*0.14)))+parseInt(150))+"</td></tr></table>Note - Price can vary depending on additional parts required";
+                                 return "<table><tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.parts_price)+"</td></tr><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>150</td></tr><tr id = 'total-row' class='total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.parts_price)+parseInt(Math.ceil((this.labour_price)))+parseInt(Math.ceil((this.labour_price*0.14)))+parseInt(150))+"</td></tr></table>Note - Price can vary depending on additional parts required";
                                 //var s = '<Table>'
                                 //$.each(this.part_dic,function(i,elem){
                                 //    s += '<tr><td>'+elem.part_name+"</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.part_price)+"</td></tr>"
@@ -442,11 +471,11 @@ var Templates = {
                                 //    s += '</table>'
                                 //    return s
 
-                            }else{
-                           return "<table><tr>&nbspService Centre Bill Amount</tr><tr><td></td><td>+</td></tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr></table>";
-                            }
+                           // }else{
+                           //return "<table><tr>&nbspService Centre Bill Amount</tr><tr><td></td><td>+</td></tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr></table>";
+                           // }
                         }else{
-                            return "<table><tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.parts_price)+"</td></tr><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr><tr id = 'total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.parts_price)+parseInt(Math.ceil((this.labour_price)))+parseInt(Math.ceil((this.labour_price*0.14)))+parseInt((this.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
+                            return "<table><tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.parts_price)+"</td></tr><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr><tr id = 'total-row' class='total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.parts_price)+parseInt(Math.ceil((this.labour_price)))+parseInt(Math.ceil((this.labour_price*0.14)))+parseInt((this.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
                     }}}
                     ]},
                 {"tag":"div","class":"col-item td-rating", "html":""},

@@ -108,7 +108,7 @@
                         <th>Dealer</th>
                         <th>Service</th>
                         <!--<th></th>-->
-                        <th>Total Price</th>
+                        <th>Estimated Price</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -119,6 +119,12 @@
                             <i class="delete-icon fa fa-trash-o"></i>
                         </div>
                         <div class="dealer-logo-wrapper">
+
+                            <!-- -->
+
+
+
+                            <!-- -->
                             <img class="dealer-logo" src="" alt="{{val.dealer}}" data-name="{{val.car.make}}" >
                             <div class="aligner"></div>
                         </div>
@@ -154,15 +160,23 @@
                         {% if val.service == "servicing" %}
                         {% if val.service_detail.dealer_cat == "Authorized" %}
                         {% if val.service_detail.car_bike == "Bike" %}
-                         <div class="price-div">
-                             Service Centre Bill Amount <br>
-                             + <br>
-                             Pick Up Fees :<i style='padding-left:10px' class='fa fa-inr'></i>150
+                         <div class="price-div"><i class="fa fa-inr"></i>
+                            {{ val.service_detail.total_price }}
                         </div>
+
+
+                         <!--<div class="price-div">-->
+                             <!--Service Centre Bill Amount <br>-->
+                             <!--+ <br>-->
+                             <!--Pick Up Fees :<i style='padding-left:10px' class='fa fa-inr'></i>150-->
+                        <!--</div>-->
                         {% else %}
-                        <div class="price-div">
-                            Service Centre Bill Amount
+                         <div class="price-div"><i class="fa fa-inr"></i>
+                            {{ val.service_detail.total_price }}
                         </div>
+                        <!--<div class="price-div">-->
+                            <!--Service Centre Bill Amount-->
+                        <!--</div>-->
                         {% endif %}
                         {% else %}
                         <div class="price-div"><i class="fa fa-inr"></i>
