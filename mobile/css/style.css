@@ -21,6 +21,9 @@ line-height: 14px;
 }
 */
 
+.ui-page{
+    background: #fff;
+}
 
 /* Landing Page Styles - Sanskar*/
 .landing-page {
@@ -109,7 +112,7 @@ line-height: 14px;
 
 }
 
-.order-body .service-image-holder{
+.order-body .service-img-holder{
  position:relative;
 }
 
@@ -488,13 +491,16 @@ form label.error {
     text-shadow: none;
 
 }
-.emergency-body .ui-content{
-    padding:0px;
+.additional-body .ui-content fieldset, .denting-body .ui-content fieldset, .diagnostics-body .ui-content fieldset{
+    margin-bottom: 12px;
 }
+/*.emergency-body .ui-content{*/
+    /*padding:0px;*/
+/*}*/
 
-.emergency-body .ui-listview{
-    margin: 0px;
-}
+/*.emergency-body .ui-listview{*/
+    /*margin: 0px;*/
+/*}*/
 
 
 /*End - Emergency - Bhuvan*/
@@ -509,17 +515,40 @@ form label.error {
 
 }
 
-.denting-body .ui-content{
-    padding:0px;
+.denting-body .dent-form fieldset .label-2{
+    float:left;
+    width: 20%;
+    margin: .5em 2% 0 0;
+}
+.denting-body .dent-form fieldset .label-3{
+    min-height: 105px;
 }
 
-.denting-body .ui-listview{
-    margin: 0px;
-}
+/*.denting-body .ui-content{*/
+    /*padding:0px;*/
+/*}*/
+
+/*.denting-body .ui-listview{*/
+    /*margin: 0px;*/
+/*}*/
 /* End -  Denting styling*/
 
 .panel-img {
     width: 160px;
     height: 100px;
     padding-top: 59px !important;
+}
+.service-img-holder img{
+    width: 100%;
+}
+.service-list .list-services{
+    margin: 0px;
+}
+.service-list .list-services li a{
+    background: #fff !important;
+    margin: 0px;
+}
+.service-list .list-services li a:active{
+    background: #e8e8e8 !important;
+    margin: 0px;
 }

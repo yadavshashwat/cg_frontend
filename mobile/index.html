@@ -387,7 +387,7 @@
                 <div class="ui-block-a">
                     <div class="service-img-wrapper padded">
                         <a class="service-option" id="repair" name="Repair">
-                            <img class="service-img" src="img/denting.jpg" alt="img4"/></a>
+                            <img class="service-img" src="img/repairs.jpg" alt="img4"/></a>
                     </div>
                     <div class="imgCaption"></div>
                 </div>
@@ -430,7 +430,7 @@
             <p id="order-page-service"></p>
         </div>
 
-        <div class="service-image-holder">
+        <div class="service-img-holder">
             <!--<div class="service-image-holder">-->
         </div>
         <div class="service-list">
@@ -769,13 +769,13 @@
 
     <!--CG Header-->
 
-    <div data-role="content" class="form">
+    <div data-role="content" class="form dent-form">
 
-        <div class="service-img-wrapper padded">
-            <a><img class="service-img" src="img/denting.jpg" alt="img4"/></a>
+        <!--<div class="service-img-wrapper padded">-->
+            <!--<a><img class="service-img" src="img/denting.jpg" alt="img4"/></a>-->
 
 
-            <form action="submit.php" data-ajax="false" method="post" id="" novalidate="novalidate">
+            <form action="submit.php" data-ajax="false" method="post" id="dentingCheckout" novalidate="novalidate">
 
 
                 <fieldset data-role="fieldcontain">
@@ -784,15 +784,22 @@
                            placeholder="(e.g. Bumper damage from the left side)" class="required" minlength='1'>
                 </fieldset>
 
-                <fieldset data-role="fieldcontain">
-                    <label for="typeofservice">2. What kind of service do you need?</label>
-                    <input type="text" name="typeofservice" id="typeofservice" placeholder="(e.g. Bumper replacement)"
-                           minlength='1'>
-                </fieldset>
+                <!--<fieldset data-role="fieldcontain">-->
+                    <!--<label for="typeofservice">2. What kind of service do you need?</label>-->
+                    <!--<input type="text" name="typeofservice" id="typeofservice" placeholder="(e.g. Bumper replacement)"-->
+                           <!--minlength='1'>-->
+                <!--</fieldset>-->
 
+    <fieldset data-role="controlgroup" data-type="horizontal">
+        <legend class="label-2">2. What kind of service do you need?</legend>
+        <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="replacement" checked="checked">
+        <label for="radio-choice-h-2a">Part Replacement</label>
+        <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="repair">
+        <label for="radio-choice-h-2b">Repair / Paint</label>
+    </fieldset>
 
                 <fieldset data-role="fieldcontain">
-                    <label for="pgaddimage">3. Upload 3 Images of the damage<span class='red'>*</span></label>
+                    <label for="pgaddimage" class="label-3">3. Upload 3 Images of the damage<span class='red'>*</span></label>
                     <input required="" name="pgaddimage" title="Enter book image here." type="file" id="pgaddimage"
                            placeholder="Enter book image here." autocomplete="off" data-clear-btn="true"/>
                     <input required="" name="pgaddimage" title="Enter book image here." type="file" id="pgaddimage"
@@ -818,9 +825,9 @@
                 </div>
                 -->
                 <br>
-                <input type="submit" value="Submit" name="submit" class="btn">
+                <input type="submit" value="Checkout" name="submit" class="btn">
             </form>
-        </div>
+        <!--</div>-->
 
 
         <!--Multiple selection checkbox for services-->
@@ -830,7 +837,7 @@
 <!--        End of Denting/Painting page - Bhuvan-->
 
 <!--Start Separate page for Additional services-->
-<div data-role="page" class="additional" id="additional">
+<div data-role="page" class="additional-body" id="additional">
 
     <!--CG Header-->
     <div data-role="header" class="header-body" data-theme="">
@@ -867,12 +874,52 @@
                 <input type="checkbox" name="checkbox-v-2g" id="checkbox-v-2g">
                 <label for="checkbox-v-2g">Brake Repair</label>
             </fieldset>
+            <fieldset>
+                <label for="add-queries">Additional Queries</label>
+                <textarea name="add-queries" id="add-queries">
+                I'm a basic textarea. If this is pre-populated with content, the height will be automatically adjusted to fit without needing to scroll. That is a pretty handy usability feature.
+                </textarea>
 
+            </fieldset>
             <br>
-            <input type="submit" value="Submit" name="submit" class="btn">
+            <input type="submit" value="Checkout" name="submit" class="btn">
         </form>
     </div>
 </div>
+<!--        End of  Additional service page -->
+<!--Start Separate page for Additional services-->
+<div data-role="page" class="diagnostics-body" id="diagnostics">
+
+    <!--CG Header-->
+    <div data-role="header" class="header-body" data-theme="">
+        <h1>Diagnostics</h1>
+
+        <a data-role="none" class="hlogo" href="#menuA" style="position: absolute; left: 0; top: 0;"><img
+                src=img/header_logo2.png alt=""/></a>
+        <a href="tel:0919953008804"
+           class="call-helpline ui-btn ui-corner-all ui-icon-phone ui-btn-icon-notext ui-nodisc-icon">phone</a>
+        <!--        <div class="hlogo" ><img src="img/header_logo2.png" data-ajax="false" href="#menuA" class="ui-btn-left" data-theme=a></div>-->
+        <!--		<a href="menuA" data-role="button" class="menu-small-btn ui-btn-right">Menu</a>-->
+    </div>
+
+    <!--CG Header-->
+
+    <div data-role="content" class="form">
+
+        <form action="" method="post" id="diagnosticsCheckout">
+            <fieldset>
+                <label for="diagnostics-queries">Tell us about the issue</label>
+                <textarea name="diagnostics-queries" id="diagnostics-queries">
+                I'm a basic textarea. If this is pre-populated with content, the height will be automatically adjusted to fit without needing to scroll. That is a pretty handy usability feature.
+                </textarea>
+
+            </fieldset>
+            <br>
+            <input type="submit" value="Checkout" name="submit" class="btn">
+        </form>
+    </div>
+</div>
+<!--        End of  Additional service page -->
 
 
 <!--        Start of Emergency page - Bhuvan-->
@@ -895,11 +942,11 @@
 
     <div data-role="content">
 
-        <div class="service-img-wrapper padded">
-            <a><img class="service-img" src="img/emergency1.jpg" alt="img4"/></a>
-
-
-            <ul class="list-services" data-role="listview">
+        <div class="service-img-holder">
+            <img src="img/emergency1.jpg" alt="img4"/>
+        </div>
+        <div class="service-list">
+            <ul class="list-services" data-role="listview" data-inset="true">
                 <li><a href="#">Key Lockout</a></li>
                 <li><a href="#">Flat Tyre</a></li>
                 <li><a href="#">Jumpstart</a></li>
@@ -934,11 +981,12 @@
 
     <div data-role="content">
 
-        <div class="service-img-wrapper padded">
-            <a><img class="service-img" src="img/denting.jpg" alt="img4"/></a>
+        <div class="service-img-holder">
+            <img src="img/repairs.jpg" alt="img4"/>
+        </div>
 
-
-            <ul class="list-repair-services" data-role="listview">
+    <div class="service-list">
+            <ul class="list-services" data-role="listview" data-inset="true">
                 <li><a href="#" data-id="custom">Custom Repair Request</a></li>
                 <li><a href="#" data-id="dent-paint">Denting / Painting</a></li>
                 <li><a href="#" data-id="diagnostics">Diagnostics</a></li>

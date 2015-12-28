@@ -230,6 +230,12 @@ var Global = {
                 window.location.hash = '#order';
                 $.mobile.changePage('#order',{'allowSamePageTransition':true});
             }else if(service_type == 'repair'){
+                var serviceObj = {'service':'repair'};
+                var serviceObjStr = JSON.stringify(serviceObj);
+                local.clearKey('clgaserviceobj');
+                local.save('clgaserviceobj', serviceObjStr);
+                Global.serviceSelected = serviceObj;
+
                 window.location.hash = '#repair';
                 $.mobile.changePage('#repair',{'allowSamePageTransition':true});
             }else if(service_type == 'emergency'){
@@ -243,7 +249,7 @@ var Global = {
         });
         
         
-        $('.service-list .list-services').on('click', 'a', function(e){
+        $('.order-body .service-list .list-services').on('click', 'a', function(e){
 //            var $target  = $(e.target);
 //            var serviceName = $('#order-page-service').text();
             var serviceId = $(this).attr('data-id');
@@ -252,8 +258,7 @@ var Global = {
             window.location.hash = '#vendor';
         });
         
-        
-        $('.vendor-list .vendors').on('click', 'a', function(e){
+        $('.order-body .vendor-list .vendors').on('click', 'a', function(e){
             var vendorType = $('#vendor-select').text();
             var vendorID = $(this).attr('data-id');
             var vendorName = $(this).attr('data-name');
@@ -264,7 +269,30 @@ var Global = {
             };
             window.location.hash = '#checkout';
         });
-        $('#emergency .list-services').on('click', 'a', function(e){
+        $('.repair-body .list-services').on('click', 'a', function(e){
+            var serviceId = $(this).attr('data-id');
+
+            Global.serviceSelected['id'] = serviceId;
+
+            if(serviceId == 'custom'){
+                window.location.hash = '#additional';
+                $.mobile.changePage('#additional',{'allowSamePageTransition':true});
+
+            }else if(serviceId == 'dent-paint'){
+                window.location.hash = '#denting';
+                $.mobile.changePage('#denting',{'allowSamePageTransition':true});
+
+            }else if(serviceId == 'diagnostics'){
+                window.location.hash = '#diagnostics';
+                $.mobile.changePage('#diagnostics',{'allowSamePageTransition':true});
+
+            }
+//            serviceId = serviceId.toLowerCase().split(' ').join('-');
+//            Global.serviceSelected['id'] = serviceId;
+//            window.location.hash = '#checkout';
+        });
+
+        $('.emergency-body .list-services').on('click', 'a', function(e){
             var serviceId = $(this).text();
             serviceId = serviceId.toLowerCase().split(' ').join('-');
             Global.serviceSelected['id'] = serviceId;
@@ -280,7 +308,17 @@ var Global = {
             window.location.hash = '#checkout';
             return false;
         });
-        
+        $('#dentingCheckout').on('submit', function(e){
+            var additionalInfo = {};
+//            var inps = $(this).find('input:checked');
+//            $.each(inps, function(i,inp){
+//               additionalInfo[$(inp).parent().find('label').text()] = true;
+//            });
+//            Global.serviceSelected['additional'] = additionalInfo;
+            window.location.hash = '#checkout';
+            return false;
+        });
+
         $('#checkout #checkout-submit').on('click', function(e){
             
             console.log('place order requested change detected');
@@ -346,7 +384,7 @@ var Global = {
                 }
                 order_list.push(orderObj);
 
-                Commons.ajaxData('add_guest_transaction', {
+                Commons.ajaxData('place_order', {
                              email             : email,
                              name              : name,
                              number            : phone,
@@ -381,6 +419,32 @@ var Global = {
                          },"GET", _this, _this.loadPlaced);
 
             }else if(service_type == 'emergency'){
+
+            }else if(service_type == 'repair'){
+                service_id = Global.serviceSelected['id'];
+                vendor_name = '--';
+                additional = Global.serviceSelected.additional;
+                var orderObj =  {
+                    ts:timeStamp,
+                    service_id:service_id,
+                    service:service_type
+                }
+                if(additional){
+                    orderObj['additional'] = JSON.stringify(additional);
+                }
+                order_list.push(orderObj);
+
+                Commons.ajaxData('place_order', {
+                             email             : email,
+                             name              : name,
+                             number            : phone,
+                             reg_no:             car_reg_number ,
+                             order_list        : JSON.stringify(order_list),
+                             car_name          : car_select,
+                             pick:JSON.stringify(pick),
+                             drop:JSON.stringify(drop),
+                             loc:'mobile'
+                         },"GET", _this, _this.loadPlaced);
 
             }
 
@@ -510,7 +574,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
 
     loadServicing : function(data){
         console.log(data)
-        var container = $('.service-list .list-services');
+        var container = $('.order-body .service-list .list-services');
         container.html('');
         var html = '';
         $.each(data, function(idx, val){
@@ -553,7 +617,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         });
         container.html(html);
         container.listview().listview("refresh")
-         var container2 = $('.service-image-holder');
+         var container2 = $('.service-img-holder');
         container2.html('');
         var html = '';
         html +=  "<img src='img/servicing1.jpg'>"
@@ -562,7 +626,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
     
     loadCleaning : function(data){
         console.log(data)
-        var container = $('.service-list .list-services');
+        var container = $('.order-body .service-list .list-services');
         container.html('');
         var html = '';
         $.each(data, function(idx, val){
@@ -574,7 +638,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         console.log(html)
         container.html(html);
         container.listview().listview("refresh")
-         var container2 = $('.service-image-holder');
+         var container2 = $('.service-img-holder');
         container2.html('');
         var html = '';
         html +=  "<img src='img/cleaning1.jpg'>"
@@ -582,7 +646,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
     },
 
     loadWindshield : function(data){
-        var container = $('.service-list .list-services');
+        var container = $('.order-body .service-list .list-services');
         container.html('');
         var html = '';
         $.each(data, function(idx, val){
@@ -593,14 +657,14 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         });
         container.html(html);
         container.listview().listview("refresh")
-         var container2 = $('.service-image-holder');
+         var container2 = $('.order-body .service-img-holder');
         container2.html('');
         var html = '';
         html +=  "<img src='img/windshield1.jpg'>"
         container2.html(html);
     },
     loadCarcare : function(data){
-        var container = $('.service-list .list-services');
+        var container = $('.order-body .service-list .list-services');
         container.html('');
         var html = '';
         $.each(data, function(idx, val){
@@ -611,7 +675,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         });
         container.html(html);
         container.listview().listview("refresh")
-         var container2 = $('.service-image-holder');
+         var container2 = $('.service-img-holder');
         container2.html('');
         var html = '';
         html +=  "<img src='img/carcare.jpg'>"
@@ -620,7 +684,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
 
     loadServicingDetails : function(data){
         console.log(data)
-        var container = $('.service-selection .selected-category');
+        var container = $('.order-body .service-selection .selected-category');
         container.html('');
         var html = '';
         var val = data[0]
