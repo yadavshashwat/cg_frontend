@@ -220,7 +220,7 @@ var Global = {
 
                 window.location.hash = '#'+service_type;
                 $.mobile.changePage('#'+service_type,{'allowSamePageTransition':true});
-            }else if(['servicing','cleaning','windshield'].indexOf(service_type)>=0){
+            }else if(['servicing','cleaning','windshield', 'carcare'].indexOf(service_type)>=0){
                 var serviceObj = {'service':service_type.toLowerCase()};
                 var serviceObjStr = JSON.stringify(serviceObj);
                 local.clearKey('clgaserviceobj');
@@ -229,6 +229,9 @@ var Global = {
 
                 window.location.hash = '#order';
                 $.mobile.changePage('#order',{'allowSamePageTransition':true});
+            }else if(service_type == 'repair'){
+                window.location.hash = '#repair';
+                $.mobile.changePage('#repair',{'allowSamePageTransition':true});
             }else if(service_type == 'emergency'){
                 window.location.hash = '#'+service_type;
                 $.mobile.changePage('#'+service_type,{'allowSamePageTransition':true});
@@ -596,6 +599,24 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         html +=  "<img src='img/windshield1.jpg'>"
         container2.html(html);
     },
+    loadCarcare : function(data){
+        var container = $('.service-list .list-services');
+        container.html('');
+        var html = '';
+        $.each(data, function(idx, val){
+            //console.log('alfa')
+            html += '<li><a data-id=' + val.id + '  href="#"><div class="header-div">';
+            html += val.category;
+            html += '</div></a></li>';
+        });
+        container.html(html);
+        container.listview().listview("refresh")
+         var container2 = $('.service-image-holder');
+        container2.html('');
+        var html = '';
+        html +=  "<img src='img/carcare.jpg'>"
+        container2.html(html);
+    },
 
     loadServicingDetails : function(data){
         console.log(data)
@@ -639,8 +660,6 @@ $( document ).delegate("#order", "pagebeforeload", function() {
                 html+= '<div class="vendor-name">' + val.vendor;
 
             html += '</div><div class=prices>'
-
-
 
             //html += "<table> <tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;"+parseInt(val.parts_price)+"</td></tr><tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil(val.labour_price)+"</td></tr> <tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil((val.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;<strike>&#8377;200</strike>&nbsp;&nbsp;&#8377;"+ (val.car_bike == 'Car' ? '0': '0')+"</td></tr><tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+(parseInt(val.parts_price)+parseInt(Math.ceil((val.labour_price)))+parseInt(Math.ceil((val.labour_price*0.14)))+parseInt((val.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
 
@@ -752,6 +771,53 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         container2.html(html);
         container2.listview().listview("refresh")
     },
+    loadCarcareDetails : function(data){
+        console.log(data)
+        var container = $('.service-selection .selected-category');
+        container.html('');
+        var html = '';
+        var val = data[0]
+            html += ' <div class="header">';
+            html += '<span class = "Category odo-read">' + (val.category) + '</span></div>';
+            html += '</div>';
+
+
+        container.html(html);
+        //container.listview("refresh")
+        var container2 = $('.vendor-list .vendors');
+        container2.html('');
+        var html = '';
+        $.each(data, function(idx, val){
+            html += '<li><a data-id="'+val.id+'" data-name="'+val.vendor+'" class="windshield-item-detail"><img src=';
+                if(val.vendor=="Authorized")
+                    html+= logoMap['Authorized Car'] + val.brand + '.jpg >';
+                else
+                    html+= logoMap[val.vendor] + '>';
+
+            if(val.vendor=="Authorized")
+                html+= '<div class="vendor-name">' + val.brand + ' Authorized ';
+            else
+                html+= '<div class="vendor-name">' + val.vendor;
+
+            html += "</div><div class='service-name'>" + val.service;
+            html += "</div><div class='description prices'>" + val.description;
+            if(val.ws_subtype=='With Defogger'){
+                    html += '<span class="part">'+val.ws_subtype+'</span>&nbsp;';
+            }
+            if(val.colour=='Green'){
+                    html += '<span class="part">Green Tinted</span>&nbsp;';
+            }
+
+            html += "</div><div class='prices'>"
+//            html += "<table><tr><td>Service Price</td><td>:&nbsp;&nbsp;"+(val.discount=='0' ? '' : "<strike>")+"&#8377;"+val.total_price + (val.discount=='0' ? '' : "</strike>&nbsp;&#8377;")+ (val.discount=='0' ? '' : parseInt(parseFloat(val.total_price)*(1.0-parseFloat(val.discount))))+"</td></tr>"+ (val.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike>&nbsp;&nbsp;&#8377;200</strike>&nbsp;&nbsp;&#8377;0</td></tr>" : '')+" <tr class='total-row' ><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+parseInt(parseFloat(val.total_price)*(1.0-parseFloat(val.discount)))+"</td></tr></table>";
+//            if(val.doorstep=="1")
+                html+= '<div class="doorstep"> &#x2302; Doorstep Service </div>';
+            html += '</div></div>';
+
+        });
+        container2.html(html);
+        container2.listview().listview("refresh")
+    },
 
     loadCarMake : function(data){
         console.log(data)
@@ -826,7 +892,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
             window.location.hash = '#index';
             return;
         }else{
-            if(Global.serviceSelected.service == 'servicing' || Global.serviceSelected.service == 'cleaning' || Global.serviceSelected.service == 'windshield'){
+            if(Global.serviceSelected.service == 'servicing' || Global.serviceSelected.service == 'cleaning' || Global.serviceSelected.service == 'windshield' || Global.serviceSelected.service == 'carcare'){
                 Commons.ajaxData('fetch_'+Global.serviceSelected.service+'_details', {service_id:Global.serviceSelected.id, c_id:Global.carSelected.id, city_id:'Delhi'},"get",Global, eval("Global.load"+Global.serviceSelected.service.toTitleCase()+"Details"))
     //            Commons.ajaxData('fetch_car_'+Global.serviceSelected.service.toLowerCase(), {c_id:Global.carSelected.id},"get",Global,eval("Global.load"+Global.serviceSelected.service))
             }

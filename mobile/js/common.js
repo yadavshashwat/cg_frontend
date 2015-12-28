@@ -54,6 +54,8 @@ var Commons = {
         'fetch_windshield_details':'/api/fetch_windshield_details/',
         'fetch_car_vas':'/api/fetch_car_vas/',
         'fetch_vas_details':'/api/fetch_vas_details/',
+        'fetch_car_carcare':'/api/fetch_car_vas/',
+        'fetch_carcare_details':'/api/fetch_vas_details/',
         'fetch_car_cleanings':'/api/fetch_all_cleaningcatservices/',
         'fetch_car_tyres':'/api/fetch_all_cleaningcatservices/',
         'add_to_cart':'/api/add_to_cart/',
