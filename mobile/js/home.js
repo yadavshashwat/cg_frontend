@@ -70,10 +70,11 @@ var Global = {
           }
         });
 
+
     },
     initGoogleHandlers:function(){
 
-     var OAUTHURL    =   'https://accounts.google.com/o/oauth2/auth?';
+        var OAUTHURL    =   'https://accounts.google.com/o/oauth2/auth?';
         var VALIDURL    =   'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=';
         var SCOPE       =   'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
         var CLIENTID    =   '280103750695-c5eiv9cp9hp4qoj3kdaa2eiajpa25sfo.apps.googleusercontent.com';
@@ -304,17 +305,20 @@ var Global = {
             $.each(inps, function(i,inp){
                additionalInfo[$(inp).parent().find('label').text()] = true;
             });
+            if($(this).find('#add-queries').text().length){
+                additionalInfo['Custom Requests'] = $(this).find('#add-queries').text();
+            }
             Global.serviceSelected['additional'] = additionalInfo;
             window.location.hash = '#checkout';
             return false;
         });
         $('#dentingCheckout').on('submit', function(e){
             var additionalInfo = {};
-//            var inps = $(this).find('input:checked');
-//            $.each(inps, function(i,inp){
-//               additionalInfo[$(inp).parent().find('label').text()] = true;
-//            });
-//            Global.serviceSelected['additional'] = additionalInfo;
+            if($(this).find('#damagedetails').val().length){
+                additionalInfo['Custom Requests'] = $(this).find('#damagedetails').val();
+            }
+            additionalInfo['Damage Type'] = $(this).find('input[name="radio-choice-h-2"]:checked').val();
+            Global.serviceSelected['additional'] = additionalInfo;
             window.location.hash = '#checkout';
             return false;
         });
@@ -380,7 +384,7 @@ var Global = {
                     service:service_type
                 }
                 if(additional){
-                    orderObj['additional'] = JSON.stringify(additional);
+                    orderObj['additional_data'] = JSON.stringify(additional);
                 }
                 order_list.push(orderObj);
 
@@ -430,7 +434,7 @@ var Global = {
                     service:service_type
                 }
                 if(additional){
-                    orderObj['additional'] = JSON.stringify(additional);
+                    orderObj['additional_data'] = JSON.stringify(additional);
                 }
                 order_list.push(orderObj);
 
@@ -447,6 +451,7 @@ var Global = {
                          },"GET", _this, _this.loadPlaced);
 
             }
+            return false;
 
 
         });
@@ -570,8 +575,13 @@ $( document ).delegate("#order", "pagebeforeload", function() {
 });
 
     },
+    logout:function(btn){
+        if(FB){
+            eval("FB.logout()");
+        }else{
 
-
+        }
+    },
     loadServicing : function(data){
         console.log(data)
         var container = $('.order-body .service-list .list-services');
@@ -617,7 +627,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         });
         container.html(html);
         container.listview().listview("refresh")
-         var container2 = $('.service-img-holder');
+         var container2 = $('.order-body .service-img-holder');
         container2.html('');
         var html = '';
         html +=  "<img src='img/servicing1.jpg'>"
@@ -638,7 +648,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         console.log(html)
         container.html(html);
         container.listview().listview("refresh")
-         var container2 = $('.service-img-holder');
+         var container2 = $('.order-body .service-img-holder');
         container2.html('');
         var html = '';
         html +=  "<img src='img/cleaning1.jpg'>"
@@ -675,7 +685,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         });
         container.html(html);
         container.listview().listview("refresh")
-         var container2 = $('.service-img-holder');
+         var container2 = $('.order-body .service-img-holder');
         container2.html('');
         var html = '';
         html +=  "<img src='img/carcare.jpg'>"
