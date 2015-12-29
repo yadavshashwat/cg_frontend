@@ -4,6 +4,10 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
 
+body{
+    font-family: Lato;
+   color: #616161 ;
+}
 /*
 .menu-small-btn{
 line-height: 14px;
@@ -42,9 +46,49 @@ line-height: 14px;
 .landing-page {
 /*    background: #4d5b94;*/
 }
-
+.landing-page .about-wrapper .ui-listview{
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.landing-page .about-wrapper .about-item-detail{
+    background: #fff;
+    height: 80px;
+}
+.landing-page .about-wrapper .about-item-detail img, .landing-page .about-wrapper .about-item-detail img:first-child{
+    top:11px;
+    left: 10px;
+}
+.landing-page .hiw-wrapper .ui-grid-b{
+    border-bottom: 1px solid rgba(0,0,0,.15);
+    margin-bottom: 12px;
+}
+.landing-page .hiw-wrapper .ui-grid-b:last-child{
+    border-bottom: none;
+}
+.landing-page .hiw-wrapper .ui-grid-b > .ui-block-span2{
+    width: 66%;
+}
+.landing-page .hiw-wrapper .img-wrap > img{
+    max-width: 100%;
+    max-height: 108px;
+    /*top:6px;*/
+    /*left: 6px;*/
+}
+.landing-page .hiw-wrapper .img-wrap{
+    min-height: 120px;
+    text-align: center;
+    padding: 6px 0px;
+}
 .landing-page .ui-panel-wrapper{
     background: transparent;
+}
+
+.landing-page .ui-field-contain{
+    border-bottom-width: 0px;
+}
+.landing-page .cb-select-wrapper{
+    border-top: solid 1px rgba(0,0,0,.15);
 }
 
 .landing-page #logo {
@@ -84,12 +128,15 @@ line-height: 14px;
 .landing-page .bottom-pane .list-item-title{
     line-height: 24px;
     font-size: 16px;
-
+    font-family: Lato;
+    font-weight: 400;
 }
 .landing-page .bottom-pane .list-item-text{
     white-space: pre-line;
     font-size: 12px;
-    line-height: 18px
+    line-height: 18px;
+    font-family: Lato;
+    font-weight: 300;
 }
 
 .landing-page .bottom-pane #contact-info {
@@ -97,14 +144,26 @@ line-height: 14px;
     border: 10px solid white;
     -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
     /*width: 306px; */
-    padding: 30px 25px; background: white url('../img/pattern_contacts.png') repeat;
+    /*padding: 30px 25px; */
+    background: white url('../img/pattern_contacts.png') repeat;
     background-size: 300px auto;
 }
-.landing-page .bottom-pane dt { text-transform: uppercase; font-family: "brandon-grotesque", Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: 1px; font-size: 12px; color: #e8554e; }
-.landing-page .bottom-pane #contact-info dd { margin-bottom: 25px; margin-left:0px;}
-.landing-page .bottom-pane #contact-info dd address{ font-style: normal;}
+.landing-page .bottom-pane dt {
+    text-transform: uppercase; font-family: Lato, Helvetica, Arial, sans-serif; font-weight: 400; letter-spacing: 1px; font-size: 12px; color: #e8554e;
+}
+.landing-page .bottom-pane #contact-info dd {
+    margin-bottom: 25px; margin-left:0px;
+    font-weight: 300; font-size: 12px;
+}
+.landing-page .bottom-pane #contact-info dd address{
+    font-weight: 400; font-size: 12px;
+    font-style: normal;
+}
 .landing-page .bottom-pane #contact-info dd, .landing-page .bottom-pane #contact-info dd a { color: #204a65; text-decoration: none; }
-.landing-page .bottom-pane #contact-info .social-links a { text-indent: -119988px; overflow: hidden; text-align: left; background-image: url('../img/icons.png?1381413743'); background-repeat: no-repeat; background-position: 50% 50%; display: -moz-inline-stack; display: inline-block; vertical-align: middle; *vertical-align: auto; zoom: 1; *display: inline; width: 32px; height: 48px; margin-right: 5px; }
+.landing-page .bottom-pane #contact-info .social-links a {
+    text-indent: -119988px; overflow: hidden; text-align: left; background-image: url('../img/icons.png?1381413743'); background-repeat: no-repeat; background-position: 50% 50%; display: -moz-inline-stack; display: inline-block; vertical-align: middle; *vertical-align: auto; zoom: 1; *display: inline; width: 32px; height: 48px; margin-right: 5px;
+    font-weight: 300; font-size: 12px;
+}
 .landing-page .bottom-pane #contact-info .social-links a.fb { background-position: -592px -72px; }
 .landing-page .bottom-pane #contact-info .social-links a.tt { background-position: -592px -8px; }
 

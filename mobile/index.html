@@ -257,23 +257,23 @@
         </ul>
       </div>
       <div id="fragment-1" class="about-wrapper">
-        <ul  data-role="listview" data-inset="true" data-icon="check">
-            <li>
-                <a data-id="5626798732d69a11ed902093" data-name="Authorized" class="servicing-item-detail">
+        <ul  data-role="listview" data-inset="true">
+            <li data-icon="false">
+                <a data-id="5626798732d69a11ed902093" data-name="Authorized" class="about-item-detail">
                     <img src="/img/m-icon-mech.png" >
                     <div class="list-item-title">Personal Advisors </div>
                     <div class="list-item-text">Industry experts who ensure that you pay for only what you need.</div>
                 </a>
             </li>
-            <li>
-                <a data-id="5626798732d69a11ed902093" data-name="Authorized" class="servicing-item-detail">
+            <li data-icon="false">
+                <a data-id="5626798732d69a11ed902093" data-name="Authorized" class="about-item-detail">
                     <img src="/img/m-icon-veri.png" >
                     <div class="list-item-title">ClickGarage Workshops </div>
                     <div class="list-item-text">Best of both worlds. Assurance of quality, in multi-brand garages.</div>
                 </a>
             </li>
-            <li>
-                <a data-id="5626798732d69a11ed902093" data-name="Authorized" class="servicing-item-detail">
+            <li data-icon="false">
+                <a data-id="5626798732d69a11ed902093" data-name="Authorized" class="about-item-detail">
                     <img src="/img/m-icon-data.png" >
                     <div class="list-item-title">Instant Estimates </div>
                     <div class="list-item-text">Power of informed choice with cost estimates generated from our extensive data.</div>
@@ -282,7 +282,49 @@
           </ul>
       </div>
       <div id="fragment-2" class="hiw-wrapper">
-        <p></p>
+
+        <div data-role="content">
+            <div class="ui-grid-b">
+                <div class="list ui-block-a img-wrap">
+                    <img src="/img/pane-select-1.png" alt=""/>
+                </div>
+                <div class="list ui-block-b ui-block-span2">
+                    <div class="list-item-title">
+                        Tell us what you need
+                    </div>
+                    <div class="list-item-text">
+                        Select your vehicle and browse through our service catalogue.
+                    </div>
+                </div>
+            </div>
+            <div class="ui-grid-b">
+                <div class="list ui-block-a ui-block-span2">
+                    <div class="list-item-title">
+                        Compare prices
+                    </div>
+                    <div class="list-item-text">
+                        Select a service provider that suits your needs best and compare price estimates.
+                    </div>
+                </div>
+                <div class="list ui-block-c img-wrap">
+                    <img src="/img/pane-compare-1.png" alt=""/>
+
+                </div>
+            </div>
+            <div class="ui-grid-b">
+                <div class="list ui-block-a img-wrap">
+                    <img src="/img/pane-relax-1.png" alt=""/>
+                </div>
+                <div class="list ui-block-b ui-block-span2">
+                    <div class="list-item-title">
+                        Book a time slot and relax
+                    </div>
+                    <div class="list-item-text">
+                        Book a slot based on your convenience. Our auto experts will get the work done.                    </div>
+                    </div>
+
+                </div>
+            </div>
       </div>
       <div id="fragment-3" class="contact-wrapper">
         <aside id="contact-info">
@@ -312,8 +354,8 @@
       </div>
     </div>
         <!--<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>-->
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
+<!--<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">-->
+<!--</fb:login-button>-->
 
 <div id="status">
 </div>
@@ -340,57 +382,37 @@
     <!--CG Header-->
 
 
-    <div data-role="main" class="ui-content">
-
-        <div>
-            <p id="service-page-car"></p>
-        </div>
+    <div data-role="main" class="ui-content no-padding">
 
         <div data-role="grid" data-control-title="Home" id="page1">
             <div class="ui-grid-solo">
                 <!--ROW 1-->
                 <div class="ui-block-solo">
-                    <div class="service-img-wrapper padded">
                         <a class="service-option" id="Servicing">
                             <img class="service-img" src="img/servicing1.jpg" alt="img1"/>
                         </a>
-                    </div>
                 </div>
                 <div class="ui-block-solo">
-                    <div class="service-img-wrapper padded">
                         <a class="service-option" id="Cleaning">
                             <img class="service-img" src="img/cleaning1.jpg" alt="img4"/></a>
-                    </div>
-                    <div class="imgCaption"></div>
                 </div>
                 <div class="ui-block-solo">
-                    <div class="service-img-wrapper padded">
                         <a class="service-option" id="windshield" name="Windshield">
                             <img class="service-img" src="img/windshield1.jpg" alt="Windshield"/></a>
-                    </div>
-                    <div class="imgCaption"></div>
                 </div>
                 <div class="ui-block-solo">
-                    <div class="service-img-wrapper padded">
                         <a class="service-option" id="carcare" name="Car Care">
                             <img class="service-img" src="img/carcare.jpg" alt="img4"/></a>
-                    </div>
-                    <div class="imgCaption"></div>
                 </div>
 
                 <div class="ui-block-solo">
-                    <div class="service-img-wrapper padded">
                         <a class="service-option" id="repair" name="Repair">
                             <img class="service-img" src="img/repairs.jpg" alt="img4"/></a>
-                    </div>
-                    <div class="imgCaption"></div>
+
                 </div>
                 <div class="ui-block-solo">
-                    <div class="service-img-wrapper ">
                         <a class="service-option" id="emergency" name="Emergency Services">
                             <img class="service-img" src="img/emergency1.jpg" alt="img4"/></a>
-                    </div>
-                    <div class="imgCaption"></div>
                 </div>
             </div>
 

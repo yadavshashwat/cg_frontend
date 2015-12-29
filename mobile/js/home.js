@@ -536,6 +536,7 @@ var Global = {
                     Global.additionalPageInit();
                     break;
                 case "#order":
+                    console.log('it goes here');
 //                    console.log('p')
 //                    console.log("_this.load"+$('#order-page-service').text())
 
@@ -590,7 +591,7 @@ $( document ).delegate("#emergency", "pageinit", function() {
 
 $( document ).delegate("#order", "pagebeforeload", function() {
     if(!(Global.carSelected && Global.carSelected.id)){
-        console.log('pagebeforeload')
+//        console.log('pagebeforeload')
         window.location.hash = '#index';
     }
 });
@@ -965,7 +966,10 @@ $( document ).delegate("#order", "pagebeforeload", function() {
             window.location.hash = '#index';
             return;
         }else{
-            Commons.ajaxData('fetch_car_'+Global.serviceSelected.service.toLowerCase(), {c_id:Global.carSelected.id},"get",Global,eval("Global.load"+Global.serviceSelected.service.toTitleCase()))
+           var service = Global.serviceSelected.service.toLowerCase();
+            if(["servicing","cleaning","carcare","windshield"].indexOf(service)>=0){
+                Commons.ajaxData('fetch_car_'+Global.serviceSelected.service.toLowerCase(), {c_id:Global.carSelected.id},"get",Global,eval("Global.load"+Global.serviceSelected.service.toTitleCase()))
+            }
         }
     },
     vendorPageInit : function(){
