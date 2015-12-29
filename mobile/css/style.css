@@ -21,6 +21,9 @@ line-height: 14px;
 }
 */
 
+.ui-page{
+    background: #fff;
+}
 
 /* Landing Page Styles - Sanskar*/
 .landing-page {
@@ -65,7 +68,34 @@ line-height: 14px;
 .landing-page #hidden-car-id{
     display: none;
 }
-    
+.landing-page .bottom-pane .list-item-title{
+    line-height: 24px;
+    font-size: 16px;
+
+}
+.landing-page .bottom-pane .list-item-text{
+    white-space: pre-line;
+    font-size: 12px;
+    line-height: 18px
+}
+
+.landing-page .bottom-pane #contact-info {
+    /*position: absolute; right: 0; top: 0; height: 100%; */
+    border: 10px solid white;
+    -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
+    /*width: 306px; */
+    padding: 30px 25px; background: white url('../img/pattern_contacts.png') repeat;
+    background-size: 300px auto;
+}
+.landing-page .bottom-pane dt { text-transform: uppercase; font-family: "brandon-grotesque", Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: 1px; font-size: 12px; color: #e8554e; }
+.landing-page .bottom-pane #contact-info dd { margin-bottom: 25px; margin-left:0px;}
+.landing-page .bottom-pane #contact-info dd address{ font-style: normal;}
+.landing-page .bottom-pane #contact-info dd, .landing-page .bottom-pane #contact-info dd a { color: #204a65; text-decoration: none; }
+.landing-page .bottom-pane #contact-info .social-links a { text-indent: -119988px; overflow: hidden; text-align: left; background-image: url('../img/icons.png?1381413743'); background-repeat: no-repeat; background-position: 50% 50%; display: -moz-inline-stack; display: inline-block; vertical-align: middle; *vertical-align: auto; zoom: 1; *display: inline; width: 32px; height: 48px; margin-right: 5px; }
+.landing-page .bottom-pane #contact-info .social-links a.fb { background-position: -592px -72px; }
+.landing-page .bottom-pane #contact-info .social-links a.tt { background-position: -592px -8px; }
+
+
 /*<Shashwat styling>*/
 
 /*Step 2 styling*/
@@ -82,7 +112,7 @@ line-height: 14px;
 
 }
 
-.order-body .service-image-holder{
+.order-body .service-img-holder{
  position:relative;
 }
 
@@ -237,7 +267,8 @@ white-space: nowrap;
 }
 
 .vendor-list .service-name{
-font-weight: 400;
+    font-weight: 400;
+    white-space: normal;
 }
 .vendor-list .description{
 white-space: pre-wrap;
@@ -460,13 +491,16 @@ form label.error {
     text-shadow: none;
 
 }
-.emergency-body .ui-content{
-    padding:0px;
+.additional-body .ui-content fieldset, .denting-body .ui-content fieldset, .diagnostics-body .ui-content fieldset{
+    margin-bottom: 12px;
 }
+/*.emergency-body .ui-content{*/
+    /*padding:0px;*/
+/*}*/
 
-.emergency-body .ui-listview{
-    margin: 0px;
-}
+/*.emergency-body .ui-listview{*/
+    /*margin: 0px;*/
+/*}*/
 
 
 /*End - Emergency - Bhuvan*/
@@ -481,17 +515,40 @@ form label.error {
 
 }
 
-.denting-body .ui-content{
-    padding:0px;
+.denting-body .dent-form fieldset .label-2{
+    float:left;
+    width: 20%;
+    margin: .5em 2% 0 0;
+}
+.denting-body .dent-form fieldset .label-3{
+    min-height: 105px;
 }
 
-.denting-body .ui-listview{
-    margin: 0px;
-}
+/*.denting-body .ui-content{*/
+    /*padding:0px;*/
+/*}*/
+
+/*.denting-body .ui-listview{*/
+    /*margin: 0px;*/
+/*}*/
 /* End -  Denting styling*/
 
 .panel-img {
     width: 160px;
     height: 100px;
     padding-top: 59px !important;
+}
+.service-img-holder img{
+    width: 100%;
+}
+.service-list .list-services{
+    margin: 0px;
+}
+.service-list .list-services li a{
+    background: #fff !important;
+    margin: 0px;
+}
+.service-list .list-services li a:active{
+    background: #e8e8e8 !important;
+    margin: 0px;
 }
