@@ -60,6 +60,7 @@ var Commons = {
         'fetch_car_tyres':'/api/fetch_all_cleaningcatservices/',
         'add_to_cart':'/api/add_to_cart/',
         'place_order':'/api/place_order/',
+        'place_emergency_order':'/api/place_emergency_order/',
         'fetch_car_booking':'/api/fetch_car_booking/',
         'fetch_car_cancelled':'/api/fetch_car_cancelled/',
         'cancel_booking':'/api/cancel_booking/',
@@ -365,7 +366,9 @@ var Templates = {
     {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Service Price</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+this.total_price+"</td></tr>"+ (this.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>0</td></tr>" : '')+"<tr><td>Total</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+this.total_price+"</td></tr></table>";}}                ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
-        }]
+        }],
+        parts:[{"tag":"span", "class":"token-class", "html":function(){return this}}]
+
     },
     bookingPage:{
         booking:[{

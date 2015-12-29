@@ -261,7 +261,13 @@ var Global = {
                 window.location.hash = '#repair';
                 $.mobile.changePage('#repair',{'allowSamePageTransition':true});
             }else if(service_type == 'emergency'){
+                var serviceObj = {'service':'emergency'};
+                var serviceObjStr = JSON.stringify(serviceObj);
+                local.clearKey('clgaserviceobj');
+                local.save('clgaserviceobj', serviceObjStr);
+                Global.serviceSelected = serviceObj;
                 window.location.hash = '#'+service_type;
+
                 $.mobile.changePage('#'+service_type,{'allowSamePageTransition':true});
             }
             Global.serviceCat = {
@@ -318,7 +324,7 @@ var Global = {
             var serviceId = $(this).text();
             serviceId = serviceId.toLowerCase().split(' ').join('-');
             Global.serviceSelected['id'] = serviceId;
-            window.location.hash = '#checkout';
+            window.location.hash = '#em-checkout';
         });
         $('#additionalCheckout').on('submit', function(e){
             var additionalInfo = {};
@@ -344,8 +350,62 @@ var Global = {
             return false;
         });
 
+        $('#em-checkout #em-checkout-submit').on('click', function(e){
+            var car_select = Global.carSelected.fullname;
+
+            var name = $('#em-checkout #name').val();
+            var email = $('#em-checkout #email').val();
+            var phone = $('#em-checkout #phonenumber').val();
+//            var pick_date = $('#dateinput option:selected').text();
+//            var pick_time = $('#pick-up-time option:selected').text();
+            var car_reg_number = $('#checkout #regn').val();
+            var pick_addr = $('#checkout #pickupadd1').val();
+            var pick_city = $('#city1 option:selected').text();
+            var timeStamp = Math.floor(Date.now() / 1000);
+
+            var date = new Date();
+            var hrs = date.getHours();
+            if(hrs<10){
+                hrs = '0'+hrs
+            }
+            var mts = date.getMinutes();
+            if(mts<10){
+                mts = '0'+mts
+            }
+
+            var pick = {
+                     street : pick_addr,
+                     pincode : 'n/a',
+                     landmark : '',
+                     city : pick_city,
+                     time : ((hrs) + ':' + (mts)),
+                     date : ((date.getMonth()+1) + '/' + (date.getDate()) + '/' +(date.getYear()))
+                 };
+            var order_list = [];
+            var service_type = 'emergency';
+            var service_id = Global.serviceSelected['id'];
+            var orderObj =  {
+                ts:timeStamp,
+                service_id:service_id,
+                service:service_type
+            };
+            order_list.push(orderObj);
+
+            Commons.ajaxData('place_emergency_order', {
+                         email             : email,
+                         name              : name,
+                         number            : phone,
+                         reg_no:             car_reg_number ,
+                         order_list        : JSON.stringify(order_list),
+                         car_name          : car_select,
+                         pick:JSON.stringify(pick),
+                         loc:'mobile'
+                     },"GET", _this, _this.loadPlaced);
+
+
+        });
         $('#checkout #checkout-submit').on('click', function(e){
-            
+
             console.log('place order requested change detected');
 //            var classy = Global.serviceCat.serviceType;
             var car_select = Global.carSelected.fullname;
@@ -444,6 +504,7 @@ var Global = {
                          },"GET", _this, _this.loadPlaced);
 
             }else if(service_type == 'emergency'){
+
 
             }else if(service_type == 'repair'){
                 service_id = Global.serviceSelected['id'];
@@ -610,7 +671,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         container.html('');
         var html = '';
         $.each(data, function(idx, val){
-            html += '<li><a data-id=' + val.id + ' href="#"><div class="header-div">';
+            html += '<li data-icon="false"><a data-id=' + val.id + ' href="#"><div class="header-div">';
             //if(val.odometer)
             //    html += String(val.odometer).replace(/(.)(?=(\d{3})+$)/g,'$1,')+'km';
 //=======
@@ -631,18 +692,47 @@ $( document ).delegate("#order", "pagebeforeload", function() {
             //else
             //    html += '--year';
             html += '</div>';
-            html += '<div class="checks-div">Regular Checks</div>';
-            html += '<div class="checks-div">Washing</div>';
+            html += '<div class="checks-div">Exterior Washing</div>';
+            html += '<div class="checks-div">Parts Check & Replacement</div>';
+            if(val.car_bike == 'Car'){
+                html += '<div class="checks-div">Interior Vacuuming</div>';
+                html += '<div class="checks-div">Dashboard Polish</div>';
+            }
 
             html += '<div class="parts-div">';
             // push the list
 
             if(val.car_bike=="Bike")
                 html += '<span class="part">Engine Oil</span>'+'<span class="part">Oil Filter</span>'+'<span class="part">Other Parts As Required</span>';
-            else
-                $.each(val.parts_replaced, function(i, part){
-                   html += '<span class="part">' + part + '</span>';
-                });
+            else{
+                html +='<span class="desc"><u>Description</u></span>';
+                    var properObj = {
+                        'Parts/ Fluids Replaced':[],
+                        'Fluids Top-up':[],
+                        'Filters Cleaned':[],
+                        'Checks Done':[]
+                    };
+                    if(val['part_dic'] && val['part_dic'].length){
+                        $.each(val.part_dic, function(i,part){
+                            if(!properObj[part.part_action]){
+                                properObj[part.part_action]=[];
+                            }
+                            properObj[part.part_action].push(part.part_name);
+                        });
+                    }
+                    $.each(properObj, function(action,list){
+                        if(list.length) {
+                            html += '<div class="action-wrapper"><span class="action-name">' + action + '</span><div class="action-list">';
+                            html += '<span class="token-class">'+list.join('</span><span class="token-class">')+'</span>';
+                            html += '</div></div>';
+                        }
+                    });
+                    html += "<span>Parts in healthy condition won't be replaced.</span>"
+
+            }
+//                $.each(val.parts_replaced, function(i, part){
+//                   html += '<span class="part">' + part + '</span>';
+//                });
 
             html += '</div></a></li>';
 
@@ -715,7 +805,6 @@ $( document ).delegate("#order", "pagebeforeload", function() {
     },
 
     loadServicingDetails : function(data){
-        console.log(data)
         var container = $('.order-body .service-selection .selected-category');
         container.html('');
         var html = '';
@@ -725,16 +814,45 @@ $( document ).delegate("#order", "pagebeforeload", function() {
             html += '<span class = "odo-read">' + String(val.type_service) +'</span></div>';
 
             html += '</div>';
-            html += '<div class="checks-div">Regular Checks</div>';
-            html += '<div class="checks-div">Washing</div>';
-             html += '<div class="parts-div">';
-        if(val.car_bike=="Bike")
+            html += '<div class="checks-div">Exterior Washing</div>';
+            html += '<div class="checks-div">Parts Check & Replacement</div>';
+            if(val.car_bike == 'Car'){
+                html += '<div class="checks-div">Interior Vacuuming</div>';
+                html += '<div class="checks-div">Dashboard Polish</div>';
+            }
+            html += '<div class="parts-div">';
+        if(val.car_bike=="Bike"){
             html += '<span class="part">Engine Oil</span>'+'<span class="part">Oil Filter</span>'+'<span class="part">Other Parts As Required</span>';
-        else
-            $.each(val.parts_list, function(i, part){
-               html += '<span class="part">' + part + '</span>';
-            });
+        }
+        else{
+//            $.each(val.parts_list, function(i, part){
+//               html += '<span class="part">' + part + '</span>';
+//            });
+            html +='<span class="desc"><u>Description</u></span>';
+                var properObj = {
+                    'Parts/ Fluids Replaced':[],
+                    'Fluids Top-up':[],
+                    'Filters Cleaned':[],
+                    'Checks Done':[]
+                };
+                if(val['part_dic'] && val['part_dic'].length){
+                    $.each(val.part_dic, function(i,part){
+                        if(!properObj[part.part_action]){
+                            properObj[part.part_action]=[];
+                        }
+                        properObj[part.part_action].push(part.part_name);
+                    });
+                }
+                $.each(properObj, function(action,list){
+                    if(list.length) {
+                        html += '<div class="action-wrapper"><span class="action-name">' + action + '</span><div class="action-list">';
+                        html += '<span class="token-class">'+list.join('</span><span class="token-class">')+'</span>';
+                        html += '</div></div>';
+                    }
+                });
+                html += "<span>Parts in healthy condition won't be replaced.</span>"
 
+        }
         container.html(html);
         //container.listview("refresh")
         var container2 = $('.vendor-list .vendors');

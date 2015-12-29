@@ -726,7 +726,7 @@
 
             <input type="checkbox" name="checkbox-0" id="checkbox-mini-0" class="custom" data-mini="true"/>
             <label for="checkbox-mini-0" class="ui-input-text">I want a different drop location</label>
-            
+
             <p></p>
             <center class="dropoff-toggle"  style="display:none;">Dropoff Details</center>
             <p></p>
@@ -745,9 +745,9 @@
                 <label for="select-choice-min" class="select ui-input-text">City:</label>
                 <select name="select-choice-min" id="city2" data-mini="true" class="required">
                     <option value="selectone">Select One</option>
-                    <option value="delhi">Delhi</option>
+                    <option value="delhi" disabled>Delhi</option>
                     <option value="gurgaon">Gurgaon</option>
-                    <option value="noida_cs">Noida (Coming soon)</option>
+                    <option value="noida" disabled>Noida (Coming soon)</option>
                 </select>
             </fieldset>
 
@@ -767,6 +767,77 @@
 </div>
 
 <!-- Don't Delete -- End of Checkout Form - Bhuvan -->
+<!-- Don't Delete -- Start of em-Checkout Form -->
+<div data-role="page" id="em-checkout">
+
+    <!--CG Header-->
+    <div data-role="header" class="header-body" data-theme="a">
+        <h1>Checkout</h1>
+
+        <a data-role="none" class="hlogo" href="#menuA" style="position: absolute; left: 0; top: 0;"><img
+                src=img/header_logo2.png alt=""/></a>
+        <a href="tel:0919953008804"
+           class="call-helpline ui-btn ui-corner-all ui-icon-phone ui-btn-icon-notext ui-nodisc-icon">phone</a>
+
+    </div>
+    <!--CG Header-->
+
+    <div data-role="content" class="form">
+
+        <form action="" method="post" id="emCheckoutForm" novalidate="novalidate">
+
+
+            <fieldset data-role="fieldcontain">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" placeholder="Ashok Kumar" class="required" minlength='3'>
+            </fieldset>
+
+            <fieldset data-role="fieldcontain">
+                <label for="phonenumber">Phone:</label>
+                <input type="number" name="phonenumber" id="phonenumber" placeholder="7676767676" class="required"
+                       minlength="10">
+            </fieldset>
+
+
+            <fieldset data-role="fieldcontain">
+                <label for="email">Email:</label>
+                <input type="email" class="required" name="email" id="email" placeholder="abc@xyzmail.com">
+            </fieldset>
+
+            <fieldset data-role="fieldcontain">
+                <label for="regn">Vehicle Regn#:</label>
+                <input type="test" class="required" name="regn" id="regn" placeholder="RJ02CC4222">
+            </fieldset>
+
+            <p></p>
+            <center class="pickup">Pick-Up Details</center>
+
+            <fieldset data-role="fieldcontain">
+                <label for="pickupadd" class="ui-input-text">Pick up Address:</label>
+                <input type="text" name="pickupadd1" class="required" id="pickupadd1">
+            </fieldset>
+
+            <fieldset data-role="fieldcontain">
+                <label for="select-choice-min" class="ui-input-text" class="select">City:</label>
+                <select name="select-choice-min" id="city1" data-mini="true" class="required">
+                    <option value="selectone">Select One</option>
+                    <option value="delhi" disabled>Delhi (Coming Soong)</option>
+                    <option value="gurgaon">Gurgaon</option>
+                    <option value="noida_cs" disabled>Noida (Coming soon)</option>
+                </select>
+            </fieldset>
+
+            <!--            <a href="i" data-role="button" data-mini="true">Submit</a>-->
+            <input type="submit" id="em-checkout-submit" value="Submit">
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- Don't Delete -- End of em-Checkout Form  -->
+
 
 <!--Start of Denting/painting page - Bhuvan   -->
 <div data-role="page" class="denting-body" id="denting">
