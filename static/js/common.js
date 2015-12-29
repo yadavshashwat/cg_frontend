@@ -53,6 +53,7 @@ var Commons = {
         'place_emergency_order':'/api/place_emergency_order/',
         'fetch_car_booking':'/api/fetch_car_booking/',
         'fetch_car_cancelled':'/api/fetch_car_cancelled/',
+        'fetch_car_complete':'/api/fetch_car_complete/',
         'cancel_booking':'/api/cancel_booking/',
         'order_complete':'/api/order_complete/',
         'fetch_all_booking':'/api/fetch_all_booking/',
@@ -120,6 +121,10 @@ var Commons = {
          Commons.shakeModal();
 
     },
+    sendOTp : function(){
+
+    },
+
     shakeModal : function(){
         $('#loginModal .modal-dialog').addClass('shake');
                  $('.error').addClass('alert alert-danger').html("Invalid email/password combination");
@@ -546,9 +551,10 @@ var Templates = {
                 {"tag":"div","class":"td-service-info", "children":[
                     {"tag":"div", "class":"text", "children":[
                         {"tag":"span","class":"car-care", "html":"${service}"},
-                        {"tag":"span", "class":"info-icon fr","html":"Info <i class='fa fa-info-circle'></i>"},
+                        //{"tag":"span", "class":"info-icon fr","html":"Info <i class='fa fa-info-circle'></i>"},
                     ]},
                     {"tag":"div", "class":"sub-text","html":"(${category})"},
+                    {"tag":"div", "class":"info","html":"${description}"},
                     {"tag":"div", "class":"doorstep-div", "html":function(){
                         if(this.doorstep=="1"){return "<span class='doorstep'><i class='fa fa-home'></i>&nbspDoorstep Service</span>"
                         }else{
@@ -592,11 +598,12 @@ var Templates = {
 
                 ]},
                 {"tag":"div","class":"td-service-info", "children":[
-                    {"tag":"div", "class":"text", "children":[
+                     {"tag":"div", "class":"text", "children":[
                         {"tag":"span","class":"car-care", "html":"${service}"},
-                        {"tag":"span", "class":"info-icon fr","html":"Info <i class='fa fa-info-circle'></i>"},
+                        //{"tag":"span", "class":"info-icon fr","html":"Info <i class='fa fa-info-circle'></i>"},
                     ]},
                     {"tag":"div", "class":"sub-text","html":"(${category})"},
+                    {"tag":"div", "class":"info","html":"${description}"},
                     {"tag":"div", "class":"doorstep-div", "html":function(){
                         if(this.doorstep=="1"){return "<span class='doorstep'><i class='fa fa-home'></i>&nbspDoorstep Service</span>"
                         }else{

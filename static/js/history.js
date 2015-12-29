@@ -47,7 +47,7 @@ var Global = {
                 if(mine.hasClass('loaded')){
 
                 }else{
-                    if(classy == 'cancelled' || classy == 'booking'){
+                    if(classy == 'cancelled' || classy == 'booking' ||  classy == 'complete'){
                         Commons.ajaxData('fetch_car_'+classy, {c_id:_this.carSelected.id},"get",_this, eval("_this.load"+classy.toTitleCase()))
                     }
                 }
@@ -96,6 +96,17 @@ var Global = {
     loadCancelled : function(data){
         console.log(data)
         var container = $('.section-box .cancelled');
+        container.html('');
+        container.json2html(data, Templates.bookingPage.cancelled, {append:true});
+//        container.append(json2html.transform(data,Templates.bookingPage.services));
+        $.each(data, function(idx, val){
+
+        });
+
+    },
+    loadComplete : function(data){
+        console.log(data)
+        var container = $('.section-box .complete');
         container.html('');
         container.json2html(data, Templates.bookingPage.cancelled, {append:true});
 //        container.append(json2html.transform(data,Templates.bookingPage.services));

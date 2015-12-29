@@ -342,9 +342,9 @@ var Global = {
             var v_type = $(this).attr('value');
             var container = $('#brandSelect');
             container.html('');
-            var carBrands = ['Chevrolet','Fiat','Ford','Honda','Hyundai','Mahindra','Maruti Suzuki','Nissan','Renault','Skoda','Tata','Toyota','Volkswagen','Audi','Bentley','BMW','Bugatti','Ferrari','Isuzu','Jaguar','Lamborghini','Land Rover','Mercedes-Benz','Mini','Porsche','Rolls-Royce','Ssangyong','Volvo'];
+            var carBrands = ['Audi','Bentley','BMW','Bugatti','Chevrolet','Ferrari','Fiat','Ford','Honda','Hyundai','Isuzu','Jaguar','Lamborghini','Land Rover','Mahindra','Maruti Suzuki','Mercedes-Benz','Mini','Nissan','Porsche','Renault','Rolls-Royce','Skoda','Ssangyong','Tata','Toyota','Volkswagen','Volvo'];
             var bikeBrands = ['Bajaj','Hero','Honda','KTM','Mahindra','Royal Enfield','Suzuki','TVS','Yamaha'];
-            html = '<option selected disabled>Select brand</option>';
+            html = '<option selected disabled>Select Brand</option>';
             if (v_type=='Car'){
                 for (i=0; i<carBrands.length; i++){
                     html += '<option>' + carBrands[i] + '</option>';
@@ -386,7 +386,7 @@ var Global = {
         console.log(data);
         var container = $('#modelSelect');
         container.html('');
-        var html = '<option selected disabled>Select model</option>';
+        var html = '<option selected disabled>Select Model</option>';
         $.each(data, function(ix, val){
             html += '<option data-id="'+val.id+'" value="'+val.name+'">'+val.name+'</option>';
         })
