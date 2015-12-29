@@ -21,6 +21,19 @@ line-height: 14px;
 }
 */
 
+.cb-select-wrapper input{
+    /*display:  none;*/
+}
+.cb-select-wrapper .ui-controlgroup-controls {
+    margin-left: 0%;
+    width: 100%;
+}
+.cb-select-wrapper .ui-controlgroup-controls .ui-radio{
+    width: 50%;
+}
+.cb-select-wrapper .ui-controlgroup-controls label{
+    text-align: center;
+}
 .ui-page{
     background: #fff;
 }
@@ -45,8 +58,8 @@ line-height: 14px;
 }
 
 .landing-page .ui-btn {
-    margin-left: 5%;
-    margin-right: 5%;        
+    /*margin-left: 5%;*/
+    /*margin-right: 5%;        */
 }
 
 .landing-page .ui-field-contain .ui-select{

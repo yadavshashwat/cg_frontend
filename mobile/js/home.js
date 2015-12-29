@@ -167,9 +167,30 @@ var Global = {
         
         $('#brand-dropdown').on('change', function(){
             var brand = $(this).val();
-            Commons.ajaxData('fetch_car_list', {m_id:brand,cb_id:"Car"},"get",_this,_this.loadCarMake);
+            var cb_flag = $('.cb-select-wrapper input:checked').val();
+            Commons.ajaxData('fetch_car_list', {m_id:brand,cb_id:cb_flag},"get",_this,_this.loadCarMake);
         });
         
+        $('.cb-select-wrapper input').on('change', function(e){
+            console.log($(this).is(":checked"))
+            if($(this).is(":checked")){
+                var container = $('#brand-dropdown');
+                var val = $(this).val();
+                container.html('');
+                    var html = '<option value="choose-one" data-placeholder="true">Select Brand</option>';
+                var data = eval("_this."+val.toLowerCase()+"Brands");
+                $.each(data, function(ix, val){
+                    html += '<option value="'+val+'">'+val+'</option>';
+
+                })
+                container.html(html);
+                container.selectmenu('enable');
+                container.selectmenu('refresh');
+                $('#make-dropdown').selectmenu('disable');
+
+            }
+
+        });
         $('#make-dropdown').on('change', function(){
             var carmake = $(this).val();
             if(carmake){
@@ -989,9 +1010,11 @@ $( document ).delegate("#order", "pagebeforeload", function() {
     },
     emergencyPageInit : function(){
 
-    }
-};
+    },
+    carBrands : ['Audi','Bentley','BMW','Bugatti','Chevrolet','Ferrari','Fiat','Ford','Honda','Hyundai','Isuzu','Jaguar','Lamborghini','Land Rover','Mahindra','Maruti Suzuki','Mercedes-Benz','Mini','Nissan','Porsche','Renault','Rolls-Royce','Skoda','Ssangyong','Tata','Toyota','Volkswagen','Volvo'],
+    bikeBrands : ['Bajaj','Hero','Honda','KTM','Mahindra','Royal Enfield','Suzuki','TVS','Yamaha']
 
+};
 
 var logoMap = {
     '3M':'img/dl-logo-3M.png',
