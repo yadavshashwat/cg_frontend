@@ -9,7 +9,9 @@ var Global = {
         }
     $("[data-role=panel]").panel().enhanceWithin();  
         _this.events();
-        
+        _this.initGoogleHandlers();
+        Commons.ajaxData('fetch_user_login',{},"get",_this,_this.userLoad);
+
         $("#checkoutForm").validate({
             rules: {
                     name: {
@@ -25,6 +27,7 @@ var Global = {
 //        $('#submit-button').button('disable');
     },
     initFBHandlers:function(FBApi){
+        var _this = this;
         $('#login').find('#facebook').on('click', function(evt){
 
           FBApi.getLoginStatus(function(response) {
@@ -32,17 +35,20 @@ var Global = {
       if(response.status && response.status == 'connected'){
           //user present
 
-      }else{
+      }
+      else{
           //user present
         FBApi.login(function(response){
+            console.log(response)
             if (response.authResponse) {
              console.log('Welcome!  Fetching your information.... ');
-                $('#login').find('.login-container').hide();
-                $('#login').find('.logout-container').show();
-                $('#login').find('.logout-container').find('.text-box h4').html('Welcome!  Fetching your information.... ');
+//                $('#login').find('.login-container').hide();
+//                $('#login').find('.logout-container').show();
+//                $('#login').find('.logout-container').find('.text-box h4').html('Welcome!  Fetching your information.... ');
+                Commons.ajaxData('fetch_user_login',{'access_token':response.authResponse.accessToken,'backend':'facebook'},"get",_this,_this.userLoad);
              FBApi.api('/me', function(response) {
                console.log('Good to see you, ' + response.name + '.');
-                $('#login').find('.logout-container').find('.text-box h4').html('You are logged in as <span class="username">'+response.name+'</span>');
+//                $('#login').find('.logout-container').find('.text-box h4').html('You are logged in as <span class="username">'+response.name+'</span>');
              });
             } else {
              console.log('User cancelled login or did not fully authorize.');
@@ -52,18 +58,17 @@ var Global = {
       }
 //    statusChangeCallback(response);
   });
-
         });
         FBApi.getLoginStatus(function(response) {
           if(response.status && response.status == 'connected'){
               //user present
-                    $('#login').find('.login-container').hide();
-                    $('#login').find('.logout-container').show();
-                    $('#login').find('.logout-container').find('.text-box h4').html('Welcome!  Fetching your information.... ');
-                    $('#logout-btn').attr('data-state', 'facebook');
+//                    $('#login').find('.login-container').hide();
+//                    $('#login').find('.logout-container').show();
+//                    $('#logout-btn').attr('data-state', 'facebook');
+                Commons.ajaxData('fetch_user_login',{'access_token':response.authResponse.accessToken,'backend':'facebook'},"get",_this,_this.userLoad);
                  FBApi.api('/me', function(response) {
                    console.log('Good to see you, ' + response.name + '.');
-                    $('#login').find('.logout-container').find('.text-box h4').html('You are logged in as <span class="username">'+response.name+'</span>');
+//                    $('#login').find('.logout-container').find('.text-box h4').html('You are logged in as <span class="username">'+response.name+'</span>');
                  });
           }else{
 
@@ -73,7 +78,7 @@ var Global = {
 
     },
     initGoogleHandlers:function(){
-
+        var _this = this;
         var OAUTHURL    =   'https://accounts.google.com/o/oauth2/auth?';
         var VALIDURL    =   'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=';
         var SCOPE       =   'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
@@ -122,6 +127,7 @@ var Global = {
                 },
                 dataType: "jsonp"
             });
+            Commons.ajaxData('fetch_user_login',{'access_token':token,'backend':'google-oauth2'},"get",_this,_this.userLoad);
         }
 
         function getUserInfo() {
@@ -157,14 +163,38 @@ var Global = {
             $('#uName').text('Welcome ');
             $('#imgHolder').attr('src', 'none.jpg');
         }
-        login();
+        $('#login').find('#google').on('click', function(evt){
+            login();
+        });
 
+    },
+    userLoad : function(data){
+        if(data.auth){
+            $('#login').find('.login-container').hide();
+            $('#login').find('.logout-container').show();
+            $('#login').find('.logout-container').find('.text-box h4').html('You are logged in as <span class="username">'+data.email+'</span>');
 
+            $('#menuA #login-page-btn a').text('Logout');
+            $('#menuA .userdetails').show();
+            $('#menuA .userdetails .uname').html(data.username);
+            $('#menuA .userdetails .email').html(data.email);
+        }else{
+            $('#login').find('.login-container').show();
+            $('#login').find('.logout-container').hide();
+
+            $('#menuA #login-page-btn a').text('Sign In / Sign Up');
+            $('#menuA .userdetails').hide();
+//            $('#menuA .uname').html('').show();
+        }
     },
     events:function(){
         var _this = this;
         console.log('adding hanlder')
-        
+
+        $('#login .logout-container #logout-btn').on('click', function(){
+            Commons.ajaxData('logout',{},"get",_this,_this.userLoad);
+        });
+
         $('#brand-dropdown').on('change', function(){
             var brand = $(this).val();
             var cb_flag = $('.cb-select-wrapper input:checked').val();
@@ -295,7 +325,11 @@ var Global = {
                 'vendor':vendorName,
                 'id':vendorID
             };
-            window.location.hash = '#checkout';
+            if(Global.serviceSelected && (Global.serviceSelected['service'] == 'servicing') ){
+                window.location.hash = '#additional';
+            }else{
+                window.location.hash = '#checkout';
+            }
         });
         $('.repair-body .list-services').on('click', 'a', function(e){
             var serviceId = $(this).attr('data-id');
@@ -332,8 +366,8 @@ var Global = {
             $.each(inps, function(i,inp){
                additionalInfo[$(inp).parent().find('label').text()] = true;
             });
-            if($(this).find('#add-queries').text().length){
-                additionalInfo['Custom Requests'] = $(this).find('#add-queries').text();
+            if($(this).find('#add-queries').val().length){
+                additionalInfo['Custom Requests'] = $(this).find('#add-queries').val();
             }
             Global.serviceSelected['additional'] = additionalInfo;
             window.location.hash = '#checkout';
@@ -428,8 +462,8 @@ var Global = {
 
             var pick = {
                      street : pick_addr,
-                     pincode : pick_pin,
-                     landmark : pick_lmark,
+//                     pincode : pick_pin,
+//                     landmark : pick_lmark,
                      city : pick_city,
                      time : pick_time,
                      date : pick_date
@@ -437,8 +471,8 @@ var Global = {
 
             var drop = {
                      street : pick_addr,
-                     pincode : pick_pin,
-                     landmark : pick_lmark,
+//                     pincode : pick_pin,
+//                     landmark : pick_lmark,
                      city : pick_city
                  };
 
@@ -491,6 +525,12 @@ var Global = {
                 }
                 order_list.push(orderObj);
 
+                if(service_type == 'servicing'){
+                    additional = Global.serviceSelected.additional;
+                    if(additional){
+                        orderObj['additional_data'] = JSON.stringify(additional);
+                    }
+                }
                 Commons.ajaxData('place_order', {
                              email             : email,
                              name              : name,
@@ -543,6 +583,7 @@ var Global = {
             $('#checkout .dropoff-toggle').toggle();            
         });    
 
+        /*
         $('.vendor-list .vendors').on('click', '.servicing-item-detail', function(e){
             var servicingID = $(this).attr('data-id');
             var vendor = $(this).attr('data-name');
@@ -557,6 +598,7 @@ var Global = {
             Global.serviceSelected['vendor'] = vendor.split(' ').join('#$');
             window.location.hash = '#checkout';
         });
+        */
 
 //    Signup link show script
     $("#signup-link").click(function(){
@@ -658,6 +700,26 @@ $( document ).delegate("#order", "pagebeforeload", function() {
 });
 
     },
+    expandCollapse:function(divvy){
+        console.log($(divvy).height());
+        $(divvy).removeClass('minimized');
+        if($(divvy).height() > 150){
+            $(divvy).addClass('minimized min-max-toggle');
+        }
+        if($(divvy).is(':hidden') && ($(divvy).find('.token-class').length>5) ){
+            $(divvy).addClass('minimized min-max-toggle');
+        }
+        $(divvy).off().on('click', '.show-hide', function(e){
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            if($(this).closest('.minimized').length){
+                $(this).closest('.minimized').removeClass('minimized').addClass('maximized');
+            }else if($(this).closest('.maximized').length){
+                $(this).closest('.maximized').addClass('minimized').removeClass('maximized');
+            }
+            return false;
+        });
+    },
     logout:function(btn){
         if(FB){
             eval("FB.logout()");
@@ -666,7 +728,6 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         }
     },
     loadServicing : function(data){
-        console.log(data)
         var container = $('.order-body .service-list .list-services');
         container.html('');
         var html = '';
@@ -702,9 +763,9 @@ $( document ).delegate("#order", "pagebeforeload", function() {
             html += '<div class="parts-div">';
             // push the list
 
-            if(val.car_bike=="Bike")
-                html += '<span class="part">Engine Oil</span>'+'<span class="part">Oil Filter</span>'+'<span class="part">Other Parts As Required</span>';
-            else{
+//            if(val.car_bike=="Bike")
+//                html += '<span class="part">Engine Oil</span>'+'<span class="part">Oil Filter</span>'+'<span class="part">Other Parts As Required</span>';
+//            else{
                 html +='<span class="desc"><u>Description</u></span>';
                     var properObj = {
                         'Parts/ Fluids Replaced':[],
@@ -729,16 +790,19 @@ $( document ).delegate("#order", "pagebeforeload", function() {
                     });
                     html += "<span>Parts in healthy condition won't be replaced.</span>"
 
-            }
+//            }
 //                $.each(val.parts_replaced, function(i, part){
 //                   html += '<span class="part">' + part + '</span>';
 //                });
 
-            html += '</div></a></li>';
+            html += '<div class="show-hide"></div></div></a></li>';
 
         });
         container.html(html);
         container.listview().listview("refresh")
+        $.each(container.find('.parts-div'), function(i,val){
+            Global.expandCollapse($(val));
+        });
          var container2 = $('.order-body .service-img-holder');
         container2.html('');
         var html = '';
@@ -821,10 +885,10 @@ $( document ).delegate("#order", "pagebeforeload", function() {
                 html += '<div class="checks-div">Dashboard Polish</div>';
             }
             html += '<div class="parts-div">';
-        if(val.car_bike=="Bike"){
-            html += '<span class="part">Engine Oil</span>'+'<span class="part">Oil Filter</span>'+'<span class="part">Other Parts As Required</span>';
-        }
-        else{
+//        if(val.car_bike=="Bike"){
+//            html += '<span class="part">Engine Oil</span>'+'<span class="part">Oil Filter</span>'+'<span class="part">Other Parts As Required</span>';
+//        }
+//        else{
 //            $.each(val.parts_list, function(i, part){
 //               html += '<span class="part">' + part + '</span>';
 //            });
@@ -850,23 +914,24 @@ $( document ).delegate("#order", "pagebeforeload", function() {
                         html += '</div></div>';
                     }
                 });
-                html += "<span>Parts in healthy condition won't be replaced.</span>"
+                html += '<div class="show-hide"></div></div><span class="parts-notif">Parts in healthy condition won\'t be replaced.</span></div>'
 
-        }
+//        }
         container.html(html);
+        Global.expandCollapse(container.find('.parts-div').eq(0));
         //container.listview("refresh")
         var container2 = $('.vendor-list .vendors');
         container2.html('');
         var html = '';
         $.each(data, function(idx, val){
-            html += '<li><a data-id="'+val.id+'" data-name="'+val.vendor+'" class="servicing-item-detail"><img src=';
+            html += '<li><a data-id="'+val.id+'" data-name="'+val.vendor+'" class="servicing-item-detail"><img src="';
                 if(val.vendor=="Authorized")
                     if(val.car_bike=="Bike")
-                        html+= logoMap['Authorized Bike'] + val.brand + '.jpg >';
+                        html+= logoMap['Authorized Bike'] + val.brand + '.jpg" >';
                     else
-                        html+= logoMap['Authorized Car'] + val.brand + '.jpg >';
+                        html+= logoMap['Authorized Car'] + val.brand + '.jpg" >';
                 else
-                    html+= logoMap[val.vendor] + '>';
+                    html+= logoMap[val.vendor] + '">';
 
             if(val.vendor=="Authorized")
                 html+= '<div class="vendor-name">' + val.brand + ' Authorized ';

@@ -41,6 +41,34 @@ line-height: 14px;
 .ui-page{
     background: #fff;
 }
+#menuA .ui-header{
+    position: relative;
+}
+#menuA .ui-header img{
+    max-width: 98%;
+    margin-left: 1%;
+
+}
+#menuA .ui-panel-inner{
+    padding: 0px;
+}
+#menuA .ui-header .userdetails{
+    position: absolute;
+    bottom: 4px;
+    left: 8px;
+}
+#menuA .ui-header .userdetails .title-text{
+    color: #fff;
+    text-shadow: none;
+    font-weight: 700;
+    font-size: 16px;
+}
+#menuA .ui-header .userdetails .sub-text{
+    color: #fff;
+    text-shadow: none;
+    font-weight: 300;
+    font-size: 12px;
+}
 
 /* Landing Page Styles - Sanskar*/
 .landing-page {
@@ -239,10 +267,13 @@ line-height: 14px;
     margin-top: 12px;
     white-space: pre-wrap;
     text-shadow: none;
+    text-align: left;
 }
 
 .order-body .parts-div .action-wrapper{
     margin-top:12px;
+    font-weight: 700;
+    line-height: 18px;
 }
 .order-body .parts-div .action-wrapper .action-name::after{
   content:":";
@@ -253,11 +284,46 @@ line-height: 14px;
   font-size: 14px;
   line-height: 18px;
   padding-right: 6px;
+    color:#333;
   /*width: 125px;*/
 }
 .order-body .parts-div .action-wrapper .action-list{
     clear:both;
   /*margin-left:135px;*/
+}
+.order-body .parts-div .show-hide{
+
+}
+.order-body .parts-div.minimized{
+    max-height: 150px;
+    overflow: hidden;
+    position: relative;
+}
+.order-body .parts-div.maximized{
+    position: relative;
+    padding-bottom: 18px;
+}
+.order-body .parts-div.minimized .show-hide::after{
+    color:#002a80;
+    /*float: right;*/
+    content:"show-more";
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    background: rgba(255,255,255,0.5);
+    font-size: 12px;
+    padding: 4px 2px;
+}
+.order-body .parts-div.maximized .show-hide::after{
+    color:#002a80;
+    float: right;
+    content:"show-less";
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    background: rgba(255,255,255,0.5);
+    font-size: 12px;
+    padding: 4px 2px;
 }
 .order-body .parts-div .token-class{
     display: inline-block;
@@ -276,6 +342,11 @@ content:",";
 content:"";
 }
 
+.order-body .parts-notif{
+    font-size: 14px;
+    float: left;
+    text-align: left;
+}
 .order-body .part{
     display: inline-block;
 	font-size: 10px;  background: #4d5b94;
@@ -294,8 +365,8 @@ content:"";
     text-shadow: none;
 display: inline-block;
 font-size: 10px;
-background: #c65169;
-border: 1px solid #c65169;
+background: #4d5b94;
+border: 1px solid #4d5b94;
 border-radius: 12px;
 line-height: 18px;
 padding: 3px 6px;
@@ -571,6 +642,9 @@ line-height: 10px;
 .hlogo{
     padding-left: 5px;
     padding-top: 5px;
+}
+.hlogo img{
+    max-height: 32px;
 }
 /*End - Header Styling - Bhuvan */
 

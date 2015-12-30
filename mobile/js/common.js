@@ -67,6 +67,8 @@ var Commons = {
         'fetch_car_list':'/api/fetch_car_list/',
         'fetch_car_autocomplete':'/api/fetch_car_autocomplete/',
         'add_guest_transaction':'/api/add_guest_transaction/',
+        'logout':'/logout/',
+        'fetch_user_login':'/api/fetch_user_login/'
         //'fetch_Servicing_details':'/api/fetch_servicing_details/',
         //'fetch_Cleaning_details':'/api/fetch_cleaning_details/',
 
