@@ -552,6 +552,8 @@
 
     </div>
 
+</div>
+
     <!-- Don't Delete -- End of fifth (cart) page page -->
 
 
@@ -561,27 +563,45 @@
 
         <!--CG Header-->
         <div data-role="header" class="header-body" data-theme="">
-            <h1>Cart</h1>
+            <h1>Booking</h1>
 
             <a data-role="none" class="hlogo" href="#menuA" style="position: absolute; left: 0; top: 0;"><img
                     src=img/header_logo2.png alt=""/></a>
+            <!--<a href="#" class="ui-btn ui-icon-refresh ui-btn-icon-notext ui-corner-all">No text</a>-->
             <a href="tel:0919953008804"
                class="call-helpline ui-btn ui-corner-all ui-icon-phone ui-btn-icon-notext ui-nodisc-icon">phone</a>
             <!--        <div class="hlogo" ><img src="img/header_logo2.png" data-ajax="false" href="#menuA" class="ui-btn-left" data-theme=a></div>-->
             <!--		<a href="menuA" data-role="button" class="menu-small-btn ui-btn-right">Menu</a>-->
         </div>
         <!--CG Header-->
+        <div data-role="content">
+    <div class="bottom-pane" data-role="tabs">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#fragment-1" class="ui-btn-active">Confirmed</a></li>
+          <li><a href="#fragment-2">Completed</a></li>
+          <li><a href="#fragment-3">Cancelled</a></li>
+        </ul>
+      </div>
+      <div id="fragment-1" class="confirmed-wrapper">
+        <ul  data-role="listview" data-inset="true">
+          </ul>
+      </div>
+      <div id="fragment-2" class="completed-wrapper">
+        <ul  data-role="listview" data-inset="true">
+          </ul>
 
-        <div class="service-selection">
-            <div class="selected-category">
-            </div>
-        </div>
-        <div class="vendor-list">
-            <ul class="vendors" data-role="listview" data-inset="true" data-icon="check">
-            </ul>
-        </div>
+      </div>
+      <div id="fragment-3" class="cancelled-wrapper">
+        <ul  data-role="listview" data-inset="true">
+          </ul>
+
+      </div>
     </div>
-</div>
+
+        </div>
+
+    </div>
 
 <!-- Don't Delete -- End of Booking page -->
 
@@ -1098,6 +1118,9 @@
             <div class="title-text">Hi, <span class="uname"></span></div>
             <div class="sub-text"><span class="email"></span></div>
         </div>
+        <div class="cardetails">
+            <div class="sub-text"><span class="cname"></span></div>
+        </div>
     </div>
     <div data-role="content">
         <ul data-role="listview" data-inset="true">
@@ -1105,7 +1128,7 @@
             <li><a href="#services" data-role="button">Home</a></li>
             <!--<li> <a href="#" data-role="button">Cart</a></li>-->
             <li><a href="#index" data-role="button">Change Car / Bike</a></li>
-            <li><a href="#" data-role="button">Bookings</a></li>
+            <li><a href="#booking" data-role="button">Bookings</a></li>
             <!--<li><a href="#" data-role="button">About Us</a></li>-->
             <!--<li> <a href="#" data-role="button">FAQ</a></li>-->
             <!--<li><a href="#" data-role="button">How it works</a></li>-->

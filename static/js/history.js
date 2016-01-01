@@ -87,7 +87,11 @@ var Global = {
         container.html('');
         console.log(container)
         console.log(Templates.bookingPage.booking)
-        container.json2html(data, Templates.bookingPage.booking, {append:true});
+        if(data.confirmed){
+            container.json2html(data.confirmed, Templates.bookingPage.booking, {append:true});
+        }else{
+            container.json2html(data, Templates.bookingPage.booking, {append:true});
+        }
 //        container.append(json2html.transform(data,Templates.bookingPage.services));
         $.each(data, function(idx, val){
         });

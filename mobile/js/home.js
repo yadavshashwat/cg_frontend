@@ -23,6 +23,16 @@ var Global = {
 				error.insertAfter($(element).parent());
 		}
 	});
+        var carObj = local.load()['clgacarobj'];
+        if(carObj){
+            carObj = JSON.parse(carObj);
+        }
+        if(carObj && carObj.fullname){
+            $('#menuA .cardetails').show();
+            $('#menuA .cardetails .cname').html(carObj.fullname);
+        }else{
+            $('#menuA .cardetails').hide();
+        }
 
 //        $('#submit-button').button('disable');
     },
@@ -174,7 +184,7 @@ var Global = {
             $('#login').find('.logout-container').show();
             $('#login').find('.logout-container').find('.text-box h4').html('You are logged in as <span class="username">'+data.email+'</span>');
 
-            $('#menuA #login-page-btn a').text('Logout');
+            $('#menuA #login-page-btn a').text('Logout').addClass('logout-state');
             $('#menuA .userdetails').show();
             $('#menuA .userdetails .uname').html(data.username);
             $('#menuA .userdetails .email').html(data.email);
@@ -182,15 +192,19 @@ var Global = {
             $('#login').find('.login-container').show();
             $('#login').find('.logout-container').hide();
 
-            $('#menuA #login-page-btn a').text('Sign In / Sign Up');
+            $('#menuA #login-page-btn a').text('Sign In / Sign Up').removeClass('logout-state');
             $('#menuA .userdetails').hide();
 //            $('#menuA .uname').html('').show();
         }
+        Commons.ajaxData('fetch_car_booking', {type:'all'},"get",Global, Global.loadBooking);
     },
     events:function(){
         var _this = this;
         console.log('adding hanlder')
-
+        $('#menuA #login-page-btn').on('click', '.logout-state', function(e){
+            Commons.ajaxData('logout',{},"get",_this,_this.userLoad);
+            return false;
+        });
         $('#login .logout-container #logout-btn').on('click', function(){
             Commons.ajaxData('logout',{},"get",_this,_this.userLoad);
         });
@@ -245,6 +259,13 @@ var Global = {
             var carObjStr = JSON.stringify(Global.carSelected);
             local.clearKey('clgacarobj');
             local.save('clgacarobj', carObjStr);
+            if(car_fullname){
+                $('#menuA .cardetails').show();
+                $('#menuA .cardetails .cname').html(car_fullname);
+            }else{
+                $('#menuA .cardetails').hide();
+            }
+
             window.location.hash = '#services';
             console.log(car_fullname, selected_c_id);
 //            $.mobile.changePage('#services',{'allowSamePageTransition':true});
@@ -353,7 +374,20 @@ var Global = {
 //            Global.serviceSelected['id'] = serviceId;
 //            window.location.hash = '#checkout';
         });
+        $('.booking-body .bottom-pane').on('click', '.cancel-booking-btn', function(e){
+            if(!$(this).hasClass('cancelled')){
+                var elem = $(this);
+                elem.addClass('cancelled')
+                var tran_id = elem.attr('tran_id')
+                var classy = 'Booking';
+                Commons.ajaxData('cancel_booking', {tran_id:tran_id},"get",_this,function(data){
+                    if(data['cancelled_id']){
+                        $('.booking-body .bottom-pane .confirmed-wrapper').find('.cancel-booking-btn[tran_id="'+data['cancelled_id']+'"]').text('Booking Cancelled');
+                    }
+                })
+            }
 
+        });
         $('.emergency-body .list-services').on('click', 'a', function(e){
             var serviceId = $(this).text();
             serviceId = serviceId.toLowerCase().split(' ').join('-');
@@ -661,6 +695,10 @@ var Global = {
                 case "#checkout":
                     Global.checkoutPageInit();
                     break;
+                case "#booking":
+                    console.log('booking page navifagte')
+                    Global.bookingPageInit();
+                    break;
                 default:
                     break;
             }
@@ -679,11 +717,11 @@ $( document ).delegate("#denting", "pageinit", function() {
 $( document ).delegate("#checkout", "pageinit", function() {
     Global.servicesPageInit();
 });
-$( document ).delegate("#cart", "pageinit", function() {
-    Global.checkoutPageInit();
-});
 $( document ).delegate("#booking", "pageinit", function() {
     Global.bookingPageInit();
+});
+$( document ).delegate("#cart", "pageinit", function() {
+    Global.checkoutPageInit();
 });
 $( document ).delegate("#additional", "pageinit", function() {
     Global.additionalPageInit();
@@ -1186,10 +1224,58 @@ $( document ).delegate("#order", "pagebeforeload", function() {
     checkoutPageInit : function(){
 
     },
-    cartPageInit : function(){
-
-    },
     bookingPageInit : function(){
+        Commons.ajaxData('fetch_car_booking', {type:'all'},"get",Global, Global.loadBooking);
+    },
+    loadBooking : function(data){
+        $.each(["completed","confirmed","cancelled"],function(idx,cat){
+            $('#booking').find('.'+cat+'-wrapper ul').html('');
+            var htmlEach = '';
+            var arry = data[cat];
+            $.each(arry,function(ix,booking){
+                htmlEach += '<li class="top-row">';
+
+            htmlEach += '<div class="wrapper header-wrapper">' +
+                            '<div class="booking id booking_id">#'+booking['booking_id']+'</div>' +
+                            '<div class="booking car booking_car">'+booking['cust_carname']+'</div>' +
+                            '<div class="booking date booking_date">'+booking['date_booking']+'('+booking['time_booking']+')'+'</div>' +
+                            '<div class="booking list booking_list">' +
+                            '<ul class="service-components">';
+                    $.each(booking.service_items,function(i,elem){
+                        if(elem.service == 'servicing'){
+                            if(elem.served_data){
+                            htmlEach += '<li class="indiv_booking">'+elem.served_data.dealer_cat+'  <i class="fa fa-caret-right"></i>  '
+                                if(elem.served_data.type_service && elem.served_data.type_service=="Not Defined"){
+                                    htmlEach+="Minor Servicing </li>"
+                                }else if(elem.served_data.type_service){
+                                    htmlEach+= elem.served_data.type_service + '</li>'
+                                }else{
+                                    htmlEach += elem.served_data.odometer+'km / '+elem.served_data.year
+                                }
+                            }
+                          } else if (elem.service == 'emergency' || elem.service == 'repair') {
+                            htmlEach += '<li class="indiv_booking">' + elem.service.toTitleCase() + '</li>'
+                        }else{
+                        htmlEach += '<li class="indiv_booking">'+ elem.served_data.vendor +'  <i class="fa fa-caret-right"></i>  '+ elem.served_data.service +' ( '+elem.served_data.category+' ) </li>'
+                        }
+                    });
+//                                '<li class="indiv_booking">Authorized  <i class="fa fa-caret-right"></i>  Minor Servicing</li>' +
+            htmlEach += '</ul>' +
+                            '</div>' +
+                        '</div>';
+                if(cat == 'confirmed'){
+             htmlEach += '<div class="wrapper detail-wrapper">' +
+                            '<div id="cancel-booking" tran_id="'+booking['tran_id']+'" class="cancel-booking-btn">' +
+                                'Cancel Booking' +
+                            '</div>' +
+                        '</div>';
+                }
+                htmlEach +=   '</li>';
+            });
+            $('#booking').find('.'+cat+'-wrapper ul').html(htmlEach);
+        });
+    },
+    cartPageInit : function(){
 
     },
     additionalPageInit : function(){
