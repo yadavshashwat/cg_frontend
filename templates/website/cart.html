@@ -121,11 +121,14 @@
                         <div class="dealer-logo-wrapper">
 
                             <!-- -->
-
-
-
                             <!-- -->
+                            {% if val.service == "servicing" %}
+
+                            <img class="dealer-logo" src="" alt="{{val.dealer}}" data-name="{{val.car.make}}" data-flag="{{val.car_bike}}">
+                            {% else %}
                             <img class="dealer-logo" src="" alt="{{val.dealer}}" data-name="{{val.car.make}}" >
+                            {% endif %}
+
                             <div class="aligner"></div>
                         </div>
                     </td>

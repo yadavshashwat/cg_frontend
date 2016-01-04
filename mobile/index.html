@@ -629,7 +629,17 @@
                 Facebook</a>
             <a class="ui-btn" id="google"><img src="img/login/google.png" class="ui-li-icon">Login with Google</a>
             <h4 class="or"> OR </h4>
+            <div></div>
 
+            <div class="text-box">
+                <input type="text" placeholder="Contact No." data-clear-btn="true" id="phone" value="">
+                <input placeholder="Name" data-clear-btn="true" id="name" value="">
+                <input type="password" placeholder="One Time Password" data-clear-btn="true" id="otp" value="">
+            </div>
+            <div class="error-msg"></div>
+            <a href="#" class="ui-btn ui-icon-delete" id="otp-btn">Send OTP</a>
+            <a href="#" class="ui-btn ui-icon-delete" id="login-btn" style="display: none;">Login</a>
+<!--
             <div class="text-box">
                 <input placeholder="Name" data-clear-btn="true" id="name" value="">
                 <input type="email" placeholder="Email Address" data-clear-btn="true" id="email" value="">
@@ -642,6 +652,7 @@
 
             <h4 class="signup-link" id="signup-link">Not an existing user? <a>Sign Up</a> for free.</h4>
             <h4 class="login-link" id="login-link">I want to <a>login</a> with my existing account.</h4>
+-->
         </div>
         <div class="logout-container" style="display: none;">
             <div class="text-box">
@@ -958,8 +969,6 @@
                 src=img/header_logo2.png alt=""/></a>
         <a href="tel:0919953008804"
            class="call-helpline ui-btn ui-corner-all ui-icon-phone ui-btn-icon-notext ui-nodisc-icon">phone</a>
-        <!--        <div class="hlogo" ><img src="img/header_logo2.png" data-ajax="false" href="#menuA" class="ui-btn-left" data-theme=a></div>-->
-        <!--		<a href="menuA" data-role="button" class="menu-small-btn ui-btn-right">Menu</a>-->
     </div>
 
     <!--CG Header-->
@@ -980,16 +989,33 @@
                 <label for="checkbox-v-2d">Wheel Alignment</label>
                 <input type="checkbox" name="checkbox-v-2c" id="checkbox-v-2e">
                 <label for="checkbox-v-2e">Injector Cleaning</label>
-                <input type="checkbox" name="checkbox-v-2f" id="checkbox-v2f">
+                <input type="checkbox" name="checkbox-v-2f" id="checkbox-v-2f">
                 <label for="checkbox-v-2f">AC Servicing</label>
                 <input type="checkbox" name="checkbox-v-2g" id="checkbox-v-2g">
                 <label for="checkbox-v-2g">Brake Repair</label>
             </fieldset>
             <fieldset>
                 <label for="add-queries">Additional Queries</label>
-                <textarea name="add-queries" id="add-queries">
-                I'm a basic textarea. If this is pre-populated with content, the height will be automatically adjusted to fit without needing to scroll. That is a pretty handy usability feature.
+                <textarea name="add-queries" id="add-queries" placeholder="Additional Details">
+
                 </textarea>
+
+            </fieldset>
+            <br>
+            <fieldset data-role="controlgroup" class="authorized-additional">
+                <input type="checkbox" name="preferred-center" id="preferred-center" class="custom" data-mini="true"/>
+                <label for="preferred-center">I have a preferred authorized service centre</label>
+                <div class="dealer-select" style="display:  none;">
+                    <select name="select-custom-23" id="dl-city-dropdown" data-native-menu="false" disabled>
+                        <option value="choose-one" data-placeholder="true">Select City</option>
+                    </select>
+                    <select name="select-custom-23" id="dl-region-dropdown" data-native-menu="false" disabled>
+                        <option value="choose-one" data-placeholder="true">Select Region</option>
+                    </select>
+                    <select name="select-custom-23" id="dl-detail-dropdown" data-native-menu="false" disabled>
+                        <option value="choose-one" data-placeholder="true">Select Dealer</option>
+                    </select>
+                </div>
 
             </fieldset>
             <br>
@@ -1020,8 +1046,7 @@
         <form action="" method="post" id="diagnosticsCheckout">
             <fieldset>
                 <label for="diagnostics-queries">Tell us about the issue</label>
-                <textarea name="diagnostics-queries" id="diagnostics-queries">
-                I'm a basic textarea. If this is pre-populated with content, the height will be automatically adjusted to fit without needing to scroll. That is a pretty handy usability feature.
+                <textarea name="diagnostics-queries" id="diagnostics-queries" placeholder="Eg.: Engine is making noise">
                 </textarea>
 
             </fieldset>

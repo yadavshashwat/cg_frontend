@@ -197,6 +197,28 @@
     width: 100%;
 }
 
+.login .login-btn, .otp-btn, .btn-login, .registerBox .btn-register{
+    background-color: #00BBFF;
+    border-color: #00BBFF;
+    border-width: 0;
+    color: #FFFFFF;
+    display: block;
+    margin: 0 auto;
+    padding: 15px 50px;
+    text-transform: uppercase;
+    width: 100%;
+}
+.login .login-btn:hover, .otp-btn:hover, .btn-login:hover, .registerBox .btn-register:hover{
+    background-color: #00A4E4;
+    color: #FFFFFF;
+}
+.login .error-msg{
+    margin-bottom: 6px;
+    line-height: 24px;
+    color: red;
+    font-size: 14px;
+}
+
 
 @media (max-width:400px){
     .login .modal-dialog{

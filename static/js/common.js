@@ -61,7 +61,9 @@ var Commons = {
         'fetch_car_list':'/api/fetch_car_list/',
         'apply_coupon':'/api/apply_coupon/',
         'fetch_car_list':'/api/fetch_car_list/',
-        'send_contact':'/api/send_contact/'
+        'send_contact':'/api/send_contact/',
+        'send_otp':'/api/send_otp/',
+        'create_otp_user':'/api/create_otp_user/'
     },
     getOrigin: function(){
         var origin = window.location.origin;
@@ -171,6 +173,65 @@ var Commons = {
         });
         $('body').on('click', '.modal-container .close-btn', function(e){
             $(this).closest('.modal-container').remove();
+        });
+        $('body').on('click', '.modal-container .otp-btn', function(e){
+
+            var numb = $(this).closest('.loginBox').find('input#phone').val();
+            var checkThis = false;
+            if(numb && numb.length == 10){
+                var intNum = parseInt(numb);
+                if(!isNaN(intNum)){
+                    checkThis = true;
+                }
+            }
+            if(checkThis){
+                $(this).closest('.loginBox').find('.error-msg').hide().text('');
+                $(this).closest('.loginBox').find('input#phone').attr('disabled',true);
+                Commons.ajaxData('send_otp', {phone:numb},"get",Commons,function(data){
+                    $('#loginModal').find('.login-btn').show();
+                    $('#loginModal').find('.otp-btn').hide();
+                    $('#loginModal').find('#otp').show();
+                    if(data.new_user){
+                        $('#loginModal').find('#name').attr("placeholder","Name").val('').show();
+                    }else if(data.username){
+                        $('#loginModal').find('#name').attr("placeholder",data.username).val(data.username).show();
+                    }else{
+                        $('#loginModal').find('#name').attr("placeholder","Name").val('').show();
+                    }
+                })
+            }else{
+                Commons.shakeModal()
+                $(this).closest('.loginBox').find('.error-msg').show().text('Invalid Number');
+            }
+        });
+        $('body').on('click', '.modal-container .otp-login', function(e){
+            var numb = $(this).closest('.loginBox').find('input#phone').val();
+            var name = $(this).closest('.loginBox').find('input#name').val();
+            var otp = $(this).closest('.loginBox').find('input#otp').val();
+            if(otp && String(otp).length == 6){
+                 $(this).closest('.loginBox').find('.error-msg').hide().text('');
+                Commons.ajaxData('create_otp_user', {phone:numb,otp:otp,name:name},"get",Commons,function(data){
+                    if(data.auth){
+                        if(window.location.pathname.indexOf('loginPage')>=0){
+                            window.location.pathname = '/order/';
+                        }else{
+                            window.location.reload();
+                        }
+                    }else if(data.msg){
+                        Commons.shakeModal()
+
+                        $('.login-modal-container').find('.error-msg').show().text(data.msg);
+                    }else{
+                        Commons.shakeModal()
+
+                        $('.login-modal-container').find('.error-msg').show().text('Error loggin in.');
+                    }
+                });
+            }else{
+                Commons.shakeModal()
+                $(this).closest('.loginBox').find('.error-msg').show().text('Invalid OTP');
+            }
+
         });
         $('#sign-up-in-home').on('click', function(e){
 //            console.log($('.modal-container'))

@@ -14,7 +14,7 @@
 
 </head>
 <body>
-<div class="modal fade login in" id="loginModal" aria-hidden="false" style="display: block;">
+<div class="modal fade login in modal-container" id="loginModal" aria-hidden="false" style="display: block;">
     <div class="modal-dialog login animated fix_modaldialog">
         <div class="modal-content">
 
@@ -54,6 +54,22 @@
 
                         </div>
 
+                        <div class="division">
+                            <div class="line l"></div>
+                            <span>or</span>
+                            <div class="line r"></div>
+                        </div>
+
+
+                        <div class="form loginBox">
+                                <input id="phone" class="form-control" type="text" placeholder="Phone" name="phone">
+                                <input id="name" class="form-control" type="text" placeholder="Name" name="name" style="display: none;">
+                                <input id="otp" class="form-control" type="password" placeholder="One Time Password" name="otp" style="display: none;">
+                            <div class="error-msg" style="display: none;"></div>
+                                <input class="btn btn-default otp-btn" type="submit" value="Send OTP">
+                                <input class="btn btn-default otp-login login-btn" type="submit" value="Login" style="display: none;">
+                        </div>
+
                     </div>
                    {% endif %}
 
@@ -79,5 +95,10 @@
         </div>
     </div>
 </div>
+                                               <script type="text/javascript">
+            document.onreadystatechange = function () {
+                Commons.eventHandlers();
+            }
+                                               </script>
 </body>
 </html>

@@ -530,6 +530,28 @@ white-space: pre-wrap;
     display:none;
 }
 
+/*
+new stuff
+*/
+.login-page #otp-btn{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.login-page #login-btn{
+    display: block;
+}
+.login-page .text-box #name,#otp {
+    display: block;
+}
+.login-page .error-msg {
+    display: none;
+}
+
+
+/*
+new stuff
+*/
+
 
 /*for services selection page (second page) - Bhuvan*/
 

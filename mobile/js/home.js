@@ -182,7 +182,11 @@ var Global = {
         if(data.auth){
             $('#login').find('.login-container').hide();
             $('#login').find('.logout-container').show();
-            $('#login').find('.logout-container').find('.text-box h4').html('You are logged in as <span class="username">'+data.email+'</span>');
+            if(data.email){
+                $('#login').find('.logout-container').find('.text-box h4').html('You are logged in as <span class="username">'+data.email+'</span>');
+            }else{
+                $('#login').find('.logout-container').find('.text-box h4').html('You are logged in as <span class="username">'+data.username+'</span>');
+            }
 
             $('#menuA #login-page-btn a').text('Logout').addClass('logout-state');
             $('#menuA .userdetails').show();
@@ -190,6 +194,13 @@ var Global = {
             $('#menuA .userdetails .email').html(data.email);
         }else{
             $('#login').find('.login-container').show();
+            $('#login').find('.login-container').find('#phone').removeAttr('disabled').val('').show().parent().not('.text-box').show();
+            $('#login').find('.login-container').find('#name').val('').hide().parent().not('.text-box').hide();
+            $('#login').find('.login-container').find('#otp').val('').hide().parent().not('.text-box').hide();
+            $('#login').find('.login-container').find('#otp-btn').show();
+            $('#login').find('.login-container').find('#login-btn').hide();
+
+
             $('#login').find('.logout-container').hide();
 
             $('#menuA #login-page-btn a').text('Sign In / Sign Up').removeClass('logout-state');
@@ -214,7 +225,63 @@ var Global = {
             var cb_flag = $('.cb-select-wrapper input:checked').val();
             Commons.ajaxData('fetch_car_list', {m_id:brand,cb_id:cb_flag},"get",_this,_this.loadCarMake);
         });
-        
+        $('#preferred-center').on('change', function(e){
+            var val = $(this).prop('checked');
+            console.log(val)
+            if(val){
+                $(this).closest('fieldset').find('.dealer-select').show();
+                if(Global.dealerAddressObj && Global.dealerAddressObj.activeRegionGrouped){
+                    var container = $('#additional .authorized-additional').find('#dl-city-dropdown');
+                    var html = '<option value="choose-one" data-placeholder="true">Select Model</option>';
+                    $.each(Global.dealerAddressObj.activeRegionGrouped, function(city, cityObj){
+                        html += '<option data-id="'+city+'" value="'+city+'">'+city+'</option>';
+                    });
+                    container.html(html);
+                    container.selectmenu('enable');
+                    container.selectmenu('refresh');
+                }
+            }else{
+                $(this).closest('fieldset').find('.dealer-select').hide();
+            }
+        });
+        $('#dl-city-dropdown').on('change', function(e){
+            var city = $(this).val();
+            if(city && Global.dealerAddressObj && Global.dealerAddressObj.activeRegionGrouped && Global.dealerAddressObj.activeRegionGrouped[city]){
+                var container = $('#additional .authorized-additional').find('#dl-region-dropdown');
+                var html = '<option value="choose-one" data-placeholder="true">Select Region</option>';
+                $.each(Global.dealerAddressObj.activeRegionGrouped[city], function(region, regionObj){
+                    console.log(region)
+                    html += '<option data-id="'+city+'" value="'+region+'">'+region+'</option>';
+                });
+                container.html(html);
+                container.selectmenu('enable');
+                container.selectmenu('refresh');
+            }
+        });
+
+        $('#dl-region-dropdown').on('change', function(e){
+            var region = $(this).val();
+            var city = $(this).find('option:selected').attr('data-id');
+            console.log(city, region);
+            if(region && Global.dealerAddressObj && Global.dealerAddressObj.activeRegionGrouped && Global.dealerAddressObj.activeRegionGrouped[city] && Global.dealerAddressObj.activeRegionGrouped[city][region]){
+                var container = $('#additional .authorized-additional').find('#dl-detail-dropdown');
+                var html = '<option value="choose-one" data-placeholder="true">Select Dealar</option>';
+                $.each(Global.dealerAddressObj.activeRegionGrouped[city][region], function(idx, dealerObj){
+                    html += '<option data-name="'+dealerObj['name']+'" value="'+dealerObj['address']+'">'+dealerObj['name']+' ('+dealerObj['locality']+')</option>';
+                });
+                container.html(html);
+                container.selectmenu('enable');
+                container.selectmenu('refresh');
+            }
+        });
+
+        $('#dl-detail-dropdown').on('change', function(e){
+            var val = $(this).val();
+            if(val){
+                $('#additional').find('input[type="submit"]').button('enable');
+            }
+        });
+
         $('.cb-select-wrapper input').on('change', function(e){
             console.log($(this).is(":checked"))
             if($(this).is(":checked")){
@@ -231,6 +298,8 @@ var Global = {
                 container.selectmenu('enable');
                 container.selectmenu('refresh');
                 $('#make-dropdown').selectmenu('disable');
+
+            }else{
 
             }
 
@@ -396,13 +465,24 @@ var Global = {
         });
         $('#additionalCheckout').on('submit', function(e){
             var additionalInfo = {};
-            var inps = $(this).find('input:checked');
+            var inps = $(this).find('fieldset').not('.authorized-additional').find('input:checked');
             $.each(inps, function(i,inp){
                additionalInfo[$(inp).parent().find('label').text()] = true;
             });
             if($(this).find('#add-queries').val().length){
                 additionalInfo['Custom Requests'] = $(this).find('#add-queries').val();
             }
+            if(Global.serviceSelected && Global.serviceSelected.service.toLowerCase() == 'servicing'){
+                if(Global.vendorSelected && Global.vendorSelected.vendor.toLowerCase() == 'authorized'){
+                    var name = $('#additional').find('#dl-detail-dropdown option:selected').attr('data-name');
+                    var address = $('#additional').find('#dl-detail-dropdown').val();
+                    additionalInfo['Selected Authorized'] = {
+                        name: name,
+                        address: address
+                    };
+                }
+            }
+
             Global.serviceSelected['additional'] = additionalInfo;
             window.location.hash = '#checkout';
             return false;
@@ -634,6 +714,48 @@ var Global = {
         });
         */
 
+        //
+    $("#otp-btn").click(function(){
+        var numb = $(this).closest('.login-container').find('input#phone').val();
+        var checkThis = false;
+        if(numb && numb.length == 10){
+            var intNum = parseInt(numb);
+            if(!isNaN(intNum)){
+                checkThis = true;
+            }
+        }
+        if(checkThis){
+            $(this).closest('.login-container').find('.error-msg').hide().text('');
+            $(this).closest('.login-container').find('input#phone').attr('disabled',true);
+            Commons.ajaxData('send_otp', {phone:numb},"get",Global,function(data){
+                $('#login .login-container').find('#login-btn').show();
+                $('#login .login-container').find('#otp-btn').hide();
+                $('#login .login-container').find('#otp').show().parent().not('.text-box').show();
+                if(data.new_user){
+                    $('#login .login-container').find('#name').attr("placeholder","Name").val('').show().parent().not('.text-box').show();
+                }else if(data.username){
+                    $('#login .login-container').find('#name').attr("placeholder",data.username).val(data.username).show().parent().not('.text-box').show();
+                }else{
+                    $('#login .login-container').find('#name').attr("placeholder","Name").val('').show().parent().not('.text-box').show();
+                }
+            })
+        }else{
+            $(this).closest('.login-container').find('.error-msg').show().text('Invalid Number');
+        }
+    });
+    $("#login-btn").click(function(){
+        var numb = $(this).closest('.login-container').find('input#phone').val();
+        var name = $(this).closest('.login-container').find('input#name').val();
+        var otp = $(this).closest('.login-container').find('input#otp').val();
+        if(otp && String(otp).length == 6){
+             $(this).closest('.login-container').find('.error-msg').hide().text('');
+            Commons.ajaxData('create_otp_user', {phone:numb,otp:otp,name:name},"get",Global,Global.userLoad);
+        }else{
+            $(this).closest('.login-container').find('.error-msg').show().text('Invalid OTP');
+        }
+    });
+
+
 //    Signup link show script
     $("#signup-link").click(function(){
     $("#login-btn").hide();
@@ -655,9 +777,9 @@ var Global = {
     });        
 
     $(window).on( "navigate", function( event, data ) {
-          console.log( data.state.info )
-          console.log( data.state.direction )
-          console.log( data.state.url )
+//          console.log( data.state.info )
+//          console.log( data.state.direction )
+//          console.log( data.state.url )
           console.log( data.state.hash )
             switch(data.state.hash){
                 case "#/":
@@ -673,7 +795,6 @@ var Global = {
                     Global.additionalPageInit();
                     break;
                 case "#order":
-                    console.log('it goes here');
 //                    console.log('p')
 //                    console.log("_this.load"+$('#order-page-service').text())
 
@@ -681,7 +802,6 @@ var Global = {
                         //Commons.ajaxData('fetch_car_cleaning', {r_id:"dmFydW5ndWxhdGlsaWtlc2dhbG91dGlrZWJhYg==",c_id:"56097f3c5e1b2d72585f54d4"},"get",_this, _this.loadCleaning)
                     break;
                 case "#vendor":
-                    console.log('vendor load')
 //                    if(!(Global.carSelected && Global.carSelected.id && Global.serviceSelected)){
 //                        console.log('pageinit')
 //                        window.location.hash = '#index';
@@ -739,7 +859,6 @@ $( document ).delegate("#order", "pagebeforeload", function() {
 
     },
     expandCollapse:function(divvy){
-        console.log($(divvy).height());
         $(divvy).removeClass('minimized');
         if($(divvy).height() > 150){
             $(divvy).addClass('minimized min-max-toggle');
@@ -961,7 +1080,12 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         var container2 = $('.vendor-list .vendors');
         container2.html('');
         var html = '';
+        Global.dealerAddressObj = {};
         $.each(data, function(idx, val){
+            if(val.vendor == 'Authorized'){
+                Global.dealerAddressObj['raw'] = val.dealer_details
+            }
+
             html += '<li><a data-id="'+val.id+'" data-name="'+val.vendor+'" class="servicing-item-detail"><img src="';
                 if(val.vendor=="Authorized")
                     if(val.car_bike=="Bike")
@@ -991,6 +1115,25 @@ $( document ).delegate("#order", "pagebeforeload", function() {
             html += '</div></div>';
 
         });
+        if(Global.dealerAddressObj['raw']){
+            Global.dealerAddressObj['activeRegionGrouped'] = {};
+            $.each(Global.dealerAddressObj['raw'], function(i,v){
+                var city = v['city'];
+                var name = v['name'];
+                var region = v['region'];
+                if(city){
+                    if(!Global.dealerAddressObj['activeRegionGrouped'][city]){
+                        Global.dealerAddressObj['activeRegionGrouped'][city] = {};
+                    }
+                    if(region){
+                        if(!Global.dealerAddressObj['activeRegionGrouped'][city][region]){
+                            Global.dealerAddressObj['activeRegionGrouped'][city][region] = [];
+                        }
+                        Global.dealerAddressObj['activeRegionGrouped'][city][region].push({'address':v['address'],'name':v['name'],'locality':v['locality']});
+                    }
+                }
+            });
+        }
         container2.html(html);
         container2.listview().listview("refresh")
     },
@@ -1279,7 +1422,18 @@ $( document ).delegate("#order", "pagebeforeload", function() {
 
     },
     additionalPageInit : function(){
+        $('#additional').find('input[type="submit"]').button();
+        if(Global.serviceSelected && Global.serviceSelected.service.toLowerCase() == 'servicing'){
+            if(Global.vendorSelected && Global.vendorSelected.vendor.toLowerCase() == 'authorized'){
+                $('#additional').find('.authorized-additional').show();
+                $('#additional').find('input[type="submit"]').button('disable');
 
+//                $('#additional').find('.dealer-select').show();
+                return;
+            }
+        }
+        $('#additional').find('input[type="submit"]').button('enable');
+        $('#additional').find('.authorized-additional').hide();
     },
     emergencyPageInit : function(){
 
@@ -1313,11 +1467,9 @@ $(".menu-toggle-btn").click(function() {
 });
 
 document.onreadystatechange = function () {
-    console.log('onreadystatechange')
       Global.init();
 }
 document.onload = function(){
-    console.log('p')
      if(FB){
         FB.getLoginStatus(function(response) {console.log(response);});
     }

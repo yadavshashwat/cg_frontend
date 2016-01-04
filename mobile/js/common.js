@@ -17,8 +17,6 @@ var Commons = {
             callType = type
         }
 
-        console.log(name)
-        console.log(url)
         if(params){
             if(params instanceof Object){
             params['loc'] = 'mobile'
@@ -26,7 +24,6 @@ var Commons = {
         }else{
             params = {'loc':'mobile'}
         }
-        console.log(params)
         if(name){
             $.ajax({
                 url:url,
@@ -68,7 +65,9 @@ var Commons = {
         'fetch_car_autocomplete':'/api/fetch_car_autocomplete/',
         'add_guest_transaction':'/api/add_guest_transaction/',
         'logout':'/logout/',
-        'fetch_user_login':'/api/fetch_user_login/'
+        'fetch_user_login':'/api/fetch_user_login/',
+        'send_otp':'/api/send_otp/',
+        'create_otp_user':'/api/create_otp_user/'
         //'fetch_Servicing_details':'/api/fetch_servicing_details/',
         //'fetch_Cleaning_details':'/api/fetch_cleaning_details/',
 

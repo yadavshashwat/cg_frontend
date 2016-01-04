@@ -40,13 +40,23 @@
                             </div>
 
                         </div>
-                        <div class="division none-i">
+                        <div class="division">
                             <div class="line l"></div>
                             <span>or</span>
 
                             <div class="line r"></div>
                         </div>
                         <div class="error"></div>
+
+                        <div class="form loginBox">
+                                <input id="phone" class="form-control" type="text" placeholder="Phone" name="phone">
+                                <input id="name" class="form-control" type="text" placeholder="Name" name="name" style="display: none;">
+                                <input id="otp" class="form-control" type="password" placeholder="One Time Password" name="otp" style="display: none;">
+                            <div class="error-msg" style="display: none;"></div>
+                                <input class="btn btn-default otp-btn" type="submit" value="Send OTP">
+                                <input class="btn btn-default otp-login login-btn" type="submit" value="Login" style="display: none;">
+                        </div>
+
                         <div class="form loginBox none-i">
                             <form method="post" action="/auth/" data-remote="true" accept-charset="UTF-8"> {% csrf_token %}
                                 <input id="name" class="form-control" type="text" placeholder="Name" name="name">
