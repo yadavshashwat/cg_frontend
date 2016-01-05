@@ -78,9 +78,11 @@ var zyxCart = {
         $.each($('img.dealer-logo'), function(i, img){
             var dealer = $(img).attr('alt');
             var carMake = $(img).attr('data-name');
-            console.log(dealer)
+            var car_bike = $(img).attr('data-flag');
+            if(!car_bike)
+                car_bike = 'Car';
             if(dealer == 'Authorized'){
-                $(img).attr('src', logoMap['Authorized']+ $.trim(carMake)+'.jpg');
+                $(img).attr('src', logoMap['Authorized '+car_bike]+ $.trim(carMake)+'.jpg');
             }else{
                 $(img).attr('src', logoMap[dealer]);
 //                $(img).attr('src', )

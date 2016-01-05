@@ -516,12 +516,13 @@ var Global = {
         var _this = this;
         var modalCarContent = '<form class="search-set-holder" id="popup-search-set-holder">'+
                 '<div class="citybox-holder" id="popup-citybox-holder">'+
-                    '<input type="text" id="city-search-box" class="city-search-box" readonly="true" value="delhi">'+
+                    '<input type="text" id="city-search-box" class="city-search-box" readonly="true" value="gurgaon">'+
                     '<i class="icon fa fa-caret-down"></i>'+
                     '<label for="city-search-box" class="city-drop-box" style="display: none;">'+
                         '<ul>'+
-                            '<li>delhi</li>'+
                             '<li>gurgaon</li>'+
+                            '<li class="disabled">noida</li>'+
+                            '<li class="disabled">delhi</li>'+
                         '</ul>'+
                     '</label>'+
                 '</div>'+
@@ -1043,7 +1044,7 @@ var Global = {
         var container = $("<div></div>").addClass('modal-container');
         var overlay = $("<div></div>").addClass('modal-overlay');
         var content = $("<div></div>").addClass('modal-content').append('<i class="fa fa-times-circle"></i>');
-        scrn_ht = $(".centered-content").height()+75
+//        scrn_ht = $(".centered-content").height()+75
         container.css({
             height : scrn_ht,
             width : scrn_wd
