@@ -57,7 +57,7 @@
                 <div class="select-wrapper"><i class="fa fa-car"></i> / <i class="fa fa-motorcycle"></i>
                     <select  id="car-select-box">
                      {% for car in carList %}
-                     <option data-name="{{ car.make }} {{ car.name}}" data-id="{{ car.id }}">{{ car.make }} {{ car.name }}</option>
+                     <option data-name="{{ car.make }} {{ car.name}}" data-id="{{ car.id }}" data-type="{{ car.car_bike }}">{{ car.make }} {{ car.name }}</option>
                      {% endfor %}
                  </select>
                     <div class="emergency-msg">Please checkout/delete emergency cart items to proceed to standard cart </div>
@@ -124,7 +124,7 @@
                             <!-- -->
                             {% if val.service == "servicing" %}
 
-                            <img class="dealer-logo" src="" alt="{{val.dealer}}" data-name="{{val.car.make}}" data-flag="{{val.car_bike}}">
+                            <img class="dealer-logo" src="" alt="{{val.dealer}}" data-name="{{val.car.make}}" data-flag="{{val.car.car_bike}}">
                             {% else %}
                             <img class="dealer-logo" src="" alt="{{val.dealer}}" data-name="{{val.car.make}}" >
                             {% endif %}
