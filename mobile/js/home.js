@@ -12,6 +12,7 @@ var Global = {
         _this.initGoogleHandlers();
         Commons.ajaxData('fetch_user_login',{},"get",_this,_this.userLoad);
 
+j
         $("#checkoutForm").validate({
             rules: {
                     name: {
@@ -192,6 +193,12 @@ var Global = {
             $('#menuA .userdetails').show();
             $('#menuA .userdetails .uname').html(data.username);
             $('#menuA .userdetails .email').html(data.email);
+            Global.userDetails = {
+                name:data.username,
+                phonenumber:data.contact,
+                email:data.email
+            };
+
         }else{
             $('#login').find('.login-container').show();
             $('#login').find('.login-container').find('#phone').removeAttr('disabled').val('').show().parent().not('.text-box').show();
@@ -205,6 +212,7 @@ var Global = {
 
             $('#menuA #login-page-btn a').text('Sign In / Sign Up').removeClass('logout-state');
             $('#menuA .userdetails').hide();
+            Global,userDetails = null;
 //            $('#menuA .uname').html('').show();
         }
         Commons.ajaxData('fetch_car_booking', {type:'all'},"get",Global, Global.loadBooking);
@@ -230,18 +238,25 @@ var Global = {
             console.log(val)
             if(val){
                 $(this).closest('fieldset').find('.dealer-select').show();
+                $('#additional').find('input[type="submit"]').button('disable');
                 if(Global.dealerAddressObj && Global.dealerAddressObj.activeRegionGrouped){
                     var container = $('#additional .authorized-additional').find('#dl-city-dropdown');
-                    var html = '<option value="choose-one" data-placeholder="true">Select Model</option>';
-                    $.each(Global.dealerAddressObj.activeRegionGrouped, function(city, cityObj){
-                        html += '<option data-id="'+city+'" value="'+city+'">'+city+'</option>';
-                    });
+                    var html = '<option value="choose-one" data-placeholder="true">Select City</option>';
+//                    $.each(Global.dealerAddressObj.activeRegionGrouped, function(city, cityObj){
+//
+//                        html += '<option data-id="'+city+'" value="'+city+'">'+city+'</option>';
+//                    });
+                        html += '<option data-id="Gurgaon" value="Gurgaon">Gurgaon</option>';
+
                     container.html(html);
                     container.selectmenu('enable');
                     container.selectmenu('refresh');
+                    $('#additional .authorized-additional').find('#dl-region-dropdown').html('<option value="choose-one" data-placeholder="true">Select Region</option>').selectmenu('disable');
+                    $('#additional .authorized-additional').find('#dl-detail-dropdown').html('<option value="choose-one" data-placeholder="true">Select Dealer</option>').selectmenu('disable');
                 }
             }else{
                 $(this).closest('fieldset').find('.dealer-select').hide();
+                $('#additional').find('input[type="submit"]').button('enable');
             }
         });
         $('#dl-city-dropdown').on('change', function(e){
@@ -256,6 +271,7 @@ var Global = {
                 container.html(html);
                 container.selectmenu('enable');
                 container.selectmenu('refresh');
+                $('#additional .authorized-additional').find('#dl-detail-dropdown').html('<option value="choose-one" data-placeholder="true">Select Dealer</option>').selectmenu('disable');
             }
         });
 
@@ -265,7 +281,7 @@ var Global = {
             console.log(city, region);
             if(region && Global.dealerAddressObj && Global.dealerAddressObj.activeRegionGrouped && Global.dealerAddressObj.activeRegionGrouped[city] && Global.dealerAddressObj.activeRegionGrouped[city][region]){
                 var container = $('#additional .authorized-additional').find('#dl-detail-dropdown');
-                var html = '<option value="choose-one" data-placeholder="true">Select Dealar</option>';
+                var html = '<option value="choose-one" data-placeholder="true">Select Dealer</option>';
                 $.each(Global.dealerAddressObj.activeRegionGrouped[city][region], function(idx, dealerObj){
                     html += '<option data-name="'+dealerObj['name']+'" value="'+dealerObj['address']+'">'+dealerObj['name']+' ('+dealerObj['locality']+')</option>';
                 });
@@ -312,11 +328,13 @@ var Global = {
         });
         
         $('#submit-button').on('click', function(){
+            var car_bike = $('#index input[name="cb-select"]:checked').val();
             var car_model = $('#make-dropdown option:selected').text();
             var car_brand = $('#brand-dropdown option:selected').text();
             var car_fullname = [car_brand, car_model].join(' ');
             var selected_c_id = $('#make-dropdown option:selected').attr('data-id');
             Global.carSelected = {
+                'car_bike':car_bike,
                 'model':car_model,
                 'brand':car_brand,
                 'fullname':car_fullname,
@@ -465,7 +483,11 @@ var Global = {
         });
         $('#additionalCheckout').on('submit', function(e){
             var additionalInfo = {};
-            var inps = $(this).find('fieldset').not('.authorized-additional').find('input:checked');
+            var car_bike = Global.carSelected.car_bike;
+            if(!car_bike)
+                car_bike = 'Car';
+
+            var inps = $(this).find('fieldset.'+car_bike.toLowerCase()+'-adder').not('.authorized-additional').find('input:checked');
             $.each(inps, function(i,inp){
                additionalInfo[$(inp).parent().find('label').text()] = true;
             });
@@ -1365,7 +1387,13 @@ $( document ).delegate("#order", "pagebeforeload", function() {
 
     },
     checkoutPageInit : function(){
-
+        if(Global.userDetails){
+            $('#checkout #checkoutForm').find('#email').val(Global.userDetails.email)
+            $('#checkout #checkoutForm').find('#name').val(Global.userDetails.name)
+            $('#checkout #checkoutForm').find('#phonenumber').val(Global.userDetails.phonenumber);
+        }else{
+            $('#checkout #checkoutForm').find('#email,#name,#phonenumber').val('');
+        }
     },
     bookingPageInit : function(){
         Commons.ajaxData('fetch_car_booking', {type:'all'},"get",Global, Global.loadBooking);
@@ -1423,23 +1451,39 @@ $( document ).delegate("#order", "pagebeforeload", function() {
     },
     additionalPageInit : function(){
         $('#additional').find('input[type="submit"]').button();
-        if(Global.serviceSelected && Global.serviceSelected.service.toLowerCase() == 'servicing'){
-            if(Global.vendorSelected && Global.vendorSelected.vendor.toLowerCase() == 'authorized'){
-                $('#additional').find('.authorized-additional').show();
-                $('#additional').find('input[type="submit"]').button('disable');
-
-//                $('#additional').find('.dealer-select').show();
-                return;
-            }
-        }
         $('#additional').find('input[type="submit"]').button('enable');
-        $('#additional').find('.authorized-additional').hide();
+        if(Global.carSelected && Global.carSelected.car_bike){
+            $('#additional').find('fieldset.adder-group').hide();
+            $('#additional').find('fieldset.'+Global.carSelected.car_bike.toLowerCase()+'-adder').show();
+            if(Global.serviceSelected && Global.serviceSelected.service.toLowerCase() == 'servicing'){
+                if(Global.vendorSelected && Global.vendorSelected.vendor.toLowerCase() == 'authorized'){
+                    $('#additional').find('.authorized-additional').show();
+
+    //                $('#additional').find('.dealer-select').show();
+                    return;
+                }
+            }
+            $('#additional').find('.authorized-additional').hide();
+        }else{
+            window.location.href = '#index'
+        }
+
+
     },
     emergencyPageInit : function(){
 
     },
     carBrands : ['Audi','Bentley','BMW','Bugatti','Chevrolet','Ferrari','Fiat','Ford','Honda','Hyundai','Isuzu','Jaguar','Lamborghini','Land Rover','Mahindra','Maruti Suzuki','Mercedes-Benz','Mini','Nissan','Porsche','Renault','Rolls-Royce','Skoda','Ssangyong','Tata','Toyota','Volkswagen','Volvo'],
-    bikeBrands : ['Bajaj','Hero','Honda','KTM','Mahindra','Royal Enfield','Suzuki','TVS','Yamaha']
+    bikeBrands : ['Bajaj','Hero','Honda','KTM','Mahindra','Royal Enfield','Suzuki','TVS','Yamaha'],
+    additionalFeatures : {
+        car : ['Clutch Overhaul', 'Interior Dry-cleaning', 'Brake Repair', 'Wheel Balancing', 'Wheel Alignment', 'AC Servicing', 'Injector Cleaning'],
+        bike : ['Front Brake Repair',  'Rear Brake repair', 'Wheel Balancing', 'Wheel Alignment']
+    },
+    additionalRepairs : {
+        car : ['Clutch Overhaul', 'Interior Dry-cleaning', 'Brake Repair', 'Wheel Balancing', 'Wheel Alignment', 'AC Servicing', 'Injector Cleaning'],
+        bike : ['Front Brake Repair',  'Rear Brake repair', 'Wheel Balancing', 'Wheel Alignment']
+    },
+
 
 };
 
