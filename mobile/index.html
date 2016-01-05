@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Page</title>
+    <title>ClickGarage - Solution to your Car/Bike maintenance needs</title>
     <!--	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
@@ -540,7 +540,7 @@
 
 
         <a href="../index#step2" class="ui-btn" id="continue-shopping">Continue Shopping</a>
-        <a href="#" class="ui-btn" id="checkout">Checkout</a>
+        <!--<a href="#" class="ui-btn" id="checkout">Checkout</a>-->
 
         <!--<a href="#services" data-role="button" id="continue-shopping" data-theme="b">Continue Shopping</a>-->
         <!--<a href="" data-role="button" id="checkout" data-theme="b">Checkout</a>    -->
@@ -977,28 +977,38 @@
 
         <form action="" method="post" id="additionalCheckout">
 
-            <fieldset data-role="controlgroup">
+            <fieldset data-role="controlgroup" class="car-adder adder-group">
                 <legend>Services:</legend>
-                <input type="checkbox" name="checkbox-v-2a" id="checkbox-v-2a">
-                <label for="checkbox-v-2a">Clutch Overhaul</label>
-                <input type="checkbox" name="checkbox-v-2b" id="checkbox-v-2b">
-                <label for="checkbox-v-2b">Interior dry-cleaning</label>
-                <input type="checkbox" name="checkbox-v-2c" id="checkbox-v-2c">
-                <label for="checkbox-v-2c">Wheel Balancing</label>
-                <input type="checkbox" name="checkbox-v-2c" id="checkbox-v-2d">
-                <label for="checkbox-v-2d">Wheel Alignment</label>
-                <input type="checkbox" name="checkbox-v-2c" id="checkbox-v-2e">
-                <label for="checkbox-v-2e">Injector Cleaning</label>
-                <input type="checkbox" name="checkbox-v-2f" id="checkbox-v-2f">
-                <label for="checkbox-v-2f">AC Servicing</label>
-                <input type="checkbox" name="checkbox-v-2g" id="checkbox-v-2g">
-                <label for="checkbox-v-2g">Brake Repair</label>
+                <input type="checkbox" name="checkbox-c-2a" id="checkbox-c-2a">
+                <label for="checkbox-c-2a">Clutch Overhaul</label>
+                <input type="checkbox" name="checkbox-c-2b" id="checkbox-c-2b">
+                <label for="checkbox-c-2b">Interior dry-cleaning</label>
+                <input type="checkbox" name="checkbox-c-2c" id="checkbox-c-2c">
+                <label for="checkbox-c-2c">Wheel Balancing</label>
+                <input type="checkbox" name="checkbox-c-2c" id="checkbox-c-2d">
+                <label for="checkbox-c-2d">Wheel Alignment</label>
+                <input type="checkbox" name="checkbox-c-2c" id="checkbox-c-2e">
+                <label for="checkbox-c-2e">Injector Cleaning</label>
+                <input type="checkbox" name="checkbox-c-2f" id="checkbox-c-2f">
+                <label for="checkbox-c-2f">AC Servicing</label>
+                <input type="checkbox" name="checkbox-c-2g" id="checkbox-c-2g">
+                <label for="checkbox-c-2g">Brake Repair</label>
             </fieldset>
+            <fieldset data-role="controlgroup" class="bike-adder adder-group">
+                <legend>Services:</legend>
+                <input type="checkbox" name="checkbox-b-2a" id="checkbox-b-2a">
+                <label for="checkbox-b-2a">Front Brake Repair</label>
+                <input type="checkbox" name="checkbox-b-2b" id="checkbox-b-2b">
+                <label for="checkbox-b-2b">Rear Brake repair</label>
+                <input type="checkbox" name="checkbox-b-2c" id="checkbox-b-2c">
+                <label for="checkbox-b-2c">Wheel Balancing</label>
+                <input type="checkbox" name="checkbox-b-2c" id="checkbox-b-2d">
+                <label for="checkbox-b-2d">Wheel Alignment</label>
+            </fieldset>
+
             <fieldset>
                 <label for="add-queries">Additional Queries</label>
-                <textarea name="add-queries" id="add-queries" placeholder="Additional Details">
-
-                </textarea>
+                <textarea name="add-queries" id="add-queries" placeholder="Additional Details"></textarea>
 
             </fieldset>
             <br>
