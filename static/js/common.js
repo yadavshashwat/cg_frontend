@@ -1177,6 +1177,8 @@ var formCheck = {
         };
         var user_name = $(container).find('.user-name').val();
         var user_number = $(container).find('.user-number').val();
+        var user_email = $(container).find('.user-email').val();
+
         var car_reg_number = $(container).find('.car-reg-no').val();
         var pick_date = $(container).find('.pick-up-date').val();
         var pick_time = $(container).find('.pick-up-time').val();
@@ -1203,6 +1205,14 @@ var formCheck = {
                 return false
             }
         }
+        if(!valid(user_email)){
+            $(container).find('.user-email').addClass('error');
+            return false;
+        }else if(!formCheck.isValidEmailAddress(user_email)){
+            $(container).find('.user-email').addClass('error');
+            return false;
+        }
+
         if(!valid(pick_date)){
             $(container).find('.pick-up-date').addClass('error');
             return false
@@ -1316,6 +1326,7 @@ var formCheck = {
 //        }
         return true;
     },
+
     clearErrorEvent : function(e){
         if($(this).val() && $(this).val().length){
             $(this).removeClass('error');
@@ -1388,7 +1399,11 @@ var formCheck = {
         }
         return obj;
     },
-     afterSendContact: function(data){
+    isValidEmailAddress : function(emailAddress) {
+        var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+        return pattern.test(emailAddress);
+    },
+    afterSendContact: function(data){
         console.log(data)
         //var btn = $('[tran_id="'+data['cancelled_id']+'"]')
         btn.find('div').text('Sent')
@@ -1397,7 +1412,7 @@ var formCheck = {
     updateTime : function(container){
             var todayFlag = false;
             var sameDay = false;
-            if($(container).find('#date-time-pair .pick-up-date').val() == formCheck.getDateFromFormat((new Date()), 'mm/dd/yyyy')){
+            if($(container).find('#date-wrap .pick-up-date').val() == formCheck.getDateFromFormat((new Date()), 'mm/dd/yyyy')){
                 todayFlag = true;
             }
             if($('#same-day-toggle').is(':checked')){
@@ -1411,8 +1426,8 @@ var formCheck = {
                 thisHour = 8
             if(thisHour >16)
                 thisHour = 16
-                var hr =  $(container).find('#date-time-pair .pick-up-time').val();
-                var ampm = $(container).find('#date-time-pair .pick-up-time').val();
+                var hr =  $(container).find('#time-wrap .pick-up-time').val();
+                var ampm = $(container).find('#time-wrap .pick-up-time').val();
                 if(hr){
                     hr = hr.split(':')[0];
                     hr = parseInt(hr);
@@ -1427,14 +1442,14 @@ var formCheck = {
             var minTime = new Date(0,0,0,thisHour,0,0);
             //var maxTime = new Date(0,0,0,12,0,0);
             if(todayFlag){
-                $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'minTime',minTime);
+                $(container).find('#time-wrap .pick-up-time').timepicker('option', 'minTime',minTime);
 //                console.log(hr, thisHour)
                 if(hr < thisHour){
-                $(container).find('#date-time-pair .pick-up-time').timepicker('setTime',minTime);
+                $(container).find('#time-wrap .pick-up-time').timepicker('setTime',minTime);
                     alert('Pick up time slots start from 2 hours after booking time');
                 }
             }else{
-                $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'minTime',new Date(0,0,0,8,0,0));
+                $(container).find('#time-wrap .pick-up-time').timepicker('option', 'minTime',new Date(0,0,0,8,0,0));
             }
         if(todayFlag && sameDay && thisHour>11){
             alert('We are unable to process any same day delivery bookings for today. Please book for any other day for same day delivery.');
@@ -1453,11 +1468,11 @@ var formCheck = {
                     alert('Same day delivery can only be checked for bookings before '+maxSameDayHr+' AM');
                     }
                 }else{
-                $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'maxTime',new Date(0,0,0,maxSameDayHr,0,0));
+                    $(container).find('#time-wrap .pick-up-time').timepicker('option', 'maxTime',new Date(0,0,0,maxSameDayHr,0,0));
                 }
 //                $(container).find('#date-time-pair .pick-up-time').timepicker('setTime',new Date(0,0,0,11,0,0));
             }else{
-                $(container).find('#date-time-pair .pick-up-time').timepicker('option', 'maxTime',new Date(0,0,0,16,0,0));
+                $(container).find('#time-wrap .pick-up-time').timepicker('option', 'maxTime',new Date(0,0,0,16,0,0));
             }
         }
             //$(container).find('.pick-up-time').data('timepicker');

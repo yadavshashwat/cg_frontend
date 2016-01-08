@@ -20,7 +20,7 @@ var zyxCart = {
         }
 
 
-    $('#date-time-pair .pick-up-time').timepicker({
+    $('#time-wrap .pick-up-time').timepicker({
         timeFormat: 'hA-jB',
         // year, month, day and seconds are not important
 
@@ -38,10 +38,11 @@ var zyxCart = {
     });
 
 
-    $('#date-time-pair .pick-up-date').datepicker({
+    $('#date-wrap .pick-up-date').datepicker({
         'format': 'm/d/yyyy',
 //        'autoclose': true,
-        'minDate': new Date()
+        'minDate': new Date(),
+        'autoclose':true
     });
         local.clearKey('clgacart');
 
@@ -215,8 +216,7 @@ var zyxCart = {
                 $(form).find('#drop-off-col').find('input,textarea').removeAttr('disabled');
             }
         })
-        $('.address-form-holder #date-time-pair').on('change','.pick-up-date', function(){
-            console.log($(this).val());
+        $('.address-form-holder #date-wrap').on('change','.pick-up-date', function(){
             //console.log($(this).data('timepicker').getTime());
             formCheck.updateTime($('.address-form-holder'))
         });
