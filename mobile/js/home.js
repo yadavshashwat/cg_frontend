@@ -12,7 +12,6 @@ var Global = {
         _this.initGoogleHandlers();
         Commons.ajaxData('fetch_user_login',{},"get",_this,_this.userLoad);
 
-j
         $("#checkoutForm").validate({
             rules: {
                     name: {
@@ -436,7 +435,7 @@ j
             if(Global.serviceSelected && (Global.serviceSelected['service'] == 'servicing') ){
                 window.location.hash = '#additional';
             }else{
-                window.location.hash = '#checkout';
+                window.location.hash = '#cart';
             }
         });
         $('.repair-body .list-services').on('click', 'a', function(e){
@@ -481,6 +480,18 @@ j
             Global.serviceSelected['id'] = serviceId;
             window.location.hash = '#em-checkout';
         });
+        $('#diagnosticsCheckout').on('submit', function(e){
+            var additionalInfo = {};
+            var car_bike = Global.carSelected.car_bike;
+            if(!car_bike)
+                car_bike = 'Car';
+            if($(this).find('#diagnostics-queries').val().length){
+                additionalInfo['Custom Requests'] = $(this).find('#diagnostics-queries').val();
+            }
+            Global.serviceSelected['additional'] = additionalInfo;
+            window.location.hash = '#cart';
+            return false;
+        });
         $('#additionalCheckout').on('submit', function(e){
             var additionalInfo = {};
             var car_bike = Global.carSelected.car_bike;
@@ -506,7 +517,7 @@ j
             }
 
             Global.serviceSelected['additional'] = additionalInfo;
-            window.location.hash = '#checkout';
+            window.location.hash = '#cart';
             return false;
         });
         $('#dentingCheckout').on('submit', function(e){
@@ -516,10 +527,47 @@ j
             }
             additionalInfo['Damage Type'] = $(this).find('input[name="radio-choice-h-2"]:checked').val();
             Global.serviceSelected['additional'] = additionalInfo;
+            window.location.hash = '#cart';
+            return false;
+        });
+        $('#cart .coupon-apply-btn').on('click', function(e){
+            var coupon = $(this).closest('.coupon-wrap').find('#coupon').val();
+            if(coupon.length){
+                $('#cart .coupon-status').html('').hide();
+                Commons.ajaxData('apply_coupon', {c_cd:coupon},"get",_this, function(data){
+                    if(data.status){
+                        var couponData = {};
+                        if (local.load() && local.load()['clgacoup']) {
+                            couponData = local.load()['clgacoup'];
+                            couponData = JSON.parse(couponData);
+                        }
+                        if (!couponData.Global) {
+                            console.log('no data')
+                            couponData.Global = {}
+                            couponData.Global[data['coupon_code']] = data['message']
+                            $('#cart .coupon-status').html('Applied').show();
+                        } else {
+                            if (!couponData.Global[data['coupon_code']]) {
+                                couponData.Global[data['coupon_code']] = data['message']
+                                $('#cart .coupon-status').html('Applied').show();
+                            } else {
+                                $('#cart .coupon-status').html('Already Applied').show();
+                                //already applied
+                            }
+                        }
+                        local.save('clgacoup', JSON.stringify(couponData));
+                    }else{
+                        $('#cart .coupon-status').html('Invalid Coupon').show();
+                    }
+                });
+            }else{
+                $('#cart .coupon-status').html('Invalid Coupon').show();
+            }
+        });
+        $('#cart #cart-submit-btn').on('click', function(e){
             window.location.hash = '#checkout';
             return false;
         });
-
         $('#em-checkout #em-checkout-submit').on('click', function(e){
             var car_select = Global.carSelected.fullname;
 
@@ -834,6 +882,10 @@ j
 //                    }
                     Global.vendorPageInit();
                     break;
+                case "#cart":
+                    console.log('navigate cart')
+                    Global.cartPageInit();
+                    break;
                 case "#checkout":
                     Global.checkoutPageInit();
                     break;
@@ -857,13 +909,14 @@ $( document ).delegate("#denting", "pageinit", function() {
     Global.dentingPageInit();
 });
 $( document ).delegate("#checkout", "pageinit", function() {
-    Global.servicesPageInit();
+    Global.checkoutPageInit();
 });
 $( document ).delegate("#booking", "pageinit", function() {
     Global.bookingPageInit();
 });
 $( document ).delegate("#cart", "pageinit", function() {
-    Global.checkoutPageInit();
+//    console.log('delegate cart')
+//    Global.cartPageInit();
 });
 $( document ).delegate("#additional", "pageinit", function() {
     Global.additionalPageInit();
@@ -1048,7 +1101,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
     },
 
     loadServicingDetails : function(data){
-        var container = $('.order-body .service-selection .selected-category');
+        var container = $('#vendor .service-selection .selected-category');
         container.html('');
         var html = '';
         var val = data[0]
@@ -1162,7 +1215,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
     
     loadCleaningDetails : function(data){
         console.log(data)
-        var container = $('.service-selection .selected-category');
+        var container = $('#vendor .service-selection .selected-category');
         container.html('');
         var html = '';
         var val = data[0]
@@ -1201,7 +1254,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
     },
     loadWindshieldDetails : function(data){
         console.log(data)
-        var container = $('.service-selection .selected-category');
+        var container = $('#vendor .service-selection .selected-category');
         container.html('');
         var html = '';
         var val = data[0]
@@ -1255,7 +1308,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
     },
     loadCarcareDetails : function(data){
         console.log(data)
-        var container = $('.service-selection .selected-category');
+        var container = $('#vendor .service-selection .selected-category');
         container.html('');
         var html = '';
         var val = data[0]
@@ -1447,7 +1500,88 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         });
     },
     cartPageInit : function(){
+        if(Global.serviceSelected && Global.serviceSelected.service){
+            var service = Global.serviceSelected.service;
+            if(['servicing','cleaning','windshield','carcare','vas'].indexOf(service)>=0){
+                if(Global.vendorSelected && Global.vendorSelected.id){
+                var id = Global.vendorSelected.id;
+                    if(service == 'carcare')
+                        service = 'vas'
 
+                    Commons.ajaxData('service_selected', {service:service,id:id},"get",Global,Global.cartItemLoad);
+                }
+
+            }else if(service == 'repair'){
+                var service_id = Global.serviceSelected.id;
+                Global.cartItemLoad([{
+                    'vendor':'ClickGarage Workshop',
+                    'type_service': (service_id+' '+service)
+                }])
+            }
+        }
+    },
+    cartItemLoad : function(data){
+        if(data && data.length){
+            var res = data[0];
+            var vendor = res.vendor;
+            var src = '';
+            var carFlag = 'car';
+            if(vendor=="Authorized"){
+                if(Global.carSelected.car_bike=="Bike"){
+                    carFlag = 'bike';
+                    src+= logoMap['Authorized Bike'] + Global.carSelected.brand + '.jpg';
+                }
+                else{
+                    carFlag = 'car';
+                    src+= logoMap['Authorized Car'] + Global.carSelected.brand + '.jpg';
+                }
+            }
+            else{
+                src += logoMap[vendor] + '';
+            }
+
+            var html = '<li><img src="'+src+'" />' +
+                '<h2>'+res['type_service']+'</h2>' +
+                '<p >'+res['vendor']+'</p>' +
+                '<p data-value="">'+res['total_price']+'</p>';
+
+            if(Global.serviceSelected && Global.serviceSelected.additional){
+                var addObj = Global.serviceSelected.additional;
+                var exhtml = '';
+                var fthtml = [];
+                $.each(addObj, function(key, val){
+                    if(Global.additionalFeatures[carFlag].indexOf(key)>=0){
+                        if(val)
+                            fthtml.push(key);
+                    }else{
+                        if(key == 'Selected Authorized'){
+                            exhtml += '<span> Dealer Name : '+val['name']+' </span><br/>';
+                            exhtml += '<span> Dealer Address : '+val['address']+' </span><br/>';
+                        }else if(key == 'Custom Requests'){
+                            exhtml += '<span> Custom Requests : '+val+' </span><br/>';
+                        }else if(key == 'Damage Type'){
+                            exhtml += '<span> Damage Type : '+val+' </span><br/>';
+                        }
+                    }
+                });
+                if(fthtml.length){
+                    html += '<p style="white-space: normal;"> Additional Queries : '+fthtml.join(', ')+'</p>';
+                }
+                if(exhtml.length){
+                    html += '<p style="white-space: normal;">'+exhtml+'</p>';
+                }
+            }
+
+            html += '</li>';
+
+
+            $('#cart').find('.cart-entries').find('ul').html(html);
+            $('#cart').find('.cart-entries').find('ul').listview().listview("refresh");
+
+            var header = 'Car selected : <span>'+Global.carSelected.fullname+'</span>';
+            $('#cart').find('.service-selection').find('.desc').html(header);
+
+        }
     },
     additionalPageInit : function(){
         $('#additional').find('input[type="submit"]').button();
@@ -1482,7 +1616,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
     additionalRepairs : {
         car : ['Clutch Overhaul', 'Interior Dry-cleaning', 'Brake Repair', 'Wheel Balancing', 'Wheel Alignment', 'AC Servicing', 'Injector Cleaning'],
         bike : ['Front Brake Repair',  'Rear Brake repair', 'Wheel Balancing', 'Wheel Alignment']
-    },
+    }
 
 
 };

@@ -67,10 +67,11 @@ var Commons = {
         'logout':'/logout/',
         'fetch_user_login':'/api/fetch_user_login/',
         'send_otp':'/api/send_otp/',
-        'create_otp_user':'/api/create_otp_user/'
+        'create_otp_user':'/api/create_otp_user/',
+        'service_selected':'/api/service_selected/',
+        'apply_coupon':'/api/apply_coupon/'
         //'fetch_Servicing_details':'/api/fetch_servicing_details/',
         //'fetch_Cleaning_details':'/api/fetch_cleaning_details/',
-
     },
     getOrigin: function(){
         var origin = window.location.origin;

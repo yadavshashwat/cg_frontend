@@ -477,6 +477,16 @@ white-space: pre-wrap;
     background-color: #e89b76;
 }
 
+.cart-body .service-selection{
+    position: relative;
+}
+.cart-body .service-selection .selected-category{
+    padding: 30px 0px;
+    background:#eaeaea;
+    text-align: center;
+    color:#4d5b94;
+
+}
 
 
 /* login Page Styles - Sanskar */

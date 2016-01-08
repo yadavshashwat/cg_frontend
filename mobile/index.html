@@ -497,7 +497,7 @@
 
 
 <!-- Don't Delete -- Start of fifth (cart) page -->
-<div data-role="page" class="cart" id="cart">
+<div data-role="page" class="cart-body" id="cart">
 
     <!--CG Header-->
     <div data-role="header" class="header-body" data-theme="">
@@ -515,31 +515,39 @@
     <div data-role="content">
 
 
-        <div class="ui-field-contain">
+    <!--<div class="ui-field-contain">
             <select name="select-custom-21" id="car-dropdown" data-native-menu="false">
                 <option value="choose-one" data-placeholder="true">Choose Your Car</option>
                 <option value="1">Toyota Altis Petrol</option>
                 <option value="2">Honda Amaze</option>
             </select>
-        </div>
+        </div>-->
+        <div class="service-selection">
+            <div class="selected-category">
+                <div class="header">
+                    Selected Services
+                </div>
+                <div class="desc">
 
+                </div>
+            </div>
+        </div>
         <div class="cart-entries">
             <ul data-role="listview" data-inset="true" data-icon="check">
-                <li><a href="#"><img src="img/dl-logo-cgverified.png">
-
-                    <h2>Regular Servicing</h2>
-
-                    <p>Rs.3000</p></a></li>
-                <li><a href="#"><img src="img/dl-logo-3M.png">
-
-                    <h2>Exterior Detailing</h2>
-
-                    <p>Rs.2000</p></a</li>
             </ul>
         </div>
-
-
-        <a href="../index#step2" class="ui-btn" id="continue-shopping">Continue Shopping</a>
+        <fieldset data-role="fieldcontain" class="coupon-wrap">
+            <div class="ui-grid-c">
+                <div class="ui-block-a" style="width: 75%;">
+                    <input type="text" name="coupon" id="coupon" placeholder="Enter Coupon" minlength='3'>
+                </div>
+                <div class="ui-block-b">
+                    <input class="coupon-apply-btn" type="submit" value="Apply"/>
+                </div>
+            </div>
+            <div class="coupon-status" style="display: none;"></div>
+        </fieldset>
+        <a href="#checkout" class="ui-btn" id="cart-submit-btn">Checkout</a>
         <!--<a href="#" class="ui-btn" id="checkout">Checkout</a>-->
 
         <!--<a href="#services" data-role="button" id="continue-shopping" data-theme="b">Continue Shopping</a>-->
@@ -947,7 +955,7 @@
                 </div>
                 -->
                 <br>
-                <input type="submit" value="Checkout" name="submit" class="btn">
+                <input type="submit" value="Place Order" name="submit" class="btn">
             </form>
         <!--</div>-->
 
@@ -982,7 +990,7 @@
                 <input type="checkbox" name="checkbox-c-2a" id="checkbox-c-2a">
                 <label for="checkbox-c-2a">Clutch Overhaul</label>
                 <input type="checkbox" name="checkbox-c-2b" id="checkbox-c-2b">
-                <label for="checkbox-c-2b">Interior dry-cleaning</label>
+                <label for="checkbox-c-2b">Interior Dry-cleaning</label>
                 <input type="checkbox" name="checkbox-c-2c" id="checkbox-c-2c">
                 <label for="checkbox-c-2c">Wheel Balancing</label>
                 <input type="checkbox" name="checkbox-c-2c" id="checkbox-c-2d">
@@ -999,7 +1007,7 @@
                 <input type="checkbox" name="checkbox-b-2a" id="checkbox-b-2a">
                 <label for="checkbox-b-2a">Front Brake Repair</label>
                 <input type="checkbox" name="checkbox-b-2b" id="checkbox-b-2b">
-                <label for="checkbox-b-2b">Rear Brake repair</label>
+                <label for="checkbox-b-2b">Rear Brake Repair</label>
                 <input type="checkbox" name="checkbox-b-2c" id="checkbox-b-2c">
                 <label for="checkbox-b-2c">Wheel Balancing</label>
                 <input type="checkbox" name="checkbox-b-2c" id="checkbox-b-2d">
@@ -1029,7 +1037,7 @@
 
             </fieldset>
             <br>
-            <input type="submit" value="Checkout" name="submit" class="btn">
+            <input type="submit" value="Place Order" name="submit" class="btn">
         </form>
     </div>
 </div>
@@ -1061,7 +1069,7 @@
 
             </fieldset>
             <br>
-            <input type="submit" value="Checkout" name="submit" class="btn">
+            <input type="submit" value="Place Order" name="submit" class="btn">
         </form>
     </div>
 </div>
