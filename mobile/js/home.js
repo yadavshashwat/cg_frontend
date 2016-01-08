@@ -545,13 +545,13 @@ var Global = {
                             console.log('no data')
                             couponData.Global = {}
                             couponData.Global[data['coupon_code']] = data['message']
-                            $('#cart .coupon-status').html('Applied').show();
+                            $('#cart .coupon-status').html('Applied -' + data['message']).show();
                         } else {
                             if (!couponData.Global[data['coupon_code']]) {
                                 couponData.Global[data['coupon_code']] = data['message']
-                                $('#cart .coupon-status').html('Applied').show();
+                                $('#cart .coupon-status').html('Applied -' + data['message']).show();
                             } else {
-                                $('#cart .coupon-status').html('Already Applied').show();
+                                $('#cart .coupon-status').html(data['coupon_code'] + ' Already Applied - ' + data['message']).show();
                                 //already applied
                             }
                         }
@@ -1177,16 +1177,25 @@ $( document ).delegate("#order", "pagebeforeload", function() {
 
             html += '</div><div class=prices>'
 
-            //html += "<table> <tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;"+parseInt(val.parts_price)+"</td></tr><tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil(val.labour_price)+"</td></tr> <tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil((val.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;<strike>&#8377;200</strike>&nbsp;&nbsp;&#8377;"+ (val.car_bike == 'Car' ? '0': '0')+"</td></tr><tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+(parseInt(val.parts_price)+parseInt(Math.ceil((val.labour_price)))+parseInt(Math.ceil((val.labour_price*0.14)))+parseInt((val.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
+            //html += "<table> <tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;"+parseInt(val.parts_price)+"</td></tr><tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil(val.labour_price)+"</td></tr> <tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil((val.labour_price*0.145))+"</td></tr><tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;<strike>&#8377;200</strike>&nbsp;&nbsp;&#8377;"+ (val.car_bike == 'Car' ? '0': '0')+"</td></tr><tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+(parseInt(val.parts_price)+parseInt(Math.ceil((val.labour_price)))+parseInt(Math.ceil((val.labour_price*0.145)))+parseInt((val.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
 
-            if(val.car_bike=="Car")
+            if (val.car_bike=="Car") {
                 //if(val.vendor=="Authorized")
                 //    html +="<table><tr>Service Centre Bill Amount</tr><tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;<strike>&#8377;200</strike>&nbsp;&nbsp;&#8377;"+ (val.car_bike == 'Car' ? '0': '0')+"</td></tr></table>"
                 //else
-                    html += "<table><tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;"+parseInt(val.parts_price)+"</td></tr><tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil(val.labour_price)+"</td></tr> <tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil((val.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;<strike>&#8377;200</strike>&nbsp;&nbsp;&#8377;"+ (val.car_bike == 'Car' ? '0': '0')+"</td></tr><tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+(parseInt(val.parts_price)+parseInt(Math.ceil((val.labour_price)))+parseInt(Math.ceil((val.labour_price*0.14)))+parseInt((val.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
-            else
-                html += "<table> <tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;"+parseInt(val.parts_price)+"</td></tr><tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil(val.labour_price)+"</td></tr> <tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil((val.labour_price*0.14))+"</td></tr><tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;<strike>&#8377;200</strike>&nbsp;&nbsp;&#8377;"+ (val.car_bike == 'Car' ? '0': '0')+"</td></tr><tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+(parseInt(val.parts_price)+parseInt(Math.ceil((val.labour_price)))+parseInt(Math.ceil((val.labour_price*0.14)))+parseInt((val.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
-
+                html += "<table><tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;" + parseInt(val.parts_price) + "</td></tr><tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;" + Math.ceil(val.labour_price) + "</td></tr> <tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;" + Math.ceil((val.labour_price * 0.145)) + "</td></tr><tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;<strike>&#8377;200</strike>&nbsp;&nbsp;&#8377;" + (val.car_bike == 'Car' ? '0' : '0') + "</td></tr><tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;" + (parseInt(val.parts_price) + parseInt(Math.ceil((val.labour_price))) + parseInt(Math.ceil((val.labour_price * 0.145))) + parseInt((val.car_bike == 'Car' ? '0' : '0'))) + "</td></tr></table>";
+            } else {
+                html += "<table> <tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;" + parseInt(val.parts_price) + "</td></tr>" +
+                    "<tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;" + Math.ceil(val.labour_price) + "</td></tr> " +
+                    "<tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;" + Math.ceil((val.labour_price * 0.145)) + "</td></tr>";
+                if(val.vendor == 'ClickGarage Doorstep'){
+                    html += "<tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;" + (parseInt(val.parts_price) + parseInt(Math.ceil((val.labour_price))) + parseInt(Math.ceil((val.labour_price * 0.145)))) + "</td></tr>";
+                }else{
+                    html += "<tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;&#8377;150&nbsp;&nbsp; </td></tr>" +
+                        "<tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;" + (parseInt(val.parts_price) + parseInt(Math.ceil((val.labour_price))) + parseInt(Math.ceil((val.labour_price * 0.145))) + 150) + "</td></tr>";
+                }
+                    html += "</table>";
+            }
             html += '</div></div>';
 
         });
@@ -1525,6 +1534,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
             var res = data[0];
             var vendor = res.vendor;
             var src = '';
+            var price = null;
             var carFlag = 'car';
             if(vendor=="Authorized"){
                 if(Global.carSelected.car_bike=="Bike"){
@@ -1539,11 +1549,39 @@ $( document ).delegate("#order", "pagebeforeload", function() {
             else{
                 src += logoMap[vendor] + '';
             }
+            if(Global.serviceSelected && Global.serviceSelected.service == 'servicing'){
+                if(carFlag == 'car'){
+                    try{
+                        price = Math.ceil(parseInt(res['parts_price'])) + Math.ceil(parseInt(res['labour_price'])*1.145);
+                    }catch(e){
+                        price = null;
+                    }
+                }else{
+                    try{
+                        price = Math.ceil(parseInt(res['parts_price'])) + Math.ceil(parseInt(res['labour_price'])) + Math.ceil(parseInt(res['labour_price'])*0.145);
+                        if(vendor != 'ClickGarage Doorstep'){
+                            price += 150
+                        }
+                    }catch(e){
+                        price = null;
+                    }
+                }
+            }else{
+                if(res['total_price']){
+                    price = res['total_price'];
+                }else{
+                    price = null;
+                }
+            }
 
             var html = '<li><img src="'+src+'" />' +
                 '<h2>'+res['type_service']+'</h2>' +
-                '<p >'+res['vendor']+'</p>' +
-                '<p data-value="">'+res['total_price']+'</p>';
+                '<p >'+res['vendor']+'</p>';
+            if(price){
+                html += '<p data-value=""> &#8377; '+price+'</p>';
+            }else{
+                html += '<p data-value=""> N/A </p>';
+            }
 
             if(Global.serviceSelected && Global.serviceSelected.additional){
                 var addObj = Global.serviceSelected.additional;
