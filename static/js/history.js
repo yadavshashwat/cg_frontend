@@ -1,10 +1,4 @@
-/**
- * Created with PyCharm.
- * User: vociferous
- * Date: 02/08/15
- * Time: 3:17 PM
- * To change this template use File | Settings | File Templates.
- */
+
 
 var Global = {
      init:function(){

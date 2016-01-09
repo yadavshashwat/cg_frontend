@@ -1,10 +1,3 @@
-/**
- * Created with PyCharm.
- * User: vociferous
- * Date: 03/08/15
- * Time: 10:06 PM
- * To change this template use File | Settings | File Templates.
- */
 
 
 var Commons = {

@@ -1,11 +1,3 @@
-/**
- * Created with PyCharm.
- * User: vociferous
- * Date: 02/08/15
- * Time: 3:17 PM
- * To change this template use File | Settings | File Templates.
- */
-
 var Global = {
     init:function(){
         var _this = this;
@@ -28,7 +20,7 @@ var Global = {
         }
         workflowState.init();
         if(workflowState.step.state == 'service'){
-            $('.section-select-holder').find('.section-menu-item').eq(0).click();
+//            $('.section-select-holder').find('.section-menu-item').eq(0).click();
         }else if(workflowState.step.state == 'dealer'){
 
         }
@@ -46,7 +38,6 @@ var Global = {
 //                console.log($(this).closest('.section-box').find('.section-content-item').hide())
                 $(this).closest('.section-box').find('.section-content-item').hide();
                 var mine = $(this).closest('.section-box').find('.section-content-item').filter('.'+classy).show();
-                console.log(classy)
                 if(mine.hasClass('loaded')){
 
                 }else{
@@ -86,7 +77,7 @@ var Global = {
                 var classy = $(this).closest('.section-content-item').attr('data-class');
                 var s_id = $(this).attr('data-id');
 //                console.log('s_id:'+s_id)
-                console.log(classy);
+//                console.log(classy);
                 _this.selectedSection = classy;
                 if(classy == 'servicing' || classy == 'cleaning' || classy == 'vas' || classy == 'windshield'){
                     var data = {};
@@ -96,7 +87,7 @@ var Global = {
                         workflowState.setWorkflow(data.state, data, '#'+data.state+'?s_id='+s_id);
                         workflowState.workflowBarUpdate(data.state);
                     }
-                    console.log("_this.load"+classy.toTitleCase()+"Details");
+//                    console.log("_this.load"+classy.toTitleCase()+"Details");
                     Commons.ajaxData('fetch_'+classy+'_details', {service_id:s_id, c_id:_this.carSelected.id, city_id:'Delhi'},"get",_this, eval("_this.load"+classy.toTitleCase()+"Details") )
                 }else if(classy == 'repair'){
 //                    var s_id = $(this).attr('data-id');
@@ -149,7 +140,6 @@ var Global = {
                 }
             }else if($target.closest('.detail-wrapper').length){
                 if($(this).hasClass('minimized')){
-                    console.log($(this).siblings().filter('.expanded').find('.bot-row'));
                     $(this).siblings().filter('.expanded').find('.bot-row').slideUp(200, function(){
                         $(this).closest('.service-list-item').removeClass('expanded').addClass('minimized');
                     });
@@ -157,7 +147,6 @@ var Global = {
                     $(this).find('.bot-row').hide().slideDown(200);
                 }else{
                     $(this).find('.bot-row').slideUp(200, function(){
-                        console.log($(this));
                         $(this).closest('.service-list-item').removeClass('expanded').addClass('minimized');
                     });
                 }
@@ -204,7 +193,7 @@ var Global = {
             obj.dealer = dealer.split(' ').join('#$');
             newC = [obj.timestamp,obj.service, obj.dealer, obj.s_id].join('*');
             oldC += newC;
-            console.log(oldC);
+//            console.log(oldC);
             local.save('clgacart', oldC);
 
 //            Commons.ajaxData('add_to_cart', {})
@@ -265,7 +254,7 @@ var Global = {
 //            console.log(oldC);
             local.save('clgacart', oldC);
             var addInfoData = cook_obj['clgacartaddi'];
-            console.log(addInfoData);
+//            console.log(addInfoData);
             if( !(addInfoData && addInfoData.length) ){
                 addInfoData = '{}'
             }
@@ -1087,17 +1076,27 @@ var workflowState = {
     init : function(){
         var _this = this;
         var already_set = window.location.hash;
-        console.log(already_set)
         if(already_set == '#_=_'){
             already_set = null
             window.location.hash = ''
 
         }
-        if(!already_set || (already_set && $.inArray(already_set,["service","dealer"]) ) ){
-            var data = _this.getWorkflow();
-            console.log(data)
-            _this.setWorkflow(data.state, data, '#'+data.state);
-            _this.pushToHistory(data.state);
+        var data = _this.getWorkflow();
+        already_set = data.state;
+        if(!already_set || (already_set && (["service","dealer"].indexOf(already_set) >= 0) ) ){
+            if(already_set == 'service'){
+                if(data.params && data.params['cat']){
+                    var cat = data.params['cat'];
+                    $('.section-select-holder').find('.section-menu-item[data-class="'+cat+'"]').click();
+                }else{
+                    $('.section-select-holder').find('.section-menu-item').eq(0).click();
+                }
+            }else{
+                $('.section-select-holder').find('.section-menu-item').eq(0).click();
+//                data = this.defaultState;
+//                _this.setWorkflow(data.state, data, '#'+data.state);
+//                _this.pushToHistory(data.state);
+            }
             _this.workflowBarUpdate(data.state);
         }else{
 
@@ -1113,15 +1112,14 @@ var workflowState = {
                 });
             }
             if(state == '#service'){
-//                _this.setWorkflow(data.state, data, '#'+data.state);
-//                _this.pushToHistory(data.state);
                 _this.workflowBarUpdate('service');
-                console.log(params)
                 if(params['cat']){
                     var cat = params['cat'];
                     if(['servicing','cleaning','repair','windshield','vas','emergency'].indexOf(cat)){
                         $('.section-select-holder').find('.section-menu-item[data-class="'+cat+'"]').click();
                     }
+                }else{
+//                    $('.section-select-holder').find('.section-menu-item').eq(0).click();
                 }
                 $('.dealer-select-holder').hide();
                 $('.section-select-holder').show();
@@ -1133,9 +1131,6 @@ var workflowState = {
                     $('.section-listings').find('.service-list-item[data-id="'+params['s_id']+'"]').eq(0).find('.state-update').click();
                 }
             }
-            console.log('event', event);
-            console.log('loc', document.location, document.location.hash);
-            console.log(window.history.length);
         }
     },
     pushToHistory: function(state, data, url){
@@ -1157,7 +1152,6 @@ var workflowState = {
         if (!data){
             data = {};
             var _state = returnLocation.hash;
-            console.log(_state)
             if (_state.length > 1){
                 data = { state: _state.split('#')[1].split('?')[0] };
 //                data = $.extend(data, getparams(url));
@@ -1168,8 +1162,7 @@ var workflowState = {
                         params[pStr.split('=')[0]] = pStr.split('=')[1];
                     });
                     data['params'] = params;
-            }
-
+                }
             }else{
                 data = this.defaultState;
             }
