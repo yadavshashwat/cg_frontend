@@ -548,7 +548,8 @@ var Global = {
 
     loadPlaced : function(data){
       //console.log("order_placed") ;
-      window.alert("Guest Order Placed")
+      //window.alert("Guest Order Placed")
+      window.location.href = "#order-placed"
     },
 
     loadAdminServicingDetails : function(data){
