@@ -275,6 +275,7 @@ var Global = {
         $('body').on('submit', '#popup-search-set-holder' ,function(){
             var c_id = $(this).find('#hidden-id-box').val();
             var c_name = $(this).find('#omni-search-box').val();
+            var varcity = $(this).find('#city-search-box').val().toTitleCase();
             if (!c_id.length){
                 return false
             }else{
@@ -283,7 +284,8 @@ var Global = {
                 local.clearKey('clgacart');
                 local.save('clgacarid',c_id);
                 local.save('clgacarname',c_name);
-                window.location = loc + 'order/?c_id='+c_id;
+                window.location = loc + 'order/'+c_name.split(' ').join('-')+'/'+varcity+'/';
+//                window.location = loc + 'order/?c_id='+c_id;
                 return false;
             }
 
