@@ -367,7 +367,7 @@ var Templates = {
                                         html += '</div></div>';
                                     }
                                 });
-                                html += "<span>Parts in healthy condition won't be replaced.</span>"
+                                html += '<div class="show-hide"></div>';
                                 return html;
                                 /*
                                 if(this['parts_replaced'] && this['parts_replaced'].length){
@@ -380,7 +380,8 @@ var Templates = {
                                     return "None";
                             */
                                 }
-                            }
+                            },
+                        {"tag":"span", "class":"info", "html":"Parts in healthy condition won't be replaced."}
                             ]}
                     ]}
                 ]},

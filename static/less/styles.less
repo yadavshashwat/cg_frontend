@@ -1865,7 +1865,45 @@
 										  margin-bottom: 6px;
 
 										}
+                                        .parts-div{
+                                          .show-hide{
+                                            cursor: pointer;
+                                          }
+                                        }
+                                        .parts-div.minimized{
+                                            max-height: 146px;
+                                            overflow: hidden;
+                                            position: relative;
 
+                                          .show-hide::after{
+                                              color:#002a80;
+                                              /*float: right;*/
+                                              content:"show-more";
+                                              position: absolute;
+                                              bottom: 0px;
+                                              right: 0px;
+                                              background: rgba(255,255,255,0.5);
+                                              font-size: 12px;
+                                            line-height: 14px;
+                                              padding: 12px 4px 0px 4px;
+                                          }
+                                        }
+                                        .parts-div.maximized{
+                                            position: relative;
+                                            padding-bottom: 18px;
+                                          .show-hide::after{
+                                              color:#002a80;
+                                              float: right;
+                                              content:"show-less";
+                                              position: absolute;
+                                              bottom: 0px;
+                                              right: 0px;
+                                              background: rgba(255,255,255,0.5);
+                                              font-size: 12px;
+                                            line-height: 14px;
+                                              padding: 12px 4px 0px 4px;
+                                          }
+                                        }
 										.parts-div{
 										  //margin-top: 10px;
 										  .desc{
@@ -2199,7 +2237,11 @@
 				}
 			}
 			.dealer-select-holder{
-
+                h2.heading{
+                  padding: 0.5em;
+                  line-height: 1.5em;
+                  text-align: center;
+                }
 				.selected-service-details{
 
 

@@ -302,6 +302,9 @@ var Global = {
         $.each(data, function(idx, val){
 
         });
+        $.each(container.find('.parts-div'), function(i,val){
+            Global.expandCollapse($(val));
+        });
 
     },
 
@@ -388,11 +391,7 @@ var Global = {
             container.json2html(data, Templates.orderPage.ws_subtype, {append:true});
         }
     },
-    
-    loadVas : function(data){
-        console.log(data);
-    },
-    //Uncomment this
+
 
     loadVas : function(data){
         console.log(data);
@@ -444,7 +443,8 @@ var Global = {
             $('.dealer-select-holder').show();
             $('.dealer-select-holder .dealer-headers').hide();
             container.html('');
-            var html = '<div class="form-wrapper" id="repair-detail-form" data-id="custom">' +
+            var html = '<h2 class="heading">Custom Repairs</h2>' +
+                '<div class="form-wrapper" id="repair-detail-form" data-id="custom">' +
                 '<div class="form-row additional">' +
                     '<div class="form-col label-col"><div class="label-div">Additional Queries</div></div>' +
                     '<div class="form-col inp-col-1"></div>' +
@@ -471,7 +471,8 @@ var Global = {
             $('.dealer-select-holder').show();
             $('.dealer-select-holder .dealer-headers').hide();
             container.html('');
-            var html = '<div class="form-wrapper" id="repair-detail-form"  data-id="dent-paint"  style="padding-top: 40px;">' +
+            var html = '<h2 class="heading">Denting / Painting</h2>' +
+                '<div class="form-wrapper" id="repair-detail-form"  data-id="dent-paint"  >' +
                 '<div class="form-row additional">' +
                     '<div class="form-col label-col"><div class="label-div">Details about the damage</div></div>' +
                     '<div class="form-col inp-col-double"><div class="clean-inp-wrapper"><textarea class="clean-inp-tabox cust-req" type="" rows="3"></textarea></div></div>' +
@@ -487,7 +488,8 @@ var Global = {
         }else if(id == 'diagnostics'){
             $('.section-select-holder').hide();
             $('.dealer-select-holder').show();
-            var html = '<div class="form-wrapper" id="repair-detail-form"  data-id="diagnostics" style="padding-top: 40px;">' +
+            var html = '<h2 class="heading">Diagnostics</h2>' +
+                '<div class="form-wrapper" id="repair-detail-form"  data-id="diagnostics" >' +
                 '<div class="form-row additional">' +
                 '<div class="form-col label-col"><div class="label-div">Tell us about the issue</div></div>' +
                 '<div class="form-col inp-col-double"><div class="clean-inp-wrapper"><textarea class="clean-inp-tabox cust-req" type="" rows="3"></textarea></div></div>' +
@@ -1070,6 +1072,25 @@ var Global = {
     redirectToCheckout: function(){
         $('.ajax-wait').text('redirecting to checkout page....');
         document.location.href = Commons.getOrigin()+'/checkout';
+    },
+    expandCollapse:function(divvy){
+        $(divvy).removeClass('minimized');
+        if($(divvy).height() > 150){
+            $(divvy).addClass('minimized min-max-toggle');
+        }
+        if($(divvy).is(':hidden') && ($(divvy).find('.token-class').length>5) ){
+            $(divvy).addClass('minimized min-max-toggle');
+        }
+        $(divvy).off().on('click', '.show-hide', function(e){
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            if($(this).closest('.minimized').length){
+                $(this).closest('.minimized').removeClass('minimized').addClass('maximized');
+            }else if($(this).closest('.maximized').length){
+                $(this).closest('.maximized').addClass('minimized').removeClass('maximized');
+            }
+            return false;
+        });
     }
 };
 
