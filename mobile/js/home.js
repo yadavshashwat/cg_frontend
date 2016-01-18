@@ -622,7 +622,7 @@ var Global = {
 
 
         });
-        $('#checkout #checkout-submit').on('click', function(e){
+        $('#checkout #checkout-submit').off().on('click', function(e){
 
             console.log('place order requested change detected');
 //            var classy = Global.serviceCat.serviceType;
@@ -631,7 +631,7 @@ var Global = {
             var name = $('#checkout #name').val();
             var email = $('#checkout #email').val();
             var phone = $('#checkout #phonenumber').val();
-            var pick_date = $('#dateinput option:selected').text();
+            var pick_date = $('#dateinput').val();
             var pick_time = $('#pick-up-time option:selected').text();
             var car_reg_number = $('#checkout #regn').val();
             var pick_addr = $('#checkout #pickupadd1').val();
@@ -697,7 +697,7 @@ var Global = {
                              pick:JSON.stringify(pick),
                              drop:JSON.stringify(drop),
                              loc:'mobile'
-                         },"GET", _this, _this.loadPlaced);
+                         },"GET", Global, Global.loadPlaced);
 
             }else if(['servicing','cleaning','windshield'].indexOf(service_type)>=0){
                 service_id = Global.vendorSelected['id'];
@@ -725,7 +725,7 @@ var Global = {
                              pick:JSON.stringify(pick),
                              drop:JSON.stringify(drop),
                              loc:'mobile'
-                         },"GET", _this, _this.loadPlaced);
+                         },"GET", Global, Global.loadPlaced);
 
             }else if(service_type == 'emergency'){
 
@@ -754,7 +754,7 @@ var Global = {
                              pick:JSON.stringify(pick),
                              drop:JSON.stringify(drop),
                              loc:'mobile'
-                         },"GET", _this, _this.loadPlaced);
+                         },"GET", Global, Global.loadPlaced);
 
             }
             return false;
@@ -1644,6 +1644,11 @@ $( document ).delegate("#order", "pagebeforeload", function() {
     },
     emergencyPageInit : function(){
 
+    },
+    loadPlaced : function(data){
+//      console.log("order_placed") ;
+      //window.alert("Guest Order Placed")
+      window.location.href = "#order-placed"
     },
     carBrands : ['Audi','Bentley','BMW','Bugatti','Chevrolet','Ferrari','Fiat','Ford','Honda','Hyundai','Isuzu','Jaguar','Lamborghini','Land Rover','Mahindra','Maruti Suzuki','Mercedes-Benz','Mini','Nissan','Porsche','Renault','Rolls-Royce','Skoda','Ssangyong','Tata','Toyota','Volkswagen','Volvo'],
     bikeBrands : ['Bajaj','Hero','Honda','KTM','Mahindra','Royal Enfield','Suzuki','TVS','Yamaha'],

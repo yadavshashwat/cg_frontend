@@ -1,13 +1,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
+    <meta charset="UTF-8">
     {% if title %}
         <title>{{ title }}</title>
     {% else %}
         <title>ClickGarage - On Demand Car and Bike Services</title>
     {% endif %}
+
+    {% if meta_desc %}
+    <meta name="description" content="{{ meta_desc }}">
+    {% else %}
     <meta name="description" content="Solution to all your vehicle maintenance needs. Compare prices, choose from a network of authorized and multibrand service centers, book doorstep services, get expert advice and save money. All within a few clicks.">
-    <meta name="keywords" content="Nissan Servicing ,Datsun Servicing ,Volkswagen Servicing ,Toyota Servicing ,Tata Servicing ,Skoda Servicing ,Renault Servicing ,Maruti Suzuki Servicing ,Mahindra Servicing ,Hyundai Servicing ,Honda Servicing ,Ford Servicing ,Fiat Servicing ,Chevrolet Servicing, Royal Enfield Servicing ,Suzuki Servicing ,TVS Servicing ,Bajaj Servicing ,KTM Servicing ,Yamaha Servicing ,Hero Servicing, car servicing, bike servicing, car cleaning, car dry cleaning, car interior cleaning, car exterior cleaning">
+    {% endif %}
+
+    {% if meta_keyw %}
+    <meta name="keywords" content="{{ meta_keyw }}">
+    {% else %}
+    <meta name="keywords" content="Nissan Servicing, Datsun Servicing, Volkswagen Servicing, Toyota Servicing, Tata Servicing, Skoda Servicing, Renault Servicing, Maruti Suzuki Servicing, Mahindra Servicing, Hyundai Servicing, Honda Servicing, Ford Servicing, Fiat Servicing, Chevrolet Servicing, Royal Enfield Servicing, Suzuki Servicing, TVS Servicing, Bajaj Servicing, KTM Servicing, Yamaha Servicing, Hero Servicing, car servicing, bike servicing, car cleaning, car dry cleaning, car interior cleaning, car exterior cleaning">
+    {% endif %}
+
+    <meta name="author" content="ClickGarage - Gurgaon based car & bike service provider">
 
     <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
    {% load staticfiles %}
@@ -242,7 +255,7 @@
     <div class="overlay overlay-pat"></div>
 
     <div class="login-modal-container bootstrap-wrapper persist-modal" style="display: none;">
-    {% include "website/login-popup.html" %}
+    {% include "website/login-popup.html" with next_url='/order/'  %}
 </div>
 
 <!--Google Analytics Script-->

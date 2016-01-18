@@ -1,10 +1,4 @@
-/**
- * Created with PyCharm.
- * User: vociferous
- * Date: 25/07/15
- * Time: 7:30 PM
- * To change this template use File | Settings | File Templates.
- */
+
 
 var Global = {
     init:function(){
@@ -283,6 +277,10 @@ var Global = {
             var c_name2 = $('#brandSelect option:selected').val() + " " + $('#modelSelect option:selected').val();
             var c_id = "";
             var c_name = "";
+            var varcity = $('#home-citybox-holder').find('input').val();
+            if(!varcity){
+                varcity = 'Gurgaon'
+            }
             if (c_id2.length && !c_id1.length) {
                 console.log('going for box1')
                 c_id = c_id + c_id2;
@@ -302,7 +300,8 @@ var Global = {
                 local.clearKey('clgacart');
                 local.save('clgacarid',c_id);
                 local.save('clgacarname',c_name);
-                window.location = loc + 'order/?c_id='+c_id;
+//                window.location = loc + 'order/?c_id='+c_id;
+                window.location = loc + 'order/'+c_name.split(' ').join('-')+'/'+varcity+'/';
 //               $(this).find('#omni-search-box').remove();
                 return false;
             }

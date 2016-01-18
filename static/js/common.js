@@ -1,10 +1,3 @@
-/**
- * Created with PyCharm.
- * User: vociferous
- * Date: 03/08/15
- * Time: 10:06 PM
- * To change this template use File | Settings | File Templates.
- */
 
 
 var Commons = {
@@ -374,7 +367,7 @@ var Templates = {
                                         html += '</div></div>';
                                     }
                                 });
-                                html += "<span>Parts in healthy condition won't be replaced.</span>"
+                                html += '<div class="show-hide"></div>';
                                 return html;
                                 /*
                                 if(this['parts_replaced'] && this['parts_replaced'].length){
@@ -387,7 +380,8 @@ var Templates = {
                                     return "None";
                             */
                                 }
-                            }
+                            },
+                        {"tag":"span", "class":"info", "html":"Parts in healthy condition won't be replaced."}
                             ]}
                     ]}
                 ]},
