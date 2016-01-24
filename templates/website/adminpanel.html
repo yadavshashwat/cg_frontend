@@ -19,7 +19,7 @@
     <!--<script type="text/javascript" src="{%  static "js/checkout.js" %}"></script>-->
     <script type="text/javascript" src="{%  static "js/adminpanel.js" %}"></script>
 <!--    <script type="text/javascript" src="{%  static "js/sms-popup.js" %}"></script>-->
-    <script src="{%  static "js/legacy/less.min.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/legacy/less.min.js" %}"></script>
         <script type="text/javascript" src="{%  static "js/legacy/jquery-2.1.4.min.js" %}"></script>
     <script type="text/javascript" src="{%  static 'js/legacy/bootstrap-datepicker.js' %}"></script>
     <script type="text/javascript" src="{%  static 'js/legacy/jquery.timepicker.js' %}"></script>
@@ -42,7 +42,7 @@
         Global.carSelected = {{ carSelected | js}};
     </script>
 <!--&ndash;&gt;-->
-     <script>
+     <script type="text/javascript">
     $(document).ready(function(e){
     $("#submit-btn").click();});
     </script>

@@ -1,18 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>ClickGarage - Solution to your car/bike maintenance needs</title>
-    <meta name="description" content="Save money by comparing prices across 50+ garages (authorized & multibrand). Free pick-up/drop-off, doorstep services and expert advise. All within a few clicks.">
-    <meta name="keywords" content="Nissan Servicing ,Datsun Servicing ,Volkswagen Servicing ,Toyota Servicing ,Tata Servicing ,Skoda Servicing ,Renault Servicing ,Maruti Suzuki Servicing ,Mahindra Servicing ,Hyundai Servicing ,Honda Servicing ,Ford Servicing ,Fiat Servicing ,Chevrolet Servicing, Royal Enfield Servicing ,Suzuki Servicing ,TVS Servicing ,Bajaj Servicing ,KTM Servicing ,Yamaha Servicing ,Hero Servicing, car servicing, bike servicing, car cleaning, car dry cleaning, car interior cleaning, car exterior cleaning">
+    <meta name="description" content="Save money by comparing prices across 50+ garages (authorized &amp; multibrand). Free pick-up/drop-off, doorstep services and expert advise. All within a few clicks."/>
+    <meta name="keywords" content="Nissan Servicing ,Datsun Servicing ,Volkswagen Servicing ,Toyota Servicing ,Tata Servicing ,Skoda Servicing ,Renault Servicing ,Maruti Suzuki Servicing ,Mahindra Servicing ,Hyundai Servicing ,Honda Servicing ,Ford Servicing ,Fiat Servicing ,Chevrolet Servicing, Royal Enfield Servicing ,Suzuki Servicing ,TVS Servicing ,Bajaj Servicing ,KTM Servicing ,Yamaha Servicing ,Hero Servicing, car servicing, bike servicing, car cleaning, car dry cleaning, car interior cleaning, car exterior cleaning"/>
     <meta property="og:image" content="../../static/img/Logo-black.jpg"/>
 
     
     {% load staticfiles %}
      <!--{% static "css/font.css" %}-->
     <!--{{ STATIC_URL }}-->
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL}}css/font-awesome.min.css" />
+    <!--<link rel="stylesheet" type="text/css" href="{{ STATIC_URL}}css/font-awesome.min.css" />-->
    <link rel="shortcut icon" type="image/png" href="../../static/img/favicon.png"/>
-    <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css'>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css'/>
 <!--    <link href="../../static/css/jquery-video-lightning.css" rel="stylesheet" type="text/css">-->
     
     <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.min.css" %}" />
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="{%  static "js/home.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/common.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/legacy/jssor.slider.debug.js" %}"></script>
-    <script>
+    <script type="text/javascript">
 
     $(function() {
     $(".video-link").jqueryVideoLightning({
@@ -42,9 +42,9 @@
     <!--Script Addition - Slider Start-->
     <script type="text/javascript" src="{%  static "js/jssor.js" %}"></script>
     <script type="text/javascript" src="{%  static "js/jssor.slider.js" %}"></script>
-    <script src="../../static/js/jquery-video-lightning.js"></script>
+    <script type="text/javascript" src="../../static/js/jquery-video-lightning.js"></script>
 
-    <script>
+    <script type="text/javascript">
         jQuery(document).ready(function ($) {
             var options = {
                 $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
@@ -168,13 +168,13 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                     </div>            
                     <div class="radio-btn-div">
                         <form>
-                            <input type="radio" class="vehicleRadio" id="carRadio" name="vehicleRadio" value="Car" checked>Car
-                            <input type="radio" class="vehicleRadio" id="bikeRadio" name="vehicleRadio" value="Bike">Bike
+                            <input type="radio" class="vehicleRadio" id="carRadio" name="vehicleRadio" value="Car" checked />Car
+                            <input type="radio" class="vehicleRadio" id="bikeRadio" name="vehicleRadio" value="Bike" />Bike
                         </form>      
                     </div>
                     <div class="vehicle-dropdown-div">
                         <select class="custom-select" name="brandSelect" id="brandSelect" >
-                            <option selected disabled>Select Brand</option>
+                            <option selected="true" disabled="true">Select Brand</option>
                             <option value="Audi">Audi</option>
                             <option value="Bentley">Bentley</option>
                             <option value="BMW">BMW</option>
@@ -205,7 +205,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                             <option value="Volvo">Volvo</option>
                         </select>
                         <select class="custom-select" name="modelSelect" id="modelSelect" >
-                            <option selected disabled>Select Model</option>
+                            <option selected="true" disabled="true">Select Model</option>
                         </select>
                     </div>
                     <div class="separator-line">
@@ -218,7 +218,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                             <div class="omnibox-holder" id="home-omnibox-holder" style="z-index: 49;">
                                 <input type="hidden" id="hidden-id-box" name="c_id" style="display: none;" />
                                 <input type="hidden" id="hidden-id-box2" name="c_id2" style="display: none;" />
-                                <input type="text" id="omni-search-box" class="omni-search-box" name="car_name" placeholder="Type your car/bike model" autocomplete="off">
+                                <input type="text" id="omni-search-box" class="omni-search-box" name="car_name" placeholder="Type your car/bike model" autocomplete="off"/>
                                 <i class="icon fa fa-search"></i>
                                 <label for="omni-search-box" class="omni-drop-box" style="display: none;">
 {#                                  <div class="drop-ttl">Dropdown</div>#}
@@ -657,7 +657,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
 </div>
 
 <!--Google Analytics Script-->
-<script>
+<script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
