@@ -19,9 +19,9 @@ var zyxCart = {
             $('#same-day-toggle').prop('checked', false);
         }
 
-
-    $('#time-wrap .pick-up-time').timepicker({
-        timeFormat: 'hA-jB',
+        /*
+        {
+        timeFormat: 'h:00 A - j:00 B',
         // year, month, day and seconds are not important
 
         minTime: new Date(0, 0, 0, 8, 0, 0),
@@ -35,7 +35,24 @@ var zyxCart = {
         startTime: new Date(0, 0, 0, 8, 20, 0),
         // items in the dropdown are separated by at interval minutes
         step: 60,
-    });
+        }
+        */
+    var timeWrapSettings = {
+        timeFormat: 'h:00 A - j:00 B',
+        minTime: new Date(0, 0, 0, 9, 0, 0),
+        maxTime: new Date(0, 0, 0, 13, 0, 0),
+        step: 60
+
+    }
+    if(this.carData && this.carData['car_bike'] == 'Bike'){
+     timeWrapSettings = {
+            timeFormat: 'h:i A - J:I B',
+            minTime: new Date(0, 0, 0, 9, 0, 0),
+            maxTime: new Date(0, 0, 0, 18, 0, 0),
+            step: 90
+        }
+    }
+    $('#time-wrap .pick-up-time').timepicker(timeWrapSettings);
 
 
     $('#date-wrap .pick-up-date').datepicker({
@@ -98,6 +115,15 @@ var zyxCart = {
     },
     eventHandlers : function(){
         var _this = this;
+        $('.clean-inp-wrapper').off().on('focus', 'input.clean-inp-tbox', function(e){
+            $(this).closest('.clean-inp-wrapper').addClass('input-focused');
+        });
+        $('.clean-inp-wrapper').on('focusout', 'input.clean-inp-tbox', function(e){
+            if(!$(this).val() && !$(this).hasClass('perpetual')){
+                $(this).closest('.clean-inp-wrapper').removeClass('input-focused');
+            }
+        });
+
         $('.login-step .change-login-btn').on('click', function(){
             //summarize previous steps
             //set present
