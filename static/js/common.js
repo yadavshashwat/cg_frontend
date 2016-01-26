@@ -328,7 +328,9 @@ var Templates = {
                         {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select This Service </div>";}}
                     ]},
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
-                        {"tag":"div", "class":"due-div fl", "html":function(){return "<span class='odo-read'>"+  (this.type_service == "Not Defined" ? 'I am not sure<br> <span class="due-at-read">I will go with minor servicing and <br> would  like post check-up recommendation</span>': this.type_service)+"</span>";}},
+                        //{"tag":"div", "class":"due-div fl", "html":function(){return "<span class='odo-read'>"+  (this.type_service == "Not Defined" ? 'I am not sure<br> <span class="due-at-read">I will go with minor servicing and <br> would  like post check-up recommendation</span>': this.type_service)+"</span>";}},
+                        {"tag":"div", "class":"due-div fl", "html":function(){return "<span class='odo-read'>"+ this.type_service + '<br> <span class="due-at-read">' + this.service_desc + "</span></span>";}},
+
 
                     {"tag":"div", "class":"service-details fix_servicedetails", "children":[
                         {"tag":"div", "class":"checks-div", "html":function(){return 'Exterior Washing';}},
@@ -399,6 +401,7 @@ var Templates = {
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
                         {"tag":"div", "class":"due-div", "html":function(){return "<span class='clean-cat'>"+this.category +"</span>";}},
+                         //{"tag":"div", "class":"due-div", "html":function(){return "<span class='clean-cat'>"+this.category +"</span>";}},
 //                        {"tag":"div", "class":"price-div", "html":function(){return "Type : <span>"+this['paid_free']+"</span>";}}
                     ]}
                 ]},
