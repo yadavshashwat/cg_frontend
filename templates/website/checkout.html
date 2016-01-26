@@ -388,51 +388,77 @@
                 <div class="form-col">
                     <div class="label-div"><b>User Details</b></div>
                     <div class="form-row mt12">
-                        <div class="label-div">Name*</div>
-                    </div>
-                    <div class="form-row">
                     {% if user and not user.is_anonymous and user.first_name %}
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-name txtbox" type="text" value="{{ user.first_name }}"/></div>
+                        <div class="clean-inp-wrapper input-focused">
+                            <label for="">Name</label>
+                            <input class="clean-inp-tbox user-name" type="text" value="{{ user.first_name }}"/>
+                        </div>
                     {% else %}
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-name txtbox" type="text"/></div>
+                        <div class="clean-inp-wrapper">
+                            <label for="">Name</label>
+                            <input class="clean-inp-tbox user-name" type="text"/>
+                        </div>
                     {% endif %}
 
-                    </div>
-                    <div class="form-row mt12">
-                        <div class="label-div">Phone*</div>
                     </div>
                     <div class="form-row">
                     {% if user and not user.is_anonymous and user.contact_no %}
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-number txtbox" placeholder="eg. 7676767676" type="text" value="{{ user.contact_no }}"/></div>
+                        <div class="clean-inp-wrapper">
+                            <label for="">Phone No.</label>
+                            <input class="clean-inp-tbox user-number" type="text" value="{{ user.contact_no }}"/>
+                        </div>
                     {% else %}
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-number txtbox" placeholder="eg. 7676767676" type="text"/></div>
+                        <div class="clean-inp-wrapper">
+                            <label for="">Phone No.</label>
+                            <input class="clean-inp-tbox user-number" type="text"/>
+                        </div>
                     {% endif %}
                     </div>
 
-                    <div class="form-row mt12">
-                        <div class="label-div">Email*</div>
-                    </div>
                     <div class="form-row">
                     {% if user and not user.is_anonymous and user.email %}
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-email txtbox" placeholder="xyz@gmail.com" type="email" value="{{ user.email }}" /></div>
+                        <div class="clean-inp-wrapper input-focused">
+                            <label for="">Email</label>
+                            <input class="clean-inp-tbox user-email" type="email" value="{{ user.email }}" />
+                        </div>
                     {% else %}
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-email txtbox" placeholder="xyz@gmail.com" type="email"/></div>
+                        <div class="clean-inp-wrapper">
+                            <input class="clean-inp-tbox user-email" type="email"/>
+                        </div>
                     {% endif %}
                     </div>
 
-                    <div class="form-row mt12">
-                        <div class="label-div">Car Reg. No.</div>
-                    </div>
-                    <div class="form-row">
+                    <div class="form-row none-i">
                         <div class="clean-inp-wrapper">
-                            <input class="clean-inp-tbox car-reg-no txtbox" placeholder= 'eg. RJ02CC4222' type="text";"/>
+                            <label for="">Car/Bike Reg. No.</label>
+                            <input class="clean-inp-tbox car-reg-no" type="text" />
                         </div>
                     </div>
 
                 </div>
                 <div class="form-col" id="pick-up-col">
                     <div class="label-div"><b>Pickup Address/ Doorstep Service Location</b></div>
-                    <div class="form-row mt12" style="height: 80px;">
+
+                    <div class="form-row mt12">
+                        <div class="clean-inp-wrapper">
+                            <label for="">Address Line 1</label>
+                            <input class="clean-inp-tbox pick-addr-1" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="clean-inp-wrapper">
+                            <label for="">Address Line 2</label>
+                            <input class="clean-inp-tbox pick-addr-2" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="clean-inp-wrapper input-focused">
+                            <label for="">City</label>
+                            <input class="clean-inp-tbox pick-city perpetual" type="text" value="Gurgaon" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-row mt12 none-i" style="height: 80px;">
                         <div class="label-div">Address*</div>
                         <div class="clean-inp-wrapper"><textarea placeholder = "House No., Street" class="clean-inp-tabox pick-addr txtbox" type="" rows="3"></textarea>
                         </div>
@@ -445,7 +471,7 @@
                         <!--<div class="label-div">Landmark*</div>-->
                         <!--<div class="clean-inp-wrapper"><input placeholder = "eg. XYZ Mall"  class="clean-inp-tbox pick-lmark txtbox" type=""/></div>-->
                     <!--</div>-->
-                    <div class="form-row mt12">
+                    <div class="form-row mt12 none-i">
                         <div class="label-div">City*</div>
                         <div class="clean-inp-wrapper">
                             <!--<input class="clean-inp-tbox drop-city" disabled type=""/>-->
@@ -457,7 +483,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="form-row mt12">
+                    <div class="form-row mt12  none-i">
                         <input class="clean-inp-cbox" id="pick-drop-toggle" type="checkbox"/>
                         <div class="label-div">&nbsp;&nbsp;Set Different Dropoff Address</div>
                     </div>
@@ -468,24 +494,43 @@
                     <div class="form-row mt12 none-i">
                         <div class="label-div">Date & Time Slot*</div>
                     </div>
-                    <div class="form-row mt12">
-                        <div class="label-div">Date*</div>
-                        <div class="clean-inp-wrapper" id="date-wrap">
-                            <input class="clean-inp-tbox pick-up-date txtbox" data-date-start-date="1d" placeholder="mm/dd/yyyy" type="text" style="width:45%;"/>
-                        </div>
-                    </div>
-                    <div class="form-row mt12">
-                        <input class="clean-inp-cbox" id="same-day-toggle" checked type="checkbox"/>
+                    <!--<div class="form-row mt12">-->
+                        <!--<div class="label-div">Date*</div>-->
+                        <!--<div class="clean-inp-wrapper input-focused" id="date-wrap">-->
+                            <!--<label for="">Date</label>-->
+                            <!--<input class="clean-inp-tbox pick-up-date perpetual" data-date-start-date="1d" placeholder="mm/dd/yyyy" type="text" />-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="form-row mt12 none-i">
+                        <input class="clean-inp-cbox" id="same-day-toggle" type="checkbox"/>
                         <div class="label-div">Same day delivery</div>
                     </div>
+                    <!--<div class="form-row mt12">-->
+                        <!--<div class="clean-inp-wrapper input-focused" id="time-wrap">-->
+                            <!--<label for="">Time</label>-->
+                            <!--<input class="clean-inp-tbox pick-up-time perpetual" placeholder="hh:mm - hh:mm" />-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <div class="form-col">
+                    <div class="label-div"><b>Other details</b></div>
+
                     <div class="form-row mt12">
-                        <div class="label-div">Time slot*</div>
-                        <div class="clean-inp-wrapper" id="time-wrap">
-                            <input class="clean-inp-tbox pick-up-time txtbox" placeholder="Time Slot" style="width:35%; "/>
+                        <!--<div class="label-div">Date*</div>-->
+                        <div class="clean-inp-wrapper input-focused" id="date-wrap">
+                            <label for="">Date</label>
+                            <input class="clean-inp-tbox pick-up-date perpetual" data-date-start-date="1d" placeholder="mm/dd/yyyy" type="text" />
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="clean-inp-wrapper input-focused" id="time-wrap">
+                            <label for="">Time</label>
+                            <input class="clean-inp-tbox pick-up-time perpetual" placeholder="hh:mm - hh:mm" />
+                        </div>
+                    </div>
+
                 </div>
-                <div class="form-col disabled" id="drop-off-col">
+                <div class="form-col disabled" id="drop-off-col" style="display: none;">
                     <div class="label-div"><b>Dropoff Address</b></div>
                     <div class="form-row mt12" style="height: 80px;">
                         <div class="label-div">Address*</div>
@@ -517,6 +562,7 @@
                     <!--</div>-->
 
                 </div>
+
                 <div class="form-submit-row" style="">
                     <span class="form-submit-btn continue-btn btn btn-white-yellow">Continue</span>
                 </div>
@@ -726,7 +772,7 @@
     {% include "website/address-popup.html" %}
 </div>
 
-<script>
+<script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)

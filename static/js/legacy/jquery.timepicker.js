@@ -410,7 +410,7 @@
 				}
 			}
 		}
-
+        console.log(settings)
 		return settings;
 	}
 
@@ -607,7 +607,6 @@
 		} else {
 			$.error('Invalid noneOption value');
 		}
-
 		if (useSelect) {
 			return $('<option />', {
 					'value': value,
@@ -1060,6 +1059,27 @@
 					}
 					output += (hour === 0) ? '12' : hour;
 					break;
+				case 'J':
+					hour = time.getHours() % 12;
+					var min = time.getMinutes();
+					if (hour<12){
+                        if(min == 30)
+    						hour = hour + 2
+                        else
+                            hour = hour + 1
+					}else{
+                        if(min == 30)
+    						hour = 2
+                        else
+                            hour = 1
+
+					}
+
+					if (hour !== 0 && hour < 10) {
+						hour = '0'+hour;
+					}
+					output += (hour === 0) ? '12' : hour;
+					break;
 
 				case 'H':
 					hour = time.getHours();
@@ -1069,6 +1089,12 @@
 
 				case 'i':
 					var minutes = time.getMinutes();
+					output += (minutes > 9) ? minutes : '0'+minutes;
+					break;
+				case 'I':
+					var minutes = time.getMinutes();
+                    minutes += 30;
+                    minutes = minutes%60;
 					output += (minutes > 9) ? minutes : '0'+minutes;
 					break;
 
@@ -1146,7 +1172,6 @@
 				timeInt = (timeInt + (_ONE_DAY / 2)) % _ONE_DAY;
 			}
 		}
-
 		return timeInt;
 	}
 
