@@ -5,7 +5,7 @@ var Global = {
         var jsslider = null;
         var _this = this;
         _this.setLayout();
-        _this.jssor_1_slider_init();
+//        _this.jssor_1_slider_init();
         var cityBoxHolder = $('#home-citybox-holder');
         if(cityBoxHolder.length){
             $(cityBoxHolder).materialDropDown({
@@ -57,7 +57,7 @@ var Global = {
         });
         var searchContentHolder = $('.search-pane').find('.content-holder');
         var givenHt = searchContentHolder.outerHeight();
-        var reqd_offset = (scrn_ht - givenHt)/2-40;
+        var reqd_offset = (scrn_ht - givenHt)/2-60;
         searchContentHolder.css({
            'marginTop':reqd_offset
         });
@@ -337,13 +337,14 @@ var Global = {
             );
         });
         $('.radio-btn-div .vehicleRadio').on('click', function(e){
-            console.log('v_type change detected');
+            $(this).closest('.radio-btn-div').find('.active').removeClass('active');
+            $(this).closest('.radio-btn').addClass('active');
             var v_type = $(this).attr('value');
             var container = $('#brandSelect');
             container.html('');
             var carBrands = ['Audi','Bentley','BMW','Bugatti','Chevrolet','Ferrari','Fiat','Ford','Honda','Hyundai','Isuzu','Jaguar','Lamborghini','Land Rover','Mahindra','Maruti Suzuki','Mercedes-Benz','Mini','Nissan','Porsche','Renault','Rolls-Royce','Skoda','Ssangyong','Tata','Toyota','Volkswagen','Volvo'];
             var bikeBrands = ['Bajaj','Hero','Honda','KTM','Mahindra','Royal Enfield','Suzuki','TVS','Yamaha'];
-            html = '<option selected disabled>Select Brand</option>';
+            var html = '<option selected disabled>Select Brand</option>';
             if (v_type=='Car'){
                 for (i=0; i<carBrands.length; i++){
                     html += '<option>' + carBrands[i] + '</option>';
@@ -354,11 +355,11 @@ var Global = {
                     html += '<option>' + bikeBrands[i] + '</option>';
                 }
             }
-        container.html(html);
+            $('#modelSelect').html('<option selected disabled>Select Model</option>');
+            container.html(html).removeClass('active');
         });
         $('.vehicle-dropdown-div #brandSelect').on('change', function(){
-            console.log('brand change detected');
-            var v_brand = $(this).val();
+            var v_brand = $(this).addClass('active').val();
             var v_type = '';
             if (document.getElementById('carRadio').checked){
                 v_type = v_type+'Car';
@@ -366,7 +367,7 @@ var Global = {
             else{
                 v_type = v_type+'Bike';
             }            
-            console.log(v_brand);
+            $('#modelSelect').html('<option selected disabled>Select Model</option>');
             Commons.ajaxData('fetch_car_list', {m_id:v_brand,cb_id:v_type},"get",Global,Global.loadCarMake);
         });
         $('.vehicle-dropdown-div #modelSelect').on('change', function(){

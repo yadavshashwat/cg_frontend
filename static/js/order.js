@@ -36,6 +36,11 @@ var Global = {
                 $(this).siblings().removeClass('active');
                 var classy = $(this).attr('data-class');
 //                console.log($(this).closest('.section-box').find('.section-content-item').hide())
+                if(classy == 'vas'){
+                $('.sel-car-holder').find('.detail-holder').find('.service').html('(car care)');
+                }else{
+                $('.sel-car-holder').find('.detail-holder').find('.service').html('('+classy+')');
+                }
                 $(this).closest('.section-box').find('.section-content-item').hide();
                 var mine = $(this).closest('.section-box').find('.section-content-item').filter('.'+classy).show();
                 if(mine.hasClass('loaded')){

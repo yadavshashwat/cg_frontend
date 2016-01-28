@@ -3,7 +3,10 @@
 <head>
     <title>ClickGarage - Solution to your car/bike maintenance needs</title>
     <meta name="description" content="Save money by comparing prices across 50+ garages (authorized &amp; multibrand). Free pick-up/drop-off, doorstep services and expert advise. All within a few clicks."/>
-    <meta name="keywords" content="Nissan Servicing ,Datsun Servicing ,Volkswagen Servicing ,Toyota Servicing ,Tata Servicing ,Skoda Servicing ,Renault Servicing ,Maruti Suzuki Servicing ,Mahindra Servicing ,Hyundai Servicing ,Honda Servicing ,Ford Servicing ,Fiat Servicing ,Chevrolet Servicing, Royal Enfield Servicing ,Suzuki Servicing ,TVS Servicing ,Bajaj Servicing ,KTM Servicing ,Yamaha Servicing ,Hero Servicing, car servicing, bike servicing, car cleaning, car dry cleaning, car interior cleaning, car exterior cleaning"/>
+    <meta name="keywords" content="Nissan Servicing, Datsun Servicing, Volkswagen Servicing, Toyota Servicing, Tata Servicing, Skoda Servicing,
+    Renault Servicing, Maruti Suzuki Servicing, Mahindra Servicing, Hyundai Servicing, Honda Servicing, Ford Servicing, Fiat Servicing,
+    Chevrolet Servicing, Royal Enfield Servicing, Suzuki Servicing, TVS Servicing, Bajaj Servicing, KTM Servicing, Yamaha Servicing, Hero Servicing,
+    car servicing, bike servicing, car cleaning, car dry cleaning, car interior cleaning, car exterior cleaning"/>
     <meta property="og:image" content="../../static/img/Logo-black.jpg"/>
 
     
@@ -135,24 +138,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
         <div class="transparent-header">
            {% include "website/home-header.html" %}
         </div>
-        <div style="display: none;">
-   {% if user and not user.is_anonymous %}
-     <li>
-       <a>Hello {{ user.get_full_name|default:user.username }}!</a>
-     </li>
-     <li>
-       <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
-     </li>
-   {% else %}
-     <li>
-       <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
-     </li>
-     <li>
-       <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Login with Google</a>
-     </li>
-   {% endif %}
-                </div>
-        <div class="content-holder">   
+        <div class="content-holder">
             <div class="title-holder">
                     <div class="title">
                        Car And Bike Care. Made Hassle Free.
@@ -165,14 +151,21 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                 <div class="dropdown-div">
                     <div class="sub-title">
                         Select vehicle to compare and book services
-                    </div>            
-                    <div class="radio-btn-div">
-                        <form>
-                            <input type="radio" class="vehicleRadio" id="carRadio" name="vehicleRadio" value="Car" checked />Car
-                            <input type="radio" class="vehicleRadio" id="bikeRadio" name="vehicleRadio" value="Bike" />Bike
-                        </form>      
                     </div>
-                    <div class="vehicle-dropdown-div">
+                    <div class="radio-btn-div">
+                        <div class="radio-btn active">
+                            <input type="radio" class="vehicleRadio" id="carRadio" name="vehicleRadio" value="Car" checked />
+                            <label for="carRadio">Car</label>
+                        </div>
+                        <div class="radio-btn">
+                            <input type="radio" class="vehicleRadio" id="bikeRadio" name="vehicleRadio" value="Bike" />
+                            <label for="bikeRadio">Bike</label>
+                        </div>
+                    </div>
+
+                <form id="home-search-form" method="get" action="/order/" data-remote="true" accept-charset="UTF-8">
+
+                    <div class="vehicle-dropdown-div" style="width: 25%;">
                         <select class="custom-select" name="brandSelect" id="brandSelect" >
                             <option selected="true" disabled="true">Select Brand</option>
                             <option value="Audi">Audi</option>
@@ -204,16 +197,23 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                             <option value="Volkswagen">Volkswagen</option>
                             <option value="Volvo">Volvo</option>
                         </select>
+                    </div>
+                    <div class="vehicle-dropdown-div" style="width: 55%;">
                         <select class="custom-select" name="modelSelect" id="modelSelect" >
                             <option selected="true" disabled="true">Select Model</option>
                         </select>
                     </div>
-                    <div class="separator-line">
+                    <div class="submit-btn-holder purple-btn-1" id="home-submit-holder" style="width: 19%">
+                        <button class="form-submit-btn" type="submit">Get Started</button>
+                    </div>
+                </form>
+
+                    <div class="separator-line none-i">
                         <div class="sep-line"><hr></div>
                         <div class="or-text">or</div>
                         <div class="sep-line"><hr></div>
                     </div>                    
-                    <div class="search-set-holder" id="home-search-set-holder">
+                    <div class="search-set-holder none-i" id="home-search-set-holder">
                         <form id="home-search-form" method="get" action="/order/" data-remote="true" accept-charset="UTF-8">
                             <div class="omnibox-holder" id="home-omnibox-holder" style="z-index: 49;">
                                 <input type="hidden" id="hidden-id-box" name="c_id" style="display: none;" />
@@ -221,7 +221,6 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                                 <input type="text" id="omni-search-box" class="omni-search-box" name="car_name" placeholder="Type your car/bike model" autocomplete="off"/>
                                 <i class="icon fa fa-search"></i>
                                 <label for="omni-search-box" class="omni-drop-box" style="display: none;">
-{#                                  <div class="drop-ttl">Dropdown</div>#}
                                     <ul></ul>
                                 </label>
                             </div>
@@ -230,43 +229,6 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                             </div>
                         </form>
                     </div>
-                </div>
-                <div class="slider-div" style="position:relative;">
-                    
-                    <div id="jssor_1">
-                    <!-- Loading Screen -->
-                        <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
-                            <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-                            <div style="position:absolute;display:block;background:url('/static/img/slider/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
-                        </div>
-                        <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; right:0px; width: 640px; height: 300px; overflow: hidden;">
-                            <div data-p="100"  style="display: none;">
-                                <a href="https://play.google.com/store/apps/details?id=innovations.generis.sui.clickgarage" target="_blank"><img data-u="image" src="/static/img/slider/playstore-link.jpg" /></a>
-                            </div>  
-                            <div data-p="100" style="display: none;">
-                                <img data-u="image" src="/static/img/slider/cleaning-discount.jpg" />
-                            </div>
-                            <!--<div data-p="100" style="display: none;">-->
-                                <!--<img data-u="image" src="/static/img/slider/car-discount.jpg" />-->
-                            <!--</div>-->
-                            <div data-p="100" style="display: none;">
-                                <img data-u="image" src="/static/img/slider/bike-discount.jpg" />
-                            </div>
-                            <div data-p="100" style="display: none;">
-                                <img data-u="image" src="/static/img/slider/features.jpg" />
-                            </div>
-                        </div>
-        <!-- Bullet Navigator -->
-                        <div data-u="navigator" class="jssorb05" data-autocenter="1">
-                            <!-- bullet navigator item prototype -->
-                            <div data-u="prototype" style="width:16px;height:16px;"></div>
-                        </div>
-                        <!-- Arrow Navigator -->
-                        <span data-u="arrowleft" class="jssora12l" style="width:30px;height:46px;" data-autocenter="2"></span>
-                        <span data-u="arrowright" class="jssora12r" style="width:50px;height:46px;" data-autocenter="2"></span>
-<!--                        <a href="http://www.jssor.com" style="display:none">Jssor Slider</a>-->
-                    </div>
-                    
                 </div>
             </div>
         </div>
@@ -532,7 +494,6 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                     <div><img u="image" alt="partner" src="../../static/img/partners/Express Windhield.jpg" /></div>
                     <div><img u="image" alt="partner" src="../../static/img/partners/Auto Glass Masters.jpg" /></div>
                 </div>
-                <a style="display: none" href="http://www.jssor.com">Bootstrap Slider</a>
             </div>
         </div>
      <!--Script Addition - Slider End-->

@@ -372,9 +372,88 @@
 				}
 				.content-holder{
 					position: relative;
-                    .dropdown-plus-slider-div{
-                        margin-top: 40px;
-                        height: 300px;
+                }
+                .video-embed{
+                    position: absolute;
+//				    bottom: -120px;
+				    left: 50%;
+				    margin-left: -80px;
+				    z-index: 50;
+                    display: inline;
+                    color:#fff;
+                    font-family: lato;
+                    height: 50px;
+                    margin-top: 50px;
+                    img{
+                        position: absolute;
+                        height: 50px;
+                    }
+                    .video-text{
+                        padding:17px 17px 17px 60px;
+                    }
+                }
+//			  .app-link{
+//                    position: absolute;
+//				    bottom: -120px;
+//				    right: 0%;
+//				    z-index: 50;
+//                    //display: inline;
+//					 padding-top: 50px;
+//                    color:#fff;
+//                        font-family: lato;
+//                        //padding-top: 50px;
+//                        img{
+//						height: 50px;}
+//
+//                    }
+//                }
+            }
+
+			.search-pane{
+				background: url('../img/bg_4.jpg');
+		//    background-position: 50% 50%;
+				min-height: 542px;
+				//    background-size: 100% auto;
+				.overlay-color.black{
+						background: rgba(0,0,0,0.35);
+						z-index: 12;
+				}
+				.overlay-color.purple{
+					background: rgba(44,62,80, 0.5);
+					z-index: 11;
+				}
+				.overlay-pat{
+					background: url('../img/search-bg-pat.png');
+					background-size: 4px 4px;
+					z-index: 10;
+				}
+				.overlay-video{
+					overflow: hidden;
+					video{
+						position: absolute;
+						bottom: -230px;
+					}
+				}
+				.overlay-image{
+					overflow: hidden;
+					img{
+						position: absolute;
+						bottom:-280px;
+						width: 100%;
+					}
+				}
+
+				.transparent-header{
+
+				}
+
+              .centered-content .content-holder .dropdown-plus-slider-div .dropdown-div{
+                width: 80%;
+                margin-left:10%;
+              }
+              .centered-content .content-holder .dropdown-plus-slider-div{
+                        margin-top: 24px;
+                        height: 130px;
                             .omni-search-box{
                                 ::-webkit-input-placeholder {
                                     font-size: 11px;
@@ -400,7 +479,6 @@
                             margin-top:auto;
                             margin-bottom:auto;
                             vertical-align: middle;
-                            width:300px;
 
 
                             .sub-title{
@@ -409,32 +487,24 @@
                                 width: 110%;
                                 margin-left: -5%;
                             }
-                            .radio-btn-div{
-                                color: #fff;
-                                margin: 12px 0px;
-                                font-size: 16px;
-                                font-family: lato;
-                                text-align: center;
-                                form{
-                                    align-content: center;
-                                    display: inline;
-                                    float: none;
-                                }
-                            }
                             .vehicle-dropdown-div{
-                                .custom-select{
-                                    display: block;
-                                    font-size: 16px;
-					               color:#616161;
-                                    font-family: lato;
-                                    width: 100%;
-                                    height: 40px;
-                                    padding: 0px 15px;
-                                    margin-top: 10px;
-				                    background: #fff;
-				                    opacity: 0.9;
-				                    border-radius: 6px;
-                                }
+                              .custom-select{
+                                  display: block;
+                                  font-size: 16px;
+                                 color:#616161;
+                                  font-family: lato;
+                                  width: 100%;
+                                  height: 48px;
+                                  padding: 0px 15px;
+                                  margin-top: 10px;
+                                  background: #fff;
+                                  opacity: 1;
+                                  -webkit-appearance:none;
+                                  border-radius: 0px;
+                              }
+                              .custom-select.active{
+                                background: #eaeaea;
+                              }
                             }
                             .separator-line{
                                 margin: 5px 0px;
@@ -534,82 +604,85 @@
                             }
                         }
                     }
+
+		    #home-search-form{
+		      overflow: auto;
+              font-size: 0;
+              padding: 12px;
+              background: rgba(0,0,0,0.5);
+              border-radius: 6px;
+              .vehicle-dropdown-div{
+                display: inline-flex;
+                vertical-align: top;
+                box-sizing: border-box;
+                padding:0px;
+                select{
+                  margin-top: 0px;
+                  -webkit-appearance:none;
                 }
-                .video-embed{
-                    position: absolute;
-				    bottom: -120px;
-				    left: 0%;
-				    z-index: 50;
-                    display: inline;
-                    color:#fff;
-                    font-family: lato;
-                    height: 50px;
-                    padding-top: 50px;
-                    img{
-                        position: absolute;
-                        height: 50px;
-                    }
-                    .video-text{
-                        padding:17px 60px;
-                    }
-                }
-//			  .app-link{
-//                    position: absolute;
-//				    bottom: -120px;
-//				    right: 0%;
-//				    z-index: 50;
-//                    //display: inline;
-//					 padding-top: 50px;
-//                    color:#fff;
-//                        font-family: lato;
-//                        //padding-top: 50px;
-//                        img{
-//						height: 50px;}
-//
-//                    }
-//                }
-            }
+              }
+              #home-submit-holder{
+                display: inline-flex;
+                vertical-align: top;
+                float: none;
+                margin-top: 0px;
+                height: 48px;
+                border-radius: 0px;
+                box-sizing: border-box;
+              }
+		    }
+                            .radio-btn-div{
+                                color: #fff;
+                                margin: 12px 0px 12px 0px;
+                                font-size: 16px;
+                                font-family: lato;
+                                text-align: center;
+                                line-height: 18px;
+                              .radio-btn{
+                                display: inline-block;
+//                                padding: 12px;
+                                background: rgba(0,0,0,0.6);
+                                border-radius: 3px;
+                                border: 1px solid #000;
+                                cursor:pointer;
+                                label{
+                                  display: block;
+                                  padding: 12px;
+                                  min-width: 60px;
+                                }
+                              }
+                              .radio-btn.active{
+                                border: 1px solid #fff;
+                              }
+                              .vehicleRadio{
+                                margin:0px;
+                                -webkit-appearance: checkbox;
+                                vertical-align: middle;
+                                line-height: 18px;
+                                cursor:pointer;
+                                display: none;
+                              }
+                              .radio-btn:first-child{
+                                margin-right: 12px;
+                              }
 
-			.search-pane{
-				background: url('../img/bg_4.jpg');
-		//    background-position: 50% 50%;
-				min-height: 542px;
-				//    background-size: 100% auto;
-				.overlay-color.black{
-						background: rgba(0,0,0,0.35);
-						z-index: 12;
-				}
-				.overlay-color.purple{
-					background: rgba(44,62,80, 0.5);
-					z-index: 11;
-				}
-				.overlay-pat{
-					background: url('../img/search-bg-pat.png');
-					background-size: 4px 4px;
-					z-index: 10;
-				}
-				.overlay-video{
-					overflow: hidden;
-					video{
-						position: absolute;
-						bottom: -230px;
-					}
-				}
-				.overlay-image{
-					overflow: hidden;
-					img{
-						position: absolute;
-						bottom:-280px;
-						width: 100%;
-					}
-				}
+                              /*
+                              .radio-btn:first-child{
+                                border-top-left-radius: 6px;
+                                border-bottom-left-radius: 6px;
+                              }
+                              .radio-btn:last-child{
+                                border-top-right-radius: 6px;
+                                border-bottom-right-radius: 6px;
+                              }
+                              */
+                                form{
+                                    align-content: center;
+                                    display: inline;
+                                    float: none;
+                                }
+                            }
 
-				.transparent-header{
-
-				}
-		//    #home-search-form{
-		//      overflow: auto;
-		//    }
 				.title-holder{
 				color: #fff;
 				text-align: center;
@@ -1638,11 +1711,15 @@
 				}
 				.sel-car-holder{
 					opacity: 0.6;
-					div{
+					div,h2{
 						float: left;
 						line-height: 24px;
-						margin-left: 8px;
+						margin: 0px 4px 0px 8px;
+					    font-size: 14px;
 						cursor: pointer;
+                      .service{
+                        font-weight: normal;
+                      }
 					}
 					i:before{
 						line-height: 24px;
