@@ -271,9 +271,9 @@ var Global = {
 //        });
         $('#home-search-form').on('submit', function(e){
             console.log('sumbit button clicked')
-            var c_id1 = $(this).find('#hidden-id-box').val();
-            var c_name1 = $(this).find('#omni-search-box').val();
-            var c_id2 = $(this).find('#hidden-id-box2').val();
+            var c_id1 = null;//$(this).find('#hidden-id-box').val();
+            var c_name1 = null;//$(this).find('#omni-search-box').val();
+            var c_id2 =  $('#modelSelect option:selected').attr('data-id');//$(this).find('#hidden-id-box2').val();
             var c_name2 = $('#brandSelect option:selected').val() + " " + $('#modelSelect option:selected').val();
             var c_id = "";
             var c_name = "";
@@ -281,17 +281,17 @@ var Global = {
             if(!varcity){
                 varcity = 'Gurgaon'
             }
-            if (c_id2.length && !c_id1.length) {
-                console.log('going for box1')
-                c_id = c_id + c_id2;
-                c_name = c_name + c_name2;
-                console.log("c_id: " + c_id)
-                console.log("c_name: " + c_name)
-            }else{
-                console.log('going for box2')
-                c_id = c_id + c_id1;
-                c_name = c_name + c_name1;
-            }   
+//            if (c_id2.length && !c_id1.length) {
+//                c_id = c_id + c_id2;
+//                c_name = c_name + c_name2;
+//            }else{
+//                console.log('going for box2')
+//                c_id = c_id + c_id1;
+//                c_name = c_name + c_name1;
+//            }
+
+            c_id = c_id2;
+            c_name = c_name2;
             if (!c_id.length){
                 return false
             }else{
@@ -302,7 +302,7 @@ var Global = {
                 local.save('clgacarname',c_name);
 //                window.location = loc + 'order/?c_id='+c_id;
                 window.location = loc + 'order/'+c_name.split(' ').join('-')+'/'+varcity+'/';
-//               $(this).find('#omni-search-box').remove();
+               $(this).find('#omni-search-box').remove();
                 return false;
             }
         });
@@ -360,21 +360,17 @@ var Global = {
         });
         $('.vehicle-dropdown-div #brandSelect').on('change', function(){
             var v_brand = $(this).addClass('active').val();
-            var v_type = '';
-            if (document.getElementById('carRadio').checked){
-                v_type = v_type+'Car';
-            }
-            else{
-                v_type = v_type+'Bike';
-            }            
+            var v_type = $('.vehicleRadio:checked').val();
+            if(!v_type)
+                v_type = 'Bike'
             $('#modelSelect').html('<option selected disabled>Select Model</option>');
             Commons.ajaxData('fetch_car_list', {m_id:v_brand,cb_id:v_type},"get",Global,Global.loadCarMake);
         });
         $('.vehicle-dropdown-div #modelSelect').on('change', function(){
             console.log('model change detected');
             var c_id = $('option:selected', this).attr("data-id");
-            console.log(c_id);
-            document.getElementById('hidden-id-box2').value = c_id;            
+//            console.log(c_id);
+//            document.getElementById('hidden-id-box2').value = c_id;
         });
     },
     paneScrolls:function(){

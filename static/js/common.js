@@ -341,11 +341,13 @@ var Templates = {
 
 
                     {"tag":"div", "class":"service-details fix_servicedetails", "children":[
-                        {"tag":"div", "class":"checks-div", "html":function(){return 'Exterior Washing';}},
-                        {"tag":"div", "class":"checks-div", "html":function(){return 'Interior Vacuuming';}},
-                        {"tag":"div", "class":"checks-div", "html":function(){return 'Dashboard Polish';}},
-                        {"tag":"div", "class":"checks-div", "html":function(){return 'Parts Check & Replacement';}},
-                        //{"tag":"div", "class":"checks-div", "html":function(){return '/';}},
+                        {"tag":"div","class":"checks-wrapper", "html":function(){
+                            if(this.car_bike == 'Bike'){
+                                return '<div class="checks-div">Washing & Polishing</div><div class="checks-div">Parts Check &amp; Replacement</div>'
+                            }else{
+                                return '<div class="checks-div">Exterior Washing</div><div class="checks-div">Interior Vacuuming</div><div class="checks-div">Dashboard Polish</div><div class="checks-div">Parts Check &amp; Replacement</div>'
+                            }
+                        }},
                         {"tag":"div", "class":"parts-div", "html":function(){
                             var html = '';
                             html +='<span class="desc">Description</span>';
