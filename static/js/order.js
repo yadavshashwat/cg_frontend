@@ -300,7 +300,7 @@ var Global = {
     
     loadServicing : function(data){
         console.log(data)
-        var container = $('.section-box .servicing');
+        var container = $('.section-box .section-listings .servicing');
         container.html('');
         container.json2html(data, Templates.orderPage.servicing, {append:true});
 //        container.append(json2html.transform(data,Templates.orderPage.services));
@@ -333,7 +333,7 @@ var Global = {
     },
     loadCleaning : function(data){
         console.log(data);
-        var container = $('.section-box .cleaning');
+        var container = $('.section-box .section-listings .cleaning');
         container.html('');
         container.json2html(data, Templates.orderPage.cleaning, {append:true});
 
@@ -369,7 +369,7 @@ var Global = {
     
     loadWindshield : function(data){
         console.log(data)
-        var container = $('.section-box .windshield');
+        var container = $('.section-box .section-listings .windshield');
         container.html('');
         container.json2html(data, Templates.orderPage.windshield, {append:true});
 //        container.append(json2html.transform(data,Templates.orderPage.services));
@@ -400,7 +400,7 @@ var Global = {
 
     loadVas : function(data){
         console.log(data);
-        var container = $('.section-box .vas');
+        var container = $('.section-box .section-listings .vas');
         container.html('');
         container.json2html(data, Templates.orderPage.vas, {append:true});
 
