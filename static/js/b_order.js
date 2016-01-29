@@ -123,7 +123,7 @@ var Global = {
                         }
                         var newC = [obj.timestamp,obj.service, '--', obj.s_id].join('*');
                         var modalHTML = '<div class="ajax-wait" style="color:#fff;">Waiting for server response</div>';
-                        $('.order-body').append(_this.genericModal(modalHTML, false));
+                        $('.bike-order-body').append(_this.genericModal(modalHTML, false));
                         var w = $('.modal-container .modal-content').width();
                         var h = $('.modal-container .modal-content').height();
                         $('.modal-container .modal-content').css({
@@ -540,7 +540,7 @@ var Global = {
                     '<button class="form-submit-btn" type="submit">Get Started</button>'+
                 '</div>'+
             '</form>';
-        $('.order-body').append(_this.genericModal(modalCarContent, false));
+        $('.bike-order-body').append(_this.genericModal(modalCarContent, false));
         var cityBoxHolder = $('#popup-citybox-holder');
         if(cityBoxHolder.length){
             $(cityBoxHolder).materialDropDown({
@@ -640,7 +640,7 @@ var Global = {
            }
            modalCarContent += '<div class="form-row" style="text-align: center;"><a class="detail-add-to-cart" href="/cart">Add to Cart</a></div>' +
                '</div>';
-        $('.order-body').append(_this.genericModal(modalCarContent, true));
+        $('.bike-order-body').append(_this.genericModal(modalCarContent, true));
         var addFeat = _this.additionalFeatures['car'];
         if(_this.carSelected['car_bike'].toLowerCase() == 'bike'){
             addFeat = _this.additionalFeatures['bike'];
@@ -866,7 +866,7 @@ var Global = {
 //                $('.modal-container .modal-content').find('.form-row.region-grouped').eq(0).find('select.dealer-city').append('<option value="'+v+'">'+v+'</option>');
 //            });
         }
-        $('.order-body').append(_this.genericModal(json2html.transform(tempObj, Templates.orderPage.package_popup.servicing), true));
+        $('.bike-order-body').append(_this.genericModal(json2html.transform(tempObj, Templates.orderPage.package_popup.servicing), true));
         $('.modal-container .modal-content').addClass('extra-form-modal').attr('data-name', serviceObj.dealer).attr('data-id', serviceObj.s_id);
         var w = $('.modal-container .modal-content').width();
         var h = $('.modal-container .modal-content').height();
@@ -1039,7 +1039,7 @@ var Global = {
     genericModal : function(popupHTML, closeFlag){
         var scrn_ht = $(window).innerHeight();
         var scrn_wd = $(window).innerWidth();
-        var _body = $(document).find('.order-body');
+        var _body = $(document).find('.bike-order-body');
         _body.find('.modal-container').hide();
         _body.find('.modal-container').not('.login-modal-container').remove();
         var container = $("<div></div>").addClass('modal-container');
