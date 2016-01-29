@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    {% if title %}
+        <title>{{ title }}</title>
+    {% else %}
+        <title>ClickGarage - On Demand Car and Bike Services</title>
+    {% endif %}
+
+    {% if meta_desc %}
+    <meta name="description" content="{{ meta_desc }}">
+    {% else %}
+    <meta name="description" content="Solution to all your vehicle maintenance needs. Compare prices, choose from a network of authorized and multibrand service centers, book doorstep services, get expert advice and save money. All within a few clicks.">
+    {% endif %}
+
+    {% if meta_keyw %}
+    <meta name="keywords" content="{{ meta_keyw }}">
+    {% else %}
+    <meta name="keywords" content="Nissan Servicing, Datsun Servicing, Volkswagen Servicing, Toyota Servicing, Tata Servicing, Skoda Servicing, Renault Servicing, Maruti Suzuki Servicing, Mahindra Servicing, Hyundai Servicing, Honda Servicing, Ford Servicing, Fiat Servicing, Chevrolet Servicing, Royal Enfield Servicing, Suzuki Servicing, TVS Servicing, Bajaj Servicing, KTM Servicing, Yamaha Servicing, Hero Servicing, car servicing, bike servicing, car cleaning, car dry cleaning, car interior cleaning, car exterior cleaning">
+    {% endif %}
+
+    <meta name="author" content="ClickGarage - Gurgaon based car & bike service provider">
+
+    <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+   {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.min.css" %}" />
+    <!--<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" />-->
+    <link rel="stylesheet" type="text/css" href="{% static "css/custom.css" %}" />
+    <link rel="stylesheet/less" type="text/css" href="{% static "less/styles.less" %}" />
+    <link rel="stylesheet/less" type="text/css" href="{% static "less/login-html.less" %}" />
+    <script type="text/javascript" src="{%  static "js/legacy/jquery-2.1.4.min.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/legacy/json2html.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/legacy/jquery.json2html.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/plugin.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/common.js" %}"></script>
+    <script type="text/javascript" src="{%  static "js/b_order.js" %}"></script>
+    <script src="{%  static "js/legacy/less.min.js" %}"></script>
+
+    {% load js %}
+    <script type="text/javascript">
+{#        {% if cars %}#}
+{#            <ul>#}
+{#            {% for car in cars %}#}
+{#                <li>{{ car.name }}</li>#}
+{#            {% endfor %}#}
+{#            </ul>#}
+{#        {% else %}#}
+{#            <p>No polls are available.</p>#}
+{#        {% endif %}#}
+        Global.carData = {{ cars | js}};
+        Global.carSelected = {{ carSelected | js}};
+        Global.citySelected = {{ city | js}};
+    {% if user and not user.is_anonymous %}
+        Global.userInfo = {};
+        Global.userInfo['name'] = "{{user.username}}";
+        Global.userInfo['first_name'] = "{{user.first_name}}";
+        Global.userInfo['last_name'] = "{{user.last_name}}";
+    {% else %}
+            Global.userInfo = null;
+    {% endif %}
+    </script>
+{# <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script> #}
+{# <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script> #}   
+    
+</head>
+<body class="bike-order-body">
+    <div class="solid-header">
+        {% include "website/dash-header.html" %}
+    </div>
+    <div class="pane order-pane">
+        <div class="centered-content">
+            <div class="content-holder">
+                <div class="workflow-holder">
+                    <div class="marker-mover">
+                            <div class="marker"></div>
+                    </div>
+                    <div class="workflow-line">
+                        <div class="completion"></div>
+                        <div class="milestone mile0 completed"></div>
+                        <div class="milestone mile1"></div>
+                        <div class="milestone mile2"></div>
+                        <div class="milestone mile3"></div>
+                    </div>
+                </div>
+                <div class="selected-data-holder" id="selected-details">
+                    <div class="sel-car-holder">
+                        <div class="icon-holder-1">
+                            <i class="fa fa-motorcycle"></i>
+                        </div>
+                        <h2 class="detail-holder">
+                            {% if car_obj and car_obj.make %}
+                            <span class="c-make">{{ car_obj.make}}</span>
+                            <span class="c-name">{{ car_obj.name }}</span>
+                            {% else %}
+                            <span class="c-make"></span>
+                            <span class="c-name"></span>
+                            {% endif %}
+
+                            {% if service %}
+                            <span class="service">({{ service }})</span>
+                            {% else %}
+                            <span class="service"></span>
+                            {% endif %}
+                        </h2>
+                        <div class="edit-btn"><i class="fa fa-pencil"></i><i class="label"> Change Vehicle</i></div>
+                    </div>
+                    <div class="sel-serv-holder" style="display: none;">
+
+                    </div>
+                </div>
+                <div class="section-select-holder">
+                    <div class="section-box">
+                        <div class="section-headers">
+                            <div class="section-menu-item" data-class="servicing"><div class="icon icon-servicing"></div><div class="icon-text">Servicing</div></div>
+                            <div class="section-menu-item" data-class="repair"><div class="icon icon-repair"></div><div class="icon-text">Repairs</div></div>
+                            <div class="section-menu-item" data-class="emergency"><div class="icon icon-emergency"></div><div class="icon-text">Emergency</div></div>
+
+                        </div>
+                        <div class="section-descriptions">
+                            <h3 class="section-description-item servicing">Servicing is an important aspect and all
+                            <h3 class="section-description-item repair">We can manage the word of repairs</h3>
+                            <h3 class="section-description-item emergency">Stuck somewhere? Call us first!</h3>
+                        </div>
+                        <div class="section-listings">
+                            <div class="section-content-item servicing" data-class="servicing"></div>
+                            <div class="section-content-item cleaning" data-class="cleaning">
+                                <div class="list-head"></div>
+                                <div class="list-body"></div>
+                            </div>
+                            <div class="section-content-item repair" data-class="repair">
+                                <!--<div class="img-holder-soon">-->
+                                     <!--<img src="../../static/img/comingsoon.png" alt="#"/><span>.</span>-->
+                                <!--</div>-->
+                                <div class="service-list-item minimized" data-id = "custom">
+                                     <div class="top-row">
+                                          <div class="wrapper detail-wrapper"><div class="vendor-div">Select This Service</div></div>
+                                          <div class="wrapper header-wrapper"><div class="clean-cat">Custom Repair Request</div></div>
+                                     </div>
+                                     <div class="state-update none-i"></div>
+                                </div>
+                                <div class="service-list-item minimized" data-id = "dent-paint">
+                                     <div class="top-row">
+                                          <div class="wrapper detail-wrapper"><div class="vendor-div">Select This Service</div></div>
+                                          <div class="wrapper header-wrapper"><div class="clean-cat">Denting / Painting</div></div>
+                                     </div>
+                                     <div class="state-update none-i"></div>
+                                </div>
+                                <div class="service-list-item minimized" data-id = "diagnostics">
+                                     <div class="top-row">
+                                          <div class="wrapper detail-wrapper"><div class="vendor-div">Select This Service</div></div>
+                                          <div class="wrapper header-wrapper"><div class="clean-cat">Diagnostics</div><div class="sub-text">I'm not sure what's wrong with my vehicle</div></div>
+                                     </div>
+
+                                     <div class="state-update none-i"></div>
+                                </div>
+                            </div>
+                            <div class="section-content-item windshield" data-class="windshield">
+                            <div class="img-holder-soon">
+                                     <!--<img src="../../static/img/comingsoon.png" alt="#"/><span>.</span>-->
+                                </div>
+                            </div>
+
+                            <div class="section-content-item vas" data-class="vas">
+                                <div class="list-head"></div>
+                                <div class="list-body"></div>
+                                <!--<div class="img-holder-soon">-->
+                                     <!--<img src="../../static/img/comingsoon.png" alt="#"/><span>.</span>-->
+                                <!--</div>-->
+                            </div>
+                            <div class="section-content-item emergency" data-class="emergency">
+                                <div class="service-list-item minimized" data-id = "key-lockout">
+                                     <div class="top-row">
+                                          <div class="wrapper detail-wrapper"><div class="vendor-div">Select This Service</div></div>
+                                          <div class="wrapper header-wrapper"><div class="clean-cat">Key Lockout</div></div>
+                                     </div>
+                                     <div class="state-update none-i"></div>
+                                </div>
+                                <div class="service-list-item minimized" data-id = "flat-tyre">
+                                     <div class="top-row">
+                                          <div class="wrapper detail-wrapper"><div class="vendor-div">Select This Service</div></div>
+                                          <div class="wrapper header-wrapper"><div class="clean-cat">Flat Tyre</div></div>
+                                     </div>
+                                     <div class="state-update none-i"></div>
+                                </div>
+                                <div class="service-list-item minimized" data-id = "jump-start">
+                                     <div class="top-row">
+                                          <div class="wrapper detail-wrapper"><div class="vendor-div">Select This Service</div></div>
+                                          <div class="wrapper header-wrapper"><div class="clean-cat">Jump Start</div></div>
+                                     </div>
+                                     <div class="state-update none-i"></div>
+                                </div>
+                                <div class="service-list-item minimized" data-id = "minor-repair">
+                                     <div class="top-row">
+                                          <div class="wrapper detail-wrapper"><div class="vendor-div">Select This Service</div></div>
+                                          <div class="wrapper header-wrapper"><div class="clean-cat">Minor Repair</div></div>
+                                     </div>
+                                     <div class="state-update none-i"></div>
+                                </div>
+                                <div class="service-list-item minimized" data-id = "2-flat-tyres">
+                                     <div class="top-row">
+                                          <div class="wrapper detail-wrapper"><div class="vendor-div">Select This Service</div></div>
+                                          <div class="wrapper header-wrapper"><div class="clean-cat">Two Flat Tyres</div></div>
+                                     </div>
+                                     <div class="state-update none-i"></div>
+                                </div>
+                                <div class="service-list-item minimized" data-id = "towing">
+                                     <div class="top-row">
+                                          <div class="wrapper detail-wrapper"><div class="vendor-div">Select This Service</div></div>
+                                          <div class="wrapper header-wrapper"><div class="clean-cat">Towing</div></div>
+                                     </div>
+                                     <div class="state-update none-i"></div>
+                                </div>
+                                <div class="service-list-item minimized" data-id = "emergency-fuel">
+                                     <div class="top-row">
+                                          <div class="wrapper detail-wrapper"><div class="vendor-div">Select This Service</div></div>
+                                          <div class="wrapper header-wrapper"><div class="clean-cat">Emergency Fuel (5 Litres)</div></div>
+                                     </div>
+                                     <div class="state-update none-i"></div>
+                                </div>
+
+                        </div>
+                            </div>
+                    </div>
+
+                </div>
+                <div class="dealer-select-holder" style="display:none;">
+                    <div class="selected-service-details">
+                    </div>
+                    <div class="dealer-box">
+                        <div class="dealer-headers">
+                            <div class="col-head th-info">Dealer</div>
+                           
+                             <div class="col-head th-Service">Product/Service</div>
+                            <div class="col-head th-price">Estimated Price</div>
+                             <div class="col-head th-dealer-select no-sort"></div>
+                           
+                        </div>
+                        <!--<div class="dealer-headers">Repair</div>-->
+                        <div class="dealer-listings">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay overlay-pat"></div>
+
+    <div class="login-modal-container bootstrap-wrapper persist-modal" style="display: none;">
+    {% include "website/login-popup.html" with next_url='/order/'  %}
+</div>
+
+<!--Google Analytics Script-->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68064927-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- feedback code -->
+<!--<script type="text/javascript" src="http://assets.freshdesk.com/widget/freshwidget.js"></script>-->
+<!--<script type="text/javascript">-->
+    <!--FreshWidget.init("", {"queryString": "&widgetType=popup&formTitle=Feedback&searchArea=no&responsive=no", "utf8": "✓", "widgetType": "popup", "buttonType": "text", "buttonText": "Feedback", "buttonColor": "white", "buttonBg": "#4D5B94", "alignment": "2", "offset": "350px", "formHeight": "400px", "responsive": "no", "url": "https://clickgarage.freshdesk.com"} );-->
+<!--</script>-->
+
+<!--//widget code//-->
+<!-- BEGIN JIVOSITE CODE {literal} -->
+<!--<script type='text/javascript'>-->
+<!--(function(){ var widget_id = 'yYPdRxqbyl';-->
+<!--var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();</script>-->
+<!-- {/literal} END JIVOSITE CODE -->
+
+<!--tawk.to-->
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5687bb1cbc4176802560a8a2/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>
