@@ -403,7 +403,7 @@
                     </div>
                     <div class="form-row">
                     {% if user and not user.is_anonymous and user.contact_no %}
-                        <div class="clean-inp-wrapper">
+                        <div class="clean-inp-wrapper input-focused">
                             <label for="">Phone No.</label>
                             <input class="clean-inp-tbox user-number" type="text" value="{{ user.contact_no }}"/>
                         </div>
@@ -414,15 +414,15 @@
                         </div>
                     {% endif %}
                     </div>
-
                     <div class="form-row">
-                    {% if user and not user.is_anonymous and user.email %}
+                    {% if user and not user.is_anonymous and user.email|length > 0 %}
                         <div class="clean-inp-wrapper input-focused">
                             <label for="">Email</label>
                             <input class="clean-inp-tbox user-email" type="email" value="{{ user.email }}" />
                         </div>
                     {% else %}
                         <div class="clean-inp-wrapper">
+                            <label for="">Email</label>
                             <input class="clean-inp-tbox user-email" type="email"/>
                         </div>
                     {% endif %}
