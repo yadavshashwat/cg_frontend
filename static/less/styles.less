@@ -1568,6 +1568,7 @@
 			.pane{
 				position: relative;
 				margin-top: 72px;
+              padding: 0px 24px;
 			}
 			.solid-header{
 				top:0px;
@@ -1634,7 +1635,8 @@
 			}
 			.centered-content{
 				position: relative;
-				width:960px;
+				min-width:960px;
+                width: 100%;
 				padding: 0px 0px;
 				margin:0 auto;
 				z-index: 20;
@@ -1763,7 +1765,7 @@
 
 				.section-box{
 					margin: 0 auto;
-					width:960px;
+//					width:960px;
 					//min-height: 100px;
 					background: #fff;
 					//.material-box-shadow;
@@ -1772,12 +1774,14 @@
 
 					.section-headers{
 						height: 120px;
-						background: #4a148c;
+                      border-bottom: 2px solid #4a148c;
 						.section-menu-item{
 							float: left;
 							width: 16.66%;
 							padding: 18px 0px;
 							cursor:pointer;
+                            box-sizing: border-box;
+						    background: rgba(74,20,140,0.01);
 							.icon{
 								height: 60px;
 								width: 100%;
@@ -1785,6 +1789,33 @@
 								background-position: 50% 50%;
 								background-repeat: no-repeat;
 							}
+							.icon.icon-servicing{background-image:url(../img/wf_carservicing_b.svg); }
+							.icon.icon-cleaning{background-image:url(../img/wf_carclean_b.svg); }
+							.icon.icon-tyres{background-image:url(../img/wf_wheelboth_b.svg); }
+							.icon.icon-windshield{background-image:url(../img/wf_windshield_b.svg); }
+							.icon.icon-repair{background-image:url(../img/wf_repair_b.svg); }
+							.icon.icon-emergency{background-image:url(../img/wf_emergency_b.svg); }
+							.icon.icon-others{background-image:url(../img/wf_otherservice_b.svg); }
+							.icon-text{
+								line-height: 24px;
+								text-align: center;
+							color:#4a148c;
+							font-family: Lato;
+							font-size: 16px;
+								font-weight: 300;
+							}
+						}
+                        .section-menu-item:last-child{
+                          border-right: 0px;
+                        }
+                        .section-menu-item:first-child{
+                          border-left: 0px;
+                        }
+						.section-menu-item.active, .section-menu-item.active:hover{
+							background: #4a148c;
+                            box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, 0.32), 0 -4px 10px 0 rgba(0, 0, 0, 0.24);
+                            -moz-box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, 0.32), 0 -4px 10px 0 rgba(0, 0, 0, 0.24);
+                            box-sizing: border-box;
 							.icon.icon-servicing{background-image:url(../img/wf_carservicing_w.svg); }
 							.icon.icon-cleaning{background-image:url(../img/wf_carclean_w.svg); }
 							.icon.icon-tyres{background-image:url(../img/wf_wheelboth_w.svg); }
@@ -1793,25 +1824,29 @@
 							.icon.icon-emergency{background-image:url(../img/wf_emergency_w.svg); }
 							.icon.icon-others{background-image:url(../img/wf_otherservice_w.svg); }
 							.icon-text{
-								line-height: 24px;
-								text-align: center;
-							color:#fff;
-							font-family: Lato;
-							font-size: 16px;
-								font-weight: 300;
-							}
-						}
-						.section-menu-item.active, .section-menu-item.active:hover{
-							background: #d81b60;
-                            box-sizing: border-box;
-							.icon-text{
+                                color:#fff;
 								font-weight: 700;
 							}
 						}
 						.section-menu-item:hover{
-							background: rgba(232, 155, 118, 0.6);
+							background: #ececec;
 						}
 					}
+                    .section-descriptions{
+                      .section-description-item{
+                        margin: 0px;
+                        padding: 12px;
+                        width: 100%;
+                        box-sizing: border-box;
+                        display: none;
+                        color:#4a148c;
+                        border-bottom: 1px solid #d81b60;
+                      }
+                      .section-description-item.active{
+                        display: block;
+                        background:#FFF;
+                      }
+                    }
 				  	.adminlist{
 					  min-height: 360px;
 					}
@@ -4816,7 +4851,7 @@ label.clean-sbox-wrapper {
                     label{
                       -webkit-transform: translate3d(0,6px,0) scale(0.75);
                       transform: translate3d(0,6px,0) scale(0.75);
-                      color: #00B9F5;
+                      color: #4a148c;
                     }
                     .clean-inp-tbox{
                       color:#333;
