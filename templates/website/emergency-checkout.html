@@ -390,54 +390,69 @@
                     <div class="form-row mt12">
                         <div class="label-div">Name</div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-row mt12">
                     {% if user and not user.is_anonymous and user.first_name %}
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-name" type="text" value="{{ user.first_name }}"/></div>
+                        <div class="clean-inp-wrapper input-focused">
+                            <label for="">Name</label>
+                            <input class="clean-inp-tbox user-name" type="text" value="{{ user.first_name }}"/>
+                        </div>
                     {% else %}
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-name" type="text"/></div>
+                        <div class="clean-inp-wrapper">
+                            <label for="">Name</label>
+                            <input class="clean-inp-tbox user-name" type="text"/>
+                        </div>
                     {% endif %}
 
                     </div>
-                    <div class="form-row mt12">
-                        <div class="label-div">Phone</div>
-                    </div>
+
                     <div class="form-row">
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox user-number" onfocus="if(this.value == 'eg. 7676767676') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'eg. 7676767676'; }" value="eg. 7676767676" type="text"/></div>
-                    </div>
-                    <div class="form-row mt12">
-                        <div class="label-div">Car Reg. No.</div>
-                    </div>
-                    <div class="form-row">
-                        <div class="clean-inp-wrapper">
-                            <input class="clean-inp-tbox car-reg-no" onfocus="if(this.value == 'eg. RJ02CC4222') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'eg. RJ02CC4222'; }" value="eg. RJ02CC4222" type="text" style="width:55%;"/>
+                    {% if user and not user.is_anonymous and user.contact_no %}
+                        <div class="clean-inp-wrapper input-focused">
+                            <label for="">Phone No.</label>
+                            <input class="clean-inp-tbox user-number" type="text" value="{{ user.contact_no }}"/>
                         </div>
+                    {% else %}
+                        <div class="clean-inp-wrapper">
+                            <label for="">Phone No.</label>
+                            <input class="clean-inp-tbox user-number" type="text"/>
+                        </div>
+                    {% endif %}
                     </div>
+
+                    <div class="form-row">
+                    {% if user and not user.is_anonymous and user.email|length > 0 %}
+                        <div class="clean-inp-wrapper input-focused">
+                            <label for="">Email</label>
+                            <input class="clean-inp-tbox user-email" type="email" value="{{ user.email }}" />
+                        </div>
+                    {% else %}
+                        <div class="clean-inp-wrapper">
+                            <label for="">Email</label>
+                            <input class="clean-inp-tbox user-email" type="email"/>
+                        </div>
+                    {% endif %}
+                    </div>
+
                 </div>
                 <div class="form-col" id="pick-up-col" style="margin-left: 100px;">
-                    <div class="label-div"><b>Pickup Address</b></div>
-                    <div class="form-row mt12" style="height: 80px;">
-                        <div class="label-div">Address</div>
-                        <div class="clean-inp-wrapper"><textarea class="clean-inp-tabox pick-addr" type="" rows="3"></textarea>
+                    <div class="label-div"><b>Pickup Address/ Doorstep Service Location</b></div>
+
+                    <div class="form-row mt12">
+                        <div class="clean-inp-wrapper">
+                            <label for="">Address Line 1</label>
+                            <input class="clean-inp-tbox pick-addr-1" type="text" />
                         </div>
                     </div>
-                    <div class="form-row mt12">
-                        <div class="label-div">Pincode</div>
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox pick-pin" type=""/></div>
-                    </div>
-                    <div class="form-row mt12">
-                        <div class="label-div">Landmark</div>
-                        <div class="clean-inp-wrapper"><input class="clean-inp-tbox pick-lmark" type=""/></div>
-                    </div>
-                    <div class="form-row mt12">
-                        <div class="label-div">City</div>
+                    <div class="form-row">
                         <div class="clean-inp-wrapper">
-                            <!--<input class="clean-inp-tbox drop-city" disabled type=""/>-->
-                            <label class="clean-sbox-wrapper">
-                            <select class="clean-inp-sbox pick-city">
-                                <option value="Delhi">Delhi</option>
-                                <option value="Gurgaon">Gurgaon</option>
-                            </select>
-                            </label>
+                            <label for="">Address Line 2</label>
+                            <input class="clean-inp-tbox pick-addr-2" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="clean-inp-wrapper input-focused">
+                            <label for="">City</label>
+                            <input class="clean-inp-tbox pick-city perpetual" type="text" value="Gurgaon" readonly />
                         </div>
                     </div>
                 </div>
