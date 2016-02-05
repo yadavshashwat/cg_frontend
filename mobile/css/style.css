@@ -24,7 +24,29 @@ line-height: 14px;
     z-index: 99;
 }
 */
-
+body div .ui-shadow{
+    -webkit-box-shadow:none;/* 0 1px 3px rgba(0,0,0,.15);*/
+    -moz-box-shadow:none; /* 0 1px 3px rgba(0,0,0,.15);*/
+    box-shadow:none;/* 0 1px 3px rgba(0,0,0,.15);*/
+}
+body div .ui-btn, body div label.ui-btn{
+    border-width: 0px;
+}
+body div .ui-corner-all,
+body div .ui-btn.ui-corner-all,
+body div .ui-slider-track.ui-corner-all,
+body div .ui-flipswitch.ui-corner-all,
+body div .ui-li-count{
+    border-radius: 0;
+}
+body div .ui-overlay-shadow{
+    -webkit-box-shadow: 0 0 4px rgba(0,0,0,.6);
+    -moz-box-shadow: 0 0 4px rgba(0,0,0,.6);
+    box-shadow: 0 0 4px rgba(0,0,0,.6);
+}
+body div.ui-dialog-contain .ui-content{
+    padding: 1em;
+}
 .cb-select-wrapper input{
     /*display:  none;*/
 }
@@ -77,8 +99,42 @@ line-height: 14px;
 }
 
 /* Landing Page Styles - Sanskar*/
+.landing-page .top-pane{
+    min-height: 50%;
+    background: #1f1f29 url('/img/home_bg.jpg');
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    min-height: 542px;
+    background-position-y: 100%;
+}
+.landing-page .top-pane .title-holder{
+    color: #fff;
+    text-align: center;
+    padding: 24px 12px;
+}
+.landing-page .top-pane .title-holder .title{
+    font-family: "Lato";
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 60px;
+    text-shadow: none;
+}
+.landing-page .top-pane .title-holder .sub-text{
+    text-align: center;
+    color: #fff;
+    margin-top: 0px;
+    line-height: 24px;
+    font-family: Lato;
+    position: relative;
+    text-shadow:none;
+}
+.landing-page .top-pane #car-select-btn{
+    background-color: #fff;
+    border: 2px solid #fff;
+    margin: 24px;
+}
 .landing-page {
-/*    background: #4d5b94;*/
+/*    background: #4a148c;*/
 }
 .landing-page .about-wrapper .ui-listview{
     box-shadow: none;
@@ -241,7 +297,7 @@ line-height: 14px;
     padding: 30px 0px;
     background:#eaeaea;
     text-align: center;
-    color:#4d5b94;
+    color:#4a148c;
 
 }
 
@@ -337,7 +393,7 @@ line-height: 14px;
     font-size: 14px;
     border-radius: 12px;
     line-height: 18px;
-color:#4d5b94;
+color:#4a148c;
     margin-right: 12px;
     white-space: nowrap;
 
@@ -356,8 +412,8 @@ content:"";
 }
 .order-body .part{
     display: inline-block;
-	font-size: 10px;  background: #4d5b94;
-	border: 1px solid #4d5b94;
+	font-size: 10px;  background: #4a148c;
+	border: 1px solid #4a148c;
 	border-radius: 12px;
 	line-height: 18px;
 	padding: 3px 6px;
@@ -372,8 +428,8 @@ content:"";
     text-shadow: none;
 display: inline-block;
 font-size: 10px;
-background: #4d5b94;
-border: 1px solid #4d5b94;
+background: #4a148c;
+border: 1px solid #4a148c;
 border-radius: 12px;
 line-height: 18px;
 padding: 3px 6px;
@@ -441,8 +497,8 @@ white-space: nowrap;
     text-shadow: none;
 display: inline-block;
 font-size: 10px;
-background: #c65169;
-border: 1px solid #c65169;
+background: #d81b60;
+border: 1px solid #d81b60;
 border-radius: 12px;
 line-height: 18px;
 padding: 3px 6px;
@@ -485,7 +541,7 @@ white-space: pre-wrap;
     padding: 30px 0px;
     background:#eaeaea;
     text-align: center;
-    color:#4d5b94;
+    color:#4a148c;
 
 }
 
@@ -499,7 +555,7 @@ white-space: pre-wrap;
 }
 
 .login-page #facebook{
-    background-color: #4d5b94;
+    background-color: #4a148c;
     color: #fff;
     margin-left: 5%;
     margin-right: 5%;
@@ -631,7 +687,7 @@ new stuff
 /*Header styling - Sanskar*/
 /*
 header-box {
-    background: #4d5b94;
+    background: #4a148c;
     float: left;
     margin-bottom: 5%;
 }
@@ -661,11 +717,12 @@ line-height: 10px;
 
 /*Start - Header Styling - Bhuvan */
 .header-body {
-    background-color: #4d5b94 !important;
+    background-color: #4a148c !important;
+    border: 0;
 }
 
 .header-body .call-helpline{
-    background-color: #4d5b94 !important;
+    background-color: #4a148c !important;
     border: none;
 }
 
@@ -689,7 +746,7 @@ line-height: 10px;
 
 /*Start - Checkout form - Bhuvan*/
 form{
-color:#4d5b94;
+color:#4a148c;
 font-family: Raleway;
 font-size:80%;
 font-style: normal;
