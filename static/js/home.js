@@ -52,7 +52,7 @@ var Global = {
             scrn_ht = 614
         }
         $('.pane').css({
-            height:scrn_ht,
+            minHeight:scrn_ht,
             width:scrn_wd
         });
         var searchContentHolder = $('.search-pane').find('.content-holder');

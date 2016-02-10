@@ -1,3 +1,92 @@
+//don't mess with this section.
+@charset "UTF-8";
+
+@font-face {
+  font-family: "clickgarage";
+  src:url("/static/fonts/clickgarage.eot");
+  src:url("/static/fonts/clickgarage.eot?#iefix") format("embedded-opentype"),
+    url("/static/fonts/clickgarage.woff") format("woff"),
+    url("/static/fonts/clickgarage.ttf") format("truetype"),
+    url("/static/fonts/clickgarage.svg#clickgarage") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "clickgarage" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="cg-"]:before,
+[class*=" cg-"]:before {
+  font-family: "clickgarage" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cg-discount:before {
+  content: "\61";
+}
+.cg-car-wd:before {
+  content: "\62";
+}
+.cg-estimate:before {
+  content: "\63";
+}
+.cg-alerts:before {
+  content: "\64";
+}
+.cg-assurance:before {
+  content: "\65";
+}
+.cg-verified:before {
+  content: "\66";
+}
+.cg-pickup:before {
+  content: "\67";
+}
+.cg-bike-emerg:before {
+  content: "\68";
+}
+.cg-bike-repair:before {
+  content: "\69";
+}
+.cg-bike-servicing:before {
+  content: "\6a";
+}
+.cg-car-clean:before {
+  content: "\6b";
+}
+.cg-car-servicing:before {
+  content: "\6c";
+}
+.cg-car-emerg:before {
+  content: "\6d";
+}
+.cg-car-care:before {
+  content: "\6e";
+}
+.cg-car-repair:before {
+  content: "\6f";
+}
+//end don't mess with this section
+
+
 		/*
 		z-index levels
 		bg-layers : 1 - 10
@@ -1051,14 +1140,18 @@
 					color:#eaeaea;
 					overflow: hidden;
 					margin-bottom: 5px;
+                  text-align: center;
 					.feature-point{
-						margin-left:44px;
+						margin:0 12px;
 						width:290px;
-						float: left;
+                      display: inline-block;
+                      vertical-align: top;
+//						float: left;
 		//        height: 150px;
 						.feat-icon{
-							padding: 24px 24px 48px 24px;
+							padding: 24px 24px 12px 24px;
 							text-align: center;
+                            color: #fff;
 							i, .fa{
 								font-size: 72px;
 							}
@@ -1085,7 +1178,7 @@
 							}
 							.sub-title{
 								padding: 12px;
-								font-size: 20px;
+								font-size: 18px;
 								line-height: 24px;
 								font-weight: 300;
 								text-align: center;
@@ -1093,10 +1186,12 @@
 		//            text-shadow: 2px 2px 4px #000;
 
 							}
+                          .desc{
+                            font-size:12px;
+                            color: #cecece;
+                            text-align: justify;
+                          }
 						}
-					}
-					.feature-point:first-child{
-						margin-left:0px;
 					}
 				}
 
@@ -1126,9 +1221,10 @@
 				background: #eaeaea;
 			}
 			.partners-platform{
-				background: #eaeaea;
-
+				background: #fefefe;
+                text-align: center;
 				border-top: 4px solid #fff;
+              padding-bottom: 24px;
 					.text-holder{
 					 font-family: "Lato";
 						font-weight: 400;
@@ -1144,12 +1240,76 @@
 		//        box-shadow: 0px 0px 60px 30px rgba(0,0,0,0.3);
 
 					}
+              .section-label{
+    margin: 24px auto;
+    line-height: 32px;
+    font-size: 24px;
+              }
+              .section-content{
+                overflow: hidden;
+                display: inline-block;
+              }
+              .centered-content{
+                min-width: 960px;
+                width: 100%;
+                box-sizing: border-box;
+              }
+              .brand-wrap{
+                display: inline-block;
+                width: 150px;
+                height: 90px;
+                padding: 3px 12px 3px 8px;
+                border-radius: 0px;
+                background: #fefefe;
+                box-sizing: border-box;
+                margin: 6px;
+                overflow: hidden;
+                  -webkit-transition: border-radius 1s; /* Safari */
+                  transition: border-radius 1s;
+                .aligner{
+                  display: inline-block;
+                  line-height: 84px;
+                  vertical-align: middle;
+                  height: 84px;
+                  width: 1px;
+                }
+                img{
+                  display: inline-block;
+                  line-height: 84px;
+                  vertical-align: middle;
+                  width: 100px;
+                  height: auto;
+                  opacity: 1;
+                  -webkit-transition: opacity 1s; /* Safari */
+                  transition: opacity 1s;
+                }
+                img.sq{
+                  width: 80px;
+                }
+                img.skew{
+                  width: 60px;
+                }
+              }
+              .brand-wrap:hover{
+                border-radius: 60px;
+                  -webkit-transition: border-radius 1s; /* Safari */
+                  transition: border-radius 1s;
+                background: #fefefe;
+                img{
+                  opacity: 0.7;
+                  -webkit-transition: opacity 1s; /* Safari */
+                  transition: opacity 1s;
+                }
+              }
 				}
 			.slider-partner{
 				background: #eaeaea;
 
 				}
-
+          .fix_pane{
+              padding-bottom: 185px;
+              box-sizing: border-box;
+          }
 			.stats-pane{
 				background: #c65169;
 				opacity: 0.85;
@@ -1782,13 +1942,17 @@
 							cursor:pointer;
                             box-sizing: border-box;
 						    background: rgba(74,20,140,0.01);
-							.icon{
+                            color:#4a148c;
+                          text-align: center;
+                            .icon{
 								height: 60px;
 								width: 100%;
 								background-size: auto 100%;
 								background-position: 50% 50%;
 								background-repeat: no-repeat;
-							}
+                                font-size: 56px;
+                                line-height: 60px;
+    						}
 							.icon.icon-servicing{background-image:url(../img/wf_carservicing_b.svg); }
 							.icon.icon-cleaning{background-image:url(../img/wf_carclean_b.svg); }
 							.icon.icon-tyres{background-image:url(../img/wf_wheelboth_b.svg); }
@@ -1798,8 +1962,6 @@
 							.icon.icon-others{background-image:url(../img/wf_otherservice_b.svg); }
 							.icon-text{
 								line-height: 24px;
-								text-align: center;
-							color:#4a148c;
 							font-family: Lato;
 							font-size: 16px;
 								font-weight: 300;
@@ -1816,6 +1978,7 @@
                             box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, 0.32), 0 -4px 10px 0 rgba(0, 0, 0, 0.24);
                             -moz-box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, 0.32), 0 -4px 10px 0 rgba(0, 0, 0, 0.24);
                             box-sizing: border-box;
+                            color:#fff;
 							.icon.icon-servicing{background-image:url(../img/wf_carservicing_w.svg); }
 							.icon.icon-cleaning{background-image:url(../img/wf_carclean_w.svg); }
 							.icon.icon-tyres{background-image:url(../img/wf_wheelboth_w.svg); }
@@ -1824,7 +1987,6 @@
 							.icon.icon-emergency{background-image:url(../img/wf_emergency_w.svg); }
 							.icon.icon-others{background-image:url(../img/wf_otherservice_w.svg); }
 							.icon-text{
-                                color:#fff;
 								font-weight: 700;
 							}
 						}
@@ -3065,20 +3227,22 @@ label.clean-sbox-wrapper {
                             box-sizing: border-box;
 						    background: rgba(74,20,140,0.01);
 							cursor:pointer;
+								text-align: center;
+							color:#4a148c;
 							.icon{
 								height: 60px;
 								width: 100%;
 								background-size: auto 100%;
 								background-position: 50% 50%;
 								background-repeat: no-repeat;
+                              line-height: 60px;
+                              font-size: 56px;
 							}
 							.icon.icon-servicing{background-image:url(../img/wf_bikeservicing_b.svg); }
 							.icon.icon-repair{background-image:url(../img/wf_bikerepair_b.svg); }
 							.icon.icon-emergency{background-image:url(../img/wf_bikeemergency_b.svg); }
 							.icon-text{
 								line-height: 24px;
-								text-align: center;
-							color:#4a148c;
 							font-family: Lato;
 							font-size: 16px;
 								font-weight: 300;
@@ -3094,12 +3258,12 @@ label.clean-sbox-wrapper {
 							background: #4a148c;
                             box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, 0.32), 0 -4px 10px 0 rgba(0, 0, 0, 0.24);
                             -moz-box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, 0.32), 0 -4px 10px 0 rgba(0, 0, 0, 0.24);
+                            color:#fff;
 
 							.icon.icon-servicing{background-image:url(../img/wf_bikeservicing_w.svg); }
 							.icon.icon-repair{background-image:url(../img/wf_bikerepair_w.svg); }
 							.icon.icon-emergency{background-image:url(../img/wf_bikeemergency_w.svg); }
 							.icon-text{
-                                color:#fff;
 								font-weight: 700;
 							}
 						}
@@ -6486,4 +6650,6 @@ top:485px !important;
 					background-size: 10px auto;
 					opacity: 0.02;
 					z-index: 10;
-				}
+}
+
+
