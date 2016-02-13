@@ -38,10 +38,10 @@ var Global = {
              var n = parseInt(number_driver_content.search("Mob")) + 5;
              var driver_number = number_driver_content.substring(n ,n+10);
 
-             var number_advisor = document.getElementById('advisor_details');
-             number_advisor_content =  String(number_advisor.textContent);
-             var k = parseInt(number_advisor_content.search("Mob")) + 5;
-             var advisor_number = number_advisor_content.substring(k ,k+10);
+             //var number_advisor = document.getElementById('advisor_details');
+             //number_advisor_content =  String(number_advisor.textContent);
+             //var k = parseInt(number_advisor_content.search("Mob")) + 5;
+             //var advisor_number = number_advisor_content.substring(k ,k+10);
 
             var smstext = document.getElementById("custom-sms").value;
              //$('.sms-popup .vendor-details').text(src);
@@ -78,7 +78,7 @@ var Global = {
              var smstext = document.getElementById('sms-content-clean');
              smstext_content = smstext.textContent.trim();
 
-             var url = "http://sms.hspsms.com:8090/sendSMS?username=clickgarage&message="+ smstext_content + "&sendername=CLKGRG&smstype=TRANS&numbers=" + driver_number + "&apikey=ab33f626-fba5-4bff-9a2b-68a7e9eed43c"
+             var url = "http://sms.hspsms.com/sendSMS?username=clickgarage&message="+ smstext_content + "&sendername=CLKGRG&smstype=TRANS&numbers=" + driver_number + "&apikey=ab33f626-fba5-4bff-9a2b-68a7e9eed43c"
              var xhr = new XMLHttpRequest();
              xhr.open("GET", url, false);
              xhr.send();
@@ -100,15 +100,15 @@ var Global = {
              var n = parseInt(number_driver_content.search("Mob")) + 5;
              var driver_number = number_driver_content.substring(n ,n+10);
 
-             var number_advisor = document.getElementById('advisor_details');
-             number_advisor_content =  String(number_advisor.textContent);
-             var k = parseInt(number_advisor_content.search("Mob")) + 5;
-             var advisor_number = number_advisor_content.substring(k ,k+10);
+             //var number_advisor = document.getElementById('advisor_details');
+             //number_advisor_content =  String(number_advisor.textContent);
+             //var k = parseInt(number_advisor_content.search("Mob")) + 5;
+             //var advisor_number = number_advisor_content.substring(k ,k+10);
 
              var smstext = document.getElementById('sms-content0');
              smstext_content = smstext.textContent.trim();
 
-             var url = "http://sms.hspsms.com:8090/sendSMS?username=clickgarage&message="+ smstext_content + "&sendername=CLKGRG&smstype=TRANS&numbers=" + driver_number + "&apikey=ab33f626-fba5-4bff-9a2b-68a7e9eed43c"
+             var url = "http://sms.hspsms.com/sendSMS?username=clickgarage&message="+ smstext_content + "&sendername=CLKGRG&smstype=TRANS&numbers=" + driver_number + "&apikey=ab33f626-fba5-4bff-9a2b-68a7e9eed43c"
              //window.location(url);
              var xhr = new XMLHttpRequest();
              xhr.open("GET", url, false);
@@ -125,15 +125,15 @@ var Global = {
              var n = parseInt(number_driver_content.search("Mob")) + 5;
              var driver_number = number_driver_content.substring(n ,n+10);
 
-             var number_advisor = document.getElementById('advisor_details');
-             number_advisor_content =  String(number_advisor.textContent);
-             var k = parseInt(number_advisor_content.search("Mob")) + 5;
-             var advisor_number = number_advisor_content.substring(k ,k+10);
+             //var number_advisor = document.getElementById('advisor_details');
+             //number_advisor_content =  String(number_advisor.textContent);
+             //var k = parseInt(number_advisor_content.search("Mob")) + 5;
+             //var advisor_number = number_advisor_content.substring(k ,k+10);
 
              var smstext = document.getElementById('sms-content1');
              smstext_content = smstext.textContent.trim();
 
-             var url = "http://sms.hspsms.com:8090/sendSMS?username=clickgarage&message="+ smstext_content + "&sendername=CLKGRG&smstype=TRANS&numbers=" + number_cust_content + "&apikey=ab33f626-fba5-4bff-9a2b-68a7e9eed43c"
+             var url = "http://sms.hspsms.com/sendSMS?username=clickgarage&message="+ smstext_content + "&sendername=CLKGRG&smstype=TRANS&numbers=" + number_cust_content + "&apikey=ab33f626-fba5-4bff-9a2b-68a7e9eed43c"
              var xhr = new XMLHttpRequest();
              xhr.open("GET", url, false);
              xhr.send();
@@ -149,15 +149,15 @@ var Global = {
              var n = parseInt(number_driver_content.search("Mob")) + 5;
              var driver_number = number_driver_content.substring(n ,n+10);
 
-             var number_advisor = document.getElementById('advisor_details');
-             number_advisor_content =  String(number_advisor.textContent);
-             var k = parseInt(number_advisor_content.search("Mob")) + 5;
-             var advisor_number = number_advisor_content.substring(k ,k+10);
+             //var number_advisor = document.getElementById('advisor_details');
+             //number_advisor_content =  String(number_advisor.textContent);
+             //var k = parseInt(number_advisor_content.search("Mob")) + 5;
+             //var advisor_number = number_advisor_content.substring(k ,k+10);
 
              var smstext = document.getElementById('sms-content2');
              smstext_content = smstext.textContent.trim();
 
-             var url = "http://sms.hspsms.com:8090/sendSMS?username=clickgarage&message="+ smstext_content + "&sendername=CLKGRG&smstype=TRANS&numbers=" + number_cust_content + "&apikey=ab33f626-fba5-4bff-9a2b-68a7e9eed43c"
+             var url = "http://sms.hspsms.com/sendSMS?username=clickgarage&message="+ smstext_content + "&sendername=CLKGRG&smstype=TRANS&numbers=" + number_cust_content + "&apikey=ab33f626-fba5-4bff-9a2b-68a7e9eed43c"
              var xhr = new XMLHttpRequest();
              xhr.open("GET", url, false);
              xhr.send();
@@ -174,10 +174,10 @@ var Global = {
              var n = parseInt(number_driver_content.search("Mob")) + 5;
              var driver_number = number_driver_content.substring(n ,n+10);
 
-             var number_advisor = document.getElementById('advisor_details');
-             number_advisor_content =  String(number_advisor.textContent);
-             var k = parseInt(number_advisor_content.search("Mob")) + 5;
-             var advisor_number = number_advisor_content.substring(k ,k+10);
+             //var number_advisor = document.getElementById('advisor_details');
+             //number_advisor_content =  String(number_advisor.textContent);
+             //var k = parseInt(number_advisor_content.search("Mob")) + 5;
+             //var advisor_number = number_advisor_content.substring(k ,k+10);
 
              var now = new Date()
              var time = [ now.getHours(), now.getMinutes() ];
@@ -206,7 +206,7 @@ var Global = {
 
 
 
-             var url = "http://sms.hspsms.com:8090/sendSMS?username=clickgarage&message="+ smstext_content + "&sendername=CLKGRG&smstype=TRANS&numbers=" + number_cust_content + "&apikey=ab33f626-fba5-4bff-9a2b-68a7e9eed43c"
+             var url = "http://sms.hspsms.com/sendSMS?username=clickgarage&message="+ smstext_content + "&sendername=CLKGRG&smstype=TRANS&numbers=" + number_cust_content + "&apikey=ab33f626-fba5-4bff-9a2b-68a7e9eed43c"
              var xhr = new XMLHttpRequest();
              xhr.open("GET", url, false);
              xhr.send();
@@ -221,10 +221,10 @@ var Global = {
              var n = parseInt(number_driver_content.search("Mob")) + 5;
              var driver_number = number_driver_content.substring(n ,n+10);
 
-             var number_advisor = document.getElementById('advisor_details');
-             number_advisor_content =  String(number_advisor.textContent);
-             var k = parseInt(number_advisor_content.search("Mob")) + 5;
-             var advisor_number = number_advisor_content.substring(k ,k+10);
+             //var number_advisor = document.getElementById('advisor_details');
+             //number_advisor_content =  String(number_advisor.textContent);
+             //var k = parseInt(number_advisor_content.search("Mob")) + 5;
+             //var advisor_number = number_advisor_content.substring(k ,k+10);
 
              var amount = document.getElementById("due_amount").value;
              $('.sms-popup .due-amount').text(amount);
@@ -232,7 +232,7 @@ var Global = {
              var smstext = document.getElementById('sms-content4');
              smstext_content = smstext.textContent.trim();
 
-             var url = "http://sms.hspsms.com:8090/sendSMS?username=clickgarage&message="+ smstext_content + "&sendername=CLKGRG&smstype=TRANS&numbers=" + number_cust_content + "&apikey=ab33f626-fba5-4bff-9a2b-68a7e9eed43c"
+             var url = "http://sms.hspsms.com/sendSMS?username=clickgarage&message="+ smstext_content + "&sendername=CLKGRG&smstype=TRANS&numbers=" + number_cust_content + "&apikey=ab33f626-fba5-4bff-9a2b-68a7e9eed43c"
              var xhr = new XMLHttpRequest();
              xhr.open("GET", url, false);
              xhr.send();
@@ -249,10 +249,10 @@ var Global = {
              var n = parseInt(number_driver_content.search("Mob")) + 5;
              var driver_number = number_driver_content.substring(n ,n+10);
 
-             var number_advisor = document.getElementById('advisor_details');
-             number_advisor_content =  String(number_advisor.textContent);
-             var k = parseInt(number_advisor_content.search("Mob")) + 5;
-             var advisor_number = number_advisor_content.substring(k ,k+10);
+             //var number_advisor = document.getElementById('advisor_details');
+             //number_advisor_content =  String(number_advisor.textContent);
+             //var k = parseInt(number_advisor_content.search("Mob")) + 5;
+             //var advisor_number = number_advisor_content.substring(k ,k+10);
 
              //var amount = document.getElementById("due_amount").value;
              //$('.sms-popup .due-amount').text(amount);
@@ -260,7 +260,7 @@ var Global = {
              var smstext = document.getElementById('sms-content5');
              smstext_content = smstext.textContent.trim();
 
-             var url = "http://sms.hspsms.com:8090/sendSMS?username=clickgarage&message="+ smstext_content + "&sendername=CLKGRG&smstype=TRANS&numbers=" + number_cust_content + "&apikey=ab33f626-fba5-4bff-9a2b-68a7e9eed43c"
+             var url = "http://sms.hspsms.com/sendSMS?username=clickgarage&message="+ smstext_content + "&sendername=CLKGRG&smstype=TRANS&numbers=" + number_cust_content + "&apikey=ab33f626-fba5-4bff-9a2b-68a7e9eed43c"
              var xhr = new XMLHttpRequest();
              xhr.open("GET", url, false);
              xhr.send();

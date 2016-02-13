@@ -1,40 +1,46 @@
 <div class="white-area">
     
     <select id="select-driver">
-        <option value="default">Select Driver/ Vendor</option>
-        <option value="driver1">Ajay (Mob: 9911090423 | Details : http://www.clickgarage.in/driver1/#ajay)</option>
+        <option value="default">Select Driver/ Vendor/ Mechanic</option>
+        <!--<option value="driver1">Ajay (Mob: 9911090423 | Details : http://www.clickgarage.in/driver1/#ajay)</option>-->
         <option value="driver1">Amit (Mob: 9560059744 | Details : http://www.clickgarage.in/driver1/#amit)</option>
-        <option value="driver2">Unique (Mob: 8860012727)</option>
+        <!--<option value="driver2">Unique (Mob: 8860012727)</option>-->
         <option value="driver3">Shashwat (Mob: 9717353148 | Details : http://www.clickgarage.in/driver1/#shashwat)</option>
         <option value="driver4">Bhuvan (Mob: 9953008804 | Details : http://www.clickgarage.in/driver1/#bhuvan)</option>
-        <option value="driver5">Varun (Mob: 9810693445)</option>
+        <option value="driver4">Rahul (Mob: 9991944166 | Details : http://www.clickgarage.in/driver1/#rahul)</option>
+        <option value="driver4">Priyank (Mob: 9643844759 | Details : http://www.clickgarage.in/driver1/#priyank)</option>
+        <!--<option value="driver5">Varun (Mob: 9810693445)</option>-->
     </select>
     
-    <select id="select-advisor">
-        <option value="default">Select Advisor</option>
-        <option value="advisor1">Sant Kumar (Mob: 9015032784)</option>
-        <option value="advisor2">Sanskar (Mob: 9620839801)</option>
-        <option value="advisor3">Shashwat (Mob: 9717353148)</option>
-        <option value="driver4">Bhuvan (Mob: 9953008804)</option>
-        <option value="driver5">Varun (Mob: 9810693445)</option>
-    </select>
+    <!--<select id="select-advisor">-->
+        <!--<option value="default">Select Advisor</option>-->
+        <!--<option value="advisor1">Sant Kumar (Mob: 9015032784)</option>-->
+        <!--<option value="advisor2">Sanskar (Mob: 9620839801)</option>-->
+        <!--<option value="advisor3">Shashwat (Mob: 9717353148)</option>-->
+        <!--<option value="driver4">Bhuvan (Mob: 9953008804)</option>-->
+        <!--<option value="driver5">Varun (Mob: 9810693445)</option>-->
+    <!--</select>-->
     
-    Service Centre Details:
-    <br>
-    <textarea name="paragraph_text" cols="30" rows="3" id="service_centre"></textarea>
-    <br>
-    <br>
+    <!--Service Centre Details:-->
+    <!--<br>-->
+    <!--<textarea name="paragraph_text" cols="30" rows="3" id="service_centre"></textarea>-->
+    <!--<br>-->
+    <!--<br>-->
     <!--<form>-->
-    Due Amount:
-    <input type="number" id ="due_amount">
+    <!--Due Amount:-->
+
     <!--</form>-->
     <br>
     <br>
 
     <div class="details first-sms">
         Name : <span class = "cust-name" id="name_cust"></span>&nbsp;|&nbsp;Number :<span class = "cust-contact" id="number_cust"></span>
-        <br>Driver : <span class = "driver-details" id="driver_details"></span>&nbsp;|&nbsp;Advisor :<span class="advisor-details" id="advisor_details"></span>
+        <br>Driver : <span class = "driver-details" id="driver_details"></span>&nbsp;
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
 
     <div class="sms-entry first-sms" id="beta">
         <div class="sms-content" id="alfa">
@@ -45,43 +51,43 @@
         </div>
     </div>
 
-    <div class="sms-entry" id="sms-entry-clean">
-        <div class="sms-content" id="sms-content-clean">
-            <p>Booking ID: <span class="booking-id"></span> | Service: <span class="service"></span> | Name: <span class="cust-name"></span> | Phone number: <span class="cust-contact" id="number"></span> | Address: <span class="cust-address"></span> | Vehicle: <span class="vehicle"></span> | Time: <span class="pickup-time"></span> | Amount: Rs.<span class="due-amount"></span>
-            </p>
-        </div>
-        <div class="send-button-div">
-            <button class="send-button" id="send-button-clean">Send this SMS</button>
-        </div>
-    </div>
+    <!--<div class="sms-entry" id="sms-entry-clean">-->
+        <!--<div class="sms-content" id="sms-content-clean">-->
+            <!--<p>Booking ID: <span class="booking-id"></span> | Service: <span class="service"></span> | Name: <span class="cust-name"></span> | Phone number: <span class="cust-contact" id="number"></span> | Address: <span class="cust-address"></span> | Vehicle: <span class="vehicle"></span> | Time: <span class="pickup-time"></span> | Amount: Rs.<span class="due-amount"></span>-->
+            <!--</p>-->
+        <!--</div>-->
+        <!--<div class="send-button-div">-->
+            <!--<button class="send-button" id="send-button-clean">Send this SMS</button>-->
+        <!--</div>-->
+    <!--</div>-->
 
 
 
-    <div class="sms-entry" id="sms-entry0">
-        <div class="sms-content" id="sms-content0">
-            <p>Booking ID: <span class="booking-id"></span> | Service: <span class="service"></span> | Name: <span class="cust-name"></span> | Phone number: <span class="cust-contact" id="number"></span> | Pickup Address: <span class="cust-address"></span> | Vehicle: <span class="vehicle"></span> | Pickup time: <span class="pickup-time"></span> | Service Center: <span class="vendor-details"></span>
-            </p>
-        </div>
-        <div class="send-button-div">
-            <button class="send-button" id="send-button1">Send this SMS</button>
-        </div>        
-    </div>
+    <!--<div class="sms-entry" id="sms-entry0">-->
+        <!--<div class="sms-content" id="sms-content0">-->
+            <!--<p>Booking ID: <span class="booking-id"></span> | Service: <span class="service"></span> | Name: <span class="cust-name"></span> | Phone number: <span class="cust-contact" id="number"></span> | Pickup Address: <span class="cust-address"></span> | Vehicle: <span class="vehicle"></span> | Pickup time: <span class="pickup-time"></span> | Service Center: <span class="vendor-details"></span>-->
+            <!--</p>-->
+        <!--</div>-->
+        <!--<div class="send-button-div">-->
+            <!--<button class="send-button" id="send-button1">Send this SMS</button>-->
+        <!--</div>        -->
+    <!--</div>-->
 
 
     
-    <div class="sms-entry" id="sms-entry1">
-        <div class="sms-content" id="sms-content1">
-            <p>Hi <span class="cust-name"></span>! We have assigned our AutoExpert Mr.<span class="advisor-details"></span> for assisting you during your appointment. If you have any question regarding the booking/ estimate amount feel free to contact the advisor.<span class="vendor-details"></span>
-            </p>
-        </div>
-        <div class="send-button-div">
-            <button class="send-button" id="send-button2">Send this SMS</button>
-        </div>        
-    </div>
-    
+    <!--<div class="sms-entry" id="sms-entry1">-->
+        <!--<div class="sms-content" id="sms-content1">-->
+            <!--<p>Hi <span class="cust-name"></span>! We have assigned our AutoExpert Mr.<span class="advisor-details"></span> for assisting you during your appointment. If you have any question regarding the booking/ estimate amount feel free to contact the advisor.<span class="vendor-details"></span>-->
+            <!--</p>-->
+        <!--</div>-->
+        <!--<div class="send-button-div">-->
+            <!--<button class="send-button" id="send-button2">Send this SMS</button>-->
+        <!--</div>        -->
+    <!--</div>-->
+    <!-- -->
     <div class="sms-entry" id="sms-entry2">
         <div class="sms-content" id="sms-content2">
-            <p>Hi <span class="cust-name"></span>, our driver <span class="driver-details"></span> is out to pick your vehicle. He will reach your location at around <span class="pickup-time"></span>. Kindly keep your RC and Service Booklet handy.
+            <p>Hi <span class="cust-name"></span>, our driver <span class="driver-details"></span> will pick your vehicle. He will reach your location between <span class="pickup-time"></span>. Kindly keep your RC and Service Booklet handy.
             </p>
         </div>
         <div class="send-button-div">
@@ -91,7 +97,7 @@
     
     <div class="sms-entry" id="sms-entry3">
         <div class="sms-content" id="sms-content3">
-            <p>Hi <span class="cust-name"></span>, your vehicle was safely checked-in<span class="vendor-details_1"></span> at <span class="current-time"></span>. A revised cost estimate will be shared with you post inspection.
+            <p>Hi <span class="cust-name"></span>, your vehicle was safely checked-in<span class="vendor-details_1"></span> at <span class="current-time"></span>. You will get a call from our service advisor post vehicle inspection.
             </p>
         </div>
         <div class="send-button-div">
@@ -101,7 +107,7 @@
     
     <div class="sms-entry" id="sms-entry4">
         <div class="sms-content" id="sms-content4">
-            <p>Hi <span class="cust-name"></span>, our driver <span class="driver-details"></span> is out to deliver your vehicle. He will need the due payment (Rs. <span class="due-amount"></span>) and receiving form for handing over the vehicle.
+            <p>Hi <span class="cust-name"></span>, our driver <span class="driver-details"></span> is out to deliver your vehicle. Your total due amount is Rs. <input type="number" id ="due_amount">. You can pay the amount in cash or online at http://imojo.in/wukje <br>Happy Motoring!<br>Team ClickGarage
             </p>
         </div>
         <div class="send-button-div">
