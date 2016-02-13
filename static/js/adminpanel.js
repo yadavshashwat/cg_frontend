@@ -652,7 +652,8 @@ var Global = {
                 if(val.service_items[0].served_data && val.service_items[0].served_data.additional){
                     html += '<p id="additional-data">Additional Data:<br/> ';
                     $.each(val.service_items[0].served_data.additional, function(name, value){
-                        html += name+' : '+value+'<br/>';
+                        if(value && value.length)
+                            html += name+' : '+value+'<br/>';
                     });
                     html += '</p>';
                 }
