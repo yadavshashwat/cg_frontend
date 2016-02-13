@@ -4,6 +4,7 @@ var Global = {
         var _this = this;
 //    $("[data-role=panel]").panel().enhanceWithin();  
         _this.events();
+        Commons.eventHandlers();
         //$('#submit-button').button('disable');
 
 
@@ -647,6 +648,13 @@ var Global = {
                 }
                 catch(err){
                     html += '<p id="service-type">Service: ' + String(val.service_items[0].service) + '</p>';
+                }
+                if(val.service_items[0].served_data && val.service_items[0].served_data.additional){
+                    html += '<p id="additional-data">Additional Data:<br/> ';
+                    $.each(val.service_items[0].served_data.additional, function(name, value){
+                        html += name+' : '+value+'<br/>';
+                    });
+                    html += '</p>';
                 }
             } else if (val.service_items[0].service == "cleaning"){
                 html += '<p id="service-type">Service: ' + String(val.service_items[0].served_data.service) + '</p>';
