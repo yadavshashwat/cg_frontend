@@ -313,7 +313,7 @@ var Global = {
         obj.cust_address = parent_div.find('#cust-div #cust-address').text().replace("Address: ","");
         obj.brand = parent_div.find('#car-div #brand').text().replace("Car: ","");
         obj.make = parent_div.find('#car-div #make').text().replace("Make: ","");
-        obj.regn = parent_div.find('#car-div #regn').text().replace("Regn#: ","");
+        //obj.regn = parent_div.find('#car-div #regn').text().replace("Regn#: ","");
         console.log(obj);
         $('.sms-popup .booking-id').text(obj.bkg_id);
         $('.sms-popup .service').text(obj.service);
@@ -668,7 +668,7 @@ var Global = {
             try {
                 html += '<p id="brand">Car: ' + String(val.cust_carname) + '</p>';
                 //html += '<p id="make">Make: ' + String(val.service_items[0].served_data.car).replace(String(val.service_items[0].served_data.brand), "") + '</p>';
-                html += '<p id="regn">Regn#: ' + String(val.cust_carnumber) + '</p>';
+                //html += '<p id="regn">Regn#: ' + String(val.cust_carnumber) + '</p>';
             }
             catch(err){
 
@@ -679,7 +679,7 @@ var Global = {
             html += '<p id="cust-name">Name: ' + String(val.cust_name) + '</p>';
             html += '<p id="cust-contact">Phone: ' + String(val.cust_number) + '</p>';
             html += '<p id="cust-email">Email: ' + String(val.cust_email) + '</p>';
-            html += '<p id="cust-address">Address: ' + String(val.cust_pickup_add.street) + ', ' + String(val.cust_pickup_add.city) + ' (Landmark: ' + String(val.cust_pickup_add.landmark)+')</p>';
+            html += '<p id="cust-address">Address: ' + String(val.cust_pickup_add.street) + ', ' + String(val.cust_pickup_add.city) +'</p>';
             html += '</div>';
 //            status-div starts
             html += '<div class="booking-entry-cat" id="status-div">';
