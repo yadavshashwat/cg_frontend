@@ -31,8 +31,7 @@ var Global = {
             if(_this.autosliderObj.presentID > 3){
                 _this.autosliderObj.presentID = 1;
             }
-        }, 2000);
-        console.log(Global.logReq)
+        }, 3500);
         if(Global.logReq){
             console.log('true')
             $('#sign-up-in-home').click();
@@ -126,6 +125,9 @@ var Global = {
 //        });
         $('#workflow-box').css({
             'line-height': (scrn_ht)+'px'
+        });
+        $('#preview-box').css({
+            'height': (scrn_ht)+'px'
         });
         var toppy = $('.lined-box.workflow-box .pusher-wrapper').position().top;
         $('.lined-box.preview-box .wrapper').css({

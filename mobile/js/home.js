@@ -541,7 +541,7 @@ var Global = {
         });
         
         $('#submit-button').on('click', function(){
-            var car_bike = $('#index input[name="cb-select"]:checked').val();
+            var car_bike = $('#carselect input[name="cb-select"]:checked').val();
             var car_model = $('#make-dropdown option:selected').text();
             var car_brand = $('#brand-dropdown option:selected').text();
             var car_fullname = [car_brand, car_model].join(' ');
