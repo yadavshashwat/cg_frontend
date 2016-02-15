@@ -30,8 +30,8 @@ var Global = {
              var number_cust = document.getElementById('number_cust');
              number_cust_content =  number_cust.textContent;
 
-             var src = document.getElementById("service_centre").value;
-             $('.sms-popup .vendor-details').text(src);
+             //var src = document.getElementById("service_centre").value;
+             //$('.sms-popup .vendor-details').text(src);
 
              var number_driver = document.getElementById('driver_details');
              number_driver_content =  String(number_driver.textContent);
