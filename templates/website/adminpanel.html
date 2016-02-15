@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.min.css" %}" />
     <link rel="stylesheet" type="text/css" href="{% static "css/custom.css" %}" />
     <link rel="stylesheet/less" type="text/css" href="{% static "less/styles.less" %}" />
+    <link rel="stylesheet/less" type="text/css" href="{% static "less/login-html.less" %}" />
     <link rel="stylesheet/less" type="text/css" href="{% static "less/sms-popup.less" %}" />
     <script type="text/javascript" src="{%  static "js/legacy/jquery-2.1.4.min.js" %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.timepicker.css' %}"/>
@@ -100,6 +101,9 @@
     </div>
     <div class="add-trans-popup" style="display: none;">
         {% include "website/add-trans-popup.html" %}
+    </div>
+    <div class="login-modal-container bootstrap-wrapper persist-modal" style="display: none;">
+    {% include "website/login-popup.html" with next_url='/adminpanel'  %}
     </div>
 
 </body>
