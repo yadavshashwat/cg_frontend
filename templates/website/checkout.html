@@ -27,6 +27,7 @@
     <script type="text/javascript">
         zyxCart.carData = {{ car_info | js}};
         zyxCart.emergency = {{ emergFlag | js}};
+        zyxCart.singleCoupon = {{ singleCoupon | js}};
     </script>
 
     
@@ -672,7 +673,11 @@
                                 {% if val.service == "servicing" %}
                                 {% if val.service_detail.dealer_cat == "Authorized" %}
                          {% if val.service_detail.car_bike == "Bike" %}
-                                <div class="price-div"><i class="fa fa-inr"></i>
+                                <div class="price-div"
+                                      data-service="{{val.service}}"
+                                      data-vendor="{{val.dealer}}"
+                                      data-type="{{val.service_detail.car_bike}}"
+                                        ><i class="fa fa-inr"></i>
                             {{ val.service_detail.total_price }}
                         </div>
                          <!--<div class="price-div">-->
@@ -681,7 +686,11 @@
                              <!--Pick Up Fees :<i style='padding-left:10px' class='fa fa-inr'></i>150-->
                         <!--</div>-->
                         {% else %}
-                                <div class="price-div"><i class="fa fa-inr"></i>
+                                <div class="price-div"
+                                      data-service="{{val.service}}"
+                                      data-vendor="{{val.dealer}}"
+                                      data-type="{{val.service_detail.car_bike}}"
+                                        ><i class="fa fa-inr"></i>
                             {{ val.service_detail.total_price }}
                         </div>
 
@@ -690,13 +699,28 @@
                         <!--</div>-->
                         {% endif %}
                          {% else %}
-                        <div class="price-div"><i class="fa fa-inr"></i>
+                        <div class="price-div"
+                                 data-service="{{val.service}}"
+                                 data-parts="{{val.service_detail.parts_price}}"
+                                 data-labour="{{val.service_detail.labour_price}}"
+                                 data-vendor="{{val.dealer}}"
+                                 data-total="{{val.service_detail.total_price}}"
+                                 data-type="{{val.service_detail.car_bike}}"
+                                ><i class="fa fa-inr"></i>
                             {{ val.service_detail.total_price }}
                         </div>
+                            <div class="discounted"></div>
                         {% endif %}
                                 {% elif val.service == "cleaning" %}
-                                <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}
-                                </div>
+                                <div class="price-div"
+                              data-service="{{val.service}}"
+                             data-parts="{{val.service_detail.parts_price}}"
+                             data-labour="{{val.service_detail.labour_price}}"
+                             data-vendor="{{val.dealer}}"
+                             data-total="{{val.service_detail.total_price}}"
+                             data-type="{{val.service_detail.car_bike}}"
+                                        ><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}</div>
+                            <div class="discounted"></div>
                                 {% elif val.service == "vas" %}
                                 <div class="price-div"><i class="fa fa-inr"></i> {{ val.service_detail.total_price }}
                                 </div>

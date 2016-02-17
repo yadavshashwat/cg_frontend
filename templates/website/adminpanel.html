@@ -51,7 +51,7 @@
 {#    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script>#}
 
 </head>
-<body class="adminpanel-body order-body">
+<body class="adminpanel-body">
     <div class="solid-header">
         {% include "website/dash-header.html" %}
     </div>
@@ -61,7 +61,11 @@
                 <div class="Add Guest Transaction">
                     <button id ="add-trans" class="trans-add">Add Guest Transaction</button>
                 </div>
-
+                {% if coupon_flag %}
+                <div class="Add Coupon">
+                    <button id ="add-coupon" class="coupon-add">Add Coupon</button>
+                </div>
+                {% endif %}
 
                 <div class="search-div">
                     <div class="search-box" id="search-by-id">
@@ -96,11 +100,14 @@
         </div>
     <div class="overlay overlay-pat"></div>
 
-    <div class="sms-popup" style="display: none;">
+    <div class="sms-popup admin-popup" style="display: none;">
         {% include "website/sms-popup.html" %}
     </div>
-    <div class="add-trans-popup" style="display: none;">
+    <div class="add-trans-popup admin-popup" style="display: none;">
         {% include "website/add-trans-popup.html" %}
+    </div>
+    <div class="add-coupon-popup admin-popup" style="display: none;">
+        {% include "website/add-coupon-popup.html" %}
     </div>
     <div class="login-modal-container bootstrap-wrapper persist-modal" style="display: none;">
     {% include "website/login-popup.html" with next_url='/adminpanel'  %}
