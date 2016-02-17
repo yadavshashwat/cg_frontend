@@ -226,11 +226,16 @@ var Commons = {
             }
 
         });
+        $('body').on('click', '.admin-popup', function(e){
+            if(!$(e.target).closest('.white-area').length){
+                $(this).closest('.admin-popup').hide();
+            }
+        });
         $('.clean-inp-wrapper').off().on('focus', 'input.clean-inp-tbox', function(e){
             $(this).closest('.clean-inp-wrapper').addClass('input-focused');
         });
         $('.clean-inp-wrapper').on('focusout', 'input.clean-inp-tbox', function(e){
-            if(!$(this).val()){
+            if(!$(this).val() && !$(this).hasClass('perpetual')){
                 $(this).closest('.clean-inp-wrapper').removeClass('input-focused');
             }
         });
@@ -259,6 +264,7 @@ var Commons = {
 
             }
         });
+
 //        $('#loginModal')
     }
 };
