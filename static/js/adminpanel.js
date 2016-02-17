@@ -6,6 +6,11 @@ var Global = {
         _this.events();
         Commons.eventHandlers();
         //$('#submit-button').button('disable');
+    $('.coupon-form-holder').find('#expiry-date,#issue-date').datepicker({
+        'format': 'yyyy/mm/dd',
+        'minDate': new Date(),
+        'autoclose':true
+    });
 
 
     },
@@ -329,6 +334,9 @@ var Global = {
         );
 
 
+        $('.centered-content').on('click', '#add-coupon', function(e){
+            $('.add-coupon-popup').show()
+        });
         $('.centered-content').on('click', '#add-trans', function(e){
         //console.log('testing');
         //var obj = {};
