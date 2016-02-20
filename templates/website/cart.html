@@ -126,8 +126,10 @@
                             {% if val.service == "servicing" %}
 
                             <img class="dealer-logo" src="" alt="{{val.dealer}}" data-name="{{val.car.make}}" data-flag="{{val.car.car_bike}}">
-                            {% else %}
+                            {% elif val.service == "repair" %}
                             <img class="dealer-logo" src="" alt="{{val.dealer}}" data-name="{{val.car.make}}" >
+                            {% else %}
+                            <img class="dealer-logo" src="" alt="ClickGarage Workshop" data-name="{{val.car.make}}" >
                             {% endif %}
 
                             <div class="aligner"></div>
