@@ -159,7 +159,9 @@ var Global = {
             var p_service = $(this).attr('data-service');
             var car_bike = $(this).attr('data-type');
             if(p_vendor && p_vendor != 'Authorized' && (p_service.toLowerCase() == c_service.toLowerCase()) ){
-                if( (car_bike.toLowerCase() == c_cb.toLowerCase()) && (p_vendor.toLowerCase() == c_vendor.toLowerCase()) ){
+                if( (car_bike.toLowerCase() == c_cb.toLowerCase()) &&
+                    ( (p_vendor.toLowerCase() == c_vendor.toLowerCase()) ||
+                        (c_vendor.toLowerCase() == 'all') ) ){
                     var p_labour = $(this).attr('data-labour');
                     var p_parts = $(this).attr('data-parts');
                     var p_total = $(this).attr('data-total');

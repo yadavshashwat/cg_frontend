@@ -115,7 +115,11 @@ var zyxCart = {
             var p_service = $(this).attr('data-service');
             var car_bike = $(this).attr('data-type');
             if(p_vendor && p_vendor != 'Authorized' && (p_service.toLowerCase() == c_service.toLowerCase()) ){
-                if( (car_bike.toLowerCase() == c_cb.toLowerCase()) && (p_vendor.toLowerCase() == c_vendor.toLowerCase()) ){
+//                if( (car_bike.toLowerCase() == c_cb.toLowerCase()) && (p_vendor.toLowerCase() == c_vendor.toLowerCase()) ){
+                if( (car_bike.toLowerCase() == c_cb.toLowerCase()) &&
+                    ( (p_vendor.toLowerCase() == c_vendor.toLowerCase()) ||
+                        (c_vendor.toLowerCase() == 'all') ) ){
+
                     var p_labour = $(this).attr('data-labour');
                     var p_parts = $(this).attr('data-parts');
                     var p_total = $(this).attr('data-total');
@@ -381,7 +385,6 @@ var zyxCart = {
         });
     },
     onOrderPlace : function(){
-        console.log('[')
                 $('.login-step').find('.max-content,.min-header').addClass('none-i');
                 $('.login-step').find('.completed-summary').removeClass('none-i');
                 $('.address-step').find('.max-content,.min-header').addClass('none-i');
