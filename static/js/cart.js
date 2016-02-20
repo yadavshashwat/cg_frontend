@@ -134,7 +134,7 @@ var Global = {
         var couponData = {}
         if (local.load() && local.load()['clgacoup']) {
             couponData = local.load()['clgacoup'];
-            couponData = JSON.parse(couponData);
+            couponData = JSON.parse(decodeURIComponent(couponData));
         }
         if(0){
             if (!couponData.Global) {

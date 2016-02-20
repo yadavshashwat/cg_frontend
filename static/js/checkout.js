@@ -363,7 +363,7 @@ var zyxCart = {
             var couponData = {};
             if (local.load() && local.load()['clgacoup']) {
                 couponData = local.load()['clgacoup'];
-                couponData = JSON.parse(couponData);
+                couponData = JSON.parse(decodeURIComponent(couponData));
             }
             if (couponData.Global) {
                 $.each(couponData.Global, function(coup,msg){
