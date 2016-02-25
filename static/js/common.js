@@ -145,7 +145,11 @@ var Commons = {
                 //var classy = 'Booking'
                 Commons.ajaxData('send_contact', {name:name, phone:phone,message:message},"get",_this, eval("_this.afterSendContact"))
             return false;
-        })
+        });
+        $('.solid-header').find('.logo-click').on('click', function(e){
+           var host = window.location.host;
+            window.location = "http://"+host+'/?source=logo'
+        });
         $('#settings-drpdwn').off().on('click', function(e){
             $(this).parent().find('.logged-user-drpdwn').toggle();
         });

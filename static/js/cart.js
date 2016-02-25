@@ -128,9 +128,6 @@ var Global = {
                 c_cb = 'Car'
             }
 
-        var container = $('.coupon-holder .coupon-message');
-        container.html('');
-        var html = '<span class="message-test">'+data.message+'</span>';
         var couponData = {}
         if (local.load() && local.load()['clgacoup']) {
             couponData = local.load()['clgacoup'];
@@ -150,11 +147,9 @@ var Global = {
                 }
             }
         }
-        couponData['Singleton'] = {};
-        couponData.Singleton[data['coupon_code']] = data['message'];
-
-        local.save('clgacoup', encodeURIComponent(JSON.stringify(couponData)));
+        var counter = {'items':0, 'valid':0};
         $('.cart-table:visible').find('.price-div').each(function(){
+            counter['items'] += 1;
             var p_vendor = $(this).attr('data-vendor');
             var p_service = $(this).attr('data-service');
             var car_bike = $(this).attr('data-type');
@@ -170,6 +165,7 @@ var Global = {
                     p_parts = parseFloat(p_parts);
                     var discount = 0;
                     var target = 0;
+                    counter['valid'] += 1;
                     if(c_key && c_key.length){
                         if(c_key == 'labour')
                             target = p_labour;
@@ -202,6 +198,26 @@ var Global = {
                 }
             }
         });
+
+        couponData['Singleton'] = {};
+
+        var container = $('.coupon-holder .coupon-message');
+        container.html('');
+        var html = '<span class="message-test">'+data.message+'</span>';
+            if(counter.valid){
+                if(counter.valid == counter.items)
+                    html = html; //all good
+                else
+                    html = '<span class="message-test">'+data.message+' - Applied on '+counter.valid+' items</span>';
+
+                couponData.Singleton[data['coupon_code']] = data['message'];
+
+            }else{
+                html = '<span class="message-test">Coupon not valid on selected service(s)</span>';
+            }
+        local.save('clgacoup', encodeURIComponent(JSON.stringify(couponData)));
+        container.html(html);
+
         //for now we only have global coupons;
         //so skip this
             /*
@@ -216,7 +232,6 @@ var Global = {
             }
         });
             */
-        container.html(html);
     }else{
 
         }

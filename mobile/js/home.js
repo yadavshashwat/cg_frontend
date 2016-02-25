@@ -1349,7 +1349,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
          var container2 = $('.order-body .service-img-holder');
         container2.html('');
         var html = '';
-        html +=  "<img src='img/servicing1.jpg'>"
+        html +=  "<img src='img/servicing_hz.jpg'>"
         container2.html(html);
     },
     
@@ -1370,7 +1370,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
          var container2 = $('.order-body .service-img-holder');
         container2.html('');
         var html = '';
-        html +=  "<img src='img/cleaning1.jpg'>"
+        html +=  "<img src='img/cleaning_hz.jpg'>"
         container2.html(html);
     },
 
@@ -1389,7 +1389,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
          var container2 = $('.order-body .service-img-holder');
         container2.html('');
         var html = '';
-        html +=  "<img src='img/windshield1.jpg'>"
+        html +=  "<img src='img/windshield_hz.jpg'>"
         container2.html(html);
     },
     loadCarcare : function(data){
@@ -1407,7 +1407,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
          var container2 = $('.order-body .service-img-holder');
         container2.html('');
         var html = '';
-        html +=  "<img src='img/carcare.jpg'>"
+        html +=  "<img src='img/carcare_hz.jpg'>"
         container2.html(html);
     },
 
@@ -1984,8 +1984,8 @@ $( document ).delegate("#order", "pagebeforeload", function() {
       //window.alert("Guest Order Placed")
       window.location.href = "#order-placed"
     },
-    carBrands : ['Audi','Bentley','BMW','Bugatti','Chevrolet','Ferrari','Fiat','Ford','Honda','Hyundai','Isuzu','Jaguar','Lamborghini','Land Rover','Mahindra','Maruti Suzuki','Mercedes-Benz','Mini','Nissan','Porsche','Renault','Rolls-Royce','Skoda','Ssangyong','Tata','Toyota','Volkswagen','Volvo'],
-    bikeBrands : ['Bajaj','Hero','Honda','KTM','Mahindra','Royal Enfield','Suzuki','TVS','Yamaha'],
+    carBrands : ['Chevrolet','Fiat','Ford','Honda','Hyundai','Mahindra','Maruti Suzuki','Nissan','Renault','Skoda','Tata','Toyota','Volkswagen'],//['Audi','Bentley','BMW','Bugatti','Chevrolet','Ferrari','Fiat','Ford','Honda','Hyundai','Isuzu','Jaguar','Lamborghini','Land Rover','Mahindra','Maruti Suzuki','Mercedes-Benz','Mini','Nissan','Porsche','Renault','Rolls-Royce','Skoda','Ssangyong','Tata','Toyota','Volkswagen','Volvo'],
+    bikeBrands : ['Bajaj','Hero','Honda','KTM','Mahindra','Royal Enfield','Suzuki','TVS','Yamaha'],//['Bajaj','Hero','Honda','KTM','Mahindra','Royal Enfield','Suzuki','TVS','Yamaha'],
     additionalFeatures : {
         car : ['Clutch Overhaul', 'Interior Dry-cleaning', 'Brake Repair', 'Wheel Balancing', 'Wheel Alignment', 'AC Servicing', 'Injector Cleaning'],
         bike : ['Front Brake Repair',  'Rear Brake repair', 'Wheel Balancing', 'Wheel Alignment']

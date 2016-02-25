@@ -484,6 +484,9 @@ var Global = {
 
        });
 
+       $('#coupon-button').on('click', function(){
+
+       });
        $('#place-guest-trans').on('click', function(){
            console.log('place order requested change detected');
 
