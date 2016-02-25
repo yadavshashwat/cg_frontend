@@ -138,6 +138,109 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
         <div class="transparent-header">
            {% include "website/home-header.html" %}
         </div>
+        {% if specific_land == 'cars'%}
+        <div class="content-holder">
+            <div class="title-holder">
+                    <div class="title">
+                       Car And Bike Care. Made Hassle Free.
+                    </div>
+                    <div class="sub-text">
+                        One Stop Shop &nbsp;<i class="fa fa-circle"></i>&nbsp;Doorstep Service&nbsp;<i class="fa fa-circle"></i>&nbsp;Instant Cost Estimate
+                    </div>
+            </div>
+            <div class="dropdown-plus-slider-div">
+                <div class="dropdown-div">
+                    <div class="radio-btn-div none-i">
+                        <div class="radio-btn">
+                            <input type="radio active" class="vehicleRadio" id="carRadio" name="vehicleRadio" value="Car"  />
+                            <label for="carRadio">Car</label>
+                        </div>
+                    </div>
+
+                <form id="home-search-form" method="get" action="/order/" data-remote="true" accept-charset="UTF-8">
+
+                    <div class="vehicle-dropdown-div" style="width: 25%;">
+                        <select class="custom-select" name="brandSelect" id="brandSelect" >
+                            <option selected="true" disabled="">Select Brand</option>
+
+                            <option>Chevrolet</option>
+                            <option>Fiat</option>
+                            <option>Ford</option>
+                            <option>Honda</option>
+                            <option>Hyundai</option>
+                            <option>Mahindra</option>
+                            <option>Maruti Suzuki</option>
+                            <option>Nissan</option>
+                            <option>Porsche</option>
+                            <option>Renault</option>
+                            <option>Skoda</option>
+                            <option>Tata</option>
+                            <option>Toyota</option>
+                            <option>Volkswagen</option>
+
+                        </select>
+                    </div>
+                    <div class="vehicle-dropdown-div" style="width: 55%;">
+                        <select class="custom-select" name="modelSelect" id="modelSelect" >
+                            <option selected="true" disabled="true">Select Model</option>
+                        </select>
+                    </div>
+                    <div class="submit-btn-holder purple-btn-1" id="home-submit-holder" style="width: 19%">
+                        <button class="form-submit-btn" type="submit">Get Started</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+        {% elif specific_land == 'bikes' %}
+        <div class="content-holder">
+            <div class="title-holder">
+                    <div class="title">
+                       Car And Bike Care. Made Hassle Free.
+                    </div>
+                    <div class="sub-text">
+                        One Stop Shop &nbsp;<i class="fa fa-circle"></i>&nbsp;Doorstep Service&nbsp;<i class="fa fa-circle"></i>&nbsp;Instant Cost Estimate
+                    </div>
+            </div>
+            <div class="dropdown-plus-slider-div">
+                <div class="dropdown-div">
+                    <div class="radio-btn-div none-i">
+                        <div class="radio-btn active">
+                            <input type="radio" class="vehicleRadio" id="bikeRadio" name="vehicleRadio" value="Bike" checked />
+                            <label for="bikeRadio">Bike</label>
+                        </div>
+                    </div>
+                <form id="home-search-form" method="get" action="/order/" data-remote="true" accept-charset="UTF-8">
+
+                    <div class="vehicle-dropdown-div" style="width: 25%;">
+                        <select class="custom-select" name="brandSelect" id="brandSelect" >
+                            <option selected="true" disabled="">Select Brand</option>
+                            <option>Bajaj</option>
+                            <option>Hero</option>
+                            <option>Honda</option>
+                            <option>KTM</option>
+                            <option>Mahindra</option>
+                            <option>Royal Enfield</option>
+                            <option>Suzuki</option>
+                            <option>TVS</option>
+                            <option>Yamaha</option>
+                        </select>
+                    </div>
+                    <div class="vehicle-dropdown-div" style="width: 55%;">
+                        <select class="custom-select" name="modelSelect" id="modelSelect" >
+                            <option selected="true" disabled="true">Select Model</option>
+                        </select>
+                    </div>
+
+                    <div class="submit-btn-holder purple-btn-1" id="home-submit-holder" style="width: 19%">
+                        <button class="form-submit-btn" type="submit">Get Started</button>
+                    </div>
+                </form>
+
+                </div>
+            </div>
+        </div>
+        {% else %}
         <div class="content-holder">
             <div class="title-holder">
                     <div class="title">
@@ -214,6 +317,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                 </div>
             </div>
         </div>
+        {% endif %}
         <div class="video-embed">  
             <span class="video-link" data-video-id="y-v-zV_Z0_wJM">
             <div class="video-icon">
@@ -445,6 +549,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
             <div class="text-holder">
                 Brands we serve
             </div>
+            {% if specific_land != 'cars' %}
             <div class="section-label">Bike Brands</div>
             <div class="section-content">
                     <div class="brand-wrap"><div class="aligner"></div><img u="image" alt="partner" src="../../static/img/logos/Bikes/Bajaj.png" /></div>
@@ -457,6 +562,8 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                     <div class="brand-wrap"><div class="aligner"></div><img u="image" alt="partner" src="../../static/img/logos/Bikes/TVS.jpg" /></div>
                     <div class="brand-wrap"><div class="aligner"></div><img u="image" alt="partner" src="../../static/img/logos/Bikes/Yamaha.jpg" /></div>
             </div>
+            {% endif %}
+            {% if specific_land != 'bikes' %}
             <div class="section-label">Car Brands</div>
             <div class="section-content">
                     <div class="brand-wrap"><div class="aligner"></div><img u="image" alt="partner" src="../../static/img/logos/Cars/Chevrolet.jpg" /></div>
@@ -474,6 +581,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                     <div class="brand-wrap"><div class="aligner"></div><img class="sq" u="image" alt="partner" src="../../static/img/logos/Cars/Toyota.jpg" /></div>
                     <div class="brand-wrap"><div class="aligner"></div><img class="skew" u="image" alt="partner" src="../../static/img/logos/Cars/Volkswagen.jpg" /></div>
             </div>
+            {% endif %}
             </div>
         </div>
      <!--Script Addition - Slider End-->
