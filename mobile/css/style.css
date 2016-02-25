@@ -1,8 +1,6 @@
 
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,300);
-@import url(http://fonts.googleapis.com/css?family=Raleway:600,400);
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
+/*@import url(https://fonts.googleapis.com/css?family=Lato:400,700,300);*/
+/*@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);*/
 
 body{
     font-family: Lato;
@@ -654,8 +652,9 @@ new stuff
     cursor: pointer;
     width: 30px;
     height: 30px;
+}
     
-    span{
+.menu-toggle-btn span{
         background: #1d1d1b;
         display: block;
         width: 30px;
@@ -665,57 +664,21 @@ new stuff
         -webkit-transition: all 0.5s linear;
         transition: all 0.3s linear;
     }
-    &.open{
-        span{
-            &:nth-child(1),
-            &:nth-child(3){
-                transform: translate(0px, 13px) rotate(-45deg) scalex(1.3);
-                    margin: 0;
-            }
-            &:nth-child(2){
-            display: block;
-/*                height: 0;*/
-                    margin: 0;
-            }
-            &:nth-child(3){
-                transform: translate(0px, 9px) rotate(45deg) scalex(1.3);               
-            }
-        }
-    }
+
+.menu-toggle-btn span.open span:nth-child(1),
+.menu-toggle-btn span.open span:nth-child(3),{
+    transform: translate(0px, 13px) rotate(-45deg) scalex(1.3);
+    margin: 0;
 }
-
-
-
-/*Header styling - Sanskar*/
-/*
-header-box {
-    background: #4a148c;
-    float: left;
-    margin-bottom: 5%;
-}
-*/
-
-/*
-.header-box .hamburger-icon {
-    margin-left: 5%;
-    float: left;
-    text-decoration: none;
-    font-size: 2em;
-    color: #fff;
-}
-
-.header-box .header-logo {
+.menu-toggle-btn span.open span:nth-child(2){
     display: block;
-    margin-left: 15%;
-    width:20%;
+    margin: 0;
 }
-*/
+.menu-toggle-btn span.open span:nth-child(3){
+    transform: translate(0px, 9px) rotate(45deg) scalex(1.3);
+}
 
-/*
-.menu-small-btn{
-line-height: 10px;
-}
-*/
+
 
 /*Start - Header Styling - Bhuvan */
 .header-body {
