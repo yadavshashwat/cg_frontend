@@ -749,7 +749,10 @@ var Global = {
             if(coupon.length){
                 $('#cart .coupon-status').html('').hide();
                 Commons.ajaxData('apply_coupon', {c_cd:coupon},"get",_this, function(data){
+                    this.loadCoupon(data);
+                    return;
                     if(data.status){
+
                         var couponData = {};
                         if (local.load() && local.load()['clgacoup']) {
                             couponData = local.load()['clgacoup'];
@@ -1173,6 +1176,100 @@ $( document ).delegate("#order", "pagebeforeload", function() {
 
         }
     },
+    loadCoupon : function(data){
+        if (data.status) {
+            var c_key = data.price_key;
+            var c_cap = data.cap;
+            c_cap = parseFloat(c_cap)
+            var c_type = data.type;
+            var c_vendor = data.vendor;
+            var c_service = data.category;
+            var c_value = data.value;
+            var c_cb = data.car_bike;
+            if(! (c_cb && c_cb.length) ){
+                c_cb = 'Car'
+            }
+
+//        var container = $('.coupon-holder .coupon-message');
+//        container.html('');
+//        var html = '<span class="message-test">'+data.message+'</span>';
+            var counter = {'items':0, 'valid':0};
+        $('.cart-entries').find('.t-price').each(function(){
+            counter['items'] += 1;
+            var p_vendor = $(this).attr('data-vendor');
+            var p_service = $(this).attr('data-service');
+            var car_bike = $(this).attr('data-type');
+            if(p_vendor && p_vendor != 'Authorized' && (p_service.toLowerCase() == c_service.toLowerCase()) ){
+                if( (car_bike.toLowerCase() == c_cb.toLowerCase()) &&
+                    ( (p_vendor.toLowerCase() == c_vendor.toLowerCase()) ||
+                        (c_vendor.toLowerCase() == 'all') ) ){
+                    var p_labour = $(this).attr('data-labour');
+                    var p_parts = $(this).attr('data-parts');
+                    var p_total = $(this).attr('data-total');
+                    var new_price = 0;
+                    p_labour = parseFloat(p_labour);
+                    p_parts = parseFloat(p_parts);
+                    p_total = parseFloat(p_total);
+                    var discount = 0;
+                    var target = 0;
+
+                    counter['valid'] += 1;
+                    if(c_key && c_key.length){
+                        if(c_key == 'labour')
+                            target = p_labour;
+                        else if(c_key == 'parts')
+                            target = p_parts;
+                        else
+                            target = p_total
+
+                        if(c_type == 'flat')
+                            discount = target - c_value
+                        else if(c_type == 'percent')
+                            discount = (c_value)*(target)/100;
+                        else
+                            discount = c_value
+
+                        if(c_cap && !isNaN(c_cap) && discount > c_cap)
+                            discount = c_cap
+
+                        if(c_key == 'labour')
+                            new_price = (Math.ceil((p_labour - discount)*(114.5))/100) + (p_parts);
+                        else if(c_key == 'parts')
+                            new_price = (Math.ceil((p_labour)*(114.5))/100) + (p_parts - discount);
+                        else
+                            new_price = (Math.ceil((p_labour)*(114.5))/100) + (p_parts) - discount;
+                    }
+                    $(this).closest('li').find('.discounted').html(' &#8377; '+Math.ceil(new_price)).show();
+                    $(this).css({
+                        'text-decoration':'line-through'
+                    });
+                }
+            }
+        });
+
+            if(counter.valid){
+                if(counter.valid == counter.items)
+                    $('#cart .coupon-status').html('Applied - [' + data['message']+'] - Coupon' ).show();
+                else
+                    $('#cart .coupon-status').html('Applied - [' + data['message']+'] - on '+counter.valid+' out of '+counter.items+' orders.' ).show();
+
+            var couponData = {};
+            if (local.load() && local.load()['clgacoup']) {
+                couponData = local.load()['clgacoup'];
+                couponData = JSON.parse(decodeURIComponent(couponData));
+            }
+            couponData['Singleton'] = {};
+            couponData.Singleton[data['coupon_code']] = data['message'];
+            local.save('clgacoup', encodeURIComponent(JSON.stringify(couponData)));
+            Global.couponData = data;
+            }else{
+               $('#cart .coupon-status').html('Coupon not applicable on current order').show();
+            }
+        }else{
+        $('#cart .coupon-status').html('Invalid Coupon').show();
+        }
+
+    },
     loadServicing : function(data){
         var container = $('.order-body .service-list .list-services');
         container.html('');
@@ -1252,7 +1349,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
          var container2 = $('.order-body .service-img-holder');
         container2.html('');
         var html = '';
-        html +=  "<img src='img/servicing1.jpg'>"
+        html +=  "<img src='img/servicing_hz.jpg'>"
         container2.html(html);
     },
     
@@ -1273,7 +1370,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
          var container2 = $('.order-body .service-img-holder');
         container2.html('');
         var html = '';
-        html +=  "<img src='img/cleaning1.jpg'>"
+        html +=  "<img src='img/cleaning_hz.jpg'>"
         container2.html(html);
     },
 
@@ -1292,7 +1389,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
          var container2 = $('.order-body .service-img-holder');
         container2.html('');
         var html = '';
-        html +=  "<img src='img/windshield1.jpg'>"
+        html +=  "<img src='img/windshield_hz.jpg'>"
         container2.html(html);
     },
     loadCarcare : function(data){
@@ -1310,7 +1407,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
          var container2 = $('.order-body .service-img-holder');
         container2.html('');
         var html = '';
-        html +=  "<img src='img/carcare.jpg'>"
+        html +=  "<img src='img/carcare_hz.jpg'>"
         container2.html(html);
     },
 
@@ -1744,15 +1841,19 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         }
     },
     cartItemLoad : function(data){
+        console.log(data);
         if(data && data.length){
             var res = data[0];
             var vendor = res.vendor;
             var src = '';
             var price = null;
+            var parts_p, labour_p;
             var carFlag = 'car';
+            if(Global.carSelected.car_bike=="Bike"){
+                carFlag = 'bike';
+            }
             if(vendor=="Authorized"){
                 if(Global.carSelected.car_bike=="Bike"){
-                    carFlag = 'bike';
                     src+= logoMap['Authorized Bike'] + Global.carSelected.brand + '.jpg';
                 }
                 else{
@@ -1767,12 +1868,16 @@ $( document ).delegate("#order", "pagebeforeload", function() {
                 if(carFlag == 'car'){
                     try{
                         price = Math.ceil(parseInt(res['parts_price'])) + Math.ceil(parseInt(res['labour_price'])*1.145);
+                        parts_p = parseInt(res['parts_price']);
+                        labour_p = parseInt(res['labour_price']);
                     }catch(e){
                         price = null;
                     }
                 }else{
                     try{
                         price = Math.ceil(parseInt(res['parts_price'])) + Math.ceil(parseInt(res['labour_price'])) + Math.ceil(parseInt(res['labour_price'])*0.145);
+                        parts_p = parseInt(res['parts_price']);
+                        labour_p = parseInt(res['labour_price']);
                         if(vendor != 'ClickGarage Doorstep'){
                             price += 150
                         }
@@ -1783,6 +1888,8 @@ $( document ).delegate("#order", "pagebeforeload", function() {
             }else{
                 if(res['total_price']){
                     price = res['total_price'];
+                    labour_p = price;
+                    parts_p = 0;
                 }else{
                     price = null;
                 }
@@ -1792,7 +1899,14 @@ $( document ).delegate("#order", "pagebeforeload", function() {
                 '<h2>'+res['type_service']+'</h2>' +
                 '<p >'+res['vendor']+'</p>';
             if(price){
-                html += '<p data-value=""> &#8377; '+price+'</p>';
+                html += '<p class="t-price" ' +
+                    'data-service="'+Global.serviceSelected.service+'" ' +
+                    'data-vendor="'+vendor+'" ' +
+                    'data-type="'+carFlag+'"' +
+                    'data-labour="'+labour_p+'"' +
+                    'data-parts="'+parts_p+'"' +
+                    'data-total+"'+price+'"' +
+                    '> &#8377; '+price+'</p><span class="discounted" style="font-size: 12px;"></span>';
             }else{
                 html += '<p data-value=""> N/A </p>';
             }
@@ -1825,11 +1939,17 @@ $( document ).delegate("#order", "pagebeforeload", function() {
             }
 
             html += '</li>';
-
+            var couponData = {};
+            if (local.load() && local.load()['clgacoup']) {
+                couponData = local.load()['clgacoup'];
+                couponData = JSON.parse(decodeURIComponent(couponData));
+            }
+            couponData['Singleton'] = {};
+            local.save('clgacoup', encodeURIComponent(JSON.stringify(couponData)));
 
             $('#cart').find('.cart-entries').find('ul').html(html);
             $('#cart').find('.cart-entries').find('ul').listview().listview("refresh");
-
+            $('#cart .coupon-status').html('');
             var header = 'Car selected : <span>'+Global.carSelected.fullname+'</span>';
             $('#cart').find('.service-selection').find('.desc').html(header);
 
@@ -1864,8 +1984,8 @@ $( document ).delegate("#order", "pagebeforeload", function() {
       //window.alert("Guest Order Placed")
       window.location.href = "#order-placed"
     },
-    carBrands : ['Audi','Bentley','BMW','Bugatti','Chevrolet','Ferrari','Fiat','Ford','Honda','Hyundai','Isuzu','Jaguar','Lamborghini','Land Rover','Mahindra','Maruti Suzuki','Mercedes-Benz','Mini','Nissan','Porsche','Renault','Rolls-Royce','Skoda','Ssangyong','Tata','Toyota','Volkswagen','Volvo'],
-    bikeBrands : ['Bajaj','Hero','Honda','KTM','Mahindra','Royal Enfield','Suzuki','TVS','Yamaha'],
+    carBrands : ['Chevrolet','Fiat','Ford','Honda','Hyundai','Mahindra','Maruti Suzuki','Nissan','Renault','Skoda','Tata','Toyota','Volkswagen'],//['Audi','Bentley','BMW','Bugatti','Chevrolet','Ferrari','Fiat','Ford','Honda','Hyundai','Isuzu','Jaguar','Lamborghini','Land Rover','Mahindra','Maruti Suzuki','Mercedes-Benz','Mini','Nissan','Porsche','Renault','Rolls-Royce','Skoda','Ssangyong','Tata','Toyota','Volkswagen','Volvo'],
+    bikeBrands : ['Bajaj','Hero','Honda','KTM','Mahindra','Royal Enfield','Suzuki','TVS','Yamaha'],//['Bajaj','Hero','Honda','KTM','Mahindra','Royal Enfield','Suzuki','TVS','Yamaha'],
     additionalFeatures : {
         car : ['Clutch Overhaul', 'Interior Dry-cleaning', 'Brake Repair', 'Wheel Balancing', 'Wheel Alignment', 'AC Servicing', 'Injector Cleaning'],
         bike : ['Front Brake Repair',  'Rear Brake repair', 'Wheel Balancing', 'Wheel Alignment']

@@ -116,28 +116,108 @@ var Global = {
         //
         //}
         if (data.status) {
+            var c_key = data.price_key;
+            var c_cap = data.cap;
+            c_cap = parseFloat(c_cap)
+            var c_type = data.type;
+            var c_vendor = data.vendor;
+            var c_service = data.category;
+            var c_value = data.value;
+            var c_cb = data.car_bike;
+            if(! (c_cb && c_cb.length) ){
+                c_cb = 'Car'
+            }
+
+        var couponData = {}
+        if (local.load() && local.load()['clgacoup']) {
+            couponData = local.load()['clgacoup'];
+            couponData = JSON.parse(decodeURIComponent(couponData));
+        }
+        if(0){
+            if (!couponData.Global) {
+                console.log('no data')
+                couponData.Global = {}
+                couponData.Global[data['coupon_code']] = data['message']
+            }
+            else {
+                if (!couponData.Global[data['coupon_code']]) {
+                    couponData.Global[data['coupon_code']] = data['message']
+                } else {
+                    //already applied
+                }
+            }
+        }
+        var counter = {'items':0, 'valid':0};
+        $('.cart-table:visible').find('.price-div').each(function(){
+            counter['items'] += 1;
+            var p_vendor = $(this).attr('data-vendor');
+            var p_service = $(this).attr('data-service');
+            var car_bike = $(this).attr('data-type');
+            if(p_vendor && p_vendor != 'Authorized' && (p_service.toLowerCase() == c_service.toLowerCase()) ){
+                if( (car_bike.toLowerCase() == c_cb.toLowerCase()) &&
+                    ( (p_vendor.toLowerCase() == c_vendor.toLowerCase()) ||
+                        (c_vendor.toLowerCase() == 'all') ) ){
+                    var p_labour = $(this).attr('data-labour');
+                    var p_parts = $(this).attr('data-parts');
+                    var p_total = $(this).attr('data-total');
+                    var new_price = 0;
+                    p_labour = parseFloat(p_labour);
+                    p_parts = parseFloat(p_parts);
+                    var discount = 0;
+                    var target = 0;
+                    counter['valid'] += 1;
+                    if(c_key && c_key.length){
+                        if(c_key == 'labour')
+                            target = p_labour;
+                        else if(c_key == 'parts')
+                            target = p_parts;
+                        else
+                            target = p_total
+
+                        if(c_type == 'flat')
+                            discount = target - c_value
+                        else if(c_type == 'percent')
+                            discount = (c_value)*(target)/100;
+                        else
+                            discount = c_value
+
+                        if(c_cap && !isNaN(c_cap) && discount > c_cap)
+                            discount = c_cap
+
+                        if(c_key == 'labour')
+                            new_price = (Math.ceil((p_labour - discount)*(114.5))/100) + (p_parts);
+                        else if(c_key == 'parts')
+                            new_price = (Math.ceil((p_labour)*(114.5))/100) + (p_parts - discount);
+                        else
+                            new_price = (Math.ceil((p_labour)*(114.5))/100) + (p_parts) - discount;
+                    }
+                    $(this).closest('td').find('.discounted').html('<i class="fa fa-inr"></i>'+Math.ceil(new_price)+' (&#8773;'+new_price+')').show();
+                    $(this).css({
+                        'text-decoration':'line-through'
+                    });
+                }
+            }
+        });
+
+        couponData['Singleton'] = {};
 
         var container = $('.coupon-holder .coupon-message');
         container.html('');
         var html = '<span class="message-test">'+data.message+'</span>';
-        var couponData = {}
-        if (local.load() && local.load()['clgacoup']) {
-            couponData = local.load()['clgacoup'];
-            couponData = JSON.parse(couponData);
-        }
-        if (!couponData.Global) {
-            console.log('no data')
-            couponData.Global = {}
-            couponData.Global[data['coupon_code']] = data['message']
-        }
-        else {
-            if (!couponData.Global[data['coupon_code']]) {
-                couponData.Global[data['coupon_code']] = data['message']
-            } else {
-                //already applied
+            if(counter.valid){
+                if(counter.valid == counter.items)
+                    html = html; //all good
+                else
+                    html = '<span class="message-test">'+data.message+' - Applied on '+counter.valid+' items</span>';
+
+                couponData.Singleton[data['coupon_code']] = data['message'];
+
+            }else{
+                html = '<span class="message-test">Coupon not valid on selected service(s)</span>';
             }
-        }
-        local.save('clgacoup', JSON.stringify(couponData));
+        local.save('clgacoup', encodeURIComponent(JSON.stringify(couponData)));
+        container.html(html);
+
         //for now we only have global coupons;
         //so skip this
             /*
@@ -152,7 +232,6 @@ var Global = {
             }
         });
             */
-        container.html(html);
     }else{
 
         }

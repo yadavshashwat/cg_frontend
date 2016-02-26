@@ -524,7 +524,7 @@
                             <th>Dealer</th>
                             <th>Service</th>
                             <!--<th></th>-->
-                            <th>Total Price</th>
+                            <th>Time</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -540,12 +540,13 @@
                             <td>
                                 <!--<div> {{ val.service_detail.service }}</div>-->
                                 <div> Emergency <i class="fa fa-caret-right"></i> {{ val.service_id }}</div>
+                                <div>{{val.car.make}}&nbsp;{{val.car.name}}</div>
                             </td>
                             <!--<td>-->
 
                             <!--</td>-->
                             <td>
-
+                                <div>{{val.datetime}}</div>
                             </td>
                             <td></td>
                         </tr>

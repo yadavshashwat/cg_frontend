@@ -145,7 +145,11 @@ var Commons = {
                 //var classy = 'Booking'
                 Commons.ajaxData('send_contact', {name:name, phone:phone,message:message},"get",_this, eval("_this.afterSendContact"))
             return false;
-        })
+        });
+        $('.solid-header').find('.logo-click').on('click', function(e){
+           var host = window.location.host;
+            window.location = "http://"+host+'/?source=logo'
+        });
         $('#settings-drpdwn').off().on('click', function(e){
             $(this).parent().find('.logged-user-drpdwn').toggle();
         });
@@ -226,11 +230,16 @@ var Commons = {
             }
 
         });
+        $('body').on('click', '.admin-popup', function(e){
+            if(!$(e.target).closest('.white-area').length){
+                $(this).closest('.admin-popup').hide();
+            }
+        });
         $('.clean-inp-wrapper').off().on('focus', 'input.clean-inp-tbox', function(e){
             $(this).closest('.clean-inp-wrapper').addClass('input-focused');
         });
         $('.clean-inp-wrapper').on('focusout', 'input.clean-inp-tbox', function(e){
-            if(!$(this).val()){
+            if(!$(this).val() && !$(this).hasClass('perpetual')){
                 $(this).closest('.clean-inp-wrapper').removeClass('input-focused');
             }
         });
@@ -259,6 +268,7 @@ var Commons = {
 
             }
         });
+
 //        $('#loginModal')
     }
 };

@@ -6,12 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
-    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">-->
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">-->
-    <!--<link rel="stylesheet" href="css/font-awesome.min.css">-->
-    <!--	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>-->
-    <!--        <script src="js/lib/jquery.validate.js"></script>-->
-    <script src="js/lib/jquery-2.1.4.min.js"></script>
 <!-- offline>
     <link rel="stylesheet" href="/js/lib/jquery.mobile-1.4.5.min.css"/>
     <script src="/js/lib/jquery.mobile-1.4.5.min.js"></script>
@@ -21,24 +15,10 @@
 <!-- online -->
 
     <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>-->
-    <link rel="stylesheet" href="/css/jquery.mobile-1.4.5.css"/>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-  <!--<link rel="stylesheet" type="text/css" href="http://ququplay.github.io/jquery-mobile-square-ui-theme/css/jquery.mobile.squareui.css" />-->
-  <!--<script src="http://ququplay.github.io/jquery-mobile-square-ui-theme/js/jquery.min.js"></script>-->
-  <!--<script src="http://ququplay.github.io/jquery-mobile-square-ui-theme/js/jqm.min.js"></script>-->
 
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js" type="text/javascript"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/additional-methods.min.js" type="text/javascript"></script>
-    <script src="https://apis.google.com/js/client.js?onload=OnLoadCallback"></script>
-
-
-    <script src="/js/common.js"></script>
-    <script src="/js/home.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <!--//<script type="text/javascript" src="js/legacy/json2html.js"></script>-->
-    <!--//<script type="text/javascript" src="js/legacy/jquery.json2html.js"></script>-->
-    <!--//<script type="text/javascript" src="js/common.js"></script>-->
-    <!--//<script type="text/javascript" src="js/Car-make.js"></script>-->
+    <link rel="stylesheet" href="/css/jquery.mobile-1.4.5.css"/>
+
 </head>
 
 <body>
@@ -55,112 +35,13 @@
  <!--js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1394399690887901";-->
  <!--fjs.parentNode.insertBefore(js, fjs);-->
 <!--}(document, 'script', 'facebook-jssdk'));</script>-->
-<script>
-  // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      testAPI();
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-    }
-  }
-
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '1394399690887901',
-    cookie     : true,  // enable cookies to allow the server to access
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.2' // use version 2.2
-  });
-
-  // Now that we've initialized the JavaScript SDK, we call
-  // FB.getLoginStatus().  This function gets the state of the
-  // person visiting this page and can return one of three states to
-  // the callback you provide.  They can be:
-  //
-  // 1. Logged into your app ('connected')
-  // 2. Logged into Facebook, but not your app ('not_authorized')
-  // 3. Not logged into Facebook and can't tell if they are logged into
-  //    your app or not.
-  //
-  // These three cases are handled in the callback function.
-
-      /*
-  FB.getLoginStatus(function(response) {
-      console.log(response)
-      if(response.status && response.status == 'connected'){
-          //user present
-                $('#login').find('.login-container').hide();
-                $('#login').find('.logout-container').show();
-                $('#login').find('.logout-container').find('.text-box h4').html('Welcome!  Fetching your information.... ');
-
-             FB.api('/me', function(response) {
-               console.log('Good to see you, ' + response.name + '.');
-                $('#login').find('.logout-container').find('.text-box h4').html('You are logged in as <span class="username">'+response.name+'</span>');
-             });
-      }else{
-          //user present
-
-      }
-//    statusChangeCallback(response);
-  });
-  */
-  Global.initFBHandlers(FB);
-  };
-
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
-  function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-    });
-  }
-</script>
     <!--CG Header-->
-    <header data-role="header" class="header-body" data-theme="a">
-        <h2>ClickGarage</h2>
+    <header data-role="header" class="header-body ui-header ui-bar-a" data-theme="a" role="banner">
+        <h2 class="ui-title" role="heading" aria-level="1">ClickGarage</h2>
 
-        <a data-role="none" class="hlogo" href="#menuA" data-rel="panel"
-           style="position: absolute; left: 0; top: 0;"><img src=img/header_logo2.png alt=""/></a>
+        <a data-role="none" class="hlogo ui-btn-left" href="#menuA" data-rel="panel" style="position: absolute; left: 0; top: 0;"><img src="img/header_logo2.png" alt="ClickGarage"></a>
 
-        <a href="tel:0919953008804"
-           class="call-helpline ui-btn ui-corner-all ui-icon-phone ui-btn-icon-notext ui-nodisc-icon">phone</a>
+        <a href="tel:0919953008804" class="call-helpline ui-nodisc-icon ui-btn-right ui-btn ui-icon-phone ui-btn-icon-notext ui-corner-all" data-role="button" role="button">phone</a>
     </header>
     <!--CG Header-->
 
@@ -213,42 +94,42 @@
         <ul  data-role="listview" data-inset="true">
             <li data-icon="false">
                 <a data-id="5626798732d69a11ed902093" data-name="Authorized" class="about-item-detail">
-                    <img src="/img/icon-assurance.png" >
+                    <img src="/img/icon-assurance.png" alt="assurance">
                     <div class="list-item-title">Quality Assurance</div>
                     <div class="list-item-text">We use genuine (OEM/OEM equivalent) parts and fluids and all the work is done under the supervision of a ClickGarage service advisor. All our mechanics are vetted to the highest industry standards.</div>
                 </a>
             </li>
             <li data-icon="false">
                 <a data-id="5626798732d69a11ed902093" data-name="Authorized" class="about-item-detail">
-                    <img src="/img/icon-verified.png" >
+                    <img src="/img/icon-verified.png" alt="warranty">
                     <div class="list-item-title">ClickGarage Warranty</div>
                     <div class="list-item-text">All our servicing and repair work comes with a 2000 KMs/2 months warranty. Subject to certain conditions, if any issues arise during this period, we will resolve the issue at no additional cost.</div>
                 </a>
             </li>
             <li data-icon="false">
                 <a data-id="5626798732d69a11ed902093" data-name="Authorized" class="about-item-detail">
-                    <img src="/img/icon-hassle.png" >
+                    <img src="/img/icon-hassle.png" alt="hassle-free">
                     <div class="list-item-title">Hassle-Free</div>
                     <div class="list-item-text">You don’t have to drive to the service centre for anything anymore. ClickGarage provides a pick-up & drop service for car related works. For bikes, your assigned service advisor and the mechanic will bring all the tools and parts required to service your bike at the convenience of your home or office, 7 days a week.</div>
                 </a>
             </li>
             <li data-icon="false">
                 <a data-id="5626798732d69a11ed902093" data-name="Authorized" class="about-item-detail">
-                    <img src="/img/icon-discount.png" >
+                    <img src="/img/icon-discount.png" alt="discounted">
                     <div class="list-item-title">Save upto 30%</div>
                     <div class="list-item-text">With our standardized pricing and lower labour costs. You can save upto 30% compared to authorized garages and franchisee.</div>
                 </a>
             </li>
             <li data-icon="false">
                 <a data-id="5626798732d69a11ed902093" data-name="Authorized" class="about-item-detail">
-                    <img src="/img/icon-reports.png" >
+                    <img src="/img/icon-reports.png" alt="reporting">
                     <div class="list-item-title">Reporting</div>
                     <div class="list-item-text">Get SMS alerts and updates for all the jobs being performed to your vehicle. You get a detailed report card of the vehicle after the completion of the services along with ClickGarage recommendations so you know what’s right for your vehicle.</div>
                 </a>
             </li>
             <li data-icon="false">
                 <a data-id="5626798732d69a11ed902093" data-name="Authorized" class="about-item-detail">
-                    <img src="/img/icon-estimate.png" >
+                    <img src="/img/icon-estimate.png" alt="estimates">
                     <div class="list-item-title">Upfront Estimates</div>
                     <div class="list-item-text">Power of informed choice with cost estimates generated from our extensive data.  With our upfront pricing estimate, there will be no last minute surprises or negotiations.</div>
                 </a>
@@ -260,7 +141,7 @@
         <div data-role="content">
             <div class="ui-grid-b">
                 <div class="list ui-block-a img-wrap">
-                    <img src="/img/pane-select-1.png" alt=""/>
+                    <img src="/img/pane-select-1.png" alt="Options"/>
                 </div>
                 <div class="list ui-block-b ui-block-span2">
                     <div class="list-item-title">
@@ -281,13 +162,13 @@
                     </div>
                 </div>
                 <div class="list ui-block-c img-wrap">
-                    <img src="/img/pane-compare-1.png" alt=""/>
+                    <img src="/img/pane-compare-1.png" alt="Alternatives"/>
 
                 </div>
             </div>
             <div class="ui-grid-b">
                 <div class="list ui-block-a img-wrap">
-                    <img src="/img/pane-relax-1.png" alt=""/>
+                    <img src="/img/pane-relax-1.png" alt="Relax"/>
                 </div>
                 <div class="list ui-block-b ui-block-span2">
                     <div class="list-item-title">
@@ -346,7 +227,7 @@
         <h2>Select Car / Bike</h2>
 
         <a data-role="none" class="hlogo" href="#menuA" data-rel="panel"
-           style="position: absolute; left: 0; top: 0;"><img src=img/header_logo2.png alt=""/></a>
+           style="position: absolute; left: 0; top: 0;"><img src=img/header_logo2.png alt="ClickGarage"/></a>
 
         <a href="tel:0919953008804"
            class="call-helpline ui-btn ui-corner-all ui-icon-phone ui-btn-icon-notext ui-nodisc-icon">phone</a>
@@ -384,34 +265,19 @@
             <select name="select-custom-22" id="brand-dropdown" data-native-menu="false">
                 <option value="choose-one" data-placeholder="true">Select Brand</option>
                <option selected disabled>Select Brand</option>
-                            <option value="Audi">Audi</option>
-                            <option value="Bentley">Bentley</option>
-                            <option value="BMW">BMW</option>
-                            <option value="Bugatti">Bugatti</option>
                             <option value="Chevrolet">Chevrolet</option>
-                            <option value="Ferrari">Ferrari</option>
                             <option value="Fiat">Fiat</option>
                             <option value="Ford">Ford</option>
                             <option value="Honda">Honda</option>
                             <option value="Hyundai">Hyundai</option>
-                            <option value="Isuzu">Isuzu</option>
-                            <option value="Jaguar">Jaguar</option>
-                            <option value="Lamborghini">Lamborghini</option>
-                            <option value="Land Rover">Land Rover</option>
                             <option value="Mahindra">Mahindra</option>
                             <option value="Maruti Suzuki">Maruti Suzuki</option>
-                            <option value="Mercedes-Benz">Mercedes-Benz</option>
-                            <option value="Mini">Mini</option>
                             <option value="Nissan">Nissan</option>
-                            <option value="Porsche">Porsche</option>
                             <option value="Renault">Renault</option>
-                            <option value="Rolls-Royce">Rolls-Royce</option>
                             <option value="Skoda">Skoda</option>
-                            <option value="Ssangyong">Ssangyong</option>
                             <option value="Tata">Tata</option>
                             <option value="Toyota">Toyota</option>
                             <option value="Volkswagen">Volkswagen</option>
-                            <option value="Volvo">Volvo</option>
             </select>
         </div>
 
@@ -503,7 +369,7 @@
         <h2>Select Service</h2>
 
         <a data-role="none" class="hlogo" href="#menuA" data-rel="panel"
-           style="position: absolute; left: 0; top: 0;"><img src=img/header_logo2.png alt=""/></a>
+           style="position: absolute; left: 0; top: 0;"><img src=img/header_logo2.png alt="ClickGarage"/></a>
 
         <a href="tel:9953008804"
            class="call-helpline ui-btn ui-corner-all ui-icon-phone ui-btn-icon-notext ui-nodisc-icon">phone</a>
@@ -703,9 +569,9 @@
     <div data-role="content">
 
         <div class="login-container">
-            <a class="ui-btn" id="facebook"><img src="img/login/facebook.png" class="ui-li-icon">Login with
+            <a class="ui-btn" id="facebook"><img src="img/login/facebook.png" alt="Facebook-Login" class="ui-li-icon">Login with
                 Facebook</a>
-            <a class="ui-btn" id="google"><img src="img/login/google.png" class="ui-li-icon">Login with Google</a>
+            <a class="ui-btn" id="google"><img src="img/login/google.png" alt="Google-Login" class="ui-li-icon">Login with Google</a>
             <h4 class="or"> OR </h4>
             <div></div>
 
@@ -1154,7 +1020,7 @@
         <h2>Emergency</h2>
 
         <a data-role="none" class="hlogo" href="#menuA" data-rel="panel"
-           style="position: absolute; left: 0; top: 0;"><img src=img/header_logo2.png alt=""/></a>
+           style="position: absolute; left: 0; top: 0;"><img src=img/header_logo2.png alt="ClickGarage"/></a>
 
         <a href="tel:0919953008804"
            class="call-helpline ui-btn ui-corner-all ui-icon-phone ui-btn-icon-notext ui-nodisc-icon">phone</a>
@@ -1165,7 +1031,7 @@
     <div data-role="content">
 
         <div class="service-img-holder">
-            <img src="img/emergency1.jpg" alt="img4"/>
+            <img src="img/emergency_hz.jpg" alt="Emergency Services"/>
         </div>
         <div class="service-list">
             <ul class="list-services" data-role="listview" data-inset="true">
@@ -1193,7 +1059,7 @@
         <h2>Repairs</h2>
 
         <a data-role="none" class="hlogo" href="#menuA" data-rel="panel"
-           style="position: absolute; left: 0; top: 0;"><img src=img/header_logo2.png alt=""/></a>
+           style="position: absolute; left: 0; top: 0;"><img src=img/header_logo2.png alt="ClickGarage"/></a>
 
         <a href="tel:0919953008804"
            class="call-helpline ui-btn ui-corner-all ui-icon-phone ui-btn-icon-notext ui-nodisc-icon">phone</a>
@@ -1204,7 +1070,7 @@
     <div data-role="content">
 
         <div class="service-img-holder">
-            <img src="img/repairs.jpg" alt="img4"/>
+            <img src="img/repairs_hz.jpg" alt="Repairs"/>
         </div>
 
     <div class="service-list">
@@ -1229,7 +1095,7 @@
         <h2>Booking Confirmation</h2>
 
         <a data-role="none" class="hlogo" href="#menuA" data-rel="panel"
-           style="position: absolute; left: 0; top: 0;"><img src=img/header_logo2.png alt=""/></a>
+           style="position: absolute; left: 0; top: 0;"><img src=img/header_logo2.png alt="ClickGarage"/></a>
 
         <a href="tel:0919953008804"
            class="call-helpline ui-btn ui-corner-all ui-icon-phone ui-btn-icon-notext ui-nodisc-icon">phone</a>
@@ -1295,6 +1161,117 @@
     </div>
 </div>
 <!--Don't delete, end of panel code-->
+    <script src="/js/lib/superminified.js"></script>
+
+    <!--<script src="js/lib/jquery-2.1.4.min.js"></script>-->
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/home.js"></script>
+
+<!--
+    <script src="js/lib/jquery-2.1.4.min.js"></script>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/additional-methods.min.js" type="text/javascript"></script>
+-->
+    <script src="https://apis.google.com/js/client.js?onload=OnLoadCallback"></script>
+<script>
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into Facebook.';
+    }
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '1394399690887901',
+    cookie     : true,  // enable cookies to allow the server to access
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.2' // use version 2.2
+  });
+
+  // Now that we've initialized the JavaScript SDK, we call
+  // FB.getLoginStatus().  This function gets the state of the
+  // person visiting this page and can return one of three states to
+  // the callback you provide.  They can be:
+  //
+  // 1. Logged into your app ('connected')
+  // 2. Logged into Facebook, but not your app ('not_authorized')
+  // 3. Not logged into Facebook and can't tell if they are logged into
+  //    your app or not.
+  //
+  // These three cases are handled in the callback function.
+
+      /*
+  FB.getLoginStatus(function(response) {
+      console.log(response)
+      if(response.status && response.status == 'connected'){
+          //user present
+                $('#login').find('.login-container').hide();
+                $('#login').find('.logout-container').show();
+                $('#login').find('.logout-container').find('.text-box h4').html('Welcome!  Fetching your information.... ');
+
+             FB.api('/me', function(response) {
+               console.log('Good to see you, ' + response.name + '.');
+                $('#login').find('.logout-container').find('.text-box h4').html('You are logged in as <span class="username">'+response.name+'</span>');
+             });
+      }else{
+          //user present
+
+      }
+//    statusChangeCallback(response);
+  });
+  */
+  Global.initFBHandlers(FB);
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+    });
+  }
+</script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -1303,8 +1280,9 @@
 
   ga('create', 'UA-68064927-1', 'auto');
   ga('send', 'pageview');
-
 </script>
-
+<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
 </body>
+
 </html>

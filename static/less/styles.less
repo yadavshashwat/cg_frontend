@@ -1464,6 +1464,102 @@
 
 
         .adminpanel-body{
+
+			margin: 0;
+			background: #eaeaea;
+
+			.overlay-pat{
+				background: url('../img/tools-pat.png');
+				background-size: 300px auto;
+				opacity: .12;
+				z-index: 10;
+			}
+
+			.pane{
+				position: relative;
+				margin-top: 72px;
+              padding: 0px 24px;
+			}
+			.solid-header{
+				top:0px;
+				position: fixed;
+				padding: 10px 0px 4px 0px;
+				width: 100%;
+				background: #4a148c;
+				border-bottom: 4px solid #4a148c;
+				z-index: 50;
+			}
+			.header.not-logged{
+				margin-right: -120px;
+			}
+
+			.header{
+				height:34px;
+				width: 960px;
+				margin:0 auto;
+				.menu-logo{
+						height: 50px;
+						width: 250px;
+						background: url(../img/cg-logo-6.png) no-repeat;
+						background-size: auto 100%;
+					}
+				.left-items-holder{
+
+				}
+				.right-items-holder{
+					a{
+								text-decoration:none;
+								font-family: Lato;
+								color: #ffffff;
+								font-size: 14px;
+								}
+					color:#fff;
+					font-family: Lato;
+					font-size: 14px;
+					position: relative;
+					padding:10px 0px 0px 0px;
+					.menu-btn{
+						margin-right:12px;
+						height: 34px;
+						line-height: 22px;
+						box-sizing: border-box;
+						border: 2px solid white;
+						padding:4px 6px;
+						border-radius: 3px;
+						cursor:pointer;
+					}
+					.menu-btn:hover{
+						background: #fff;
+		//        color:rgba(44,62,80,0.4);
+						color:#4a148c;
+					}
+					.menu-item{
+						margin-right:12px;
+						height: 34px;
+						line-height: 24px;
+						box-sizing: border-box;
+						padding:5px 6px;
+						cursor:pointer;
+					}
+				}
+			}
+			.centered-content{
+				position: relative;
+				min-width:960px;
+                width: 100%;
+				padding: 0px 0px;
+				margin:0 auto;
+				z-index: 20;
+				background: rgba(234,234,234,0.7);
+				-webkit-box-shadow: 0px 0px 45px 60px rgba(234,234,234,1);
+				-moz-box-shadow: 0px 0px 45px 60px rgba(234,234,234,1);
+				box-shadow: 0px 0px 45px 60px rgba(234,234,234,1);
+				.content-holder{
+					position: relative;
+				}
+			}
+
+
             .search-div{
                 padding-top: 10px;
                 display: block;
@@ -1494,6 +1590,7 @@
 			.section-headers{
                 height: 40px !important;
 				margin-top: 60px !important;
+                border-bottom: 2px solid #4a148c;
                 .list-head{
                     padding-top: 10px;
                     p{
@@ -1508,7 +1605,25 @@
 
             }
 			.section-box{
-				margin-top: 30px !important;
+              margin: 30px auto 30px auto;
+              background: #fff;
+              .adminList{
+                position: relative;
+                font-family: Lato;
+                min-height: 360px;
+              }
+              .section-content-item{
+    display: none;
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 3px solid #d81b60;
+    padding: 0px 12px;
+    background: white;
+    overflow-y: scroll;
+//    display: inline;
+    max-height: 440px!important;
+              }
 			}
             .booking-entry-cat{
                 display: inline-block;
