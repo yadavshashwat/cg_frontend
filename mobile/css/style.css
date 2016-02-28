@@ -143,18 +143,25 @@ body div.ui-dialog-contain .ui-content{
 }
 .landing-page .about-wrapper .about-item-detail{
     background: #fff;
-    height: 80px;
+    min-height: 80px;
 }
 .landing-page .about-wrapper .about-item-detail img, .landing-page .about-wrapper .about-item-detail img:first-child{
     top:11px;
     left: 10px;
 }
+.landing-page .hiw-wrapper .ui-content{
+    margin-top: 12px;
+}
 .landing-page .hiw-wrapper .ui-grid-b{
     border-bottom: 1px solid rgba(0,0,0,.15);
     margin-bottom: 12px;
+    background: #fff;
+}
+.landing-page .hiw-wrapper .list-item-title{
+    margin-top: 12px;
 }
 .landing-page .hiw-wrapper .ui-grid-b:last-child{
-    border-bottom: none;
+    /*border-bottom: none;*/
 }
 .landing-page .hiw-wrapper .ui-grid-b > .ui-block-span2{
     width: 66%;
@@ -165,8 +172,15 @@ body div.ui-dialog-contain .ui-content{
     /*top:6px;*/
     /*left: 6px;*/
 }
-.landing-page .hiw-wrapper .img-wrap{
-    min-height: 120px;
+.landing-page .service-wrapper .ui-grid-a > .offset-a{
+    margin-left: 25%;
+}
+.landing-page .service-wrapper .img-wrap > img{
+    max-width: 100%;
+    max-height: 72px;
+}
+.landing-page .hiw-wrapper .img-wrap, .landing-page .service-wrapper .img-wrap{
+    min-height: 84px;
     text-align: center;
     padding: 6px 0px;
 }
@@ -215,21 +229,41 @@ body div.ui-dialog-contain .ui-content{
 .landing-page #hidden-car-id{
     display: none;
 }
-.landing-page .bottom-pane .list-item-title{
+.landing-page .bottom-pane .list-item-title, .landing-page .middle-pane .list-item-title{
     line-height: 24px;
     font-size: 16px;
     font-family: Lato;
     font-weight: 400;
+    margin-bottom: 0px;
 }
-.landing-page .bottom-pane .list-item-text{
+.landing-page .middle-pane .list-item-title{
+    margin-top: 0px;
+}
+.landing-page .middle-pane .service-wrapper .list-item-title{
+    text-align: center;
+}
+.landing-page .bottom-pane .list-item-text, .landing-page .middle-pane .list-item-text{
     white-space: pre-line;
     font-size: 12px;
     line-height: 18px;
     font-family: Lato;
     font-weight: 300;
 }
-
-.landing-page .bottom-pane #contact-info {
+.landing-page .middle-pane{
+    padding: 12px 6px;
+    border: 2px solid #ccc;
+    border-width: 2px 0px;
+    border-style: dashed;
+}
+.landing-page .middle-pane .title-holder{
+    font-size: 16px;
+    font-weight: 700;
+    font-family: Lato;
+    text-align: center;
+    line-height: 28px;
+    text-decoration: underline;
+}
+.landing-page .contact-pane #contact-info {
     /*position: absolute; right: 0; top: 0; height: 100%; */
     border: 10px solid white;
     -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
@@ -239,24 +273,24 @@ body div.ui-dialog-contain .ui-content{
     background-size: 300px auto;
     text-align: center;
 }
-.landing-page .bottom-pane dt {
+.landing-page .contact-pane dt {
     text-transform: uppercase; font-family: Lato, Helvetica, Arial, sans-serif; font-weight: 400; letter-spacing: 1px; font-size: 12px; color: #e8554e;
 }
-.landing-page .bottom-pane #contact-info dd {
+.landing-page .contact-pane #contact-info dd {
     margin-bottom: 25px; margin-left:0px;
     font-weight: 300; font-size: 12px;
 }
-.landing-page .bottom-pane #contact-info dd address{
+.landing-page .contact-pane #contact-info dd address{
     font-weight: 400; font-size: 12px;
     font-style: normal;
 }
-.landing-page .bottom-pane #contact-info dd, .landing-page .bottom-pane #contact-info dd a { color: #204a65; text-decoration: none; }
-.landing-page .bottom-pane #contact-info .social-links a {
+.landing-page .contact-pane #contact-info dd, .landing-page .bottom-pane #contact-info dd a { color: #204a65; text-decoration: none; }
+.landing-page .contact-pane #contact-info .social-links a {
     text-indent: -119988px; overflow: hidden; text-align: left; background-image: url('../img/icons.png?1381413743'); background-repeat: no-repeat; background-position: 50% 50%; display: -moz-inline-stack; display: inline-block; vertical-align: middle; *vertical-align: auto; zoom: 1; *display: inline; width: 32px; height: 48px; margin-right: 5px;
     font-weight: 300; font-size: 12px;
 }
-.landing-page .bottom-pane #contact-info .social-links a.fb { background-position: -592px -72px; }
-.landing-page .bottom-pane #contact-info .social-links a.tt { background-position: -592px -8px; }
+.landing-page .contact-pane #contact-info .social-links a.fb { background-position: -592px -72px; }
+.landing-page .contact-pane #contact-info .social-links a.tt { background-position: -592px -8px; }
 
 
 /*<Shashwat styling>*/

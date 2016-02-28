@@ -7,7 +7,7 @@
     Renault Servicing, Maruti Suzuki Servicing, Mahindra Servicing, Hyundai Servicing, Honda Servicing, Ford Servicing, Fiat Servicing,
     Chevrolet Servicing, Royal Enfield Servicing, Suzuki Servicing, TVS Servicing, Bajaj Servicing, KTM Servicing, Yamaha Servicing, Hero Servicing,
     car servicing, bike servicing, car cleaning, car dry cleaning, car interior cleaning, car exterior cleaning"/>
-    <meta property="og:image" content="../../static/img/Logo-black.jpg"/>
+    <meta property="og:image" content="../../static/img/Logo-Black.jpg"/>
 
     
     {% load staticfiles %}
@@ -47,47 +47,6 @@
     <script type="text/javascript" src="{%  static "js/jssor.slider.js" %}"></script>
     <script type="text/javascript" src="../../static/js/jquery-video-lightning.js"></script>
 
-    <script type="text/javascript">
-        jQuery(document).ready(function ($) {
-            var options = {
-                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
-                $AutoPlaySteps: 1,                                  //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1
-                $AutoPlayInterval: 0,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
-                $PauseOnHover: 4,                               //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
-
-                $ArrowKeyNavigation: true,                          //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
-                $SlideEasing: $JssorEasing$.$EaseLinear,          //[Optional] Specifies easing for right to left animation, default value is $JssorEasing$.$EaseOutQuad
-                $SlideDuration: 5000,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
-                $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
-                $SlideWidth: 100,                                   //[Optional] Width of every slide in pixels, default value is width of 'slides' container
-                $SlideHeight: 100,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
-                $SlideSpacing: 50,                                  //[Optional] Space between each slide in pixels, default value is 0
-                $DisplayPieces: 8,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
-                $ParkingPosition: 0,                              //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
-                $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
-                $PlayOrientation: 1,                                //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
-                $DragOrientation: 1                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
-            };
-
-            var jssor_slider1 = new $JssorSlider$("slider1_container", options);
-
-            //responsive code begin
-            //you can remove responsive code if you don't want the slider scales while window resizes
-            function ScaleSlider() {
-                var bodyWidth = document.body.clientWidth;
-                if (bodyWidth)
-                    jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 1380));
-                else
-                    window.setTimeout(ScaleSlider, 30);
-            }
-            ScaleSlider();
-
-            $(window).bind("load", ScaleSlider);
-            $(window).bind("resize", ScaleSlider);
-            $(window).bind("orientationchange", ScaleSlider);
-            //responsive code end
-        });
-    </script>
     <!--Script Addition - Slider end-->
 
     <script src="{%  static "js/legacy/less.min.js" %}"></script>
@@ -356,6 +315,84 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
 </div>
 
 
+<div class="pane features-pane">
+    <div class="centered-content">
+        <div class="abouts-row">
+            <a name="about-us">
+            <div class="text-holder">
+                What Sets Us Apart
+            </div>
+            </a>
+        </div>
+        <div class="feats-row">
+            <div class="feature-point">
+                <div class="feat-icon">
+                    <i class="cg-assurance"></i>
+                </div>
+                <div class="feat-text">
+                    <h3 class="title">Quality Assurance </h3>
+                    <div class="sub-title none-i"></div><div class="desc">We use genuine (OEM/OEM equivalent) parts and fluids and all the work is done under the supervision of a ClickGarage service advisor. All our mechanics are vetted to the highest industry standards.</div>
+                </div>
+            </div>
+            <div class="feature-point">
+                <div class="feat-icon">
+                    <i class="cg-verified"></i>
+                </div>
+                <div class="feat-text">
+                    <h3 class="title">ClickGarage Warranty</h3>
+                    <div class="sub-title none-i"></div><div class="desc">All our servicing and repair work comes with a 2000 KMs/2 months warranty. Subject to certain conditions, if any issues arise during this period, we will resolve the issue at no additional cost</div>
+                </div>
+            </div>
+            <div class="feature-point">
+                <div class="feat-icon">
+                    <i class="cg-relax"></i>
+                </div>
+                <div class="feat-text">
+                    <h3 class="title">Hassle-free</h3>
+                    <div class="sub-title none-i"></div><div class="desc">You don’t have to drive to the service centre for anything anymore. ClickGarage provides a pick-up & drop service for car related works. For bikes, your assigned service advisor and the mechanic will bring all the tools and parts required to service your bike at the convenience of your home or office, 7 days a week.</div>
+                </div>
+            </div>
+            <div class="feature-point">
+                <div class="feat-icon">
+                    <i class="cg-discount"></i>
+                </div>
+                <div class="feat-text">
+                    <h3 class="title">Save upto 30%</h3>
+                    <div class="sub-title none-i"></div><div class="desc">With our standardized pricing and lower labour costs. You can save upto 30% compared to authorized garages and franchisee.</div>
+                </div>
+            </div>
+            <div class="feature-point">
+                <div class="feat-icon">
+                    <i class="cg-alerts"></i>
+                </div>
+                <div class="feat-text">
+                    <h3 class="title">Reporting</h3>
+                    <div class="sub-title none-i"></div><div class="desc">Get SMS alerts and updates for all the jobs being performed to your vehicle. You get a detailed report card of the vehicle after the completion of the services along with ClickGarage recommendations so you know what’s right for your vehicle.</div>
+                </div>
+            </div>
+            <div class="feature-point">
+                <div class="feat-icon">
+                    <i class="cg-estimate"></i>
+                </div>
+                <div class="feat-text">
+                    <h3 class="title">Upfront Estimate</h3>
+                    <div class="sub-title none-i"></div><div class="desc">Power of informed choice with cost estimates generated from our extensive data.  With our upfront pricing estimate, there will be no last minute surprises or negotiations.</div>
+                </div>
+            </div>
+        </div>
+        <div class="goal-row">
+            <div class="text-holder">
+                "Providing Convenient and Quality Auto Care."
+            </div>
+        </div>
+    </div>
+    <!--<div class="overlay overlay-pat"></div>-->
+    <!--<div class="overlay overlay-color black"></div>-->
+    <!--<div class="overlay overlay-image">-->
+        <!--<img src="../../static/img/about-bg.jpg" alt=""/>-->
+    <!--</div>-->
+
+</div>
 
 
 <div class="pane steps-pane">
@@ -455,75 +492,100 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
  </div>
 -->
 
-<div class="pane features-pane">
+
+<div class="pane aboutcg-pane">
     <div class="centered-content">
+        <div class="feats-row">
+            <div class="text-holder">
+                Our Services
+            </div>
+            <div class="feature-point">
+                <div class="feat-dual-icon">
+                    <i class="cg-car-servicing"></i>
+                    <span>/</span>
+                    <i class="cg-car-repair"></i>
+                </div>
+                <div class="feat-text">
+                    <h3 class="title">Car Servicing and Repair </h3>
+                    <div class="desc">If your car needs servicing or needs fixing, you can book the job on the platform. We will do the pick and take care of it.</div>
+                </div>
+            </div>
+            <div class="feature-point">
+                <div class="feat-dual-icon">
+                    <i class="cg-bike-servicing"></i>
+                    <span>/</span>
+                    <i class="cg-bike-repair"></i>
+                </div>
+                <div class="feat-text">
+                    <h3 class="title">Bike Servicing and Repair</h3>
+                    <div class="desc">Busy schedule and little free time? Our skilled mechanic will takes care of your bike maintenance needs at your doorstep.</div>
+                </div>
+            </div>
+            <div class="feature-point">
+                <div class="feat-icon">
+                    <i class="cg-car-care"></i>
+                </div>
+                <div class="feat-text">
+                    <h3 class="title">Car Care Services</h3>
+                    <div class="desc">Need Teflon or Paint Paint Protection coating? Choose from a wide range of treatments and get it done while sitting in the comfort of your home.</div>
+                </div>
+            </div>
+            <div class="feature-point">
+                <div class="feat-icon">
+                    <i class="cg-car-clean"></i>
+                </div>
+                <div class="feat-text">
+                    <h3 class="title">Car Cleaning Services</h3>
+                    <div class="desc">Partied hard last night? Tinder is working wonders for you? Book car cleaning appointments using our platform and get your car spa at doorstep.</div>
+                </div>
+            </div>
+            <div class="feature-point">
+                <div class="feat-dual-icon">
+                    <i class="cg-car-emerg"></i>
+                    <span>/</span>
+                    <i class="cg-bike-emerg"></i>
+                </div>
+                <div class="feat-text">
+                    <h3 class="title">Emergency Services</h3>
+                    <div class="desc">Stranded somewhere? Battery died? We are just an app away 24 X 7. Tell us where you are and we’ll be there.</div>
+                </div>
+            </div>
+        </div>
+        <div class="spacer"><div class="dual-dot"></div><div class="dual-dot"></div></div>
         <div class="abouts-row">
             <a name="about-us">
             <div class="text-holder">
-                What Sets Us Apart
+                Our Story
+            </div>
+            <div class="sub-text">
+                Maintenance of cars and bikes is not only a time-consuming and frustrating experience, it is expensive too. There is no transparency in pricing as even for a straightforward procedure like regular maintenance, the bill amount can vary wildly from service centre to service centre.
+                <!--<br/>-->
+                <!--<div class="spacer"><div class="dot"></div></div>-->
+            </div>
+            <div class="bullet-holder">
+                <div class="list-header">
+                    Here was a problem that was faced by a lot of us, but one where the status-quo was never challenged. We figured that the problem with after-sales automobile industry in India boils down to the lack of 4 basic value propositions for the customers:
+                </div>
+                <ul>
+                    <li>
+                        Quality multi brand workshops with expertise and ability to work on wide range of vehicles in non existent.
+                    </li>
+                    <li>
+                        Convenience of getting it delivered at their doorstep when they need it
+                    </li>
+                    <li>
+                        Transparency in the amount customer will end up paying and how it compares against the rest of the market
+                    </li>
+                    <li>
+                        And last but the most important one.. Affordability
+                    </li>
+                </ul>
+                <div class="spacer"><div class="dot"></div></div>
+            </div>
+            <div class="sub-text">
+                Keeping these in mind, ClickGarage was founded. We are an online garage where you can go for any service related to your car or bike. Our partner ClickGarage workshops have been standardized to offer a consistent experience across the footprint. These workshops use OEM/OEM equivalent parts and fluids and operate under the supervision of ClickGarage employed auto experts. More importantly, the incentives of these auto experts are not tied to the their sales, hence no upselling takes place, one can expect lowest repair bills across the industry along with an assurance of quality. Our current list of services on the platform include:
             </div>
             </a>
-        </div>
-        <div class="feats-row">
-            <div class="feature-point">
-                <div class="feat-icon">
-                    <i class="cg-assurance"></i>
-                </div>
-                <div class="feat-text">
-                    <h3 class="title">Quality Assurance </h3>
-                    <div class="sub-title none-i"></div><div class="desc">We use genuine (OEM/OEM equivalent) parts and fluids and all the work is done under the supervision of a ClickGarage service advisor. All our mechanics are vetted to the highest industry standards.</div>
-                </div>
-            </div>
-            <div class="feature-point">
-                <div class="feat-icon">
-                    <i class="cg-verified"></i>
-                </div>
-                <div class="feat-text">
-                    <h3 class="title">ClickGarage Warranty</h3>
-                    <div class="sub-title none-i"></div><div class="desc">All our servicing and repair work comes with a 2000 KMs/2 months warranty. Subject to certain conditions, if any issues arise during this period, we will resolve the issue at no additional cost</div>
-                </div>
-            </div>
-            <div class="feature-point">
-                <div class="feat-icon">
-                    <i class="cg-relax"></i>
-                </div>
-                <div class="feat-text">
-                    <h3 class="title">Hassle-free</h3>
-                    <div class="sub-title none-i"></div><div class="desc">You don’t have to drive to the service centre for anything anymore. ClickGarage provides a pick-up & drop service for car related works. For bikes, your assigned service advisor and the mechanic will bring all the tools and parts required to service your bike at the convenience of your home or office, 7 days a week.</div>
-                </div>
-            </div>
-            <div class="feature-point">
-                <div class="feat-icon">
-                    <i class="cg-discount"></i>
-                </div>
-                <div class="feat-text">
-                    <h3 class="title">Save upto 30%</h3>
-                    <div class="sub-title none-i"></div><div class="desc">With our standardized pricing and lower labour costs. You can save upto 30% compared to authorized garages and franchisee.</div>
-                </div>
-            </div>
-            <div class="feature-point">
-                <div class="feat-icon">
-                    <i class="cg-alerts"></i>
-                </div>
-                <div class="feat-text">
-                    <h3 class="title">Reporting</h3>
-                    <div class="sub-title none-i"></div><div class="desc">Get SMS alerts and updates for all the jobs being performed to your vehicle. You get a detailed report card of the vehicle after the completion of the services along with ClickGarage recommendations so you know what’s right for your vehicle.</div>
-                </div>
-            </div>
-            <div class="feature-point">
-                <div class="feat-icon">
-                    <i class="cg-estimate"></i>
-                </div>
-                <div class="feat-text">
-                    <h3 class="title">Upfront Estimate</h3>
-                    <div class="sub-title none-i"></div><div class="desc">Power of informed choice with cost estimates generated from our extensive data.  With our upfront pricing estimate, there will be no last minute surprises or negotiations.</div>
-                </div>
-            </div>
-        </div>
-        <div class="goal-row">
-            <div class="text-holder">
-                "Providing Convenient and Quality Auto Care."
-            </div>
         </div>
     </div>
     <div class="overlay overlay-pat"></div>
@@ -533,8 +595,6 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
     <!--</div>-->
 
 </div>
- 
-
 
 <div class="pane fix_pane">
     <div class="stats-pane none-i">
