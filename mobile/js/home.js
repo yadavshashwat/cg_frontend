@@ -44,10 +44,10 @@ var Global = {
                 var pick_pin = $('#checkout #pincode1').val();
                 var pick_lmark = $('#checkout #landmark1').val();
                 var pick_city = $('#city1 option:selected').text();
-                var drop_addr = $('#checkout #pickupadd2').val();
-                var drop_pin = $('#checkout #pincode2').val();
-                var drop_lmark = $('#checkout #landmark2').val();
-                var drop_city = $('#city2 option:selected').text();
+//                var drop_addr = $('#checkout #pickupadd2').val();
+//                var drop_pin = $('#checkout #pincode2').val();
+//                var drop_lmark = $('#checkout #landmark2').val();
+//                var drop_city = $('#city2 option:selected').text();
                 var timeStamp = Math.floor(Date.now() / 1000);
 
                 var pick = {
@@ -1703,6 +1703,12 @@ $( document ).delegate("#order", "pagebeforeload", function() {
 
         if(!Global.carSelected || !Global.carSelected.id){
             window.location.hash = '#index';
+        }else{
+            if(Global.carSelected.car_bike == 'Bike')
+                $('#services[data-role="page"]').find('.ui-block-solo').not('.bike_flag').hide();
+            else
+                $('#services[data-role="page"]').find('.ui-block-solo').show();
+
         }
 
     },
