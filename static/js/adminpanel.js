@@ -11,6 +11,30 @@ var Global = {
         'minDate': new Date(),
         'autoclose':true
     });
+    var timeWrapSettings = {
+        timeFormat: 'h:00 A - j:00 B',
+        minTime: new Date(0, 0, 0, 9, 0, 0),
+        maxTime: new Date(0, 0, 0, 18, 0, 0),
+        step: 30
+
+    };
+    if(this.carData && this.carData['car_bike'] == 'Bike'){
+     timeWrapSettings = {
+            timeFormat: 'h:i A - J:I B',
+            minTime: new Date(0, 0, 0, 9, 0, 0),
+            maxTime: new Date(0, 0, 0, 18, 0, 0),
+            step: 90
+        }
+    }
+    $('#time-wrap .pick-up-time').timepicker(timeWrapSettings);
+
+
+    $('#date-wrap .pick-up-date').datepicker({
+        'format': 'm/d/yyyy',
+//        'autoclose': true,
+        'minDate': new Date(),
+        'autoclose':true
+    });
 
 
     },
@@ -554,7 +578,56 @@ var Global = {
            //}
 
        });
+       $('#coupon-button').on('click', function(){
+           var container = $('.add-coupon-popup');
 
+           var code = container.find('.clean-inp-tbox.cpn-code').val();
+           var message = container.find('.clean-inp-tbox.cpn-msg').val();
+
+           var amount = container.find('.clean-inp-tbox.cpn-value').val();
+           var cap = container.find('.clean-inp-tbox.cpn-cap').val();
+           var type = container.find('.clean-inp-sbox.cpn-type').val();
+           var price_key = container.find('.clean-inp-sbox.cpn-key').val();
+           var vendor = container.find('.clean-inp-sbox.cpn-vendor').val();
+           var service = container.find('.clean-inp-sbox.cpn-category').val();
+           var car_bike = container.find('.clean-inp-sbox.cpn-cb').val();
+
+           var expiry = container.find('.clean-inp-tbox.cpn-expiry').val();
+           var isValid = function(p){if(String(p).length && String(p) != "undefined"){return true;}return false;};
+           if(!isValid(code)){
+               alert('code invalid');
+               return false;
+           }
+           if(!isValid(message)){
+               alert('message invalid');
+               return false;
+           }
+           if(!isValid(amount)){
+               alert('amount invalid');
+               return false;
+           }
+           if(!isValid(cap)){
+               alert('cap invalid');
+               return false;
+           }
+           if(!isValid(expiry)){
+               alert('expiry invalid');
+               return false;
+           }
+
+           Commons.ajaxData('add_coupon',{
+               code : code,
+               message : message,
+               amount : amount,
+               cap : cap,
+               type : type,
+               price_key : price_key,
+               vendor : vendor,
+               service : service,
+               car_bike : car_bike,
+               expiry : expiry
+           },"get",_this, function(){});
+       });
 
     },
 

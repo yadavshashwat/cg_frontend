@@ -56,6 +56,7 @@ var Commons = {
         'fetch_car_list':'/api/fetch_car_list/',
         'send_contact':'/api/send_contact/',
         'send_otp':'/api/send_otp/',
+        'add_coupon':'/api/add_coupon/',
         'create_otp_user':'/api/create_otp_user/'
     },
     getOrigin: function(){
