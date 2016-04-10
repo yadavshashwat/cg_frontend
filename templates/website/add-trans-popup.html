@@ -7,7 +7,7 @@
 
 
                 <!--</div>-->
-
+                <!-- phew phew. this...this is old stuff
                 <div class="form-col">
                     <div class="label-div"><b>User Details</b></div>
                     <div class="form-row mt12">
@@ -68,7 +68,6 @@
                     <div class="form-row mt12">
                         <div class="label-div">City</div>
                         <div class="clean-inp-wrapper">
-                            <!--<input class="clean-inp-tbox drop-city" disabled type=""/>-->
                             <label class="clean-sbox-wrapper">
                             <select class="clean-inp-sbox pick-city txtbox">
                                 <option value="Delhi">Delhi</option>
@@ -77,10 +76,6 @@
                             </label>
                         </div>
                     </div>
-                    <!--<div class="form-row mt12">-->
-                        <!--<div class="label-div">Country</div>-->
-                        <!--<div class="clean-inp-wrapper"><input class="clean-inp-tbox" value="India" type="" disabled/></div>-->
-                    <!--</div>-->
                     <div class="form-row mt12">
                         <input class="clean-inp-cbox" id="pick-drop-toggle" checked type="checkbox"/>
                         <div class="label-div">Set this as Dropoff Address</div>
@@ -103,7 +98,6 @@
                     <div class="form-row mt12">
                         <div class="label-div">City</div>
                         <div class="clean-inp-wrapper">
-                            <!--<input class="clean-inp-tbox drop-city" disabled type=""/>-->
                             <label class="clean-sbox-wrapper">
                             <select class="clean-inp-sbox drop-city txtbox" disabled>
                                 <option value="Delhi">Delhi</option>
@@ -112,12 +106,77 @@
                             </label>
                         </div>
                     </div>
-                    <!--<div class="form-row mt12">-->
-                        <!--<div class="label-div">Country</div>-->
-                        <!--<div class="clean-inp-wrapper"><input class="clean-inp-tbox" value="India" type="" disabled/></div>-->
-                    <!--</div>-->
                 </div>
+                 this is the new stuff -->
+                <div class="form-col">
+                    <div class="label-div"><b>User Details</b></div>
+                    <div class="form-row mt12">
+                        <div class="clean-inp-wrapper">
+                            <label for="">Name</label>
+                            <input class="clean-inp-tbox user-name" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="clean-inp-wrapper">
+                            <label for="">Phone No.</label>
+                            <input class="clean-inp-tbox user-number" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="clean-inp-wrapper">
+                            <label for="">Email</label>
+                            <input class="clean-inp-tbox user-email" type="email"/>
+                        </div>
+                    </div>
+
+                    <div class="form-row none-i">
+                        <div class="clean-inp-wrapper">
+                            <label for="">Car/Bike Reg. No.</label>
+                            <input class="clean-inp-tbox car-reg-no" type="text" />
+                        </div>
+                    </div>
+
                 </div>
+                <div class="form-col" id="pick-up-col">
+                    <div class="label-div"><b>Pickup Address/ Doorstep Service Location</b></div>
+
+                    <div class="form-row mt12">
+                        <div class="clean-inp-wrapper">
+                            <label for="">Address Line 1</label>
+                            <input class="clean-inp-tbox pick-addr-1" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="clean-inp-wrapper">
+                            <label for="">Address Line 2</label>
+                            <input class="clean-inp-tbox pick-addr-2" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="clean-inp-wrapper input-focused">
+                            <label for="">City</label>
+                            <input class="clean-inp-tbox pick-city perpetual" type="text" value="Gurgaon" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-col">
+                    <div class="label-div"><b>Other details</b></div>
+
+                    <div class="form-row mt12">
+                        <div class="clean-inp-wrapper input-focused" id="date-wrap">
+                            <label for="">Date</label>
+                            <input class="clean-inp-tbox pick-up-date perpetual" data-date-start-date="1d" placeholder="mm/dd/yyyy" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="clean-inp-wrapper input-focused" id="time-wrap">
+                            <label for="">Time</label>
+                            <input class="clean-inp-tbox pick-up-time perpetual" placeholder="hh:mm - hh:mm" />
+                        </div>
+                    </div>
+                </div>
+                <!-- this is the end. of the new stuff -->
+</div>
 
                 <div class = "select-service" >
                     Select Service
