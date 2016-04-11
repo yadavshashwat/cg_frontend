@@ -4,6 +4,96 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+//don't mess with this section.
+@charset "UTF-8";
+
+@font-face {
+  font-family: "clickgarage";
+  src:url("/static/fonts/clickgarage.eot");
+  src:url("/static/fonts/clickgarage.eot?#iefix") format("embedded-opentype"),
+    url("/static/fonts/clickgarage.woff") format("woff"),
+    url("/static/fonts/clickgarage.ttf") format("truetype"),
+    url("/static/fonts/clickgarage.svg#clickgarage") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "clickgarage" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="cg-"]:before,
+[class*=" cg-"]:before {
+  font-family: "clickgarage" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cg-discount:before {
+  content: "\61";
+}
+.cg-car-wd:before {
+  content: "\62";
+}
+.cg-estimate:before {
+  content: "\63";
+}
+.cg-alerts:before {
+  content: "\64";
+}
+.cg-assurance:before {
+  content: "\65";
+}
+.cg-verified:before {
+  content: "\66";
+}
+.cg-pickup:before {
+  content: "\67";
+}
+.cg-bike-emerg:before {
+  content: "\68";
+}
+.cg-bike-repair:before {
+  content: "\69";
+}
+.cg-bike-servicing:before {
+  content: "\6a";
+}
+.cg-car-clean:before {
+  content: "\6b";
+}
+.cg-car-servicing:before {
+  content: "\6c";
+}
+.cg-car-emerg:before {
+  content: "\6d";
+}
+.cg-car-care:before {
+  content: "\6e";
+}
+.cg-car-repair:before {
+  content: "\6f";
+}
+.cg-relax:before {
+  content: "\70";
+}
+
 html,
 body {
     width: 100%;
@@ -186,16 +276,16 @@ header {
     -o-background-size: cover;
 }
 header.car.servicing{
-    background-image: url('/static/img/ad/car/servicing.jpg');
+    background-image: url('/static/img/live/car/servicing.jpg');
 }
 header.car.cleaning{
-    background-image: url('/static/img/ad/car/cleaning.jpg');
+    background-image: url('/static/img/live/car/cleaning.jpg');
 }
 header.car.repair{
-    background-image: url('/static/img/ad/car/repair.jpg');
+    background-image: url('/static/img/live/car/repair.jpg');
 }
 header.bike.servicing{
-    background-image: url('/static/img/ad/bike/servicing.jpg');
+    background-image: url('/static/img/live/bike/servicing.jpg');
 }
 header .header-content {
     position: relative;

@@ -22,18 +22,19 @@
     <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="{%  static "css/ad/bootstrap.min.css" %}" type="text/css">
+    <link rel="stylesheet" href="{%  static "css/ad/bootstrap.min.css" %}" type="text/css" />
 
     <!-- Custom Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="{%  static "css/font-awesome.min.css" %}" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'/>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="{%  static "css/font-awesome.min.css" %}" type="text/css" />
 
     <!-- Plugin CSS -->
-    <link rel="stylesheet" href="{%  static "css/ad/animate.min.css" %}"type="text/css">
+    <link rel="stylesheet" href="{%  static "css/ad/animate.min.css" %}"type="text/css" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{%  static "css/ad/creative.css" %}"type="text/css">
+    <link rel="stylesheet" href="{%  static "css/ad/creative.css" %}"type="text/css" />
+    <link rel="stylesheet/less" type="text/css" href="{% static "less/styles.less" %}" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -83,7 +84,7 @@
             </div>
             <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container-fluid -->
+        <!-- /.container-fluid -->x
     </nav>
 
     <header class="{{car_bike|lower}} {{service}}">
@@ -146,58 +147,85 @@
         </div>
     </header>
 
-    <section class="bg-primary" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">We've got what you need!</h2>
-                    <hr class="light">
-                    <p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>
-                    <a href="#" class="btn btn-default btn-xl">Get Started!</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!--<section class="bg-primary" id="about">-->
+        <!--<div class="container">-->
+            <!-- -->
+            <!-- -->
+            <!-- -->
+            <!-- -->
+            <!-- -->
+            <!-- -->
+            <!-- -->
+            <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="col-lg-8 col-lg-offset-2 text-center">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<h2 class="section-heading">We've got what you need!</h2>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<hr class="light">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<a href="#" class="btn btn-default btn-xl">Get Started!</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</div>-->
+    <!--</section>-->
 
     <section id="services">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">At Your Service</h2>
+                    <h2 class="section-heading">What sets us apart</h2>
                     <hr class="primary">
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 text-center">
+                <div class="col-lg-4 col-md-3 text-center">
                     <div class="service-box">
-                        <i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>
-                        <h3>Sturdy Templates</h3>
-                        <p class="text-muted">Our templates are updated regularly so they don't break.</p>
+                        <!--<i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>-->
+                        <i class="cg-assurance"> </i>
+                        <h3>Quality Assurance</h3>
+                        <p class="text-muted">We use genuine (OEM/OEM equivalent) parts and fluids and all the work is done under the supervision of a ClickGarage service advisor. All our mechanics are vetted to the highest industry standards.</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 text-center">
+                <div class="col-lg-4 col-md-3 text-center">
                     <div class="service-box">
                         <i class="fa fa-4x fa-paper-plane wow bounceIn text-primary" data-wow-delay=".1s"></i>
-                        <h3>Ready to Ship</h3>
-                        <p class="text-muted">You can use this theme as is, or you can make changes!</p>
-                    </div>
+                        <h3>ClickGarage Warranty</h3>
+                        <p class="text-muted">All our servicing and repair work comes with a 2000 KMs/2 months warranty. Subject to certain conditions, if any issues arise during this period, we will resolve the issue at no additional cost</p>
+                    </div>s
                 </div>
-                <div class="col-lg-3 col-md-6 text-center">
+                <div class="col-lg-4 col-md-3 text-center">
                     <div class="service-box">
                         <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
-                        <h3>Up to Date</h3>
-                        <p class="text-muted">We update dependencies to keep things fresh.</p>
+                        <h3>Hassle-free</h3>
+                        <p class="text-muted">You don’t have to drive to the service centre for anything anymore. ClickGarage provides a pick-up & drop service for car related works. For bikes, your assigned service advisor and the mechanic will bring all the tools and parts required to service your bike at the convenience of your home or office, 7 days a week.</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 text-center">
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-3 text-center">
                     <div class="service-box">
                         <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
                         <h3>Made with Love</h3>
                         <p class="text-muted">You have to make your websites with love these days!</p>
                     </div>
                 </div>
+
+                <div class="col-lg-4 col-md-3 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".4s"></i>
+                        <h3>Save upto 30%</h3>
+                        <p class="text-muted">With our standardized pricing and lower labour costs. You can save upto 30% compared to authorized garages and franchisee.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".4s"></i>
+                        <h3>Upfront Estimate</h3>
+                        <p class="text-muted">Power of informed choice with cost estimates generated from our extensive data.  With our upfront pricing estimate, there will be no last minute surprises or negotiations.</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -207,7 +235,22 @@
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-6">
                     <a href="#" class="portfolio-box">
-                        <img class="service-thumb" src="{%  static "img/ad/servicing_hz.jpg" %}" class="img-responsive" alt="">
+                        <img class="service-thumb" src="{%  static "img/live/servicing_hz.jpg" %}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Servicing
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="#" class="portfolio-box">
+                        <img class="service-thumb" src="{% static "img/live/cleaning_hz.jpg" %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -222,7 +265,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <a href="#" class="portfolio-box">
-                        <img class="service-thumb" src="{% static "img/ad/cleaning_hz.jpg" %}" class="img-responsive" alt="">
+                        <img class="service-thumb" src="{% static "img/live/repairs_hz.jpg" %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -237,7 +280,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <a href="#" class="portfolio-box">
-                        <img class="service-thumb" src="{% static "img/ad/repairs_hz.jpg" %}" class="img-responsive" alt="">
+                        <img class="service-thumb" src="{% static "img/live/windshield_hz.jpg" %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -252,7 +295,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <a href="#" class="portfolio-box">
-                        <img class="service-thumb" src="{% static "img/ad/windshield_hz.jpg" %}" class="img-responsive" alt="">
+                        <img class="service-thumb" src="{% static "img/live/carcare_hz.jpg" %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -267,22 +310,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <a href="#" class="portfolio-box">
-                        <img class="service-thumb" src="{% static "img/ad/carcare_hz.jpg" %}" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img class="service-thumb" src="{% static "img/ad/emergency_hz.jpg" %}" class="img-responsive" alt="">
+                        <img class="service-thumb" src="{% static "img/live/emergency_hz.jpg" %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -299,14 +327,14 @@
         </div>
     </section>
 
-    <aside class="bg-dark">
-        <div class="container text-center">
-            <div class="call-to-action">
-                <h2>Free Download at Start Bootstrap!</h2>
-                <a href="#" class="btn btn-default btn-xl wow tada">Download Now!</a>
-            </div>
-        </div>
-    </aside>
+    <!--<aside class="bg-dark">-->
+        <!--<div class="container text-center">-->
+            <!--<div class="call-to-action">-->
+                <!--<h2>Free Download at Start Bootstrap!</h2>-->
+                <!--<a href="#" class="btn btn-default btn-xl wow tada">Download Now!</a>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</aside>-->
 
     <section id="contact">
         <div class="container">
@@ -314,15 +342,15 @@
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">Let's Get In Touch!</h2>
                     <hr class="primary">
-                    <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                    <p>Need anything else? Give us a call or send us an email and we will get back to you as soon as possible!</p>
                 </div>
                 <div class="col-lg-4 col-lg-offset-2 text-center">
                     <i class="fa fa-phone fa-3x wow bounceIn"></i>
-                    <p>123-456-6789</p>
+                    <p>+91-9555-95-0000</p>
                 </div>
                 <div class="col-lg-4 text-center">
                     <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                    <p><a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a></p>
+                    <p><a href="mailto:your-email@your-domain.com">info@clickgarage.in</a></p>
                 </div>
             </div>
         </div>
