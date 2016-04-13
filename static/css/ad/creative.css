@@ -4,6 +4,10 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 @charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,300);
+@import url(http://fonts.googleapis.com/css?family=Raleway:600,400);
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
 
 @font-face {
   font-family: "clickgarage";
@@ -92,6 +96,62 @@
   content: "\70";
 }
 
+/*-------------------------------*/
+/*      Code snippet by          */
+/*      @maridlcrmn              */
+/*-------------------------------*/
+
+
+section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.quote {
+    color: rgba(0,0,0,.1);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/*-------------------------------*/
+/*    Carousel Fade Transition   */
+/*-------------------------------*/
+
+#fade-quote-carousel.carousel {
+  padding-bottom: 60px;
+}
+#fade-quote-carousel.carousel .carousel-inner .item {
+  opacity: 0;
+  -webkit-transition-property: opacity;
+      -ms-transition-property: opacity;
+          transition-property: opacity;
+}
+#fade-quote-carousel.carousel .carousel-inner .active {
+  opacity: 1;
+  -webkit-transition-property: opacity;
+      -ms-transition-property: opacity;
+          transition-property: opacity;
+}
+#fade-quote-carousel.carousel .carousel-indicators {
+  bottom: 10px;
+}
+#fade-quote-carousel.carousel .carousel-indicators > li {
+  background-color: #e84a64;
+  border: none;
+}
+#fade-quote-carousel blockquote {
+    text-align: center;
+    border: none;
+}
+#fade-quote-carousel .profile-circle {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 100px;
+}
+
+
+
 html,
 body {
     width: 100%;
@@ -99,7 +159,7 @@ body {
 }
 
 body {
-    font-family: Merriweather, 'Helvetica Neue', Arial, sans-serif;
+    font-family:  Merriweather, 'Helvetica Neue', Arial, sans-serif;
 }
 
 hr {
@@ -130,14 +190,40 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Roboto','Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
 p {
     margin-bottom: 20px;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.5;
 }
+
+.circleBase {
+    border-radius: 50%;
+    /*behavior: url(PIE.htc); /!* remove if you don't care about IE8 *!/*/
+}
+
+.type1 {
+    width: 200px;
+    height: 200px;
+    background: #eaeaea;
+    /*border: 3px solid red;*/
+}
+.type2 {
+    width: 50px;
+    height: 50px;
+    background: #ccc;
+    border: 3px solid #000;
+}
+.type3 {
+    width: 500px;
+    height: 500px;
+    background: aqua;
+    border: 30px solid blue;
+}
+
+
 
 .bg-primary {
     background-color: #4a148c;
@@ -405,7 +491,7 @@ header .header-content .header-content-inner p .fa {
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-category,
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-name {
     padding: 0 15px;
-    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Roboto', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-category {
@@ -438,6 +524,12 @@ header .header-content .header-content-inner p .fa {
 
 .text-primary {
     color: #4a148c;
+    font-size: 80px;
+}
+
+.text-tertiary {
+    color: #4a148c;;
+    font-size: 80px;
 }
 
 .no-gutter > [class*=col-] {
