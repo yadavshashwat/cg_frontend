@@ -70,6 +70,9 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="logo-box"></li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a class="page-scroll" href="#about">Why ClickGarage?</a>
@@ -108,7 +111,7 @@
                             <input class="clean-inp-tbox user-number" type="text"/>
                         </div>
                         <label class="clean-sbox-wrapper">
-                        <select class="clean-inp-sbox user-service txtbox">
+                        <select class="clean-inp-sbox user-cat txtbox">
                            <option selected disabled>Select Category</option>
                             {% if category_list %}
                                 {% for opt in category_list %}
@@ -488,6 +491,9 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="{%  static "js/ad/creative.js" %}"></script>
-
+    {% load js %}
+    <script type="text/javascript">
+        service_dict = {{ service_dict|js }}
+    </script>
 </body>
 </html>
