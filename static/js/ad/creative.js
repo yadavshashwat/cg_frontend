@@ -53,5 +53,56 @@
         }
     });
 
+    $('.form-wrapper').find('.user-cat').on('change', function(){
+        var cat = $(this).val();
+        var service_list = service_dict[cat];
+        if(service_list && service_list.length){
+            $('.form-wrapper').find('.user-service').closest('label').show();
+            $('.form-wrapper').find('.user-service').html('');
+            $.each(service_list, function(idx, service){
+                $('.form-wrapper').find('.user-service').append('<option value="'+service[0]+'">'+service[1]+'</option>');
+            });
+        }else{
+            $('.form-wrapper').find('.user-service').closest('label').hide();
+            $('.form-wrapper').find('.user-service').html('');
+        }
+    });
+    $('.form-wrapper').find('#form-submit').on('click', function(){
+        var name = $('.form-wrapper').find('.user-name').val();
+        var number = $('.form-wrapper').find('.user-number').val();
+        var cat = $('.form-wrapper').find('.user-cat').val();
+        var service = $('.form-wrapper').find('.user-service').val();
+        if(!(name && name.length)){
+            alert('Invalid Name!');
+            return;
+        }
+        if(!(number && (number.length == 10) && !isNaN(number))){
+            alert('Invalid Number.');
+            return;
+        }
+        if($('.form-wrapper').find('.user-service').is(':visible')){
+            if( !(service && service.length) ){
+                alert('Select Service');
+                return;
+            }
+        }
+        var url = 'http://'+window.location.host+'/api/request_quote/';
+        $.ajax({
+            method:'POST',
+            url:url,
+            data:{name:name,number:number,category:cat,service:service}
+        }).done(function(response){
+            $('<div class="popup"></div>').appendTo($('body'));
+            $('.popup').append('<div class="popup-content"></div>');
+            $('.popup-content').append('<div class="msg-txt">Request Received. Our team will contact you shortly.</div>');
+            $('.popup-content').append('<div class="close-btn">X</div>');
+        });
+    });
+    $('body').on('click', '.popup', function(e){
+        var $target = $(e.target);
+        if(!$target.closest('.popup-content').length || $target.closest('.close-btn').length){
+            $('.popup').remove();
+        }
+    });
 
 })(jQuery); // End of use strict
