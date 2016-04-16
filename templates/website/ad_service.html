@@ -70,6 +70,9 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="logo-box"></li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a class="page-scroll" href="#about">Why ClickGarage?</a>
@@ -108,7 +111,7 @@
                             <input class="clean-inp-tbox user-number" type="text"/>
                         </div>
                         <label class="clean-sbox-wrapper">
-                        <select class="clean-inp-sbox user-service txtbox">
+                        <select class="clean-inp-sbox user-cat txtbox">
                            <option selected disabled>Select Category</option>
                             {% if category_list %}
                                 {% for opt in category_list %}
@@ -284,7 +287,7 @@
         <div class="container-fluid">
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
+                    <a href="/order/#service?cat=servicing" class="portfolio-box">
                         <img class="service-thumb" src="{%  static "img/live/servicing_hz.jpg" %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
@@ -298,8 +301,9 @@
                         </div>
                     </a>
                 </div>
+                {% if car_bike|lower == 'car' %}
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
+                    <a href="/order/#service?cat=cleaning" class="portfolio-box">
                         <img class="service-thumb" src="{% static "img/live/cleaning_hz.jpg" %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
@@ -313,8 +317,9 @@
                         </div>
                     </a>
                 </div>
+                {% endif %}
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
+                    <a href="/order/#service?cat=repair" class="portfolio-box">
                         <img class="service-thumb" src="{% static "img/live/repairs_hz.jpg" %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
@@ -328,8 +333,9 @@
                         </div>
                     </a>
                 </div>
+                {% if car_bike|lower == 'car' %}
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
+                    <a href="/order/#service?cat=windshield" class="portfolio-box">
                         <img class="service-thumb" src="{% static "img/live/windshield_hz.jpg" %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
@@ -343,8 +349,10 @@
                         </div>
                     </a>
                 </div>
+                {% endif %}
+                {% if car_bike|lower == 'car' %}
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
+                    <a href="/order/#service?cat=vas" class="portfolio-box">
                         <img class="service-thumb" src="{% static "img/live/carcare_hz.jpg" %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
@@ -358,8 +366,9 @@
                         </div>
                     </a>
                 </div>
+                {% endif %}
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
+                    <a href="/order/#service?cat=emergency" class="portfolio-box">
                         <img class="service-thumb" src="{% static "img/live/emergency_hz.jpg" %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
@@ -488,6 +497,9 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="{%  static "js/ad/creative.js" %}"></script>
-
+    {% load js %}
+    <script type="text/javascript">
+        service_dict = {{ service_dict|js }}
+    </script>
 </body>
 </html>
