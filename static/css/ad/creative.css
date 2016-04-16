@@ -205,6 +205,7 @@ p {
 }
 
 .type1 {
+    position: inherit;
     width: 200px;
     height: 200px;
     background: #eaeaea;
@@ -221,6 +222,15 @@ p {
     height: 500px;
     background: aqua;
     border: 30px solid blue;
+}
+
+.type4 {
+    /*padding-left: 200px;*/
+    width: 200px;
+    height: 200px;
+    background: #eaeaea;
+
+    /*border: 30px solid blue;*/
 }
 
 
@@ -530,6 +540,10 @@ header .header-content .header-content-inner p .fa {
 .text-tertiary {
     color: #4a148c;;
     font-size: 80px;
+}
+
+.featuretext{
+    padding-top: 30px;
 }
 
 .no-gutter > [class*=col-] {
