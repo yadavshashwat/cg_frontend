@@ -527,7 +527,7 @@ var Global = {
            var pick_addr_2 = $('.address-form-holder .clean-inp-tbox.pick-addr-2').val();
            var pick_pin = $('.address-form-holder .clean-inp-tbox.pick-pin').val();
            var pick_lmark = $('.address-form-holder .clean-inp-tbox.pick-lmark').val();
-           var pick_city = $('.address-form-holder .clean-inp-sbox.pick-city').val();
+           var pick_city = $('.address-form-holder .clean-inp-tbox.pick-city').val();
            var drop_addr = $('.address-form-holder .clean-inp-tabox.drop-addr').val();
            var drop_pin = $('.address-form-holder .clean-inp-tbox.drop-pin').val();
            var drop_lmark = $('.address-form-holder .clean-inp-tbox.drop-lmark').val();
@@ -773,7 +773,7 @@ var Global = {
             html += '<p id="cust-name">Name: ' + String(val.cust_name) + '</p>';
             html += '<p id="cust-contact">Phone: ' + String(val.cust_number) + '</p>';
             html += '<p id="cust-email">Email: ' + String(val.cust_email) + '</p>';
-            html += '<p id="cust-address">Address: ' + String(val.cust_pickup_add.street) + ', ' + String(val.cust_pickup_add.city) +'</p>';
+            html += '<p id="cust-address">Address: ' + String(val.cust_pickup_add.street) + ', ' + String(val.cust_pickup_add.landmark) +', ' +String(val.cust_pickup_add.city) +'</p>';
             html += '</div>';
 //            status-div starts
             html += '<div class="booking-entry-cat" id="status-div">';
