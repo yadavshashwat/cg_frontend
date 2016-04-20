@@ -15,22 +15,22 @@ var Global = {
         timeFormat: 'h:00 A - j:00 B',
         minTime: new Date(0, 0, 0, 9, 0, 0),
         maxTime: new Date(0, 0, 0, 18, 0, 0),
-        step: 30
+        step: 60
 
     };
-    if(this.carData && this.carData['car_bike'] == 'Bike'){
-     timeWrapSettings = {
-            timeFormat: 'h:i A - J:I B',
-            minTime: new Date(0, 0, 0, 9, 0, 0),
-            maxTime: new Date(0, 0, 0, 18, 0, 0),
-            step: 90
-        }
-    }
+    //if(this.carData && this.carData['car_bike'] == 'Bike'){
+    // timeWrapSettings = {
+    //        timeFormat: 'h:i A - J:I B',
+    //        minTime: new Date(0, 0, 0, 9, 0, 0),
+    //        maxTime: new Date(0, 0, 0, 18, 0, 0),
+    //        step: 90
+    //    }
+    //}
     $('#time-wrap .pick-up-time').timepicker(timeWrapSettings);
 
 
     $('#date-wrap .pick-up-date').datepicker({
-        'format': 'm/d/yyyy',
+        'format': 'd/m/yyyy',
 //        'autoclose': true,
         'minDate': new Date(),
         'autoclose':true
@@ -298,22 +298,22 @@ var Global = {
             }
 
         );
-            $('#date-time-pair .pick-up-time').timepicker({
-        timeFormat: 'hA-jA',
-        // year, month, day and seconds are not important
-
-        minTime: new Date(0, 0, 0, 8, 0, 0),
-        maxTime: new Date(0, 0, 0, 15, 0, 0),
-        // time entries start being generated at 6AM but the plugin
-        // shows only those within the [minTime, maxTime] interval
-        //startHour: 6,
-        // the value of the first item in the dropdown, when the input
-        // field is empty. This overrides the startHour and startMinute
-        // options
-        startTime: new Date(0, 0, 0, 8, 20, 0),
-        // items in the dropdown are separated by at interval minutes
-        step: 60,
-    });
+    //        $('#date-time-pair .pick-up-time').timepicker({
+    //    timeFormat: 'hA-jA',
+    //    // year, month, day and seconds are not important
+    //
+    //    minTime: new Date(0, 0, 0, 8, 0, 0),
+    //    maxTime: new Date(0, 0, 0, 15, 0, 0),
+    //    // time entries start being generated at 6AM but the plugin
+    //    // shows only those within the [minTime, maxTime] interval
+    //    //startHour: 6,
+    //    // the value of the first item in the dropdown, when the input
+    //    // field is empty. This overrides the startHour and startMinute
+    //    // options
+    //    //startTime: new Date(0, 0, 0, 8, 20, 0),
+    //    // items in the dropdown are separated by at interval minutes
+    //    step: 60,
+    //});
 
 
     $('#date-time-pair .pick-up-date').datepicker({
@@ -518,12 +518,13 @@ var Global = {
            var car_select = $('.select-service #car-select :selected').attr("carname");
            var servicename = document.getElementById('service-select').value;
            var name = $('.address-form-holder .clean-inp-tbox.user-name').val();
-           var email = $('.address-form-holder .clean-inp-tbox.email').val();
+           var email = $('.address-form-holder .clean-inp-tbox.user-email').val();
            var phone = $('.address-form-holder .clean-inp-tbox.user-number').val();
            var pick_date = $('.address-form-holder .clean-inp-tbox.pick-up-date ').val();
            var pick_time = $('.address-form-holder .clean-inp-tbox.pick-up-time').val();
            var car_reg_number = $('.address-form-holder .clean-inp-tbox.car-reg-no ').val();
-           var pick_addr = $('.address-form-holder .clean-inp-tabox.pick-addr').val();
+           var pick_addr_1 = $('.address-form-holder .clean-inp-tbox.pick-addr-1').val();
+           var pick_addr_2 = $('.address-form-holder .clean-inp-tbox.pick-addr-2').val();
            var pick_pin = $('.address-form-holder .clean-inp-tbox.pick-pin').val();
            var pick_lmark = $('.address-form-holder .clean-inp-tbox.pick-lmark').val();
            var pick_city = $('.address-form-holder .clean-inp-sbox.pick-city').val();
@@ -534,16 +535,16 @@ var Global = {
            var timeStamp = Math.floor(Date.now() / 1000);
 
            var pick = {
-                    street : pick_addr,
+                    street : pick_addr_1,
                     pincode : pick_pin,
-                    landmark : pick_lmark,
+                    landmark : pick_addr_2,
                     city : pick_city,
                     time : pick_time,
                     date : pick_date
                 };
 
            var drop = {
-                    street : pick_addr,
+                    street : pick_addr_1,
                     pincode : pick_pin,
                     landmark : pick_lmark,
                     city : pick_city
