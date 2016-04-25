@@ -143,6 +143,12 @@
 
                         </select>
                         </label>
+                        {% else %}
+                        <label class="clean-sbox-wrapper" style="display: none;">
+                        <select class="clean-inp-sbox user-service txtbox">
+
+                        </select>
+                        </label>
                         {% endif %}
                         <div style="clear:both;"></div>
                         <div class="square-btn" id="form-submit">Place Order</div>
@@ -166,9 +172,9 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-4 col-md-3 text-center">
+                <div class="col-lg-4 col-md-6 col-sm-6 text-center">
 
 
                     <div class="service-box circleBase type4 featuretext">
@@ -184,7 +190,7 @@
                     <!--</div>-->
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-3 text-center">
+                <div class="col-lg-4 col-md-6 col-sm-6 text-center">
                     <!--<div class="service-box">-->
                         <!--<div class="circleBase type1">-->
                             <!--<div class="featuretext">-->
@@ -199,7 +205,7 @@
                 </div>
                     <!--</div>-->
                 <!--</div>-->
-                <div class="col-lg-4 col-md-3 text-center">
+                <div class="col-lg-4 col-md-6 col-sm-6 text-center">
                     <!--<div class="service-box">-->
                         <!--<div class="circleBase type1">-->
                             <!--<div class="featuretext">-->
@@ -211,11 +217,11 @@
                         <h3>Hassle-free</h3>
                         <!--<p class="text-muted">You don’t have to drive to the service centre for anything anymore. ClickGarage provides a pick-up & drop service for car related works. For bikes, your assigned service advisor and the mechanic will bring all the tools and parts required to service your bike at the convenience of your home or office, 7 days a week.</p>-->
                     <!--</div>-->
-                <!--</div>-->
             </div>
-                    </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-3 text-center">
+            </div>
+            <!--</div>-->
+            <!--<div class="row">-->
+                <div class="col-lg-4 col-md-6 col-sm-6 text-center">
                     <!--<div class="service-box">-->
                                             <div class="service-box circleBase type4 featuretext">
 
@@ -231,7 +237,7 @@
                         </div>
                     </div>
 
-                <div class="col-lg-4 col-md-3 text-center">
+                <div class="col-lg-4 col-md-6 col-sm-6 text-center">
                     <!--<div class="service-box">-->
                         <!--<div class="circleBase type1">-->
                             <!--<div class="featuretext">-->
@@ -247,7 +253,7 @@
                         </div>
                     </div>
 
-                <div class="col-lg-4 col-md-3 text-center">
+                <div class="col-lg-4 col-md-6 col-sm-6 text-center">
                     <!--<div class="service-box">-->
                         <!--<div class="circleBase type1">-->
                             <!--<div class="featuretext">-->
@@ -288,7 +294,11 @@
     <section class="no-padding" id="portfolio">
         <div class="container-fluid">
             <div class="row no-gutter">
+                {% if car_bike|lower == 'car' %}
                 <div class="col-lg-4 col-sm-6">
+                {% else %}
+                <div class="col-lg-4 col-sm-12">
+                {% endif %}
                     <a href="/order/#service?cat=servicing" class="portfolio-box">
                         <img class="service-thumb" src="{%  static "img/live/servicing_hz.jpg" %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
@@ -320,7 +330,11 @@
                     </a>
                 </div>
                 {% endif %}
+                {% if car_bike|lower == 'car' %}
                 <div class="col-lg-4 col-sm-6">
+                {% else %}
+                <div class="col-lg-4 col-sm-12">
+                {% endif %}
                     <a href="/order/#service?cat=repair" class="portfolio-box">
                         <img class="service-thumb" src="{% static "img/live/repairs_hz.jpg" %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
@@ -369,7 +383,11 @@
                     </a>
                 </div>
                 {% endif %}
+                {% if car_bike|lower == 'car' %}
                 <div class="col-lg-4 col-sm-6">
+                {% else %}
+                <div class="col-lg-4 col-sm-12">
+                {% endif %}
                     <a href="/order/#service?cat=emergency" class="portfolio-box">
                         <img class="service-thumb" src="{% static "img/live/emergency_hz.jpg" %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
