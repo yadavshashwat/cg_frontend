@@ -1362,6 +1362,7 @@ var formCheck = {
     getSelectedAddress : function(container,formType){
         var user_name = $(container).find('.user-name').val();
         var user_number = $(container).find('.user-number').val();
+var email = $(container).find('.user-email').val();
 //        var car_reg_number = $(container).find('.car-reg-no').val();
         var pick_addr_1 = $(container).find('.pick-addr-1').val();
         var pick_addr_2 = $(container).find('.pick-addr-2').val();
@@ -1393,6 +1394,7 @@ var formCheck = {
             obj = {
                 name : user_name,
                 number : user_number,
+		email : email,
 //                reg_no : car_reg_number,
                 pick:{
                     street : pick_addr_1,
@@ -1409,6 +1411,7 @@ var formCheck = {
             obj = {
                 name : user_name,
                 number : user_number,
+		email : email,
 //                reg_no : car_reg_number,
                 pick:{
                     street : pick_addr_1,
