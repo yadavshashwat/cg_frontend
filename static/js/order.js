@@ -327,7 +327,12 @@ var Global = {
             $('.dealer-select-holder .dealer-headers').show();
             var container = $('.dealer-box .dealer-listings');
             container.html('');
-            container.json2html(data, Templates.orderPage.dealers, {append:true});
+            $.each(data, function(idx, obj){
+                if(obj.vendor == 'ClickGarage Workshop' || obj.vendor == 'ClickGarage Doorstep'){
+                    container.json2html([obj], Templates.orderPage.dealers, {append:true});
+                }
+            });
+//            container.json2html(data, Templates.orderPage.dealers, {append:true});
 
         }
     },
