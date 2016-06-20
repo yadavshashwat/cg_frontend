@@ -2851,8 +2851,8 @@
 					  }
 						.th-price{
 						  float: right;
-						  width: 350px;
-                          text-align: centerm;
+						  width: 250px;
+//                          text-align: center;
 						  //padding-left: 140px;
 					  }
 						.th-dist{
@@ -4260,7 +4260,7 @@ label.clean-sbox-wrapper {
 
 						.td-service-info{
                           position: relative;
-						  width:290px;
+						  width:190px;
 							float:left;
 						  .doorstep-div{
 							margin-top:10px;
@@ -4325,19 +4325,34 @@ label.clean-sbox-wrapper {
 						}
 						.td-price{
 						  	display:inline;
-						  	width:250px;
+						  	width:350px;
 							float:right;
                             padding-top: 1px;
 
 							.table-prices{
+                              table{margin:0 auto;}
 
 							  td:nth-child(1){
 								padding: 0px 5px;
 							  }
-							   td:nth-child(2){
-								 text-align: left;
-								width:60px;
-							  }
+
+                              td, th{
+                                padding-right: 10px;
+                              }
+
+                              td.price{
+                                text-align: right;
+                              }
+                              td.price:before{
+                                content: ":";
+                                float: left;
+                              }
+
+                              td.smallFont,th.smallFont{
+                                font-size: 0.75em;
+                                padding-left: 1px;
+                                text-align: right;
+                              }
 
                             }
                             .pick-up{
