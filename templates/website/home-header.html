@@ -14,12 +14,13 @@
     </div>
     -->
     <div class="right-items-holder fr">
-        <div class="menu-item fl ph"><i class="fa fa-phone"></i> +91-9953008804</div>
-        <a href="/contact" target="_blank"><div class="menu-item fl">Contact Us/ Feedback</div></a>
+        <div class="menu-item fl ph"><a href="tel:+91-9555950000" title="Click to call us"><i class="fa fa-phone"></i>+91-9555-95-0000</a></div>
+
+        <div class="menu-item fl">Why ClickGarage?</div></a>
         <div class="menu-item fl hw">How It Works</div>
-        <a href="//blog.clickgarage.in" target="_blank"><div class="menu-item fl">Blog</div></a>
-        <div class="menu-item fl au">About Us</div>
-    {% if user and not user.is_anonymous %}
+        <div class="menu-item fl au">Our Services</div>
+        <a href="/contact" target="_blank"><div class="menu-item fl">Contact Us</div></a>
+        {% if user and not user.is_anonymous %}
         <div class="menu-item fl" id="settings-drpdwn">Hi, {{ user.first_name }} &nbsp; <i class="fa fa-caret-down"></i></div>
         <div class="logged-user-drpdwn">
             <div class="tri-tip"></div>
