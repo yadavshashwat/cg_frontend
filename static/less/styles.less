@@ -408,6 +408,7 @@
 					.menu-item{
 						margin-right:12px;
 						height: 34px;
+						//width:150px;
 						line-height: 24px;
 						box-sizing: border-box;
 						padding:5px 6px;
@@ -455,7 +456,7 @@
 				margin:0 auto;
 				z-index: 20;
 				.transparent-header{
-					position: absolute;
+					position: relative;
 					padding: 15px 0px;
 					width: 100%;
 				}
@@ -590,6 +591,9 @@
                                   opacity: 1;
                                   -webkit-appearance:none;
                                   border-radius: 0px;
+								  .brand-div{
+									  background : #dedede
+								  }
                               }
                               .custom-select.active{
                                 background: #dedede;
@@ -704,6 +708,7 @@
               padding: 12px;
               background: rgba(0,0,0,0.5);
               border-radius: 6px;
+				box-shadow: 0 0 5px #fff;
               .vehicle-dropdown-div{
                 display: inline-flex;
                 vertical-align: top;
@@ -871,7 +876,7 @@
 			}
 			.steps-pane{
 				background: #fff;
-				border-top: 4px solid #d81b60;
+				//border-top: 4px solid #d81b60;
 				box-sizing: border-box;
 				min-height: 542px;
 				overflow: hidden;
@@ -901,7 +906,8 @@
 						font-family: "Lato";
 						font-weight: 400;
 						font-size: 40px;
-						color: #c65169;
+						//color: #c65169;
+						color:#d81b60;
 		//        color: #4a148c;
 
 		//        text-shadow: 2px 2px #000;
@@ -930,7 +936,8 @@
 									display: none;
 									font-size:14px;
 									line-height: 18px;
-									color:#c65169;
+									//color:#c65169;
+										color:#d81b60;
 									.big-text{
 										padding: 24px 0px;
 										font-size: 24px;
@@ -1018,7 +1025,7 @@
 								width: 22px;
 								border: 5px solid #d81b60;
 								border-radius: 16px;
-								background-color: #c65169;
+								background-color: #d81b60;
 								cursor: pointer;
 							}
 							#point1{
@@ -1048,7 +1055,9 @@
 									line-height: 30px;
 									font-family: Lato;
 									font-weight: 400;
-									color:#c65169;
+									//color:#c65169;
+									color:#d81b60;
+
 								}
 								.step-summary{
 									font-size:16px;
@@ -1100,10 +1109,10 @@
 			}
           .aboutcg-pane{
                 opacity: 1;
-              background: rgba(74,20,140,0.7);
+              background: rgba(74,20,140,1);
 //            background: rgba(251,251,251,1);
             box-sizing: border-box;
-            border-top: 4px solid rgba(74,20,140,0.5);
+            //border-top: 4px solid rgba(74,20,140,0.5);
             font-family: "Lato";
             font-weight: 400;
 //            color: #4a148c;
@@ -1279,9 +1288,10 @@
 				}
           }
 			.features-pane{
-              background: rgba(74,20,140,0.7);
+              background: rgba(74,20,140,1);
+			//	background-color: #4a148c;
               opacity: 1;
-                border-top: 4px solid rgba(255,255,255,0.25);
+              //  border-top: 4px solid rgba(255,255,255,0.25);
 				box-sizing: border-box;
 
 				.abouts-row{
@@ -1394,14 +1404,16 @@
 			.partners-platform{
 				background: #fefefe;
                 text-align: center;
-                border-top: 4px solid rgba(198,81,105,0.25);
+              //  border-top: 4px solid rgba(198,81,105,0.25);
                 padding-bottom: 24px;
+				height: inherit;
                 background: #fff;
               .text-holder{
 					 font-family: "Lato";
 						font-weight: 400;
 						font-size: 40px;
-						color: #c65169;
+						color: #d81b60;
+
 		//        color: #4a148c;
 
 		//        text-shadow: 2px 2px #000;
@@ -2157,9 +2169,10 @@
 				font-size: 0px;
 				text-align: center;
 				.sel-car-holder, .sel-serv-holder{
+					padding-top: 10px;
 					display: inline-block;
 					height: 30px;
-					font-size: 14px;
+					font-size: 20px;
 					font-family: Lato;
 
 				}
@@ -2169,7 +2182,7 @@
 						float: left;
 						line-height: 24px;
 						margin: 0px 4px 0px 8px;
-					    font-size: 14px;
+					    font-size: 20px;
 						cursor: pointer;
                       .service{
                         font-weight: normal;
@@ -2191,7 +2204,7 @@
 					.edit-btn{
 						padding: 0px 3px;
 						border-radius: 3px;
-						width:140px;
+						width:240px;
 						text-align: left;
 						.label{
 							//display: none;
@@ -2225,7 +2238,7 @@
                       border-bottom: 2px solid #4a148c;
 						.section-menu-item{
 							float: left;
-							width: 16.66%;
+							width: 25%;
 							padding: 18px 0px;
 							cursor:pointer;
                             box-sizing: border-box;
@@ -3469,10 +3482,11 @@ label.clean-sbox-wrapper {
 			.selected-data-holder{
 				font-size: 0px;
 				text-align: center;
+				height: 50px;
 				.sel-car-holder, .sel-serv-holder{
 					display: inline-block;
 					height: 30px;
-					font-size: 14px;
+					font-size: 20px;
 					font-family: Lato;
 
 				}
@@ -3482,7 +3496,7 @@ label.clean-sbox-wrapper {
 						float: left;
 						line-height: 24px;
 						margin: 0px 4px 0px 8px;
-					    font-size: 14px;
+					    font-size: 20px;
 						cursor: pointer;
                       .service{
                         font-weight: normal;
@@ -3495,6 +3509,7 @@ label.clean-sbox-wrapper {
 					.icon-holder{
 						height: 24px;
 						width: 24px;
+						font-size : 20px;
 						background: url('../img/generic.svg') no-repeat;
 						background-size: 100% auto;
 					}
@@ -3504,8 +3519,9 @@ label.clean-sbox-wrapper {
 					.edit-btn{
 						padding: 0px 3px;
 						border-radius: 3px;
-						width:140px;
+						width:240px;
 						text-align: left;
+						font-size:20px;
 						.label{
 							//display: none;
 						}

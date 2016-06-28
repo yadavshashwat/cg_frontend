@@ -98,11 +98,13 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
 
 
 <body class="home-body">
+
 <div class="pane search-pane fit-width">
     <div class="centered-content">
-        <div class="transparent-header">
+<div class="transparent-header">
            {% include "website/home-header.html" %}
-        </div>
+</div>
+
         {% if specific_land == 'cars'%}
         <div class="content-holder">
             <div class="title-holder">
@@ -233,7 +235,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
 
                 <form id="home-search-form" method="get" action="/order/" data-remote="true" accept-charset="UTF-8">
 
-                    <div class="vehicle-dropdown-div" style="width: 25%;">
+                    <div class="vehicle-dropdown-div brand-div" style="width: 25%;">
                         <select class="custom-select" name="brandSelect" id="brandSelect" >
                             <option selected="true" disabled="">Select Brand</option>
                             <option>Bajaj</option><option>Hero</option>
@@ -411,7 +413,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
             <div class="how-it-works">
                 <a name="how-it-works">
                 <div class="text-holder">
-                How It Works
+                How It Works?
                 </div>
                 </a>
             </div>
@@ -605,18 +607,15 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
 <div class="pane fix_pane">
     <div class="stats-pane none-i">
     </div>
-
-
-
      <!--Script Addition - Slider Start-->
         <div class="partners-platform" style="position: relative; ">
             <div class="centered-content">
 
             <div class="text-holder">
-                Brands we serve
+                Brands
             </div>
             {% if specific_land != 'cars' %}
-            <div class="section-label">Bike Brands</div>
+            <div class="section-label">Bike</div>
             <div class="section-content">
                     <div class="brand-wrap"><div class="aligner"></div><img u="image" alt="partner" src="../../static/img/logos/Bikes/Bajaj.png" /></div>
                     <div class="brand-wrap"><div class="aligner"></div><img class="skew" u="image" alt="partner" src="../../static/img/logos/Bikes/Hero.png" /></div>
@@ -630,7 +629,7 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
             </div>
             {% endif %}
             {% if specific_land != 'bikes' %}
-            <div class="section-label">Car Brands</div>
+            <div class="section-label">Car</div>
             <div class="section-content">
                     <div class="brand-wrap"><div class="aligner"></div><img u="image" alt="partner" src="../../static/img/logos/Cars/Chevrolet.jpg" /></div>
                     <div class="brand-wrap"><div class="aligner"></div><img u="image" alt="partner" src="../../static/img/logos/Cars/Datsun.jpg" /></div>
@@ -675,10 +674,13 @@ mixpanel.init("fbb9a141a5e5cc0141425fd038daa739");
                 </div>
                 <div class="horizontal-lists">
                     <ul>
-                        <li class="footer-hw">How it works</li>
-                        <li class="footer-au">About Us</li>
+                        <li class="footer-wh">Why ClickGarage?</li>
+                        <li class="footer-hw">How It Works?</li>
+                        <li class="footer-au">Our Services</li>
+                        <li class="footer-bd">Brands</li>
                         <li><a href="/contact" target="_blank">Contact Us</a></li>
                         <li><a href="//blog.clickgarage.in" target="_blank">Blog</a></li>
+
                         <li><a href="/sitemap" target="_blank">Sitemap</a></li>
                     </ul>
                 </div>
