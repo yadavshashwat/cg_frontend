@@ -1468,6 +1468,7 @@ $( document ).delegate("#order", "pagebeforeload", function() {
         var html = '';
         Global.dealerAddressObj = {};
         $.each(data, function(idx, val){
+            if(val.vendor == 'ClickGarage Workshop' || val.vendor == 'ClickGarage Doorstep'){
 
             if(val.vendor == 'Authorized'){
                 Global.dealerAddressObj['raw'] = val.dealer_details
@@ -1491,36 +1492,39 @@ $( document ).delegate("#order", "pagebeforeload", function() {
             html += '</div><div class=prices>'
 
             //html += "<table> <tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;"+parseInt(val.parts_price)+"</td></tr><tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil(val.labour_price)+"</td></tr> <tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;"+Math.ceil((val.labour_price*0.145))+"</td></tr><tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;<strike>&#8377;200</strike>&nbsp;&nbsp;&#8377;"+ (val.car_bike == 'Car' ? '0': '0')+"</td></tr><tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;"+(parseInt(val.parts_price)+parseInt(Math.ceil((val.labour_price)))+parseInt(Math.ceil((val.labour_price*0.145)))+parseInt((val.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";
-
             if (val.car_bike=="Car") {
                 //if(val.vendor=="Authorized")
                 // html +="<table><tr>Service Centre Bill Amount</tr><tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;<strike>&#8377;200</strike>&nbsp;&nbsp;&#8377;"+ (val.car_bike == 'Car' ? '0': '0')+"</td></tr></table>"
                 //else
 //                html += "<table><tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;" + parseInt(val.parts_price) + "</td></tr><tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;" + Math.ceil(val.labour_price) + "</td></tr> <tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;" + Math.ceil((val.labour_price * 0.145)) + "</td></tr><tr><td>Pick-Up Fee</td><td>:&nbsp;&nbsp;<strike>&#8377;200</strike>&nbsp;&nbsp;&#8377;" + (val.car_bike == 'Car' ? '0' : '0') + "</td></tr><tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;" + (parseInt(val.parts_price) + parseInt(Math.ceil((val.labour_price))) + parseInt(Math.ceil((val.labour_price * 0.145))) + parseInt((val.car_bike == 'Car' ? '0' : '0'))) + "</td></tr></table>";
-               if (val.prices.len < 1) {
-                   html += "<table><tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;" + parseInt(val.parts_price) + "</td></tr><tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;" + parseInt(Math.ceil(val.labour_price)) + "</td></tr> <tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;" + parseInt(Math.ceil((val.labour_price * 0.15))) + "</td></tr><tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;" + parseInt(parseInt(val.parts_price) + parseInt(Math.ceil((val.labour_price))) + parseInt(Math.ceil((val.labour_price * 0.15)))) + "</td></tr></table>";
-               }else{
+                if(val.prices.length>1 && val.prices[1]){
                    html += "<table><th></th><th>ClickGarage</th><th></th><th>Authorized</th>"
-                   html += "<tr><td>Parts</td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil(val.prices[0].parts_price))) + "</td><td></td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil(val.prices[1].parts_price))) + "</td></tr>"
-                   html += "<tr><td>Labour</td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil(val.prices[0].labour_price))) + "</td><td></td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil(val.prices[1].labour_price))) + "</td></tr>"
-                   html += "<tr><td>Service Tax</td><td>&nbsp;&nbsp;&#8377;" + parseInt(Math.ceil((val.prices[0].labour_price * 0.15))) + "</td><td></td><td>&nbsp;&nbsp;&#8377;" + parseInt(Math.ceil((val.prices[1].labour_price * 0.15))) + "</td></tr>"
-                   html += "<tr><td>Total</td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil((val.prices[0].labour_price * 0.15))) + parseInt(Math.ceil((val.prices[0].labour_price))) + parseInt(Math.ceil((val.prices[0].parts_price)))) + "</td><td></td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil((val.prices[1].labour_price * 0.15))) + parseInt(Math.ceil((val.prices[1].labour_price))) + parseInt(Math.ceil((val.prices[1].parts_price)))) + "</td></tr></table>"
+                   html += "<tr><td>Parts</td><td class='num-cell'>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil(val.prices[0].parts_price))) + "</td><td></td><td class='num-cell'>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil(val.prices[1].parts_price))) + "</td></tr>"
+                   html += "<tr><td>Labour</td><td class='num-cell'>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil(val.prices[0].labour_price))) + "</td><td></td><td class='num-cell'>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil(val.prices[1].labour_price))) + "</td></tr>"
+                   html += "<tr><td>Service Tax</td><td class='num-cell'>&nbsp;&nbsp;&#8377;" + parseInt(Math.ceil((val.prices[0].labour_price * 0.15))) + "</td><td></td><td class='num-cell'>&nbsp;&nbsp;&#8377;" + parseInt(Math.ceil((val.prices[1].labour_price * 0.15))) + "</td></tr>"
+                   html += "<tr class='total-row'><td>Total</td><td class='num-cell'>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil((val.prices[0].labour_price * 0.15))) + parseInt(Math.ceil((val.prices[0].labour_price))) + parseInt(Math.ceil((val.prices[0].parts_price)))) + "</td><td></td><td class='num-cell'>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil((val.prices[1].labour_price * 0.15))) + parseInt(Math.ceil((val.prices[1].labour_price))) + parseInt(Math.ceil((val.prices[1].parts_price)))) + "</td></tr></table>"
+
+               }else{
+                   html += "<table><tr><td class='title-cell'>Parts</td><td class='num-cell'>&nbsp;&nbsp;&#8377;" + parseInt(val.parts_price) + "</td></tr><tr><td class='title-cell'>Labour</td><td class='num-cell'>&nbsp;&nbsp;&#8377;" + parseInt(Math.ceil(val.labour_price)) + "</td></tr> <tr><td class='title-cell'>Service Tax</td><td class='num-cell'>&nbsp;&nbsp;&#8377;" + parseInt(Math.ceil((val.labour_price * 0.15))) + "</td></tr><tr class='total-row'><td class='title-cell'>Total</td><td class='num-cell'>&nbsp;&nbsp;&#8377;" + parseInt(parseInt(val.parts_price) + parseInt(Math.ceil((val.labour_price))) + parseInt(Math.ceil((val.labour_price * 0.15)))) + "</td></tr></table>";
+
                }
 
 
             } else {
-               if (val.prices.len < 1) {
-                   html += "<table><tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;" + parseInt(val.parts_price) + "</td></tr><tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;" + parseInt(Math.ceil(val.labour_price)) + "</td></tr> <tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;" + parseInt(Math.ceil((val.labour_price * 0.15))) + "</td></tr><tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;" + parseInt(parseInt(val.parts_price) + parseInt(Math.ceil((val.labour_price))) + parseInt(Math.ceil((val.labour_price * 0.15)))) + "</td></tr></table>";
-               }else{
-                   html += "<table><th></th><th>ClickGarage</th><th></th><th>Authorized</th>"
-                   html += "<tr><td>Parts</td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil(val.prices[0].parts_price))) + "</td><td></td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil(val.prices[1].parts_price))) + "</td></tr>"
-                   html += "<tr><td>Labour</td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil(val.prices[0].labour_price))) + "</td><td></td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil(val.prices[1].labour_price))) + "</td></tr>"
-                   html += "<tr><td>Service Tax</td><td>&nbsp;&nbsp;&#8377;" + parseInt(Math.ceil((val.prices[0].labour_price * 0.15))) + "</td><td></td><td>&nbsp;&nbsp;&#8377;" + parseInt(Math.ceil((val.prices[1].labour_price * 0.15))) + "</td></tr>"
-                   html += "<tr><td>Total</td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil((val.prices[0].labour_price * 0.15))) + parseInt(Math.ceil((val.prices[0].labour_price))) + parseInt(Math.ceil((val.prices[0].parts_price)))) + "</td><td></td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil((val.prices[1].labour_price * 0.15))) + parseInt(Math.ceil((val.prices[1].labour_price))) + parseInt(Math.ceil((val.prices[1].parts_price)))) + "</td></tr></table>"
+                if (val.prices.len < 1) {
+                    html += "<table><tr><td>Parts</td><td>:&nbsp;&nbsp;&#8377;" + parseInt(val.parts_price) + "</td></tr><tr><td>Labour</td><td>:&nbsp;&nbsp;&#8377;" + parseInt(Math.ceil(val.labour_price)) + "</td></tr> <tr><td>Service Tax</td><td>:&nbsp;&nbsp;&#8377;" + parseInt(Math.ceil((val.labour_price * 0.15))) + "</td></tr><tr class='total-row'><td>Total</td><td>:&nbsp;&nbsp;&#8377;" + parseInt(parseInt(val.parts_price) + parseInt(Math.ceil((val.labour_price))) + parseInt(Math.ceil((val.labour_price * 0.15)))) + "</td></tr></table>";
+                } else {
+                    html += "<table><th></th><th>ClickGarage</th><th></th><th>Authorized</th>"
+                    html += "<tr><td>Parts</td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil(val.prices[0].parts_price))) + "</td><td></td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil(val.prices[1].parts_price))) + "</td></tr>"
+                    html += "<tr><td>Labour</td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil(val.prices[0].labour_price))) + "</td><td></td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil(val.prices[1].labour_price))) + "</td></tr>"
+                    html += "<tr><td>Service Tax</td><td>&nbsp;&nbsp;&#8377;" + parseInt(Math.ceil((val.prices[0].labour_price * 0.15))) + "</td><td></td><td>&nbsp;&nbsp;&#8377;" + parseInt(Math.ceil((val.prices[1].labour_price * 0.15))) + "</td></tr>"
+                    html += "<tr><td>Total</td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil((val.prices[0].labour_price * 0.15))) + parseInt(Math.ceil((val.prices[0].labour_price))) + parseInt(Math.ceil((val.prices[0].parts_price)))) + "</td><td></td><td>&nbsp;&nbsp;&#8377;" + (parseInt(Math.ceil((val.prices[1].labour_price * 0.15))) + parseInt(Math.ceil((val.prices[1].labour_price))) + parseInt(Math.ceil((val.prices[1].parts_price)))) + "</td></tr></table>"
                 }
-            html += '</div></div>';
+                html += '</div></div>';
+            }
 
-        }});
+            }
+        });
         if(Global.dealerAddressObj['raw']){
             Global.dealerAddressObj['activeRegionGrouped'] = {};
             $.each(Global.dealerAddressObj['raw'], function(i,v){

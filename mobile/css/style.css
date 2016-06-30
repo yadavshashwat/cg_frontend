@@ -523,6 +523,15 @@ white-space: nowrap;
     font-weight:700;
 }
 
+.vendor-list .num-cell{
+    text-align: right;
+}
+
+.vendor-list .title-cell::after{
+    content:":";
+    float:right;
+}
+
 .vendor-list .vendor-name{
 
 }

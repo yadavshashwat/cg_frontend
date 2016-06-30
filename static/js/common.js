@@ -144,6 +144,14 @@ var Commons = {
                 //elem.addClass('sent')
                 //var tran_id = elem.attr('tran_id')
                 //var classy = 'Booking'
+                $('#id_name,#id_phone,#id_message').val('');
+            $('#contact-form').find('.submit-row').prepend($('<div class="fl cnfrm-msg">e-Mail sent</div>'));
+            setTimeout(function(){
+                $('#contact-form').find('.submit-row .cnfrm-msg').fadeOut( "slow", function() {
+                     // Animation complete.
+                    $(this).remove();
+              });
+            }, 3000);
                 Commons.ajaxData('send_contact', {name:name, phone:phone,message:message},"get",_this, eval("_this.afterSendContact"))
             return false;
         });
