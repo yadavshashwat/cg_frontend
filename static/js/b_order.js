@@ -467,7 +467,7 @@ var Global = {
                     '<div class="form-col label-col"><div class="label-div">Custom Requests</div></div>' +
                     '<div class="form-col inp-col-double"><div class="clean-inp-wrapper"><textarea class="clean-inp-tabox cust-req" type="" rows="3"></textarea></div></div>' +
                 '</div>';
-           html += '<div class="form-row" style="text-align: center;"><a class="repair-add-to-cart" href="/cart">Add to Cart</a></div>' +
+           html += '<div class="form-row" style="text-align: center;"><a class="repair-add-to-cart" href="/cart">Book Now</a></div>' +
                '</div>';
             $(container).html(html);
         var addFeat = _this.additionalRepairs['car'];
@@ -495,7 +495,7 @@ var Global = {
                 '<div class="form-col inp-col-1"><div class="clean-inp-wrapper"><input type="radio" name="damage-type" value="replacement">Part Replacement</div></div>' +
                 '<div class="form-col inp-col-2"><div class="clean-inp-wrapper"><input type="radio" name="damage-type" value="repair">Repair/Paint</div></div>' +
                 '</div>';
-           html += '<div class="form-row" style="text-align: center;"><a class="repair-add-to-cart" href="/cart">Add to Cart</a></div>' +
+           html += '<div class="form-row" style="text-align: center;"><a class="repair-add-to-cart" href="/cart">Book Now</a></div>' +
                '</div>';
             $(container).html(html);
         }else if(id == 'diagnostics'){
@@ -510,7 +510,7 @@ var Global = {
                 '<div class="form-row" style="text-align: center;">We will get in touch with you soon!</div>';
             $('.dealer-select-holder .dealer-headers').hide();
             container.html('');
-           html += '<div class="form-row" style="text-align: center;"><a class="repair-add-to-cart" href="/cart">Add to Cart</a></div>' +
+           html += '<div class="form-row" style="text-align: center;"><a class="repair-add-to-cart" href="/cart">Book Now</a></div>' +
                '</div>';
             $(container).html(html);
         }else{
@@ -643,7 +643,7 @@ var Global = {
                     '</div>'+
                 '</div>';
            }
-           modalCarContent += '<div class="form-row" style="text-align: center;"><a class="detail-add-to-cart" href="/cart">Add to Cart</a></div>' +
+           modalCarContent += '<div class="form-row" style="text-align: center;"><a class="detail-add-to-cart" href="/cart">Book Now</a></div>' +
                '</div>';
         $('.bike-order-body').append(_this.genericModal(modalCarContent, true));
         var addFeat = _this.additionalFeatures['car'];

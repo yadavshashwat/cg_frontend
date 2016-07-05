@@ -321,7 +321,7 @@ var Templates = {
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
-                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select This Service </div>";}}
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Book Now </div>";}}
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
@@ -352,7 +352,7 @@ var Templates = {
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
-                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select This Service </div>";}}
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Book Now </div>";}}
                     ]},
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
                         //{"tag":"div", "class":"due-div fl", "html":function(){return "<span class='odo-read'>"+  (this.type_service == "Not Defined" ? 'I am not sure<br> <span class="due-at-read">I will go with minor servicing and <br> would  like post check-up recommendation</span>': this.type_service)+"</span>";}},
@@ -425,7 +425,7 @@ var Templates = {
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
-                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select This Service </div>";}}
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Book Now </div>";}}
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
@@ -454,7 +454,7 @@ var Templates = {
             "tag":"div","class":"service-list-item minimized", "data-id":"${id}", "children":[
                 {"tag":"div", "class":"top-row", "children":[
                     {"tag":"div", "class":"wrapper detail-wrapper", "children":[
-                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Select This Service </div>";}}
+                        {"tag":"div", "class":"vendor-div", "html":function(){return "<div> Book Now </div>";}}
                     ]},
 
                     {"tag":"div", "class":"wrapper header-wrapper", "children":[
@@ -499,7 +499,7 @@ var Templates = {
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
 
-                    {"tag":"div", "html":"<a class='dealer-add-to-cart' href='/cart'>Add to Cart</a>"}
+                    {"tag":"div", "html":"<a class='dealer-add-to-cart' href='/cart'>Book Now</a>"}
 
                 ]},
                 {"tag":"div","class":"td-price", "children":[
@@ -547,8 +547,8 @@ var Templates = {
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
 
-                    {"tag":"div", "html":"<a class='dealer-add-to-cart' href='/cart'>Add to Cart</a>", "class":"none-i"},
-                    {"tag":"div", "html":"<a class='servicing-form-generate'>Add to Cart</a>"}
+                    {"tag":"div", "html":"<a class='dealer-add-to-cart' href='/cart'>Book Now</a>", "class":"none-i"},
+                    {"tag":"div", "html":"<a class='servicing-form-generate'>Book Now</a>"}
                 ]},
                 {"tag":"div","class":"td-price", "children":[
                     {"tag":"div", "class":"table-prices","html":function(){
@@ -693,7 +693,7 @@ var Templates = {
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
-                    {"tag":"div", "html":"<a class='dealer-add-to-cart' href='/cart'>Add to Cart</a>"}
+                    {"tag":"div", "html":"<a class='dealer-add-to-cart' href='/cart'>Book Now</a>"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
     {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Service Price</td><td>:"+(this.discount=='0' ? '' : "<strike>")+"<i style='padding-left:10px' class='fa fa-inr'></i>"+this.total_price + (this.discount=='0' ? '' : "</strike>&nbsp<i style='padding-left:10px' class='fa fa-inr'></i>") + (this.discount=='0' ? '' : parseInt(parseFloat(this.total_price)*(1.0-parseFloat(this.discount))))+ "</td></tr>"+ (this.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>0</td></tr>" : '')+"<tr><td>Total</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(parseFloat(this.total_price)*(1.0-parseFloat(this.discount)))+"</td></tr></table>";}}                ]},
@@ -742,7 +742,7 @@ var Templates = {
                 ]},
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
-                    {"tag":"div", "html":"<a class='dealer-add-to-cart' href='/cart'>Add to Cart</a>"}
+                    {"tag":"div", "html":"<a class='dealer-add-to-cart' href='/cart'>Book Now</a>"}
                 ]},
                 {"tag":"div","class":"col-item td-price", "children":[
     {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Service Price</td><td>:"+(this.discount=='0' ? '' : "<strike>")+"<i style='padding-left:10px' class='fa fa-inr'></i>"+this.total_price + (this.discount=='0' ? '' : "</strike>&nbsp<i style='padding-left:10px' class='fa fa-inr'></i>") + (this.discount=='0' ? '' : parseInt(parseFloat(this.total_price)*(1.0-parseFloat(this.discount))))+ "</td></tr>"+ (this.doorstep == '0' ? "<tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>0</td></tr>" : '')+"<tr><td>Total</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(parseFloat(this.total_price)*(1.0-parseFloat(this.discount)))+"</td></tr></table>";}}                ]},
@@ -786,7 +786,7 @@ var Templates = {
                 {"tag":"div","class":"col-item td-dealer-select", "children":[
                     // {"tag":"div", "class":"dealer-checkout", "html":"<a href='/checkout'>Checkout</a>"},
 
-                    {"tag":"div", "html":"<a class='dealer-add-to-cart', href='/cart'>Add to Cart</a>"}
+                    {"tag":"div", "html":"<a class='dealer-add-to-cart', href='/cart'>Book Now</a>"}
                 ]},
                 {"tag":"div","class":"td-price", "children":[
                     {"tag":"div", "class":"text","html":function(){
@@ -923,7 +923,7 @@ var Templates = {
                             }else{
                                 return ""
                             }
-                        }, "html":"<a class='detail-add-to-cart' href='/cart'>Add to Cart</a>"},
+                        }, "html":"<a class='detail-add-to-cart' href='/cart'>Book Now</a>"},
                         {"tag":"div", "class":"form-btn form-nav-btn next", "style":function(){
                             if(this.dealer != 'Authorized'){
                                 return "display:none;"
