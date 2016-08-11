@@ -1048,8 +1048,8 @@
 					break;
 				case 'j':
 					hour = time.getHours() % 12;
-					if (hour<12){
-						hour = hour + 1
+					if (hour+2<=12){
+						hour = hour + 2
 					}else{
 						hour = 1
 					}

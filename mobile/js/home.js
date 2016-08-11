@@ -1789,9 +1789,13 @@ $( document ).delegate("#order", "pagebeforeload", function() {
             $('#checkout #checkoutForm').find('#email,#name,#phonenumber').val('');
         }
         if(Global.carSelected && Global.carSelected.car_bike == "Bike"){
-            $('#pick-up-time').html('<option value="">Select One</option><option value="time1">9:00AM - 10:30AM</option><option value="time2">10:30AM - 12:00PM</option><option value="time3">12:00PM - 1:30PM</option><option value="time4">1:30PM - 3:00PM</option><option value="time5">3:00PM - 4:30PM</option><option value="time6">4:30PM - 6:00PM</option><option value="time7">6:00PM - 7:30PM</option>')
+            $('#pick-up-time').html('<option value="">Select One</option><option value="time1">9:30AM - 11:30AM</option><option value="time2">11:30AM - 1:30PM</option><option value="time3">1:30PM - 3:30PM</option><option value="time4">3:30PM - 5:30PM</option><option value="time5">5:30PM - 7:30PM</option>')
+
+            // $('#pick-up-time').html('<option value="">Select One</option><option value="time1">9:00AM - 10:30AM</option><option value="time2">10:30AM - 12:00PM</option><option value="time3">12:00PM - 1:30PM</option><option value="time4">1:30PM - 3:00PM</option><option value="time5">3:00PM - 4:30PM</option><option value="time6">4:30PM - 6:00PM</option><option value="time7">6:00PM - 7:30PM</option>')
         }else{
-            $('#pick-up-time').html('<option value="">Select One</option><option value="time2">9:00AM - 10:00AM</option><option value="time3">10:00AM - 11:00AM</option><option value="time4">11:00AM - 12:00PM</option><option value="time5">12:00PM - 1:00PM</option><option value="time6">1:00PM - 2:00PM</option><option value="time6">2:00PM - 3:00PM</option><option value="time7">3:00PM - 4:00PM</option>')
+            $('#pick-up-time').html('<option value="">Select One</option><option value="time1">9:30AM - 11:30AM</option><option value="time2">11:30AM - 1:30PM</option><option value="time3">1:30PM - 3:30PM</option><option value="time4">3:30PM - 5:30PM</option><option value="time5">5:30PM - 7:30PM</option>')
+
+            // $('#pick-up-time').html('<option value="">Select One</option><option value="time2">9:00AM - 10:00AM</option><option value="time3">10:00AM - 11:00AM</option><option value="time4">11:00AM - 12:00PM</option><option value="time5">12:00PM - 1:00PM</option><option value="time6">1:00PM - 2:00PM</option><option value="time6">2:00PM - 3:00PM</option><option value="time7">3:00PM - 4:00PM</option>')
         }
     },
     bookingPageInit : function(){

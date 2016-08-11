@@ -12,10 +12,10 @@ var Global = {
         'autoclose':true
     });
     var timeWrapSettings = {
-        timeFormat: 'h:00 A - j:00 B',
+        timeFormat: 'h:30 A - j:30 B',
         minTime: new Date(0, 0, 0, 9, 0, 0),
-        maxTime: new Date(0, 0, 0, 18, 0, 0),
-        step: 60
+        maxTime: new Date(0, 0, 0, 17, 0, 0),
+        step: 120
 
     };
     //if(this.carData && this.carData['car_bike'] == 'Bike'){
