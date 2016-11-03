@@ -532,6 +532,7 @@ var Global = {
            var drop_pin = $('.address-form-holder .clean-inp-tbox.drop-pin').val();
            var drop_lmark = $('.address-form-holder .clean-inp-tbox.drop-lmark').val();
            var drop_city = $('.address-form-holder .clean-inp-sbox.drop-city').val();
+           var custom = $('.address-form-holder .clean-inp-tbox.custom').val();
            var timeStamp = Math.floor(Date.now() / 1000);
 
            var pick = {
@@ -571,6 +572,7 @@ var Global = {
                         name              : name,
                         number            : phone,
                         reg_no:             car_reg_number ,
+                        custom_req       : custom,
                         order_list        : JSON.stringify(order_list),
                         car_name          : car_select,
                         pick:JSON.stringify(pick),

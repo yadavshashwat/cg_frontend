@@ -335,18 +335,36 @@ var zyxCart = {
             formCheck.updateTime($('.address-form-holder'))
         });
         $('.confirm-step #place-order-btn').on('click', function(){
+            $(this).css({'pointer-events':'none'});
             var orderObj = {};
+            var fetchFlag = true;
             if(zyxCart.emergency){
                 orderObj = formCheck.getSelectedAddress($('.address-form-holder'),'emergency');
             }else{
                 if(zyxCart.orderObj){
-                    orderObj = zyxCart.orderObj;
+                    $.extend(true, orderObj,zyxCart.orderObj);
+                    fetchFlag = false;
                 }else{
                     orderObj = formCheck.getSelectedAddress($('.address-form-holder'),'regular');
                 }
             }
-            orderObj['pick'] = JSON.stringify(orderObj['pick']);
-            orderObj['drop'] = JSON.stringify(orderObj['drop']);
+
+
+            if(fetchFlag) {
+                orderObj['pick'] = JSON.stringify(orderObj['pick']);
+                orderObj['drop'] = JSON.stringify(orderObj['drop']);
+            }
+
+            if(typeof (orderObj['pick']) == 'object'){
+                orderObj['pick'] = JSON.stringify(orderObj['pick']);
+            }
+
+            if(typeof (orderObj['drop']) == 'object'){
+                orderObj['drop'] = JSON.stringify(orderObj['drop']);
+            }
+
+
+
             var trarray = $('.confirm-step .table-holder table tbody').find('tr');
             var arry = [];
             $.each(trarray, function(ix, tr){
@@ -380,11 +398,12 @@ var zyxCart = {
                 if(zyxCart.emergency){
                     Commons.ajaxData('place_emergency_order', orderObj,"GET", _this, _this.onOrderPlace);
                 }else{
-                    Commons.ajaxData('place_order', orderObj,"GET", _this, _this.onOrderPlace);
+                    Commons.ajaxData('place_order', orderObj,"GET", _this, _this.onOrderPlace, function(){$('.confirm-step #place-order-btn').css({'pointer-events':'auto'})});
                 }
         });
     },
     onOrderPlace : function(){
+                    $('.confirm-step #place-order-btn').css({'pointer-events':'auto'});
                 $('.login-step').find('.max-content,.min-header').addClass('none-i');
                 $('.login-step').find('.completed-summary').removeClass('none-i');
                 $('.address-step').find('.max-content,.min-header').addClass('none-i');

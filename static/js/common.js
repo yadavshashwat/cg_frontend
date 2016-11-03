@@ -18,8 +18,10 @@ var Commons = {
 
             }).always(function(res){
                     console.log(res)
-                    if(res.status){
+                    if(res && res.status){
                         bind(success_cb, bindObj, [res.result])
+                    }else{
+                        bind(fail_cb, bindObj)
                     }
                 });
         }
