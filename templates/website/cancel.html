@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>ClickGarage - Car and Bike Servicing, Cleaning</title>
+    <link rel="shortcut icon" type="image/png" href="../../static/img/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/dash.css"/>
+    
+    <link rel="stylesheet" type="text/css" href="../static/css/custom.css"/>
+    <link rel="stylesheet/less" type="text/css" href="../static/less/styles.less"/>
+    <link rel="stylesheet/less" type="text/css" href="../static/less/login-html.less"/>
+    <script type="text/javascript" src="../static/js/legacy/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../static/js/plugin.js"></script>
+    <script type="text/javascript" src="../static/js/dashboard.js"></script>
+    <script type="text/javascript" src="../static/js/common.js"></script>
+    <script type="text/javascript" src="../static/js/legacy/less.min.js"></script>
+    
+  <script type="text/javascript">
+    
+  $(function() {
+  var d = document,
+    accordionToggles = d.querySelectorAll('.js-accordionTrigger'),
+    setAria,
+    setAccordionAria,
+    switchAccordion,
+    touchSupported = ('ontouchstart' in window),
+    pointerSupported = ('pointerdown' in window);
+
+  skipClickDelay = function(e) {
+    e.preventDefault();
+    e.target.click();
+  }
+
+  setAriaAttr = function(el, ariaType, newProperty) {
+    el.setAttribute(ariaType, newProperty);
+  };
+  setAccordionAria = function(el1, el2, expanded) {
+    switch (expanded) {
+      case "true":
+        setAriaAttr(el1, 'aria-expanded', 'true');
+        setAriaAttr(el2, 'aria-hidden', 'false');
+        break;
+      case "false":
+        setAriaAttr(el1, 'aria-expanded', 'false');
+        setAriaAttr(el2, 'aria-hidden', 'true');
+        break;
+      default:
+        break;
+    }
+  };
+  //function
+  switchAccordion = function(e) {
+    e.preventDefault();
+    var thisAnswer = e.target.parentNode.nextElementSibling;
+    var thisQuestion = e.target;
+    if (thisAnswer.classList.contains('is-collapsed')) {
+      setAccordionAria(thisQuestion, thisAnswer, 'true');
+    } else {
+      setAccordionAria(thisQuestion, thisAnswer, 'false');
+    }
+    thisQuestion.classList.toggle('is-collapsed');
+    thisQuestion.classList.toggle('is-expanded');
+    thisAnswer.classList.toggle('is-collapsed');
+    thisAnswer.classList.toggle('is-expanded');
+
+    thisAnswer.classList.toggle('animateIn');
+  };
+  for (var i = 0, len = accordionToggles.length; i < len; i++) {
+    if (touchSupported) {
+      accordionToggles[i].addEventListener('touchstart', skipClickDelay, false);
+    }
+    if (pointerSupported) {
+      accordionToggles[i].addEventListener('pointerdown', skipClickDelay, false);
+    }
+    accordionToggles[i].addEventListener('click', switchAccordion, false);
+  }
+});
+    
+    </script>
+</head>
+<body class="dash-body">
+     <div class="solid-header">
+        {% include "website/tnc-header.html" %}
+    </div> 
+    <div class="pane dash-pane">
+      <div class="tnc-header">
+        <h4>Cancellation/ Refund Policy</h4>
+          <h5>ClickGarage believes in helping its customers as far as possible, and has therefore a liberal cancellation/refund policy.</h5>
+      </div>
+        <div class="centered-content">
+
+  <!--
+		<aside class="acc , terms">
+		<ul class="outer-ul">
+		<li><a href="#" >Account</a>
+		<ul class="inner-ul-1">
+            <li><a href="#" id="addresslink"><i></i>Address</a> </li>
+		<li><a href="#" id="profilelink"><i></i>Profile</a></li>
+			<li><a href="#" id="carslink"><i></i>Cars</a></li>
+				<li><a href="#">Bikes</a></li>
+		</ul>
+		
+		</li>
+			<li><a href="#">Order</a>
+            <ul class="inner-ul-2">
+                <li><a href="#" id="upcominglink"><i></i>Upcoming</a></li>
+                <li><a href="#" id="completedlink"><i></i>Completed</a></li>
+                </ul>
+            </li>
+				<li><a href="#">Cart</a></li>
+		</ul>
+		
+		</aside>-->
+
+            <div class="main-content condition">
+                
+                <div class="accordion">
+ 
+                   <dl>
+                   <dt><a href="" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger">
+               <!-- <img src="../static/img/abc.png">
+                <p>What do we do with your information ?</p>-->
+                       Cancellation Policy
+                    </a>
+                   </dt>
+                   <dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
+                   
+                   <p>
+<li>Cancellation request can be made via the web app used to make the booking or via e-mail to bookings@clickgarage.in</li>
+<li>Cancellations will be considered only if the request is made before the car has reached the Service Station.</li>
+<li>In case pickup/drop service is availed, a cancellation fee of INR 99.00 will be charged once the cancellation request is accepted by ClickGarage</li>
+<li>Cancellation request will not be entertained if the orders have been communicated to the vendors/merchants and they have initiated the services.</li>
+<li>In case cancellation is made via phone call, cancellation is to be deemed accepted by ClickGarage only if the user receives a confirmation e-mail/sms on the registered e-mail id/phone number. In case the e-mail/sms is not received by user, booking will stand confirmed.</li>
+                   </p>
+                   </dd>
+                   <dt><a href="" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger">
+               <!-- <img src="../static/img/abc.png">
+                <p>What do we do with your information ?</p>-->
+                       Refund Policy
+                    </a>
+                   </dt>
+                   <dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
+
+                   <p>
+<li>Refund can be claimed only after service order cancellation.</li>
+<li>Refund will be made only if the cancellation is done before initiating the services by the Service Station.</li>
+<li>In case you feel that the service received is not satisfactory or is not as per your expectations, you must bring it to the notice of our customer service by dropping a mail to bookings@clickgarage.in within 24 hours of receiving the service. The Customer Service Team after looking into your complaint will take an appropriate decision.</li>
+<li>In case of complaints regarding service parts that come with a warranty from manufacturers, please refer the issue to the concerned Service Station.</li>
+            </p>
+                   </dd>
+
+
+
+
+
+                       </dl>
+                </div><!--accordion ends-->
+               
+            </div>
+            </div>
+    </div>
+   
+        <div class="overlay overlay-pat"></div>
+</body>
+</html>
