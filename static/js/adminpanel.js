@@ -533,6 +533,10 @@ var Global = {
            var drop_lmark = $('.address-form-holder .clean-inp-tbox.drop-lmark').val();
            var drop_city = $('.address-form-holder .clean-inp-sbox.drop-city').val();
            var custom = $('.address-form-holder .clean-inp-tbox.custom').val();
+           var send_sms_cust = $('.address-form-holder .clean-inp-dropdown.sms').val();
+
+           console.log(send_sms_cust);
+
            var timeStamp = Math.floor(Date.now() / 1000);
 
            var pick = {
@@ -573,6 +577,7 @@ var Global = {
                         number            : phone,
                         reg_no:             car_reg_number ,
                         custom_req       : custom,
+                        send_sms          : send_sms_cust,
                         order_list        : JSON.stringify(order_list),
                         car_name          : car_select,
                         pick:JSON.stringify(pick),

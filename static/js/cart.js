@@ -184,12 +184,14 @@ var Global = {
                         if(c_cap && !isNaN(c_cap) && discount > c_cap)
                             discount = c_cap
 
+                        // service tax changes
+
                         if(c_key == 'labour')
-                            new_price = (Math.ceil((p_labour - discount)*(114.5))/100) + (p_parts);
+                            new_price = (Math.ceil((p_labour - discount)*(100))/100) + (p_parts);
                         else if(c_key == 'parts')
-                            new_price = (Math.ceil((p_labour)*(114.5))/100) + (p_parts - discount);
+                            new_price = (Math.ceil((p_labour)*(100))/100) + (p_parts - discount);
                         else
-                            new_price = (Math.ceil((p_labour)*(114.5))/100) + (p_parts) - discount;
+                            new_price = (Math.ceil((p_labour)*(100))/100) + (p_parts) - discount;
                     }
                     $(this).closest('td').find('.discounted').html('<i class="fa fa-inr"></i>'+Math.ceil(new_price)+' (&#8773;'+new_price+')').show();
                     $(this).css({

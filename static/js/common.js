@@ -505,7 +505,9 @@ var Templates = {
 
                 ]},
                 {"tag":"div","class":"td-price", "children":[
-                    {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.parts_price)+"</td></tr><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.15))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr><tr id = 'total-row' class='total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.parts_price)+parseInt(Math.ceil((this.labour_price)))+parseInt(Math.ceil((this.labour_price*0.15)))+parseInt((this.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";}}
+                    // {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.parts_price)+"</td></tr><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Service Tax</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price*0.15))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr><tr id = 'total-row' class='total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.parts_price)+parseInt(Math.ceil((this.labour_price)))+parseInt(Math.ceil((this.labour_price*0.15)))+parseInt((this.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";}}
+                    {"tag":"div", "class":"table-parts","html":function(){return "<table><tr><td>Parts</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.parts_price)+"</td></tr><tr><td>Labour</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.labour_price))+"</td></tr><tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr><tr id = 'total-row' class='total-row'><td>Total</td><td>:<i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.parts_price)+parseInt(Math.ceil((this.labour_price)))+parseInt((this.car_bike == 'Car' ? '0': '0')))+"</td></tr></table>";}}
+
                     ]},
                 {"tag":"div","class":"col-item td-rating", "html":""}
             ]
@@ -561,9 +563,9 @@ var Templates = {
                                 t_header = "<tr><th></th><th>ClickGarage</th><th></th><th class='price'>Authorized</th></tr>";
                                 parts_row = "</td><td> </td><td class='smallFont'><i class='fa fa-inr'></i>"+parseInt(this.prices[1].parts_price)
                                 labour_row = "</td><td> </td><td class='smallFont'><i class='fa fa-inr'></i>"+Math.ceil((this.prices[1].labour_price))
-                                service_row = "</td><td> </td><td class='smallFont'><i class='fa fa-inr'></i>"+Math.ceil((this.prices[1].labour_price*0.15))
+                                // service_row = "</td><td> </td><td class='smallFont'><i class='fa fa-inr'></i>"+Math.ceil((this.prices[1].labour_price*0.15))
                                 total_row = "<td> </td>" +
-                                     "<td class='' style='text-align: right;'><i class='fa fa-inr'></i>"+(parseInt(this.prices[1].parts_price)+parseInt(Math.ceil((this.prices[1].labour_price)))+parseInt(Math.ceil((this.prices[1].labour_price*0.15))))+
+                                     "<td class='' style='text-align: right;'><i class='fa fa-inr'></i>"+(parseInt(this.prices[1].parts_price)+parseInt(Math.ceil((this.prices[1].labour_price))))+
                                      "</td>";
                             }
                             if(this.car_bike=='Bike'){
@@ -571,11 +573,12 @@ var Templates = {
                                      t_header+
                                      "<tr><td>Parts</td><td class='price'><i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.prices[0].parts_price)+parts_row+"</td></tr>" +
                                      "<tr><td>Labour</td><td class='price'><i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.prices[0].labour_price))+labour_row+"</td></tr>" +
-                                     "<tr><td>Service Tax</td><td class='price'><i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.prices[0].labour_price*0.15))+service_row+"</td></tr>" +
+                                     // "<tr><td>Service Tax</td><td class='price'><i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.prices[0].labour_price*0.15))+service_row+"</td></tr>" +
+
 //                                     (this.vendor == "ClickGarage Doorstep" ? "": "<tr><td>Pick-Up Fee</td><td>:<i style='padding-left:10px' class='fa fa-inr'></i>150</td></tr>")+
                                      "<tr id = 'total-row' class='total-row'>" +
                                      "<td>Total</td>" +
-                                     "<td class='price'><i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.prices[0].parts_price)+parseInt(Math.ceil((this.prices[0].labour_price)))+parseInt(Math.ceil((this.prices[0].labour_price*0.15))))+
+                                     "<td class='price'><i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.prices[0].parts_price)+parseInt(Math.ceil((this.prices[0].labour_price))))+
 //                                     parseInt((this.vendor == "ClickGarage Doorstep" ? "0": "150"))+
                                      "</td>" +
                                      total_row +
@@ -598,11 +601,11 @@ var Templates = {
                                      t_header+
                                 "<tr><td>Parts</td><td class='price'><i style='padding-left:10px' class='fa fa-inr'></i>"+parseInt(this.prices[0].parts_price)+parts_row+"</td></tr>" +
                                 "<tr><td>Labour</td><td class='price'><i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.prices[0].labour_price))+labour_row+"</td></tr>" +
-                                "<tr><td>Service Tax</td><td class='price'><i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.prices[0].labour_price*0.15))+service_row+"</td></tr>" +
+                                // "<tr><td>Service Tax</td><td class='price'><i style='padding-left:10px' class='fa fa-inr'></i>"+Math.ceil((this.prices[0].labour_price*0.15))+service_row+"</td></tr>" +
 //                                "<tr><td>Pick-Up Fee</td><td>:<strike><i style='padding-left:10px' class='fa fa-inr'></i>200</strike><i style='padding-left:10px' class='fa fa-inr'></i>"+ (this.car_bike == 'Car' ? '0': '0')+"</td></tr>" +
                                 "<tr id = 'total-row' class='total-row'>" +
                                 "<td>Total</td>" +
-                                "<td class='price'><i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.prices[0].parts_price)+parseInt(Math.ceil((this.prices[0].labour_price)))+parseInt(Math.ceil((this.prices[0].labour_price*0.15))))+
+                                "<td class='price'><i class='fa fa-inr' style='padding-left:10px'></i>"+(parseInt(this.prices[0].parts_price)+parseInt(Math.ceil((this.prices[0].labour_price))))+
 //                                parseInt((this.car_bike == 'Car' ? '0': '0'))+
                                 "</td>" +
                                  total_row +
