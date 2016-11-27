@@ -103,7 +103,9 @@ var Global = {
                                  pick:JSON.stringify(pick),
                                  drop:JSON.stringify(drop),
                                  loc:'mobile'
-                             },"GET", Global, Global.loadPlaced);
+                             },"GET", Global, Global.loadPlaced, null,
+                        { open:'#loadOpenTrigger', close:'#loadCloseTrigger'}
+                    );
 
                 }else if(['servicing','cleaning','windshield'].indexOf(service_type)>=0){
                     service_id = Global.vendorSelected['id'];

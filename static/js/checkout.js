@@ -396,9 +396,12 @@ var zyxCart = {
 
 //            console.log('')
                 if(zyxCart.emergency){
-                    Commons.ajaxData('place_emergency_order', orderObj,"GET", _this, _this.onOrderPlace);
+                    Commons.ajaxData('place_emergency_order', orderObj,"GET", _this, _this.onOrderPlace, function(){
+                    }, '.loading-pane');
                 }else{
-                    Commons.ajaxData('place_order', orderObj,"GET", _this, _this.onOrderPlace, function(){$('.confirm-step #place-order-btn').css({'pointer-events':'auto'})});
+                    Commons.ajaxData('place_order', orderObj,"GET", _this, _this.onOrderPlace, function(){
+                        $('.confirm-step #place-order-btn').css({'pointer-events':'auto'})
+                    }, '.loading-pane');
                 }
         });
     },

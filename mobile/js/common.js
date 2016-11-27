@@ -1,6 +1,6 @@
 
 var Commons = {
-    ajaxData : function(name, params, type, bindObj, success_cb, fail_cb){
+    ajaxData : function(name, params, type, bindObj, success_cb, fail_cb,loadingSelectors){
         var _this = this;
         var url = _this.getOrigin() + _this.URLFromName[name];
 //        var url = 'http://local.clickgarage.in/' + _this.URLFromName[name];
@@ -17,6 +17,11 @@ var Commons = {
             params = {'loc':'mobile'}
         }
         if(name){
+            if(loadingSelectors && loadingSelectors.open){
+                $(loadingSelectors.open).click();
+            }
+    
+
             $.ajax({
                 url:url,
                 data:params,
@@ -24,6 +29,10 @@ var Commons = {
                 type:callType
 
             }).always(function(res){
+                if(loadingSelectors && loadingSelectors.close){
+                    $(loadingSelectors.close).click();
+                }
+
 //                    console.log(res)
                     if(res.status){
                         bind(success_cb, bindObj, [res.result])

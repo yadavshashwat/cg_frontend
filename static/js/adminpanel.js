@@ -534,6 +534,7 @@ var Global = {
            var drop_city = $('.address-form-holder .clean-inp-sbox.drop-city').val();
            var custom = $('.address-form-holder .clean-inp-tbox.custom').val();
            var send_sms_cust = $('.address-form-holder .clean-inp-dropdown.sms').val();
+           var send_tookan_cust = $('.address-form-holder .clean-inp-dropdown.tookan').val();
 
            console.log(send_sms_cust);
 
@@ -578,11 +579,12 @@ var Global = {
                         reg_no:             car_reg_number ,
                         custom_req       : custom,
                         send_sms          : send_sms_cust,
+                        send_tookan         : send_tookan_cust,
                         order_list        : JSON.stringify(order_list),
                         car_name          : car_select,
                         pick:JSON.stringify(pick),
                         drop:JSON.stringify(drop),
-                    },"GET", _this, _this.loadPlaced);
+                    },"GET", _this, _this.loadPlaced, null, '.add-trans-popup  .loading-pane');
            //}
 
        });
@@ -591,7 +593,6 @@ var Global = {
 
            var code = container.find('.clean-inp-tbox.cpn-code').val();
            var message = container.find('.clean-inp-tbox.cpn-msg').val();
-
            var amount = container.find('.clean-inp-tbox.cpn-value').val();
            var cap = container.find('.clean-inp-tbox.cpn-cap').val();
            var type = container.find('.clean-inp-sbox.cpn-type').val();
@@ -642,7 +643,8 @@ var Global = {
     loadPlaced : function(data){
       //console.log("order_placed") ;
       //window.alert("Guest Order Placed")
-      window.location.href = "#order-placed"
+      window.location.href = "#order-placed";
+      window.alert("Guest Order Placed");
     },
 
     loadAdminServicingDetails : function(data){
