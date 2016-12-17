@@ -1,0 +1,200 @@
+/* ==========================================================================
+   Insert Your Custom Styles Below. All styles located in this file will
+   override existing main.css stylesheets.
+   ========================================================================== */ 
+
+
+.centered-text{
+	text-align: center;
+}
+
+.cloud-container{
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    overflow:hidden;
+    /*z-index:-1; !* Remove this line if it's not going to be a background! *!*/
+}
+
+.col-centered {
+    float: none !important;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.fade {
+   opacity: 0.5;
+
+   }
+
+.fade:hover {
+      opacity: 1.0;
+    transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+      }
+
+/*!* ==========================================================================*/
+   /*Card Designs*/
+   /*========================================================================== *!*/
+
+/*.card {*/
+	/*background: #fff;*/
+	/*!*border-radius: 2px;*!*/
+  	/*!*display: inline-block;*!*/
+  	/*!*height: 300px;*!*/
+  	/*!*margin: 3px;*!*/
+  	/*position: relative;*/
+    /*!*border-style*!*/
+    /*!*border: 1px;*!*/
+    /*!*border-color: grey;*!*/
+  	/*!*width: 300px;*!*/
+	/*!*box-shadow:0px 0px 2px 0px rgba(0, 0, 0, 0.91);*!*/
+	/*transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
+    /*!*padding: -2px;*!*/
+
+
+/*}*/
+
+/*.card-left{*/
+    /*border-radius: 10px 0px 0px 10px;*/
+
+/*}*/
+/*.card-right{*/
+    /*border-radius: 0px 10px 10px 0px;*/
+/*}*/
+
+.text-center{
+    text-align: center;
+}
+
+.text-left{
+    text-align: left;
+}
+
+.text-right{
+    text-align: right;
+}
+
+.cardhover:hover {
+  box-shadow:0px 0px 10px 0px rgba(0, 0, 0, 0.50);
+    z-index: 10;
+}
+
+.visible{
+    display: inherit;
+}
+.invisible{
+    display: none;
+    /*height: 0px;*/
+    /*width: 0px;*/
+}
+
+
+
+.icon{
+    vertical-align: middle;
+}
+
+.x1{font-size: 1px;}
+.x2{font-size: 2px;}
+.x3{font-size: 3px;}
+.x4{font-size: 4px;}
+.x5{font-size: 5px;}
+.x6{font-size: 6px;}
+.x7{font-size: 7px;}
+.x8{font-size: 8px;}
+.x9{font-size: 9px;}
+.x10{font-size: 10px;}
+.x11{font-size: 11px;}
+.x12{font-size: 12px;}
+.x13{font-size: 13px;}
+.x14{font-size: 14px;}
+.x15{font-size: 15px;}
+.x16{font-size: 16px;}
+.x17{font-size: 17px;}
+.x18{font-size: 18px;}
+.x19{font-size: 19px;}
+.x20{font-size: 20px;}
+.x21{font-size: 21px;}
+.x22{font-size: 22px;}
+.x23{font-size: 23px;}
+.x24{font-size: 24px;}
+.x25{font-size: 25px;}
+.x26{font-size: 26px;}
+.x27{font-size: 27px;}
+.x28{font-size: 28px;}
+.x29{font-size: 29px;}
+.x30{font-size: 30px;}
+.x31{font-size: 31px;}
+.x32{font-size: 32px;}
+.x33{font-size: 33px;}
+.x34{font-size: 34px;}
+.x35{font-size: 35px;}
+.x36{font-size: 36px;}
+.x37{font-size: 37px;}
+.x38{font-size: 38px;}
+.x39{font-size: 39px;}
+.x40{font-size: 40px;}
+.x41{font-size: 41px;}
+.x42{font-size: 42px;}
+.x43{font-size: 43px;}
+.x44{font-size: 44px;}
+.x45{font-size: 45px;}
+.x46{font-size: 46px;}
+.x47{font-size: 47px;}
+.x48{font-size: 48px;}
+.x49{font-size: 49px;}
+.x50{font-size: 50px;}
+.x51{font-size: 51px;}
+.x52{font-size: 52px;}
+.x53{font-size: 53px;}
+.x54{font-size: 54px;}
+.x55{font-size: 55px;}
+.x56{font-size: 56px;}
+.x57{font-size: 57px;}
+.x58{font-size: 58px;}
+.x59{font-size: 59px;}
+.x60{font-size: 60px;}
+.x61{font-size: 61px;}
+.x62{font-size: 62px;}
+.x63{font-size: 63px;}
+.x64{font-size: 64px;}
+.x65{font-size: 65px;}
+.x66{font-size: 66px;}
+.x67{font-size: 67px;}
+.x68{font-size: 68px;}
+.x69{font-size: 69px;}
+.x70{font-size: 70px;}
+.x71{font-size: 71px;}
+.x72{font-size: 72px;}
+.x73{font-size: 73px;}
+.x74{font-size: 74px;}
+.x75{font-size: 75px;}
+.x76{font-size: 76px;}
+.x77{font-size: 77px;}
+.x78{font-size: 78px;}
+.x79{font-size: 79px;}
+.x80{font-size: 80px;}
+.x81{font-size: 81px;}
+.x82{font-size: 82px;}
+.x83{font-size: 83px;}
+.x84{font-size: 84px;}
+.x85{font-size: 85px;}
+.x86{font-size: 86px;}
+.x87{font-size: 87px;}
+.x88{font-size: 88px;}
+.x89{font-size: 89px;}
+.x90{font-size: 90px;}
+.x91{font-size: 91px;}
+.x92{font-size: 92px;}
+.x93{font-size: 93px;}
+.x94{font-size: 94px;}
+.x95{font-size: 95px;}
+.x96{font-size: 96px;}
+.x97{font-size: 97px;}
+.x98{font-size: 98px;}
+.x99{font-size: 99px;}
+.x100{font-size: 100px;}
