@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "cgfont";
+  src:url("../font/cgfont.eot");
+  src:url("../font/cgfont.eot?#iefix") format("embedded-opentype"),
+    url("../font/cgfont.woff") format("woff"),
+    url("../font/cgfont.ttf") format("truetype"),
+    url("../font/cgfont.svg#cgfont") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "cgfont" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "cgfont" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cg-driver:before {
+  content: "\61";
+}
+.icon-cg-carbreakdown:before {
+  content: "\62";
+}
+.icon-cg-bikebreakdown:before {
+  content: "\63";
+}
+.icon-cg-hasslefree:before {
+  content: "\64";
+}
+.icon-cg-repair:before {
+  content: "\65";
+}
+.icon-cg-bikeservicing:before {
+  content: "\66";
+}
+.icon-cg-carclean:before {
+  content: "\67";
+}
+.icon-cg-carsericing:before {
+  content: "\68";
+}
+.icon-cg-certificate:before {
+  content: "\69";
+}
+.icon-cg-carcare:before {
+  content: "\6a";
+}
+.icon-cg-carrepair:before {
+  content: "\6b";
+}
+.icon-cg-windshield:before {
+  content: "\6c";
+}
+.icon-cg-discount:before {
+  content: "\6d";
+}
+.icon-cg-repor:before {
+  content: "\6e";
+}
+.icon-cg-pricing:before {
+  content: "\6f";
+}
+.icon-cg-mechanic:before {
+  content: "\70";
+}
+.icon-cg-quality:before {
+  content: "\71";
+}
+.icon-cg-location:before {
+  content: "\72";
+}
+.icon-cg-fair:before {
+  content: "\73";
+}
+.icon-cg-denting:before {
+  content: "\74";
+}
+.icon-cg-carcheckup:before {
+  content: "\75";
+}
+.icon-cg-bikerepair:before {
+  content: "\76";
+}
+.icon-cg-bikecheckup:before {
+  content: "\77";
+}

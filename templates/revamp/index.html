@@ -17,6 +17,7 @@
 		<!-- Styles -->
 		<link rel="stylesheet" href="../../static/revamp/css/font-awesome.css">
 		<link rel="stylesheet" href="../../static/revamp/css/animate.css">
+		<link rel="stylesheet" href="../../static/revamp/css/styles.css">
 		<!--<link rel="stylesheet" href="../../static/revamp/css/bootstrap.min.css">-->
 		<link rel="stylesheet" href="../../static/revamp/css/materialize.min.css">
 		<link rel="stylesheet" href="../../static/revamp/css/main.css">
@@ -43,19 +44,25 @@
 	<div class="navbar navbar-fixed">
 		<nav>
 			<div class="nav-wrapper navbar-custom">
-				<a href="/index_revamp" class="brand-logo"><img class="logo-img" src="../../static/revamp/img/logo.png"></a>
-				<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+				<div class="logo-cg">
+				<a href="/index_revamp" class="brand-logo"><img class="logo-img" src="../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>
+				</div>
+					<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 				<ul class="right hide-on-med-and-down items-list">
-					<li><a href="">About Us</a></li>
-					<li><a href="">Partners</a></li>
-					<li><a href="">Brands</a></li>
-					<li><a href="">Book Now!</a></li>
+					<li><a href="#features">Why Us?</a></li>
+					<li><a href="#clients">Partners</a></li>
+					<li><a href="#testimonials">Testimonials</a></li>
+					<li><a href="#brands">Brands</a></li>
+					<li><a href="#contact">Contact Us</a></li>
+					<li><a href="#home">Book Now!</a></li>
 				</ul>
 				<ul class="side-nav items-list" id="mobile">
-					<li><a href="">About Us</a></li>
-					<li><a href="">Partners</a></li>
-					<li><a href="">Brands</a></li>
-					<li><a href="">Book Now!</a></li>
+					<li><a href="#features">Why Us?</a></li>
+					<li><a href="#clients">Partners</a></li>
+					<li><a href="#testimonials">Testimonials</a></li>
+					<li><a href="#brands">Brands</a></li>
+					<li><a href="#contact">Contact Us</a></li>
+					<li><a href="#home">Book Now!</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -81,15 +88,18 @@
 							<!--<li>Instant Cost Estimate</li>-->
 							<!--</ul>-->
 						</h4>
-						<div class="row header-btn">
-						<button class="btn waves-effect waves-light btn-large red" href=""><i class="icon-chevron-down"></i>Learn More</button>
-						<button class="btn waves-effect waves-light btn-large hide-on-large-only book-btn" href=""><i class="icon-chevron-down"></i>Book Now</button>
+					<div class="row header-btn">
+						<button class="btn waves-effect waves-light btn-large hide-on-large-only book-btn red cg-btn" href=""><i class="icon-chevron-down"></i>Book Now</button>
 					</div>
+					<div class="row header-btn">
+						<a href ="#features"><button class="btn waves-effect waves-light btn-large red cg-btn"><i class="icon-chevron-down"></i>Learn More</button></a>
+					</div>
+
 						</div>
 				</div>
 				<div class = "home-form card col s12 m12 l6 hide-on-med-and-down">
 					<div class="row form-title text-left">
-						<h3><img src="../../static/revamp/img/red-line.png" alt="red-line">Book Service!</h3>
+						<h3><img src="../../static/revamp/img/by-line.png" alt="by-line">Book Service!</h3>
 					</div>
 
 
@@ -97,23 +107,24 @@
 						<div class="row field-title text-left">
 							<h4>Vehicle Details</h4>
 						</div>
-
-						<div class="input-field col s11 m11 l3 offset-m1 offset-s1 offset-l1 ">
+						<form id="formValidate">
+						<div class="input-field col s11 m11 l3 offset-m1 offset-s1 offset-l1" id="brand-select">
 							<!--<i class="fa fa-car prefix"></i>-->
-							<select>
-								<option value="" disabled selected>Choose Make</option>
-								<option value="Hyundai">Hyundai</option>
-								<option value="Maruti">Maruti</option>
-							</select>
+							<!--<select id="brand-select">-->
+								<!--&lt;!&ndash;<option value="" disabled selected>Choose Make</option>&ndash;&gt;-->
+								<!--&lt;!&ndash;&lt;!&ndash;<option value="Hyundai">Hyundai</option>&ndash;&gt;&ndash;&gt;-->
+								<!--&lt;!&ndash;&lt;!&ndash;<option value="Maruti">Maruti</option>&ndash;&gt;&ndash;&gt;-->
+							<!--</select>-->
+							<!--<label data-error="Select a Brand">Type of Question</label>-->
 						</div>
-						<div class="input-field col s6 m6 l5 offset-m1 offset-s1 ">
+						<div class="input-field col s6 m6 l5 offset-m1 offset-s1 " id="vehicle-select">
 							<select>
 								<option value="" disabled selected>Choose Model</option>
-								<option value="i10">i10</option>
-								<option value="i20">i20</option>
+								<!--<option value="i10">i10</option>-->
+								<!--<option value="i20">i20</option>-->
 							</select>
 						</div>
-						<div class="input-field col s5 m5 l3">
+						<div class="input-field col s5 m5 l3" id="fuel-type-select">
 							<select>
 								<option value="" disabled selected>Fuel Type</option>
 								<option value="petrol">Petrol</option>
@@ -121,10 +132,11 @@
 								<option value="cng">LPG/CNG</option>
 							</select>
 						</div>
-
+						</form>
+						<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-vehicle-error"></span>
 					</div>
 
-					<div class = "row service-headers">
+					<div class = "row service-headers" id="selected-service">
 						<div class="row field-title text-left">
 							<h4>Service Details</h4>
 						</div>
@@ -171,12 +183,13 @@
 								</div>
 							</div>
 						</div>
+						<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-category-error"></span>
 						<form class="col s12">
 							<div class="row">
-								<div class="input-field col s12">
+								<div class="input-field col s12" >
 									<i class="material-icons prefix">report_problem</i>
-									<textarea id="request" class="materialize-textarea"></textarea>
-									<label for="request">Specific issues/ request?</label>
+									<textarea id="additional" class="materialize-textarea"></textarea>
+									<label for="additional">Specific issues/ request?</label>
 								</div>
 							</div>
 						</form>
@@ -192,38 +205,40 @@
 							<div class="row">
 								<div class="input-field col s6">
 									<i class="material-icons prefix">account_circle</i>
-									<input id="first_name" type="text" class="validate">
-									<label for="first_name">First Name</label>
+									<input id="first_name" type="text" class="validate" required="" aria-required="true">
+									<label for="first_name" data-error="Required">First Name</label>
 								</div>
 								<div class="input-field col s6">
 
-									<input id="last_name" type="text" class="validate">
-									<label for="last_name">Last Name</label>
+									<input id="last_name" type="text" class="validate" required="" aria-required="true">
+									<label for="last_name" data-error="Required">Last Name</label>
 								</div>
 							</div>
 							<div class="row">
-								<div class="input-field col s6">
+								<!--<div class="input-field col s6">-->
+									<!--<i class="material-icons prefix">location_on</i>-->
+									<!--<input id="address" type="text" class="validate">-->
+									<!--<label for="address">House No./ Street Name</label>-->
+								<!--</div>-->
+								<div class="input-field col s12">
 									<i class="material-icons prefix">location_on</i>
-									<input id="address" type="text" class="validate">
-									<label for="address">House No./ Street Name</label>
-								</div>
-								<div class="input-field col s6">
-									<input id="locality" type="text" class="validate">
-									<label for="locality">Locality</label>
+									 <input type="text" id="locality" class="autocomplete" required="" aria-required="true">
+									<label for="locality" data-error="Required">Locality</label>
+
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s12">
 									<i class="material-icons prefix">phone</i>
-									<input id="icon_telephone" type="tel" class="validate">
-									<label for="icon_telephone">Telephone</label>
+									<input id="telephone" type="number" required="" aria-required="true">
+									<label for="telephone" data-error="Invalid Number | Example : 9829098290" >Mobile</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s12">
 									<i class="material-icons prefix">email</i>
-									<input id="email" type="email" class="validate">
-									<label for="email">Email</label>
+									<input id="email" type="email" class="validate" required="" aria-required="true">
+									<label for="email" data-error="Invalid e-mail id">Email</label>
 								</div>
 							</div>
 							<div class="row">
@@ -232,7 +247,7 @@
 									<input id="date" type="date" class="datepicker">
 									<label for="date">date</label>
 								</div>
-								<div class="input-field col s6 m6 l6">
+								<div class="input-field col s6 m6 l6" id ="time-slot">
 									<select>
 										<option value="" disabled selected>Time-Slot</option>
 										<option value="1">09:30AM - 11:30AM </option>
@@ -248,16 +263,21 @@
 
 						</form>
 					</div>
-					<div class="row button-row">
-						<!--<button class="waves-effect waves-light btn-large form-submit" type="submit" name="action">Back-->
-							<!--<i class="material-icons right">send</i>-->
-						<!--</button>-->
-						<!--<div class="col-centered">-->
-							<button class="waves-effect waves-light btn-large red form-submit" type="submit" name="action">Proceed
+					<div class="row button-row proceed">
+							<button class="waves-effect waves-light btn-large red form-proceed" type="submit" name="action">Proceed
 								<i class="material-icons right">send</i>
 							</button>
-						<!--</div>-->
 					</div>
+					<div class="row button-row invisible submit">
+							<button class="waves-effect waves-light btn-large red form-submit" type="submit" name="action">Book Now
+								<i class="material-icons right">send</i>
+							</button>
+					</div>
+					<div class="row order-confirm invisible">
+							Thank you for placing your order! Our team will contact you shortly regarding the same.
+					</div>
+
+
 				</div>
 			</div>
 		</div>
@@ -270,46 +290,49 @@
 			<div class="row">
 				<div class='col l4 m4 s12 center-align'>
 					<div class='feature-container'>
-						<img class='icon' src='//d310p4tz9tc9pz.cloudfront.net/assets/main/icon-easy-47c13d6dcacaa69bea11f7f20bfeeb55.svg'>
+						<!--<img class='icon' src='//d310p4tz9tc9pz.cloudfront.net/assets/main/icon-easy-47c13d6dcacaa69bea11f7f20bfeeb55.svg'>-->
+						<i class="cg-icon icon-cg-location x70"></i>
 						<h5 class='text-dark-gray'>WE MAKE IT EASY</h5>
 						<p>Get a quote and book a service online 24/7. Our mechanics will come to your home or office, even on evenings and weekends.</p>
-						<a href=''>
-							<div class='btn-more pull-bot'>
-								<button class="waves-effect waves-teal btn-flat" name="action">Learn More</button>
-							</div>
-							<!--<div class=''>Learn More</div>-->
-						</a>
-						</img>
+						<!--<a href=''>-->
+							<!--<div class='btn-more pull-bot'>-->
+								<!--<button class="waves-effect waves-red btn-flat" name="action">Learn More</button>-->
+							<!--</div>-->
+							<!--&lt;!&ndash;<div class=''>Learn More</div>&ndash;&gt;-->
+						<!--</a>-->
+						<!--</img>-->
 					</div>
 				</div>
 				<div class='col l4 m4 s12 center-align'>
 					<div class='feature-container'>
-						<img class='icon' src='//d310p4tz9tc9pz.cloudfront.net/assets/main/icon-pricing-3c7b4a919e3a18e6cdd92acbfad1b2a4.svg'>
+						<!--<img class='icon' src='//d310p4tz9tc9pz.cloudfront.net/assets/main/icon-pricing-3c7b4a919e3a18e6cdd92acbfad1b2a4.svg'>-->
+						<i class="cg-icon icon-cg-fair x70"></i>
 						<h5 class='text-dark-gray'>FAIR AND TRANSPARENT PRICING</h5>
 						<p>We offer fair and transparent pricing and savings up to 30% compared to repair shops.</p>
 						<p>Book with confidence.</p>
-						<a href=''>
-							<!--<div class=''>Learn More</div>-->
-							<div class='btn-more pull-bot'>
-								<button class="waves-effect waves-teal btn-flat" name="action">Learn More</button>
-							</div>
-						</a>
-						</img>
+						<!--<a href=''>-->
+							<!--&lt;!&ndash;<div class=''>Learn More</div>&ndash;&gt;-->
+							<!--<div class='btn-more pull-bot'>-->
+								<!--<button class="waves-effect waves-red btn-flat" name="action">Learn More</button>-->
+							<!--</div>-->
+						<!--</a>-->
+						<!--</img>-->
 					</div>
 				</div>
 				<div class='col l4 m4 s12 center-align'>
 					<div class='feature-container'>
-						<img class='icon' src='//d310p4tz9tc9pz.cloudfront.net/assets/main/icon-shield-85a3db2fcea7ced728cdc09be095ed2e.svg'>
+						<!--<img class='icon' src='//d310p4tz9tc9pz.cloudfront.net/assets/main/icon-shield-85a3db2fcea7ced728cdc09be095ed2e.svg'>-->
+						<i class="cg-icon icon-cg-quality x70"></i>
 						<h5 class='text-dark-gray'>HAPPINESS GUARANTEED</h5>
 						<p>We only work with highly rated mechanics.</p>
 						<p>All services are backed by our 12-month / 12,000-mile warranty.</p>
-						<a href=''>
-							<!--<div class=''>Learn More</div>-->
-							<div class='btn-more pull-bot'>
-								<button class="waves-effect waves-teal btn-flat" name="action">Learn More</button>
-							</div>
-						</a>
-						</img>
+						<!--<a href=''>-->
+							<!--&lt;!&ndash;<div class=''>Learn More</div>&ndash;&gt;-->
+							<!--<div class='btn-more pull-bot'>-->
+								<!--<button class="waves-effect waves-red btn-flat" name="action">Learn More</button>-->
+							<!--</div>-->
+						<!--</a>-->
+						<!--</img>-->
 					</div>
 				</div>
 			</div>
@@ -327,26 +350,26 @@
         	<div class="container-fluid">
         		<div class="row">
         			<div class="col s12 m12 l4 featured-section-title">
-        				<h3 class="section-title"><img src="../../static/revamp/img/red-line.png" alt="red-line">Our partners</h3>
+        				<h3 class="section-title"><img src="../../static/revamp/img/by-line.png" alt="by-line">Our partners</h3>
         			</div>
         			<div class="col l2 s6 m6 client">
         				<!--Client Logo - Set Images to 170px by 100px-->
-        				<a href="#"><img src="../../static/revamp/img/Clients/client-1.png" alt="Img Title"></a>
-        			</div>
-
-        			<div class="col l2 s6 m6 client">
-        				<!--Client Logo - Set Images to 170px by 100px-->
-        				<a href="#"><img src="../../static/revamp/img/clients-02.png" alt="Img Title"></a>
+        				<a href="#"><img src="../../static/revamp/img/Partners/Ola.png" alt="Ola Cabs"></a>
         			</div>
 
         			<div class="col l2 s6 m6 client">
         				<!--Client Logo - Set Images to 170px by 100px-->
-        				<a href="#"><img src="../../static/revamp/img/clients-03.png" alt="Img Title"></a>
+        				<a href="#"><img src="../../static/revamp/img/Partners/Spinny.png" alt="MySpinny"></a>
         			</div>
 
         			<div class="col l2 s6 m6 client">
         				<!--Client Logo - Set Images to 170px by 100px-->
-        				<a href="#"><img src="../../static/revamp/img/clients-04.png" alt="Img Title"></a>
+        				<a href="#"><img src="../../static/revamp/img/Partners/Burgersingh.png" alt="Burger Singh"></a>
+        			</div>
+
+        			<div class="col l2 s6 m6 client">
+        				<!--Client Logo - Set Images to 170px by 100px-->
+        				<a href="#"><img src="../../static/revamp/img/Partners/Saladdays.png" alt="Salad Days"></a>
         			</div>
         		</div>
         	</div>
@@ -362,51 +385,51 @@
 			<div class="container-fluid">
 				<div class='row'>
 					<div class="col s12 m12 l12 testimonial-section-title">
-						<h3 class="section-title"><img src="../../static/revamp/img/red-line.png" alt="red-line">Our Customers Say The Nicest Things</h3>
+						<h3 class="section-title"><img src="../../static/revamp/img/by-line.png" alt="by-line">Our Customers Say The Nicest Things</h3>
 					</div>
 				</div>
 
 				<div class="row testi-row">
 					<div class="col s12 m12 l4">
-						<div class="testimonial-column card card-content">
+						<div class="testimonial-column card medium card-content">
 							<div class="card-image waves-effect waves-block waves-light">
-      							<img class="activator" src="images/office.jpg">
+      							<img class="activator img1" src="../../static/revamp/img/Testimonials/Salman.jpg">
     						</div>
 							<div class="card-content">
-									<p class="title">Barbara Mansour</p>
-									<span class="testi-vehicle-name x15">Volkswagen Golf IV</span>
+									<p class="title">Salman Sunny</p>
+									<span class="testi-vehicle-name x15">Honda City</span>
 									<blockquote>
-										<p>ClickGarage was <strong>fantastic</strong>. The mechanic could come to us and, on top of that, it was <span>well-priced.</span></p>
+										<p>ClickGarage has been extremely helpful with guiding me with the Insurance requirements and there was a <strong>great level of detail</strong> in how they went about their work! </p>
 									</blockquote>
 							</div>
 						</div>
 					</div>
 
 					<div class="col s12 m12 l4">
-						<div class="testimonial-column card card-content">
+						<div class="testimonial-column medium card card-content">
 							<div class="card-image waves-effect waves-block waves-light">
-      							<img class="activator" src="images/office.jpg">
+      							<img class="activator img2" src="../../static/revamp/img/Testimonials/prem.jpg">
     						</div>
 							<div class="card-content">
-									<p class="title">Barbara Mansour</p>
-									<span class="testi-vehicle-name x15">Volkswagen Golf IV</span>
+									<p class="title">Prem</p>
+									<span class="testi-vehicle-name x15">Bajaj Pulsar</span>
 									<blockquote>
-										<p>ClickGarage was <strong>fantastic</strong>. The mechanic could come to us and, on top of that, it was <span>well-priced.</span></p>
+										<p>Workshop at my doorstep; <strong>Amazing experience.</strong> Highly Recommended</span></p>
 									</blockquote>
 							</div>
 
 						</div>
 					</div>
 					<div class="col s12 m12 l4">
-						<div class="testimonial-column card card-content">
+						<div class="testimonial-column medium card card-content">
 							<div class="card-image waves-effect waves-block waves-light">
-      							<img class="activator" src="images/office.jpg">
+      							<img class="activator img3" src="../../static/revamp/img/Testimonials/Nakul.jpg">
     						</div>
 							<div class="card-content">
-									<p class="title">Barbara Mansour</p>
-									<span class="testi-vehicle-name x15">Volkswagen Golf IV</span>
+									<p class="title">Nakul Kapoor</p>
+									<span class="testi-vehicle-name x15">Hyundai Verna</span>
 									<blockquote>
-										<p>ClickGarage was <strong>fantastic</strong>. The mechanic could come to us and, on top of that, it was <span>well-priced.</span></p>
+										<p><strong>Great service</strong>, great model, fast turnaround time.</p>
 									</blockquote>
 							</div>
 
@@ -431,7 +454,7 @@
 			<div class="container-fluid">
 				<div class='row'>
 					<div class="col s12 m12 l12 brand-section-title">
-						<h3 class="section-title"><img src="../../static/revamp/img/red-line.png" alt="red-line">We service most makes and models</h3>
+						<h3 class="section-title"><img src="../../static/revamp/img/by-line.png" alt="by-line">We service most makes and models</h3>
 					</div>
 				</div>
 
@@ -443,37 +466,37 @@
 							</div>
 							<div class='col l4 m6 s6 center-align'>
 								<div class='image-space fade'>
-									<img class='center-vertical' src='//d310p4tz9tc9pz.cloudfront.net/assets/car_makes/bmw-9e2d471526050cdc87350c0c72cf330f.png'>
+									<img class='center-vertical' src='../../static/revamp/img/Brands/Car/Hyundai.png'>
 								</div>
 								<!--<a class='btn-gray-stroke-small card cardhover' href='/cars/bmw'>BMW</a>-->
 							</div>
 							<div class='col l4 m6 s6 center-align'>
 								<div class='image-space fade'>
-									<img class='center-vertical' src='//d310p4tz9tc9pz.cloudfront.net/assets/car_makes/bmw-9e2d471526050cdc87350c0c72cf330f.png'>
+									<img class='center-vertical' src='../../static/revamp/img/Brands/Car/Honda.png'>
 								</div>
 								<!--<a class='btn-gray-stroke-small card cardhover' href='/cars/bmw'>BMW</a>-->
 							</div>
 							<div class='col l4 m6 s6 center-align'>
 								<div class='image-space fade'>
-									<img class='center-vertical' src='//d310p4tz9tc9pz.cloudfront.net/assets/car_makes/bmw-9e2d471526050cdc87350c0c72cf330f.png'>
+									<img class='center-vertical' src='../../static/revamp/img/Brands/Car/Volkswagen.png'>
 								</div>
 								<!--<a class='btn-gray-stroke-small card cardhover' href='/cars/bmw'>BMW</a>-->
 							</div>
 							<div class='col l4 m6 s6 center-align'>
 								<div class='image-space fade'>
-									<img class='center-vertical' src='//d310p4tz9tc9pz.cloudfront.net/assets/car_makes/bmw-9e2d471526050cdc87350c0c72cf330f.png'>
+									<img class='center-vertical' src='../../static/revamp/img/Brands/Car/MarutiSuzuki.png'>
 								</div>
 								<!--<a class='btn-gray-stroke-small card cardhover' href='/cars/bmw'>BMW</a>-->
 							</div>
 							<div class='col l4 m6 s6 center-align hide-on-med-and-down'>
 								<div class='image-space fade '>
-									<img class='center-vertical' src='//d310p4tz9tc9pz.cloudfront.net/assets/car_makes/bmw-9e2d471526050cdc87350c0c72cf330f.png'>
+									<img class='center-vertical' src='../../static/revamp/img/Brands/Car/Chevrolet.png'>
 								</div>
 								<!--<a class='btn-gray-stroke-small card cardhover' href='/cars/bmw'>BMW</a>-->
 							</div>
 							<div class='col l4 m6 s6 center-align hide-on-med-and-down'>
 								<div class='image-space fade'>
-									<img class='center-vertical' src='//d310p4tz9tc9pz.cloudfront.net/assets/car_makes/bmw-9e2d471526050cdc87350c0c72cf330f.png'>
+									<img class='center-vertical' src='../../static/revamp/img/Brands/Car/Audi.png'>
 								</div>
 								<!--<a class='btn-gray-stroke-small card cardhover' href='/cars/bmw'>BMW</a>-->
 							</div>
@@ -487,47 +510,47 @@
 							</div>
 							<div class='col l4 m6 s6 center-align'>
 								<div class='image-space fade'>
-									<img class='center-vertical' src='//d310p4tz9tc9pz.cloudfront.net/assets/car_makes/bmw-9e2d471526050cdc87350c0c72cf330f.png'>
+									<img class='center-vertical' src='../../static/revamp/img/Brands/Bikes/Hero.png'>
 								</div>
 								<!--<a class='btn-gray-stroke-small card cardhover' href='/cars/bmw'>BMW</a>-->
 							</div>
 							<div class='col l4 m6 s6 center-align'>
 								<div class='image-space fade'>
-									<img class='center-vertical' src='//d310p4tz9tc9pz.cloudfront.net/assets/car_makes/bmw-9e2d471526050cdc87350c0c72cf330f.png'>
+									<img class='center-vertical' src='../../static/revamp/img/Brands/Bikes/Honda.png'>
 								</div>
 								<!--<a class='btn-gray-stroke-small card cardhover' href='/cars/bmw'>BMW</a>-->
 							</div>
 							<div class='col l4 m6 s6 center-align'>
 								<div class='image-space fade'>
-									<img class='center-vertical' src='//d310p4tz9tc9pz.cloudfront.net/assets/car_makes/bmw-9e2d471526050cdc87350c0c72cf330f.png'>
+									<img class='center-vertical' src='../../static/revamp/img/Brands/Bikes/Yamaha.png'>
 								</div>
 								<!--<a class='btn-gray-stroke-small card cardhover' href='/cars/bmw'>BMW</a>-->
 							</div>
 							<div class='col l4 m6 s6 center-align'>
 								<div class='image-space fade'>
-									<img class='center-vertical' src='//d310p4tz9tc9pz.cloudfront.net/assets/car_makes/bmw-9e2d471526050cdc87350c0c72cf330f.png'>
+									<img class='center-vertical' src='../../static/revamp/img/Brands/Bikes/Bajaj.png'>
 								</div>
 								<!--<a class='btn-gray-stroke-small card cardhover' href='/cars/bmw'>BMW</a>-->
 							</div>
 							<div class='col l4 m6 s6 center-align hide-on-med-and-down'>
 								<div class='image-space fade '>
-									<img class='center-vertical' src='//d310p4tz9tc9pz.cloudfront.net/assets/car_makes/bmw-9e2d471526050cdc87350c0c72cf330f.png'>
+									<img class='center-vertical' src='../../static/revamp/img/Brands/Bikes/RoyalEnfield.png'>
 								</div>
 								<!--<a class='btn-gray-stroke-small card cardhover' href='/cars/bmw'>BMW</a>-->
 							</div>
 							<div class='col l4 m6 s6 center-align hide-on-med-and-down'>
 								<div class='image-space fade'>
-									<img class='center-vertical' src='//d310p4tz9tc9pz.cloudfront.net/assets/car_makes/bmw-9e2d471526050cdc87350c0c72cf330f.png'>
+									<img class='center-vertical' src='../../static/revamp/img/Brands/Bikes/TVS.png'>
 								</div>
 								<!--<a class='btn-gray-stroke-small card cardhover' href='/cars/bmw'>BMW</a>-->
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row button-row">
-					<button class="waves-effect waves-light btn-large red brands-button" name="action">Show All Brands
-						<!--<i class="material-icons right">send</i>-->
-					</button>
+				<!--<div class="row button-row">-->
+					<!--<button class="waves-effect waves-light btn-large red brands-button" name="action">Show All Brands-->
+						<!--&lt;!&ndash;<i class="material-icons right">send</i>&ndash;&gt;-->
+					<!--</button>-->
 				</div>
 			</div>
 		</div>
@@ -540,21 +563,35 @@
 	<section id="contact">
 
 		<div class="container-fluid">
-			<!--<div class="row">-->
-				<!--<div class="col m12 l12 s12 text-left">-->
-					<!--<h3 class="section-title"><img src="../../static/revamp/img/red-line.png" alt="red-line">Contact Us</h3>-->
-				<!--</div>-->
-			<!--</div>-->
+			<div class="row">
+				<div class="col m12 l12 s12 text-left">
+					<h3 class="section-title"><img src="../../static/revamp/img/by-line.png" alt="by-line">Contact Us</h3>
+				</div>
+			</div>
 
 			<div class="row">
 
-				<div class="col m4 l4 s12 text-left">
+				<!--<div class="col m4 l4 s12 text-left">-->
+				<!--<ul>-->
+					<!--<li>Legal</li>-->
+					<!--<ul>-->
+						<!--<li>Terms and Conditions</li>-->
+						<!--<li>Privacy Policy</li>-->
+					<!--</ul>-->
+					<!--<li>Sitemap</li>-->
+					<!--<ul>-->
+						<!--<li>Why Us?</li>-->
+						<!--<li>Partners</li>-->
+						<!--<li>Testimonials</li>-->
+						<!--<li>Brands</li>-->
+						<!--<li>Contact Us</li>-->
+					<!--</ul>-->
+				<!--</ul>-->
+				<!--</div>-->
 
-				</div>
 
 
-
-				<div class="col m4 l4 s12 text-left">
+				<div class="col m6 l6 s12 text-left">
 						<h4><b>Find Us On</b></h4>
 					</br>
 					<ul class="socialize list-inline">
@@ -578,27 +615,27 @@
 					<p>B702, Hex Tax Aprtments, Sector 43<br />
 						Gurgaon, Haryana - 122009</p>
 
-					<p class="tel"><i class="fa fa-phone"></i> &nbsp; +91.9555.95.0000</p><br />
-					<div class="contact-btn text-center">
-					<a class="waves-effect waves-light waves-cg btn-large cg-btn-2 scroll" href="mailto:info@clickgarage.in"><i class="fa fa-envelope"></i> &nbsp; Contact Us</a>
+					<p class="tel"><i class="fa fa-phone"></i> &nbsp; +919555.95.0000</p><br />
+					<div class="contact-btn text-left">
+					<a class="waves-effect waves-light waves-cg btn-large red cg-btn-2 scroll" href="mailto:info@clickgarage.in"><i class="fa fa-envelope"></i> &nbsp; Contact Us</a>
 					</div>
 				</div>
 
-				<div class="col m4 l4 s12">
+				<div class="col m6 l6 s12">
 					<h4><b>Get in Touch</b></h4>
 					</br>
 					<div class ="contact-us card">
-						<form>
+						<form class = "contact-form">
 							<div class="row">
 								<div class="input-field col s12 l6 m6">
 									<i class="material-icons prefix">account_circle</i>
-									<input id="first_name" type="text" class="validate">
-									<label for="first_name">First Name</label>
+									<input id="first_name-2" type="text" class="validate">
+									<label for="first_name-2" data-error="Required">First Name</label>
 								</div>
 								<div class="input-field col s12 l6 m6">
 
-									<input id="last_name" type="text" class="validate">
-									<label for="last_name">Last Name</label>
+									<input id="last_name-2" type="text" class="validate">
+									<label for="last_name-2"  data-error="Required">Last Name</label>
 								</div>
 							</div>
 							<!--<div class="row">-->
@@ -615,30 +652,33 @@
 							<div class="row">
 								<div class="input-field col s12 l12 m12">
 									<i class="material-icons prefix">phone</i>
-									<input id="icon_telephone" type="tel" class="validate">
-									<label for="icon_telephone">Telephone</label>
+									<input id="telephone-2" type="number" class="validate">
+									<label for="telephone-2"  data-error="Invalid Number | Example : 9829098290">Telephone</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s12 l12 m12">
 									<i class="material-icons prefix">email</i>
-									<input id="email" type="email" class="validate">
-									<label for="email">Email</label>
+									<input id="email-2" type="email" class="validate">
+									<label for="email-2" data-error="Invalid Email">Email</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s12">
 									<i class="material-icons prefix">chat_bubble_outline</i>
-									<textarea id="request" class="materialize-textarea"></textarea>
-									<label for="request">Message</label>
+									<textarea id="message-2" class="materialize-textarea"></textarea>
+									<label for="message-2" data-error="Required">Message</label>
 								</div>
 							</div>
+						</form>
+							<div class="row message-button">
+								<button class="waves-effect waves-light waves-cg red btn-large cg-btn-2 message-submit red" type="submit" name="action"><i class="fa fa-send"></i> &nbsp; Send</button>
+							</div>
+						<div class="row message-confirm invisible">
+							Thank you for messaging us! Our team will contact you shortly regarding the same.
+						</div>
 
 
-					<div class="row message-button">
-					<button class="waves-effect waves-light waves-cg btn-large cg-btn-2 message-button"><i class="fa fa-send"></i> &nbsp; Send</button>
-					</div>
-					</form>
 				</div>
 
 
@@ -664,6 +704,10 @@
 		</div>
 	</footer>
 
+<div class="loading-pane">
+    <img src="../../static/revamp/img/loading.gif" alt="" class="loading-gif">
+</div>
+
 	<!--<a href="#" class="scrollToTop hidden-phone"><i class="icon-chevron-up"></i></a>-->
 
 
@@ -676,14 +720,17 @@
 	<!--<script src="../../static/revamp/js/bootstrap.min.js"></script>-->
 	<script src="../../static/revamp/js/materialize.min.js"></script>
 	<script src="../../static/revamp/js/main.js"></script>
+	<script src="../../static/revamp/js/common.js"></script>
+	<script src="../../static/revamp/js/forms.js"></script>
 	<script src="../../static/revamp/js/jquery.backstretch.js"></script>
+	<!--<script src="../../static/revamp/js/jquery.validate.min.js"></script>-->
 	<script src="../../static/revamp/js/jquery.cycle.lite.js"></script>
 
 	<script>
 		$(document).ready(function() {
 			$.backstretch([
-				"../../static/revamp/img/header1.jpg",
-				"../../static/revamp/img/header2.jpg"
+				"../../static/revamp/img/Backgrounds/bg1.jpg",
+//				"../../static/revamp/img/header2.jpg"
 			], {
 				fade: 1000,
 				duration: 3000
