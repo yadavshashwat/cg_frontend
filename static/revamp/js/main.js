@@ -40,7 +40,13 @@ $(document).ready(function() {
 //Height Define
 $(document).ready(function(){
     var a = $(window).height();
-    $("#home").height(a - 0)
+    var b = $('.home-form').height();
+    if (a>=b){
+        $("#home").height(a - 0)
+    }else{
+        $("#home").height(b + 50)
+    }
+
 });
 
 // materialize css
@@ -222,10 +228,11 @@ var Global = {
            }
            if(time==""){
                $('#time').addClass("invalid");
+               $('#choose-time-slot').text('Choose Time Slot');
                error = 1;
            }
             if(error==1){
-                console.log("didnt work")
+               console.log("didnt work")
                return;
            }
            //

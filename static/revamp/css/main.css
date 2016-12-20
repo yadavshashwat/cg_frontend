@@ -37,7 +37,7 @@ h1, h2, h3 {
 }
 
 h3 {
-	font-size: 37px;
+	font-size: 25px;
     letter-spacing: 0px;
     line-height: 32px;
     text-transform: uppercase;
@@ -45,16 +45,17 @@ h3 {
 }
 
 h4 {
-	font-size: 21px;
-    letter-spacing: -0.5px;
+	font-size: 17px;
+    letter-spacing: 0px;
     line-height: 19px;
     text-transform: uppercase;
     color: #232527;
+	margin: 10px!important;
 }
 
 h5 {
-	font-size: 19px;
-    letter-spacing: 3px;
+	font-size: 15px;
+    letter-spacing: 0px;
     line-height: 18px;
     text-transform: uppercase;
 }
@@ -83,6 +84,10 @@ p {
 	margin-bottom: 5px!important;
 }
 
+.input-field{
+	margin-top: 2px!important;
+}
+/*.input-field lh5*/
 
 .form-title h3 {
 		font-family: 'Open Sans', sans-serif;
@@ -360,13 +365,14 @@ iframe {
 
 .navbar-custom a{
 	color: #232527!important;
+	padding: 0px 7px!important;
 }
 
 .items-list{
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 800;
     font-size: 12px;
-    letter-spacing: 2px;
+    letter-spacing: 0px;
     text-transform: uppercase;
 	text-shadow: none;
 	/*color: #232527!important;*/
@@ -399,10 +405,10 @@ iframe {
 }
 
 .hero-text h1 {
-	font-size: 55px;
-    letter-spacing: 7px;
-    line-height: 60px;
-    margin-bottom: 20px;
+	font-size: 40px;
+    letter-spacing: 2px;
+    line-height: 40px;
+    margin-bottom: 7px;
 }
 .hero-text h3 {
 	font-size: 15px;
@@ -416,23 +422,31 @@ iframe {
 	height: 100%;
 	line-height: 100%;
 	/*padding-top: 40px;*/
-	margin-top: 5%!important;
+	margin-top: 2%!important;
 }
 
 .home-form .error-message{
 	color: red;
+	font-size: 13px;
+    text-align: right;
+    margin-top: -10px;
 }
 
 .service-card{
 	text-align: center;
 	vertical-align: middle;
-	height: 80px;
+	/*height: 80px;*/
+	font-size: 12px;
 	/*line-height: 50px;*/
 }
 
-.service-card p{
-	padding-top: 6px;
+.service-card .service-name{
+	padding: 15px!important;
 }
+
+/*.service-card p{*/
+	/*padding-top: 6px;*/
+/*}*/
 
 .header-website{
 	text-align: center;
@@ -464,7 +478,7 @@ iframe {
         /*width: 30%;*/
         /*padding: 0% 5% 0% 5%;*/
         /*margin-left: 35%;*/
-		margin-bottom: 40px!important;
+		margin-bottom: 2rem!important;
 
 }
 
@@ -550,7 +564,7 @@ iframe {
 }
 
 .red-overlay {
-	background: rgba(248, 93, 93,0.80);
+	background: rgba(248, 93, 93,0.70);
 	padding: 2% 0% 2% 0%;
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7)"; /* IE8 */    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7);   /* IE6 & 7 */      zoom: 1;
 }
@@ -559,6 +573,9 @@ iframe {
 	padding-top: 10px;
 }
 
+#clients .client{
+	text-align: center;
+}
 
 
 /* ==========================================================================
@@ -619,17 +636,17 @@ iframe {
 }
 
 
-#testimonials .card .img1{
-	top: -103px;
-}
+/*#testimonials .card .img1{*/
+	/*top: -40px;*/
+/*}*/
 
-#testimonials .card .img2{
-	top: -40px;
-}
+/*#testimonials .card .img2{*/
+	/*top: -40px;*/
+/*}*/
 
-#testimonials .card .img3{
-	top: -40px;
-}
+/*#testimonials .card .img3{*/
+	/*top: -40px;*/
+/*}*/
 
 /* ==========================================================================
    Brands Styles

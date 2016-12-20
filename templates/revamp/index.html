@@ -89,10 +89,10 @@
 							<!--</ul>-->
 						</h4>
 					<div class="row header-btn">
-						<button class="btn waves-effect waves-light btn-large hide-on-large-only book-btn red cg-btn" href=""><i class="icon-chevron-down"></i>Book Now</button>
+						<button class="btn waves-effect waves-light btn hide-on-large-only book-btn red cg-btn" href=""><i class="icon-chevron-down"></i>Book Now</button>
 					</div>
 					<div class="row header-btn">
-						<a href ="#features"><button class="btn waves-effect waves-light btn-large red cg-btn"><i class="icon-chevron-down"></i>Learn More</button></a>
+						<a href ="#features"><button class="btn waves-effect waves-light btn red cg-btn"><i class="icon-chevron-down"></i>Learn More</button></a>
 					</div>
 
 						</div>
@@ -108,7 +108,7 @@
 							<h4>Vehicle Details</h4>
 						</div>
 						<form id="formValidate">
-						<div class="input-field col s11 m11 l3 offset-m1 offset-s1 offset-l1" id="brand-select">
+						<div class="input-field col s12 m12 l4 " id="brand-select">
 							<!--<i class="fa fa-car prefix"></i>-->
 							<!--<select id="brand-select">-->
 								<!--&lt;!&ndash;<option value="" disabled selected>Choose Make</option>&ndash;&gt;-->
@@ -143,42 +143,42 @@
 
 						<div class="col s6 m6 l4">
 							<div class="card cardhover service-card">
-								<div class="card-content">
+								<div class="card-content service-name">
 									<p>Servicing</p>
 								</div>
 							</div>
 						</div>
 						<div class="col s6 m6 l4">
 							<div class="card cardhover service-card">
-								<div class="card-content">
+								<div class="card-content service-name">
 									<p>Car Care</p>
 								</div>
 							</div>
 						</div>
 						<div class="col s6 m6 l4">
 							<div class="card cardhover service-card">
-								<div class="card-content">
+								<div class="card-content service-name">
 									<p>Repairing</p>
 								</div>
 							</div>
 						</div>
 						<div class="col s6 m6 l4">
 							<div class="card cardhover service-card">
-								<div class="card-content">
+								<div class="card-content service-name">
 									<p>Denting/Painting</p>
 								</div>
 							</div>
 						</div>
 						<div class="col s6 m6 l4">
 							<div class="card cardhover service-card">
-								<div class="card-content">
+								<div class="card-content service-name">
 									<p>General Check-Up</p>
 								</div>
 							</div>
 						</div>
 						<div class="col s6 m6 l4">
 							<div class="card cardhover service-card">
-								<div class="card-content">
+								<div class="card-content service-name">
 									<p>Emergency</p>
 								</div>
 							</div>
@@ -245,7 +245,7 @@
 								<div class="input-field col s6">
 									<i class="material-icons prefix">today</i>
 									<input id="date" type="date" class="datepicker">
-									<label for="date">date</label>
+									<label for="date" data-error="required">date</label>
 								</div>
 								<div class="input-field col s6 m6 l6" id ="time-slot">
 									<select>
@@ -255,8 +255,8 @@
 										<option value="3">01:30PM - 03:30PM </option>
 										<option value="4">03:30PM - 05:30PM </option>
 										<option value="5">05:30PM - 07:30PM </option>
-
 									</select>
+								<span id ="choose-time-slot" class="error-message"></span>
 								</div>
 
 							</div>
@@ -264,12 +264,12 @@
 						</form>
 					</div>
 					<div class="row button-row proceed">
-							<button class="waves-effect waves-light btn-large red form-proceed" type="submit" name="action">Proceed
+							<button class="waves-effect waves-light btn red form-proceed" type="submit" name="action">Proceed
 								<i class="material-icons right">send</i>
 							</button>
 					</div>
 					<div class="row button-row invisible submit">
-							<button class="waves-effect waves-light btn-large red form-submit" type="submit" name="action">Book Now
+							<button class="waves-effect waves-light btn red form-submit" type="submit" name="action">Book Now
 								<i class="material-icons right">send</i>
 							</button>
 					</div>
@@ -352,22 +352,22 @@
         			<div class="col s12 m12 l4 featured-section-title">
         				<h3 class="section-title"><img src="../../static/revamp/img/by-line.png" alt="by-line">Our partners</h3>
         			</div>
-        			<div class="col l2 s6 m6 client">
+        			<div class="col l2 s12 m12 client">
         				<!--Client Logo - Set Images to 170px by 100px-->
         				<a href="#"><img src="../../static/revamp/img/Partners/Ola.png" alt="Ola Cabs"></a>
         			</div>
 
-        			<div class="col l2 s6 m6 client">
+        			<div class="col l2 s12 m12 client">
         				<!--Client Logo - Set Images to 170px by 100px-->
         				<a href="#"><img src="../../static/revamp/img/Partners/Spinny.png" alt="MySpinny"></a>
         			</div>
 
-        			<div class="col l2 s6 m6 client">
+        			<div class="col l2 s12 m12 client">
         				<!--Client Logo - Set Images to 170px by 100px-->
         				<a href="#"><img src="../../static/revamp/img/Partners/Burgersingh.png" alt="Burger Singh"></a>
         			</div>
 
-        			<div class="col l2 s6 m6 client">
+        			<div class="col l2 s12 m12 client">
         				<!--Client Logo - Set Images to 170px by 100px-->
         				<a href="#"><img src="../../static/revamp/img/Partners/Saladdays.png" alt="Salad Days"></a>
         			</div>
@@ -391,7 +391,7 @@
 
 				<div class="row testi-row">
 					<div class="col s12 m12 l4">
-						<div class="testimonial-column card medium card-content">
+						<div class="testimonial-column card  large">
 							<div class="card-image waves-effect waves-block waves-light">
       							<img class="activator img1" src="../../static/revamp/img/Testimonials/Salman.jpg">
     						</div>
@@ -406,7 +406,7 @@
 					</div>
 
 					<div class="col s12 m12 l4">
-						<div class="testimonial-column medium card card-content">
+						<div class="testimonial-column large card">
 							<div class="card-image waves-effect waves-block waves-light">
       							<img class="activator img2" src="../../static/revamp/img/Testimonials/prem.jpg">
     						</div>
@@ -421,7 +421,7 @@
 						</div>
 					</div>
 					<div class="col s12 m12 l4">
-						<div class="testimonial-column medium card card-content">
+						<div class="testimonial-column  large card">
 							<div class="card-image waves-effect waves-block waves-light">
       							<img class="activator img3" src="../../static/revamp/img/Testimonials/Nakul.jpg">
     						</div>
@@ -548,7 +548,7 @@
 					</div>
 				</div>
 				<!--<div class="row button-row">-->
-					<!--<button class="waves-effect waves-light btn-large red brands-button" name="action">Show All Brands-->
+					<!--<button class="waves-effect waves-light btn red brands-button" name="action">Show All Brands-->
 						<!--&lt;!&ndash;<i class="material-icons right">send</i>&ndash;&gt;-->
 					<!--</button>-->
 				</div>
@@ -617,7 +617,7 @@
 
 					<p class="tel"><i class="fa fa-phone"></i> &nbsp; +919555.95.0000</p><br />
 					<div class="contact-btn text-left">
-					<a class="waves-effect waves-light waves-cg btn-large red cg-btn-2 scroll" href="mailto:info@clickgarage.in"><i class="fa fa-envelope"></i> &nbsp; Contact Us</a>
+					<a class="waves-effect waves-light waves-cg btn red cg-btn-2 scroll" href="mailto:info@clickgarage.in"><i class="fa fa-envelope"></i> &nbsp; Contact Us</a>
 					</div>
 				</div>
 
@@ -672,7 +672,7 @@
 							</div>
 						</form>
 							<div class="row message-button">
-								<button class="waves-effect waves-light waves-cg red btn-large cg-btn-2 message-submit red" type="submit" name="action"><i class="fa fa-send"></i> &nbsp; Send</button>
+								<button class="waves-effect waves-light waves-cg red btn cg-btn-2 message-submit red" type="submit" name="action"><i class="fa fa-send"></i> &nbsp; Send</button>
 							</div>
 						<div class="row message-confirm invisible">
 							Thank you for messaging us! Our team will contact you shortly regarding the same.
