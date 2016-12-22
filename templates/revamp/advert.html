@@ -49,19 +49,19 @@
 				</div>
 					<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 				<ul class="right hide-on-med-and-down items-list">
-					<li><a href="#features">Why Us?</a></li>
-					<li><a href="#clients">Partners</a></li>
-					<li><a href="#testimonials">Testimonials</a></li>
-					<li><a href="#brands">Brands</a></li>
-					<li><a href="#contact">Contact Us</a></li>
+					<li class ="learn-more-button"><a>Why Us?</a></li>
+					<li class ="partners-button"><a>Partners</a></li>
+					<li class ="testi-button"><a>Testimonials</a></li>
+					<li class ="brands-button"><a>Brands</a></li>
+					<li class ="contact-us-button"><a href="">Contact Us</a></li>
 					<li><a href="#home">Book Now!</a></li>
 				</ul>
 				<ul class="side-nav items-list" id="mobile">
-					<li><a href="#features">Why Us?</a></li>
-					<li><a href="#clients">Partners</a></li>
-					<li><a href="#testimonials">Testimonials</a></li>
-					<li><a href="#brands">Brands</a></li>
-					<li><a href="#contact">Contact Us</a></li>
+					<li class ="learn-more-button"><a>Why Us?</a></li>
+					<li class ="partners-button"><a>Partners</a></li>
+					<li class ="testi-button"><a>Testimonials</a></li>
+					<li class ="brands-button"><a>Brands</a></li>
+					<li class ="contact-us-button"><a href="">Contact Us</a></li>
 					<li><a href="#home">Book Now!</a></li>
 				</ul>
 			</div>
@@ -92,7 +92,7 @@
 						<button class="btn waves-effect waves-light btn hide-on-large-only book-btn red cg-btn" href=""><i class="icon-chevron-down"></i>Book Now</button>
 					</div>
 					<div class="row header-btn">
-						<a href ="#features"><button class="btn waves-effect waves-light btn red cg-btn"><i class="icon-chevron-down"></i>Learn More</button></a>
+						<button class="btn waves-effect waves-light btn red cg-btn learn-more"><i class="icon-chevron-down"></i>Learn More</button>
 					</div>
 
 						</div>
@@ -108,7 +108,7 @@
 							<h4>Vehicle Details</h4>
 						</div>
 						<form id="formValidate">
-						<div class="input-field col s12 m12 l4 " id="brand-select">
+						<div class="input-field col s12 m12 l5 " id="brand-select">
 							<!--<i class="fa fa-car prefix"></i>-->
 							<!--<select id="brand-select">-->
 								<!--&lt;!&ndash;<option value="" disabled selected>Choose Make</option>&ndash;&gt;-->
@@ -117,16 +117,16 @@
 							<!--</select>-->
 							<!--<label data-error="Select a Brand">Type of Question</label>-->
 						</div>
-						<div class="input-field col s6 m6 l5 offset-m1 offset-s1 " id="vehicle-select">
+						<div class="input-field col s8 m8 l5 " id="vehicle-select">
 							<select>
-								<option value="" disabled selected>Choose Model</option>
+								<option value="" disabled selected>Model</option>
 								<!--<option value="i10">i10</option>-->
 								<!--<option value="i20">i20</option>-->
 							</select>
 						</div>
-						<div class="input-field col s5 m5 l3" id="fuel-type-select">
+						<div class="input-field col s4 m4 l2" id="fuel-type-select">
 							<select>
-								<option value="" disabled selected>Fuel Type</option>
+								<option value="" disabled selected>Fuel</option>
 								<option value="petrol">Petrol</option>
 								<option value="diesel">Diesel</option>
 								<option value="cng">LPG/CNG</option>
@@ -484,7 +484,7 @@
 							</div>
 							<div class='col l4 m6 s6 center-align'>
 								<div class='image-space fade'>
-									<img class='center-vertical' src='../../static/revamp/img/Brands/Car/MarutiSuzuki.png'>
+									<img class='center-vertical' src='../../static/revamp/img/Brands/Car/Maruti Suzuki.png'>
 								</div>
 								<!--<a class='btn-gray-stroke-small card cardhover' href='/cars/bmw'>BMW</a>-->
 							</div>
@@ -615,7 +615,7 @@
 					<p>B702, Hex Tax Aprtments, Sector 43<br />
 						Gurgaon, Haryana - 122009</p>
 
-					<p class="tel"><i class="fa fa-phone"></i> &nbsp; +919555.95.0000</p><br />
+					<p class="tel"><a href="tel:+919555950000"><i class="fa fa-whatsapp"></i>&nbsp;/&nbsp;<i class="fa fa-phone"></i> &nbsp; +91-9555-95-0000</p><br />
 					<div class="contact-btn text-left">
 					<a class="waves-effect waves-light waves-cg btn red cg-btn-2 scroll" href="mailto:info@clickgarage.in"><i class="fa fa-envelope"></i> &nbsp; Contact Us</a>
 					</div>
@@ -707,9 +707,10 @@
 <div class="loading-pane">
     <img src="../../static/revamp/img/loading.gif" alt="" class="loading-gif">
 </div>
-
+<!--<div class ="call-us-button"><a href="tel:+91-9555-95-0000"><img src="../../static/revamp/img/Call.png"></a></div>-->
 	<!--<a href="#" class="scrollToTop hidden-phone"><i class="icon-chevron-up"></i></a>-->
-
+<div class="scrollToTop"><a href="#"><img src="../../static/revamp/img/scroll_to_top.png"></a></div>
+<div class="call-button"><a href="tel:+91-9555-95-0000"><img src="../../static/revamp/img/Call.png"></a></div>
 
 	<!-- Javascript
 	================================================== -->
@@ -717,13 +718,11 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script>window.jQuery || document.write('<script src="../../static/revamp/js/jquery-3.1.1.min.js"><\/script>')</script>
-	<!--<script src="../../static/revamp/js/bootstrap.min.js"></script>-->
 	<script src="../../static/revamp/js/materialize.min.js"></script>
 	<script src="../../static/revamp/js/main.js"></script>
 	<script src="../../static/revamp/js/common.js"></script>
 	<script src="../../static/revamp/js/forms.js"></script>
 	<script src="../../static/revamp/js/jquery.backstretch.js"></script>
-	<!--<script src="../../static/revamp/js/jquery.validate.min.js"></script>-->
 	<script src="../../static/revamp/js/jquery.cycle.lite.js"></script>
 
 	<script>
@@ -737,6 +736,20 @@
 			});
 		});
 	</script>
+	<!--Start of Tawk.to Script-->
+	<script type="text/javascript">
+	var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+	(function(){
+	var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+	s1.async=true;
+	s1.src='https://embed.tawk.to/5687bb1cbc4176802560a8a2/1b4iq4he6';
+	s1.charset='UTF-8';
+	s1.setAttribute('crossorigin','*');
+	s0.parentNode.insertBefore(s1,s0);
+	})();
+	</script>
+	<!--End of Tawk.to Script-->
+
 
 
 	</body>

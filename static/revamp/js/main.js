@@ -20,22 +20,25 @@ $(document).ready(function() {
 
 
 
-//Scroll To Top
-// 		$(document).ready(function(){
-// 			//Check to see if the window is top if not then display button
-// 			$(window).scroll(function(){
-// 				if ($(this).scrollTop() > 160) {
-// 					$('.scrollToTop').fadeIn();
-// 				} else {
-// 					$('.scrollToTop').fadeOut();
-// 				}
-// 			});
-// 			//Click event to scroll to top
-// 			$('.scrollToTop').click(function(){
-// 				$('html, body').animate({scrollTop : 0},800);
-// 				return false;
-// 			});
-// 		});
+// Scroll To Top
+$(document).ready(function(){
+
+	//Check to see if the window is top if not then display button
+	$(window).scroll(function(){
+		if ($(this).scrollTop() > 100) {
+			$('.scrollToTop').fadeIn();
+		} else {
+			$('.scrollToTop').fadeOut();
+		}
+	});
+
+	//Click event to scroll to top
+	$('.scrollToTop').click(function(){
+		$('html, body').animate({scrollTop : 0},800);
+		return false;
+	});
+
+});
 
 //Height Define
 $(document).ready(function(){
@@ -92,6 +95,38 @@ var Global = {
             return false;
         _this.eventsAdded = true;
         console.log('adding hanlder')
+
+        $('.learn-more-button').on('click', function(e){
+            $('body,html').animate(
+                {'scrollTop':$('#home').outerHeight()},
+                500
+            );
+        });
+         $('.partners-button').on('click', function(e){
+            $('body,html').animate(
+                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()},
+                500
+            );
+        });
+        $('.testi-button').on('click', function(e){
+            $('body,html').animate(
+                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()},
+                500
+            );
+        });
+        $('.brands-button').on('click', function(e){
+            $('body,html').animate(
+                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()},
+                500
+            );
+        });
+        $('.contact-us-button').on('click', function(e){
+            $('body,html').animate(
+                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()+$('#brands').outerHeight()},
+                500
+            );
+        });
+
 
 
         $('.service-card').click(function (event) {
@@ -333,9 +368,12 @@ var Global = {
             var container = $('#brand-select');
             container.html('');
             var html = '<select id="brand-select-list">';
-            html += '<option value="" disabled selected>Choose Make</option>';
+            html += '<option value="" disabled selected>Make</option>';
             $.each(data, function(ix, val){
-                html += '<option value="' + val.make + 'data-placeholder="true">'+ val.make + '</option>'});
+                // html += '<option value="' + val.make + 'data-placeholder="true" data-icon="../../static/revamp/img/Brands/Car/'+ val.make +'.png" class="circle">'+ val.make + '</option>'});
+                html += '<option value="' + val.make + 'data-placeholder="true" data-icon="../../static/revamp/img/Brands/Car/'+ val.make +'.png" class="left circle">'+ val.make + '</option>'});
+
+                // html += '<option value="' + val.make + 'data-placeholder="true" >'+ val.make + '</option>'});
 
             html += '<select>';
             container.html(html);
@@ -346,7 +384,7 @@ var Global = {
             var container = $('#vehicle-select');
             container.html('');
             var html = '<select id="vehicle-select-list">';
-            html += '<option value="" disabled selected>Choose Model</option>';
+            html += '<option value="" disabled selected>Model</option>';
             $.each(data, function(ix, val){
                 html += '<option value="' + val.model + ' data-placeholder="true">'+ val.model + '</option>'});
 
