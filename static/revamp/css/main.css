@@ -67,7 +67,7 @@ p {
 
 
 .section-title {
-	margin-bottom: 70px;
+	margin-bottom: 30px;
 }
 
 
@@ -583,7 +583,7 @@ iframe {
    ========================================================================== */
 
 #testimonials{
-	padding: 5%;
+	padding: 2%;
 	background: #F7F7F7;
 }
 
@@ -654,7 +654,7 @@ iframe {
 
 #brands{
 	background: #FFF;
-	padding: 5%;
+	padding: 2%;
 }
 
 .brand-section{
@@ -700,7 +700,7 @@ iframe {
    Contact Styles
    ========================================================================== */ 
 #contact {
-	padding: 5%;
+	padding: 2%;
 	background: #F7F7F7;
 	/*height: 100%;*/
 }
