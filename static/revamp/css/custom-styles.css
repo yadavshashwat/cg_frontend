@@ -218,3 +218,4 @@ input:not([type])+label:after,input[type=text]+label:after,input[type=password]+
     z-index: 40;
     will-change: opacity;
 }
+

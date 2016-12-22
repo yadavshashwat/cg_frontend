@@ -40,6 +40,69 @@ $(document).ready(function(){
 
 });
 
+
+// Navbar Colour - white transition
+
+$(window).load(function() {
+    var viewportWidth = $(window).width();
+    if (viewportWidth <= 600) {
+        $('.navbar .nav-wrapper').removeClass('navbar-trans').addClass('navbar-custom');
+        $('.navbar .nav-wrapper .logo-trans').removeClass('visible').addClass('invisible');
+        $('.navbar .nav-wrapper .logo-color').removeClass('invisible').addClass('visible');
+
+    }else if (viewportWidth <= 992){
+        $('.navbar .nav-wrapper').removeClass('navbar-trans').addClass('navbar-custom');
+        $('.navbar .nav-wrapper .logo-trans').removeClass('visible').addClass('invisible');
+        $('.navbar .nav-wrapper .logo-color').removeClass('invisible').addClass('visible');
+    }else{
+        $('.navbar .nav-wrapper').addClass('navbar-trans').removeClass('navbar-custom');
+        $('.navbar .nav-wrapper .logo-trans').addClass('visible').removeClass('invisible');
+        $('.navbar .nav-wrapper .logo-color').addClass('invisible').removeClass('visible');
+
+    }
+
+});
+
+$(window).resize(function() {
+    var viewportWidth = $(window).width();
+    if (viewportWidth <= 600) {
+        $('.navbar .nav-wrapper').removeClass('navbar-trans').addClass('navbar-custom');
+        $('.navbar .nav-wrapper .logo-trans').removeClass('visible').addClass('invisible');
+        $('.navbar .nav-wrapper .logo-color').removeClass('invisible').addClass('visible');
+    }else if (viewportWidth <= 992){
+        $('.navbar .nav-wrapper').removeClass('navbar-trans').addClass('navbar-custom');
+        $('.navbar .nav-wrapper .logo-trans').removeClass('visible').addClass('invisible');
+        $('.navbar .nav-wrapper .logo-color').removeClass('invisible').addClass('visible');
+
+    }else{
+        $('.navbar .nav-wrapper').addClass('navbar-trans').removeClass('navbar-custom');
+        $('.navbar .nav-wrapper .logo-trans').addClass('visible').removeClass('invisible');
+        $('.navbar .nav-wrapper .logo-color').addClass('invisible').removeClass('visible');
+
+    }
+});
+
+$(document).ready(function(){
+
+	//Check to see if the window is top if not then display button
+	$(window).scroll(function(){
+		if ($(this).scrollTop() > 20) {
+        $('.navbar .nav-wrapper').removeClass('navbar-trans').addClass('navbar-custom');
+        $('.navbar .nav-wrapper .logo-trans').removeClass('visible').addClass('invisible');
+        $('.navbar .nav-wrapper .logo-color').removeClass('invisible').addClass('visible');
+        } else {
+		$('.navbar .nav-wrapper').addClass('navbar-trans').removeClass('navbar-custom');
+        $('.navbar .nav-wrapper .logo-trans').addClass('visible').removeClass('invisible');
+        $('.navbar .nav-wrapper .logo-color').addClass('invisible').removeClass('visible');
+		}
+	});
+});
+
+
+
+
+
+
 //Height Define
 $(document).ready(function(){
     var a = $(window).height();
@@ -96,6 +159,21 @@ var Global = {
         _this.eventsAdded = true;
         console.log('adding hanlder')
 
+        $('.book-now-button').on('click', function(e){
+            $('body,html').animate(
+                {'scrollTop':0},
+                500
+            );
+        });
+
+        $('.form-proceed').on('click', function(e){
+            $('body,html').animate(
+                {'scrollTop':0},
+                500
+            );
+        });
+
+
         $('.learn-more-button').on('click', function(e){
             $('body,html').animate(
                 {'scrollTop':$('#home').outerHeight()},
@@ -125,6 +203,11 @@ var Global = {
                 {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()+$('#brands').outerHeight()},
                 500
             );
+        });
+
+        $(".side-nav").on("click", function() {
+             $("#sidenav-overlay").trigger("click");
+                return false;
         });
 
 
@@ -359,7 +442,7 @@ var Global = {
                error = 1;
            }
         });
-        
+
 
 
     },
@@ -421,17 +504,8 @@ var Global = {
         $('#contact .message-confirm').removeClass('invisible').addClass('visible');
 
     }
-
-
-
+    
 };
-
-
-
-
-
-
-
 
 
 
