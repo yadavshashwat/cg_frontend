@@ -6,18 +6,6 @@ $(document).ready(function() {
     $('select').material_select();
 });
 
-// $('select').change(function (event) {
-//     $('select').material_select();
-// })
-
-// $("#brand-select").change( function(){
-//     $(this).material_select();
-// });
-
-// $(select).change(function(){
-//     $('select').material_select();
-// });
-
 
 
 // Scroll To Top
@@ -83,6 +71,7 @@ $(window).resize(function() {
 });
 
 $(document).ready(function(){
+    var viewportWidth = $(window).width();
 
 	//Check to see if the window is top if not then display button
 	$(window).scroll(function(){
@@ -91,10 +80,11 @@ $(document).ready(function(){
         $('.navbar .nav-wrapper .logo-trans').removeClass('visible').addClass('invisible');
         $('.navbar .nav-wrapper .logo-color').removeClass('invisible').addClass('visible');
         } else {
+        if (viewportWidth > 992){
 		$('.navbar .nav-wrapper').addClass('navbar-trans').removeClass('navbar-custom');
         $('.navbar .nav-wrapper .logo-trans').addClass('visible').removeClass('invisible');
         $('.navbar .nav-wrapper .logo-color').addClass('invisible').removeClass('visible');
-		}
+        }}
 	});
 });
 
@@ -172,8 +162,7 @@ var Global = {
                 500
             );
         });
-
-
+        
         $('.learn-more-button').on('click', function(e){
             $('body,html').animate(
                 {'scrollTop':$('#home').outerHeight()},
@@ -442,8 +431,6 @@ var Global = {
                error = 1;
            }
         });
-
-
 
     },
 
