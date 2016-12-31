@@ -79,8 +79,9 @@
 }
 
 .cardhover:hover {
-  box-shadow:0px 0px 10px 0px rgba(0, 0, 0, 0.50);
+  /*box-shadow:0px 0px 10px 0px rgba(0, 0, 0, 0.50);*/
     z-index: 10;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
 }
 
 .visible{
@@ -218,4 +219,5 @@ input:not([type])+label:after,input[type=text]+label:after,input[type=password]+
     z-index: 40;
     will-change: opacity;
 }
+
 

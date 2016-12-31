@@ -294,7 +294,10 @@ iframe {
 	position: static;
 }
 
-
+.card{
+    border-radius: 10px;
+    z-index: 30;
+}
 /* ==========================================================================
    Colors
    ========================================================================== */
@@ -951,7 +954,14 @@ footer a:hover {
 	/*background: rgba(74,20,140,0.80);*/
 	/*padding: 130px 0px 130px 0px;*/
 	/*-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7)"; !* IE8 *!    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7);   !* IE6 & 7 *!      zoom: 1;*/
-	background: #eaeaea;
+	background: #f4f4f4;
+}
+
+.overlay-pat{
+					background: url('../img/tools-pat.png');
+					background-size: 300px auto;
+					opacity: 0.1;
+					z-index: 10;
 }
 
 .order-page .nav-service-list{
@@ -969,22 +979,25 @@ footer a:hover {
 	/*border-color: #4a148c;*/
 }
 
-.order-page  .nav-service-list .selected li:hover{
+.order-page  .nav-service-list .selected:hover{
 	/*background: #F44336;*/
 	/*background: #4a148c;*/
-	/*color: #FFFFFF;*/
-	cursor:pointer;
+	/*color: #FFFFFF!important;*/
+	/*cursor:pointer;*/
 	/*color: #4a148c;*/
 	/*border-bottom: 2px;*/
 	/*border-color: #4a148c;*/
 }
 
 .order-page .nav-service-list .desktop-list .selected{
-	/*background: #F44336;*/
-	background: #4a148c;
-	color: #FFFFFF;
+	background: #FFFFFF;
+	/*background: #4a148c;*/
+	/*color: #FFFFFF;*/
 	cursor:pointer;
-	/*color: #4a148c;*/
+    font-weight: 800;
+    border-bottom: 4px solid #4a148c;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+	color: #4a148c;
 	/*border-bottom: 2px;*/
 	/*border-color: #4a148c;*/
 }
@@ -1007,6 +1020,7 @@ footer a:hover {
 	text-align: center;
 }
 
+
 /*#services .purple-overlay{*/
 /*background: rgba(74,20,140,0.80);*/
 /*!*padding: 130px 0px 130px 0px;*!*/
@@ -1021,6 +1035,7 @@ footer a:hover {
 	/*margin:2% 2%;*/
 	height: 260px;
 	/*margin-left: ;*/
+
 }
 
 #services .service-card .icon{
@@ -1052,8 +1067,17 @@ footer a:hover {
 
 
 #jobs .services{
-	padding-left: 7%;
-	padding-right: 7%;
+	padding-left: 2.5%;
+    padding-right: 4%;
+    margin-top:15px;
+}
+
+#jobs .service-name-border{
+	/*padding-left: 2.5%;*/
+    /*padding-right: 4%;*/
+    /*margin-top:15px;*/
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
 
 #jobs .services .card-image {
@@ -1069,7 +1093,7 @@ footer a:hover {
 	/*padding-left: 7%;*/
 	/*padding-right: 7%;*/
 	/*height: 90px;*/
-	width: 90px;
+	width: 70px;
 	/*margin-top: 10px;*/
 }
 
@@ -1092,28 +1116,46 @@ footer a:hover {
 }
 
 #jobs .services .service-name .job-name{
-    font-size: 25px;
-    font-weight: 500;
+    /*font-size: 25px;*/
+    /*font-weight: 500;*/
+	font-size: 22px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-weight: 600;
 }
 
 #jobs .services .service-name .job-desc{
 	margin-left: 5%;
-    font-size: 15px;
+    font-size: 16px;
     color: #9e9e9e;
 }
 
+#jobs .services .service-name .job-desc ul{
+	/*list-style:	circle;*/
+	margin-top : 0px;
+	margin-bottom:5px;
+}
 #jobs .services .service-name .job-desc li{
-list-style: square
+list-style: circle;
 }
 
 #jobs .services .service-name .job-prices {
 	display: block;
 	text-align: right;
-	color: #7C838A;
+	/*color: #7C838A;*/
+    padding: 20px 0 20px 0;
 }
 
+#jobs .services .service-name .job-prices-mobile {
+	/*display: block;*/
+	text-align: center!important;
+	/*color: #7C838A;*/
+    padding: 2px 0 2px 0!important;
+}
+
+
 #jobs .services .service-name .job-prices .job-amount{
-    font-size: 22px;
+    font-size: 24px;
     margin-bottom: 5px;
     margin-top: 10px;
    	font-weight: 600;
@@ -1128,32 +1170,231 @@ list-style: square
 
 
 
-
 #jobs .services .button-col{
 	display:inline;
 	margin-top: auto;
 	margin-bottom: auto;
 	text-align: Center;
+	padding-top: 20px;
 }
 
+
+
+
 #jobs .services .button-col .btn-service{
-	/*width: 220px;*/
+	width: 137px;
 	margin: 1%;
 
+}
+#jobs .services .service-name .button-row{
+	text-align: center;
+	/*margin: 1%;*/
+	height: 50px;
+}
+#jobs .services .service-name .button-row .btn-service{
+	width: 130px;
+	margin: 1%;
 }
 
 #jobs .services-select-section .vertical-col{
 	/*height:;*/
-	/*padding:0px;*/
+	padding:0px;
 
 }
 #jobs .services-select-section .vertical-cards{
 /*box-shadow: 0 0px 2px 0 rgba(0,0,0,0.14),0 0px 5px 0 rgba(0,0,0,0.12),0 0px 1px 0px rgba(0,0,0,0.2);*/
 	/*height: 100%;*/
+	margin-bottom: 0px;
+}
+
+#jobs .services .info-div{
+   	/*min-height: 200px;*/
+	background: #FFFFFF;
+	box-shadow: 0 0px 2px 0 rgba(0,0,0,0.14),0 0px 5px 0 rgba(0,0,0,0.12),0 0px 1px 0px rgba(0,0,0,0.2);
+	padding: 10px;
+    /*margin-top: -10px;*/
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#jobs .info-div .header {
+
+	margin: 3px;
+	font-size: 16px;
+}
+
+#jobs .info-div .header .desc-name{
+	font-size: 22px;
+    font-weight: 600;
+	padding-left: 2%;
+	padding-top: 10px;
+}
+
+#jobs .info-div .header .desc-content{
+	padding-left: 4%;
+}
+
+#jobs .info-div .button-header{
+	/*padding-left: 4%;*/
+	text-align: right;
+	/*text-align: right;*/
 }
 
 
-/* right: 100%; */
+#jobs .info-div .header .desc-content li{
+	list-style: square;
+}
+
+#jobs .info-div .list-things li{
+	list-style: lower-roman!important;
+}
+
+
+#cart{
+    position: absolute;
+    /*top : 140px;*/
+    /*bottom: 30px;*/
+    right: 10px;
+}
+
+#cart .cart-section {
+
+    border-bottom: 2px solid #dcdcdc;
+}
+
+#cart .cart-header{
+    background: #e6e6e6;
+     border-top-left-radius: 10px;
+     border-top-right-radius: 10px;
+    /*border-color: #c7c7c7;*/
+    color: #232527;
+    text-align: center;
+    /*height: 60px;*/
+    font-size: 22px;
+    font-weight: 600;
+    padding: 20px;
+
+}
+#cart .vehicle-header{
+    text-align: left;
+    font-weight: 600;
+    padding: 5px;
+    font-size: 16px;
+}
+
+#cart .vehicle-header .vehicle-name{
+    text-align: left;
+    padding: 45px;
+    color: #9e9e9e;
+    font-weight: 400;
+
+}
+#cart .cart-list{
+    min-height: 80px;
+}
+#cart .cart-item{
+    min-height: 80px;
+    font-size: 18px;
+    line-height: 55px;
+    border-bottom: 0.5px solid #dcdcdc;
+}
+
+#cart .cart-item .item-desc{
+    /*height: 70px;*/
+    font-size: 16px!important;
+    line-height: 0px!important;
+    color : #00A4E4;
+    text-decoration: underline;
+    /*font-weight: 700!important;*/
+}
+
+
+#cart .cart-item .item-price{
+    /*height: 70px;*/
+    /*font-size: 22px;*/
+    /*line-height: 70px;*/
+    font-weight: 700;
+}
+#cart .cart-summary{
+    font-size: 20px;
+    line-height: 45px;
+    font-weight: 800;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /*border-bottom: 0px solid #dcdcdc;*/
+    /*border: none;*/
+}
+
+#cart .cart-coupon{
+    font-size: 16px;
+    line-height: 30px;
+    color: #9e9e9e;
+    padding: 20px;
+}
+
+#cart .cart-coupon .btn-coupon{
+    /*font-size: 16px;*/
+    /*line-height: 30px;*/
+    /*color: #9e9e9e;*/
+    /*padding: 20px;*/
+    /*width: 90px;*/
+}
+
+
+#cart .cart-coupon .discount-link{
+    color : #00A4E4;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#cart .cart-coupon .coupon-box{
+    padding-top: 15px;
+}
+
+#cart .cart-coupon .coupon-message{
+    font-size: 16px;
+    line-height: 16px;
+     color: #232527;
+    padding: 5px;
+}
+
+
+
+
+#cart .price{
+    text-align: right;
+}
+
+#cart .dealer-price{
+    color: #c12d2d;
+}
+#cart .cg-price{
+    font-size: 22px;
+    font-weight: 800;
+}
+
+#cart .discount{
+    font-size: 16px;
+    font-weight: 400;
+    text-align: right;
+    color:#459e41;
+    line-height: 16px;
+}
+
+#cart .cart-checkout{
+    padding: 20px;
+    text-align: center;
+}
+
+#cart .cart-checkout .btn-checkout{
+    /*padding: 20px;*/
+    /*text-align: center;*/
+    width: 100%;
+}
+
+
+
+
 
 /* ==========================================================================
    Mobile Styles

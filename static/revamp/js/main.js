@@ -102,7 +102,6 @@ $(document).ready(function(){
     }else{
         $("#home").height(b + 50)
     }
-
 });
 
 // materialize css
