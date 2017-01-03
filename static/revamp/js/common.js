@@ -38,6 +38,8 @@ var Commons = {
     URLFromName : {
         'get_type_make':'/api/get_type_make/',
         'get_make_model':'/api/get_make_model/',
+        'get_jobs_vehicle':'/api/get_jobs_vehicle/',
+        'add_job_cart':'/api/add_job_cart/',
         'get_location':'/api/get_location/',
         'post_lead':'/api/post_lead/',
         'post_message':'/api/post_message/'
@@ -70,6 +72,42 @@ function bind(f, obj, args)
         }
     }else
         console.log('Empty callback');
-
 }
+
+var local = {
+    save:function(key, value){
+        var stringKey = 'cgcart';
+        if(key){
+            stringKey = key;
+        }
+        var stringVal = value;
+        if(value instanceof Object){
+            stringVal = JSON.stringify(value);
+        }
+        var dc_old = document.cookie;
+        document.cookie = key+"="+stringVal+"; path=/";
+    },
+    load:function(){
+        var dc_str = document.cookie;
+        var dc_arr = dc_str.split(';');
+        var dict = {};
+        $.each(dc_arr, function(idx, val){
+            dict[val.split('=')[0].trim()] = val.split('=')[1]
+        });
+        return dict;
+    },
+    clearKey:function(key){
+        var stringKey = 'cgcart';
+        if(key){
+            stringKey = key;
+        }
+        document.cookie = stringKey+'=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+        document.cookie = stringKey+'=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+    },
+    clearAll:function(){
+    }
+};
+
+
+
 

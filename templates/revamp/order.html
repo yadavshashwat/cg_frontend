@@ -80,7 +80,7 @@
 			</ul>
 		</div>
 		<div class="row">
-			<div class="nav-wrapper navbar-services small-list hide-on-large-only">
+			<div id="service-select" class="nav-wrapper navbar-services small-list hide-on-large-only">
 				<div class="input-field col s10 m10 l10 offset-m1 offset-s1 offset-l1 car-services visible" >
 					<select>
 						<option data-class ="servicing" class ="car-servicing" value="servicing-button">Servicing</option>
@@ -249,141 +249,141 @@
 			<div class="row">
 				<!--Service List Code-->
 				<div class="col l9 s12 m12 vertical-col service-list">
-					<div class="job">
-						<div class="card vertical-cards cardhover  service-name">
-							<div class="row">
-								<div class="col l12 s12 m12 service-content">
-									<div class="card-image">
-										<img class=""  src="../../static/revamp/img/Icons-Services/Emergency.png">
-									</div>
-									<div class="card-content job-content">
-										<div class="col s12 m12 l6">
-											<div class="job-name">General Check Up</div>
-											<div class="job-desc">
-												<ul>
-													<li>Done pre major travel/ trip</li>
-													<li>60 Points checkup</li>
-													<li>Fluids Top Up</li>
-												</ul>
-											</div>
-										</div>
-										<div class="col s12 m12 l3 job-prices hide-on-med-and-down">
-											<div class="job-amount"><b>&#8377;&nbsp;</b>700</div>
-											<div class="job-tat">Time : 5-6 Hrs</div>
-										</div>
-										<div class="col l3 s12 m12 button-col hide-on-med-and-down">
-											<button class="waves-effect waves-light btn red btn-service closed-more-info" type="submit" name="action">Info
-												<i class="material-icons right">turned_in</i>
-											</button>
-											<button class="waves-effect waves-light btn red  btn-service book-btn" type="submit" name="action">Book
-												<i class="material-icons right">send</i>
-											</button>
-										</div>
-									</div>
+					<!--<div class="job">-->
+						<!--<div class="card vertical-cards cardhover  service-name">-->
+							<!--<div class="row">-->
+								<!--<div class="col l12 s12 m12 service-content">-->
+									<!--<div class="card-image">-->
+										<!--<img class=""  src="../../static/revamp/img/Icons-Services/Emergency.png">-->
+									<!--</div>-->
+									<!--<div class="card-content job-content">-->
+										<!--<div class="col s12 m12 l6">-->
+											<!--<div class="job-name">General Check Up</div>-->
+											<!--<div class="job-desc">-->
+												<!--<ul>-->
+													<!--<li>Done pre major travel/ trip</li>-->
+													<!--<li>60 Points checkup</li>-->
+													<!--<li>Fluids Top Up</li>-->
+												<!--</ul>-->
+											<!--</div>-->
+										<!--</div>-->
+										<!--<div class="col s12 m12 l3 job-prices hide-on-med-and-down">-->
+											<!--<div class="job-amount"><b>&#8377;&nbsp;</b>700</div>-->
+											<!--<div class="job-tat">Time : 5-6 Hrs</div>-->
+										<!--</div>-->
+										<!--<div class="col l3 s12 m12 button-col hide-on-med-and-down">-->
+											<!--<button class="waves-effect waves-light btn red btn-service closed-more-info" type="submit" name="action">Info-->
+												<!--<i class="material-icons right">turned_in</i>-->
+											<!--</button>-->
+											<!--<button class="waves-effect waves-light btn red  btn-service book-btn" type="submit" name="action">Book-->
+												<!--<i class="material-icons right">send</i>-->
+											<!--</button>-->
+										<!--</div>-->
+									<!--</div>-->
 
 
-								</div>
-							</div>
-							<div class="row hide-on-large-only">
-								<div class="s12 m12 l12 job-prices job-prices-mobile">
-											<div class="job-amount"><b>&#8377;&nbsp;</b>700</div>
-											<div class="job-tat">Time : 5-6 Hrs</div>
-								</div>
-							</div>
-							<div class="row button-row hide-on-large-only">
-								<div class="col l12 s12 m12">
-									<button class="waves-effect waves-light btn red btn-service closed-more-info" type="submit" name="action">Info
-										<i class="material-icons right">turned_in</i>
-									</button>
-									<button class="waves-effect waves-light btn red  btn-service book-btn" type="submit" name="action">Book
-										<i class="material-icons right">send</i>
-									</button>
-								</div>
-							</div>
-						</div>
-						<div class="info-div invisible">
-							<div class="row button-header">
-								<button class="waves-effect waves-light btn red  btn-service book-btn closed-more-info" type="submit" name="action"><i class="fa fa-times"></i>
-									<!--<i class="material-icons right">open_in_new</i>-->
-								</button>
-							</div>
-
-							<div class="header gen-desc">
-								<div class="desc-name">
-									Why it is required?
-								</div>
-								<div class="desc-content">
-									General check up is recommended before any major travelling event/ seasonal change. Get to know about all the faulty parts in the vehicle.
-								</div>
-							</div>
-							<div class="header list-things">
-								<div class="desc-name">
-									What is done as part of the service?
-								</div>
-								<div class="desc-content">
-									<ul>
-										<li>60 Points Checkup of the vehicle is done</li>
-										<li>All fluids are topped up</li>
-										<li>Complete vehicle inspection report</li>
-									</ul>
-								</div>
-							</div>
-							<div class="header symptoms">
-								<div class="desc-name">
-									What are the symptoms?
-								</div>
-								<div class="desc-content">
-									<ul>
-										<li>Noice in brakes while driving</li>
-										<li>Reduced braking while running the vehicle</li>
-										<!--<li></li>-->
-									</ul>
-								</div>
-							</div>
-							<div class="header parts-breakup">
-								<div class="desc-name">
-									What all will be replaced?
-								</div>
-								<div class="desc-content">
-									<table class="striped">
-										<thead>
-										<tr>
-											<th data-field="id">S.No.</th>
-											<th data-field="part">Name</th>
-											<th data-field="action">Item Action</th>
-											<th data-field="price">Item Price</th>
-										</tr>
-										</thead>
-										<tbody>
-										<tr>
-											<td>1</td>
-											<td>Alvin</td>
-											<td>Eclair</td>
-											<td>$0.87</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>Alan</td>
-											<td>Jellybean</td>
-											<td>$3.76</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>Jonathan</td>
-											<td>Lollipop</td>
-											<td>$7.00</td>
-										</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<!--<div class="row button-header">-->
-							<!--<button class="waves-effect waves-light btn red  btn-service book-btn" type="submit" name="action"><i class="fa fa-times"></i>-->
-							<!--&lt;!&ndash;<i class="material-icons right">open_in_new</i>&ndash;&gt;-->
-							<!--</button>-->
+								<!--</div>-->
 							<!--</div>-->
-						</div>
-					</div>
+							<!--<div class="row hide-on-large-only">-->
+								<!--<div class="s12 m12 l12 job-prices job-prices-mobile">-->
+											<!--<div class="job-amount"><b>&#8377;&nbsp;</b>700</div>-->
+											<!--<div class="job-tat">Time : 5-6 Hrs</div>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--<div class="row button-row hide-on-large-only">-->
+								<!--<div class="col l12 s12 m12">-->
+									<!--<button class="waves-effect waves-light btn red btn-service closed-more-info" type="submit" name="action">Info-->
+										<!--<i class="material-icons right">turned_in</i>-->
+									<!--</button>-->
+									<!--<button class="waves-effect waves-light btn red  btn-service book-btn" type="submit" name="action">Book-->
+										<!--<i class="material-icons right">send</i>-->
+									<!--</button>-->
+								<!--</div>-->
+							<!--</div>-->
+						<!--</div>-->
+						<!--<div class="info-div invisible">-->
+							<!--<div class="row button-header">-->
+								<!--<button class="waves-effect waves-light btn red  btn-service book-btn closed-more-info" type="submit" name="action"><i class="fa fa-times"></i>-->
+									<!--&lt;!&ndash;<i class="material-icons right">open_in_new</i>&ndash;&gt;-->
+								<!--</button>-->
+							<!--</div>-->
+
+							<!--<div class="header gen-desc">-->
+								<!--<div class="desc-name">-->
+									<!--Why it is required?-->
+								<!--</div>-->
+								<!--<div class="desc-content">-->
+									<!--General check up is recommended before any major travelling event/ seasonal change. Get to know about all the faulty parts in the vehicle.-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--<div class="header list-things">-->
+								<!--<div class="desc-name">-->
+									<!--What is done as part of the service?-->
+								<!--</div>-->
+								<!--<div class="desc-content">-->
+									<!--<ul>-->
+										<!--<li>60 Points Checkup of the vehicle is done</li>-->
+										<!--<li>All fluids are topped up</li>-->
+										<!--<li>Complete vehicle inspection report</li>-->
+									<!--</ul>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--<div class="header symptoms">-->
+								<!--<div class="desc-name">-->
+									<!--What are the symptoms?-->
+								<!--</div>-->
+								<!--<div class="desc-content">-->
+									<!--<ul>-->
+										<!--<li>Noice in brakes while driving</li>-->
+										<!--<li>Reduced braking while running the vehicle</li>-->
+										<!--&lt;!&ndash;<li></li>&ndash;&gt;-->
+									<!--</ul>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--<div class="header parts-breakup">-->
+								<!--<div class="desc-name">-->
+									<!--What all will be replaced?-->
+								<!--</div>-->
+								<!--<div class="desc-content">-->
+									<!--<table class="striped">-->
+										<!--<thead>-->
+										<!--<tr>-->
+											<!--<th data-field="id">S.No.</th>-->
+											<!--<th data-field="part">Name</th>-->
+											<!--<th data-field="action">Item Action</th>-->
+											<!--<th data-field="price">Item Price</th>-->
+										<!--</tr>-->
+										<!--</thead>-->
+										<!--<tbody>-->
+										<!--<tr>-->
+											<!--<td>1</td>-->
+											<!--<td>Alvin</td>-->
+											<!--<td>Eclair</td>-->
+											<!--<td>$0.87</td>-->
+										<!--</tr>-->
+										<!--<tr>-->
+											<!--<td>2</td>-->
+											<!--<td>Alan</td>-->
+											<!--<td>Jellybean</td>-->
+											<!--<td>$3.76</td>-->
+										<!--</tr>-->
+										<!--<tr>-->
+											<!--<td>3</td>-->
+											<!--<td>Jonathan</td>-->
+											<!--<td>Lollipop</td>-->
+											<!--<td>$7.00</td>-->
+										<!--</tr>-->
+										<!--</tbody>-->
+									<!--</table>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--&lt;!&ndash;<div class="row button-header">&ndash;&gt;-->
+							<!--&lt;!&ndash;<button class="waves-effect waves-light btn red  btn-service book-btn" type="submit" name="action"><i class="fa fa-times"></i>&ndash;&gt;-->
+							<!--&lt;!&ndash;&lt;!&ndash;<i class="material-icons right">open_in_new</i>&ndash;&gt;&ndash;&gt;-->
+							<!--&lt;!&ndash;</button>&ndash;&gt;-->
+							<!--&lt;!&ndash;</div>&ndash;&gt;-->
+						<!--</div>-->
+					<!--</div>-->
 				</div>
 				<div id="cart" class="col l3 vertical-col-cart hide-on-med-and-down">
 					<div class="card cardhover vertical-cards cart">
@@ -400,26 +400,26 @@
 							</div>
 						</div>
 						<div class="row cart-section cart-list">
-							<div class="cart-item">
-								<div class="col s1 m1 l1">
-									<div class="delete x25">
-										<i class="fa fa-trash-o"></i>
-									</div>
-								</div>
-								<div class="col s8 m8 l8">
-									<div class="item-name">
-										General Servicing
-									</div>
-									<div class="item-desc">
-										Quotation Break-up
-									</div>
-								</div>
-								<div class="col s3 m3 l3">
-									<div class="item-price">
-										<b>₹&nbsp;</b>700
-									</div>
-								</div>
-							</div>
+							<!--<div class="cart-item">-->
+								<!--<div class="col s1 m1 l1">-->
+									<!--<div class="delete x25">-->
+										<!--<i class="fa fa-trash-o"></i>-->
+									<!--</div>-->
+								<!--</div>-->
+								<!--<div class="col s8 m8 l8">-->
+									<!--<div class="item-name">-->
+										<!--General Servicing-->
+									<!--</div>-->
+									<!--<div class="item-desc">-->
+										<!--Quotation Break-up-->
+									<!--</div>-->
+								<!--</div>-->
+								<!--<div class="col s3 m3 l3">-->
+									<!--<div class="item-price">-->
+										<!--<b>₹&nbsp;</b>700-->
+									<!--</div>-->
+								<!--</div>-->
+							<!--</div>-->
 						</div>
 						<div class="row cart-section  cart-summary">
 							<div class="col s12 m12 l12">
@@ -452,7 +452,7 @@
 							</div>
 							<div class ="col s12 m12 l12 coupon-box invisible">
 								<div class="input-field col s7 m7 l7 coupon-btn ">
-								  <i class="material-icons prefix">receipt</i>
+								  <!--<i class="material-icons prefix">receipt</i>-->
 								  <input id="icon_prefix" type="text" class="validate" style="text-transform:uppercase">
 								  <label for="icon_prefix">Promo Code</label>
 								</div>
