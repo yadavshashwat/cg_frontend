@@ -17,10 +17,11 @@ $('.datepicker').pickadate({
 
 $(".button-collapse").sideNav();
 
-
+var CURRENT_CART = {'a':'asadaadad'}
 var Global = {
     init:function() {
         var _this = this;
+        _this.events();
         _this.events();
         // Commons.eventHandlers();
     },
@@ -32,6 +33,34 @@ var Global = {
             return false;
         _this.eventsAdded = true;
         console.log('adding hanlder');
+
+
+        $(document).ready(function() {
+            cookie = local.load()
+            vehicle_type = cookie['vehtype'];
+            veh_make = cookie['vehmake'];
+            veh_model = cookie['vehmodel'];
+            veh_fuel = cookie['vehfuel'];
+            $('#vehicle-name').text(veh_make + " " +veh_model)
+            rand_number = Math.floor(Math.random() * 3) + 1
+            if (rand_number == 1){
+                $('#intro-sentence').text('How can we help with your '+veh_make+' '+veh_model+'?')
+            }else if (rand_number == 2){
+                $('#intro-sentence').text('We really love your '+veh_make+' '+veh_model+'!')
+            }else{
+                $('#intro-sentence').text('Your '+veh_make+' '+veh_model+' looks kinda amazing!')
+            }
+
+            if(vehicle_type == "Car"){
+                // console.log(vehicle_type)
+                $('#services .services-category-car').show()
+            }else{
+                $('#services .services-category-bike').show()
+            }
+            Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
+        });
+
+
 
         $('#services .service-card').on('click' ,function(e){
             var classy = $(this).attr('data-class');
@@ -55,11 +84,15 @@ var Global = {
             }else if(classy =='denting'){
                 $('.nav-services').find('.car-denting').addClass('selected');
             }else{
-                return;
+                return
             }
-            $('#services').hide();
-            $('.order-page .nav-services').show();
-            $('#jobs').show();
+            $('#services').slideUp('fast', function() {
+                    $('#jobs').show();
+                                });
+            $('.order-page .nav-services').slideDown('slow', function() {
+
+            });
+
         });
 
         $('.order-page .desktop-list .service-item').on('click', function(e){
@@ -75,7 +108,7 @@ var Global = {
                 Commons.ajaxData('get_jobs_vehicle', {make_id: "Hyundai",model_id:"i20",fuel_id:"Diesel",service_type: "Cleaning"}, "get", _this, _this.loadJobs);
             }else if(classy =='denting'){
             }else{
-                return;
+                return
             }
         });
 
@@ -91,11 +124,11 @@ var Global = {
                 Commons.ajaxData('get_jobs_vehicle', {make_id: "Hyundai",model_id:"i20",fuel_id:"Diesel",service_type: "Cleaning"}, "get", _this, _this.loadJobs);
             }else if(classy =='denting'){
             }else{
-                return;
+                return
             }        });
 
 
-        $('#jobs .job').on('click','.closed-more-info', function(e){
+        $('#jobs').on('click',' .job .closed-more-info', function(e){
             var parent = $(this).closest('.job');
             parent.find('.closed-more-info').addClass('open-more-info').removeClass('closed-more-info');
             parent.find('.service-name').addClass('service-name-border');
@@ -103,11 +136,11 @@ var Global = {
 
         });
 
-        $('#jobs .job').on('click','.open-more-info' ,function(e){
+        $('#jobs').on('click','.job .open-more-info' ,function(e){
             var parent = $(this).closest('.job');
             parent.find('.open-more-info').addClass('closed-more-info').removeClass('open-more-info');
             parent.find('.info-div').slideUp('slow', function() {
-                parent.find('.service-name').removeClass('service-name-border');
+            parent.find('.service-name').removeClass('service-name-border');
             });
         });
 
@@ -139,9 +172,9 @@ var Global = {
               $('#cart .cart-coupon .coupon-box').show();
         });
 
-        $('#jobs .service-list').on('click','.book-btn',function(e){
+        $('#jobs').on('click','.job .book-btn',function(e){
             var parent = $(this).closest('.job');
-            var newC = parent.attr('job_id');
+            var newC = parent.attr('job-id');
             var obj_cookie = local.load();
             var oldC = '';
             if(obj_cookie['cgcart']){
@@ -152,16 +185,35 @@ var Global = {
             local.save('cgcart', oldC);
             console.log(local.load('cgcart'))
             Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
+            $(this).addClass('disabled')
+        });
+
+        $('#cart').on('click','.cart-item .delete',function(e){
+            var parent = $(this).closest('.cart-item');
+            var delC = parent.attr('job-id');
+            var obj_cookie = local.load();
+            var cookie_list = obj_cookie['cgcart'].split(',');
+            var cartLen = cookie_list.length;
+                    for (i = 0; i < cartLen; i++) {
+                        if (cookie_list[i] == delC){
+                            cookie_list.splice(i,1);
+                        }
+                    }
+            cookie_list_string = cookie_list.join(',')
+            local.save('cgcart', cookie_list_string);
+            Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
+            job_div = $("#jobs").find("[job-id='" + delC + "']");
+            job_div.find('.book-btn').removeClass('disabled')
         });
     },
 
     loadCart:function(data){
-            var container = $('#cart .cart-section .cart-list');
-            // console.log('check')
+            var container = $('#cart .cart-list');
+            console.log('check')
             container.html('');
             var html ='';
-            $.each(data, function(ix, val) {
-                html +='<div class="cart-item" data-id="'+val.id+'">';
+            $.each(data['cart_details'], function(ix, val) {
+                html +='<div class="cart-item" job-id="'+val.id+'">';
                 html +=' 								<div class="col s1 m1 l1">';
                 html +=' 									<div class="delete x25">';
                 html +=' 										<i class="fa fa-trash-o"></i>';
@@ -171,7 +223,7 @@ var Global = {
                 html +=' 									<div class="item-name">';
                 html += 									val.job_name
                 html +=' 									</div>';
-                html +=' 									<div class="item-desc" data-id="'+val.id+'">';
+                html +=' 									<div class="item-desc">';
                 html +=' 										Quotation Break-up';
                 html +=' 									</div>';
                 html +=' 								</div>';
@@ -183,41 +235,52 @@ var Global = {
                 html +=' 							</div>'
             });
          container.html(html);
-        var container2 = $('#cart .cart-section .cart-summary');
+        var container2 = $('#cart .cart-section.cart-summary');
             // console.log('check')
             container2.html('');
             var html2 ='';
+            $.each(data['cart_summary'], function(ix, val) {
             html2 += '<div class="col s12 m12 l12">';
             html2 += '									<div class="row dealer-price">';
             html2 += '										<div class="col s7 m7 l7"> Dealer Price :</div>';
             html2 += '										<div class="col s5 m5 l5 price">';
-            html2 += '											<strike><b>₹&nbsp;</b>;
-            html2 += 1000;
+            html2 += '											<strike><b>₹&nbsp;</b>';
+            html2 += val.comp_amount
             html2 += '</strike>';
             html2 += '										</div>';
             html2 += '									</div>';
             html2 += '									<div class="row">';
-            html2 += '										<div class="col s7 m7 l7">CG Price :</div>';
+            html2 += '										<div class="col s7 m7 l7">CG Price : </div>';
             html2 += '										<div class="col s5 m5 l5 cg-price price">';
             html2 += '											<b>₹&nbsp;</b>';
-            html2 += 12200;
+            html2 += val.cg_amount
             html2 += '										</div>';
             html2 += '									</div>';
             html2 += '									<div class="row discount">';
             html2 += '										<div class="col s12 m12 l12">Save ₹&nbsp;';
-            html2 += 25%;
+            html2 += val.diff_amount
             html2 += '										</div>';
             html2 += '									</div>';
             html2 += '							</div>';
+                });
         container2.html(html2);
+
+
     },
 
     loadJobs:function(data){
             var container = $('#jobs .service-list');
             container.html('');
             var html ='';
+
+            // booking button disable
+            $("#jobs").find('.book-btn').removeClass('disabled');
+            cookie = local.load();
+            if (cookie['chcart']){
+                cart_list = cookie['cgcart'].split(',')
+            };
             $.each(data, function(ix, val) {
-                    html += '<div class="job" job_id ='+val.id + '>';
+                    html += '<div class="job" job-id ='+val.id + '>';
                     html += '<div class="card vertical-cards cardhover  service-name">';
                     html += '<div class="row">';
                     html += '<div class="col l12 s12 m12 service-content">';
@@ -244,6 +307,14 @@ var Global = {
                     html += '											<button class="waves-effect waves-light btn red btn-service closed-more-info" type="submit" name="action">Info';
                     html += '												<i class="material-icons right">turned_in</i>';
                     html += '											</button>';
+
+                    // if (val.id in cart_list){
+                    //     console.log('read')
+                    // }else{
+                    //     console.log('no read')
+                    // }
+
+
                     html += '											<button class="waves-effect waves-light btn red  btn-service book-btn" type="submit" name="action">Book';
                     html += '												<i class="material-icons right">send</i>';
                     html += '											</button>';
@@ -270,7 +341,7 @@ var Global = {
                     html += '						</div>';
                     html += '						<div class="info-div invisible">';
                     html += '							<div class="row button-header">';
-                    html += '								<button class="waves-effect waves-light btn red  btn-service book-btn closed-more-info" type="submit" name="action">';
+                    html += '								<button class="waves-effect waves-light btn red  btn-service closed-more-info" type="submit" name="action">';
                     html += '								<i class="fa fa-times"></i>';
                     html += '								</button>';
                     html += '							</div>';
@@ -280,7 +351,7 @@ var Global = {
                     html += '								</div>';
                     html += '								<div class="desc-content">';
                     html += val.job_desc
-                    // html += '									General check up is recommended before any major travelling event/ seasonal change. Get to know about all the faulty';
+
                     html += '								</div>';
                     html += '							</div>';
                     html += '							<div class="header list-things">';

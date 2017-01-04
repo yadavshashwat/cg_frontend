@@ -494,11 +494,89 @@ iframe {
 
 }
 
+#home .home-form-2 {
+	/*background : #F7F7F7;*/
+	height: 100%;
+	line-height: 100%;
+	/*padding-top: 40px;*/
+	/*margin-top: 2%!important;*/
+	padding: 2%;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	z-index:300;
+	/*border-top: 4px solid #F44336;*/
+}
+
+#home .vehicle-select-form{
+	margin-top: 7%;
+}
+
+#home .veh-cat-card {
+	height: 60px;
+	text-align: center;
+	line-height: 60px;
+	margin: 0px!important;
+	border-radius: 0px;
+	font-size: 20px;
+	/*box-shadow: 1px 0px 0px 0 rgba(0,0,0,0.14),1px 0px 0px 0 rgba(0,0,0,0.12),1px 0px 0px 0px rgba(0,0,0,0.2);*/
+}
+
+#home .veh-cat-card.selected {
+	z-index: 200;
+	color: #FFFFFF!important;
+	background: #F44336 !important;
+}
+
+#home .veh-cat-card:hover {
+	z-index: 200;
+	/*color: #FFFFFF;*/
+	/*border-bottom: 4px solid #F44336;*/
+	/*background: rgba(244,67,54,1);*/
+	color:#F44336;
+	cursor: pointer;
+}
+
+
+#home .bike-card {
+	/*height: 60px;*/
+	/*text-align: center;*/
+	/*line-height: 60px;*/
+	/*margin: 0px!important;*/
+	border-top-right-radius: 10px!important;
+}
+#home .car-card {
+	/*height: 60px;*/
+	/*text-align: center;*/
+	/*line-height: 60px;*/
+	/*margin: 0px!important;*/
+	border-top-left-radius: 10px!important;;
+}
+
+
+
+
+
+#home .veh-cat-col {
+	/*height: 50px;*/
+	/*text-align: center;*/
+	/*line-height: 50px;*/
+	padding: 0px!important;
+}
+
+
 #home h4{
 	text-transform: uppercase;
 
 }
+
 #home .home-form .error-message{
+	color: red;
+	font-size: 13px;
+	text-align: right;
+	margin-top: -10px;
+}
+
+#home .home-form-2 .error-message{
 	color: red;
 	font-size: 13px;
 	text-align: right;
@@ -547,6 +625,15 @@ iframe {
 }
 
 #home .home-form .button-row{
+	text-align: center;
+	/*width: 30%;*/
+	/*padding: 0% 5% 0% 5%;*/
+	/*margin-left: 35%;*/
+	margin-bottom: 2rem!important;
+
+}
+
+#home .home-form-2 .button-row{
 	text-align: center;
 	/*width: 30%;*/
 	/*padding: 0% 5% 0% 5%;*/
