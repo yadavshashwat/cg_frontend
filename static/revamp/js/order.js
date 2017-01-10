@@ -17,7 +17,11 @@ $('.datepicker').pickadate({
 
 $(".button-collapse").sideNav();
 
-var CURRENT_CART = {'a':'asadaadad'}
+var CURRENT_CART = [];
+var TOTAL_PRICE = 0;
+var TOTAL_JOBS = 0;
+
+
 var Global = {
     init:function() {
         var _this = this;
@@ -34,6 +38,7 @@ var Global = {
         _this.eventsAdded = true;
         console.log('adding hanlder');
 
+    // On page load adding items car
 
         $(document).ready(function() {
             cookie = local.load()
@@ -60,8 +65,7 @@ var Global = {
             Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
         });
 
-
-
+        // Service Select Load Jobs - Start
         $('#services .service-card').on('click' ,function(e){
             var classy = $(this).attr('data-class');
             console.log(classy);
@@ -86,14 +90,30 @@ var Global = {
             }else{
                 return
             }
-            $('#services').slideUp('fast', function() {
+            $('#services').slideUp('slow', function() {
                     $('#jobs').show();
                                 });
-            $('.order-page .nav-services').slideDown('slow', function() {
-
-            });
-
+            // $('.order-page .nav-services').slideDown('slow', function() {
+            // });
+            $('.order-page .nav-services').show();
+            $('#nav-cart').show()
         });
+
+        $('#nav-cart').click(function(){
+            $('#cart').show().addClass('page-width-cart')
+            $('.order-page .nav-services').hide();
+            $('#jobs .service-list').hide()
+             $('#nav-cart').hide()
+        });
+
+        $('#cart .close-cart').click(function(){
+            $('#cart').hide().removeClass('page-width-cart')
+            $('.order-page .nav-services').show();
+            $('#jobs .service-list').show()
+             $('#nav-cart').show()
+        })
+
+
 
         $('.order-page .desktop-list .service-item').on('click', function(e){
             $(' .desktop-list  .service-item').removeClass('selected');
@@ -127,6 +147,7 @@ var Global = {
                 return
             }        });
 
+        // Service Select Load Jobs - End
 
         $('#jobs').on('click',' .job .closed-more-info', function(e){
             var parent = $(this).closest('.job');
@@ -149,12 +170,9 @@ var Global = {
                 $("#jobs").height(b)
         });
 
-
         $(window).scroll(function(){
             var wh = $(window).height();
             var ch = $('#cart').height() + 250;
-            // console.log(wh);
-            // console.log(ch);
             if (wh >= ch){
               	if ($(this).scrollTop() > 0) {
                 $('#cart').css({position: 'fixed', top: '140px'});
@@ -172,6 +190,8 @@ var Global = {
               $('#cart .cart-coupon .coupon-box').show();
         });
 
+        // adding item cart
+
         $('#jobs').on('click','.job .book-btn',function(e){
             var parent = $(this).closest('.job');
             var newC = parent.attr('job-id');
@@ -187,6 +207,10 @@ var Global = {
             Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
             $(this).addClass('disabled')
         });
+
+
+
+        // Deleting item cart
 
         $('#cart').on('click','.cart-item .delete',function(e){
             var parent = $(this).closest('.cart-item');
@@ -205,14 +229,140 @@ var Global = {
             job_div = $("#jobs").find("[job-id='" + delC + "']");
             job_div.find('.book-btn').removeClass('disabled')
         });
+
+        $('#cart .btn-checkout').on('click' ,function(e){
+            $('.order-page .nav-services').hide();
+            $('#jobs').hide();
+            $('#booking-details').show();
+        });
+
+        var sendotp = function(){
+            var name = $('#name').val();
+           var number = $('#telephone').val();
+           var email = $('#email').val();
+           var address =  $('#address').val();
+           var locality =  $('#locality').val();
+           var city =  $('#city').val();
+           var date = $('#date').val();
+           var time = $('#time-slot').find('.active span').text();
+                        // form validation
+            error =0
+           if(name==""){
+               $('#name').addClass("invalid");
+               error = 1;
+           }
+           if(address==""){
+               $('#address').addClass("invalid");
+               error = 1;
+           }
+           if(locality==""){
+               $('#locality').addClass("invalid");
+               error = 1;
+           }
+           if(number <= 100000000 || number >= 9999999999){
+               $('#telephone').addClass("invalid");
+               error = 1;
+           }
+            if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+               $('#email').addClass("valid");
+               // error = 1;
+           }else{
+               $('#email').addClass("invalid");
+               error =1;
+           }
+           if(date==""){
+               $('#date').addClass("invalid");
+               error = 1;
+           }
+           if(time==""){
+               $('#time').addClass("invalid");
+               $('#choose-time-slot').text('Choose Time Slot');
+               error = 1;
+           }
+            if(error==1){
+               console.log("didnt work")
+               return;
+           }else{
+              Commons.ajaxData('send_otp_new', {phone: number}, "get", _this, _this.loadOTP);
+            }
+        };
+
+        var calculate_cart =function(){
+
+        };
+
+        $('#booking-details .btn-checkout').on('click',sendotp);
+        $('#booking-details .resend').on('click',sendotp);
+
+        $('#booking-details .change_details').on('click',function () {
+               $('#booking-details .customer-details').show()
+               $('#booking-details .login').hide()
+
+        });
+
+
+
+        $('#booking-details .btn-send-booking').click(function () {
+           var name = $('#name').val();
+           var number = $('#telephone').val();
+           var email = $('#email').val();
+           var address =  $('#address').val();
+           var locality =  $('#locality').val();
+           var city =  $('#city').val();
+           var date = $('#date').val();
+           var otp = $('#otp').val();
+           var comment = $('#comment').val();
+            cookie = local.load();
+           var fuel = cookie['vehfuel'];
+           var veh_type = cookie['vehtype'];
+           var make = cookie['vehmake'];
+           var model = cookie['vehmodel'];
+           var coupon = cookie['coupon']
+           var is_paid = false
+           var paid_amt = "0"
+           var price_total = $('#total-price').val();
+           var time = $('#time-slot').find('.active span').text();
+           Commons.ajaxData('send_otp_booking', {otp:otp
+                                            ,name       : name
+                                            ,number     : number
+                                            ,email      : email
+                                            ,reg_number : "--"
+                                            ,address    : address
+                                            ,locality   : locality
+                                            ,city       : city
+                                            ,order_list : CURRENT_CART
+                                            ,make       : make
+                                            ,model      : model
+                                            ,fuel       : fuel
+                                            ,veh_type   : veh_type
+                                            ,date       : date
+                                            ,time       : time
+                                            ,comment    : comment
+                                            ,is_paid    : is_paid
+                                            ,paid_amt   : paid_amt
+                                            ,coupon     : coupon
+                                            ,price_total: price_total }, "get", _this, _this.loadSendbooking);
+        });
+
     },
 
     loadCart:function(data){
             var container = $('#cart .cart-list');
-            console.log('check')
+        // console.log('check')
             container.html('');
             var html ='';
             $.each(data['cart_details'], function(ix, val) {
+
+
+                // Cart Changes
+
+                CURRENT_CART.push({"Job ID":val.id,"Vehicle Make":val.make,
+                    "Vehicle Model":val.model,
+                    "Vehicle Fuel Type":val.fuel_type,
+                    "Job Name":val.job_name,
+                    "Job Total":val.total_price,
+                    "Job Description":val.default_comp})
+
                 html +='<div class="cart-item" job-id="'+val.id+'">';
                 html +=' 								<div class="col s1 m1 l1">';
                 html +=' 									<div class="delete x25">';
@@ -235,11 +385,18 @@ var Global = {
                 html +=' 							</div>'
             });
          container.html(html);
+
         var container2 = $('#cart .cart-section.cart-summary');
+
             // console.log('check')
             container2.html('');
             var html2 ='';
             $.each(data['cart_summary'], function(ix, val) {
+
+            // TOTAL_PRICE Change
+            TOTAL_PRICE = val.cg_amount;
+            TOTAL_JOBS = val.total_jobs;
+
             html2 += '<div class="col s12 m12 l12">';
             html2 += '									<div class="row dealer-price">';
             html2 += '										<div class="col s7 m7 l7"> Dealer Price :</div>';
@@ -253,7 +410,7 @@ var Global = {
             html2 += '										<div class="col s7 m7 l7">CG Price : </div>';
             html2 += '										<div class="col s5 m5 l5 cg-price price">';
             html2 += '											<b>₹&nbsp;</b>';
-            html2 += val.cg_amount
+            html2 += '<span id="total-price">'+TOTAL_PRICE+'</span>'
             html2 += '										</div>';
             html2 += '									</div>';
             html2 += '									<div class="row discount">';
@@ -262,23 +419,63 @@ var Global = {
             html2 += '										</div>';
             html2 += '									</div>';
             html2 += '							</div>';
-                });
+            });
         container2.html(html2);
 
+
+
+        // Summary Section Populate
+
+            var container3 = $('#summary .cart-list');
+            container3.html('');
+            var html3 ='';
+            $.each(data['cart_details'], function(ix, val) {
+                html3 +='<div class="cart-item" job-id="'+val.id+'">';
+                // html3 +=' 								<div class="col s1 m1 l1">';
+                // html3 +=' 									<div class="delete x25">';
+                // html3 +=' 										<i class="fa fa-trash-o"></i>';
+                // html3 +=' 									</div>';
+                // html3 +=' 								</div>';
+                html3 +=' 								<div class="col offset-s1 offset-m1 offset-l1 s8 m8 l8">';
+                html3 +=' 									<div class="item-name">';
+                html3 += 									val.job_name
+                html3 +=' 									</div>';
+                html3 +=' 									<div class="item-desc">';
+                html3 +=' 										Quotation Break-up';
+                html3 +=' 									</div>';
+                html3 +=' 								</div>';
+                html3 +=' 								<div class="col s3 m3 l3">';
+                html3 +=' 									<div class="item-price">';
+                html3 +=' 										<b>₹&nbsp;</b>'+ val.total_price;
+                html3 +=' 									</div>';
+                html3 +=' 								</div>';
+                html3 +=' 							</div>'
+            });
+         container3.html(html3);
+
+        var container4 = $('#summary .cart-section.cart-summary');
+            // console.log('check')
+            container4.html('');
+            container4.html(html2);
+
+        $('#cart_items').text(TOTAL_PRICE);
+
+        // Saving to cart_global_variable
 
     },
 
     loadJobs:function(data){
             var container = $('#jobs .service-list');
+
             container.html('');
             var html ='';
+            cookie_name = local.load();
+            if(cookie_name['cgcart']==null || cookie_name['cgcart']===false){;
+            cart_list = 'Empty';
+            }else{
+            cart_list = cookie_name['cgcart'];
+            }
 
-            // booking button disable
-            $("#jobs").find('.book-btn').removeClass('disabled');
-            cookie = local.load();
-            if (cookie['chcart']){
-                cart_list = cookie['cgcart'].split(',')
-            };
             $.each(data, function(ix, val) {
                     html += '<div class="job" job-id ='+val.id + '>';
                     html += '<div class="card vertical-cards cardhover  service-name">';
@@ -308,14 +505,11 @@ var Global = {
                     html += '												<i class="material-icons right">turned_in</i>';
                     html += '											</button>';
 
-                    // if (val.id in cart_list){
-                    //     console.log('read')
-                    // }else{
-                    //     console.log('no read')
-                    // }
-
-
-                    html += '											<button class="waves-effect waves-light btn red  btn-service book-btn" type="submit" name="action">Book';
+                    if (cart_list.indexOf(val.id)>=0){
+                        html += '											<button class="waves-effect waves-light btn red  btn-service book-btn disabled" type="submit" name="action">Book';
+                    }else{
+                        html += '											<button class="waves-effect waves-light btn red  btn-service book-btn" type="submit" name="action">Book';
+                    }
                     html += '												<i class="material-icons right">send</i>';
                     html += '											</button>';
                     html += '										</div>';
@@ -333,7 +527,11 @@ var Global = {
                     html += '									<button class="waves-effect waves-light btn red btn-service closed-more-info" type="submit" name="action">Info';
                     html += '										<i class="material-icons right">turned_in</i>';
                     html += '									</button>';
-                    html += '									<button class="waves-effect waves-light btn red  btn-service book-btn" type="submit" name="action">Book';
+                    if (cart_list.indexOf(val.id)>=0){
+                        html += '											<button class="waves-effect waves-light btn red  btn-service book-btn disabled" type="submit" name="action">Book';
+                    }else{
+                        html += '											<button class="waves-effect waves-light btn red  btn-service book-btn" type="submit" name="action">Book';
+                    }
                     html += '										<i class="material-icons right">send</i>';
                     html += '									</button>';
                     html += '								</div>';
@@ -415,7 +613,13 @@ var Global = {
             });
             container.html(html);
         },
+    loadOTP:function(data) {
+        $('#booking-details .customer-details').hide()
+        $('#booking-details .login').show()
+    },
+    loadSendbooking:function(data) {
 
+    }
 };
 
 

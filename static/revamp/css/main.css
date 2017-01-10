@@ -328,7 +328,7 @@ iframe {
 }
 
 .cg-primary{
-	color: #4a148c;
+    background-color: #4a148c!important;
 }
 
 .cg-secondary{
@@ -1337,19 +1337,18 @@ list-style: circle;
 }
 
 
-#cart{
+#cart, #summary{
     position: absolute;
     /*top : 140px;*/
     /*bottom: 30px;*/
     right: 10px;
 }
 
-#cart .cart-section {
-
+#cart .cart-section, #summary .cart-section {
     border-bottom: 2px solid #dcdcdc;
 }
 
-#cart .cart-header{
+#cart .cart-header, #summary .cart-header{
     background: #e6e6e6;
      border-top-left-radius: 10px;
      border-top-right-radius: 10px;
@@ -1362,31 +1361,31 @@ list-style: circle;
     padding: 20px;
 
 }
-#cart .vehicle-header{
+#cart .vehicle-header, #summary .vehicle-header{
     text-align: left;
     font-weight: 600;
     padding: 5px;
     font-size: 16px;
 }
 
-#cart .vehicle-header .vehicle-name{
+#cart .vehicle-header .vehicle-name, #summary .vehicle-header .vehicle-name{
     text-align: left;
     padding: 45px;
     color: #9e9e9e;
     font-weight: 400;
 
 }
-#cart .cart-list{
+#cart .cart-list, #summary .cart-list{
     min-height: 80px;
 }
-#cart .cart-item{
+#cart .cart-item, #summary .cart-item{
     min-height: 80px;
     font-size: 18px;
     line-height: 55px;
     border-bottom: 0.5px solid #dcdcdc;
 }
 
-#cart .cart-item .item-desc{
+#cart .cart-item .item-desc, #summary .cart-item .item-desc{
     /*height: 70px;*/
     font-size: 16px!important;
     line-height: 0px!important;
@@ -1396,13 +1395,13 @@ list-style: circle;
 }
 
 
-#cart .cart-item .item-price{
+#cart .cart-item .item-price, #summary .cart-item .item-price{
     /*height: 70px;*/
     /*font-size: 22px;*/
     /*line-height: 70px;*/
     font-weight: 700;
 }
-#cart .cart-summary{
+#cart .cart-summary, #summary .cart-summary{
     font-size: 20px;
     line-height: 45px;
     font-weight: 800;
@@ -1447,20 +1446,19 @@ list-style: circle;
 
 
 
-
-#cart .price{
+#cart .price, #summary .price{
     text-align: right;
 }
 
-#cart .dealer-price{
+#cart .dealer-price, #summary .dealer-price{
     color: #c12d2d;
 }
-#cart .cg-price{
+#cart .cg-price, #summary .cg-price{
     font-size: 22px;
     font-weight: 800;
 }
 
-#cart .discount{
+#cart .discount, #summary .discount{
     font-size: 16px;
     font-weight: 400;
     text-align: right;
@@ -1479,6 +1477,80 @@ list-style: circle;
     width: 100%;
 }
 
+#booking-details .number{
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+	margin: 20px 5px 20px 20px;
+    width: 50px;
+    height: 50px;
+    padding: 8px;
+	line-height: 35px;
+    background: rgba(74,20,140,1);
+    /*border: 2px solid #666;*/
+    color: #FFF;
+    text-align: center;
+	font-size: 22px;
+}
+
+#booking-details .box-header{
+	margin-top: 8px;
+}
+#booking-details .time-form {
+	font-size: 20px;
+	line-height: 20px;
+	margin-top: 15px;
+	text-align: right;
+}
+
+#booking-details .box-card {
+	font-size: 20px;
+	line-height: 40px;
+	margin-right: 5px;
+	border-radius: 0px;
+	height: 40px;
+	text-align: center;
+	margin-bottom: 3px;
+}
+
+#booking-details .confirm-details {
+	padding-bottom: 20px;
+}
+#booking-details .link-otp {
+	font-size: 16px;
+	padding:10px;
+	color : #00A4E4;
+    text-decoration: underline;
+    cursor: pointer;
+	text-align: center;
+}
+
+#nav-cart .nav-cart-list{
+	bottom: 0px;
+    background: rgba(74,20,140,1);
+    /*border: 2px solid #666;*/
+    color: #FFF;
+    text-align: center;
+	font-size: 22px;
+}
+
+#nav-cart .nav-cart-list  li{
+	width: 100%;
+}
+
+#nav-cart-btn{
+border-right: 2px solid #FFF;
+}
+
+#cart.page-width-cart{
+	position: fixed;
+	top: 60px;
+	width:100%;
+	padding: 2%;
+	display: block!important;
+	right:0px!important;
+}
+
+
 
 
 
@@ -1486,7 +1558,6 @@ list-style: circle;
 /* ==========================================================================
    Mobile Styles
    ========================================================================== */
-
 
 
 /* Landscape phones and down */

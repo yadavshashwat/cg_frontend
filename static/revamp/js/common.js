@@ -40,11 +40,12 @@ var Commons = {
         'get_make_model':'/api/get_make_model/',
         'get_jobs_vehicle':'/api/get_jobs_vehicle/',
         'add_job_cart':'/api/add_job_cart/',
+        'send_otp_new':'/api/send_otp_new/',
+        'send_otp_booking':'/api/send_otp_booking/',
         'get_location':'/api/get_location/',
         'post_lead':'/api/post_lead/',
         'post_message':'/api/post_message/'
-        
-        
+
     },
 
     getOrigin: function(){
