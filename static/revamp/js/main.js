@@ -267,7 +267,6 @@ var Global = {
            $('#home .home-form-2 .vehicle-type').text(vehicle);
         });
 
-
        $('#home .home-form-2 .form-proceed').click(function(event){
            var make = $('#brand-select').find('.active span').text();
            var model = $('#vehicle-select').find('.active span').text();
@@ -286,7 +285,8 @@ var Global = {
            local.save('vehfuel',fuel)
            local.save('vehtype',vehtype)
            local.save('fullname',make+" "+model+" "+fuel)
-            window.location.href = '/get_quote';
+            // window.location.href = '/get_quote';
+           window.location.href = '/'+vehtype+'/'+make+'_'+model+'_'+fuel;
        });
 
         $('#contact .contact-us .message-submit').click(function(event){

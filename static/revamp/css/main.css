@@ -405,6 +405,9 @@ iframe {
 	margin-left: 5%;
 }
 
+.nav-services,.nav-cart{
+	z-index: 50;
+}
 
 /*Tranparent Navbar*/
 .nav2{
@@ -569,19 +572,19 @@ iframe {
 
 }
 
-#home .home-form .error-message{
+.error-message{
 	color: red;
 	font-size: 13px;
 	text-align: right;
 	margin-top: -10px;
 }
 
-#home .home-form-2 .error-message{
-	color: red;
-	font-size: 13px;
-	text-align: right;
-	margin-top: -10px;
-}
+/*#home .home-form-2 .error-message{*/
+	/*color: red;*/
+	/*font-size: 13px;*/
+	/*text-align: right;*/
+	/*margin-top: -10px;*/
+/*}*/
 
 #home .service-card{
 	text-align: center;
@@ -1342,6 +1345,7 @@ list-style: circle;
     /*top : 140px;*/
     /*bottom: 30px;*/
     right: 10px;
+	padding-bottom: 50px;
 }
 
 #cart .cart-section, #summary .cart-section {
@@ -1543,7 +1547,7 @@ border-right: 2px solid #FFF;
 
 #cart.page-width-cart{
 	position: fixed;
-	top: 60px;
+	top: 60px!important;
 	width:100%;
 	padding: 2%;
 	display: block!important;

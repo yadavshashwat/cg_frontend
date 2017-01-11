@@ -5,7 +5,7 @@
 	<title>Car & Bike - Repair, Cleaning, Servicing | Road Side Assistance | Doorstep services</title>
 	<meta name="description" content="Click Garage is the ideal one-stop solution for all types of car & bike repair, service, interior cleaning and other associated works. We also offer quick and efficient road side assistance for cars (Nissan, Datsun, Volkswagen, Toyota, Tata, Skoda,  Renault, Maruti Suzuki, Mahindra, Hyundai, Honda, Ford, Fiat, Chevrolet) and bikes (Royal Enfield, Suzuki, TVS, Bajaj, KTM, Yamaha, Hero)."/>
 	<meta name="keywords" content="Car, Car Repair, Car Dry Cleaning, Bike, Bike Repair , car dent repair, Bumper Repair, car interior cleaning, road side assistance, motorcycle maintenance"/>
-	<meta property="og:image" content="../../static/revamp/img/Logo-Black.jpg"/>
+	<meta property="og:image" content="/../../static/revamp/img/Logo-Black.jpg"/>
 	<meta name="viewport" content="width=device-width">
 	<meta property="og:title" content="Car & Bike - Repair, Cleaning, Servicing | Road Side Assistance | Doorstep services">
 	<meta property="og:type" content="website">
@@ -14,13 +14,13 @@
 	<meta property="og:description" content="Click Garage is the ideal one-stop solution for all types of car & bike repair, service, interior cleaning and other associated works. We also offer quick and efficient road side assistance for cars (Nissan, Datsun, Volkswagen, Toyota, Tata, Skoda,  Renault, Maruti Suzuki, Mahindra, Hyundai, Honda, Ford, Fiat, Chevrolet) and bikes (Royal Enfield, Suzuki, TVS, Bajaj, KTM, Yamaha, Hero).">
 
 	<!-- Styles -->
-	<link rel="stylesheet" href="../../static/revamp/css/font-awesome.css">
-	<link rel="stylesheet" href="../../static/revamp/css/animate.css">
-	<link rel="stylesheet" href="../../static/revamp/css/styles.css">
-	<!--<link rel="stylesheet" href="../../static/revamp/css/bootstrap.min.css">-->
-	<link rel="stylesheet" href="../../static/revamp/css/materialize.min.css">
-	<link rel="stylesheet" href="../../static/revamp/css/main.css">
-	<link rel="stylesheet" href="../../static/revamp/css/custom-styles.css">
+	<link rel="stylesheet" href="/../../static/revamp/css/font-awesome.css">
+	<link rel="stylesheet" href="/../../static/revamp/css/animate.css">
+	<link rel="stylesheet" href="/../../static/revamp/css/styles.css">
+	<!--<link rel="stylesheet" href="/../../static/revamp/css/bootstrap.min.css">-->
+	<link rel="stylesheet" href="/../../static/revamp/css/materialize.min.css">
+	<link rel="stylesheet" href="/../../static/revamp/css/main.css">
+	<link rel="stylesheet" href="/../../static/revamp/css/custom-styles.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800italic,800' rel='stylesheet' type='text/css'>
 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -30,7 +30,7 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-57-precomposed.png">
-	<link rel="shortcut icon" href="../../static/revamp/img/favicon.png">
+	<link rel="shortcut icon" href="/../../static/revamp/img/favicon.png">
 </head>
 
 <body class="order-page">
@@ -39,11 +39,12 @@
 	<nav class="nav2">
 		<div class="nav-wrapper navbar-custom">
 			<div class="logo-cg logo-color visible">
-				<a href="/get_quote/" class="brand-logo"><img class="logo-img" src="../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>
+				<a href="/{{veh_type}}/{{veh}}" class="brand-logo"><img class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>
 			</div>
 			<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			<ul class="right hide-on-med-and-down items-list">
-				<li class ="learn-more-button"><a>Change Car</a></li>
+				<li class ="learn-more-button"><a href="/index_new">Home</a></li>
+				<li class ="learn-more-button"><a>Change Vehicle</a></li>
 				<li class ="partners-button"><a>Booking History</a></li>
 				<li class ="testi-button"><a>Login</a></li>
 				<!--<li class ="brands-button"><a>Brands</a></li>-->
@@ -52,7 +53,8 @@
 			</ul>
 
 			<ul class="side-nav items-list" id="mobile">
-				<li class ="learn-more-button"><a>Change Car</a></li>
+				<li class ="learn-more-button"><a href="/index_new">Home</a></li>
+				<li class ="learn-more-button"><a>Change Vehicle</a></li>
 				<li class ="partners-button"><a>Booking History</a></li>
 				<li class ="testi-button"><a>Login</a></li>
 			</ul>
@@ -64,7 +66,7 @@
 
 	<nav class="nav-service-list">
 		<div class="nav-wrapper navbar-services desktop-list hide-on-med-and-down">
-			<ul class="center items-list-car visible">
+			<ul class="center items-list-car invisible">
 				<li data-class ="servicing" class ="service-item servicing-button car-servicing">Servicing</li>
 				<li data-class ="repairing" class ="service-item repairing-button car-repairing">Repairing</li>
 				<li data-class ="denting"   class ="service-item painting-button car-denting">Denting/Painting</li>
@@ -80,11 +82,11 @@
 		</div>
 		<div class="row">
 			<div id="service-select" class="nav-wrapper navbar-services small-list hide-on-large-only">
-				<div class="input-field col s10 m10 l10 offset-m1 offset-s1 offset-l1 car-services visible" >
+				<div class="input-field col s10 m10 l10 offset-m1 offset-s1 offset-l1 car-services invisible" >
 					<select>
 						<option data-class ="servicing" class ="car-servicing" value="servicing-button">Servicing</option>
 						<option data-class ="repairing" class ="car-repairing"   value="repairs-button">Repairing</option>
-						<option data-class ="denting" class ="car-denting"   value="painting-button">Denting/Painting</option>
+						<option data-class ="denting" class ="car-denting"   value="painting-button">Denting Painting</option>
 						<option  data-class ="carcare" class ="car-care"   value="cleaning-button">Car Care</option>
 						<option data-class ="subscription" class ="car-subscription"  value="amc-button">AMC</option>
 						<option data-class ="emergency" class ="car-emergency"   value="emergency-button">Emergency</option>
@@ -104,23 +106,24 @@
 </div>
 
 <!--service category section -->
-<section id="services" class="visible">
+<section id="services" class="visible" data-vehicle-name="{{veh}}" data-vehicle-type="{{veh_type}}">
 	<!--<div class="overlay-pat">-->
 	<div class="services-select-section">
 		<div class="container-fluid">
 			<div class='row'>
 				<div class="col s12 m12 l12 car-name">
 					<h3 id="intro-sentence"></h3>
+					<!--<h4>{{display_name}}</h4>-->
 				</div>
 			</div>
 			<!--<div class="col s12 m12 l4">-->
 			<div class='row services-category-bike invisible'>
 				<div class="col s12 m12 l4">
-					<div data-class="servicing" class='card service-card cardhover bike-servicing'>
+					<div data-class="servicing"  class='card service-card cardhover bike-servicing'>
 						<!--<div class ="">-->
 						<br>
 						<div class = "card-image">
-							<img class="" src="../../static/revamp/img/Icons-Services/Bike-Servicing.png">
+							<img class="" src="/../../static/revamp/img/Icons-Services/Bike-Servicing.png">
 						</div>
 						<div class = "card-content">
 							<h3 class="service-headers">Servicing</h3>
@@ -133,7 +136,7 @@
 					<div data-class="repairing" class ="card service-card cardhover bike-repairing">
 						<br>
 						<div class = "card-image">
-							<img class=""   src="../../static/revamp/img/Icons-Services/Bike-Repairing.png">
+							<img class=""   src="/../../static/revamp/img/Icons-Services/Bike-Repairing.png">
 						</div>
 						<div class = "card-content">
 							<!--<i class ="icon-cg-carrepair icon"></i>-->
@@ -146,7 +149,7 @@
 					<div data-class="emergency" class ="card service-card cardhover bike-emergency">
 						<br>
 						<div class = "card-image">
-							<img class=""  src="../../static/revamp/img/Icons-Services/Emergency.png">
+							<img class=""  src="/../../static/revamp/img/Icons-Services/Emergency.png">
 						</div>
 						<div class = "card-content">
 							<!--<i class ="icon-cg-denting icon"></i>-->
@@ -161,7 +164,7 @@
 					<div data-class="servicing" class ="card service-card cardhover car-servicing">
 						<br>
 						<div class = "card-image">
-							<img class="" src="../../static/revamp/img/Icons-Services/Car-Servicing.png">
+							<img class="" src="/../../static/revamp/img/Icons-Services/Car-Servicing.png">
 						</div>
 						<div class = "card-content">
 							<h3 class="service-headers">Servicing</h3>
@@ -173,7 +176,7 @@
 					<div data-class = "repairing" class ="card service-card cardhover car-repairing">
 						<br>
 						<div class = "card-image">
-							<img class=""   src="../../static/revamp/img/Icons-Services/Car-Repair.png">
+							<img class=""   src="/../../static/revamp/img/Icons-Services/Car-Repair.png">
 						</div>
 						<div class = "card-content">
 							<!--<i class ="icon-cg-carrepair icon"></i>-->
@@ -186,7 +189,7 @@
 					<div data-class = "denting" class ="card service-card cardhover car-denting">
 						<br>
 						<div class = "card-image">
-							<img class=""  src="../../static/revamp/img/Icons-Services/Car-Denting.png">
+							<img class=""  src="/../../static/revamp/img/Icons-Services/Car-Denting.png">
 						</div>
 						<div class = "card-content">
 							<!--<i class ="icon-cg-denting icon"></i>-->
@@ -199,7 +202,7 @@
 					<div data-class ="carcare" class ="card service-card cardhover car-care">
 						<br>
 						<div class = "card-image">
-							<img class="" src="../../static/revamp/img/Icons-Services/Car-CarCare.png">
+							<img class="" src="/../../static/revamp/img/Icons-Services/Car-CarCare.png">
 						</div>
 						<div class = "card-content">
 							<h3 class="service-headers">Car Care</h3>
@@ -211,7 +214,7 @@
 					<div data-class ="subscription" class ="card service-card cardhover car-subscrition">
 						<br>
 						<div class = "card-image">
-							<img class=""   src="../../static/revamp/img/Icons-Services/Car-AMC.png">
+							<img class=""   src="/../../static/revamp/img/Icons-Services/Car-AMC.png">
 						</div>
 						<div class = "card-content">
 							<!--<i class ="icon-cg-carrepair icon"></i>-->
@@ -224,7 +227,7 @@
 					<div data-class="emergency" class ="card service-card cardhover car-emergency">
 						<br>
 						<div class = "card-image">
-							<img class=""  src="../../static/revamp/img/Icons-Services/Emergency.png">
+							<img class=""  src="/../../static/revamp/img/Icons-Services/Emergency.png">
 						</div>
 						<div class = "card-content">
 							<!--<i class ="icon-cg-denting icon"></i>-->
@@ -241,7 +244,7 @@
 
 <!--service jobs Section-->
 
-<section id="jobs" class="invisible">
+<section id="jobs" class="invisible" data-service="{{service}}">
 	<div class="services-select-section">
 		<div class="container-fluid services">
 			<div class="row">
@@ -252,7 +255,7 @@
 					<!--<div class="row">-->
 					<!--<div class="col l12 s12 m12 service-content">-->
 					<!--<div class="card-image">-->
-					<!--<img class=""  src="../../static/revamp/img/Icons-Services/Emergency.png">-->
+					<!--<img class=""  src="/../../static/revamp/img/Icons-Services/Emergency.png">-->
 					<!--</div>-->
 					<!--<div class="card-content job-content">-->
 					<!--<div class="col s12 m12 l6">-->
@@ -397,8 +400,8 @@
 						<div class="row cart-section  vehicle-header">
 							<div class="col s12 m12 l12">
 								Vehicle Details<br>
-								<span id="vehicle-name" class="vehicle-name">Hyundai i20</span><br>
-								<span id="vehicle-varient" class="vehicle-name">Petrol Variant</span>
+								<span id="vehicle-name1" class="vehicle-name"></span><br>
+								<span id="vehicle-varient1" class="vehicle-name"></span>
 							</div>
 						</div>
 						<div class="row cart-section cart-list">
@@ -614,7 +617,7 @@
 										<div class="input-field col s12">
 											<i class="material-icons prefix">my_location</i>
 											<input type="text" id="address" required="" aria-required="true">
-											<label for="locality" data-error="Required">Street Name</label>
+											<label for="address" data-error="Required">Street Name</label>
 										</div>
 									</div>
 									<div class="row">
@@ -629,7 +632,7 @@
 										<div class="input-field col s12">
 											<i class="material-icons prefix">business</i>
 											<input type="text" id="city" class="" required="" aria-required="true">
-											<label for="locality" data-error="Required">City</label>
+											<label for="city" data-error="Required">City</label>
 										</div>
 									</div>
 
@@ -857,20 +860,20 @@
 
 
 <div class="loading-pane">
-	<img src="../../static/revamp/img/loading.gif" alt="" class="loading-gif">
+	<img src="/../../static/revamp/img/loading.gif" alt="" class="loading-gif">
 </div>
 <!-- Javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script>window.jQuery || document.write('<script src="../../static/revamp/js/jquery-3.1.1.min.js"><\/script>')</script>
-<script src="../../static/revamp/js/materialize.min.js"></script>
-<script src="../../static/revamp/js/order.js"></script>
-<script src="../../static/revamp/js/common.js"></script>
-<script src="../../static/revamp/js/forms.js"></script>
-<script src="../../static/revamp/js/jquery.backstretch.js"></script>
-<script src="../../static/revamp/js/jquery.cycle.lite.js"></script>
+<script>window.jQuery || document.write('<script src="/../../static/revamp/js/jquery-3.1.1.min.js"><\/script>')</script>
+<script src="/../../static/revamp/js/materialize.min.js"></script>
+<script src="/../../static/revamp/js/order.js"></script>
+<script src="/../../static/revamp/js/common.js"></script>
+<script src="/../../static/revamp/js/forms.js"></script>
+<script src="/../../static/revamp/js/jquery.backstretch.js"></script>
+<script src="/../../static/revamp/js/jquery.cycle.lite.js"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">

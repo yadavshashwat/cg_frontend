@@ -42,62 +42,168 @@ var Global = {
 
         $(document).ready(function() {
             cookie = local.load()
-            vehicle_type = cookie['vehtype'];
+            vehicle_type_c = cookie['vehtype'];
             veh_make = cookie['vehmake'];
             veh_model = cookie['vehmodel'];
             veh_fuel = cookie['vehfuel'];
-            $('#vehicle-name').text(veh_make + " " +veh_model)
-            rand_number = Math.floor(Math.random() * 3) + 1
-            if (rand_number == 1){
-                $('#intro-sentence').text('How can we help with your '+veh_make+' '+veh_model+'?')
-            }else if (rand_number == 2){
-                $('#intro-sentence').text('We really love your '+veh_make+' '+veh_model+'!')
+            var name = $('#services').attr('data-vehicle-name')
+            name = name.split('_')
+            var vehicle_type = $('#services').attr('data-vehicle-type')
+
+            if (veh_make == name[0] && veh_model == name[1] && veh_fuel == name[2] && vehicle_type_c == vehicle_type){
+
             }else{
-                $('#intro-sentence').text('Your '+veh_make+' '+veh_model+' looks kinda amazing!')
+                local.clearKey('cgcart')
+                local.save('vehtype',vehicle_type)
+                local.save('vehmake',name[0])
+                local.save('vehmodel',name[1])
+                local.save('vehfuel',name[2])
             }
 
+
+            $('#vehicle-name').text(name[0] + " " +name[1])
+            $('#vehicle-varient').text(name[2]+" Varient")
+            $('#vehicle-name1').text(name[0] + " " +name[1])
+            $('#vehicle-varient1').text(name[2]+" Varient")
+            rand_number = Math.floor(Math.random() * 3) + 1
+            if (rand_number == 1){
+                $('#intro-sentence').text('How can we help with your '+name[0]+' '+name[1]+'?')
+            }else if (rand_number == 2){
+                $('#intro-sentence').text('We really love your '+name[0]+' '+name[1]+'!')
+            }else{
+                $('#intro-sentence').text('Your '+name[0]+' '+name[1]+' looks kinda amazing!')
+            }
             if(vehicle_type == "Car"){
                 // console.log(vehicle_type)
                 $('#services .services-category-car').show()
             }else{
                 $('#services .services-category-bike').show()
             }
+
+            var service = $('#jobs').attr('data-service')
+            if(service.length){
+                $('#services .service-card[data-class="'+service+'"]').click()
+            }
             Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
         });
 
+
+
         // Service Select Load Jobs - Start
         $('#services .service-card').on('click' ,function(e){
+            $(' .desktop-list  .service-item').removeClass('selected');
+            $(' .desktop-list  .service-item:hover').addClass('selected');
             var classy = $(this).attr('data-class');
-            console.log(classy);
+            var name = $('#services').attr('data-vehicle-name')
+            var vehicle_type = $('#services').attr('data-vehicle-type')
+
+            name = name.split('_')
+            // console.log(classy);
             if(classy == 'servicing'){
                 $('.nav-services').find('.car-servicing').addClass('selected');
                 $('.nav-services').find('.bike-servicing').addClass('selected');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: "Hyundai",model_id:"i20",fuel_id:"Diesel",service_type: "Servicing"}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
             }else if(classy =='repairing'){
                 $('.nav-services').find('.car-repairing').addClass('selected');
                 $('.nav-services').find('.bike-repairing').addClass('selected');
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Repairing"}, "get", _this, _this.loadJobs);
             }else if(classy =='emergency'){
                 $('.nav-services').find('.car-emergency').addClass('selected');
                 $('.nav-services').find('.bike-emergency').addClass('selected');
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Emergency"}, "get", _this, _this.loadJobs);
             }else if(classy =='subscription'){
                 $('.nav-services').find('.car-subscription').addClass('selected');
                 $('.nav-services').find('.bike-subscription').addClass('selected');
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
             }else if(classy =='carcare'){
                 $('.nav-services').find('.car-care').addClass('selected');
                 Commons.ajaxData('get_jobs_vehicle', {make_id: "Hyundai",model_id:"i20",fuel_id:"Diesel",service_type: "Cleaning"}, "get", _this, _this.loadJobs);
             }else if(classy =='denting'){
                 $('.nav-services').find('.car-denting').addClass('selected');
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Denting"}, "get", _this, _this.loadJobs);
             }else{
                 return
             }
+             // console.log(window.location.pathname.split('/').length)
+                if(window.location.pathname.split('/').length == 4){
+                    var new_path =  window.location.pathname+classy+'/'
+                    history.pushState({},'',new_path)
+                }
             $('#services').slideUp('slow', function() {
                     $('#jobs').show();
                                 });
-            // $('.order-page .nav-services').slideDown('slow', function() {
-            // });
             $('.order-page .nav-services').show();
+            if (vehicle_type == "Car"){
+                $('.order-page .nav-services .items-list-car').addClass('visible').removeClass('invisible')
+                $('.order-page .nav-services .car-services').addClass('visible').removeClass('invisible')
+
+            }else if(vehicle_type =="Bike"){
+                $('.order-page .nav-services .items-list-bike').addClass('visible').removeClass('invisible')
+                $('.order-page .nav-services .bike-services').addClass('visible').removeClass('invisible')
+            }
             $('#nav-cart').show()
         });
+
+
+        $('.order-page .desktop-list .service-item').on('click', function(e){
+            $(' .desktop-list  .service-item').removeClass('selected');
+            $(' .desktop-list  .service-item:hover').addClass('selected');
+            var name = $('#services').attr('data-vehicle-name')
+            name = name.split('_')
+            var classy = $(this).attr('data-class');
+            if(classy == 'servicing'){
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
+            }else if(classy =='repairing'){
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Repairing"}, "get", _this, _this.loadJobs);
+            }else if(classy =='emergency'){
+                                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Emergenct"}, "get", _this, _this.loadJobs);
+            }else if(classy =='subscription'){
+                                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
+            }else if(classy =='carcare'){
+                Commons.ajaxData('get_jobs_vehicle', {make_id: "Hyundai",model_id:"i20",fuel_id:"Diesel",service_type: "Cleaning"}, "get", _this, _this.loadJobs);
+            }else if(classy =='denting'){
+                                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Denting"}, "get", _this, _this.loadJobs);
+            }else{
+                return
+            }
+             // console.log(window.location.pathname.split('/').length)
+                if(window.location.pathname.split('/').length == 5){
+                    var a = window.location.pathname.split('/')
+                    var new_path =  a.slice(0,a.length-2).join('/')+'/'+classy+'/'
+                    history.pushState({},'',new_path)
+                }
+        });
+
+        $('#service-select').change(function(event,data){
+            var classy = $(this).find('.active span').text().toLowerCase().replace(/\s+/g, '');;
+            // console.log(classy)
+            var name = $('#services').attr('data-vehicle-name')
+            name = name.split('_')
+            if(classy == 'servicing'){
+               Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
+            }else if(classy =='repairing'){
+                              Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Repairing"}, "get", _this, _this.loadJobs);
+            }else if(classy =='emergency'){
+                               Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Emergency"}, "get", _this, _this.loadJobs);
+            }else if(classy =='amc'){
+                               Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
+            }else if(classy =='carcare'){
+                               Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Cleaning"}, "get", _this, _this.loadJobs);
+                // Commons.ajaxData('get_jobs_vehicle', {make_id: "Hyundai",model_id:"i20",fuel_id:"Diesel",service_type: "Cleaning"}, "get", _this, _this.loadJobs);
+            }else if(classy =='dentingpainting'){
+                               Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Denting"}, "get", _this, _this.loadJobs);
+            }else{
+                return
+            }
+            // console.log(window.location.pathname.split('/').length)
+                if(window.location.pathname.split('/').length == 5){
+                    var a = window.location.pathname.split('/')
+                    var new_path =  a.slice(0,a.length-2).join('/')+'/'+classy+'/'
+                    history.pushState({},'',new_path)
+                }
+        });
+
+        // Service Select Load Jobs - End
 
         $('#nav-cart').click(function(){
             $('#cart').show().addClass('page-width-cart')
@@ -115,40 +221,6 @@ var Global = {
 
 
 
-        $('.order-page .desktop-list .service-item').on('click', function(e){
-            $(' .desktop-list  .service-item').removeClass('selected');
-            $(' .desktop-list  .service-item:hover').addClass('selected');
-            var classy = $(this).attr('data-class');
-            if(classy == 'servicing'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: "Hyundai",model_id:"i20",fuel_id:"Diesel",service_type: "Servicing"}, "get", _this, _this.loadJobs);
-            }else if(classy =='repairing'){
-            }else if(classy =='emergency'){
-            }else if(classy =='subscription'){
-            }else if(classy =='carcare'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: "Hyundai",model_id:"i20",fuel_id:"Diesel",service_type: "Cleaning"}, "get", _this, _this.loadJobs);
-            }else if(classy =='denting'){
-            }else{
-                return
-            }
-        });
-
-        $('#service-select').change(function(event,data){
-            var classy = $(this).find('.active span').text();
-            console.log(classy)
-            if(classy == 'Servicing'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: "Hyundai",model_id:"i20",fuel_id:"Diesel",service_type: "Servicing"}, "get", _this, _this.loadJobs);
-            }else if(classy =='repairing'){
-            }else if(classy =='emergency'){
-            }else if(classy =='subscription'){
-            }else if(classy =='Car Care'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: "Hyundai",model_id:"i20",fuel_id:"Diesel",service_type: "Cleaning"}, "get", _this, _this.loadJobs);
-            }else if(classy =='denting'){
-            }else{
-                return
-            }        });
-
-        // Service Select Load Jobs - End
-
         $('#jobs').on('click',' .job .closed-more-info', function(e){
             var parent = $(this).closest('.job');
             parent.find('.closed-more-info').addClass('open-more-info').removeClass('closed-more-info');
@@ -165,10 +237,28 @@ var Global = {
             });
         });
 
-        $('.service-card').click(function(){
-            var b = $('#cart').height() + 150;
-                $("#jobs").height(b)
-        });
+        // height-windows
+        $('#jobs .close-cart').click(function () {
+            var ch = $('#jobs .service-list').height()+20;
+            $('#jobs').height(ch)
+        })
+
+        $('#nav-cart').click(function () {
+            var ch = $('#cart').height();
+            $('#jobs').height(ch)
+        })
+
+        // Ask atachee
+        $('.service-card').click(function () {
+            var ch = $('#cart').height();
+            var sh = $('#jobs .service-list').height();
+            // console.log(ch)
+            // console.log(sh)
+            // $('#jobs').height(ch)
+        })
+
+
+
 
         $(window).scroll(function(){
             var wh = $(window).height();
@@ -185,7 +275,7 @@ var Global = {
         });
 
         $('#cart .cart-coupon .discount-link').on('click',function(e){
-              console.log('check')
+              // console.log('check')
               $('#cart .cart-coupon .discount-link').hide();
               $('#cart .cart-coupon .coupon-box').show();
         });
@@ -203,7 +293,7 @@ var Global = {
             }
             oldC += newC;
             local.save('cgcart', oldC);
-            console.log(local.load('cgcart'))
+            // console.log(local.load('cgcart'))
             Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
             $(this).addClass('disabled')
         });
@@ -232,7 +322,14 @@ var Global = {
 
         $('#cart .btn-checkout').on('click' ,function(e){
             $('.order-page .nav-services').hide();
-            $('#jobs').hide();
+            $('#jobs').hide()
+            if(window.location.pathname.split('/').length == 5){
+                    var a = window.location.pathname.split('/')
+                    var new_path =  a.slice(0,a.length-2).join('/')+'/checkout/'
+                    history.pushState({},'',new_path)
+                }
+
+
             $('#booking-details').show();
         });
 
@@ -258,6 +355,9 @@ var Global = {
            if(locality==""){
                $('#locality').addClass("invalid");
                error = 1;
+           }if(city==""){
+               $('#city').addClass("invalid");
+               error = 1;
            }
            if(number <= 100000000 || number >= 9999999999){
                $('#telephone').addClass("invalid");
@@ -280,15 +380,11 @@ var Global = {
                error = 1;
            }
             if(error==1){
-               console.log("didnt work")
+               // console.log("didnt work")
                return;
            }else{
-              Commons.ajaxData('send_otp_new', {phone: number}, "get", _this, _this.loadOTP);
+              Commons.ajaxData('send_otp_new', {phone: number}, "get", _this, _this.loadOTP,null, '.loading-pane');
             }
-        };
-
-        var calculate_cart =function(){
-
         };
 
         $('#booking-details .btn-checkout').on('click',sendotp);
@@ -320,7 +416,7 @@ var Global = {
            var coupon = cookie['coupon']
            var is_paid = false
            var paid_amt = "0"
-           var price_total = $('#total-price').val();
+           var price_total = $('#total-price').text();
            var time = $('#time-slot').find('.active span').text();
            Commons.ajaxData('send_otp_booking', {otp:otp
                                             ,name       : name
@@ -341,7 +437,7 @@ var Global = {
                                             ,is_paid    : is_paid
                                             ,paid_amt   : paid_amt
                                             ,coupon     : coupon
-                                            ,price_total: price_total }, "get", _this, _this.loadSendbooking);
+                                            ,price_total: price_total }, "get", _this, _this.loadSendbooking,null, '.loading-pane');
         });
 
     },
@@ -482,11 +578,12 @@ var Global = {
                     html += '<div class="row">';
                     html += '<div class="col l12 s12 m12 service-content">';
                     html += '								<div class="card-image">';
-                    html += '										<img class=""  src="../../static/revamp/img/Icons-Services/Emergency.png">';
+                    html += '										<img class=""  src="/../../static/revamp/img/Icons-Services/Emergency.png">';
                     html += '									</div>';
                     html += '									<div class="card-content job-content">';
                     html += '										<div class="col s12 m12 l6">';
                     html += '											<div class="job-name">'+ val.job_name +'</div>';
+                    // html += '											<div class="job-desc">';
                     html += '											<div class="job-desc">';
                     html += '												<ul>';
                     jsLen = val.job_summary.length;
