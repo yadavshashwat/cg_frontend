@@ -8,8 +8,8 @@ var Commons = {
         if(type == "POST" || type == "GET"){
             callType = type
         }
-        console.log(name)
 
+        console.log(name)
         if(name){
             if(loadingSelector){
                 $(loadingSelector).show();
@@ -25,7 +25,7 @@ var Commons = {
                     if(loadingSelector){
                         $(loadingSelector).hide();
                     }
-                    console.log(res)
+                    // console.log(res)
                     if(res && res.status){
                         bind(success_cb, bindObj, [res.result])
                     }else{
@@ -42,10 +42,22 @@ var Commons = {
         'add_job_cart':'/api/add_job_cart/',
         'send_otp_new':'/api/send_otp_new/',
         'send_otp_booking':'/api/send_otp_booking/',
+        'send_booking':'/api/send_booking/',
         'get_location':'/api/get_location/',
         'post_lead':'/api/post_lead/',
-        'post_message':'/api/post_message/'
-
+        'post_message':'/api/post_message/',
+        'verify_otp_password_cookie':'/api/verify_otp_password_cookie/',
+        'set_password_otp':'/api/set_password_otp/',
+        'sign_up_otp':'/api/sign_up_otp/',
+        'logout_view':'/api/logout_view/',
+        'view_all_bookings':'/api/view_all_bookings/',
+        'fetch_all_users':'/api/fetch_all_users/',
+        'update_user':'/api/update_user/',
+        'update_booking':'/api/update_booking/',
+        'add_modify_coupon':'/api/add_modify_coupon/',
+        'view_all_coupons':'/api/view_all_coupons/',
+        'check_coupon':'/api/check_coupon/',
+        'send_booking':'/api/send_booking/',
     },
 
     getOrigin: function(){

@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+
+	<title>Car & Bike - Repair, Cleaning, Servicing | Road Side Assistance | Doorstep services</title>
+	<meta name="description" content="Click Garage is the ideal one-stop solution for all types of car & bike repair, service, interior cleaning and other associated works. We also offer quick and efficient road side assistance for cars (Nissan, Datsun, Volkswagen, Toyota, Tata, Skoda,  Renault, Maruti Suzuki, Mahindra, Hyundai, Honda, Ford, Fiat, Chevrolet) and bikes (Royal Enfield, Suzuki, TVS, Bajaj, KTM, Yamaha, Hero)."/>
+	<meta name="keywords" content="Car, Car Repair, Car Dry Cleaning, Bike, Bike Repair , car dent repair, Bumper Repair, car interior cleaning, road side assistance, motorcycle maintenance"/>
+	<meta property="og:image" content="/../../static/revamp/img/Logo-Black.jpg"/>
+	<meta name="viewport" content="width=device-width">
+	<meta property="og:title" content="Car & Bike - Repair, Cleaning, Servicing | Road Side Assistance | Doorstep services">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="http://www.clickgarage.in">
+	<meta property="og:site_name" content="ClickGarage">
+	<meta property="og:description" content="Click Garage is the ideal one-stop solution for all types of car & bike repair, service, interior cleaning and other associated works. We also offer quick and efficient road side assistance for cars (Nissan, Datsun, Volkswagen, Toyota, Tata, Skoda,  Renault, Maruti Suzuki, Mahindra, Hyundai, Honda, Ford, Fiat, Chevrolet) and bikes (Royal Enfield, Suzuki, TVS, Bajaj, KTM, Yamaha, Hero).">
+
+	<!-- Styles -->
+	<link rel="stylesheet" href="/../../static/revamp/css/font-awesome.css">
+	<link rel="stylesheet" href="/../../static/revamp/css/animate.css">
+	<link rel="stylesheet" href="/../../static/revamp/css/styles.css">
+	<!--<link rel="stylesheet" href="/../../static/revamp/css/bootstrap.min.css">-->
+	<link rel="stylesheet" href="/../../static/revamp/css/materialize.min.css">
+	<link rel="stylesheet" href="/../../static/revamp/css/main.css">
+	<link rel="stylesheet" href="/../../static/revamp/css/custom-styles.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800italic,800' rel='stylesheet' type='text/css'>
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+	<!-- Fav and touch icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-57-precomposed.png">
+	<link rel="shortcut icon" href="/../../static/revamp/img/favicon.png">
+</head>
+
+<body class="admin-page">
+
+<div class="navbar navbar-fixed visible">
+	<nav class="nav2">
+		<div class="nav-wrapper navbar-custom">
+			<div class="logo-cg logo-color visible">
+				<a href="/newadmin" class="brand-logo"><img class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>
+			</div>
+			<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+			<ul class="right hide-on-med-and-down items-list">
+				<li class ="name"><a><span class="uname"></span></a></li>
+				<li class ="new-booking-button"><a>New Booking</a></li>
+				<li class ="coupon-button"><a>Coupon Management</a></li>
+				<li class ="users-button"><a>User Management</a></li>
+				<!--<li class ="analytics-button"><a>Analytics</a></li>-->
+				<li class ="lead-button"><a>Leads</a></li>
+				<li class ="booking-button"><a>Bookings</a></li>
+				<li class ="log-in-button"><a><span class="log-in"></span></a></li>
+			</ul>
+			<ul class="side-nav items-list" id="mobile">
+				<li class ="name"><a><span class="uname"></span></a></li>
+				<li class ="new-booking-button"><a>New Booking</a></li>
+				<li class ="coupon-button"><a>Coupon Management</a></li>
+				<li class ="users-button"><a>User Management</a></li>
+				<!--<li class ="analytics-button"><a>Analytics</a></li>-->
+				<li class ="lead-button"><a>Leads</a></li>
+				<li class ="booking-button"><a>Bookings</a></li>
+				<li class ="log-in-button"><a><span class="log-in"></span></a></li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<section id="new-booking" class="invisible">
+	<div class="row header-booking admin-staff-row">
+		<div class="col s6 m6 l6 date-box book-btn selected">
+			Booking
+		</div>
+		<div class="col s6 m6 l6 date-box lead-btn">
+			Lead
+		</div>
+	</div>
+	<div class="row">
+		<div class="row booking-add visible">
+			<div class="row centered-text">
+				<h3><span class="booking-lead">Booking</span> Details</h3>
+			</div>
+			<div class="vehicle-select">
+				<div class="row">
+					<div class="col l12 m12 s12 box-header">
+						<h3>Vehicle Select</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col l12 s12 m12">
+						<!-- <form class="col s12"> -->
+						<div class="row">
+							<div class="col l12 centered-text">
+								<p>
+									<input class="veh-type-select" name="groupvehtype" type="radio" id="Carnew" checked />
+									<label for="Carnew">Car</label>
+									<input class="veh-type-select" name="groupvehtype" type="radio" id="Bikenew" />
+									<label for="Bikenew">Bike</label>
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12 m12 l12" id ="select-make">
+								<select class="browser-default">
+									<option value="" disabled selected>Select Make</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12 m12 l12" id ="select-model">
+								<!--<select class="browser-default">-->
+									<!--<option value="" disabled selected>Select Model</option>-->
+								<!--</select>-->
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12 m12 l12 invisible" id ="select-fuel">
+								<select class="browser-default">
+									<option value="" disabled selected>Fuel Type</option>
+									<option value="Petrol">Petrol</option>
+									<option value="Diesel">Diesel</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+								<i class="material-icons prefix">receipt</i>
+								<input id="reg_number" type="text" class="validate" required="" aria-required="true">
+								<label for="reg_number" data-error="Required">Registration Numbers</label>
+							</div>
+						</div>
+						<!-- </form> -->
+					</div>
+				</div>
+			</div>
+
+			<div class="service-select">
+				<div class="row">
+					<div class="col l12 m12 s12 box-header">
+						<h3>Service Select</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col l12 s12 m12">
+						<!-- <form class="col s12"> -->
+						<div class="row">
+							Total Amount : <b>₹&nbsp;<span class="amount">0</span></b>
+						</div>
+						<div class="services-list">
+							<div class="service-row">
+								<div class="row">
+									<div class="input-field col s5 m5 l5 category-select">
+										<select class="browser-default">
+											<option value="" disabled selected>Select Category</option>
+										</select>
+									</div>
+									<div class="input-field col s6 m6 l6 service-select">
+										<select class="browser-default">
+											<option value="" disabled selected>Select Service</option>
+										</select>
+									</div>
+									<div class="col s1 m1 l1 x25 centered-text delete-item" >
+										<i class="fa fa-trash-o"></i>
+									</div>
+								</div>
+							</div>
+							<div class="service-row to-copy-row invisible">
+								<div class="row">
+									<div class="input-field col s5 m5 l5 category-select">
+										<select class="browser-default">
+											<option value="" disabled selected>Select Category</option>
+										</select>
+									</div>
+									<div class="input-field col s6 m6 l6 service-select">
+										<select class="browser-default">
+											<option value="" disabled selected>Select Service</option>
+										</select>
+									</div>
+									<div class="col s1 m1 l1 x25 centered-text delete-item" >
+										<i class="fa fa-trash-o"></i>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="row">
+							<div class="col l12 s12 m12 centered-text">
+								<button class="waves-effect waves-light btn red btn-additem page-wide" type="submit" name="action">Add Job
+									<i class="material-icons right">add</i>
+								</button>
+							</div>
+						</div>
+						<div class="row">
+								<div class="input-field col s12" >
+									<i class="material-icons prefix">report_problem</i>
+									<textarea id="comment" class="materialize-textarea"></textarea>
+									<label for="comment">Specific issues/ request?</label>
+								</div>
+						</div>
+					</div>
+					<!-- </form> -->
+				</div>
+			</div>
+
+			<div class="customer-details-select">
+				<div class="row">
+					<div class="col l12 m12 s12 box-header">
+						<h3><span class="pocdetails">Customer</span> Details</h3>
+					</div>
+				</div>
+				<div class="row">
+					<form>
+						<div class="col l6 s12 m12">
+							<!-- <div class="col s12"> -->
+							<div class="row">
+								<div class="input-field col s12">
+									<i class="material-icons prefix">account_circle</i>
+									<input id="name" type="text" class="validate" required="" aria-required="true">
+									<label for="name" data-error="Required">Name</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<i class="material-icons prefix">phone</i>
+									<input id="telephone" type="number" required="" aria-required="true">
+									<label for="telephone" data-error="Invalid Number" >Mobile</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<i class="material-icons prefix">email</i>
+									<input id="email" type="email" class="validate" required="" aria-required="true">
+									<label for="email" data-error="Invalid e-mail id">Email</label>
+								</div>
+							</div>
+							<!-- </div>	 -->
+						</div>
+						<div class="col l6 s12 m12">
+							<!-- <div class="col s12"> -->
+							<div class="row">
+								<div class="input-field col s12">
+									<i class="material-icons prefix">my_location</i>
+									<input type="text" id="address" required="" aria-required="true">
+									<label for="address" data-error="Required">Street Name</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<i class="material-icons prefix">location_on</i>
+									<input type="text" id="locality" class="autocomplete" required="" aria-required="true">
+									<label for="locality" data-error="Required">Locality</label>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="input-field col s12">
+									<i class="material-icons prefix">business</i>
+									<input type="text" id="city" class="" required="" aria-required="true">
+									<label for="city" data-error="Required">City</label>
+								</div>
+							</div>
+							<!-- </div>	 -->
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="date-time-select">
+				<div class="row">
+					<div class="col l12 m12 s12 box-header">
+						<h3><span class="booking-lead-2">Booking</span>  Date & Time</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col l12 s12 m12">
+						<form class="col s12">
+							<div class="row">
+								<div class="input-field col s12 m12 l6">
+									<i class="material-icons prefix">today</i>
+									<input id="date" type="date" class="datepicker">
+									<label for="date" data-error="required">Date</label>
+								</div>
+
+								<div class="input-field col s12 m12 l6" id ="time-slot">
+									<select class="browser-default">
+										<option value="" disabled selected>Time-Slot</option>
+										<option value="09:30AM - 11:30AM">09:30AM - 11:30AM </option>
+										<option value="11:30AM - 01:30PM">11:30AM - 01:30PM </option>
+										<option value="01:30PM - 03:30PM">01:30PM - 03:30PM </option>
+										<option value="03:30PM - 05:30PM">03:30PM - 05:30PM </option>
+										<option value="05:30PM - 07:30PM">05:30PM - 07:30PM </option>
+									</select>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="row confirm-details">
+				<div class="col s12 m12 l12 centered-text">
+					<button class="waves-effect waves-light btn-large red btn-service btn-send-booking" type="submit" name="action">Confirm
+						<i class="material-icons right">send</i>
+					</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!--</div>-->
+	</div>
+
+</section>
+
+<section id="bookings" class="invisible">
+	<div class="booking-select-section">
+		<!--<div class="container-fluid services">-->
+		<div class="box card no-border-radius invisible">
+			<div class="row btn red filter-sort closed">
+				<div class="col l12 s12 m12">
+					Filter Bookings <i class="fa fa-caret-down"></i>
+				</div>
+			</div>
+			<div class="row filter-option invisible">
+				<div class="col l4 s12 m12">
+					<div class="input-field">
+						<i class="material-icons prefix">today</i>
+						<input id="startdate" type="date" class="datepicker">
+						<label for="startdate" data-error="required">Start Date</label>
+					</div>
+				</div>
+				<div class="col l4 s12 m12">
+					<div class="input-field">
+						<i class="material-icons prefix">today</i>
+						<input id="enddate" type="date" class="datepicker">
+						<label for="enddate" data-error="required">End Date</label>
+					</div>
+				</div>
+				<div class="col l4 s12 m12">
+					<div class="input-field" id ="Status">
+						<select>
+							<option value="" disabled selected>Status</option>
+							<option value="1">Cold</option>
+							<option value="2">Confirmed</option>
+							<option value="3">Assigned</option>
+							<option value="4">Service Engineer Left</option>
+							<option value="5">Work In Progress</option>
+							<option value="6">Job Complete</option>
+						</select>
+					</div>
+				</div>
+				<div class="col l4 s6 m6">
+					<div class="input-field">
+						<i class="material-icons prefix">receipt</i>
+						<input id="booking_id" type="text" class="validate">
+						<label for="booking_id">Booking ID</label>
+					</div>
+				</div>
+				<div class="col l4 s6 m6">
+					<div class="input-field">
+						<i class="material-icons prefix">account_circle</i>
+						<input id="custname" type="text" class="validate">
+						<label for="custname">Customer Name</label>
+					</div>
+				</div>
+				<div class="col l4 s12 m12">
+					<div class="input-field" id ="Vehicle_type">
+						<select>
+							<option value="" disabled selected>Vehicle Type</option>
+							<option value="1">Car</option>
+							<option value="1">Bike</option>
+						</select>
+					</div>
+				</div>
+				<!--<div class="row filter-details">-->
+				<div class="col s12 m12 l12 centered-text">
+					<button class="waves-effect waves-light btn-large red btn-filter" type="submit" name="action">Filter Bookings
+						<i class="material-icons right">send</i>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="box invisible">
+			<div class="row">
+				<div class="col l6 m12 s12">
+					<div class="input-field sort" id ="sort">
+						<select>
+							<option value="" disabled selected>Sort By</option>
+							<option value="1">Booking ID</option>
+							<option value="2">Name</option>
+							<option value="3">Status</option>
+							<option value="4">Time</option>
+						</select>
+					</div>
+				</div>
+				<div class="col l6 m12 s12">
+					<div class="col l6 m6 s6 date-box selected">
+						Today
+					</div>
+					<div class="col l6 m6 s6 date-box">
+						Tomorrow
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	</div>
+	<div id="bookings-list" class="">
+		<div class="row card no-border-radius booking-header centered-text">
+			<div class="row">
+				<div class="col l1 s2 m2 booking-id-bar">
+					<b><span class="id">ID</span></b>
+				</div>
+				<div class="col l7 s7 m7">
+					<!--<div class="col l12 s12 m12">-->
+					<b>Details</b>
+					<!--</div>-->
+				</div>
+				<div class="col l4 s3 m3 status-bar">
+					<span class="status"><b>Status</b></span>
+				</div>
+			</div>
+		</div>
+		<div class="booking-list">
+			<div class="row pre-data">
+
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="booking-details" class="invisible">
+	<div id="customer-detail">
+		<div class="row header-booking">
+			<div class="col s6 m6 l6 cust-detail service-box selected">
+				Cust. Details
+			</div>
+			<div class="col s6 m6 l6 service-detail service-box">
+				Service Desc.
+			</div>
+
+		</div>
+		<div class="row">
+			<div class="row booking-data visible">
+				<div class="row pre-data">
+
+				</div>
+
+				<div class="row agent-button-row">
+					<div class="row">
+						<div class="col l12 s12 m12 centered-text">
+							<button class="waves-effect waves-light btn red btn-update-cust page-wide" type="submit" name="action">Update Customer
+								<i class="material-icons right">send</i>
+							</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col l12 s12 m12">
+							<button class="waves-effect waves-light btn red btn-update-status page-wide" type="submit" name="action"><span class="change-status">Change Status</span>
+								<i class="material-icons right">send</i>
+							</button>
+						</div>
+					</div>
+
+				</div>
+				<div class="row staff-button-row">
+					<div class="col l2 s12 m12">
+						<b>Select Agent</b>
+					</div>
+					<div class="col l10 s12 m12">
+						<div class="input-field" id="agent-select">
+							<!--<select class="agent-list">-->
+							<!--<option value="" disabled>Select Agent</option>-->
+							<!--</select>-->
+						</div>
+					</div>
+					<div class="col l2 s12 m12">
+						<b>Change Status</b>
+					</div>
+					<div class="col l10 s12 m12">
+						<div class="input-field" id="status-select">
+							<select class="status-list">
+								<option value="" disabled selected>Select Status</option>
+							</select>
+						</div>
+					</div>
+					<div class="col l12 s12 m12 centered-text">
+						<button class="waves-effect waves-light btn red btn-update-cust page-wide" type="submit" name="action">Update Booking
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="row booking-job-data invisible">
+				<div class="row pre-data">
+				</div>
+				<div class="row add-item">
+					<div class="row">
+						<div class="col l12 s12 m12 centered-text">
+							<button class="waves-effect waves-light btn red btn-additem-est page-wide" type="submit" name="action">Add Item
+								<i class="material-icons right">add</i>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="row agent-staff-button-row">
+					<div class="row">
+						<div class="col l6 s12 m12 centered-text">
+							<button class="waves-effect waves-light btn red btn-update-cust page-wide" type="submit" name="action">Update Estimate
+								<i class="material-icons right">send</i>
+							</button>
+						</div>
+						<div class="col l6 s12 m12 centered-text">
+							<button class="waves-effect waves-light btn red btn-share-est page-wide" type="submit" name="action">Share Estimate
+								<i class="material-icons right">send</i>
+							</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="user-details" class="invisible">
+	<div id="user-detail">
+		<div class="row user-data visible">
+		</div>
+	</div>
+</section>
+
+<section id="coupon-details" class="invisible">
+	<div id="coupon-detail">
+		<div class="row header-coupon">
+			<div class="col s6 m6 l6 date-box all-coupon selected">
+				All Coupons
+			</div>
+			<div class="col s6 m6 l6 date-box single-coupon">
+				Add/Edit Coupon
+			</div>
+		</div>
+		<div class="row">
+			<div class="row coupon-list visible">
+				<div class="row pre-data">
+				</div>
+			</div>
+			<div class="row coupon-add-mod invisible">
+				<div class="row centered-text">
+					<h3>Coupon Details</h3>
+				</div>
+				<div class="row">
+					<div class="col l12 s12 m12 centered-text">
+						<input type="checkbox" class="filled-in" id="coupon_active"/><label for="coupon_active">Activation Status</label>'
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col l12 s12 m12">
+						<div class="input-field">
+							<i class="material-icons prefix">turned_in_not</i>
+							<input id="coup_name" type="text" class="validate" required="" aria-required="true">
+							<label for="coup_name" data-error="Required">Coupon Code</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col l6 s6 m6">
+						<div class="input-field">
+							<i class="material-icons prefix">today</i>
+							<input id="start_date" type="date" class="datepicker">
+							<label for="start_date" data-error="Required">Start Date</label>
+						</div>
+					</div>
+					<div class="col l6 s6 m6">
+						<div class="input-field">
+							<i class="material-icons prefix">today</i>
+							<input id="end_date" type="date" class="datepicker">
+							<label for="end_date" data-error="Required">End Date</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col l6 s6 m6">
+						<select id="coup_veh_type" class="browser-default">
+							<option value="" disabled selected>Car/Bike</option>
+							<option value="Car">Car</option>
+							<option value="Bike">Bike</option>
+						</select>
+					</div>
+					<div class="col l6 s6 m6">
+						<select id="coup_cat" class="browser-default">
+							<option value="" disabled selected>Type Service</option>
+							<option value="Servicing">Servicing</option>
+							<option value="Cleaning">Cleaning</option>
+							<option value="Denting">Denting/ Painting</option>
+							<option value="All">All</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col l12 s12 m12">
+						<select id="coup_type"  class="browser-default">
+							<option value="" disabled selected>Type</option>
+							<option value="flat">Flat</option>
+							<option value="discount_labour">Discount on Labour</option>
+							<option value="discount_parts">Discount on Parts</option>
+							<option value="discount_total">Discount on Total</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col l12 s12 m12">
+						<div class="input-field">
+							<i class="material-icons prefix">error_outline</i>
+							<input id="coup_value" type="number" class="validate" required="" aria-required="true">
+							<label for="coup_value" data-error="Required">Value (<100 for percent or amount for flat)</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col l12 s12 m12">
+						<div class="input-field">
+							<i class="material-icons prefix">error_outline</i>
+							<input id="coup_cap" type="text" class="validate" required="" aria-required="true">
+							<label for="coup_cap" data-error="Required">Cap Amount</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col l12 s12 m12">
+						<div class="input-field" >
+							<i class="material-icons prefix">report_problem</i>
+							<textarea id="coup_message" class="materialize-textarea"></textarea>
+							<label for="coup_message" data-error="Required">Coupon Message</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col l12 s12 m12 centered-text">
+						<button class="waves-effect waves-light btn-large red add-coupon" type="submit" name="action">Add/ Modify Coupon
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+				<div class="row">
+					<span class="coupon-message"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section id="login" class="login invisible" style="">
+	<div class="materialContainer card">
+		<div class="box">
+			<!--<button class="waves-effect waves-light btn red  btn-service book-btn close-btn" type="submit" name="action"><i class="fa fa-times"></i>-->
+			<!--</button>-->
+			<div class="title row">ADMIN LOGIN</div>
+			<div class="row login-input-row">
+				<div class="input-field login-input">
+					<i class="material-icons prefix">phone</i>
+					<input id="telephone_login" type="tel" class="validate">
+					<label for="telephone_login" data-error="Invalid Number">Telephone : 10 Digits</label>
+				</div>
+			</div>
+			<div class="row btn-row login-method-row">
+				<div class="col s12 m12 l5">
+					<button class="btn waves-effect waves-light btn-large red use-otp" href="">Use OTP
+						<i class="material-icons right">send</i>
+					</button>
+				</div>
+				<div class="col s12 m12 l2">
+					Or
+				</div>
+				<div class="col s12 m12 l5">
+					<button class="btn waves-effect waves-light btn-large red use-pass" href="">Password
+						<i class="material-icons right">turned_in_not</i>
+					</button>
+				</div>
+				<div class="col s12 m12 l12 centered-text pass-forgot">
+					Forgot Your Password?
+				</div>
+			</div>
+			<div class="login-pass-change invisible">
+				<div class="row pass login-method-input">
+					<div class="input-field">
+						<i class="material-icons prefix">verified_user</i>
+						<input id="password-new" type="password" class="validate">
+						<label for="password-new" data-error="Required">Enter New Password</label>
+					</div>
+				</div>
+				<div class="row centered-text send-otp-row">
+					<div class="col s12 m12 l12">
+						<button class="btn waves-effect waves-light btn-large red change-pass-otp" href="">SEND OTP
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="row login-passchange-btn-row-otp invisible">
+				<div class="row otp login-method-input">
+					<div class="input-field">
+						<i class="material-icons prefix">dialpad</i>
+						<input id="otp-pass-new" type="tel" class="validate">
+						<label for="otp-pass-new">Enter OTP</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s12 m12 l6">
+						<button class="btn waves-effect waves-light btn-large red resend-otp" href="">RESEND
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+					<div class="col s12 m12 l6">
+						<button class="btn waves-effect waves-light btn-large red verify-btn-pass" href="">VERIFY
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+				<div class="row login-message-row invisible">
+					<span class="login-message"></span>
+				</div>
+			</div>
+			<div class="login-method-inputs">
+				<div class="row pass login-method-input invisible">
+					<div class="input-field login-input">
+						<i class="material-icons prefix">verified_user</i>
+						<input id="password" type="password" class="validate">
+						<label for="password">Enter Password</label>
+					</div>
+				</div>
+
+				<div class="row otp login-method-input invisible">
+					<div class="input-field login-input">
+						<i class="material-icons prefix">verified_user</i>
+						<input id="otp_login" type="tel" class="validate">
+						<label for="otp_login">Enter OTP</label>
+					</div>
+				</div>
+			</div>
+			<div class="row login-method-btn-row-otp invisible">
+				<div class="row">
+					<div class="col s12 m12 l6">
+						<button class="btn waves-effect waves-light btn-large red resend-otp" href="">RESEND
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+					<!--</div>-->
+					<!--<div class="row btn-row login-method-btn-row invisible">-->
+					<div class="col s12 m12 l6">
+						<button class="btn waves-effect waves-light btn-large red verify-btn" href="">VERIFY
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+				<div class="row login-message-row invisible">
+					<span class="login-message"></span>
+				</div>
+			</div>
+			<div class="row login-method-btn-row invisible">
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<button class="btn waves-effect waves-light btn-large red verify-btn" href="">VERIFY
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+				<div class="row login-message-row invisible">
+					<span class="login-message"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="cover" class="invisible"></section>
+
+<div class="loading-pane">
+	<img src="/../../static/revamp/img/loading.gif" alt="" class="loading-gif">
+</div>
+<!-- Javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>window.jQuery || document.write('<script src="/../../static/revamp/js/jquery-3.1.1.min.js"><\/script>')</script>
+<script src="/../../static/revamp/js/materialize.min.js"></script>
+<script src="/../../static/revamp/js/admin.js"></script>
+<script src="/../../static/revamp/js/login.js"></script>
+<script src="/../../static/revamp/js/common.js"></script>
+<script src="/../../static/revamp/js/forms.js"></script>
+<script src="/../../static/revamp/js/jquery.backstretch.js"></script>
+<script src="/../../static/revamp/js/jquery.cycle.lite.js"></script>
+</body>
+</html>

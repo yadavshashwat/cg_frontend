@@ -1,5 +1,11 @@
-document.onreadystatechange = function () {
+
+
+
+document.onready = function () {
+    // alert("Hi")
+    Login.init()
     Global.init();
+
 }
 
 $(document).ready(function() {
@@ -254,7 +260,6 @@ var Global = {
             }else{
 
             }
-
             var make = $(this).find('.active span').text();
             Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehtype}, "get", _this, _this.loadModels);
         });

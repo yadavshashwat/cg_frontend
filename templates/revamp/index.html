@@ -46,22 +46,24 @@
 			</div>
 			<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			<ul class="right hide-on-med-and-down items-list">
+				<li class ="name"><a><span class="uname"></span></a></li>
 				<li class ="learn-more-button"><a>Why Us?</a></li>
 				<li class ="partners-button"><a>Partners</a></li>
 				<li class ="testi-button"><a>Testimonials</a></li>
 				<li class ="brands-button"><a>Brands</a></li>
 				<li class ="contact-us-button"><a>Contact Us</a></li>
+				<li class ="log-in-button"><a><span class="log-in"></span></a></li>
 				<li class ="book-now-button"><a>Book Now!</a></li>
 				<!--<li class ="book-now-button btn waves-effect waves-light red"><a>Book Now!</a></li>-->
-
 			</ul>
-
 			<ul class="side-nav items-list" id="mobile">
+				<li class ="name"><a><span class="uname"></span></a></li>
 				<li class ="learn-more-button"><a>Why Us?</a></li>
 				<li class ="partners-button"><a>Partners</a></li>
 				<li class ="testi-button"><a>Testimonials</a></li>
 				<li class ="brands-button"><a>Brands</a></li>
 				<li class ="contact-us-button"><a>Contact Us</a></li>
+				<li class ="log-in-button"><a><span class="log-in"></span></a></li>
 				<li class ="book-now-button"><a>Book Now!</a></li>
 			</ul>
 		</div>
@@ -97,8 +99,9 @@
 
 				</div>
 			</div>
+
 			<div class = "vehicle-select-form col s12 m12 l6 hide-on-med-and-down">
-				<div class="row">
+				<div class="row row-zero-margin">
 					<div class="col s6 m6 l6 veh-cat-col">
 						<div class="card veh-cat-card car-card cardhover selected">
 							Car
@@ -111,186 +114,186 @@
 					</div>
 				</div>
 				<div class="row home-form-2 card">
-				<div class="row form-title text-left">
-					<h3><img src="../../static/revamp/img/by-line.png" alt="by-line">Select <span class="vehicle-type">Car</span> !</h3>
-				</div>
+					<div class="row form-title text-left">
+						<h3><img src="../../static/revamp/img/by-line.png" alt="by-line">Select <span class="vehicle-type">Car</span></h3>
+					</div>
 
-				<div class="row text-left vehicle-details">
+					<div class="row text-left vehicle-details">
 
-					<!--<div class="row field-title text-left">-->
+						<!--<div class="row field-title text-left">-->
 						<!--<h4>Vehicle Details</h4>-->
-					<!--</div>-->
+						<!--</div>-->
 
-					<form id="formValidate">
-						<div class="input-field col s12 m12 l12 " id="brand-select">
-							<!--<i class="fa fa-car prefix"></i>-->
-							<!--<select id="brand-select">-->
-							<!--&lt;!&ndash;<option value="" disabled selected>Choose Make</option>&ndash;&gt;-->
-							<!--&lt;!&ndash;&lt;!&ndash;<option value="Hyundai">Hyundai</option>&ndash;&gt;&ndash;&gt;-->
-							<!--&lt;!&ndash;&lt;!&ndash;<option value="Maruti">Maruti</option>&ndash;&gt;&ndash;&gt;-->
-							<!--</select>-->
-							<!--<label data-error="Select a Brand">Type of Question</label>-->
-						</div>
-						<div class="input-field col s7 m7 l7 " id="vehicle-select">
-							<select>
-								<option value="" disabled selected>Model</option>
-								<!--<option value="i10">i10</option>-->
-								<!--<option value="i20">i20</option>-->
-							</select>
-						</div>
-						<div class="input-field col s5 m5 l5" id="fuel-type-select">
-							<select>
-								<option value="" disabled selected>Fuel</option>
-								<option value="petrol">Petrol</option>
-								<option value="diesel">Diesel</option>
-								<option value="cng">LPG/CNG</option>
-							</select>
-						</div>
-					</form>
-					<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-vehicle-error"></span>
-				</div>
+						<form id="formValidate">
+							<div class="input-field col s12 m12 l12 " id="brand-select">
+								<!--<i class="fa fa-car prefix"></i>-->
+								<!--<select id="brand-select">-->
+								<!--&lt;!&ndash;<option value="" disabled selected>Choose Make</option>&ndash;&gt;-->
+								<!--&lt;!&ndash;&lt;!&ndash;<option value="Hyundai">Hyundai</option>&ndash;&gt;&ndash;&gt;-->
+								<!--&lt;!&ndash;&lt;!&ndash;<option value="Maruti">Maruti</option>&ndash;&gt;&ndash;&gt;-->
+								<!--</select>-->
+								<!--<label data-error="Select a Brand">Type of Question</label>-->
+							</div>
+							<div class="input-field col s7 m7 l7 " id="vehicle-select">
+								<select>
+									<option value="" disabled selected>Model</option>
+									<!--<option value="i10">i10</option>-->
+									<!--<option value="i20">i20</option>-->
+								</select>
+							</div>
+							<div class="input-field col s5 m5 l5" id="fuel-type-select">
+								<select>
+									<option value="" disabled selected>Fuel</option>
+									<option value="petrol">Petrol</option>
+									<option value="diesel">Diesel</option>
+									<!--<option value="cng">LPG/CNG</option>-->
+								</select>
+							</div>
+						</form>
+						<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-vehicle-error"></span>
+					</div>
 
-				<!--<div class = "row service-headers" id="selected-service">-->
+					<!--<div class = "row service-headers" id="selected-service">-->
 					<!--<div class="row field-title text-left">-->
-						<!--<h4>Service Details</h4>-->
+					<!--<h4>Service Details</h4>-->
 					<!--</div>-->
 
 					<!--<div class="col s6 m6 l4">-->
-						<!--<div class="card cardhover service-card">-->
-							<!--<div class="card-content service-name">-->
-								<!--<p>Servicing</p>-->
-							<!--</div>-->
-						<!--</div>-->
+					<!--<div class="card cardhover service-card">-->
+					<!--<div class="card-content service-name">-->
+					<!--<p>Servicing</p>-->
+					<!--</div>-->
+					<!--</div>-->
 					<!--</div>-->
 					<!--<div class="col s6 m6 l4">-->
-						<!--<div class="card cardhover service-card">-->
-							<!--<div class="card-content service-name">-->
-								<!--<p>Car Care</p>-->
-							<!--</div>-->
-						<!--</div>-->
+					<!--<div class="card cardhover service-card">-->
+					<!--<div class="card-content service-name">-->
+					<!--<p>Car Care</p>-->
+					<!--</div>-->
+					<!--</div>-->
 					<!--</div>-->
 					<!--<div class="col s6 m6 l4">-->
-						<!--<div class="card cardhover service-card">-->
-							<!--<div class="card-content service-name">-->
-								<!--<p>Repairing</p>-->
-							<!--</div>-->
-						<!--</div>-->
+					<!--<div class="card cardhover service-card">-->
+					<!--<div class="card-content service-name">-->
+					<!--<p>Repairing</p>-->
+					<!--</div>-->
+					<!--</div>-->
 					<!--</div>-->
 					<!--<div class="col s6 m6 l4">-->
-						<!--<div class="card cardhover service-card">-->
-							<!--<div class="card-content service-name">-->
-								<!--<p>Denting/Painting</p>-->
-							<!--</div>-->
-						<!--</div>-->
+					<!--<div class="card cardhover service-card">-->
+					<!--<div class="card-content service-name">-->
+					<!--<p>Denting/Painting</p>-->
+					<!--</div>-->
+					<!--</div>-->
 					<!--</div>-->
 					<!--<div class="col s6 m6 l4">-->
-						<!--<div class="card cardhover service-card">-->
-							<!--<div class="card-content service-name">-->
-								<!--<p>General Check-Up</p>-->
-							<!--</div>-->
-						<!--</div>-->
+					<!--<div class="card cardhover service-card">-->
+					<!--<div class="card-content service-name">-->
+					<!--<p>General Check-Up</p>-->
+					<!--</div>-->
+					<!--</div>-->
 					<!--</div>-->
 					<!--<div class="col s6 m6 l4">-->
-						<!--<div class="card cardhover service-card">-->
-							<!--<div class="card-content service-name">-->
-								<!--<p>Emergency</p>-->
-							<!--</div>-->
-						<!--</div>-->
+					<!--<div class="card cardhover service-card">-->
+					<!--<div class="card-content service-name">-->
+					<!--<p>Emergency</p>-->
+					<!--</div>-->
+					<!--</div>-->
 					<!--</div>-->
 					<!--<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-category-error"></span>-->
 					<!--<form class="col s12">-->
-						<!--<div class="row">-->
-							<!--<div class="input-field col s12" >-->
-								<!--<i class="material-icons prefix">report_problem</i>-->
-								<!--<textarea id="additional" class="materialize-textarea"></textarea>-->
-								<!--<label for="additional">Specific issues/ request?</label>-->
-							<!--</div>-->
-						<!--</div>-->
+					<!--<div class="row">-->
+					<!--<div class="input-field col s12" >-->
+					<!--<i class="material-icons prefix">report_problem</i>-->
+					<!--<textarea id="additional" class="materialize-textarea"></textarea>-->
+					<!--<label for="additional">Specific issues/ request?</label>-->
+					<!--</div>-->
+					<!--</div>-->
 					<!--</form>-->
-				<!--</div>-->
+					<!--</div>-->
 
-				<!--<div class="row form-row invisible">-->
+					<!--<div class="row form-row invisible">-->
 					<!--<form class="col s12">-->
-						<!--<div class="row field-title text-left">-->
-							<!--<h4>Booking Details</h4>-->
-						<!--</div>-->
+					<!--<div class="row field-title text-left">-->
+					<!--<h4>Booking Details</h4>-->
+					<!--</div>-->
 
-						<!--<div class="row">-->
-							<!--<div class="input-field col s6">-->
-								<!--<i class="material-icons prefix">account_circle</i>-->
-								<!--<input id="first_name" type="text" class="validate" required="" aria-required="true">-->
-								<!--<label for="first_name" data-error="Required">First Name</label>-->
-							<!--</div>-->
-							<!--<div class="input-field col s6">-->
+					<!--<div class="row">-->
+					<!--<div class="input-field col s6">-->
+					<!--<i class="material-icons prefix">account_circle</i>-->
+					<!--<input id="first_name" type="text" class="validate" required="" aria-required="true">-->
+					<!--<label for="first_name" data-error="Required">First Name</label>-->
+					<!--</div>-->
+					<!--<div class="input-field col s6">-->
 
-								<!--<input id="last_name" type="text" class="validate" required="" aria-required="true">-->
-								<!--<label for="last_name" data-error="Required">Last Name</label>-->
-							<!--</div>-->
-						<!--</div>-->
-						<!--<div class="row">-->
-							<!--&lt;!&ndash;<div class="input-field col s6">&ndash;&gt;-->
-							<!--&lt;!&ndash;<i class="material-icons prefix">location_on</i>&ndash;&gt;-->
-							<!--&lt;!&ndash;<input id="address" type="text" class="validate">&ndash;&gt;-->
-							<!--&lt;!&ndash;<label for="address">House No./ Street Name</label>&ndash;&gt;-->
-							<!--&lt;!&ndash;</div>&ndash;&gt;-->
-							<!--<div class="input-field col s12">-->
-								<!--<i class="material-icons prefix">location_on</i>-->
-								<!--<input type="text" id="locality" class="autocomplete" required="" aria-required="true">-->
-								<!--<label for="locality" data-error="Required">Locality</label>-->
+					<!--<input id="last_name" type="text" class="validate" required="" aria-required="true">-->
+					<!--<label for="last_name" data-error="Required">Last Name</label>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--<div class="row">-->
+					<!--&lt;!&ndash;<div class="input-field col s6">&ndash;&gt;-->
+					<!--&lt;!&ndash;<i class="material-icons prefix">location_on</i>&ndash;&gt;-->
+					<!--&lt;!&ndash;<input id="address" type="text" class="validate">&ndash;&gt;-->
+					<!--&lt;!&ndash;<label for="address">House No./ Street Name</label>&ndash;&gt;-->
+					<!--&lt;!&ndash;</div>&ndash;&gt;-->
+					<!--<div class="input-field col s12">-->
+					<!--<i class="material-icons prefix">location_on</i>-->
+					<!--<input type="text" id="locality" class="autocomplete" required="" aria-required="true">-->
+					<!--<label for="locality" data-error="Required">Locality</label>-->
 
-							<!--</div>-->
-						<!--</div>-->
-						<!--<div class="row">-->
-							<!--<div class="input-field col s12">-->
-								<!--<i class="material-icons prefix">phone</i>-->
-								<!--<input id="telephone" type="number" required="" aria-required="true">-->
-								<!--<label for="telephone" data-error="Invalid Number | Example : 9829098290" >Mobile</label>-->
-							<!--</div>-->
-						<!--</div>-->
-						<!--<div class="row">-->
-							<!--<div class="input-field col s12">-->
-								<!--<i class="material-icons prefix">email</i>-->
-								<!--<input id="email" type="email" class="validate" required="" aria-required="true">-->
-								<!--<label for="email" data-error="Invalid e-mail id">Email</label>-->
-							<!--</div>-->
-						<!--</div>-->
-						<!--<div class="row">-->
-							<!--<div class="input-field col s6">-->
-								<!--<i class="material-icons prefix">today</i>-->
-								<!--<input id="date" type="date" class="datepicker">-->
-								<!--<label for="date" data-error="required">date</label>-->
-							<!--</div>-->
-							<!--<div class="input-field col s6 m6 l6" id ="time-slot">-->
-								<!--<select>-->
-									<!--<option value="" disabled selected>Time-Slot</option>-->
-									<!--<option value="1">09:30AM - 11:30AM </option>-->
-									<!--<option value="2">11:30AM - 01:30PM </option>-->
-									<!--<option value="3">01:30PM - 03:30PM </option>-->
-									<!--<option value="4">03:30PM - 05:30PM </option>-->
-									<!--<option value="5">05:30PM - 07:30PM </option>-->
-								<!--</select>-->
-								<!--<span id ="choose-time-slot" class="error-message"></span>-->
-							<!--</div>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--<div class="row">-->
+					<!--<div class="input-field col s12">-->
+					<!--<i class="material-icons prefix">phone</i>-->
+					<!--<input id="telephone" type="number" required="" aria-required="true">-->
+					<!--<label for="telephone" data-error="Invalid Number | Example : 9829098290" >Mobile</label>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--<div class="row">-->
+					<!--<div class="input-field col s12">-->
+					<!--<i class="material-icons prefix">email</i>-->
+					<!--<input id="email" type="email" class="validate" required="" aria-required="true">-->
+					<!--<label for="email" data-error="Invalid e-mail id">Email</label>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--<div class="row">-->
+					<!--<div class="input-field col s6">-->
+					<!--<i class="material-icons prefix">today</i>-->
+					<!--<input id="date" type="date" class="datepicker">-->
+					<!--<label for="date" data-error="required">date</label>-->
+					<!--</div>-->
+					<!--<div class="input-field col s6 m6 l6" id ="time-slot">-->
+					<!--<select>-->
+					<!--<option value="" disabled selected>Time-Slot</option>-->
+					<!--<option value="1">09:30AM - 11:30AM </option>-->
+					<!--<option value="2">11:30AM - 01:30PM </option>-->
+					<!--<option value="3">01:30PM - 03:30PM </option>-->
+					<!--<option value="4">03:30PM - 05:30PM </option>-->
+					<!--<option value="5">05:30PM - 07:30PM </option>-->
+					<!--</select>-->
+					<!--<span id ="choose-time-slot" class="error-message"></span>-->
+					<!--</div>-->
 
-						<!--</div>-->
+					<!--</div>-->
 
 					<!--</form>-->
-				<!--</div>-->
-				<div class="row button-row proceed">
-					<!--<a href="#home">	-->
-					<button class="waves-effect waves-light btn-large red form-proceed" type="submit" name="action">Proceed
-						<i class="material-icons right">send</i>
-					</button>
-					<!--</a>-->
-				</div>
-				<!--<div class="row button-row invisible submit">-->
+					<!--</div>-->
+					<div class="row button-row proceed">
+						<!--<a href="#home">	-->
+						<button class="waves-effect waves-light btn-large red form-proceed" type="submit" name="action">Proceed
+							<i class="material-icons right">send</i>
+						</button>
+						<!--</a>-->
+					</div>
+					<!--<div class="row button-row invisible submit">-->
 					<!--<button class="waves-effect waves-light btn red form-submit" type="submit" name="action">Book Now-->
-						<!--<i class="material-icons right">send</i>-->
+					<!--<i class="material-icons right">send</i>-->
 					<!--</button>-->
-				<!--</div>-->
-				<!--<div class="row order-confirm invisible">-->
+					<!--</div>-->
+					<!--<div class="row order-confirm invisible">-->
 					<!--Thank you for placing your order! Our team will contact you shortly regarding the same.-->
-				<!--</div>-->
+					<!--</div>-->
 
 				</div>
 			</div>
@@ -302,13 +305,13 @@
 <section id="features">
 	<div class="feature-section">
 		<div class="container-fluid">
-			<div class="row">
+			<div class="row row-zero-margin">
 				<div class='col l4 m4 s12 center-align'>
 					<div class='feature-container'>
 						<!--<img class='icon' src='//d310p4tz9tc9pz.cloudfront.net/assets/main/icon-easy-47c13d6dcacaa69bea11f7f20bfeeb55.svg'>-->
 						<i class="cg-icon icon-cg-location x70"></i>
 						<h5 class='text-dark-gray'>WE MAKE IT EASY</h5>
-						<p>Get a quote and book a service online 24/7. Our mechanics will come to your home or office, even on evenings and weekends.</p>
+						<p>Get a quote and book a service online 24/7. Our service engineers will come to your home or office, even on evenings and weekends.</p>
 						<!--<a href=''>-->
 						<!--<div class='btn-more pull-bot'>-->
 						<!--<button class="waves-effect waves-red btn-flat" name="action">Learn More</button>-->
@@ -323,7 +326,7 @@
 						<!--<img class='icon' src='//d310p4tz9tc9pz.cloudfront.net/assets/main/icon-pricing-3c7b4a919e3a18e6cdd92acbfad1b2a4.svg'>-->
 						<i class="cg-icon icon-cg-fair x70"></i>
 						<h5 class='text-dark-gray'>FAIR AND TRANSPARENT PRICING</h5>
-						<p>We offer fair and transparent pricing and savings up to 30% compared to repair shops.</p>
+						<p>We offer fair and transparent pricing and savings up to 40% compared to repair shops.</p>
 						<p>Book with confidence.</p>
 						<!--<a href=''>-->
 						<!--&lt;!&ndash;<div class=''>Learn More</div>&ndash;&gt;-->
@@ -339,8 +342,8 @@
 						<!--<img class='icon' src='//d310p4tz9tc9pz.cloudfront.net/assets/main/icon-shield-85a3db2fcea7ced728cdc09be095ed2e.svg'>-->
 						<i class="cg-icon icon-cg-quality x70"></i>
 						<h5 class='text-dark-gray'>HAPPINESS GUARANTEED</h5>
-						<p>We only work with highly rated mechanics.</p>
-						<p>All services are backed by our 12-month / 12,000-mile warranty.</p>
+						<p>We only work with highly rated workshops.</p>
+						<p>All services are backed by our 2-month / 2,000-km warranty.</p>
 						<!--<a href=''>-->
 						<!--&lt;!&ndash;<div class=''>Learn More</div>&ndash;&gt;-->
 						<!--<div class='btn-more pull-bot'>-->
@@ -363,7 +366,7 @@
 	<div class="red-overlay">
 		<div class="client-section">
 			<div class="container-fluid">
-				<div class="row">
+				<div class="row row-zero-margin">
 					<div class="col s12 m12 l4 featured-section-title">
 						<h3 class="section-title"><img src="../../static/revamp/img/by-line.png" alt="by-line">Our partners</h3>
 					</div>
@@ -404,7 +407,7 @@
 				</div>
 			</div>
 
-			<div class="row testi-row">
+			<div class="row testi-row row-zero-margin">
 				<div class="col s12 m12 l4">
 					<div class="testimonial-column card  large">
 						<div class="card-image waves-effect waves-block waves-light">
@@ -473,7 +476,7 @@
 				</div>
 			</div>
 
-			<div class="row brand-logos">
+			<div class="row brand-logos row-zero-margin">
 				<div class="col s12 m12 l6">
 					<div class="brand-column card card-content">
 						<div class='col l12 m12 s12 center-align'>
@@ -578,13 +581,13 @@
 <section id="contact">
 
 	<div class="container-fluid">
-		<div class="row">
+		<div class="row row-zero-margin">
 			<div class="col m12 l12 s12 text-left">
 				<h3 class="section-title"><img src="../../static/revamp/img/by-line.png" alt="by-line">Contact Us</h3>
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row row-zero-margin">
 
 			<!--<div class="col m4 l4 s12 text-left">-->
 			<!--<ul>-->
@@ -630,7 +633,7 @@
 				<p>B702, Hex Tax Aprtments, Sector 43<br />
 					Gurgaon, Haryana - 122009</p>
 
-				<p class="tel"><a href="tel:+919555950000"><i class="fa fa-whatsapp"></i>&nbsp;/&nbsp;<i class="fa fa-phone"></i> &nbsp; +91-9555-95-0000</p><br />
+				<p class="tel"><a href="tel:+919555950000"><i class="fa fa-whatsapp"></i>&nbsp;/&nbsp;<i class="fa fa-phone"></i> &nbsp; +91-9555-95-0000</p></br>
 				<div class="contact-btn text-left">
 					<a class="waves-effect waves-light waves-cg btn red cg-btn-2 scroll" href="mailto:info@clickgarage.in"><i class="fa fa-envelope"></i> &nbsp; Contact Us</a>
 				</div>
@@ -722,8 +725,173 @@
 <div class="loading-pane">
 	<img src="../../static/revamp/img/loading.gif" alt="" class="loading-gif">
 </div>
-<!--<div class ="call-us-button"><a href="tel:+91-9555-95-0000"><img src="../../static/revamp/img/Call.png"></a></div>-->
-<!--<a href="#" class="scrollToTop hidden-phone"><i class="icon-chevron-up"></i></a>-->
+
+<div id="login" class="login invisible" style="">
+	<div class="materialContainer card">
+		<div class="box">
+			<button class="waves-effect waves-light btn red  btn-service book-btn close-btn" type="submit" name="action"><i class="fa fa-times"></i>
+			</button>
+			<div class="title row">LOGIN</div>
+			<div class="row login-input-row">
+				<div class="input-field login-input">
+					<i class="material-icons prefix">phone</i>
+					<input id="telephone_login" type="tel" class="validate">
+					<label for="telephone_login" data-error="Invalid Number">Telephone : 10 Digits</label>
+				</div>
+			</div>
+			<div class="row btn-row login-method-row">
+				<div class="col s12 m12 l5">
+					<button class="btn waves-effect waves-light btn-large red use-otp" href="">Use OTP
+						<i class="material-icons right">send</i>
+					</button>
+				</div>
+				<div class="col s12 m12 l2">
+					Or
+				</div>
+				<div class="col s12 m12 l5">
+					<button class="btn waves-effect waves-light btn-large red use-pass" href="">Password
+						<i class="material-icons right">turned_in_not</i>
+					</button>
+				</div>
+				<div class="col s12 m12 l12 centered-text pass-forgot">
+					Forgot Your Password?
+				</div>
+			</div>
+		<div class="login-pass-change invisible">
+				<div class="row pass login-method-input">
+					<div class="input-field">
+						<i class="material-icons prefix">verified_user</i>
+						<input id="password-new" type="password" class="validate">
+						<label for="password-new" data-error="Required">Enter New Password</label>
+					</div>
+				</div>
+				<div class="row centered-text send-otp-row">
+					<div class="col s12 m12 l12">
+						<button class="btn waves-effect waves-light btn-large red change-pass-otp" href="">SEND OTP
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="row login-passchange-btn-row-otp invisible">
+				<div class="row otp login-method-input">
+					<div class="input-field">
+						<i class="material-icons prefix">dialpad</i>
+						<input id="otp-pass-new" type="tel" class="validate">
+						<label for="otp-pass-new">Enter OTP</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s12 m12 l6">
+						<button class="btn waves-effect waves-light btn-large red resend-otp" href="">RESEND
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+					<div class="col s12 m12 l6">
+						<button class="btn waves-effect waves-light btn-large red verify-btn-pass" href="">VERIFY
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+				<div class="row login-message-row invisible">
+					<span class="login-message"></span>
+				</div>
+			</div>
+	<div class="login-method-inputs">
+				<div class="row pass login-method-input invisible">
+					<div class="input-field login-input">
+						<i class="material-icons prefix">verified_user</i>
+						<input id="password" type="password" class="validate">
+						<label for="password">Enter Password</label>
+					</div>
+				</div>
+
+				<div class="row otp login-method-input invisible">
+					<div class="input-field login-input">
+						<i class="material-icons prefix">verified_user</i>
+						<input id="otp_login" type="tel" class="validate">
+						<label for="otp_login">Enter OTP</label>
+					</div>
+				</div>
+			</div>
+			<div class="row login-method-btn-row-otp invisible">
+				<div class="row">
+					<div class="col s12 m12 l6">
+						<button class="btn waves-effect waves-light btn-large red resend-otp" href="">RESEND
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+					<!--</div>-->
+					<!--<div class="row btn-row login-method-btn-row invisible">-->
+					<div class="col s12 m12 l6">
+						<button class="btn waves-effect waves-light btn-large red verify-btn" href="">VERIFY
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+				<div class="row login-message-row invisible">
+					<span class="login-message"></span>
+				</div>
+			</div>
+			<div class="row login-method-btn-row invisible">
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<button class="btn waves-effect waves-light btn-large red verify-btn" href="">VERIFY
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+				<div class="row login-message-row invisible">
+					<span class="login-message"></span>
+				</div>
+			</div>
+		</div>
+		<div class="overbox">
+			<div class="material-button alt-2"><span class="shape"></span><span class="btn-sign">SIGN UP</span></div>
+			<div class="title">Sign Up</div>
+			<div class="row login-input-row signup-row">
+				<div class="input-field signup-input">
+					<i class="material-icons prefix">phone</i>
+					<input id="telephone-sign" type="tel" class="validate">
+					<label for="telephone-sign" data-error="Invalid Number">Telephone</label>
+				</div>
+			</div>
+			<div class="row signup-row">
+				<div class="input-field signup-input">
+					<i class="material-icons prefix">account_circle</i>
+					<input id="name_login" type="tel" class="validate">
+					<label for="name_login" data-error="Required">Name</label>
+				</div>
+			</div>
+			<div class="row signup-row">
+				<div class="input-field login-input">
+					<i class="material-icons prefix">verified_user</i>
+					<input id="password-sign" type="password" class="validate">
+					<label for="password-sign" data-error="Required">Password</label>
+				</div>
+			</div>
+			<div class="button button-otp-signup-row">
+				<button class="button-otp-signup"><span>SEND OTP</span></button>
+			</div>
+			<div class="row otp-btn-row signup-row invisible">
+				<div class="input-field login-input col l6 s6 m6">
+					<i class="material-icons prefix">verified_user</i>
+					<input id="otp-sign" type="text" class="validate">
+					<label for="otp-sign">OTP</label>
+				</div>
+				<div class="button button2">
+					<button class="col l3 m3 s3 verify-btn-sign"><span>VERIFY</span></button>
+					<button class="col l3 m3 s3 resend-otp"><span>RESEND</span></button>
+				</div>
+			</div>
+			<div class="row login-message-row visible">
+				<span class="login-message">Success</span>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="cover" class="invisible"></div>
 <div class="scrollToTop"><a href="#"><img src="../../static/revamp/img/scroll_to_top.png"></a></div>
 <div class="call-button hide-on-large-only"><a href="tel:+91-9555-95-0000"><img src="../../static/revamp/img/Call.png"></a></div>
 
@@ -736,6 +904,7 @@
 <script src="../../static/revamp/js/materialize.min.js"></script>
 <script src="../../static/revamp/js/main.js"></script>
 <script src="../../static/revamp/js/common.js"></script>
+<script src="../../static/revamp/js/login.js"></script>
 <script src="../../static/revamp/js/forms.js"></script>
 <script src="../../static/revamp/js/jquery.backstretch.js"></script>
 <script src="../../static/revamp/js/jquery.cycle.lite.js"></script>

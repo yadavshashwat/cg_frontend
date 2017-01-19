@@ -92,11 +92,19 @@
     /*height: 0px;*/
     /*width: 0px;*/
 }
-
-
+.invalid-select-box{
+    border-color: red;
+}
+.no-border-radius{
+    border-radius: 0px!important;
+}
 
 .icon{
     vertical-align: middle;
+}
+
+.page-wide{
+    width: 100%;
 }
 
 .x1{font-size: 1px;}
