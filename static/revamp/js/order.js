@@ -1083,6 +1083,8 @@ var Global = {
         $('#booking-details .login').show()
     },
     loadSendbooking:function(data) {
+        $('#confirm-booking').show()
+        $('#booking-details').hide(0)
         local.clearKey('cgcart')
         local.clearKey('coupon')
         

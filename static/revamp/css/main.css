@@ -2193,6 +2193,17 @@ overflow: hidden;
 	text-align: center;
 }
 
+#confirm-booking{
+    height: 200px;
+    color: black;
+    font-weight: 600;
+    font-size: 22px;
+    text-align: center;
+}
+#confirm-booking .order-confirm {
+padding: 5%;
+}
+
 #nav-cart .nav-cart-list{
 	bottom: 0px;
     background: rgba(74,20,140,1);
