@@ -359,10 +359,18 @@ iframe {
 	color: #d81b60;
 }
 
+.input-field{
+    margin-top:0px;
+}
+
+.input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea{
+	height : 2rem!important;
+}
+
 /*<------ Login Page Start----->*/
 
 #cover{
-	z-index: 98!important;
+	z-index: 97!important;
     width:100%;
     height:100%;
     /*display:none; }*/
@@ -927,7 +935,7 @@ iframe {
 }
 
 .nav-services,.nav-cart{
-	z-index: 50;
+	z-index: 99;
 }
 
 /*Tranparent Navbar*/
@@ -1021,11 +1029,20 @@ iframe {
 #vehicle-select-form{
     position: fixed;
     top: 10%;
-    z-index: 99;
-    width: 50%;
+    width: 100%;
+    z-index: 98;
     height: 50%;
-    left:25%;
+    /*left:25%;*/
 }
+/*#vehicle-select-form .vehicle-select-form{*/
+    /*width: 100%;*/
+    /*height: 50%;*/
+    /*z-index: 99;*/
+
+/*}*/
+
+
+
 
 .row-zero-margin{
     margin:0px!important;
@@ -1656,15 +1673,47 @@ footer a:hover {
 /*-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7)"; !* IE8 *!    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7);   !* IE6 & 7 *!      zoom: 1;*/
 /*}*/
 
+#city-select{
+    position: fixed;
+    top:30%;
+    z-index: 99;
+    /*left:50%;*/
+}
 
+#city-select .city-select{
+    /*position: fixed;*/
+    /*top:30%;*/
+    /*z-index: 99;*/
+    left:55%;
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+}
+#city-select .city-select .city{
+    cursor: pointer;
+}
+
+#city-select img{
+        height: 150px;
+}
+#city-select .city .city-name{
+    color:#4a148c;
+    font-weight: 400;
+    text-decoration: underline;
+    font-size: 22px;
+}
 
 
 #services .service-card{
 	text-align: center;
 	/*margin:2% 2%;*/
 	height: 260px;
+    cursor: pointer;
 	/*margin-left: ;*/
 
+}
+
+#services .service-card:hover{
+    /*border:1px solid #4a148c;*/
 }
 
 #services .service-card .icon{
@@ -1701,6 +1750,8 @@ footer a:hover {
     margin-top:15px;
 }
 
+
+
 #jobs .service-name-border{
 	/*padding-left: 2.5%;*/
     /*padding-right: 4%;*/
@@ -1717,6 +1768,18 @@ footer a:hover {
 	margin-top: auto;
 	margin-bottom: auto;
 }
+
+#jobs .services .card-image .cg-icon-card{
+    line-height: 20px;
+    color:#7C838A;
+}
+
+
+#jobs .services .job:hover .card-image .cg-icon-card{
+    line-height: 20px;
+    color:#4a148c;
+}
+
 
 #jobs .services .card-image img {
 	/*padding-left: 7%;*/
@@ -1879,6 +1942,59 @@ list-style: circle;
 }
 
 
+#jobs .job-cat-card{
+	height: 60px;
+	text-align: center;
+	line-height: 60px;
+	margin: 0px!important;
+	border-radius: 0px;
+	font-size: 20px;
+	/*box-shadow: 1px 0px 0px 0 rgba(0,0,0,0.14),1px 0px 0px 0 rgba(0,0,0,0.12),1px 0px 0px 0px rgba(0,0,0,0.2);*/
+}
+
+#jobs .job-cat-card.selected {
+	z-index: 50;
+	color: #FFFFFF!important;
+	background: #F44336 !important;
+}
+
+#jobs .job-cat-card:hover {
+	z-index: 200;
+	/*color: #FFFFFF;*/
+	/*border-bottom: 4px solid #F44336;*/
+	/*background: rgba(244,67,54,1);*/
+	color:#F44336;
+	cursor: pointer;
+}
+
+#jobs .job-cat-col {
+    padding: 0px;
+}
+
+
+#jobs .doorstep-card, #jobs .solid-card{
+	/*height: 60px;*/
+	/*text-align: center;*/
+	/*line-height: 60px;*/
+	/*margin: 0px!important;*/
+	border-top-left-radius: 10px!important;;
+	border-bottom-left-radius: 10px!important;;
+
+}
+#jobs .workshop-card, #jobs .pearlecent-card {
+	/*height: 60px;*/
+	/*text-align: center;*/
+	/*line-height: 60px;*/
+	/*margin: 0px!important;*/
+	border-top-right-radius: 10px!important;
+	border-bottom-right-radius: 10px!important;
+
+}
+
+
+
+
+
 #cart, #summary{
     position: absolute;
     /*top : 140px;*/
@@ -1913,7 +2029,7 @@ list-style: circle;
 
 #cart .vehicle-header .vehicle-name, #summary .vehicle-header .vehicle-name{
     text-align: left;
-    padding: 45px;
+    /*padding: 45px;*/
     color: #9e9e9e;
     font-weight: 400;
 
@@ -1926,6 +2042,15 @@ list-style: circle;
     font-size: 18px;
     line-height: 55px;
     border-bottom: 0.5px solid #dcdcdc;
+}
+
+#cart .cart-item .item-name, #summary .cart-item .item-name{
+overflow: hidden;
+    white-space: nowrap;
+}
+
+#cart .cart-item .delete, #summary .cart-item .delete{
+    cursor:pointer;
 }
 
 #cart .cart-item .item-desc, #summary .cart-item .item-desc{
@@ -2133,7 +2258,7 @@ border-right: 2px solid #FFF;
 }
 
 
-#bookings .box .date-box, #coupon-details .date-box, #new-booking .date-box{
+#bookings .box .date-box, #coupon-details .date-box, #new-booking .date-box, #user-details .date-box{
     text-align: center;
     text-transform: uppercase;
     font-size: 22px;
@@ -2144,7 +2269,7 @@ border-right: 2px solid #FFF;
         margin: 10px 0px 10px 0px;
 }
 
-#bookings .box .date-box.selected,  #coupon-details .date-box.selected, #new-booking .date-box.selected{
+#bookings .box .date-box.selected,  #coupon-details .date-box.selected, #new-booking .date-box.selected,  #user-details .date-box.selected{
     text-align: center;
     text-transform: uppercase;
     font-size: 22px;
@@ -2152,7 +2277,7 @@ border-right: 2px solid #FFF;
     background: #eaeaea;
     border: 0.5px solid #eaeaea;
 }
-#bookings .box .date-box:hover, #coupon-details .date-box:hover, #new-booking .date-box:hover{
+#bookings .box .date-box:hover, #coupon-details .date-box:hover, #new-booking .date-box:hover, #user-details .date-box:hover{
     text-align: center;
     text-transform: uppercase;
     font-size: 22px;

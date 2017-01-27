@@ -41,6 +41,19 @@ var APPLIED_COUP_DISCOUNT = 0;
 
 var COUP_DISCOUNT = 0;
 
+var PICK_DROP = 0;
+var SHOW_ESTIMATE = 0;
+
+var logoMap = {
+    'Standard Service':'<i class="cg-icon cg-icon-card icon-cg-quality x100"></i>',
+    'Comprehensive Service':'<i class="cg-icon cg-icon-card icon-cg-quality x100"></i>',
+    'Front Bumper':'<img class=""  src="/../../static/revamp/img/Icons-Services/Emergency.png">'
+};
+
+
+
+
+
 
 var Global = {
     init:function() {
@@ -59,6 +72,18 @@ var Global = {
 
         // On page load adding items car
         //     Change vehicle button
+        $('.autocomplete-option').click(function() {
+          $input.val($(this).text().trim());
+          $('.autocomplete-option').addClass('hide');
+        });
+
+        $('#city-select .city').click(function(){
+            city = $(this).attr('data-class')
+            local.save('cg_city',city)
+            $('#city-select').hide()
+            $('#cover').hide()
+        })
+
         $('.order-page .nav2 .change-button').click(function () {
             $('#vehicle-select-form').show()
             $('#cover').show()
@@ -151,7 +176,7 @@ var Global = {
             $('#vehicle-name').text(name[0] + " " +name[1])
             $('#vehicle-varient').text(name[2]+" Varient")
             $('#vehicle-name1').text(name[0] + " " +name[1])
-            $('#vehicle-varient1').text(name[2]+" Varient")
+            $('#vehicle-varient1').text(name[2]+"")
             rand_number = Math.floor(Math.random() * 3) + 1
             if (rand_number == 1){
                 $('#intro-sentence').text('How can we help with your '+name[0]+' '+name[1]+'?')
@@ -183,7 +208,8 @@ var Global = {
             var classy = $(this).attr('data-class');
             var name = $('#services').attr('data-vehicle-name')
             var vehicle_type = $('#services').attr('data-vehicle-type')
-
+            $('#jobs .service-sub-category.car-care').hide()
+            $('#jobs .service-sub-category.denting').hide()
             name = name.split('_')
             // console.log(classy);
             if(classy == 'servicing'){
@@ -204,10 +230,13 @@ var Global = {
                 Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
             }else if(classy =='carcare'){
                 $('.nav-services').find('.car-care').addClass('selected');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: "Hyundai",model_id:"i20",fuel_id:"Diesel",service_type: "Cleaning"}, "get", _this, _this.loadJobs);
-            }else if(classy =='denting'){
+                $('#jobs .service-sub-category.car-care').show();
+                var doorstep = $('#jobs .service-sub-category.car-care .selected').attr('doorstep');
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);            }else if(classy =='denting'){
                 $('.nav-services').find('.car-denting').addClass('selected');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Denting"}, "get", _this, _this.loadJobs);
+                $('#jobs .service-sub-category.denting').show();
+                var sub_cat = $('#jobs .service-sub-category.denting .selected').attr('sub_cat');
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
             }else{
                 return
             }
@@ -238,18 +267,24 @@ var Global = {
             var name = $('#services').attr('data-vehicle-name')
             name = name.split('_')
             var classy = $(this).attr('data-class');
+            $('#jobs .service-sub-category.car-care').hide()
+            $('#jobs .service-sub-category.denting').hide()
             if(classy == 'servicing'){
                 Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
             }else if(classy =='repairing'){
                 Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Repairing"}, "get", _this, _this.loadJobs);
             }else if(classy =='emergency'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Emergenct"}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Emergency"}, "get", _this, _this.loadJobs);
             }else if(classy =='subscription'){
                 Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
             }else if(classy =='carcare'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: "Hyundai",model_id:"i20",fuel_id:"Diesel",service_type: "Cleaning"}, "get", _this, _this.loadJobs);
+                $('#jobs .service-sub-category.car-care').show();
+                var doorstep = $('#jobs .service-sub-category.car-care .selected').attr('doorstep');
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);
             }else if(classy =='denting'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Denting"}, "get", _this, _this.loadJobs);
+                $('#jobs .service-sub-category.denting').show();
+                var sub_cat = $('#jobs .service-sub-category.denting .selected').attr('sub_cat');
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
             }else{
                 return
             }
@@ -266,6 +301,9 @@ var Global = {
             // console.log(classy)
             var name = $('#services').attr('data-vehicle-name')
             name = name.split('_')
+            $('#jobs .service-sub-category.car-care').hide()
+            $('#jobs .service-sub-category.denting').hide()
+
             if(classy == 'servicing'){
                 Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
             }else if(classy =='repairing'){
@@ -275,10 +313,14 @@ var Global = {
             }else if(classy =='amc'){
                 Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
             }else if(classy =='carcare'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Cleaning"}, "get", _this, _this.loadJobs);
+                $('#jobs .service-sub-category.car-care').show();
+                var doorstep = $('#jobs .service-sub-category.car-care .selected').attr('doorstep');
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);
                 // Commons.ajaxData('get_jobs_vehicle', {make_id: "Hyundai",model_id:"i20",fuel_id:"Diesel",service_type: "Cleaning"}, "get", _this, _this.loadJobs);
             }else if(classy =='dentingpainting'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Denting"}, "get", _this, _this.loadJobs);
+                $('#jobs .service-sub-category.denting').show();
+                var sub_cat = $('#jobs .service-sub-category.denting .selected').attr('sub_cat');
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
             }else{
                 return
             }
@@ -289,6 +331,25 @@ var Global = {
                 history.pushState({},'',new_path)
             }
         });
+
+        $('#jobs .service-sub-category.car-care').click(function () {
+            $('#jobs .service-sub-category.car-care .job-cat-card').removeClass('selected')
+            $('#jobs .service-sub-category.car-care .job-cat-card:hover').addClass('selected')
+            var name = $('#services').attr('data-vehicle-name')
+            name = name.split('_')
+            var doorstep = $('#jobs .service-sub-category.car-care .selected').attr('doorstep');
+            Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);
+        })
+
+        $('#jobs .service-sub-category.denting').click(function () {
+            $('#jobs .service-sub-category.denting .job-cat-card').removeClass('selected')
+            $('#jobs .service-sub-category.denting .job-cat-card:hover').addClass('selected')
+            var name = $('#services').attr('data-vehicle-name')
+            name = name.split('_')
+            var sub_cat = $('#jobs .service-sub-category.denting .selected').attr('sub_cat');
+            Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
+        })
+
 
         // Service Select Load Jobs - End
 
@@ -414,8 +475,37 @@ var Global = {
                 var new_path =  a.slice(0,a.length-2).join('/')+'/checkout/'
                 history.pushState({},'',new_path)
             }
+            name = ""
+            number = ""
+            email = ""
+            address = ""
+            locality = ""
+            city = ""
 
+            cookie = local.load();
+            if (cookie['c_user_id']){
+                name = cookie['c_user_first_name'] + " " + cookie['c_user_last_name']  ;
+                number = cookie['c_user_number'];
+                email = cookie['c_user_email'];
+                email = email.substr(1,email.length-2)
+                address = cookie['c_user_address'];
+                address = address.substr(1,address.length-2)
+                locality = cookie['c_user_locality'];
+                locality = locality.substr(1,locality.length-2)
+                city = cookie['c_user_city'];
+                city = city.substr(1,city.length-2)
+            }else{
+                city = cookie['cg_city']
+                city = city.substr(1,city_2.length-2)
+            }
 
+            $('#name').val(name);
+            $('#telephone').val(number);
+            $('#email').val(email);
+            $('#address').val(address);
+            $('#locality').val(locality);
+            $('#city').val(city);
+            Materialize.updateTextFields();
             $('#booking-details').show();
         });
 
@@ -473,7 +563,18 @@ var Global = {
             }
         };
 
-        $('#booking-details .btn-checkout').on('click',sendotp);
+        $('#booking-details .confirm-details .btn-checkout').on('click', function(){
+            var number = $('#telephone').val();
+            cookie = local.load()
+            number2 = cookie["c_user_number"]
+            if (number == number2){
+                sendbooking()
+            }else{
+                sendotp()
+            }
+        });
+
+        // $('#booking-details .btn-checkout').on('click', sendotp)
         $('#booking-details .resend').on('click',sendotp);
         $('#booking-details .change_details').on('click',function () {
             $('#booking-details .customer-details').show()
@@ -481,9 +582,19 @@ var Global = {
 
         });
 
+        $('#locality').on('keypress',function(e,event,data){
+            var code = (e.keyCode || e.which);
+            // do nothing if it's an arrow key
+            if(code == 37 || code == 38 || code == 39 || code == 40) {
+                return;
+            }
+             var locality = $(this).val();
+            Commons.ajaxData('get_location', {location_id: locality}, "get", _this, _this.loadLocation);
+            $('#locality').removeClass('invalid')
+        });
 
 
-        $('#booking-details .btn-send-booking').click(function () {
+        var sendbooking = function(){
             var name = $('#name').val();
             var number = $('#telephone').val();
             var email = $('#email').val();
@@ -503,7 +614,7 @@ var Global = {
             var paid_amt = "0"
             var price_total = $('#total-price').text();
             var time = $('#time-slot').find('.active span').text();
-            Commons.ajaxData('send_otp_booking', {otp:otp
+            Commons.ajaxData('send_booking', {otp:otp
                 ,name       : name
                 ,number     : number
                 ,email      : email
@@ -523,14 +634,17 @@ var Global = {
                 ,paid_amt   : paid_amt
                 ,coupon     : coupon
                 ,price_total: price_total }, "post", _this, _this.loadSendbooking,null, '.loading-pane');
-        });
+        };
+
+        $('#booking-details .btn-send-booking').click(sendbooking);
+
         $('#cart .cart-coupon .btn-coupon').click(function(){
             code = $('#cart #coupon_box').val()
             var vehicle_type = $('#services').attr('data-vehicle-type')
             Commons.ajaxData('check_coupon', {c_id:code,veh_type:vehicle_type}, "get", _this, _this.loadCheckCoupon,null, '.loading-pane');
             setTimeout(function() {
-                  Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
-               }, 100);
+                Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
+            }, 100);
 
 
         });
@@ -580,22 +694,24 @@ var Global = {
         container.find('select').material_select();
     },
     loadCart:function(data){
+        $('#jobs #cart .btn-checkout').addClass('disabled');
         var container = $('#cart .cart-list');
         // console.log('check')
         container.html('');
         var html ='';
         ALL_JOBS = '';
         CURRENT_CART =[];
-        JOBS_SUMMARY=[]
+        JOBS_SUMMARY=[];
+        SHOW_ESTIMATE = 0 ;
         $.each(data['cart_details'], function(ix, val) {
             jsLen = val.default_comp.length;
             for (i = 0; i < jsLen; i++) {
-              CURRENT_CART.push(val.default_comp[i])
+                CURRENT_CART.push(val.default_comp[i])
             }
             if (ALL_JOBS ==''){
-            ALL_JOBS = val.job_name;
+                ALL_JOBS = val.job_name;
             }else{
-            ALL_JOBS = ALL_JOBS +', '+val.job_name;
+                ALL_JOBS = ALL_JOBS +', '+val.job_name;
             }
             JOBS_SUMMARY.push({'category':val.service_cat,'price_total':val.total_price,'price_part':val.total_part,'price_labour':val.total_labour,'price_discount':val.total_discount})
             html +='<div class="cart-item" job-id="'+val.id+'">';
@@ -613,9 +729,14 @@ var Global = {
             // html +=' 									</div>';
             html +=' 								</div>';
             html +=' 								<div class="col s3 m3 l3">';
-            html +=' 									<div class="item-price">';
-            html +=' 										<b>₹&nbsp;</b>'+ val.total_price;
-            html +=' 									</div>';
+            if (val.price_active == "1") {
+
+                html += ' 									<div class="item-price">';
+                html += ' 										<b>₹&nbsp;</b>' + val.total_price;
+                html += ' 									</div>';
+            }else{
+                SHOW_ESTIMATE = SHOW_ESTIMATE + 1;
+            }
             html +=' 								</div>';
             html +=' 							</div>'
         });
@@ -628,48 +749,110 @@ var Global = {
         var html2 ='';
         $.each(data['cart_summary'], function(ix, val) {
 
-            // TOTAL_PRICE Change
-            TOTAL_PRICE = parseFloat(val.cg_amount) - parseFloat(COUP_DISCOUNT);
+            if (val.car_bike=="Car"){
+                if (val.cg_amount_workshop <= 1800 && val.cg_amount_workshop > 0){
+                    PICK_DROP = 150
+                }else{
+                    PICK_DROP = 0
+                }
+            }else if (val.car_bike =="Bike"){
+                if (val.cg_amount <=250 && val.cg_amount >0){
+                    PICK_DROP = 200
+                }else{
+                    PICK_DROP = 0
+                }
+            }else{
+                PICK_DROP=0
+            }
+
+            if (PICK_DROP >0 ){
+                CURRENT_CART.push(
+                    {"category": "Labour",
+                        "name": "Visiting/Pick Drop",
+                        "price": PICK_DROP,
+                        "price_comp": PICK_DROP,
+                        "unit_price": PICK_DROP,
+                        "action": "Labour",
+                        "quantity": "1"}
+                )
+            }
+
+            if (CURRENT_CART.length > 0) {
+                $('#jobs #cart .btn-checkout').removeClass('disabled');
+            }
+
+
+            TOTAL_PRICE = parseFloat(val.cg_amount) - parseFloat(COUP_DISCOUNT) + PICK_DROP;
             TOTAL_JOBS = val.total_jobs;
-            TOTAL_LABOUR = val.total_labour_cg;
+            TOTAL_LABOUR = val.total_labour_cg + PICK_DROP;
             TOTAL_PARTS = val.total_part_cg;
             TOTAL_DISCOUNT = val.total_discount_cg
             ADD_DISCOUNT = parseFloat(val.diff_amount) + parseFloat(COUP_DISCOUNT);
 
             html2 += '<div class="col s12 m12 l12">';
-            html2 += '									<div class="row dealer-price">';
-            html2 += '										<div class="col s7 m7 l7"> Dealer Price :</div>';
-            html2 += '										<div class="col s5 m5 l5 price">';
-            html2 += '											<strike><b>₹&nbsp;</b>';
-            html2 += val.comp_amount
-            html2 += '</strike>';
-            html2 += '										</div>';
-            html2 += '									</div>';
-            if (TOTAL_PRICE > 0){
-            html2 += '									<div class="row coup-discount invisible">';
-            html2 += '										<div class="col s7 m7 l7">Coupon Discount : </div>';
-            html2 += '										<div class="col s5 m5 l5 cg-price price">';
-            html2 += '											<b>₹&nbsp;</b>';
-            html2 += '<span id="total-coup-discount">'+COUP_DISCOUNT+'</span>'
-            html2 += '										</div>';
-            html2 += '									</div>';
-            }
-            html2 += '									<div class="row">';
-            html2 += '										<div class="col s7 m7 l7">CG Price : </div>';
-            html2 += '										<div class="col s5 m5 l5 cg-price price">';
-            html2 += '											<b>₹&nbsp;</b>';
-            if (TOTAL_PRICE > 0) {
-                html2 += '<span id="total-price">' + TOTAL_PRICE + '</span>'
+
+            if (SHOW_ESTIMATE > 0){
+                html2 += '									<div class="row">';
+                html2 += '										<div class="col s12 m12 l12 centered-text">Request Total Estimate</div>';
+                html2 += '									</div>';
             }else{
-                html2 += '<span id="total-price">' + 0 + '</span>'
+                html2 += '									<div class="row dealer-price">';
+                html2 += '										<div class="col s7 m7 l7"> Dealer Price :</div>';
+                html2 += '										<div class="col s5 m5 l5 price">';
+                html2 += '											<strike><b>₹&nbsp;</b>';
+                html2 += val.comp_amount + PICK_DROP
+                html2 += '</strike>';
+                html2 += '										</div>';
+                html2 += '									</div>';
+                if (TOTAL_PRICE > 0){
+                    html2 += '									<div class="row coup-discount invisible">';
+                    html2 += '										<div class="col s7 m7 l7">Coupon Discount : </div>';
+                    html2 += '										<div class="col s5 m5 l5 cg-price price">';
+                    html2 += '											<b>₹&nbsp;</b>';
+                    html2 += '<span id="total-coup-discount">'+COUP_DISCOUNT+'</span>'
+                    html2 += '										</div>';
+                    html2 += '									</div>';
+                }
+
+                if (PICK_DROP >0 ){
+                    html2 += '									<div class="row">';
+
+                    if (val.car_bike=="Car"){
+                        html2 += '										<div class="col s7 m7 l7">Pick Up : </div>';
+
+                    }else{
+                        html2 += '										<div class="col s7 m7 l7">Visiting Charges : </div>';
+                    }
+                    html2 += '										<div class="col s5 m5 l5 cg-price price">';
+                    html2 += '											<b>₹&nbsp;</b>';
+                    html2 += '<span id="total-price">' + PICK_DROP + '</span>'
+                    html2 += '										</div>';
+                    html2 += '									</div>';
+
+                }else{
+
+                }
+
+
+                html2 += '									<div class="row">';
+                html2 += '										<div class="col s7 m7 l7">CG Price : </div>';
+                html2 += '										<div class="col s5 m5 l5 cg-price price">';
+                html2 += '											<b>₹&nbsp;</b>';
+                if (TOTAL_PRICE > 0) {
+                    html2 += '<span id="total-price">' + TOTAL_PRICE + '</span>'
+                }else{
+                    html2 += '<span id="total-price">' + 0 + '</span>'
+                }
+
+
+                html2 += '										</div>';
+                html2 += '									</div>';
+                html2 += '									<div class="row discount">';
+                html2 += '										<div class="col s12 m12 l12">Save ₹&nbsp;';
+                html2 += ADD_DISCOUNT
+                html2 += '										</div>';
+                html2 += '									</div>';
             }
-            html2 += '										</div>';
-            html2 += '									</div>';
-            html2 += '									<div class="row discount">';
-            html2 += '										<div class="col s12 m12 l12">Save ₹&nbsp;';
-            html2 += ADD_DISCOUNT
-            html2 += '										</div>';
-            html2 += '									</div>';
             html2 += '							</div>';
         });
         container2.html(html2);
@@ -697,9 +880,11 @@ var Global = {
             // html3 +=' 									</div>';
             html3 +=' 								</div>';
             html3 +=' 								<div class="col s3 m3 l3">';
-            html3 +=' 									<div class="item-price">';
-            html3 +=' 										<b>₹&nbsp;</b>'+ val.total_price;
-            html3 +=' 									</div>';
+            if (val.price_active == "1"){
+                html3 +=' 									<div class="item-price">';
+                html3 +=' 										<b>₹&nbsp;</b>'+ val.total_price;
+                html3 +=' 									</div>';
+            }
             html3 +=' 								</div>';
             html3 +=' 							</div>'
         });
@@ -708,7 +893,7 @@ var Global = {
             $('#cart .coup-discount').show()
             $('#summary .coup-discount').show()
         }else{
-             $('#cart .coup-discount').hide()
+            $('#cart .coup-discount').hide()
             $('#summary .coup-discount').hide()
         }
 
@@ -740,7 +925,9 @@ var Global = {
             html += '<div class="row">';
             html += '<div class="col l12 s12 m12 service-content">';
             html += '								<div class="card-image">';
-            html += '										<img class=""  src="/../../static/revamp/img/Icons-Services/Emergency.png">';
+            // html += '<i class="cg-icon cg-icon-card icon-cg-quality x100"></i>'
+            html += logoMap[val.job_name]
+            // html += '										<img class=""  src="/../../static/revamp/img/Icons-Services/Emergency.png">';
             html += '									</div>';
             html += '									<div class="card-content job-content">';
             html += '										<div class="col s12 m12 l6">';
@@ -749,25 +936,32 @@ var Global = {
             html += '											<div class="job-desc">';
             html += '												<ul>';
             jsLen = val.job_summary.length;
-            for (i = 0; i < jsLen; i++) {
-                html += "<li>" + val.job_summary[i] + "</li>";
-            }
+            if (jsLen>1){
+                for (i = 0; i < jsLen; i++) {
+                    html += "<li>" + val.job_summary[i] + "</li>";
+                }}
             html += '												</ul>';
             html += '											</div>';
             html += '										</div>';
             html += '										<div class="col s12 m12 l3 job-prices hide-on-med-and-down">';
-            html += '											<div class="job-amount"><b>&#8377;&nbsp;</b>'+val.total_price+'</div>';
-            html += '											<div class="job-tat">Time : '+val.time+' Hrs</div>';
+            // html += '											<div class="job-amount"><b>&#8377;&nbsp;</b>'+val.total_price+'</div>';
+            if (val.price_active == "1"){
+                html += '											<div class="job-amount"><b>&#8377;&nbsp;</b>'+val.total_price+'</div>';
+            }
+            if (val.time == "" || val.time == "0" || val.time =="NA"){
+            }else{
+                html += '											<div class="job-tat">Time : '+(parseFloat(val.time)/60)+' Hrs</div>';
+            }
             html += '										</div>';
             html += '										<div class="col l3 s12 m12 button-col hide-on-med-and-down">';
-            html += '											<button class="waves-effect waves-light btn red btn-service closed-more-info" type="submit" name="action">Info';
+            html += '											<button class="waves-effect waves-light btn cg-primary btn-service closed-more-info" type="submit" name="action">Info';
             html += '												<i class="material-icons right">turned_in</i>';
             html += '											</button>';
 
             if (cart_list.indexOf(val.id)>=0){
-                html += '											<button class="waves-effect waves-light btn red  btn-service book-btn disabled" type="submit" name="action">Book';
+                html += '											<button class="waves-effect waves-light btn cg-primary  btn-service book-btn disabled" type="submit" name="action">Book';
             }else{
-                html += '											<button class="waves-effect waves-light btn red  btn-service book-btn" type="submit" name="action">Book';
+                html += '											<button class="waves-effect waves-light btn cg-primary  btn-service book-btn" type="submit" name="action">Book';
             }
             html += '												<i class="material-icons right">send</i>';
             html += '											</button>';
@@ -777,19 +971,25 @@ var Global = {
             html += '							</div>';
             html += '							<div class="row hide-on-large-only">';
             html += '								<div class="s12 m12 l12 job-prices job-prices-mobile">';
-            html += '											<div class="job-amount"><b>&#8377;&nbsp;</b>'+val.total_price+'</div>';
-            html += '											<div class="job-tat">Time : '+val.time+' Hrs</div>';
+            if (val.price_active == "1"){
+                html += '											<div class="job-amount"><b>&#8377;&nbsp;</b>'+val.total_price+'</div>';
+            }
+            if (val.time == "" || val.time == "0" || val.time =="NA"){
+            }else{
+                html += '											<div class="job-tat">Time : '+(parseFloat(val.time)/60)+' Hrs</div>';
+            }
+            // html += '											<div class="job-tat">Time : '+val.time+' Hrs</div>';
             html += '								</div>';
             html += '							</div>';
             html += '							<div class="row button-row hide-on-large-only">';
             html += '								<div class="col l12 s12 m12">';
-            html += '									<button class="waves-effect waves-light btn red btn-service closed-more-info" type="submit" name="action">Info';
+            html += '									<button class="waves-effect waves-light btn cg-primary btn-service closed-more-info" type="submit" name="action">Info';
             html += '										<i class="material-icons right">turned_in</i>';
             html += '									</button>';
             if (cart_list.indexOf(val.id)>=0){
-                html += '											<button class="waves-effect waves-light btn red  btn-service book-btn disabled" type="submit" name="action">Book';
+                html += '											<button class="waves-effect waves-light btn cg-primary  btn-service book-btn disabled" type="submit" name="action">Book';
             }else{
-                html += '											<button class="waves-effect waves-light btn red  btn-service book-btn" type="submit" name="action">Book';
+                html += '											<button class="waves-effect waves-light btn cg-primary  btn-service book-btn" type="submit" name="action">Book';
             }
             html += '										<i class="material-icons right">send</i>';
             html += '									</button>';
@@ -798,74 +998,80 @@ var Global = {
             html += '						</div>';
             html += '						<div class="info-div invisible">';
             html += '							<div class="row button-header">';
-            html += '								<button class="waves-effect waves-light btn red  btn-service closed-more-info" type="submit" name="action">';
+            html += '								<button class="waves-effect waves-light btn cg-primary  btn-service closed-more-info" type="submit" name="action">';
             html += '								<i class="fa fa-times"></i>';
             html += '								</button>';
             html += '							</div>';
             html += '							<div class="header gen-desc">';
             html += '								<div class="desc-name">';
-            html += '									Why it is required?';
+            html += '									Description:';
             html += '								</div>';
             html += '								<div class="desc-content">';
             html += val.job_desc
+            html += '								</div>';
+            html += '							</div>';
 
-            html += '								</div>';
-            html += '							</div>';
-            html += '							<div class="header list-things">';
-            html += '								<div class="desc-name">';
-            html += '									Job Features : ';
-            html += '								</div>';
-            html += '								<div class="desc-content">';
-            html += '									<ul>';
-            jfLen = val.job_summary.length;
-            for (i = 0; i < jfLen; i++) {
-                html += "<li>" + val.job_features[i] + "</li>";
-            }
-            html += '									</ul>';
-            html += '								</div>';
-            html += '							</div>';
             jsyLen = val.job_symptoms.length;
-            if (jsyLen >= 0){
+            if (jsyLen > 1) {
                 html += '							<div class="header symptoms">';
                 html += '								<div class="desc-name">';
-                html += '									What are the symptoms?';
+                html += '									When is it required?';
                 html += '								</div>';
                 html += '								<div class="desc-content">';
                 html += '									<ul>';
                 for (i = 0; i < jsyLen; i++) {
                     html += "<li>" + val.job_symptoms[i] + "</li>";
-                }}
-            html += '									</ul>';
-            html += '								</div>';
-            html += '							</div>';
+                }
+                html += '									</ul>';
+                html += '								</div>';
+                html += '							</div>';
+            }
             html += '							<div class="header parts-breakup">';
             html += '								<div class="desc-name">';
-            html += '									What all is done as part of the job?';
+            html += '									What all is covered?';
             html += '								</div>';
-            html += '								<div class="desc-content">';
-            html += '									<table class="striped">';
-            html += '										<thead>';
-            html += '										<tr>';
-            html += '											<th data-field="id">S.No.</th>';
-            html += '											<th data-field="part">Name</th>';
-            html += '											<th data-field="action">Item Action</th>';
-            html += '											<th data-field="price">Item Price</th>';
-            html += '										</tr>';
-            html += '										</thead>';
-            html += '										<tbody>';
-            compLen = val.default_comp.length;
-            for (i = 0; i < compLen; i++) {
-                item_no = i + 1;
-                html += '										<tr>';
-                html += '											<td>'+item_no+'</td>';
-                html += '											<td>'+val.default_comp[i].name+'</td>';
-                html += '											<td>'+val.default_comp[i].action+'</td>';
-                html += '											<td>'+val.default_comp[i].price+'</td>';
-                html += '										</tr>';
+            jfLen = val.job_features.length;
+            if (jfLen>1){
+                // html += '							<div class="header list-things">';
+                // html += '								<div class="desc-name">';
+                // html += '									Job Features : ';
+                // html += '								</div>';
+                html += '								<div class="desc-content">';
+                html += '									<ul>';
+
+                for (i = 0; i < jfLen; i++) {
+                    html += "<li>" + val.job_features[i] + "</li>";
+                }
+                html += '									</ul>';
+                html += '								</div>';
+                // html += '							</div>';
             }
-            html += '										</tbody>';
-            html += '									</table>';
-            html += '								</div>';
+            if (val.price_active =="1"){
+                html += '								<div class="desc-content">';
+                html += '									<table class="striped">';
+                html += '										<thead>';
+                html += '										<tr>';
+                html += '											<th data-field="id">S.No.</th>';
+                html += '											<th data-field="part">Name</th>';
+                html += '											<th data-field="action">Item Action</th>';
+                html += '											<th data-field="price">Item Price</th>';
+                html += '										</tr>';
+                html += '										</thead>';
+                html += '										<tbody>';
+                compLen = val.default_comp.length;
+                for (i = 0; i < compLen; i++) {
+                    item_no = i + 1;
+                    html += '										<tr>';
+                    html += '											<td>'+item_no+'</td>';
+                    html += '											<td>'+val.default_comp[i].name+'</td>';
+                    html += '											<td>'+val.default_comp[i].action+'</td>';
+                    html += '											<td>'+val.default_comp[i].price+'</td>';
+                    html += '										</tr>';
+                }
+                html += '										</tbody>';
+                html += '									</table>';
+                html += '								</div>';
+            }
             html += '							</div>';
             html += '						</div>';
             html += '					</div>';
@@ -879,7 +1085,9 @@ var Global = {
     loadSendbooking:function(data) {
         local.clearKey('cgcart')
         local.clearKey('coupon')
+        
     },
+
     loadCheckCoupon:function(data){
         message = data.msg
         APPLIED_COUP_LABOUR = 0
@@ -888,10 +1096,10 @@ var Global = {
         APPLIED_COUP_DISCOUNT = 0
         COUP_DISCOUNT = 0
         cat_counter = 0
-         $.each(data, function(ix, val) {
+        $.each(data, function(ix, val) {
             jsLen = JOBS_SUMMARY.length;
             console.log(JOBS_SUMMARY)
-             cat_counter = 0
+            cat_counter = 0
             for (i = 0; i < jsLen; i++) {
                 if (val.category == JOBS_SUMMARY[i].category){
                     cat_counter = cat_counter + 1
@@ -901,57 +1109,76 @@ var Global = {
                     APPLIED_COUP_DISCOUNT = APPLIED_COUP_DISCOUNT + parseFloat(JOBS_SUMMARY[i].price_discount)
                 }}
 
-                if (val.type=="discount_labour"){
-                    console.log("discount_labour")
-                    DISCOUNT = ((APPLIED_COUP_LABOUR - APPLIED_COUP_DISCOUNT) * parseFloat(val.value))/100
-                    // console.log(DISCOUNT)
-                    if (DISCOUNT >= parseFloat(val.cap)){
-                        COUP_DISCOUNT = parseFloat(val.cap)
-                    }else{
-                        COUP_DISCOUNT = DISCOUNT
-                    }
-                }else if(val.type=="discount_part"){
-                    console.log("discount_part")
-                    DISCOUNT = (APPLIED_COUP_PART * parseFloat(val.value))/100
-                    if (DISCOUNT >= parseFloat(val.cap)){
-                        COUP_DISCOUNT = parseFloat(val.cap)
-                    }else{
-                        COUP_DISCOUNT = DISCOUNT
-                    }
-                }else if(val.type=="discount_total"){
-                    console.log("discount_total")
-                    DISCOUNT = (APPLIED_COUP_TOTAL * parseFloat(val.value))/100
-                    if (DISCOUNT >= parseFloat(val.cap)){
-                        COUP_DISCOUNT = parseFloat(val.cap)
-                    }else{
-                        COUP_DISCOUNT = DISCOUNT
-                    }
-                }else if(val.type=="flat"){
-                    console.log("flat")
-                    DISCOUNT = (APPLIED_COUP_TOTAL * parseFloat(val.value))/100
-                    if (DISCOUNT >= parseFloat(val.cap)){
-                        COUP_DISCOUNT = parseFloat(val.cap)
-                    }else{
-                        COUP_DISCOUNT = DISCOUNT
-                    }
-
+            if (val.type=="discount_labour"){
+                console.log("discount_labour")
+                DISCOUNT = ((APPLIED_COUP_LABOUR - APPLIED_COUP_DISCOUNT) * parseFloat(val.value))/100
+                // console.log(DISCOUNT)
+                if (DISCOUNT >= parseFloat(val.cap)){
+                    COUP_DISCOUNT = parseFloat(val.cap)
                 }else{
-                    console.log("none")
-                    COUP_DISCOUNT= 0
+                    COUP_DISCOUNT = DISCOUNT
                 }
+            }else if(val.type=="discount_part"){
+                console.log("discount_part")
+                DISCOUNT = (APPLIED_COUP_PART * parseFloat(val.value))/100
+                if (DISCOUNT >= parseFloat(val.cap)){
+                    COUP_DISCOUNT = parseFloat(val.cap)
+                }else{
+                    COUP_DISCOUNT = DISCOUNT
+                }
+            }else if(val.type=="discount_total"){
+                console.log("discount_total")
+                DISCOUNT = (APPLIED_COUP_TOTAL * parseFloat(val.value))/100
+                if (DISCOUNT >= parseFloat(val.cap)){
+                    COUP_DISCOUNT = parseFloat(val.cap)
+                }else{
+                    COUP_DISCOUNT = DISCOUNT
+                }
+            }else if(val.type=="flat"){
+                console.log("flat")
+                DISCOUNT = (APPLIED_COUP_TOTAL * parseFloat(val.value))/100
+                if (DISCOUNT >= parseFloat(val.cap)){
+                    COUP_DISCOUNT = parseFloat(val.cap)
+                }else{
+                    COUP_DISCOUNT = DISCOUNT
+                }
+
+            }else{
+                console.log("none")
+                COUP_DISCOUNT= 0
+            }
             message = val.message
-             local.save('coupon',val.coupon_code)
-             CURRENT_CART.push({"name": "Discount Coupon - " + val.coupon_code,
-                                "price": COUP_DISCOUNT,
-                                "action": "Discount",
-                                "type": "Discount"})
-         })
+            local.save('coupon',val.coupon_code)
+            CURRENT_CART.push({"name": "Discount Coupon - " + val.coupon_code,
+                "price": COUP_DISCOUNT,
+                "action": "Discount",
+                "type": "Discount"})
+        })
         if (cat_counter==0){
             message = "Coupon invalid for selected service"
             local.clearKey('coupon')
         }
         $('#cart .coupon-message .coup-mess').text(message)
-    }
+    },
+    loadLocation:function(data){
+            var container = $('input.autocomplete');
+            var locations = {};
+            container.autocomplete({
+                data : locations
+            })
+            // var locations = {};
+
+            $.each(data.predictions, function(ix, val){
+                 locations[val.description] = null
+            });
+            // locations += '}';
+            console.log(locations)
+            container.autocomplete({
+                data : locations
+            })
+            Materialize.updateTextFields();
+
+    },
 };
 
 // "cap": 200,

@@ -231,10 +231,6 @@ var Global = {
         // $('#home .form-proceed').click(function (event) {
         // });
 
-        $('.autocomplete-option').click(function() {
-          $input.val($(this).text().trim());
-          $('.autocomplete-option').addClass('hide');
-        });
 
 
         var callbrands =function(){

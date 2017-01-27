@@ -90,7 +90,7 @@ var Global = {
             $('#booking-details').show()
             bid =$(this).attr('data-class')
             Commons.ajaxData('view_all_bookings', {b_id:bid}, "get", _this, _this.loadBookingData,null, '.loading-pane');
-            Commons.ajaxData('fetch_all_users', {type:"b2b"}, "get", _this, _this.loadB2Bdata,null, '.loading-pane');
+            Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", _this, _this.loadAgentdata,null, '.loading-pane');
         });
         // Switch between estimate and details in a booking
         $('#customer-detail .cust-detail').click(function(){
@@ -136,7 +136,7 @@ var Global = {
             // new_container.appendTo(container);
             TOTAL_ITEMS_ADMIN = item_no;
         });
-        // - update-customer-details-estimate
+        // - update-customer
         $('#customer-detail .btn-update-cust').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             email_n = $('#customer-detail #email').val();
@@ -144,28 +144,65 @@ var Global = {
             date_n = $('#customer-detail #date').val();
             time_n = $('#customer-detail #time_booking').val();
             comment_n = $('#customer-detail #comments').text();
-            agent_n = $('#agent-select').find('option:selected').val()
-            console.log(bid);
-            console.log(email_n)
-            console.log(reg_n)
-            console.log(date_n)
-            console.log(time_n)
-            console.log(comment_n)
-            console.log(agent_n)
+            // console.log(bid);
+            // console.log(email_n)
+            // console.log(reg_n)
+            // console.log(date_n)
+            // console.log(time_n)
+            // console.log(comment_n)
+            // console.log(agent_n)
             ALL_JOBS_ADMIN = comment_n
-            _this.updateCart()
-            console.log(CURRENT_CART_ADMIN)
-            estimate = JSON.stringify(CURRENT_CART_ADMIN)
             Commons.ajaxData('update_booking', {b_id: bid,
-                                                agent_id: agent_n,
                                                 email: email_n,
                                                 reg_number: reg_n,
                                                 comment: comment_n,
-                                                estimate: estimate,
                                                 time: time_n,
                                                 date: date_n,
                                                 }, "post", _this, _this.loadCustomerupdate,null, '.loading-pane');
         });
+
+        // - update-estimate
+        $('#customer-detail .btn-update-estimate').click(function(){
+            bid = $('#customer-detail #booking_id').attr('booking_id');
+            _this.updateCart()
+            console.log(CURRENT_CART_ADMIN)
+            estimate = JSON.stringify(CURRENT_CART_ADMIN)
+            Commons.ajaxData('update_estimate', {b_id: bid,
+                                                estimate: estimate,
+                                                }, "post", _this, _this.loadCustomerestimate,null, '.loading-pane');
+        });
+        // Update-Agent
+            $('#customer-detail .btn-update-agent').click(function(){
+            bid = $('#customer-detail #booking_id').attr('booking_id');
+            agent_n = $('#agent-select').find('option:selected').val()
+            Commons.ajaxData('update_agent', {b_id: bid,
+                                                agent_id: agent_n,
+                                                // email: email_n,
+                                                // reg_number: reg_n,
+                                                // comment: comment_n,
+                                                // estimate: estimate,
+                                                // time: time_n,
+                                                // date: date_n,
+                                                }, "post", _this, _this.loadCustomerAgent,null, '.loading-pane');
+        });
+                // change-status
+            $('#customer-detail .btn-update-status').click(function(){
+            bid = $('#customer-detail #booking_id').attr('booking_id');
+            status_n = $('#status-select').find('option:selected').val()
+
+            // agent_n = $('#agent-select').find('option:selected').val()
+            Commons.ajaxData('change_status', {b_id: bid,
+                                                status_id: status_n,
+                                                // email: email_n,
+                                                // reg_number: reg_n,
+                                                // comment: comment_n,
+                                                // estimate: estimate,
+                                                // time: time_n,
+                                                // date: date_n,
+                                                }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
+        });
+
+
 
         //Coupon Management
         // -- Load Coupon
@@ -272,6 +309,7 @@ var Global = {
               $('#coupon-detail  .single-coupon').removeClass('selected')
               $('#coupon-detail  .all-coupon:hover').addClass('selected')
         });
+
         $('#coupon-detail .single-coupon').click(function(){
               $('#coupon-detail .coupon-list').hide();
               $('#coupon-detail  .coupon-add-mod').show();
@@ -570,23 +608,138 @@ var Global = {
 
             Commons.ajaxData('fetch_all_users', {}, "get", _this, _this.loadUsers,null, '.loading-pane');
         });
-        $('#user-detail .user-data').on('click','.btn-user-update',function(event,data){
-            // console.log(check)
-            user = $(this).attr('data-class');
-            row = $(this).attr('row_n');
-            b2b_box =  document.getElementById('b2b_box-'+row);
-            admin_box = document.getElementById('admin_box-'+row);
-            staff_box =  document.getElementById('staff_box-'+row);
-            agent_box =  document.getElementById('agent_box-'+row);
-            b2b = b2b_box.checked
-            admin = admin_box.checked
-            staff = staff_box.checked
+                //     - ADD User
+        $('#user-detail .add-user').click(function(){
+            user_id = $('#user-detail #user_id').attr('data-class')
+            user_name = $('#user-detail #user_name').val()
+            user_number = $('#user-detail #user_number').val()
+            user_email = $('#user-detail #user_email').val()
+            user_password = $('#user-detail #user_password').val()
+            user_locality = $('#user-detail #user_locality').val()
+            user_city = $('#user-detail #user_city').val()
+            user_address = $('#user-detail #user_address').val()
+            agent_box =  document.getElementById('agent_box');
+            b2b_box =  document.getElementById('b2b_box');
+            admin_box =  document.getElementById('admin_box');
+            staff_box =  document.getElementById('staff_box');
+
             agent = agent_box.checked
-            // parent = $(this).
-            // var parent = $(this).closest('tr');
-            // parent.find('#b2b_box-').
-            Commons.ajaxData('update_user', {user_id:user, b2b_st:b2b, admin_st:admin, staff_st:staff,agent_st:agent}, "get", _this, _this.loadUpdateUser,null, '.loading-pane');
+            b2b = b2b_box.checked
+            admin= admin_box.checked
+            staff= staff_box.checked
+
+            error =0
+
+
+            if(user_name==""){
+                $('#user-detail #user_name').addClass("invalid");
+                error = 1;
+            }
+            if(user_number==""){
+                $('#user-detail #user_number').addClass("invalid");
+                error = 1;
+            }
+            if(user_email==""){
+                $('#user-detail #user_email').addClass("invalid");
+                error = 1;
+            }
+            if(user_password==""){
+                $('#user-detail #user_password').addClass("invalid");
+                error = 1;
+            }
+            if(user_city==""){
+               $('#user-detail #user_city').addClass("invalid");
+                error = 1;
+            }
+            if(user_locality==""){
+               $('#user-detail #user_locality').addClass("invalid");
+                error = 1;
+            }
+            if(user_address==""){
+               $('#user-detail #user_address').addClass("invalid");
+                error = 1;
+            }
+
+            if(error==1){
+                return;
+            }else{
+                Commons.ajaxData('update_user',
+                        {user_id:user_id, user_num: user_number, user_name : user_name, user_email: user_email, user_add: user_address, user_loc: user_locality, user_city:user_city,b2b_st:b2b, admin_st:admin, staff_st:staff,agent_st:agent}
+                    // {
+                                // c_id: coupon_code  ,
+                                //     d_start: coupon_start ,
+                                //     d_end: coupon_end   ,
+                                //     veh_type: coup_veh_type,
+                                //     cat_id: coup_cat_type,
+                                //     type: coup_type    ,
+                                //     val: coup_val     ,
+                                //     cap: coup_cap     ,
+                                //     message: coup_message ,
+                                //     active: coup_active
+                // }
+            , "get", _this, _this.loadUpdateUser,null, '.loading-pane');
+            }
         });
+        // -- Modify Coupon
+        $('#user-detail .user-list').on('click','.modify-btn',function(){
+            user_id = $(this).closest('tr').attr('data-class')
+            // console.log(coupon_id)
+            $('#user-detail .user-list').hide()
+            $('#user-detail .user-add-mod').show()
+             $('#user-detail  .all-user').removeClass('selected')
+              $('#user-detail  .single-user').addClass('selected')
+             Commons.ajaxData('fetch_all_users', {u_id:user_id}, "get", _this, _this.loadUser,null, '.loading-pane');
+        });
+        // -- Switch between list and add/modify in a coupon
+        $('#user-detail .all-user').click(function(){
+              $('#user-detail .user-list').show();
+              $('#user-detail  .user-add-mod').hide();
+              $('#user-detail  .single-user').removeClass('selected')
+              $('#user-detail  .all-user:hover').addClass('selected')
+        });
+
+        $('#user-detail .single-user').click(function(){
+              $('#user-detail .user-list').hide();
+              $('#user-detail  .user-add-mod').show();
+              $('#user-detail  .all-user').removeClass('selected')
+              $('#user-detail  .single-user:hover').addClass('selected')
+                $('#user-detail #user_id').attr('data-class','')
+                $('#user-detail #user_name').val('')
+               $('#user-detail #user_number').val('')
+               $('#user-detail #user_number').val('')
+               $('#user-detail #user_email').val('')
+               $('#user-detail #user_password').val('')
+               $('#user-detail #user_address').val('')
+               $('#user-detail #user_locality').val('')
+               $('#user-detail #user_city').val('')
+                document.getElementById('b2b_box').removeAttribute("checked", "");;
+                document.getElementById('agent_box').removeAttribute("checked", "");;
+                document.getElementById('admin_box').removeAttribute("checked", "");;
+                document.getElementById('staff_box').removeAttribute("checked", "");;
+
+        });
+
+
+
+
+
+        // $('#user-detail .user-data').on('click','.btn-user-update',function(event,data){
+        //     // console.log(check)
+        //     user = $(this).attr('data-class');
+        //     row = $(this).attr('row_n');
+        //     b2b_box =  document.getElementById('b2b_box-'+row);
+        //     admin_box = document.getElementById('admin_box-'+row);
+        //     staff_box =  document.getElementById('staff_box-'+row);
+        //     agent_box =  document.getElementById('agent_box-'+row);
+        //     b2b = b2b_box.checked
+        //     admin = admin_box.checked
+        //     staff = staff_box.checked
+        //     agent = agent_box.checked
+        //     // parent = $(this).
+        //     // var parent = $(this).closest('tr');
+        //     // parent.find('#b2b_box-').
+        //     Commons.ajaxData('update_user', {user_id:user, b2b_st:b2b, admin_st:admin, staff_st:staff,agent_st:agent}, "get", _this, _this.loadUpdateUser,null, '.loading-pane');
+        // });
     },
     loadBookings:function(data){
         var container = $('#bookings-list .booking-list .pre-data');
@@ -631,64 +784,55 @@ var Global = {
             container.html(html);
             // container.find('select').material_select();
     },
+
     loadUsers:function(data){
-        var container = $('#user-detail .user-data');
-        container.html('');
-        html = ''
+        container =        $('#user-details .user-list .pre-data')
+        container.html('')
+        html=''
         i=1
            html += '								<div class="desc-content col s12 m12 l12">';
             html += '									<table class="striped">';
             html += '										<thead>';
             html += '										<tr>';
             html += '											<th data-field="id">S.No.</th>';
-            html += '											<th data-field="part">Name</th>';
-            // html += '											<th data-field="part">Last Name</th>';
-            html += '											<th data-field="action">Number</th>';
-            html += '											<th data-field="action">Email</th>';
-            html += '											<th data-field="price">Rights</th>';
-            // html += '											<th data-field="price">Give Rights</th>';
-            html += '											<th data-field="price">Button</th>';
+            html += '											<th data-field="code">Name</th>';
+            html += '											<th data-field="veh_type">Number</th>';
+            html += '											<th data-field="category">Email</th>';
+            html += '											<th data-field="start_date">Agent</th>';
+            html += '											<th data-field="end_date">B2B</th>';
+            html += '											<th data-field="type">Staff</th>';
+            html += '											<th data-field="status">Admin</th>';
+            html += '											<th data-field="modify"></th>';
             html += '										</tr>';
             html += '										</thead>';
             html += '										<tbody>';
         $.each(data, function(ix, val) {
-            html += '<tr data-class="'+val.id+'">'
+            html += '<tr class="coupon-row" data-class="'+val.id+'">'
             html += '											<td>'+i+'</td>';
             html += '											<td>'+val.first_name+' '+val.last_name+'</td>';
             html += '											<td>'+val.phone+'</td>';
-            html += '											<td>'+val.email+'</td>';
-            html += '											<td><p>';
-
+            html += '											<td>'+val.email[0]+'</td>';
             if (val.agent){
-               html += '<input type="checkbox" class="filled-in" id="agent_box-'+i+'" checked="checked" /><label for="agent_box-'+i+'">Agent</label>'
+                html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
             }else{
-               html +='<input type="checkbox" class="filled-in" id="agent_box-'+i+'"/><label for="agent_box-'+i+'">Agent</label>'
+                html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
             }
             if (val.b2b){
-               html += '<input type="checkbox" class="filled-in" id="b2b_box-'+i+'" checked="checked" /><label for="b2b_box-'+i+'">B2B</label>'
+                html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
             }else{
-               html +='<input type="checkbox" class="filled-in" id="b2b_box-'+i+'" /><label for="b2b_box-'+i+'">B2B</label>'
+                html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
             }
-            html+='</p><p>'
             if (val.staff){
-               html += '<input type="checkbox" class="filled-in" id="staff_box-'+i+'" checked="checked" /><label for="staff_box-'+i+'">Staff</label>'
+                html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
             }else{
-               html +='<input type="checkbox" class="filled-in" id="staff_box-'+i+'"/><label for="staff_box-'+i+'">Staff</label>'
+                html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
             }
             if (val.admin){
-               html += '<input type="checkbox" class="filled-in" id="admin_box-'+i+'" checked="checked" /><label for="admin_box-'+i+'">Admin</label>'
+                html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
             }else{
-               html +='<input type="checkbox" class="filled-in" id="admin_box-'+i+'"/><label for="admin_box-'+i+'">Admin</label>'
+                html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
             }
-            html+='</p>'
-            //
-            // if (val.user){
-            //    html += '<input type="checkbox" class="filled-in" id="user_box"checked="checked" /><label for="user_box">User</label>'
-            // }else{
-            //    html +='<input type="checkbox" class="filled-in" id="user_box"/><label for="user_box">User</label></p>'
-            // }
-            html += '										</td><td>';
-            html += '<button class="waves-effect waves-light btn red btn-user-update" data-class="'+val.id+'" row_n ="'+i+'" type="submit" name="action">Update Rights</button></td>'
+            html += '											<td style="color:purple; cursor:pointer" class="modify-btn"><i class="fa fa-pencil"></i></td>';
             html += '										</tr>';
             i=i+1
         })
@@ -698,8 +842,101 @@ var Global = {
             html += '								</div>';
 
             container.html(html);
-            // container.find('select').material_select();
     },
+        loadUser:function(data){
+           $.each(data, function(ix, val) {
+              $('#user-detail #user_id').attr('data-class',val.id);
+               $('#user-detail #user_name').val(val.first_name +" "+val.last_name);
+               $('#user-detail #user_number').val(val.phone);
+               $('#user-detail #user_email').val(val.email[0]);
+               $('#user-detail #user_address').val(val.user_address[0]['address'])
+               $('#user-detail #user_locality').val(val.user_address[0]['locality'])
+               $('#user-detail #user_city').val(val.user_address[0]['city'])
+               if (val.agent){
+                   document.getElementById('agent_box').setAttribute("checked", "");;
+               }
+               if (val.b2b){
+                   document.getElementById('b2b_box').setAttribute("checked", "");;
+               }
+               if (val.staff){
+                   document.getElementById('staff_box').setAttribute("checked", "");;
+               }
+               if (val.admin){
+                   document.getElementById('admin_box').setAttribute("checked", "");;
+               }
+
+           });
+            Materialize.updateTextFields();
+            },
+    // loadUsers:function(data){
+    //     var container = $('#user-detail .user-data');
+    //     container.html('');
+    //     html = ''
+    //     i=1
+    //        html += '								<div class="desc-content col s12 m12 l12">';
+    //         html += '									<table class="striped">';
+    //         html += '										<thead>';
+    //         html += '										<tr>';
+    //         html += '											<th data-field="id">S.No.</th>';
+    //         html += '											<th data-field="part">Name</th>';
+    //         // html += '											<th data-field="part">Last Name</th>';
+    //         html += '											<th data-field="action">Number</th>';
+    //         html += '											<th data-field="action">Email</th>';
+    //         html += '											<th data-field="price">Rights</th>';
+    //         // html += '											<th data-field="price">Give Rights</th>';
+    //         html += '											<th data-field="price">Button</th>';
+    //         html += '										</tr>';
+    //         html += '										</thead>';
+    //         html += '										<tbody>';
+    //     $.each(data, function(ix, val) {
+    //         html += '<tr data-class="'+val.id+'">'
+    //         html += '											<td>'+i+'</td>';
+    //         html += '											<td>'+val.first_name+' '+val.last_name+'</td>';
+    //         html += '											<td>'+val.phone+'</td>';
+    //         html += '											<td>'+val.email+'</td>';
+    //         html += '											<td><p>';
+    //
+    //         if (val.agent){
+    //            html += '<input type="checkbox" class="filled-in" id="agent_box-'+i+'" checked="checked" /><label for="agent_box-'+i+'">Agent</label>'
+    //         }else{
+    //            html +='<input type="checkbox" class="filled-in" id="agent_box-'+i+'"/><label for="agent_box-'+i+'">Agent</label>'
+    //         }
+    //         if (val.b2b){
+    //            html += '<input type="checkbox" class="filled-in" id="b2b_box-'+i+'" checked="checked" /><label for="b2b_box-'+i+'">B2B</label>'
+    //         }else{
+    //            html +='<input type="checkbox" class="filled-in" id="b2b_box-'+i+'" /><label for="b2b_box-'+i+'">B2B</label>'
+    //         }
+    //         html+='</p><p>'
+    //         if (val.staff){
+    //            html += '<input type="checkbox" class="filled-in" id="staff_box-'+i+'" checked="checked" /><label for="staff_box-'+i+'">Staff</label>'
+    //         }else{
+    //            html +='<input type="checkbox" class="filled-in" id="staff_box-'+i+'"/><label for="staff_box-'+i+'">Staff</label>'
+    //         }
+    //         if (val.admin){
+    //            html += '<input type="checkbox" class="filled-in" id="admin_box-'+i+'" checked="checked" /><label for="admin_box-'+i+'">Admin</label>'
+    //         }else{
+    //            html +='<input type="checkbox" class="filled-in" id="admin_box-'+i+'"/><label for="admin_box-'+i+'">Admin</label>'
+    //         }
+    //         html+='</p>'
+    //         //
+    //         // if (val.user){
+    //         //    html += '<input type="checkbox" class="filled-in" id="user_box"checked="checked" /><label for="user_box">User</label>'
+    //         // }else{
+    //         //    html +='<input type="checkbox" class="filled-in" id="user_box"/><label for="user_box">User</label></p>'
+    //         // }
+    //         html += '										</td><td>';
+    //         html += '<button class="waves-effect waves-light btn red btn-user-update" data-class="'+val.id+'" row_n ="'+i+'" type="submit" name="action">Update Rights</button></td>'
+    //         html += '										</tr>';
+    //         i=i+1
+    //     })
+    //
+    //         html += '										</tbody>';
+    //         html += '									</table>';
+    //         html += '								</div>';
+    //
+    //         container.html(html);
+    //         // container.find('select').material_select();
+    // },
     loadBookingData:function(data){
         var container = $('#customer-detail .booking-data .pre-data');
         container.html('');
@@ -714,7 +951,7 @@ var Global = {
                 html+= '<div class="col s4 m4 l2 header">Amount Paid</div><div class="col s8 m8 l4 detail">: Rs. '+val.amount_paid+'</div>'
                 html+= '<div class="col s4 m4 l2 header">Source</div><div class="col s8 m8 l4 detail">: '+val.source+'</div>'
                 html+= '<div class="col s4 m4 l2 header">Status</div><div class="col s8 m8 l4 detail">: '+val.status+'</div>'
-                html+= '<div class="col s4 m4 l2 header">Agent</div><div class="col s8 m8 l4 detail">: '+ val.agent+'</div></div>'
+                html+= '<div class="col s4 m4 l2 header">Agent</div><div class="col s8 m8 l4 detail">: '+ val.agent_details+'</div></div>'
                 html+= '<div class="row"><div class="col s4 m4 l2 header header-var">Email</div><div class="col s8 m8 l10"><input id="email" type="text" class="" value ="'+val.cust_email+'" aria-required="true"></div>'
                 html+= '<div class="col s4 m4 l2 header header-var">#Veh Reg</div><div class="col s8 m8 l10"><input id="cust_regnumber" type="text" class="" value ="'+val.cust_regnumber+'" aria-required="true"></div>'
                 if (val.booking_flag){
@@ -822,7 +1059,7 @@ var Global = {
 
         // <div class="id_100">
     },
-    loadB2Bdata:function(data){
+    loadAgentdata:function(data){
         container3 = $('#agent-select')
         container3.html('');
         html = '';

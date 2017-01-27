@@ -315,7 +315,7 @@
 <section id="bookings" class="invisible">
 	<div class="booking-select-section">
 		<!--<div class="container-fluid services">-->
-		<div class="box card no-border-radius invisible">
+		<div class="box card no-border-radius visible">
 			<div class="row btn red filter-sort closed">
 				<div class="col l12 s12 m12">
 					Filter Bookings <i class="fa fa-caret-down"></i>
@@ -340,7 +340,7 @@
 					<div class="input-field" id ="Status">
 						<select>
 							<option value="" disabled selected>Status</option>
-							<option value="1">Cold</option>
+							<option value="1">Lead</option>
 							<option value="2">Confirmed</option>
 							<option value="3">Assigned</option>
 							<option value="4">Service Engineer Left</option>
@@ -441,13 +441,15 @@
 			</div>
 
 		</div>
+
+
 		<div class="row">
 			<div class="row booking-data visible">
 				<div class="row pre-data">
 
 				</div>
 
-				<div class="row agent-button-row">
+				<div class="row agent-button-row invisible">
 					<div class="row">
 						<div class="col l12 s12 m12 centered-text">
 							<button class="waves-effect waves-light btn red btn-update-cust page-wide" type="submit" name="action">Update Customer
@@ -465,31 +467,59 @@
 
 				</div>
 				<div class="row staff-button-row">
-					<div class="col l2 s12 m12">
-						<b>Select Agent</b>
-					</div>
-					<div class="col l10 s12 m12">
-						<div class="input-field" id="agent-select">
-							<!--<select class="agent-list">-->
-							<!--<option value="" disabled>Select Agent</option>-->
-							<!--</select>-->
+					<div class="row">
+						<div class="col l2 s12 m12">
+							<b>Select Agent</b>
+						</div>
+						<div class="col l6 s12 m12">
+							<div class="input-field" id="agent-select">
+								<!--<select class="agent-list">-->
+								<!--<option value="" disabled>Select Agent</option>-->
+								<!--</select>-->
+							</div>
+						</div>
+						<div class="col l4 s12 m12 centered-text">
+							<button class="waves-effect waves-light btn red btn-update-agent page-wide" type="submit" name="action">Select Agent
+								<i class="material-icons right">send</i>
+							</button>
 						</div>
 					</div>
+					<div class="row">
 					<div class="col l2 s12 m12">
 						<b>Change Status</b>
 					</div>
-					<div class="col l10 s12 m12">
+					<div class="col l6 s12 m12">
 						<div class="input-field" id="status-select">
-							<select class="status-list">
+							<select class="status-list browser-default">
 								<option value="" disabled selected>Select Status</option>
+								<option value="Lead" disabled >Lead</option>
+								<option value="Confirmed">Confirmed</option>
+								<option value="Assigned" disabled>Assigned</option>
+								<option value="Agent Left">Agent Left</option>
+								<option value="Reached Workshop" >Reached Workshop</option>
+								<option value="Estimate Shared" >Estimate Shared</option>
+								<option value="Feedback Taken" >Feedback Taken</option>
+								<option value="Cancelled" >Cancelled</option>
+								<option value="Escalation" >Escalation</option>
+								<!--# 1. Lead - Lead-->
+								<!--# 2. Booking - Confirmed-->
+								<!--# 3. Assign Vendor - Assigned-->
+								<!--# 4. Left - Agent Left-->
+								<!--# 5. Reached - Reached Workshop-->
+								<!--# 6. Estimate shared - Estimate Shared-->
+								<!--# 7. Job completed - Job completed-->
+								<!--# 8. Feedback - Feedback Taken-->
+								<!--# 9. Cancelled - Cancelled-->
+								<!--# 10. Escalation - Escalation-->
 							</select>
 						</div>
 					</div>
-					<div class="col l12 s12 m12 centered-text">
-						<button class="waves-effect waves-light btn red btn-update-cust page-wide" type="submit" name="action">Update Booking
+					<div class="col l4 s12 m12 centered-text">
+						<button class="waves-effect waves-light btn red btn-update-status page-wide" type="submit" name="action">Update Status
 							<i class="material-icons right">send</i>
 						</button>
 					</div>
+				</div>
 				</div>
 
 
@@ -508,30 +538,152 @@
 				</div>
 				<div class="row agent-staff-button-row">
 					<div class="row">
-						<div class="col l6 s12 m12 centered-text">
-							<button class="waves-effect waves-light btn red btn-update-cust page-wide" type="submit" name="action">Update Estimate
+						<div class="col l12 s12 m12 centered-text">
+							<button class="waves-effect waves-light btn red btn-update-estimate page-wide" type="submit" name="action">Update Estimate
 								<i class="material-icons right">send</i>
 							</button>
 						</div>
-						<div class="col l6 s12 m12 centered-text">
+						<div class="col l12 s12 m12 centered-text invisible">
 							<button class="waves-effect waves-light btn red btn-share-est page-wide" type="submit" name="action">Share Estimate
 								<i class="material-icons right">send</i>
 							</button>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
-<section id="user-details" class="invisible">
+<!--<section id="user-details" class="invisible">-->
+	<!--<div id="user-detail">-->
+		<!--<div class="row user-data visible">-->
+		<!--</div>-->
+	<!--</div>-->
+<!--</section>-->
+
+<section id="user-details" class="visible">
 	<div id="user-detail">
-		<div class="row user-data visible">
+		<div class="row header-coupon">
+			<div class="col s6 m6 l6 date-box all-user selected">
+				All Users
+			</div>
+			<div class="col s6 m6 l6 date-box single-user">
+				Add/Edit User
+			</div>
+		</div>
+		<div class="row">
+			<div class="row user-list visible">
+				<div class="row pre-data">
+				</div>
+			</div>
+			<div class="row user-add-mod invisible">
+				<div class="row centered-text">
+					<h3>User Details</h3>
+				</div>
+				<!--<div class="row">-->
+					<!--<div class="col l12 s12 m12 centered-text">-->
+						<!--<input type="checkbox" class="filled-in" id="coupon_active"/><label for="coupon_active">Activation Status</label>'-->
+					<!--</div>-->
+				<!--</div>-->
+				<div class="row">
+					<div class="col l12 s12 m12">
+							<span id="user_id" data-class=""></span>
+						<!--</div>-->
+					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="col l12 s12 m12">
+						<div class="input-field">
+							<i class="material-icons prefix">account_circle</i>
+							<input id="user_name" type="text" class="validate" required="" aria-required="true">
+							<label for="user_name" data-error="Required">User Name</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col l12 s12 m12">
+						<div class="input-field">
+							<i class="material-icons prefix">phone</i>
+							<input id="user_number" type="number" class="validate" required="" aria-required="true">
+							<label for="user_number" data-error="Required">10 Digit Phone Number</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col l12 s12 m12">
+						<div class="input-field">
+							<i class="material-icons prefix">email</i>
+							<input id="user_email" type="email" class="validate" required="" aria-required="true">
+							<label for="user_email" data-error="Required">User Email</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col l10 s12 m12 offset-l2">
+					<table>
+						<tr>
+							<td>
+								<input type="checkbox" class="filled-in" id="agent_box"/>
+								<label for="agent_box">Agent</label>'
+							</td>
+							<td>
+								<input type="checkbox" class="filled-in" id="b2b_box"/>
+								<label for="b2b_box">B2B</label>'
+							</td>
+							<td>
+								<input type="checkbox" class="filled-in" id="staff_box"/>
+								<label for="staff_box">Staff</label>'
+							</td>
+							<td>
+								<input type="checkbox" class="filled-in" id="admin_box"/>
+								<label for="admin_box">Admin</label>'
+							</td>
+						</tr>
+					</table>
+				</div>
+				</div>
+				<div class="row">
+					<div class="col l12 s12 m12">
+						<div class="input-field">
+							<i class="material-icons prefix">my_location</i>
+							<input id="user_address" type="text" class="validate" required="" aria-required="true">
+							<label for="user_address" data-error="Required">User Address</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col l12 s12 m12">
+						<div class="input-field">
+							<i class="material-icons prefix">location_on</i>
+							<input id="user_locality" type="text" class="validate" required="" aria-required="true">
+							<label for="user_locality" data-error="Required">User Locality</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col l12 s12 m12">
+						<div class="input-field">
+							<i class="material-icons prefix">business</i>
+							<input id="user_city" type="text" class="validate" required="" aria-required="true">
+							<label for="user_city" data-error="Required">User City</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col l12 s12 m12 centered-text">
+						<button class="waves-effect waves-light btn-large red add-user" type="submit" name="action">Add/ Modify User
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
+
 
 <section id="coupon-details" class="invisible">
 	<div id="coupon-detail">

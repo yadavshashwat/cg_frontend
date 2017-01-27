@@ -69,7 +69,7 @@
 				<li data-class ="repairing" class ="service-item repairing-button car-repairing">Repairing</li>
 				<li data-class ="denting"   class ="service-item painting-button car-denting">Denting/Painting</li>
 				<li data-class ="carcare"   class ="service-item cleaning-button car-care">Car Care</li>
-				<li data-class ="subscription"  class ="service-item amc-button car-subscription">AMC</li>
+				<li data-class ="subscription"  class ="service-item amc-button car-subscription">Subscription</li>
 				<li data-class ="emergency"  class ="service-item emergency-button car-emergency">Emergency</li>
 			</ul>
 			<ul class="center items-list-bike invisible">
@@ -86,7 +86,7 @@
 						<option data-class ="repairing" class ="car-repairing"   value="repairs-button">Repairing</option>
 						<option data-class ="denting" class ="car-denting"   value="painting-button">Denting Painting</option>
 						<option  data-class ="carcare" class ="car-care"   value="cleaning-button">Car Care</option>
-						<option data-class ="subscription" class ="car-subscription"  value="amc-button">AMC</option>
+						<option data-class ="subscription" class ="car-subscription"  value="amc-button">Subscription</option>
 						<option data-class ="emergency" class ="car-emergency"   value="emergency-button">Emergency</option>
 					</select>
 				</div>
@@ -102,6 +102,33 @@
 
 	</nav>
 </div>
+<!--city select-->
+<section id="city-select" class="visible">
+	<div class="row">
+		<div class="card city-select col l4 s12 m12">
+			<div class="col l12 s12 m12">
+					<div class="city card">
+						<div class="card-image waves-effect waves-block waves-light">
+							<img class="activator img1" src="/../../static/revamp/img/City/Gurgaon.jpg">
+						</div>
+						<div class="card-content  centered-text">
+							<p class="title city-name">Gurgaon</p>
+						</div>
+					</div>
+			</div>
+			<!--<div class="city col l6 s12 m12">-->
+					<!--<div class="card">-->
+						<!--<div class="card-image waves-effect waves-block waves-light">-->
+							<!--<img class="activator img1" src="/../../static/revamp/img/City/NewDelhi.jpg">-->
+						<!--</div>-->
+						<!--<div class="card-content centered-text">-->
+							<!--<p class="title city-name">New Delhi</p>-->
+						<!--</div>-->
+					<!--</div>-->
+			<!--</div>-->
+		</div>
+	</div>
+</section>
 
 <!--service category section -->
 <section id="services" class="visible" data-vehicle-name="{{veh}}" data-vehicle-type="{{veh_type}}">
@@ -245,9 +272,44 @@
 <section id="jobs" class="invisible" data-service="{{service}}">
 	<div class="services-select-section">
 		<div class="container-fluid services">
+
 			<div class="row">
+
 				<!--Service List Code-->
-				<div class="col l9 s12 m12 vertical-col service-list">
+				<div class="col l9 s12 m12">
+					<div class="row service-sub-category car-care invisible">
+						<div class="col s6 m6 l6 job-cat-col ">
+							<div class="card job-cat-card doorstep-card cardhover selected" doorstep="1">
+								Doorstep
+							</div>
+						</div>
+						<div class="col s6 m6 l6  job-cat-col ">
+							<div class="card job-cat-card workshop-card cardhover" doorstep="0">
+								Workshop
+							</div>
+						</div>
+					</div>
+					<div class="row service-sub-category denting invisible">
+						<div class="col s4 m4 l4 job-cat-col ">
+							<div class="card job-cat-card solid-card cardhover selected" sub_cat="Solid">
+								Solid
+							</div>
+						</div>
+						<div class="col s4 m4 l4  job-cat-col ">
+							<div class="card job-cat-card mettalic-card cardhover" sub_cat="Metallic">
+								Mettalic
+							</div>
+						</div>
+						<div class="col s4 m4 l4  job-cat-col ">
+							<div class="card job-cat-card pearlecent-card cardhover" sub_cat ="Pearl">
+								Pearlecent
+							</div>
+						</div>
+					</div>
+
+					<div class="row vertical-col service-list">
+
+					</div>
 					<!--<div class="job">-->
 					<!--<div class="card vertical-cards cardhover  service-name">-->
 					<!--<div class="row">-->
@@ -397,8 +459,8 @@
 						</div>
 						<div class="row cart-section  vehicle-header">
 							<div class="col s12 m12 l12">
-								Vehicle Details<br>
-								<span id="vehicle-name1" class="vehicle-name"></span><br>
+								Vehicle :
+								<span id="vehicle-name1" class="vehicle-name"></span>
 								<span id="vehicle-varient1" class="vehicle-name"></span>
 							</div>
 						</div>
@@ -471,7 +533,7 @@
 						</div>
 						<div class="row cart-checkout">
 							<div class="col s12 m12 l12">
-								<button class="waves-effect waves-light btn-large red btn-service btn-checkout" type="submit" name="action">Book Now
+								<button class="waves-effect waves-light btn-large red btn-service btn-checkout disabled" type="submit" name="action">Book Now
 									<i class="material-icons right">send</i>
 								</button>
 							</div>
@@ -508,161 +570,121 @@
 
 
 
-						<div class="row">
-							<div class="col l11 s11 m11 offset-l1">
-								<form class="col s12">
-								<div class="row">
-									<div class="input-field col s12 m12 l5">
-										<i class="material-icons prefix">today</i>
-										<input id="date" type="date" class="datepicker">
-										<label for="date" data-error="required">Date</label>
-									</div>
-									<div class="col l2 m4 s4 time-form">
-											<i class="fa fa-clock-o"></i>
+							<div class="row">
+								<div class="col l11 s11 m11 offset-l1">
+									<form class="col s12">
+										<div class="row">
+											<div class="input-field col s12 m12 l5">
+												<i class="material-icons prefix">today</i>
+												<input id="date" type="date" class="datepicker">
+												<label for="date" data-error="required">Date</label>
+											</div>
+											<div class="col l2 m4 s4 time-form">
+												<i class="fa fa-clock-o"></i>
 												Time:
-									</div>
+											</div>
 
-									<div class="input-field col s8 m8 l4" id ="time-slot">
-									<!--<div class="col s9 m9 l9" id ="time-slot">-->
-											<!--<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>-->
-											<!--<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>-->
-											<!--<div class="card box-card cardhover col l4 m4 s4 offset-s2 offset-m2 offset-l2" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>-->
-											<!--<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>-->
-											<!--<div class="card box-card cardhover col l4 m4 s4 offset-s2 offset-m2 offset-l2" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>-->
+											<div class="input-field col s8 m8 l4" id ="time-slot">
+												<!--<div class="col s9 m9 l9" id ="time-slot">-->
+												<!--<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>-->
+												<!--<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>-->
+												<!--<div class="card box-card cardhover col l4 m4 s4 offset-s2 offset-m2 offset-l2" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>-->
+												<!--<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>-->
+												<!--<div class="card box-card cardhover col l4 m4 s4 offset-s2 offset-m2 offset-l2" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>-->
 
-										<select>
-											<option value="" disabled selected>Time-Slot</option>
-											<option value="1">09:30AM - 11:30AM </option>
-											<option value="2">11:30AM - 01:30PM </option>
-											<option value="3">01:30PM - 03:30PM </option>
-											<option value="4">03:30PM - 05:30PM </option>
-											<option value="5">05:30PM - 07:30PM </option>
-										</select>
-										<span id ="choose-time-slot" class="error-message"></span>
-									</div>
+												<select>
+													<option value="" disabled selected>Time-Slot</option>
+													<option value="1">09:30AM - 11:30AM </option>
+													<option value="2">11:30AM - 01:30PM </option>
+													<option value="3">01:30PM - 03:30PM </option>
+													<option value="4">03:30PM - 05:30PM </option>
+													<option value="5">05:30PM - 07:30PM </option>
+												</select>
+												<span id ="choose-time-slot" class="error-message"></span>
+											</div>
+										</div>
+										<div class="row">
+											<div class="input-field col s12" >
+												<i class="material-icons prefix">report_problem</i>
+												<input id="comment" type="text"  aria-required="true">
+												<label for="comment">Specific issues/ request?</label>
+											</div>
+										</div>
+									</form>
 								</div>
-								<div class="row">
-									<div class="input-field col s12" >
-										<i class="material-icons prefix">report_problem</i>
-										<textarea id="comment" class="materialize-textarea"></textarea>
-										<label for="comment">Specific issues/ request?</label>
-									</div>
+							</div>
+							<!--</div>-->
+							<!--<div class="card">-->
+							<div class="row">
+								<div class="col l1 m1 s1 number centered-text">
+									2
 								</div>
+								<div class="col l10 m9 s9 box-header">
+									<h3>Customer Details</h3>
+								</div>
+							</div>
+
+
+
+							<div class="row">
+								<form>
+									<div class="col l5 s12 m12 offset-l1">
+											<div class="row">
+												<div class="input-field col s12">
+													<i class="material-icons prefix">account_circle</i>
+													<input id="name" type="text" class="validate" required="" aria-required="true">
+													<label for="name" data-error="Required">Name</label>
+												</div>
+											</div>
+											<div class="row">
+												<div class="input-field col s12">
+													<i class="material-icons prefix">phone</i>
+													<input id="telephone" type="number" required="" aria-required="true">
+													<label for="telephone" data-error="Invalid Number | Example : 9829098290" >Mobile</label>
+												</div>
+											</div>
+											<div class="row">
+												<div class="input-field col s12">
+													<i class="material-icons prefix">email</i>
+													<input id="email" type="email" class="validate" required="" aria-required="true">
+													<label for="email" data-error="Invalid e-mail id">Email</label>
+												</div>
+											</div>
+									</div>
+									<div class="col l5 s12 m12">
+										<div class="row">
+											<div class="input-field col s12">
+												<i class="material-icons prefix">my_location</i>
+												<input type="text" id="address" required="" aria-required="true">
+												<label for="address" data-error="Required">Address</label>
+											</div>
+										</div>
+										<div class="row">
+											<div class="input-field col s12">
+												<i class="material-icons prefix">location_on</i>
+												<input type="text" id="locality" class="autocomplete" required="" aria-required="true">
+												<label for="locality" data-error="Required">Locality</label>
+											</div>
+										</div>
+										<div class="row">
+											<div class="input-field col s12">
+												<i class="material-icons prefix">business</i>
+												<input type="text" id="city" class="" required="" aria-required="true">
+												<label for="city" data-error="Required">City</label>
+											</div>
+										</div>
+									</div>
 								</form>
 							</div>
-						</div>
-					<!--</div>-->
-					<!--<div class="card">-->
-						<div class="row">
-							<div class="col l1 m1 s1 number centered-text">
-								2
-							</div>
-							<div class="col l10 m9 s9 box-header">
-								<h3>Customer Details</h3>
-							</div>
-						</div>
 
-
-
-						<div class="row">
-							<div class="col l5 s12 m12 offset-l1">
-								<form class="col s12">
-								<div class="row">
-									<div class="input-field col s12">
-										<i class="material-icons prefix">account_circle</i>
-										<input id="name" type="text" class="validate" required="" aria-required="true">
-										<label for="name" data-error="Required">Name</label>
-									</div>
+							<div class="row confirm-details">
+								<div class="col s12 m12 l12 centered-text">
+									<button class="waves-effect waves-light btn-large red btn-service btn-checkout" type="submit" name="action">Confirm Details
+										<i class="material-icons right">send</i>
+									</button>
 								</div>
-								<div class="row">
-									<div class="input-field col s12">
-										<i class="material-icons prefix">phone</i>
-										<input id="telephone" type="number" required="" aria-required="true">
-										<label for="telephone" data-error="Invalid Number | Example : 9829098290" >Mobile</label>
-									</div>
-								</div>
-								<div class="row">
-									<div class="input-field col s12">
-										<i class="material-icons prefix">email</i>
-										<input id="email" type="email" class="validate" required="" aria-required="true">
-										<label for="email" data-error="Invalid e-mail id">Email</label>
-									</div>
-								</div>
-
-								<!--<div class="row">-->
-									<!--<div class="input-field col s6">-->
-										<!--<i class="material-icons prefix">today</i>-->
-										<!--<input id="date" type="date" class="datepicker">-->
-										<!--<label for="date" data-error="required">date</label>-->
-									<!--</div>-->
-									<!--<div class="input-field col s6 m6 l6" id ="time-slot">-->
-										<!--<select>-->
-											<!--<option value="" disabled selected>Time-Slot</option>-->
-											<!--<option value="1">09:30AM - 11:30AM </option>-->
-											<!--<option value="2">11:30AM - 01:30PM </option>-->
-											<!--<option value="3">01:30PM - 03:30PM </option>-->
-											<!--<option value="4">03:30PM - 05:30PM </option>-->
-											<!--<option value="5">05:30PM - 07:30PM </option>-->
-										<!--</select>-->
-										<!--<span id ="choose-time-slot" class="error-message"></span>-->
-									<!--</div>-->
-								<!--</div>-->
-							</form>
-							</div>
-								<div class="col l5 s12 m12">
-								<form class="col s12">
-									<div class="row">
-										<div class="input-field col s12">
-											<i class="material-icons prefix">my_location</i>
-											<input type="text" id="address" required="" aria-required="true">
-											<label for="address" data-error="Required">Street Name</label>
-										</div>
-									</div>
-									<div class="row">
-										<div class="input-field col s12">
-											<i class="material-icons prefix">location_on</i>
-											<input type="text" id="locality" class="autocomplete" required="" aria-required="true">
-											<label for="locality" data-error="Required">Locality</label>
-										</div>
-									</div>
-
-									<div class="row">
-										<div class="input-field col s12">
-											<i class="material-icons prefix">business</i>
-											<input type="text" id="city" class="" required="" aria-required="true">
-											<label for="city" data-error="Required">City</label>
-										</div>
-									</div>
-
-									<!--<div class="row">-->
-										<!--<div class="input-field col s6">-->
-											<!--<i class="material-icons prefix">today</i>-->
-											<!--<input id="date" type="date" class="datepicker">-->
-											<!--<label for="date" data-error="required">date</label>-->
-										<!--</div>-->
-										<!--<div class="input-field col s6 m6 l6" id ="time-slot">-->
-											<!--<select>-->
-												<!--<option value="" disabled selected>Time-Slot</option>-->
-												<!--<option value="1">09:30AM - 11:30AM </option>-->
-												<!--<option value="2">11:30AM - 01:30PM </option>-->
-												<!--<option value="3">01:30PM - 03:30PM </option>-->
-												<!--<option value="4">03:30PM - 05:30PM </option>-->
-												<!--<option value="5">05:30PM - 07:30PM </option>-->
-											<!--</select>-->
-											<!--<span id ="choose-time-slot" class="error-message"></span>-->
-										<!--</div>-->
-									<!--</div>-->
-								</form>
 							</div>
 						</div>
-						<div class="row confirm-details">
-							<div class="col s12 m12 l12 centered-text">
-								<button class="waves-effect waves-light btn-large red btn-service btn-checkout" type="submit" name="action">Confirm Details
-									<i class="material-icons right">send</i>
-								</button>
-							</div>
-						</div>
-					</div>
 					</div>
 					<div class="login invisible">
 						<div class="card">
@@ -675,30 +697,30 @@
 								</div>
 							</div>
 							<div class="row">
-									<div class="input-field col s12 l5 m12 offset-l1">
-											<i class="material-icons prefix">verified_user</i>
-											<input type="text" id="otp" class="autocomplete" required="" aria-required="true">
-											<label for="otp" data-error="Invalid OTP">Enter OTP</label>
-									</div>
-									<div class="resend link-otp col s6 m6 hide-on-large-only">
-										Resend OTP
-									</div>
-									<div class="resend link-otp col s6 m6 hide-on-large-only">
-										Change Details
-									</div>
-									<div class="col l4 s12 m12">
-										<button class="waves-effect waves-light btn-large red btn-service btn-send-booking" type="submit" name="action">Verify and Confirm Booking
-											<i class="material-icons right">send</i>
-										</button>
-									</div>
+								<div class="input-field col s12 l5 m12 offset-l1">
+									<i class="material-icons prefix">verified_user</i>
+									<input type="text" id="otp" class="autocomplete" required="" aria-required="true">
+									<label for="otp" data-error="Invalid OTP">Enter OTP</label>
+								</div>
+								<div class="resend link-otp col s6 m6 hide-on-large-only">
+									Resend OTP
+								</div>
+								<div class="resend link-otp col s6 m6 hide-on-large-only">
+									Change Details
+								</div>
+								<div class="col l4 s12 m12">
+									<button class="waves-effect waves-light btn-large red btn-service btn-send-booking" type="submit" name="action">Verify and Confirm Booking
+										<i class="material-icons right">send</i>
+									</button>
+								</div>
 							</div>
 							<div class="row hide-on-med-and-down">
-									<div class="col l2 offset-l2 link-otp resend">
-										Resend OTP
-									</div>
-									<div class="col l2 link-otp change_details">
-										Change Details
-									</div>
+								<div class="col l2 offset-l2 link-otp resend">
+									Resend OTP
+								</div>
+								<div class="col l2 link-otp change_details">
+									Change Details
+								</div>
 							</div>
 
 						</div>
@@ -714,8 +736,8 @@
 						</div>
 						<div class="row cart-section  vehicle-header">
 							<div class="col s12 m12 l12">
-								Vehicle Details<br>
-								<span id="vehicle-name" class="vehicle-name"></span><br>
+								Vehicle:
+								<span id="vehicle-name" class="vehicle-name"></span>
 								<span id="vehicle-varient" class="vehicle-name"></span>
 							</div>
 						</div>
@@ -799,7 +821,7 @@
 	<nav class="nav-cart-list waves-effect waves-light">
 		<div class="row">
 			<div id="cart-navbar" class="nav-wrapper navbar-cart">
-				<ul class="center">
+				<ul class="center data-cart">
 					<li id="nav-cart-btn" class ="cart-btn-items"><i class="fa fa-shopping-cart"></i>&nbsp Total: ₹&nbsp;<span id="cart_items">0</span> | Book Now &nbsp<i class="fa fa-angle-right"></i></li>
 				</ul>
 			</div>
@@ -810,203 +832,203 @@
 
 <section id="vehicle-select-form" class="invisible">
 	<div class="row">
-	<div class = "vehicle-select-form col s12 m12 l12">
-		<div class="row row-zero-margin">
-					<div class="col s6 m6 l6 veh-cat-col">
-						<div class="card veh-cat-card car-card cardhover selected">
-							Car
-						</div>
-					</div>
-					<div class="col s6 m6 l6 veh-cat-col">
-						<div class="card veh-cat-card bike-card cardhover">
-							Bike
-						</div>
+		<div class = "vehicle-select-form col s12 m12 l6 offset-l3 offset-s0 offset-m0">
+			<div class="row row-zero-margin">
+				<div class="col s6 m6 l6 veh-cat-col">
+					<div class="card veh-cat-card car-card cardhover selected">
+						Car
 					</div>
 				</div>
-				<div class="row home-form-2 card">
-					<div class="row form-title text-left">
-						<h3><img src="/../../static/revamp/img/by-line.png" alt="by-line">Select <span class="vehicle-type">Car</span></h3>
+				<div class="col s6 m6 l6 veh-cat-col">
+					<div class="card veh-cat-card bike-card cardhover">
+						Bike
 					</div>
-
-					<div class="row text-left vehicle-details">
-
-						<!--<div class="row field-title text-left">-->
-						<!--<h4>Vehicle Details</h4>-->
-						<!--</div>-->
-
-						<form id="formValidate">
-							<div class="input-field col s12 m12 l12 " id="brand-select">
-								<!--<i class="fa fa-car prefix"></i>-->
-								<!--<select id="brand-select">-->
-								<!--&lt;!&ndash;<option value="" disabled selected>Choose Make</option>&ndash;&gt;-->
-								<!--&lt;!&ndash;&lt;!&ndash;<option value="Hyundai">Hyundai</option>&ndash;&gt;&ndash;&gt;-->
-								<!--&lt;!&ndash;&lt;!&ndash;<option value="Maruti">Maruti</option>&ndash;&gt;&ndash;&gt;-->
-								<!--</select>-->
-								<!--<label data-error="Select a Brand">Type of Question</label>-->
-							</div>
-							<div class="input-field col s7 m7 l7 " id="vehicle-select">
-								<select>
-									<option value="" disabled selected>Model</option>
-									<!--<option value="i10">i10</option>-->
-									<!--<option value="i20">i20</option>-->
-								</select>
-							</div>
-							<div class="input-field col s5 m5 l5" id="fuel-type-select">
-								<select>
-									<option value="" disabled selected>Fuel</option>
-									<option value="petrol">Petrol</option>
-									<option value="diesel">Diesel</option>
-									<!--<option value="cng">LPG/CNG</option>-->
-								</select>
-							</div>
-						</form>
-						<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-vehicle-error"></span>
-					</div>
-
-					<!--<div class = "row service-headers" id="selected-service">-->
-					<!--<div class="row field-title text-left">-->
-					<!--<h4>Service Details</h4>-->
-					<!--</div>-->
-
-					<!--<div class="col s6 m6 l4">-->
-					<!--<div class="card cardhover service-card">-->
-					<!--<div class="card-content service-name">-->
-					<!--<p>Servicing</p>-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--<div class="col s6 m6 l4">-->
-					<!--<div class="card cardhover service-card">-->
-					<!--<div class="card-content service-name">-->
-					<!--<p>Car Care</p>-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--<div class="col s6 m6 l4">-->
-					<!--<div class="card cardhover service-card">-->
-					<!--<div class="card-content service-name">-->
-					<!--<p>Repairing</p>-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--<div class="col s6 m6 l4">-->
-					<!--<div class="card cardhover service-card">-->
-					<!--<div class="card-content service-name">-->
-					<!--<p>Denting/Painting</p>-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--<div class="col s6 m6 l4">-->
-					<!--<div class="card cardhover service-card">-->
-					<!--<div class="card-content service-name">-->
-					<!--<p>General Check-Up</p>-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--<div class="col s6 m6 l4">-->
-					<!--<div class="card cardhover service-card">-->
-					<!--<div class="card-content service-name">-->
-					<!--<p>Emergency</p>-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-category-error"></span>-->
-					<!--<form class="col s12">-->
-					<!--<div class="row">-->
-					<!--<div class="input-field col s12" >-->
-					<!--<i class="material-icons prefix">report_problem</i>-->
-					<!--<textarea id="additional" class="materialize-textarea"></textarea>-->
-					<!--<label for="additional">Specific issues/ request?</label>-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--</form>-->
-					<!--</div>-->
-
-					<!--<div class="row form-row invisible">-->
-					<!--<form class="col s12">-->
-					<!--<div class="row field-title text-left">-->
-					<!--<h4>Booking Details</h4>-->
-					<!--</div>-->
-
-					<!--<div class="row">-->
-					<!--<div class="input-field col s6">-->
-					<!--<i class="material-icons prefix">account_circle</i>-->
-					<!--<input id="first_name" type="text" class="validate" required="" aria-required="true">-->
-					<!--<label for="first_name" data-error="Required">First Name</label>-->
-					<!--</div>-->
-					<!--<div class="input-field col s6">-->
-
-					<!--<input id="last_name" type="text" class="validate" required="" aria-required="true">-->
-					<!--<label for="last_name" data-error="Required">Last Name</label>-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--<div class="row">-->
-					<!--&lt;!&ndash;<div class="input-field col s6">&ndash;&gt;-->
-					<!--&lt;!&ndash;<i class="material-icons prefix">location_on</i>&ndash;&gt;-->
-					<!--&lt;!&ndash;<input id="address" type="text" class="validate">&ndash;&gt;-->
-					<!--&lt;!&ndash;<label for="address">House No./ Street Name</label>&ndash;&gt;-->
-					<!--&lt;!&ndash;</div>&ndash;&gt;-->
-					<!--<div class="input-field col s12">-->
-					<!--<i class="material-icons prefix">location_on</i>-->
-					<!--<input type="text" id="locality" class="autocomplete" required="" aria-required="true">-->
-					<!--<label for="locality" data-error="Required">Locality</label>-->
-
-					<!--</div>-->
-					<!--</div>-->
-					<!--<div class="row">-->
-					<!--<div class="input-field col s12">-->
-					<!--<i class="material-icons prefix">phone</i>-->
-					<!--<input id="telephone" type="number" required="" aria-required="true">-->
-					<!--<label for="telephone" data-error="Invalid Number | Example : 9829098290" >Mobile</label>-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--<div class="row">-->
-					<!--<div class="input-field col s12">-->
-					<!--<i class="material-icons prefix">email</i>-->
-					<!--<input id="email" type="email" class="validate" required="" aria-required="true">-->
-					<!--<label for="email" data-error="Invalid e-mail id">Email</label>-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--<div class="row">-->
-					<!--<div class="input-field col s6">-->
-					<!--<i class="material-icons prefix">today</i>-->
-					<!--<input id="date" type="date" class="datepicker">-->
-					<!--<label for="date" data-error="required">date</label>-->
-					<!--</div>-->
-					<!--<div class="input-field col s6 m6 l6" id ="time-slot">-->
-					<!--<select>-->
-					<!--<option value="" disabled selected>Time-Slot</option>-->
-					<!--<option value="1">09:30AM - 11:30AM </option>-->
-					<!--<option value="2">11:30AM - 01:30PM </option>-->
-					<!--<option value="3">01:30PM - 03:30PM </option>-->
-					<!--<option value="4">03:30PM - 05:30PM </option>-->
-					<!--<option value="5">05:30PM - 07:30PM </option>-->
-					<!--</select>-->
-					<!--<span id ="choose-time-slot" class="error-message"></span>-->
-					<!--</div>-->
-
-					<!--</div>-->
-
-					<!--</form>-->
-					<!--</div>-->
-					<div class="row button-row proceed">
-						<!--<a href="#home">	-->
-						<button class="waves-effect waves-light btn-large red form-proceed" type="submit" name="action">Proceed
-							<i class="material-icons right">send</i>
-						</button>
-						<!--</a>-->
-					</div>
-					<!--<div class="row button-row invisible submit">-->
-					<!--<button class="waves-effect waves-light btn red form-submit" type="submit" name="action">Book Now-->
-					<!--<i class="material-icons right">send</i>-->
-					<!--</button>-->
-					<!--</div>-->
-					<!--<div class="row order-confirm invisible">-->
-					<!--Thank you for placing your order! Our team will contact you shortly regarding the same.-->
-					<!--</div>-->
-
 				</div>
 			</div>
+			<div class="row home-form-2 card">
+				<div class="row form-title text-left">
+					<h3><img src="/../../static/revamp/img/by-line.png" alt="by-line">Select <span class="vehicle-type">Car</span></h3>
+				</div>
+
+				<div class="row text-left vehicle-details">
+
+					<!--<div class="row field-title text-left">-->
+					<!--<h4>Vehicle Details</h4>-->
+					<!--</div>-->
+
+					<form id="formValidate">
+						<div class="input-field col s12 m12 l12 " id="brand-select">
+							<!--<i class="fa fa-car prefix"></i>-->
+							<!--<select id="brand-select">-->
+							<!--&lt;!&ndash;<option value="" disabled selected>Choose Make</option>&ndash;&gt;-->
+							<!--&lt;!&ndash;&lt;!&ndash;<option value="Hyundai">Hyundai</option>&ndash;&gt;&ndash;&gt;-->
+							<!--&lt;!&ndash;&lt;!&ndash;<option value="Maruti">Maruti</option>&ndash;&gt;&ndash;&gt;-->
+							<!--</select>-->
+							<!--<label data-error="Select a Brand">Type of Question</label>-->
+						</div>
+						<div class="input-field col s7 m7 l7 " id="vehicle-select">
+							<select>
+								<option value="" disabled selected>Model</option>
+								<!--<option value="i10">i10</option>-->
+								<!--<option value="i20">i20</option>-->
+							</select>
+						</div>
+						<div class="input-field col s5 m5 l5" id="fuel-type-select">
+							<select>
+								<option value="" disabled selected>Fuel</option>
+								<option value="petrol">Petrol</option>
+								<option value="diesel">Diesel</option>
+								<!--<option value="cng">LPG/CNG</option>-->
+							</select>
+						</div>
+					</form>
+					<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-vehicle-error"></span>
+				</div>
+
+				<!--<div class = "row service-headers" id="selected-service">-->
+				<!--<div class="row field-title text-left">-->
+				<!--<h4>Service Details</h4>-->
+				<!--</div>-->
+
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>Servicing</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>Car Care</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>Repairing</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>Denting/Painting</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>General Check-Up</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>Emergency</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-category-error"></span>-->
+				<!--<form class="col s12">-->
+				<!--<div class="row">-->
+				<!--<div class="input-field col s12" >-->
+				<!--<i class="material-icons prefix">report_problem</i>-->
+				<!--<textarea id="additional" class="materialize-textarea"></textarea>-->
+				<!--<label for="additional">Specific issues/ request?</label>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</form>-->
+				<!--</div>-->
+
+				<!--<div class="row form-row invisible">-->
+				<!--<form class="col s12">-->
+				<!--<div class="row field-title text-left">-->
+				<!--<h4>Booking Details</h4>-->
+				<!--</div>-->
+
+				<!--<div class="row">-->
+				<!--<div class="input-field col s6">-->
+				<!--<i class="material-icons prefix">account_circle</i>-->
+				<!--<input id="first_name" type="text" class="validate" required="" aria-required="true">-->
+				<!--<label for="first_name" data-error="Required">First Name</label>-->
+				<!--</div>-->
+				<!--<div class="input-field col s6">-->
+
+				<!--<input id="last_name" type="text" class="validate" required="" aria-required="true">-->
+				<!--<label for="last_name" data-error="Required">Last Name</label>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="row">-->
+				<!--&lt;!&ndash;<div class="input-field col s6">&ndash;&gt;-->
+				<!--&lt;!&ndash;<i class="material-icons prefix">location_on</i>&ndash;&gt;-->
+				<!--&lt;!&ndash;<input id="address" type="text" class="validate">&ndash;&gt;-->
+				<!--&lt;!&ndash;<label for="address">House No./ Street Name</label>&ndash;&gt;-->
+				<!--&lt;!&ndash;</div>&ndash;&gt;-->
+				<!--<div class="input-field col s12">-->
+				<!--<i class="material-icons prefix">location_on</i>-->
+				<!--<input type="text" id="locality" class="autocomplete" required="" aria-required="true">-->
+				<!--<label for="locality" data-error="Required">Locality</label>-->
+
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="row">-->
+				<!--<div class="input-field col s12">-->
+				<!--<i class="material-icons prefix">phone</i>-->
+				<!--<input id="telephone" type="number" required="" aria-required="true">-->
+				<!--<label for="telephone" data-error="Invalid Number | Example : 9829098290" >Mobile</label>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="row">-->
+				<!--<div class="input-field col s12">-->
+				<!--<i class="material-icons prefix">email</i>-->
+				<!--<input id="email" type="email" class="validate" required="" aria-required="true">-->
+				<!--<label for="email" data-error="Invalid e-mail id">Email</label>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="row">-->
+				<!--<div class="input-field col s6">-->
+				<!--<i class="material-icons prefix">today</i>-->
+				<!--<input id="date" type="date" class="datepicker">-->
+				<!--<label for="date" data-error="required">date</label>-->
+				<!--</div>-->
+				<!--<div class="input-field col s6 m6 l6" id ="time-slot">-->
+				<!--<select>-->
+				<!--<option value="" disabled selected>Time-Slot</option>-->
+				<!--<option value="1">09:30AM - 11:30AM </option>-->
+				<!--<option value="2">11:30AM - 01:30PM </option>-->
+				<!--<option value="3">01:30PM - 03:30PM </option>-->
+				<!--<option value="4">03:30PM - 05:30PM </option>-->
+				<!--<option value="5">05:30PM - 07:30PM </option>-->
+				<!--</select>-->
+				<!--<span id ="choose-time-slot" class="error-message"></span>-->
+				<!--</div>-->
+
+				<!--</div>-->
+
+				<!--</form>-->
+				<!--</div>-->
+				<div class="row button-row proceed">
+					<!--<a href="#home">	-->
+					<button class="waves-effect waves-light btn-large red form-proceed" type="submit" name="action">Proceed
+						<i class="material-icons right">send</i>
+					</button>
+					<!--</a>-->
+				</div>
+				<!--<div class="row button-row invisible submit">-->
+				<!--<button class="waves-effect waves-light btn red form-submit" type="submit" name="action">Book Now-->
+				<!--<i class="material-icons right">send</i>-->
+				<!--</button>-->
+				<!--</div>-->
+				<!--<div class="row order-confirm invisible">-->
+				<!--Thank you for placing your order! Our team will contact you shortly regarding the same.-->
+				<!--</div>-->
+
+			</div>
+		</div>
 	</div>
 </section>
 
@@ -1041,7 +1063,7 @@
 					Forgot Your Password?
 				</div>
 			</div>
-		<div class="login-pass-change invisible">
+			<div class="login-pass-change invisible">
 				<div class="row pass login-method-input">
 					<div class="input-field">
 						<i class="material-icons prefix">verified_user</i>
@@ -1082,7 +1104,7 @@
 					<span class="login-message"></span>
 				</div>
 			</div>
-	<div class="login-method-inputs">
+			<div class="login-method-inputs">
 				<div class="row pass login-method-input invisible">
 					<div class="input-field login-input">
 						<i class="material-icons prefix">verified_user</i>
@@ -1176,7 +1198,7 @@
 	</div>
 </section>
 
-<section id="cover" class="invisible"></section>
+<section id="cover" class="visible"></section>
 
 
 

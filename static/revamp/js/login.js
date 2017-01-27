@@ -319,6 +319,11 @@ var Login = {
             local.clearKey('c_user_id');
             local.clearKey('c_user_first_name');
             local.clearKey('c_user_last_name');
+            local.clearKey('c_user_number');
+            local.clearKey('c_user_email');
+            local.clearKey('c_user_address');
+            local.clearKey('c_user_locality');
+            local.clearKey('c_user_city');
             location.reload();
     }
 };

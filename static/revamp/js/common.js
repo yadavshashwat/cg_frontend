@@ -54,10 +54,12 @@ var Commons = {
         'fetch_all_users':'/api/fetch_all_users/',
         'update_user':'/api/update_user/',
         'update_booking':'/api/update_booking/',
+        'update_estimate':'/api/update_estimate/',
+        'update_agent':'/api/update_agent/',
+        'change_status':'/api/change_status/',
         'add_modify_coupon':'/api/add_modify_coupon/',
         'view_all_coupons':'/api/view_all_coupons/',
         'check_coupon':'/api/check_coupon/',
-        'send_booking':'/api/send_booking/',
     },
 
     getOrigin: function(){
