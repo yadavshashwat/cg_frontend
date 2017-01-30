@@ -155,11 +155,11 @@ var Login = {
 
 
         $('#login .use-otp').click(function () {
-            var number = $('#telephone').val();
+            var number = $('#telephone_login').val();
 
             error = 0;
-            if (number.length != 10) {
-                $('#telephone').addClass("invalid");
+            if (number.length < 10) {
+                $('#telephone_login').addClass("invalid");
                 error = 1;
             }
             if (error == 1) {
@@ -171,12 +171,12 @@ var Login = {
         });
 
         $('#login .change-pass-otp').click(function () {
-            var number = $('#telephone').val();
+            var number = $('#telephone_login').val();
             var password = $('#password-new').val();
 
             error = 0;
             if (number.length != 10) {
-                $('#telephone').addClass("invalid");
+                $('#telephone_login').addClass("invalid");
                 error = 1;
             }
 
@@ -216,6 +216,18 @@ var Login = {
                 Commons.ajaxData('send_otp_new', {phone: number}, "get", _this, _this.loadOTPsignup, null, '.loading-pane');
             }
         });
+
+        $('#login .resend-otp').on('click',function(){
+             var number = $('#telephone_login').val();
+                Commons.ajaxData('send_otp_new', {phone: number}, "get", _this, _this.loadOTPresend, null, '.loading-pane');
+        });
+
+        $('#login .resend-otp-sign').on('click',function(){
+             var number = $('#telephone-sign').val();
+                Commons.ajaxData('send_otp_new', {phone: number}, "get", _this, _this.loadOTPresend, null, '.loading-pane');
+        });
+
+
 
         $('#login .pass-forgot').click(function () {
             $('#login .login-method-row').hide();
@@ -296,6 +308,9 @@ var Login = {
         $('#login .login-message').text(data.msg);
         $('#login .login-message-row').show();
         // location.reload();
+        if (data.msg == "Success"){
+        location.reload();
+        }
     },
     loadCookieLogin:function (data){
         c_uname = local.load()
@@ -309,11 +324,17 @@ var Login = {
         $('#login .login-passchange-btn-row-otp .login-message').text(data.msg);
         $('#login .login-passchange-btn-row-otp .login-message-row').show();
         // location.reload();
+        if (data.msg == "Success"){
+        location.reload();
+        }
     },
     loadSignUp: function (data) {
         $('#login .login-message').text(data.msg);
         $('#login .login-message-row').show();
         // location.reload();
+        if (data.msg == "Success"){
+        location.reload();
+        }
     },
     loadLogout:function(data){
             local.clearKey('c_user_id');

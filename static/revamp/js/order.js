@@ -595,7 +595,8 @@ var Global = {
         });
 
         var sendotp = function(){
-                Commons.ajaxData('send_otp_new', {phone: number}, "get", _this, _this.loadOTP,null, '.loading-pane');
+             number = $('#telephone').val();
+            Commons.ajaxData('send_otp_new', {phone: number}, "get", _this, _this.loadOTP,null, '.loading-pane');
 
         };
 
