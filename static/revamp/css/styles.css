@@ -38,54 +38,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-cg-driver:before {
-  content: "\61";
-}
-.icon-cg-carbreakdown:before {
-  content: "\62";
-}
-.icon-cg-bikebreakdown:before {
-  content: "\63";
-}
-.icon-cg-hasslefree:before {
-  content: "\64";
-}
-.icon-cg-repair:before {
-  content: "\65";
-}
-.icon-cg-bikeservicing:before {
-  content: "\66";
-}
-.icon-cg-carclean:before {
-  content: "\67";
-}
-.icon-cg-carsericing:before {
-  content: "\68";
-}
-.icon-cg-certificate:before {
-  content: "\69";
-}
-.icon-cg-carcare:before {
-  content: "\6a";
-}
-.icon-cg-carrepair:before {
-  content: "\6b";
-}
-.icon-cg-windshield:before {
-  content: "\6c";
-}
-.icon-cg-discount:before {
-  content: "\6d";
-}
-.icon-cg-repor:before {
-  content: "\6e";
-}
-.icon-cg-pricing:before {
-  content: "\6f";
-}
-.icon-cg-mechanic:before {
-  content: "\70";
-}
 .icon-cg-quality:before {
   content: "\71";
 }
@@ -95,15 +47,150 @@
 .icon-cg-fair:before {
   content: "\73";
 }
-.icon-cg-denting:before {
+.icon-air-conditioner:before {
+  content: "\61";
+}
+.icon-cg-accheck2:before {
+  content: "\62";
+}
+.icon-air-conditioner-2:before {
+  content: "\63";
+}
+.icon-cg-exterior:before {
+  content: "\64";
+}
+.icon-cg-battery:before {
+  content: "\65";
+}
+.icon-cg-car-standard:before {
+  content: "\66";
+}
+.icon-cg-dryclean:before {
+  content: "\67";
+}
+.icon-car-2:before {
+  content: "\68";
+}
+.icon-car-3:before {
+  content: "\69";
+}
+.icon-car-4:before {
+  content: "\6a";
+}
+.icon-cg-checkup:before {
   content: "\74";
 }
-.icon-cg-carcheckup:before {
+.icon-cg-scan:before {
   content: "\75";
 }
-.icon-cg-bikerepair:before {
+.icon-car-7:before {
   content: "\76";
 }
-.icon-cg-bikecheckup:before {
+.icon-mechanic:before {
   content: "\77";
+}
+.icon-long-checklist:before {
+  content: "\78";
+}
+.icon-cg-key:before {
+  content: "\79";
+}
+.icon-gas-station-1:before {
+  content: "\7a";
+}
+.icon-vehicle:before {
+  content: "\41";
+}
+.icon-cg-accheck:before {
+  content: "\42";
+}
+.icon-cg-repair:before {
+  content: "\43";
+}
+.icon-wrench-1:before {
+  content: "\44";
+}
+.icon-transport-2:before {
+  content: "\45";
+}
+.icon-cg-fuel:before {
+  content: "\46";
+}
+.icon-cg-contract:before {
+  content: "\47";
+}
+.icon-transport-1:before {
+  content: "\48";
+}
+.icon-cg-underbody:before {
+  content: "\49";
+}
+.icon-cg-brake:before {
+  content: "\4a";
+}
+.icon-cg-clutch:before {
+  content: "\4b";
+}
+.icon-towing-a-car:before {
+  content: "\4c";
+}
+.icon-cg-tow:before {
+  content: "\4d";
+}
+.icon-child-seat-for-the-car:before {
+  content: "\4e";
+}
+.icon-cg-alignment:before {
+  content: "\4f";
+}
+.icon-to-do-list:before {
+  content: "\50";
+}
+.icon-carwash:before {
+  content: "\51";
+}
+.icon-cg-wash:before {
+  content: "\52";
+}
+.icon-cg-tyre2:before {
+  content: "\53";
+}
+.icon-rim:before {
+  content: "\54";
+}
+.icon-car-contract2:before {
+  content: "\55";
+}
+.icon-cg-fork:before {
+  content: "\56";
+}
+.icon-car-1:before {
+  content: "\6b";
+}
+.icon-cg-engine:before {
+  content: "\6c";
+}
+.icon-gearstick:before {
+  content: "\6d";
+}
+.icon-cg-wire:before {
+  content: "\6e";
+}
+.icon-cg-chain:before {
+  content: "\6f";
+}
+.icon-cg-spark:before {
+  content: "\70";
+}
+.icon-cg-car-comp:before {
+  content: "\57";
+}
+.icon-cg-tyre:before {
+  content: "\58";
+}
+.icon-cg-checkup-1:before {
+  content: "\59";
+}
+.icon-cg-bike-standard:before {
+  content: "\5a";
 }

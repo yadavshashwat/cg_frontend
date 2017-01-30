@@ -9,7 +9,8 @@ document.onready = function () {
 }
 
 $(document).ready(function() {
-    $('select').material_select();
+    // $('select').material_select();
+    $('select').select2();
 });
 
 
@@ -247,7 +248,6 @@ var Global = {
         $('#home').on('click','.veh-cat-card',callbrands);
 
 
-
       $('#brand-select').change(function(event,data){
             vehtype = $('#home .veh-cat-card.selected').text().trim()
             // console.log(vehtype)
@@ -256,7 +256,8 @@ var Global = {
             }else{
 
             }
-            var make = $(this).find('.active span').text();
+            var make = $(this).find('.select2-selection__rendered').text().trim();
+          console.log(make)
             Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehtype}, "get", _this, _this.loadModels);
         });
 
@@ -269,12 +270,12 @@ var Global = {
         });
 
        $('#home .home-form-2 .form-proceed').click(function(event){
-           var make = $('#brand-select').find('.active span').text();
-           var model = $('#vehicle-select').find('.active span').text();
-           var fuel = $('#fuel-type-select').find('.active span').text();
+           var make = $('#brand-select').find('.select2-selection__rendered').text().trim();
+           var model = $('#vehicle-select').find('.select2-selection__rendered').text().trim();
+           // var fuel = $('#fuel-type-select').find('.active span').text();
            var vehtype = $('#home .veh-cat-card.selected').text().trim()
            var error = 0 ;
-           if(make == "" || model == "" || fuel == "") {
+           if(make == "" || model == "") {
                $('#choose-vehicle-error').text('Please select vehicle');
                 error = 1;
             }
@@ -282,6 +283,12 @@ var Global = {
                return;
            }
            local.save('vehmake',make);
+           fuel_start = model.indexOf("(")
+           fuel_end = model.indexOf(")")
+
+           var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
+           model = model.substr(0,fuel_start)
+           local.clearKey('cgcart')
            local.save('vehmodel',model);
            local.save('vehfuel',fuel)
            local.save('vehtype',vehtype)
@@ -371,18 +378,31 @@ var Global = {
             }
             // console.log(vehtype)
             container.html('');
-            var html = '<select id="brand-select-list">';
+            var html = '<select id="brand-select-list" class="js-example-responsive">';
             html += '<option value="" disabled selected>Make</option>';
-            if (vehtype=="Car"){
+
             $.each(data, function(ix, val){
-                html += '<option value="' + val.make + 'data-placeholder="true" data-icon="../../static/revamp/img/Brands/Car/'+ val.make +'.png" class="left circle">'+ val.make + '</option>'});
-            }else{
-            $.each(data, function(ix, val){
-                html += '<option value="' + val.make + 'data-placeholder="true" data-icon="../../static/revamp/img/Brands/Bikes/'+ val.make +'.png" class="left circle">'+ val.make + '</option>'});
-            }
+                html += '<option value="' + val.make + '">'+ val.make + '</option>'
+            });
+
             html += '<select>';
             container.html(html);
-            container.find('select').material_select();
+            function formatmodelname (modelname) {
+                if (!modelname.id) { return modelname.text; }
+                if (vehtype=="Car"){
+                    var modelname = $('<span><img src="/../../static/revamp/img/Brands/Car/' + modelname.element.value + '.png" class="img-flag img-brand" /> ' + modelname.text + '</span>')
+                }else{
+                    var modelname = $('<span><img src="/../../static/revamp/img/Brands/Bikes/' + modelname.element.value + '.png" class="img-flag img-brand" /> ' + modelname.text + '</span>')
+                }
+                return modelname;
+            };
+
+            // container.find('select').material_select();
+            container.find('select').select2({
+                  // allowClear: true
+                templateResult: formatmodelname
+            });
+
         },
 
     // loadBrands2:function(data){
@@ -415,14 +435,18 @@ var Global = {
             // }
             var container = $('#vehicle-select');
             container.html('');
-            var html = '<select id="vehicle-select-list">';
+            var html = '<select id="vehicle-select-list" class="js-example-responsive">';
             html += '<option value="" disabled selected>Model</option>';
             $.each(data, function(ix, val){
-                html += '<option value="' + val.model + ' data-placeholder="true">'+ val.model + '</option>'});
+                html += '<option value="' + val.make +' '+val.model+' '+val.fuel_type + '" data-placeholder="true">'+ val.full_veh_name + '</option>'
+                console.log(val.model)
 
-            html += '<select>';
+            });
+            html += '</select>';
             container.html(html);
-            container.find('select').material_select();
+            // container.find('select').material_select();
+            container.find('select').select2();
+
     },
     loadLocation:function(data){
             var container = $('input.autocomplete');

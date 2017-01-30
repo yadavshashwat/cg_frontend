@@ -363,10 +363,96 @@ iframe {
     margin-top:0px;
 }
 
-.input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea{
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea{
 	height : 2rem!important;
 }
 
+/*<----- Select Drop Down ------>*/
+.select2-container{
+    width: 100%!important;
+    border-radius: 0px;
+    margin:0px!important;
+    /*position:absolute!important;*/
+}
+
+.img-brand{
+    width: 30px;
+}
+
+.select2-selection, .select2-container--focus{
+            /*position: relative!important;*/
+
+    cursor: pointer!important;
+    background-color: transparent!important;
+    border: none!important;
+    border-bottom: 1px solid #9e9e9e!important;
+    outline: none!important;
+    height: 3rem!important;
+    line-height: 3rem!important;
+    width: 100%!important;
+    font-size: 1rem!important;
+    margin: 0 0 20px 0!important;
+    padding: 0!important;
+    display: block!important;
+}
+
+
+.order-page .select2-dropdown{
+    /*position: absolute!important;*/
+    /*left: 28%!important;*/
+    /*top: 45%;*/
+}
+
+
+.select2-dropdown{
+    position: relative!important;
+    /*margin: 0.5rem 0 1rem !important;*/
+    background-color: #fff!important;;
+    transition: box-shadow .25s!important;;
+    border-radius: 2px!important;;
+        /*position: absolute;*/
+    /*width: 483px;*/
+    /*top: -70px;*/
+
+     /*background-color: white;*/
+     border: none!important;
+     box-sizing: 0px!important;
+     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
+     font-family: Roboto;
+}
+.select2-search__field{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #9e9e9e;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 1rem;
+    margin: 0 0 20px 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 0.3s;
+}
+
+.select2-results__options{
+    font-size: 16px;
+    color: #26a69a;
+    display: block;
+    line-height: 22px;
+    padding: 14px 16px;
+    background-color: #fff;
+    margin: 0;
+    /*display: none;*/
+    /*min-width: 100px;*/
+    max-height: 650px;
+    overflow-y: auto;
+    /*opacity: 0;*/
+    /*position: absolute;*/
+    z-index: 999;
+    /*will-change: width, height;*/
+}
 /*<------ Login Page Start----->*/
 
 #cover{
@@ -1678,18 +1764,22 @@ footer a:hover {
     top:30%;
     z-index: 99;
     /*left:50%;*/
+    /*width: .;*/
 }
 
 #city-select .city-select{
+    /*width: 100%;*/
     /*position: fixed;*/
     /*top:30%;*/
     /*z-index: 99;*/
-    left:55%;
+    /*left:55%;*/
     /*margin-left: auto;*/
     /*margin-right: auto;*/
 }
 #city-select .city-select .city{
     cursor: pointer;
+    padding: 5%;
+    margin: 5%;
 }
 
 #city-select img{
@@ -1785,7 +1875,7 @@ footer a:hover {
 	/*padding-left: 7%;*/
 	/*padding-right: 7%;*/
 	/*height: 90px;*/
-	width: 70px;
+	width: 100px;
 	/*margin-top: 10px;*/
 }
 

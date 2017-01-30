@@ -6,6 +6,8 @@ document.onreadystatechange = function () {
 // materialize css
 $(document).ready(function() {
     $('select').material_select();
+    // $('select').select2();
+    // $('#service-select').
 });
 
 
@@ -25,10 +27,13 @@ $('.datepicker').pickadate({
 $(".button-collapse").sideNav();
 
 var CURRENT_CART = [];
+var CURRENT_CART_COUP = [];
 var TOTAL_PRICE = 0;
 var TOTAL_JOBS = 0;
 var ALL_JOBS = "";
-var JOBS_SUMMARY = []
+var JOBS_SUMMARY = [];
+var JOBS_SUMMARY_TOTAL = [];
+var JOBS_SUMMARY_COUP = [];
 
 var TOTAL_LABOUR= 0;
 var TOTAL_PARTS = 0;
@@ -43,11 +48,55 @@ var COUP_DISCOUNT = 0;
 
 var PICK_DROP = 0;
 var SHOW_ESTIMATE = 0;
+var COUPON_CODE = "";
 
 var logoMap = {
-    'Standard Service':'<i class="cg-icon cg-icon-card icon-cg-quality x100"></i>',
-    'Comprehensive Service':'<i class="cg-icon cg-icon-card icon-cg-quality x100"></i>',
-    'Front Bumper':'<img class=""  src="/../../static/revamp/img/Icons-Services/Emergency.png">'
+        'Standard Service':'<i class="cg-icon cg-icon-card icon-cg-car-standard x80"></i>',
+        'Standard Service2':'<i class="cg-icon cg-icon-card icon-cg-bike-standard x80"></i>',
+        'Comprehensive Service':'<i class="cg-icon cg-icon-card icon-cg-car-comp x80"></i>',
+        'AC Check':'<i class="cg-icon cg-icon-card icon-cg-accheck x80"></i>',
+        'Wheel Alignment And Balancing':'<i class="cg-icon cg-icon-card icon-cg-alignment x80"></i>',
+        'Comprehensive Check-Up':'<i class="cg-icon cg-icon-card icon-cg-checkup x80"></i>',
+        'Scanning':'<i class="cg-icon cg-icon-card icon-cg-scan x80"></i>',
+        'Brake Pad/Disc Pad Replacement':'<i class="cg-icon cg-icon-card icon-cg-brake x80"></i>',
+        'Clutch Check':'<i class="cg-icon cg-icon-card icon-cg-clutch x80"></i>',
+        'Battery Charging/Replacement':'<i class="cg-icon cg-icon-card icon-cg-battery x80"></i>',
+        'Other Diagnosis':'<i class="cg-icon cg-icon-card icon-cg-repair x80"></i>',
+        'Complete Car Detailing':'<i class="cg-icon cg-icon-card icon-cg-exterior x80"></i>',
+        'Interior Dry Cleaning':'<i class="cg-icon cg-icon-card icon-cg-dryclean x80"></i>',
+        'Exterior Rubbing Polishing':'<i class="cg-icon cg-icon-card icon-cg-exterior x80"></i>',
+        'Teflon Coating':'<i class="cg-icon cg-icon-card icon-cg-exterior x80"></i>',
+        'Underbody Anti Rust Treatment':'<i class="cg-icon cg-icon-card icon-cg-underbody x80"></i>',
+        'Exterior Car Washing':'<i class="cg-icon cg-icon-card icon-cg-wash x80"></i>',
+        'Flat Tyre':'<i class="cg-icon cg-icon-card icon-cg-tyre2 x80"></i>',
+        'Battery Jump Start':'<i class="cg-icon cg-icon-card icon-cg-battery x80"></i>',
+        'Towing':'<i class="cg-icon cg-icon-card icon-cg-tow x80"></i>',
+        'Minor Repairs':'<i class="cg-icon cg-icon-card icon-cg-repair x80"></i>',
+        'Key Lockout':'<i class="cg-icon cg-icon-card icon-cg-key x80"></i>',
+        'Emergency Fuel (5 Litres)':'<i class="cg-icon cg-icon-card icon-cg-fuel x80"></i>',
+        'Tyre Replacement':'<i class="cg-icon cg-icon-card icon-cg-tyre x80"></i>',
+        'Clickgarage Assist':'<i class="cg-icon cg-icon-card icon-cg-contract x80"></i>',
+        'General Check Up':'<i class="cg-icon cg-icon-card icon-cg-checkup-1 x80"></i>',
+        'Cable Replacement':'<i class="cg-icon cg-icon-card icon-cg-wire x80"></i>',
+        'Clutch Overhaul':'<i class="cg-icon cg-icon-card icon-cg-clutch x80"></i>',
+        'Front Fork Oil Or Seal Replacement':'<i class="cg-icon cg-icon-card icon-cg-fork x80"></i>',
+        'Chain Sprocket Replacement':'<i class="cg-icon cg-icon-card icon-cg-chain x80"></i>',
+        'Spark Plug Replacement':'<i class="cg-icon cg-icon-card icon-cg-spark x80"></i>',
+        'Engine Check':'<i class="cg-icon cg-icon-card icon-cg-engine x80"></i>',
+        'Bumper Rear':'<img class="" src="/../../static/revamp/img/Panel/Bumper Rear.png">',
+        'Door Front Left':'<img class="" src="/../../static/revamp/img/Panel/Door Front Left.png">',
+        'Door Front Right':'<img class="" src="/../../static/revamp/img/Panel/Door Front Right.png">',
+        'Door Rear Left':'<img class="" src="/../../static/revamp/img/Panel/Door Rear Left.png">',
+        'Door Rear Right':'<img class="" src="/../../static/revamp/img/Panel/Door Rear Right.png">',
+        'Fender Left':'<img class="" src="/../../static/revamp/img/Panel/Fender Left.png">',
+        'Fender Rear':'<img class="" src="/../../static/revamp/img/Panel/Fender Rear.png">',
+        'Bumper Front':'<img class="" src="/../../static/revamp/img/Panel/Bumper Front.png">',
+        'Front Bumper':'<img class="" src="/../../static/revamp/img/Panel/Front Bumper.png">',
+        'Quarter Panel Left':'<img class="" src="/../../static/revamp/img/Panel/Quarter Panel Left.png">',
+        'Quarter Panel Right':'<img class="" src="/../../static/revamp/img/Panel/Quarter Panel Right.png">',
+        'Running Board Left':'<img class="" src="/../../static/revamp/img/Panel/Running Board Left.png">',
+        'Running Board Right':'<img class="" src="/../../static/revamp/img/Panel/Running Board Right.png">',
+        'Full Body':'<img class="" src="/../../static/revamp/img/Panel/Full Body.png">',
 };
 
 
@@ -90,7 +139,7 @@ var Global = {
         })
 
         $('#cover').click(function () {
-            console.log('check')
+            // console.log('check')
             $('#vehicle-select-form').hide()
             $('#cover').hide()
         });
@@ -106,7 +155,7 @@ var Global = {
             Commons.ajaxData('get_type_make', {vehicle_type: vehtype}, "get", _this, _this.loadBrands);
         }
 
-        $
+
 
         $(document).on('ready',callbrands);
         $('#vehicle-select-form').on('click','.veh-cat-card',callbrands);
@@ -118,7 +167,8 @@ var Global = {
             }else{
 
             }
-            var make = $(this).find('.active span').text();
+            var make = $(this).find('.select2-selection__rendered').text().trim();
+          console.log(make)
             Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehtype}, "get", _this, _this.loadModels);
         });
 
@@ -131,25 +181,37 @@ var Global = {
         });
 
         $('#vehicle-select-form .home-form-2 .form-proceed').click(function(event){
-            var make = $('#brand-select').find('.active span').text();
-            var model = $('#vehicle-select').find('.active span').text();
-            var fuel = $('#fuel-type-select').find('.active span').text();
-            var vehtype = $('#vehicle-select-form .veh-cat-card.selected').text().trim()
+           var make = $('#brand-select').find('.select2-selection__rendered').text().trim();
+           var model = $('#vehicle-select').find('.select2-selection__rendered').text().trim();
+           // var fuel = $('#fuel-type-select').find('.active span').text();
+           var vehtype = $('#vehicle-select-form .veh-cat-card.selected').text().trim()
             var error = 0 ;
-            if(make == "" || model == "" || fuel == "") {
-                $('#choose-vehicle-error').text('Please select vehicle');
+            if(make == "" || model == "") {
+               $('#choose-vehicle-error').text('Please select vehicle');
                 error = 1;
             }
-            if(error==1){
-                return;
-            }
-            local.save('vehmake',make);
-            local.save('vehmodel',model);
-            local.save('vehfuel',fuel)
-            local.save('vehtype',vehtype)
-            local.save('fullname',make+" "+model+" "+fuel)
+           if(error==1){
+               return;
+           }
+           local.save('vehmake',make);
+           fuel_start = model.indexOf("(")
+           fuel_end = model.indexOf(")")
 
-            window.location.href = '/'+vehtype+'/'+make+'_'+model+'_'+fuel;
+           var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
+           model = model.substr(0,fuel_start)
+            local.clearKey('cgcart')
+           local.save('vehmodel',model);
+           local.save('vehfuel',fuel)
+           local.save('vehtype',vehtype)
+           local.save('fullname',make+" "+model+" "+fuel)
+            // window.location.href = '/get_quote';
+             window.location.href = '/'+vehtype+'/'+make+'_'+model+'_'+fuel;
+           //   if(window.location.pathname.split('/').length == 4){
+           //      // var a = window.location.pathname.split('/')
+           //      var new_path =  '/'+vehtype+'/'+make+'_'+model+'_'+fuel
+           //      history.pushState({},'',new_path)
+           //  }
+
         });
 
         $(document).ready(function() {
@@ -158,12 +220,22 @@ var Global = {
             veh_make = cookie['vehmake'];
             veh_model = cookie['vehmodel'];
             veh_fuel = cookie['vehfuel'];
+
+            if(cookie['cg_city']==null || cookie['cg_city']===false){
+                 $('#city-select').show()
+                  $('#cover').show()
+            }else{
+                    // cart_list = cookie_name['cgcart'];
+            }
+
+
             var name = $('#services').attr('data-vehicle-name')
             name = name.split('_')
             var vehicle_type = $('#services').attr('data-vehicle-type')
 
             if (veh_make == name[0] && veh_model == name[1] && veh_fuel == name[2] && vehicle_type_c == vehicle_type){
-
+                // console.log(veh_make)
+                // console.log(name[0])
             }else{
                 local.clearKey('cgcart')
                 local.save('vehtype',vehicle_type)
@@ -354,6 +426,8 @@ var Global = {
         // Service Select Load Jobs - End
 
         $('#nav-cart').click(function(){
+            $('#jobs .service-sub-category.car-care').hide();
+            $('#jobs .service-sub-category.denting').hide();
             $('#cart').show().addClass('page-width-cart')
             $('.order-page .nav-services').hide();
             $('#jobs .service-list').hide()
@@ -489,14 +563,25 @@ var Global = {
                 email = cookie['c_user_email'];
                 email = email.substr(1,email.length-2)
                 address = cookie['c_user_address'];
-                address = address.substr(1,address.length-2)
+                if (address.split(' ').length > 1){
+                    address = address.substr(1,address.length-2)
+                }
                 locality = cookie['c_user_locality'];
-                locality = locality.substr(1,locality.length-2)
+                if (locality.split(' ').length > 1){
+                    locality = locality.substr(1,locality.length-2)
+                }
+
                 city = cookie['c_user_city'];
-                city = city.substr(1,city.length-2)
+                if (city.split(' ').length > 1){
+                    city = city.substr(1,city.length-2)
+                }
             }else{
                 city = cookie['cg_city']
-                city = city.substr(1,city_2.length-2)
+
+                if (city.split(' ').length > 1) {
+                    city = city.substr(1,city.length-2)
+                }
+
             }
 
             $('#name').val(name);
@@ -510,6 +595,15 @@ var Global = {
         });
 
         var sendotp = function(){
+                Commons.ajaxData('send_otp_new', {phone: number}, "get", _this, _this.loadOTP,null, '.loading-pane');
+
+        };
+
+        $('#booking-details .confirm-details .btn-checkout').on('click', function(){
+            var number = $('#telephone').val();
+            cookie = local.load()
+            number2 = cookie["c_user_number"]
+
             var name = $('#name').val();
             var number = $('#telephone').val();
             var email = $('#email').val();
@@ -556,21 +650,14 @@ var Global = {
                 error = 1;
             }
             if(error==1){
-                // console.log("didnt work")
                 return;
             }else{
-                Commons.ajaxData('send_otp_new', {phone: number}, "get", _this, _this.loadOTP,null, '.loading-pane');
-            }
-        };
 
-        $('#booking-details .confirm-details .btn-checkout').on('click', function(){
-            var number = $('#telephone').val();
-            cookie = local.load()
-            number2 = cookie["c_user_number"]
-            if (number == number2){
-                sendbooking()
-            }else{
-                sendotp()
+                if (number == number2){
+                    sendbooking()
+                }else{
+                    sendotp()
+                }
             }
         });
 
@@ -609,9 +696,9 @@ var Global = {
             var veh_type = cookie['vehtype'];
             var make = cookie['vehmake'];
             var model = cookie['vehmodel'];
-            var coupon = cookie['coupon']
-            var is_paid = false
-            var paid_amt = "0"
+            var coupon = COUPON_CODE;
+            var is_paid = false;
+            var paid_amt = "0";
             var price_total = $('#total-price').text();
             var time = $('#time-slot').find('.active span').text();
             Commons.ajaxData('send_booking', {otp:otp
@@ -633,7 +720,8 @@ var Global = {
                 ,is_paid    : is_paid
                 ,paid_amt   : paid_amt
                 ,coupon     : coupon
-                ,price_total: price_total }, "post", _this, _this.loadSendbooking,null, '.loading-pane');
+                ,price_total: price_total
+                ,int_summary :JSON.stringify(JOBS_SUMMARY_TOTAL)}, "post", _this, _this.loadSendbooking,null, '.loading-pane');
         };
 
         $('#booking-details .btn-send-booking').click(sendbooking);
@@ -655,24 +743,36 @@ var Global = {
         vehtype = $('#vehicle-select-form .veh-cat-card.selected').text().trim()
         // console.log(vehtype)
         if(vehtype == ""){
-            vehtype ="Car"
-        }else{
+                vehtype ="Car"
+            }else{
 
-        }
-        // console.log(vehtype)
-        container.html('');
-        var html = '<select id="brand-select-list">';
-        html += '<option value="" disabled selected>Make</option>';
-        if (vehtype=="Car"){
+            }
+            // console.log(vehtype)
+            container.html('');
+            var html = '<select id="brand-select-list" class="js-example-responsive">';
+            html += '<option value="" disabled selected>Make</option>';
+
             $.each(data, function(ix, val){
-                html += '<option value="' + val.make + 'data-placeholder="true" data-icon="/../../static/revamp/img/Brands/Car/'+ val.make +'.png" class="left circle">'+ val.make + '</option>'});
-        }else{
-            $.each(data, function(ix, val){
-                html += '<option value="' + val.make + 'data-placeholder="true" data-icon="/../../static/revamp/img/Brands/Bikes/'+ val.make +'.png" class="left circle">'+ val.make + '</option>'});
-        }
-        html += '<select>';
-        container.html(html);
-        container.find('select').material_select();
+                html += '<option value="' + val.make + '">'+ val.make + '</option>'
+            });
+
+            html += '<select>';
+            container.html(html);
+            function formatmodelname (modelname) {
+                if (!modelname.id) { return modelname.text; }
+                if (vehtype=="Car"){
+                    var modelname = $('<span><img src="/../../static/revamp/img/Brands/Car/' + modelname.element.value + '.png" class="img-flag img-brand" /> ' + modelname.text + '</span>')
+                }else{
+                    var modelname = $('<span><img src="/../../static/revamp/img/Brands/Bikes/' + modelname.element.value + '.png" class="img-flag img-brand" /> ' + modelname.text + '</span>')
+                }
+                return modelname;
+            };
+
+            // container.find('select').material_select();
+            container.find('select').select2({
+                  // allowClear: true
+                templateResult: formatmodelname
+            });
     },
     loadModels:function(data){
         //  vehtype = $('#home .veh-cat-card.selected').text().trim()
@@ -683,17 +783,21 @@ var Global = {
         //
         // }
         var container = $('#vehicle-select');
-        container.html('');
-        var html = '<select id="vehicle-select-list">';
-        html += '<option value="" disabled selected>Model</option>';
-        $.each(data, function(ix, val){
-            html += '<option value="' + val.model + ' data-placeholder="true">'+ val.model + '</option>'});
+            container.html('');
+            var html = '<select id="vehicle-select-list" class="js-example-responsive">';
+            html += '<option value="" disabled selected>Model</option>';
+            $.each(data, function(ix, val){
+                html += '<option value="' + val.make +' '+val.model+' '+val.fuel_type + '" data-placeholder="true">'+ val.full_veh_name + '</option>'
+                console.log(val.model)
 
-        html += '<select>';
-        container.html(html);
-        container.find('select').material_select();
+            });
+            html += '</select>';
+            container.html(html);
+            // container.find('select').material_select();
+            container.find('select').select2();
     },
     loadCart:function(data){
+        console.log("Cart Check")
         $('#jobs #cart .btn-checkout').addClass('disabled');
         var container = $('#cart .cart-list');
         // console.log('check')
@@ -701,6 +805,8 @@ var Global = {
         var html ='';
         ALL_JOBS = '';
         CURRENT_CART =[];
+
+
         JOBS_SUMMARY=[];
         SHOW_ESTIMATE = 0 ;
         $.each(data['cart_details'], function(ix, val) {
@@ -708,12 +814,14 @@ var Global = {
             for (i = 0; i < jsLen; i++) {
                 CURRENT_CART.push(val.default_comp[i])
             }
+
             if (ALL_JOBS ==''){
                 ALL_JOBS = val.job_name;
             }else{
                 ALL_JOBS = ALL_JOBS +', '+val.job_name;
             }
-            JOBS_SUMMARY.push({'category':val.service_cat,'price_total':val.total_price,'price_part':val.total_part,'price_labour':val.total_labour,'price_discount':val.total_discount})
+
+            JOBS_SUMMARY.push({'category':val.service_cat,'job_name':val.job_name,'price_total':val.total_price,'price_part':val.total_part,'price_labour':val.total_labour,'price_discount':val.total_discount,"doorstep":val.doorstep})
             html +='<div class="cart-item" job-id="'+val.id+'">';
             html +=' 								<div class="col s1 m1 l1">';
             html +=' 									<div class="delete x25">';
@@ -740,6 +848,15 @@ var Global = {
             html +=' 								</div>';
             html +=' 							</div>'
         });
+        JOBS_SUMMARY_TOTAL.push.apply(JOBS_SUMMARY_TOTAL,JOBS_SUMMARY);
+        if (CURRENT_CART_COUP.length > 0 ){
+            CURRENT_CART.push.apply(CURRENT_CART,CURRENT_CART_COUP)
+            // JOBS_SUMMARY_TOTAL = JOBS_SUMMARY
+            JOBS_SUMMARY_TOTAL.push.apply(JOBS_SUMMARY_TOTAL,JOBS_SUMMARY_COUP);
+
+        }else{
+            // console.log("2")
+        }
         container.html(html);
 
         var container2 = $('#cart .cart-section.cart-summary');
@@ -756,7 +873,7 @@ var Global = {
                     PICK_DROP = 0
                 }
             }else if (val.car_bike =="Bike"){
-                if (val.cg_amount <=250 && val.cg_amount >0){
+                if (val.cg_amount <200 && val.cg_amount >0){
                     PICK_DROP = 200
                 }else{
                     PICK_DROP = 0
@@ -766,21 +883,22 @@ var Global = {
             }
 
             if (PICK_DROP >0 ){
-                CURRENT_CART.push(
-                    {"category": "Labour",
+                // JOBS_SUMMARY_TOTAL
+                pick_drop_val = {"category": "Labour",
                         "name": "Visiting/Pick Drop",
                         "price": PICK_DROP,
                         "price_comp": PICK_DROP,
                         "unit_price": PICK_DROP,
                         "action": "Labour",
-                        "quantity": "1"}
-                )
+                        "quantity": "1"};
+
+                JOBS_SUMMARY_TOTAL.push(pick_drop_val);
+                CURRENT_CART.push(pick_drop_val)
             }
 
             if (CURRENT_CART.length > 0) {
                 $('#jobs #cart .btn-checkout').removeClass('disabled');
             }
-
 
             TOTAL_PRICE = parseFloat(val.cg_amount) - parseFloat(COUP_DISCOUNT) + PICK_DROP;
             TOTAL_JOBS = val.total_jobs;
@@ -926,7 +1044,11 @@ var Global = {
             html += '<div class="col l12 s12 m12 service-content">';
             html += '								<div class="card-image">';
             // html += '<i class="cg-icon cg-icon-card icon-cg-quality x100"></i>'
+            if (val.job_name =="Standard Service" && val.car_bike == "Bike"){
+            html += logoMap[val.job_name + "2"]
+            }else{
             html += logoMap[val.job_name]
+            }
             // html += '										<img class=""  src="/../../static/revamp/img/Icons-Services/Emergency.png">';
             html += '									</div>';
             html += '									<div class="card-content job-content">';
@@ -1083,8 +1205,9 @@ var Global = {
         $('#booking-details .login').show()
     },
     loadSendbooking:function(data) {
+        console.log("Check")
         $('#confirm-booking').show()
-        $('#booking-details').hide(0)
+        $('#booking-details').hide()
         local.clearKey('cgcart')
         local.clearKey('coupon')
         
@@ -1097,10 +1220,11 @@ var Global = {
         APPLIED_COUP_TOTAL = 0
         APPLIED_COUP_DISCOUNT = 0
         COUP_DISCOUNT = 0
+        JOBS_SUMMARY_TOTAL = []
         cat_counter = 0
         $.each(data, function(ix, val) {
             jsLen = JOBS_SUMMARY.length;
-            console.log(JOBS_SUMMARY)
+            // console.log(JOBS_SUMMARY)
             cat_counter = 0
             for (i = 0; i < jsLen; i++) {
                 if (val.category == JOBS_SUMMARY[i].category){
@@ -1112,7 +1236,7 @@ var Global = {
                 }}
 
             if (val.type=="discount_labour"){
-                console.log("discount_labour")
+                // console.log("discount_labour")
                 DISCOUNT = ((APPLIED_COUP_LABOUR - APPLIED_COUP_DISCOUNT) * parseFloat(val.value))/100
                 // console.log(DISCOUNT)
                 if (DISCOUNT >= parseFloat(val.cap)){
@@ -1121,7 +1245,7 @@ var Global = {
                     COUP_DISCOUNT = DISCOUNT
                 }
             }else if(val.type=="discount_part"){
-                console.log("discount_part")
+                // console.log("discount_part")
                 DISCOUNT = (APPLIED_COUP_PART * parseFloat(val.value))/100
                 if (DISCOUNT >= parseFloat(val.cap)){
                     COUP_DISCOUNT = parseFloat(val.cap)
@@ -1129,7 +1253,7 @@ var Global = {
                     COUP_DISCOUNT = DISCOUNT
                 }
             }else if(val.type=="discount_total"){
-                console.log("discount_total")
+                // console.log("discount_total")
                 DISCOUNT = (APPLIED_COUP_TOTAL * parseFloat(val.value))/100
                 if (DISCOUNT >= parseFloat(val.cap)){
                     COUP_DISCOUNT = parseFloat(val.cap)
@@ -1137,7 +1261,7 @@ var Global = {
                     COUP_DISCOUNT = DISCOUNT
                 }
             }else if(val.type=="flat"){
-                console.log("flat")
+                // console.log("flat")
                 DISCOUNT = (APPLIED_COUP_TOTAL * parseFloat(val.value))/100
                 if (DISCOUNT >= parseFloat(val.cap)){
                     COUP_DISCOUNT = parseFloat(val.cap)
@@ -1146,15 +1270,23 @@ var Global = {
                 }
 
             }else{
-                console.log("none")
+                // console.log("none")
                 COUP_DISCOUNT= 0
             }
             message = val.message
-            local.save('coupon',val.coupon_code)
-            CURRENT_CART.push({"name": "Discount Coupon - " + val.coupon_code,
+            local.save('coupon',val.coupon_code);
+            COUPON_CODE = val.coupon_code;
+            CURRENT_CART_COUP = [{"name": "Discount Coupon - " + val.coupon_code,
                 "price": COUP_DISCOUNT,
                 "action": "Discount",
-                "type": "Discount"})
+                "type": "Discount"}]
+            // console.log(CURRENT_CART)
+            // JOBS_SUMMARY_TOTAL = JOBS_SUMMARY.push()
+            // JOBS_SUMMARY_TOTAL = JOBS_SUMMARY
+            //
+            // JOBS_SUMMARY_TOTAL = JOBS_SUMMARY
+            JOBS_SUMMARY_COUP = [{'category':"Discount",'job_name':val.coupon_code,'price_total':COUP_DISCOUNT,'price_part': "0",'price_labour':COUP_DISCOUNT,'price_discount':"0"}]
+            // console.log(JOBS_SUMMARY_TOTAL)
         })
         if (cat_counter==0){
             message = "Coupon invalid for selected service"

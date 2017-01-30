@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="/../../static/revamp/css/materialize.min.css">
 	<link rel="stylesheet" href="/../../static/revamp/css/main.css">
 	<link rel="stylesheet" href="/../../static/revamp/css/custom-styles.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800italic,800' rel='stylesheet' type='text/css'>
 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -103,11 +104,11 @@
 	</nav>
 </div>
 <!--city select-->
-<section id="city-select" class="visible">
+<section id="city-select" class="invisible">
 	<div class="row">
-		<div class="card city-select col l4 s12 m12">
+		<div class="card city-select col l4 s8 m4 offset-l6 offset-s2 offset-m2">
 			<div class="col l12 s12 m12">
-				<div class="city card">
+				<div class="city card" data-class="Gurgaon">
 					<div class="card-image waves-effect waves-block waves-light">
 						<img class="activator img1" src="/../../static/revamp/img/City/Gurgaon.jpg">
 					</div>
@@ -861,31 +862,37 @@
 					<!--</div>-->
 
 					<form id="formValidate">
-						<div class="input-field col s12 m12 l12 " id="brand-select">
-							<!--<i class="fa fa-car prefix"></i>-->
-							<!--<select id="brand-select">-->
-							<!--&lt;!&ndash;<option value="" disabled selected>Choose Make</option>&ndash;&gt;-->
-							<!--&lt;!&ndash;&lt;!&ndash;<option value="Hyundai">Hyundai</option>&ndash;&gt;&ndash;&gt;-->
-							<!--&lt;!&ndash;&lt;!&ndash;<option value="Maruti">Maruti</option>&ndash;&gt;&ndash;&gt;-->
-							<!--</select>-->
-							<!--<label data-error="Select a Brand">Type of Question</label>-->
-						</div>
-						<div class="input-field col s7 m7 l7 " id="vehicle-select">
-							<select>
-								<option value="" disabled selected>Model</option>
-								<!--<option value="i10">i10</option>-->
-								<!--<option value="i20">i20</option>-->
-							</select>
-						</div>
-						<div class="input-field col s5 m5 l5" id="fuel-type-select">
-							<select>
-								<option value="" disabled selected>Fuel</option>
-								<option value="petrol">Petrol</option>
-								<option value="diesel">Diesel</option>
-								<!--<option value="cng">LPG/CNG</option>-->
-							</select>
-						</div>
-					</form>
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<div class="input" id="brand-select">
+									<!--<i class="fa fa-car prefix"></i>-->
+									<!--<select id="brand-select">-->
+									<!--&lt;!&ndash;<option value="" disabled selected>Choose Make</option>&ndash;&gt;-->
+									<!--&lt;!&ndash;&lt;!&ndash;<option value="Hyundai">Hyundai</option>&ndash;&gt;&ndash;&gt;-->
+									<!--&lt;!&ndash;&lt;!&ndash;<option value="Maruti">Maruti</option>&ndash;&gt;&ndash;&gt;-->
+									<!--</select>-->
+									<!--<label data-error="Select a Brand">Type of Question</label>-->
+								</div>
+							</div>
+							</div>
+							<div class="row">
+							<div class="col s12 m12 l12">
+							<div class="input" id="vehicle-select">
+								<select class ="js-example-responsive">
+									<option value="" disabled selected>Model</option>
+								</select>
+							</div>
+							</div>
+							</div>
+							<!--<div class="input-field col s5 m5 l5" id="fuel-type-select">-->
+								<!--<select>-->
+									<!--<option value="" disabled selected>Fuel</option>-->
+									<!--<option value="petrol">Petrol</option>-->
+									<!--<option value="diesel">Diesel</option>-->
+									<!--&lt;!&ndash;<option value="cng">LPG/CNG</option>&ndash;&gt;-->
+								<!--</select>-->
+							<!--</div>-->
+						</form>
 					<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-vehicle-error"></span>
 				</div>
 
@@ -1212,7 +1219,7 @@
 	</div>
 </section>
 
-<section id="cover" class="visible"></section>
+<section id="cover" class="invisible"></section>
 
 
 
@@ -1282,6 +1289,8 @@
 <script src="/../../static/revamp/js/forms.js"></script>
 <script src="/../../static/revamp/js/jquery.backstretch.js"></script>
 <script src="/../../static/revamp/js/jquery.cycle.lite.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
