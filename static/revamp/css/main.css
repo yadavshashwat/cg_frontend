@@ -405,7 +405,7 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
 
 
 .select2-dropdown{
-    position: relative!important;
+    /*position: relative!important;*/
     /*margin: 0.5rem 0 1rem !important;*/
     background-color: #fff!important;;
     transition: box-shadow .25s!important;;

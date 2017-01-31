@@ -236,6 +236,7 @@ var Global = {
 
         var callbrands =function(){
             vehtype = $('#home .veh-cat-card.selected').text().trim()
+
             console.log(vehtype)
             if(vehtype == ""){
                 vehtype ="Car"
@@ -265,6 +266,12 @@ var Global = {
        $('#home .veh-cat-card').click(function(){
             $('#home .veh-cat-card').removeClass('selected');
             $('#home .veh-cat-card:hover').addClass('selected');
+
+           var html = '<select id="vehicle-select-list" class="js-example-responsive">';
+            html += '<option value="" disabled selected>Model</option>';
+            html += '</select>';
+             $('#home #vehicle-select').html(html);
+           $('#home #vehicle-select').find('select').select2();
             vehicle = $('#home .veh-cat-card:hover').text()
            $('#home .home-form-2 .vehicle-type').text(vehicle);
         });
@@ -275,7 +282,7 @@ var Global = {
            // var fuel = $('#fuel-type-select').find('.active span').text();
            var vehtype = $('#home .veh-cat-card.selected').text().trim()
            var error = 0 ;
-           if(make == "" || model == "") {
+           if(make == "" || model == "" ||make == "Make" || model == "Model" ) {
                $('#choose-vehicle-error').text('Please select vehicle');
                 error = 1;
             }
@@ -283,6 +290,7 @@ var Global = {
                return;
            }
            local.save('vehmake',make);
+
            fuel_start = model.indexOf("(")
            fuel_end = model.indexOf(")")
 

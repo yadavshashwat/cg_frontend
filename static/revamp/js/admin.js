@@ -680,7 +680,8 @@ var Global = {
             , "get", _this, _this.loadUpdateUser,null, '.loading-pane');
             }
         });
-        // -- Modify Coupon
+        // -- Modify User
+
         $('#user-detail .user-list').on('click','.modify-btn',function(){
             user_id = $(this).closest('tr').attr('data-class')
             // console.log(coupon_id)
@@ -688,12 +689,15 @@ var Global = {
             $('#user-detail .user-add-mod').show()
              $('#user-detail  .all-user').removeClass('selected')
               $('#user-detail  .single-user').addClass('selected')
+
              Commons.ajaxData('fetch_all_users', {u_id:user_id}, "get", _this, _this.loadUser,null, '.loading-pane');
         });
-        // -- Switch between list and add/modify in a coupon
+        // -- Switch between list and add/modify in a USer
         $('#user-detail .all-user').click(function(){
               $('#user-detail .user-list').show();
               $('#user-detail  .user-add-mod').hide();
+
+              // $('#user-detail #user_number').removeAttr('disabled')
               $('#user-detail  .single-user').removeClass('selected')
               $('#user-detail  .all-user:hover').addClass('selected')
         });
@@ -703,15 +707,16 @@ var Global = {
               $('#user-detail  .user-add-mod').show();
               $('#user-detail  .all-user').removeClass('selected')
               $('#user-detail  .single-user:hover').addClass('selected')
-                $('#user-detail #user_id').attr('data-class','')
-                $('#user-detail #user_name').val('')
-               $('#user-detail #user_number').val('')
-               $('#user-detail #user_number').val('')
-               $('#user-detail #user_email').val('')
-               $('#user-detail #user_password').val('')
-               $('#user-detail #user_address').val('')
-               $('#user-detail #user_locality').val('')
-               $('#user-detail #user_city').val('')
+              $('#user-detail #user_id').attr('data-class','')
+              $('#user-detail #user_number').removeAttr('disabled')
+              $('#user-detail #user_name').val('')
+              $('#user-detail #user_number').val('')
+              $('#user-detail #user_number').val('')
+              $('#user-detail #user_email').val('')
+              $('#user-detail #user_password').val('')
+              $('#user-detail #user_address').val('')
+              $('#user-detail #user_locality').val('')
+              $('#user-detail #user_city').val('')
                 document.getElementById('b2b_box').removeAttribute("checked", "");;
                 document.getElementById('agent_box').removeAttribute("checked", "");;
                 document.getElementById('admin_box').removeAttribute("checked", "");;
@@ -847,11 +852,33 @@ var Global = {
            $.each(data, function(ix, val) {
               $('#user-detail #user_id').attr('data-class',val.id);
                $('#user-detail #user_name').val(val.first_name +" "+val.last_name);
+               // console.log(val.phone)
                $('#user-detail #user_number').val(val.phone);
-               $('#user-detail #user_email').val(val.email[0]);
-               $('#user-detail #user_address').val(val.user_address[0]['address'])
-               $('#user-detail #user_locality').val(val.user_address[0]['locality'])
-               $('#user-detail #user_city').val(val.user_address[0]['city'])
+                $('#user-detail #user_number').attr('disabled',"")
+               // try:
+               try {
+                 $('#user-detail #user_email').val(val.email[0]);
+                } catch (e) {
+                    $('#user-detail #user_email').val();
+                }
+               try {
+                 $('#user-detail #user_address').val(val.user_address[0]['address'])
+                   $('#user-detail #user_locality').val(val.user_address[0]['locality'])
+                    $('#user-detail #user_city').val(val.user_address[0]['city'])
+                } catch (e) {
+                   $('#user-detail #user_address').val()
+                }
+
+
+               // if (val.user_address[0]['address'] == null || val.user_address[0]['address'] == false){
+               // $('#user-detail #user_address').val(val.user_address[0]['address'])
+               // }
+               // if (val.user_address[0]['locality'] == null || val.user_address[0]['locality'] == false){
+               // $('#user-detail #user_locality').val(val.user_address[0]['locality'])
+               // }
+               // if (val.user_address[0]['city'] == null || val.user_address[0]['city'] == false ){
+               // $('#user-detail #user_city').val(val.user_address[0]['city'])
+               // }
                if (val.agent){
                    document.getElementById('agent_box').setAttribute("checked", "");;
                }

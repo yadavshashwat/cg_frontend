@@ -177,6 +177,10 @@ var Global = {
             $('#vehicle-select-form .veh-cat-card').removeClass('selected');
             $('#vehicle-select-form .veh-cat-card:hover').addClass('selected');
             vehicle = $('#vehicle-select-form .veh-cat-card:hover').text()
+             var html = '<select id="vehicle-select-list" class="js-example-responsive">';
+            html += '<option value="" disabled selected>Model</option>';
+            html += '</select>';
+             $('#vehicle-select-form #vehicle-select').html(html);
             $('#vehicle-select-form .home-form-2 .vehicle-type').text(vehicle);
         });
 
@@ -186,7 +190,7 @@ var Global = {
            // var fuel = $('#fuel-type-select').find('.active span').text();
            var vehtype = $('#vehicle-select-form .veh-cat-card.selected').text().trim()
             var error = 0 ;
-            if(make == "" || model == "") {
+           if(make == "" || model == "" ||make == "Make" || model == "Model" ) {
                $('#choose-vehicle-error').text('Please select vehicle');
                 error = 1;
             }
