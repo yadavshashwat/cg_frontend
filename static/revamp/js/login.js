@@ -151,9 +151,7 @@ var Login = {
             $('#login').hide()
             $('#cover').hide()
         });
-
-
-
+        
         $('#login .use-otp').click(function () {
             var number = $('#telephone_login').val();
 
@@ -318,6 +316,24 @@ var Login = {
           $('.navbar .log-in').text("Logout")
           $('.navbar .uname').text("Hi "+uname+",")
           $('.navbar .log-in-button').addClass('log-out-button').removeClass('log-in-button')
+        // console.log(data['auth_rights']['admin'])
+        if (data['auth_rights']['admin'] || data['auth_rights']['staff']){
+
+        }else if(data['auth_rights']['b2b']){
+            $('.admin-page .items-list li.coupon-button').hide()
+            $('.admin-page .items-list li.users-button').hide()
+            $('.admin-page .items-list li.lead-button').hide()
+
+
+        }else if(data['auth_rights']['agent']){
+
+        }else{
+
+        }
+
+
+
+
 
     },
     loadPasswordchange: function (data) {

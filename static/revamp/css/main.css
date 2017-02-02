@@ -375,6 +375,14 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
     /*position:absolute!important;*/
 }
 
+/*.select2-container.select2-container--open{*/
+/*width : auto  !important*/
+/*}*/
+
+body>.select2-container{width:auto !important;
+    margin-top: -35px!important;
+}
+
 .img-brand{
     width: 30px;
 }

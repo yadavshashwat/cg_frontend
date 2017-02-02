@@ -209,7 +209,7 @@ var Global = {
            local.save('vehtype',vehtype)
            local.save('fullname',make+" "+model+" "+fuel)
             // window.location.href = '/get_quote';
-             window.location.href = '/'+vehtype+'/'+make+'_'+model+'_'+fuel;
+             window.location.href = '/'+vehtype+'/'+make.replace(" ","_")+'-'+model.replace(" ","_")+'-'+fuel;
            //   if(window.location.pathname.split('/').length == 4){
            //      // var a = window.location.pathname.split('/')
            //      var new_path =  '/'+vehtype+'/'+make+'_'+model+'_'+fuel
@@ -234,32 +234,31 @@ var Global = {
 
 
             var name = $('#services').attr('data-vehicle-name')
-            name = name.split('_')
+            name = name.split('-')
             var vehicle_type = $('#services').attr('data-vehicle-type')
 
-            if (veh_make == name[0] && veh_model == name[1] && veh_fuel == name[2] && vehicle_type_c == vehicle_type){
+            if (veh_make == name[0].replace("_", " ") && veh_model == name[1].replace("_", " ") && veh_fuel == name[2] && vehicle_type_c == vehicle_type){
                 // console.log(veh_make)
-                // console.log(name[0])
+                // console.log(name[0].replace("_", " "))
             }else{
                 local.clearKey('cgcart')
                 local.save('vehtype',vehicle_type)
-                local.save('vehmake',name[0])
-                local.save('vehmodel',name[1])
+                local.save('vehmake',name[0].replace("_", " "))
+                local.save('vehmodel',name[1].replace("_", " "))
                 local.save('vehfuel',name[2])
             }
 
-
-            $('#vehicle-name').text(name[0] + " " +name[1])
+            $('#vehicle-name').text(name[0].replace("_", " ") + " " +name[1].replace("_", " "))
             $('#vehicle-varient').text(name[2]+" Varient")
-            $('#vehicle-name1').text(name[0] + " " +name[1])
+            $('#vehicle-name1').text(name[0].replace("_", " ") + " " +name[1].replace("_", " "))
             $('#vehicle-varient1').text(name[2]+"")
             rand_number = Math.floor(Math.random() * 3) + 1
             if (rand_number == 1){
-                $('#intro-sentence').text('How can we help with your '+name[0]+' '+name[1]+'?')
+                $('#intro-sentence').text('How can we help with your '+name[0].replace("_", " ")+' '+name[1].replace("_", " ")+'?')
             }else if (rand_number == 2){
-                $('#intro-sentence').text('We really love your '+name[0]+' '+name[1]+'!')
+                $('#intro-sentence').text('We really love your '+name[0].replace("_", " ")+' '+name[1].replace("_", " ")+'!')
             }else{
-                $('#intro-sentence').text('Your '+name[0]+' '+name[1]+' looks kinda amazing!')
+                $('#intro-sentence').text('Your '+name[0].replace("_", " ")+' '+name[1].replace("_", " ")+' looks kinda amazing!')
             }
             if(vehicle_type == "Car"){
                 // console.log(vehicle_type)
@@ -286,33 +285,33 @@ var Global = {
             var vehicle_type = $('#services').attr('data-vehicle-type')
             $('#jobs .service-sub-category.car-care').hide()
             $('#jobs .service-sub-category.denting').hide()
-            name = name.split('_')
+            name = name.split('-')
             // console.log(classy);
             if(classy == 'servicing'){
                 $('.nav-services').find('.car-servicing').addClass('selected');
                 $('.nav-services').find('.bike-servicing').addClass('selected');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
             }else if(classy =='repairing'){
                 $('.nav-services').find('.car-repairing').addClass('selected');
                 $('.nav-services').find('.bike-repairing').addClass('selected');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Repairing"}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Repairing"}, "get", _this, _this.loadJobs);
             }else if(classy =='emergency'){
                 $('.nav-services').find('.car-emergency').addClass('selected');
                 $('.nav-services').find('.bike-emergency').addClass('selected');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Emergency"}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Emergency"}, "get", _this, _this.loadJobs);
             }else if(classy =='subscription'){
                 $('.nav-services').find('.car-subscription').addClass('selected');
                 $('.nav-services').find('.bike-subscription').addClass('selected');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
             }else if(classy =='carcare'){
                 $('.nav-services').find('.car-care').addClass('selected');
                 $('#jobs .service-sub-category.car-care').show();
                 var doorstep = $('#jobs .service-sub-category.car-care .selected').attr('doorstep');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);            }else if(classy =='denting'){
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);            }else if(classy =='denting'){
                 $('.nav-services').find('.car-denting').addClass('selected');
                 $('#jobs .service-sub-category.denting').show();
                 var sub_cat = $('#jobs .service-sub-category.denting .selected').attr('sub_cat');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
             }else{
                 return
             }
@@ -341,26 +340,26 @@ var Global = {
             $(' .desktop-list  .service-item').removeClass('selected');
             $(' .desktop-list  .service-item:hover').addClass('selected');
             var name = $('#services').attr('data-vehicle-name')
-            name = name.split('_')
+            name = name.split('-')
             var classy = $(this).attr('data-class');
             $('#jobs .service-sub-category.car-care').hide()
             $('#jobs .service-sub-category.denting').hide()
             if(classy == 'servicing'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
             }else if(classy =='repairing'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Repairing"}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Repairing"}, "get", _this, _this.loadJobs);
             }else if(classy =='emergency'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Emergency"}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Emergency"}, "get", _this, _this.loadJobs);
             }else if(classy =='subscription'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
             }else if(classy =='carcare'){
                 $('#jobs .service-sub-category.car-care').show();
                 var doorstep = $('#jobs .service-sub-category.car-care .selected').attr('doorstep');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);
             }else if(classy =='denting'){
                 $('#jobs .service-sub-category.denting').show();
                 var sub_cat = $('#jobs .service-sub-category.denting .selected').attr('sub_cat');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
             }else{
                 return
             }
@@ -376,27 +375,27 @@ var Global = {
             var classy = $(this).find('.active span').text().toLowerCase().replace(/\s+/g, '');;
             // console.log(classy)
             var name = $('#services').attr('data-vehicle-name')
-            name = name.split('_')
+            name = name.split('-')
             $('#jobs .service-sub-category.car-care').hide()
             $('#jobs .service-sub-category.denting').hide()
 
             if(classy == 'servicing'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
             }else if(classy =='repairing'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Repairing"}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Repairing"}, "get", _this, _this.loadJobs);
             }else if(classy =='emergency'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Emergency"}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Emergency"}, "get", _this, _this.loadJobs);
             }else if(classy =='amc'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
             }else if(classy =='carcare'){
                 $('#jobs .service-sub-category.car-care').show();
                 var doorstep = $('#jobs .service-sub-category.car-care .selected').attr('doorstep');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);
                 // Commons.ajaxData('get_jobs_vehicle', {make_id: "Hyundai",model_id:"i20",fuel_id:"Diesel",service_type: "Cleaning"}, "get", _this, _this.loadJobs);
             }else if(classy =='dentingpainting'){
                 $('#jobs .service-sub-category.denting').show();
                 var sub_cat = $('#jobs .service-sub-category.denting .selected').attr('sub_cat');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
+                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
             }else{
                 return
             }
@@ -412,18 +411,18 @@ var Global = {
             $('#jobs .service-sub-category.car-care .job-cat-card').removeClass('selected')
             $('#jobs .service-sub-category.car-care .job-cat-card:hover').addClass('selected')
             var name = $('#services').attr('data-vehicle-name')
-            name = name.split('_')
+            name = name.split('-')
             var doorstep = $('#jobs .service-sub-category.car-care .selected').attr('doorstep');
-            Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);
+            Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);
         })
 
         $('#jobs .service-sub-category.denting').click(function () {
             $('#jobs .service-sub-category.denting .job-cat-card').removeClass('selected')
             $('#jobs .service-sub-category.denting .job-cat-card:hover').addClass('selected')
             var name = $('#services').attr('data-vehicle-name')
-            name = name.split('_')
+            name = name.split('-')
             var sub_cat = $('#jobs .service-sub-category.denting .selected').attr('sub_cat');
-            Commons.ajaxData('get_jobs_vehicle', {make_id: name[0],model_id: name[1],fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
+            Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
         })
 
 

@@ -302,7 +302,7 @@ var Global = {
            local.save('vehtype',vehtype)
            local.save('fullname',make+" "+model+" "+fuel)
             // window.location.href = '/get_quote';
-           window.location.href = '/'+vehtype+'/'+make+'_'+model+'_'+fuel;
+           window.location.href = '/'+vehtype+'/'+make.replace(" ", "_")+'-'+model.replace(" ", "_")+'-'+fuel;
        });
 
         $('#contact .contact-us .message-submit').click(function(event){

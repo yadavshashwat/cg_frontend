@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+	<Document>
+		<name>Locations for  ClickGarage</name>
+		<atom:author>
+			<atom:name>Bhuvan Batra</atom:name>
+		</atom:author>
+		<atom:link rel="related" href="http://www.clickgarage.in" />
+		<Folder>
+			<Placemark>
+				<name><![CDATA[ ClickGarage]]></name>
+				<address><![CDATA[2nd Floor, W22 Green Park, New Delhi, 110016, India]]></address>
+				<description><![CDATA[Click Garage is the ideal one-stop solution for all types of car and bikes maintenance services]]></description>
+				<Point>
+					<coordinates>77.2029376,28.5584489,0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name><![CDATA[ ClickGarage]]></name>
+				<address><![CDATA[House No. 2401, DLF Phase 4, Gurgaon, 122009, India]]></address>
+				<description><![CDATA[Click Garage is the ideal one-stop solution for all types of car and and bikes maintenance services]]></description>
+				<Point>
+					<coordinates>77.0844801,28.4646699,0</coordinates>
+				</Point>
+			</Placemark>
+		</Folder>
+	</Document>
+</kml>
