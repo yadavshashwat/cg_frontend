@@ -76,7 +76,7 @@
 			<ul class="center items-list-bike invisible">
 				<li data-class ="servicing" class ="service-item servicing-button bike-servicing">Servicing</li>
 				<li data-class ="repairing" class ="service-item repairing-button bike-repairing">Repairing</li>
-				<li data-class ="emergency"class ="service-item emergency-button bike-emergency">Emergency</li>
+				<li data-class ="emergency" class ="service-item emergency-button bike-emergency">Emergency</li>
 			</ul>
 		</div>
 		<div class="row">
@@ -105,28 +105,52 @@
 </div>
 <!--city select-->
 <section id="city-select" class="invisible">
-	<div class="row">
-		<div class="card city-select col l4 s8 m4 offset-l6 offset-s2 offset-m2">
-			<div class="col l12 s12 m12">
-				<div class="city card" data-class="Gurgaon">
+	<div class="row row-car invisible">
+		<div class="card city-select col l12 s12 m12">
+			<div class="col l4 s12 m12">
+				<div class="city card cardhover" data-class="Gurgaon">
 					<div class="card-image waves-effect waves-block waves-light">
-						<img class="activator img1" src="/../../static/revamp/img/City/Gurgaon.jpg">
+						<img class="activator img1" src="/../../static/revamp/img/City/Gurgaon.svg">
 					</div>
 					<div class="card-content  centered-text">
 						<p class="title city-name">Gurgaon</p>
 					</div>
 				</div>
 			</div>
-			<!--<div class="city col l6 s12 m12">-->
-			<!--<div class="card">-->
-			<!--<div class="card-image waves-effect waves-block waves-light">-->
-			<!--<img class="activator img1" src="/../../static/revamp/img/City/NewDelhi.jpg">-->
-			<!--</div>-->
-			<!--<div class="card-content centered-text">-->
-			<!--<p class="title city-name">New Delhi</p>-->
-			<!--</div>-->
-			<!--</div>-->
-			<!--</div>-->
+			<div class="city col l4 s12 m12">
+				<div class="card  cardhover" data-class="New Delhi">
+					<div class="card-image waves-effect waves-block waves-light">
+						<img class="activator img1" src="/../../static/revamp/img/City/NewDelhi.svg">
+					</div>
+					<div class="card-content centered-text">
+						<p class="title city-name">New Delhi</p>
+					</div>
+				</div>
+			</div>
+			<div class="city col l4 s12 m12">
+				<div class="card cardhover" data-class="Noida">
+					<div class="card-image waves-effect waves-block waves-light">
+						<img class="activator img1" src="/../../static/revamp/img/City/Noida.svg">
+					</div>
+					<div class="card-content centered-text">
+						<p class="title city-name">Noida</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row row-bike invisible">
+		<div class="card city-select col l12 s12 m12">
+			<div class="col l4 s12 m12 offset-l4">
+				<div class="city card cardhover" data-class="Gurgaon">
+					<div class="card-image waves-effect waves-block waves-light">
+						<img class="activator img1" src="/../../static/revamp/img/City/Gurgaon.svg">
+					</div>
+					<div class="card-content  centered-text">
+						<p class="title city-name">Gurgaon</p>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
@@ -874,25 +898,25 @@
 									<!--<label data-error="Select a Brand">Type of Question</label>-->
 								</div>
 							</div>
-							</div>
-							<div class="row">
+						</div>
+						<div class="row">
 							<div class="col s12 m12 l12">
-							<div class="input" id="vehicle-select">
-								<select class ="js-example-responsive">
-									<option value="" disabled selected>Model</option>
-								</select>
+								<div class="input" id="vehicle-select">
+									<select class ="js-example-responsive">
+										<option value="" disabled selected>Model</option>
+									</select>
+								</div>
 							</div>
-							</div>
-							</div>
-							<!--<div class="input-field col s5 m5 l5" id="fuel-type-select">-->
-								<!--<select>-->
-									<!--<option value="" disabled selected>Fuel</option>-->
-									<!--<option value="petrol">Petrol</option>-->
-									<!--<option value="diesel">Diesel</option>-->
-									<!--&lt;!&ndash;<option value="cng">LPG/CNG</option>&ndash;&gt;-->
-								<!--</select>-->
-							<!--</div>-->
-						</form>
+						</div>
+						<!--<div class="input-field col s5 m5 l5" id="fuel-type-select">-->
+						<!--<select>-->
+						<!--<option value="" disabled selected>Fuel</option>-->
+						<!--<option value="petrol">Petrol</option>-->
+						<!--<option value="diesel">Diesel</option>-->
+						<!--&lt;!&ndash;<option value="cng">LPG/CNG</option>&ndash;&gt;-->
+						<!--</select>-->
+						<!--</div>-->
+					</form>
 					<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-vehicle-error"></span>
 				</div>
 
@@ -1220,6 +1244,7 @@
 </section>
 
 <section id="cover" class="invisible"></section>
+<section id="cover2" class="invisible"></section>
 
 
 
@@ -1296,28 +1321,28 @@
 Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
 --------------------------------------------------->
 <script type="text/javascript">
-/* <![CDATA[ */
-var google_conversion_id = 932007205;
-var google_custom_params = window.google_tag_params;
-var google_remarketing_only = true;
-/* ]]> */
+	/* <![CDATA[ */
+	var google_conversion_id = 932007205;
+	var google_custom_params = window.google_tag_params;
+	var google_remarketing_only = true;
+	/* ]]> */
 </script>
 <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
 </script>
 <noscript>
-<div style="display:inline;">
-<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/932007205/?guid=ON&amp;script=0"/>
-</div>
+	<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/932007205/?guid=ON&amp;script=0"/>
+	</div>
 </noscript>
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-68064927-1', 'auto');
-  ga('send', 'pageview');
+	ga('create', 'UA-68064927-1', 'auto');
+	ga('send', 'pageview');
 
 </script>
 

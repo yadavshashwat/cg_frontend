@@ -130,7 +130,7 @@ var Global = {
             city = $(this).attr('data-class')
             local.save('cg_city',city)
             $('#city-select').hide()
-            $('#cover').hide()
+            $('#cover2').hide()
         })
 
         $('.order-page .nav2 .change-button').click(function () {
@@ -197,25 +197,33 @@ var Global = {
            if(error==1){
                return;
            }
-           local.save('vehmake',make);
+
+           cookie = local.load()
+
+           if(cookie['vehtype']==null || cookie['vehtype']===false){
+                    local.clearKey('cg_city')
+            }else{
+                if (vehtype != cookie['vehtype']){
+                    console.log('check')
+                    local.clearKey('cg_city')
+                }
+           }
+
            fuel_start = model.indexOf("(")
            fuel_end = model.indexOf(")")
-
            var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
            model = model.substr(0,fuel_start)
-            local.clearKey('cgcart')
+           local.clearKey('cgcart')
+           local.save('vehmake',make);
            local.save('vehmodel',model);
-           local.save('vehfuel',fuel)
-           local.save('vehtype',vehtype)
+           local.save('vehfuel',fuel);
+           local.save('vehtype',vehtype);
            local.save('fullname',make+" "+model+" "+fuel)
-            // window.location.href = '/get_quote';
-             window.location.href = '/'+vehtype+'/'+make.replace(" ","_")+'-'+model.replace(" ","_")+'-'+fuel;
-           //   if(window.location.pathname.split('/').length == 4){
-           //      // var a = window.location.pathname.split('/')
-           //      var new_path =  '/'+vehtype+'/'+make+'_'+model+'_'+fuel
-           //      history.pushState({},'',new_path)
-           //  }
 
+          setTimeout(function(){
+                              window.location.href = '/'+vehtype+'/'+make.replace(" ", "_")+'-'+model.replace(" ", "_")+'-'+fuel;
+
+           },10);
         });
 
         $(document).ready(function() {
@@ -225,9 +233,16 @@ var Global = {
             veh_model = cookie['vehmodel'];
             veh_fuel = cookie['vehfuel'];
 
+            url_list = window.location.pathname.split('/')
+
             if(cookie['cg_city']==null || cookie['cg_city']===false){
                  $('#city-select').show()
-                  $('#cover').show()
+                if (vehicle_type_c == "Bike"){
+                   $('#city-select .row-bike').show()
+                }else{
+                    $('#city-select .row-car').show()
+                }
+                  $('#cover2').show()
             }else{
                     // cart_list = cookie_name['cgcart'];
             }
@@ -803,7 +818,7 @@ var Global = {
             html += '<option value="" disabled selected>Model</option>';
             $.each(data, function(ix, val){
                 html += '<option value="' + val.make +' '+val.model+' '+val.fuel_type + '" data-placeholder="true">'+ val.full_veh_name + '</option>'
-                console.log(val.model)
+                // console.log(val.model)
 
             });
             html += '</select>';

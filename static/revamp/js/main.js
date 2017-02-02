@@ -296,13 +296,28 @@ var Global = {
 
            var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
            model = model.substr(0,fuel_start)
+
+           cookie = local.load()
+
+           if(cookie['vehtype']==null || cookie['vehtype']===false){
+                    local.clearKey('cg_city')
+            }else{
+                if (vehtype != cookie['vehtype']){
+                    console.log('check')
+                    local.clearKey('cg_city')
+                }
+           }
+
            local.clearKey('cgcart')
            local.save('vehmodel',model);
            local.save('vehfuel',fuel)
            local.save('vehtype',vehtype)
            local.save('fullname',make+" "+model+" "+fuel)
-            // window.location.href = '/get_quote';
-           window.location.href = '/'+vehtype+'/'+make.replace(" ", "_")+'-'+model.replace(" ", "_")+'-'+fuel;
+           // window.location.href = '/get_quote';
+           setTimeout(function(){
+                              window.location.href = '/'+vehtype+'/'+make.replace(" ", "_")+'-'+model.replace(" ", "_")+'-'+fuel;
+
+           },10);
        });
 
         $('#contact .contact-us .message-submit').click(function(event){
@@ -447,7 +462,7 @@ var Global = {
             html += '<option value="" disabled selected>Model</option>';
             $.each(data, function(ix, val){
                 html += '<option value="' + val.make +' '+val.model+' '+val.fuel_type + '" data-placeholder="true">'+ val.full_veh_name + '</option>'
-                console.log(val.model)
+                // console.log(val.model)
 
             });
             html += '</select>';
@@ -468,7 +483,7 @@ var Global = {
                  locations[val.description] = null
             });
             // locations += '}';
-            console.log(locations)
+            // console.log(locations)
             container.autocomplete({
                 data : locations
             })

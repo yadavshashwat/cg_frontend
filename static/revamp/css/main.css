@@ -24,7 +24,7 @@ body {
 	background: #FFFFFF;
 	padding-left: 0px;
 	padding-right: 0px;
-	font-family:Roboto;
+	font-family:Proxima-nova;
     /*-moz-transform: scale(0.9, 0.9); !* Moz-browsers *!*/
     /*zoom: 0.9; !* Other non-webkit browsers *!*/
     /*zoom: 90%; !* Webkit browsers *!*/
@@ -463,7 +463,7 @@ body>.select2-container{width:auto !important;
 }
 /*<------ Login Page Start----->*/
 
-#cover{
+#cover, #cover2{
 	z-index: 97!important;
     width:100%;
     height:100%;
@@ -1154,6 +1154,11 @@ body>.select2-container{width:auto !important;
 	/*border-top: 4px solid #F44336;*/
 }
 
+#home .home-form-2 .vehicle-details,#vehicle-select-form .home-form-2  .vehicle-details{
+	padding: 5%;
+}
+
+
 #home .vehicle-select-form, #vehicle-select-form .vehicle-select-form{
 	margin-top: 5%;
 }
@@ -1769,10 +1774,12 @@ footer a:hover {
 
 #city-select{
     position: fixed;
-    top:30%;
+    top:12.5%;
     z-index: 99;
     /*left:50%;*/
     /*width: .;*/
+    width: 100%;
+    padding: 0% 10%;;
 }
 
 #city-select .city-select{
@@ -1783,20 +1790,21 @@ footer a:hover {
     /*left:55%;*/
     /*margin-left: auto;*/
     /*margin-right: auto;*/
+        padding: 5%;
 }
 #city-select .city-select .city{
     cursor: pointer;
-    padding: 5%;
-    margin: 5%;
+    /*padding: 5%;*/
+    /*margin: 5%;*/
 }
 
 #city-select img{
         height: 150px;
 }
 #city-select .city .city-name{
-    color:#4a148c;
+    /*color:#4a148c;*/
     font-weight: 400;
-    text-decoration: underline;
+    /*text-decoration: underline;*/
     font-size: 22px;
 }
 
