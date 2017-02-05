@@ -13,6 +13,16 @@ $(document).ready(function() {
     $('select').select2();
 });
 
+// $(window).ready(function() {
+//     $('#loading').hide();
+// });
+
+$(window).ready(function() {
+     setTimeout(function() {
+         $('.loading-pane-2').hide();
+         $('#overlay').hide();
+            }, 2200);
+});
 
 
 // Scroll To Top
@@ -295,7 +305,7 @@ var Global = {
            fuel_end = model.indexOf(")")
 
            var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
-           model = model.substr(0,fuel_start)
+           model = model.substr(0,fuel_start-1)
 
            cookie = local.load()
 
@@ -318,6 +328,7 @@ var Global = {
                               window.location.href = '/'+vehtype+'/'+make.replace(" ", "_")+'-'+model.replace(" ", "_")+'-'+fuel;
 
            },10);
+
        });
 
         $('#contact .contact-us .message-submit').click(function(event){

@@ -30,11 +30,11 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-57-precomposed.png">
-	<link rel="shortcut icon" href="/../../static/revamp/img/favicon.png">
+	<link rel="shortcut icon" href="../../static/revamp/img/favicon-3.ico">
 </head>
 
 <body class="admin-page">
-
+<div class="admin-page-html invisible">
 <div class="navbar navbar-fixed visible">
 	<nav class="nav2">
 		<div class="nav-wrapper navbar-custom">
@@ -67,11 +67,11 @@
 </div>
 
 <section id="new-booking" class="invisible">
-	<div class="row header-booking admin-staff-row">
-		<div class="col s6 m6 l6 date-box book-btn selected">
+	<div class="row header-booking staff-button-row">
+		<div class="col s6 m6 l6 date-box card cardhover book-btn selected">
 			Booking
 		</div>
-		<div class="col s6 m6 l6 date-box lead-btn">
+		<div class="col s6 m6 l6 date-box card cardhover lead-btn">
 			Lead
 		</div>
 	</div>
@@ -113,19 +113,19 @@
 								<!--</select>-->
 							</div>
 						</div>
-						<div class="row">
-							<div class="input-field col s12 m12 l12 invisible" id ="select-fuel">
-								<select class="browser-default">
-									<option value="" disabled selected>Fuel Type</option>
-									<option value="Petrol">Petrol</option>
-									<option value="Diesel">Diesel</option>
-								</select>
-							</div>
-						</div>
+						<!--<div class="row">-->
+						<!--<div class="input-field col s12 m12 l12 invisible" id ="select-fuel">-->
+						<!--<select class="browser-default">-->
+						<!--<option value="" disabled selected>Fuel Type</option>-->
+						<!--<option value="Petrol">Petrol</option>-->
+						<!--<option value="Diesel">Diesel</option>-->
+						<!--</select>-->
+						<!--</div>-->
+						<!--</div>-->
 						<div class="row">
 							<div class="input-field col s12">
 								<i class="material-icons prefix">receipt</i>
-								<input id="reg_number" type="text" class="validate" required="" aria-required="true">
+								<input id="reg_number" type="text" class="validate" style="text-transform:uppercase" required="" aria-required="true">
 								<label for="reg_number" data-error="Required">Registration Numbers</label>
 							</div>
 						</div>
@@ -296,14 +296,21 @@
 					</div>
 				</div>
 			</div>
-
+			<div class="staff-button-row">
+				<div class="row send-reminder">
+					<div class="col l12 s12 m12 centered-text">
+						<input type="checkbox" checked="" id="send_details"/><label for="send_details">Send Confirmation</label>'
+					</div>
+				</div>
+			</div>
 			<div class="row confirm-details">
 				<div class="col s12 m12 l12 centered-text">
-					<button class="waves-effect waves-light btn-large red btn-service btn-send-booking" type="submit" name="action">Confirm
+					<button class="waves-effect waves-light btn red btn-service btn-send-booking" type="submit" name="action">Confirm
 						<i class="material-icons right">send</i>
 					</button>
 				</div>
 			</div>
+
 		</div>
 
 	</div>
@@ -312,94 +319,120 @@
 
 </section>
 
-<section id="bookings" class="visible">
+<section id="bookings" class="invisible">
 	<div class="booking-select-section">
 		<!--<div class="container-fluid services">-->
-		<div class="box card no-border-radius visible">
-			<div class="row btn red filter-sort closed">
-				<div class="col l12 s12 m12">
-					Filter Bookings <i class="fa fa-caret-down"></i>
-				</div>
+		<div class="row ">
+			<div class="filter-sort closed  date-box card cardhover selected col l3 m12 s12">
+				Filter<i class="fa fa-caret-down"></i>
 			</div>
-			<div class="row filter-option invisible">
-				<div class="col l4 s12 m12">
-					<div class="input-field">
-						<i class="material-icons prefix">today</i>
-						<input id="startdate" type="date" class="datepicker">
-						<label for="startdate" data-error="required">Start Date</label>
-					</div>
+			<div class="col l9 m12 s12 date-filter">
+				<div class="col l4 m4 s4 date-box card today cardhover selected" data-class="Today">
+					Today
 				</div>
-				<div class="col l4 s12 m12">
-					<div class="input-field">
-						<i class="material-icons prefix">today</i>
-						<input id="enddate" type="date" class="datepicker">
-						<label for="enddate" data-error="required">End Date</label>
-					</div>
+				<div class="col l4 m4 s4 card cardhover tomorrow date-box" data-class="Tomorrow">
+					Tomorrow
 				</div>
-				<div class="col l4 s12 m12">
-					<div class="input-field" id ="Status">
-						<select>
-							<option value="" disabled selected>Status</option>
-							<option value="1">Lead</option>
-							<option value="2">Confirmed</option>
-							<option value="3">Assigned</option>
-							<option value="4">Service Engineer Left</option>
-							<option value="5">Work In Progress</option>
-							<option value="6">Job Complete</option>
-						</select>
-					</div>
-				</div>
-				<div class="col l4 s6 m6">
-					<div class="input-field">
-						<i class="material-icons prefix">receipt</i>
-						<input id="booking_id" type="text" class="validate">
-						<label for="booking_id">Booking ID</label>
-					</div>
-				</div>
-				<div class="col l4 s6 m6">
-					<div class="input-field">
-						<i class="material-icons prefix">account_circle</i>
-						<input id="custname" type="text" class="validate">
-						<label for="custname">Customer Name</label>
-					</div>
-				</div>
-				<div class="col l4 s12 m12">
-					<div class="input-field" id ="Vehicle_type">
-						<select>
-							<option value="" disabled selected>Vehicle Type</option>
-							<option value="1">Car</option>
-							<option value="1">Bike</option>
-						</select>
-					</div>
-				</div>
-				<!--<div class="row filter-details">-->
-				<div class="col s12 m12 l12 centered-text">
-					<button class="waves-effect waves-light btn-large red btn-filter" type="submit" name="action">Filter Bookings
-						<i class="material-icons right">send</i>
-					</button>
+				<div class="col l4 m4 s4 card cardhover all date-box" data-class="All">
+					All
 				</div>
 			</div>
 		</div>
-		<div class="box invisible">
+		<div class="box card no-border-radius visible">
+			<div class="row filter-option invisible">
+				<div class="row">
+					<div class="col l4 s12 m12">
+						<div class="input-field">
+							<i class="material-icons prefix">today</i>
+							<input id="filterdate" type="date" class="datepicker">
+							<label for="filterdate" data-error="required">Date</label>
+						</div>
+					</div>
+					<!--<div class="col l4 s12 m12">-->
+					<!--<div class="input-field">-->
+					<!--<i class="material-icons prefix">today</i>-->
+					<!--<input id="enddate" type="date" class="datepicker">-->
+					<!--<label for="enddate" data-error="required">End Date</label>-->
+					<!--</div>-->
+					<!--</div>-->
+					<div class="col l4 s12 m12">
+						<div class="input-field" id ="Status">
+							<select class="status-list browser-default">
+								<option value="" disabled selected>Select Status</option>
+								<!--<option value="Lead">Lead</option>-->
+								<!--<option value="Confirmed">Confirmed</option>-->
+								<option value="Assigned">Assigned</option>
+								<option value="Agent Left">Agent Left</option>
+								<option value="Reached Workshop" >Reached Workshop</option>
+								<option value="Estimate Shared" >Estimate Shared</option>
+								<option value="Job Completed">Job Completed</option>
+								<option value="Feedback Taken" >Feedback Taken</option>
+								<option value="Cancelled" >Cancelled</option>
+								<option value="Escalation" >Escalation</option>
+							</select>
+						</div>
+					</div>
+					<div class="col l4 s12 m12">
+						<div class="input-field" id ="Vehicle_type">
+							<select class="browser-default">
+								<option value="" disabled selected>Vehicle Type</option>
+								<option value="Car">Car</option>
+								<option value="Bike">Bike</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col l4 s12 m12">
+						<div class="input-field">
+							<i class="material-icons prefix">receipt</i>
+							<input id="booking_id" type="text" class="validate">
+							<label for="booking_id">Booking ID</label>
+						</div>
+					</div>
+					<div class="col l4 s12 m12">
+						<div class="input-field">
+							<i class="material-icons prefix">account_circle</i>
+							<input id="custname" type="text" class="validate">
+							<label for="custname">Name</label>
+						</div>
+					</div>
+					<div class="col l4 s12 m12">
+						<div class="input-field">
+							<i class="material-icons prefix">receipt</i>
+							<input id="regnumber" type="text" class="validate" style="text-transform:uppercase">
+							<label for="regnumber">Registration Number</label>
+						</div>
+					</div>
+				</div>
+				<!--<div class="row filter-details">-->
+				<div class="row">
+					<div class="col s12 m12 l12 centered-text">
+						<button class="waves-effect waves-light btn red btn-apply-filter" type="submit" name="action">Apply Filter
+							<i class="material-icons right">done</i>
+						</button>
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+		<div class="box visible">
 			<div class="row">
-				<div class="col l6 m12 s12">
+				<div class="col l8 m8 s8">
 					<div class="input-field sort" id ="sort">
-						<select>
-							<option value="" disabled selected>Sort By</option>
-							<option value="1">Booking ID</option>
-							<option value="2">Name</option>
-							<option value="3">Status</option>
-							<option value="4">Time</option>
+						<select class="browser-default">
+							<option value="Booking ID">Booking ID</option>
+							<option value="Name">Name</option>
+							<option value="Status">Status</option>
 						</select>
 					</div>
 				</div>
-				<div class="col l6 m12 s12">
-					<div class="col l6 m6 s6 date-box selected">
-						Today
-					</div>
-					<div class="col l6 m6 s6 date-box">
-						Tomorrow
-					</div>
+				<div class="col s4 m4 l4 centered-text">
+					<button class="waves-effect waves-light btn red btn-remove-filter" type="submit" name="action">Filters
+						<i class="material-icons right">not_interested</i>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -433,10 +466,10 @@
 <section id="booking-details" class="invisible">
 	<div id="customer-detail">
 		<div class="row header-booking">
-			<div class="col s6 m6 l6 cust-detail service-box selected">
+			<div class="col s6 m6 l6 cust-detail service-box card cardhover selected">
 				Cust. Details
 			</div>
-			<div class="col s6 m6 l6 service-detail service-box">
+			<div class="col s6 m6 l6 service-detail service-box card cardhover">
 				Service Desc.
 			</div>
 
@@ -449,27 +482,35 @@
 
 				</div>
 
-				<div class="row agent-button-row invisible">
+				<div class="row agent-button-row">
 					<div class="row">
 						<div class="col l12 s12 m12 centered-text">
-							<button class="waves-effect waves-light btn red btn-update-cust page-wide" type="submit" name="action">Update Customer
+							<button class="waves-effect waves-light btn red btn-update-cust page-wide" type="submit" name="action">Update Details
 								<i class="material-icons right">send</i>
+							</button>
+						</div>
+					</div>
+					<!--<div class="row">-->
+					<div class="row">
+						<div class="col l12 s12 m12">
+							<button status_next="" class="waves-effect status-btn-1 waves-light btn red btn-update-status page-wide" type="submit" name="action"><span class="change-status"><span id="status_change-1"></span>
+									<i class="material-icons right">send</i>
 							</button>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col l12 s12 m12">
-							<button class="waves-effect waves-light btn red btn-update-status page-wide" type="submit" name="action"><span class="change-status">Change Status</span>
-								<i class="material-icons right">send</i>
+							<button status_next="" class="waves-effect status-btn-2 waves-light btn red btn-update-status page-wide" type="submit" name="action"><span class="change-status"><span id="status_change-2"></span>
+									<i class="material-icons right">send</i>
 							</button>
 						</div>
 					</div>
-
+					<!--</div>-->
 				</div>
 				<div class="row staff-button-row">
 					<div class="row">
 						<div class="col l2 s12 m12">
-							<b>Select Agent</b>
+							<b>Assign Agent</b>
 						</div>
 						<div class="col l6 s12 m12">
 							<div class="input-field" id="agent-select">
@@ -484,6 +525,7 @@
 							</button>
 						</div>
 					</div>
+
 					<div class="row">
 						<div class="col l2 s12 m12">
 							<b>Change Status</b>
@@ -494,23 +536,14 @@
 									<option value="" disabled selected>Select Status</option>
 									<option value="Lead" disabled >Lead</option>
 									<option value="Confirmed">Confirmed</option>
-									<option value="Assigned" disabled>Assigned</option>
+									<option value="Assigned">Assigned</option>
 									<option value="Agent Left">Agent Left</option>
 									<option value="Reached Workshop" >Reached Workshop</option>
 									<option value="Estimate Shared" >Estimate Shared</option>
+									<option value="Job Completed">Job Completed</option>
 									<option value="Feedback Taken" >Feedback Taken</option>
 									<option value="Cancelled" >Cancelled</option>
 									<option value="Escalation" >Escalation</option>
-									<!--# 1. Lead - Lead-->
-									<!--# 2. Booking - Confirmed-->
-									<!--# 3. Assign Vendor - Assigned-->
-									<!--# 4. Left - Agent Left-->
-									<!--# 5. Reached - Reached Workshop-->
-									<!--# 6. Estimate shared - Estimate Shared-->
-									<!--# 7. Job completed - Job completed-->
-									<!--# 8. Feedback - Feedback Taken-->
-									<!--# 9. Cancelled - Cancelled-->
-									<!--# 10. Escalation - Escalation-->
 								</select>
 							</div>
 						</div>
@@ -520,55 +553,84 @@
 							</button>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col l12 s12 m12 centered-text">
+							<button class="waves-effect waves-light btn red btn-update-cust page-wide" type="submit" name="action">Update Details
+								<i class="material-icons right">send</i>
+							</button>
+						</div>
+					</div>
 				</div>
-
 
 			</div>
 			<div class="row booking-job-data invisible">
 				<div class="row pre-data">
 				</div>
-				<div class="row add-item">
-					<div class="row">
+
+				<div class="row agent-button-row">
+					<div class="row add-item">
+						<!--<div class="row">-->
 						<div class="col l12 s12 m12 centered-text">
 							<button class="waves-effect waves-light btn red btn-additem-est page-wide" type="submit" name="action">Add Item
 								<i class="material-icons right">add</i>
 							</button>
 						</div>
+						<!--</div>-->
 					</div>
-				</div>
-				<div class="row agent-staff-button-row">
 					<div class="row">
 						<div class="col l12 s12 m12 centered-text">
 							<button class="waves-effect waves-light btn red btn-update-estimate page-wide" type="submit" name="action">Update Estimate
 								<i class="material-icons right">send</i>
 							</button>
 						</div>
-						<div class="col l12 s12 m12 centered-text invisible">
-							<button class="waves-effect waves-light btn red btn-share-est page-wide" type="submit" name="action">Share Estimate
+					</div>
+					<!--<div class="row">-->
+					<!--<div class="col l12 s12 m12 centered-text visible">-->
+					<!--<button class="waves-effect waves-light btn red btn-share-est page-wide" type="submit" name="action">Share Estimate-->
+					<!--<i class="material-icons right">send</i>-->
+					<!--</button>-->
+					<!--</div>-->
+					<!--</div>-->
+
+				</div>
+				<div class="row staff-button-row">
+					<div class="row add-item">
+						<!--<div class="row">-->
+						<div class="col l12 s12 m12 centered-text">
+							<button class="waves-effect waves-light btn red btn-additem-est page-wide" type="submit" name="action">Add Item
+								<i class="material-icons right">add</i>
+							</button>
+						</div>
+						<!--</div>-->
+					</div>
+					<div class="row">
+						<div class="col l12 s12 m12 centered-text">
+							<button class="waves-effect waves-light btn red btn-update-estimate page-wide" type="submit" name="action">Update Estimate
 								<i class="material-icons right">send</i>
 							</button>
 						</div>
 					</div>
+					<!--<div class="row">-->
+					<!--<div class="col l12 s12 m12 centered-text visible">-->
+					<!--<button class="waves-effect waves-light btn red btn-share-est page-wide" type="submit" name="action">Share Estimate-->
+					<!--<i class="material-icons right">send</i>-->
+					<!--</button>-->
+					<!--</div>-->
+					<!--</div>-->
+
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
-<!--<section id="user-details" class="invisible">-->
-<!--<div id="user-detail">-->
-<!--<div class="row user-data visible">-->
-<!--</div>-->
-<!--</div>-->
-<!--</section>-->
-
 <section id="user-details" class="invisible">
 	<div id="user-detail">
 		<div class="row header-coupon">
-			<div class="col s6 m6 l6 date-box all-user selected">
+			<div class="col s6 m6 l6 date-box card cardhover all-user selected">
 				All Users
 			</div>
-			<div class="col s6 m6 l6 date-box single-user">
+			<div class="col s6 m6 l6 date-box card cardhover single-user">
 				Add/Edit User
 			</div>
 		</div>
@@ -626,19 +688,19 @@
 						<table>
 							<tr>
 								<td>
-									<input type="checkbox" class="filled-in" id="agent_box"/>
+									<input type="checkbox"  id="agent_box"/>
 									<label for="agent_box">Agent</label>'
 								</td>
 								<td>
-									<input type="checkbox" class="filled-in" id="b2b_box"/>
+									<input type="checkbox" id="b2b_box"/>
 									<label for="b2b_box">B2B</label>'
 								</td>
 								<td>
-									<input type="checkbox" class="filled-in" id="staff_box"/>
+									<input type="checkbox"  id="staff_box"/>
 									<label for="staff_box">Staff</label>'
 								</td>
 								<td>
-									<input type="checkbox" class="filled-in" id="admin_box"/>
+									<input type="checkbox"  id="admin_box"/>
 									<label for="admin_box">Admin</label>'
 								</td>
 							</tr>
@@ -684,14 +746,13 @@
 	</div>
 </section>
 
-
 <section id="coupon-details" class="invisible">
 	<div id="coupon-detail">
 		<div class="row header-coupon">
-			<div class="col s6 m6 l6 date-box all-coupon selected">
+			<div class="col s6 m6 l6 date-box card cardhover all-coupon selected">
 				All Coupons
 			</div>
-			<div class="col s6 m6 l6 date-box single-coupon">
+			<div class="col s6 m6 l6 date-box card cardhover single-coupon">
 				Add/Edit Coupon
 			</div>
 		</div>
@@ -706,7 +767,7 @@
 				</div>
 				<div class="row">
 					<div class="col l12 s12 m12 centered-text">
-						<input type="checkbox" class="filled-in" id="coupon_active"/><label for="coupon_active">Activation Status</label>'
+						<input type="checkbox" id="coupon_active"/><label for="coupon_active">Activation Status</label>'
 					</div>
 				</div>
 
@@ -808,9 +869,8 @@
 		</div>
 	</div>
 </section>
-
-
-<section id="login" class="login invisible" style="">
+</div>
+<section id="login" class="login visible" style="">
 	<div class="materialContainer card">
 		<div class="box">
 			<!--<button class="waves-effect waves-light btn red  btn-service book-btn close-btn" type="submit" name="action"><i class="fa fa-times"></i>-->
@@ -939,6 +999,12 @@
 <div class="loading-pane">
 	<img src="/../../static/revamp/img/loading.gif" alt="" class="loading-gif">
 </div>
+
+<div class="loading-pane-2">
+	<img src="/../../static/revamp/img/page_loader.gif" alt="" class="loading-gif">
+</div>
+<div id="overlay"></div>
+
 <!-- Javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

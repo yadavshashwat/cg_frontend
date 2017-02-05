@@ -10,6 +10,13 @@ $(document).ready(function() {
     // $('#service-select').
 });
 
+$(window).ready(function() {
+     setTimeout(function() {
+         $('.loading-pane-2').hide();
+         $('#overlay').hide();
+            }, 1000);
+});
+
 
 
 $('.datepicker').pickadate({
@@ -212,7 +219,7 @@ var Global = {
            fuel_start = model.indexOf("(")
            fuel_end = model.indexOf(")")
            var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
-           model = model.substr(0,fuel_start)
+           model = model.substr(0,fuel_start-1)
            local.clearKey('cgcart')
            local.save('vehmake',make);
            local.save('vehmodel',model);
@@ -607,9 +614,9 @@ var Global = {
                 }}
             }else{
                 city = cookie['cg_city']
-                if (city.split(' ').length > 1) {
-                    city = city.substr(1,city.length-2)
-                }
+                // if (city.split(' ').length > 1) {
+                //     city = city.substr(0,city.length-2)
+                // }
 
             }
 

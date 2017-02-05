@@ -318,17 +318,29 @@ var Login = {
           $('.navbar .log-in-button').addClass('log-out-button').removeClass('log-in-button')
         // console.log(data['auth_rights']['admin'])
         if (data['auth_rights']['admin'] || data['auth_rights']['staff']){
-
+            $('.admin-page .admin-page-html').show()
+            $('.admin-page .login').hide()
+            $('.admin-page .agent-button-row').hide()
+        }else if(data['auth_rights']['agent']){
+            $('.admin-page .admin-page-html').show()
+            $('.admin-page .login').hide()
+            $('.admin-page .items-list li.coupon-button').hide()
+            $('.admin-page .items-list li.users-button').hide()
+            $('.admin-page .staff-button-row').hide()
         }else if(data['auth_rights']['b2b']){
+            $('.admin-page-html').show()
+            $('.admin-page .login').hide()
             $('.admin-page .items-list li.coupon-button').hide()
             $('.admin-page .items-list li.users-button').hide()
             $('.admin-page .items-list li.lead-button').hide()
-
-
-        }else if(data['auth_rights']['agent']){
-
+            $('.admin-page .agent-button-row').hide()
+            $('.admin-page .staff-button-row').hide()
         }else{
-
+            $('.admin-page .admin-page-html').hide()
+            $('.admin-page .login').hide()
+            $('.admin-page .navbar').hide()
+            $('.admin-page .agent-button-row').hide()
+            $('.admin-page .staff-button-row').hide()
         }
 
 

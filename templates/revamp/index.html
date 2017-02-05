@@ -31,7 +31,7 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-57-precomposed.png">
-	<link rel="shortcut icon" href="../../static/revamp/img/favicon.png">
+	<link rel="shortcut icon" href="../../static/revamp/img/favicon-3.ico">
 </head>
 
 <body>
@@ -104,12 +104,12 @@
 			<div class = "vehicle-select-form col s12 m12 l6 hide-on-med-and-down">
 				<div class="row row-zero-margin">
 					<div class="col s6 m6 l6 veh-cat-col">
-						<div class="card veh-cat-card car-card cardhover selected">
+						<div class="card veh-cat-card car-card selected">
 							Car
 						</div>
 					</div>
 					<div class="col s6 m6 l6 veh-cat-col">
-						<div class="card veh-cat-card bike-card cardhover">
+						<div class="card veh-cat-card bike-card ">
 							Bike
 						</div>
 					</div>
@@ -728,9 +728,7 @@
 	</div>
 </footer>
 
-<div class="loading-pane">
-	<img src="../../static/revamp/img/loading.gif" alt="" class="loading-gif">
-</div>
+
 
 <div id="login" class="login invisible" style="">
 	<div class="materialContainer card">
@@ -901,6 +899,17 @@
 <div class="scrollToTop"><a href="#"><img src="../../static/revamp/img/scroll_to_top.png"></a></div>
 <div class="call-button hide-on-large-only"><a href="tel:+91-9555-95-0000"><img src="../../static/revamp/img/Call.png"></a></div>
 
+<div class="loading-pane">
+	<img src="/../../static/revamp/img/loading.gif" alt="" class="loading-gif">
+</div>
+<div class="loading-pane-2">
+	<!--<span class="image-centre">-->
+		<img src="/../../static/revamp/img/page_loader.gif" alt="" class="loading-gif">
+	<!--</span>-->
+</div>
+<div id="overlay"></div>
+
+
 <!-- Javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -917,17 +926,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 
-<script>
-	$(document).ready(function() {
-		$.backstretch([
-			"../../static/revamp/img/Backgrounds/bg1.jpg",
-//				"../../static/revamp/img/header2.jpg"
-		], {
-			fade: 1000,
-			duration: 3000
-		});
-	});
-</script>
 
 <!--Google Tag start-->
 <!-- Google Code for Remarketing Tag -->
@@ -960,6 +958,19 @@ var google_remarketing_only = true;
 
 </script>
 <!--Googel Tags End-->
+
+<script>
+	$(document).ready(function() {
+		$.backstretch([
+			"../../static/revamp/img/Backgrounds/bg1.jpg",
+//				"../../static/revamp/img/header2.jpg"
+		], {
+			fade: 1000,
+			duration: 3000
+		});
+	});
+</script>
+
 
 
 <!--Start of Tawk.to Script-->

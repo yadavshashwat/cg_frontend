@@ -11,7 +11,15 @@ $(document).ready(function() {
 $('.datepicker').pickadate({
     format: 'dd-mm-yyyy',
     closeOnSelect: false,
-    min: new Date(),
+    // min: new Date(),
+});
+
+
+$(window).ready(function() {
+     setTimeout(function() {
+         $('.loading-pane-2').hide();
+         $('#overlay').hide();
+            }, 1000);
 });
 
 $(".button-collapse").sideNav();
@@ -37,7 +45,16 @@ var TOTAL_DISCOUNT_NEW_BOOKING = 0;
 var COUP_DISCOUNT_NEW_BOOKING = 0 ;
 var TOTAL_JOBS_NEW_BOOKING = 0;
 
-
+// Sort Filter
+var LEAD_TYPE = "";
+var DATE_TYPE = "";
+var REG_NUMBER = "";
+var CUST_NAME = "";
+var STATUS_TYPE = "";
+var SORT_TYPE = "";
+var BOOKING_ID = "";
+var VEH_TYPE = "";
+ // DATE_TYPE =
 
 var Global = {
     init:function() {
@@ -71,18 +88,156 @@ var Global = {
             $('#user-details').hide()
             $('#coupon-details').hide()
             $('#new-booking').hide()
-            type = "Booking"
-            Commons.ajaxData('view_all_bookings', {lead_booking:type}, "get", _this, _this.loadBookings,null, '.loading-pane');
+            LEAD_TYPE = "Booking"
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                                lead_booking:LEAD_TYPE,
+                                sort:SORT_TYPE,
+                                date:DATE_TYPE,
+                                status:STATUS_TYPE,
+                                name:CUST_NAME,
+                                reg:REG_NUMBER,
+                                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
         });
+
         $('.navbar .lead-button').click(function(event,data){
             $('#booking-details').hide();
             $('#bookings').show()
             $('#user-details').hide()
             $('#coupon-details').hide()
             $('#new-booking').hide()
-            type = "Lead"
-            Commons.ajaxData('view_all_bookings', {lead_booking:type}, "get", _this, _this.loadBookings,null, '.loading-pane');
+            LEAD_TYPE = "Lead"
+            // type = "Lead"
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                                lead_booking:LEAD_TYPE,
+                                sort:SORT_TYPE,
+                                date:DATE_TYPE,
+                                status:STATUS_TYPE,
+                                name:CUST_NAME,
+                                reg:REG_NUMBER,
+                                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
         });
+
+        DATE_TYPE = _this.date_format( new Date());
+
+        //Filtering/ Date Selection
+        $('#bookings .date-filter .date-box').click(function(){
+           $('#filterdate').val('');
+           $('#bookings .date-filter .date-box').removeClass('selected');
+           $(this).addClass('selected');
+            date = $(this).attr('data-class')
+            // console.log(date)
+
+            // console.log(date)
+            date_str = new Date();
+            DATE_TYPE = _this.date_format(date_str);
+            if (date=="Today"){
+                // console.log(date)
+                date_str = new Date();
+                DATE_TYPE = _this.date_format(date_str);
+            }else if (date == "Tomorrow"){
+                // console.log(date)
+                date_str = new Date((new Date()).valueOf() + 1000*3600*24);
+                DATE_TYPE = _this.date_format(date_str);
+            }else{
+                // console.log(date)
+                DATE_TYPE = "";
+            }
+            // console.log(DATE_TYPE)
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                                lead_booking:LEAD_TYPE,
+                                sort:SORT_TYPE,
+                                date:DATE_TYPE,
+                                status:STATUS_TYPE,
+                                name:CUST_NAME,
+                                reg:REG_NUMBER,
+                                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+        })
+
+        $('#bookings  .btn-apply-filter').click(function(){
+            date_selected = $('#bookings #filterdate').val();
+            status_selected = $('#bookings  #Status').find('select').val();
+            veh_type_selected = $('#bookings  #Vehicle_type').find('select').val();;
+            name_selected =  $('#bookings  #custname').val();
+            id_selected =  $('#bookings  #booking_id').val();
+            reg_selected =  $('#bookings  #regnumber').val();
+            console.log(date_selected);
+            console.log(status_selected);
+            console.log(veh_type_selected);
+            console.log(name_selected);
+            console.log(id_selected);
+            console.log(reg_selected);
+            if (date_selected != ""){
+                DATE_TYPE = date_selected
+                $('#bookings .date-filter .date-box').removeClass('selected');
+            }
+            if (status_selected != ""){
+                STATUS_TYPE = status_selected
+            }
+            if (veh_type_selected != ""){
+                VEH_TYPE = veh_type_selected
+            }
+            if (name_selected != ""){
+                CUST_NAME = name_selected
+            }
+            if (id_selected != ""){
+                BOOKING_ID = id_selected
+            }
+            if (reg_selected != ""){
+                REG_NUMBER = reg_selected
+            }
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                                lead_booking:LEAD_TYPE,
+                                sort:SORT_TYPE,
+                                date:DATE_TYPE,
+                                status:STATUS_TYPE,
+                                name:CUST_NAME,
+                                reg:REG_NUMBER,
+                                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+            $('#bookings .filter-option').hide();
+            $('#bookings .filter-sort').addClass('closed').removeClass('open');
+
+        })
+
+         $('#bookings  .btn-remove-filter').click(function(){
+            $('#bookings #filterdate').val('');
+            $('#bookings  #Status').find('select').val('');
+            $('#bookings  #Vehicle_type').find('select').val('');
+            $('#bookings  #custname').val('');
+            $('#bookings  #booking_id').val('');
+            $('#bookings  #regnumber').val('');
+             DATE_TYPE = _this.date_format( new Date());
+             REG_NUMBER = "";
+             CUST_NAME = "";
+             STATUS_TYPE = "";
+             SORT_TYPE = "";
+             BOOKING_ID = "";
+             VEH_TYPE = "";
+             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                                lead_booking:LEAD_TYPE,
+                                sort:SORT_TYPE,
+                                date:DATE_TYPE,
+                                status:STATUS_TYPE,
+                                name:CUST_NAME,
+                                reg:REG_NUMBER,
+                                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+             $('#bookings .date-filter .date-box').removeClass('selected');
+             $('#bookings .date-filter .date-box.today').addClass('selected');
+
+         })
+
+         $('#bookings #sort').change(function(){
+            SORT_TYPE = $('#bookings  #sort').find('select').val();
+              Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                                lead_booking:LEAD_TYPE,
+                                sort:SORT_TYPE,
+                                date:DATE_TYPE,
+                                status:STATUS_TYPE,
+                                name:CUST_NAME,
+                                reg:REG_NUMBER,
+                                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+
+         })
+
         // Open Individual Booking
         $('#bookings-list .booking-list').on('click','.booking',function(event,data){
             $('#bookings').hide()
@@ -142,7 +297,10 @@ var Global = {
             reg_n = $('#customer-detail #cust_regnumber').val();
             date_n = $('#customer-detail #date').val();
             time_n = $('#customer-detail #time_booking').val();
-            comment_n = $('#customer-detail #comments').text();
+            comment_n = $('#customer-detail #comments').val();
+            notes_n = $('#customer-detail #notes').val();
+
+
             // console.log(bid);
             // console.log(email_n)
             // console.log(reg_n)
@@ -157,6 +315,7 @@ var Global = {
                                                 comment: comment_n,
                                                 time: time_n,
                                                 date: date_n,
+                                                note:notes_n
                                                 }, "post", _this, _this.loadCustomerupdate,null, '.loading-pane');
         });
 
@@ -185,19 +344,20 @@ var Global = {
                                                 }, "post", _this, _this.loadCustomerAgent,null, '.loading-pane');
         });
                 // change-status
-            $('#customer-detail .btn-update-status').click(function(){
+        $('#customer-detail .staff-button-row .btn-update-status').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $('#status-select').find('option:selected').val()
-
-            // agent_n = $('#agent-select').find('option:selected').val()
+            console.log("Status Update")
             Commons.ajaxData('change_status', {b_id: bid,
                                                 status_id: status_n,
-                                                // email: email_n,
-                                                // reg_number: reg_n,
-                                                // comment: comment_n,
-                                                // estimate: estimate,
-                                                // time: time_n,
-                                                // date: date_n,
+                                                }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
+        });
+
+        $('#customer-detail .agent-button-row .btn-update-status').click(function(){
+            bid = $('#customer-detail #booking_id').attr('booking_id');
+            status_n = $(this).attr('status_next')
+            Commons.ajaxData('change_status', {b_id: bid,
+                                                status_id: status_n,
                                                 }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
         });
 
@@ -345,6 +505,8 @@ var Global = {
             $('#new-booking  .book-btn:hover').addClass('selected')
             $('#new-booking  .booking-lead').text("Booking")
             $('#new-booking  .booking-lead-2').text("Booking")
+             $('#new-booking  .send-reminder').show()
+           document.getElementById('send_details').setAttribute("checked", "");;
 
         });
 
@@ -353,6 +515,10 @@ var Global = {
             $('#new-booking  .lead-btn:hover').addClass('selected')
             $('#new-booking  .booking-lead').text("Lead")
             $('#new-booking  .booking-lead-2').text("Lead Follow Up")
+              document.getElementById('send_details').removeAttribute("checked", "");
+            $('#new-booking  .send-reminder').hide()
+
+
         });
 
         // -- Load Make
@@ -383,22 +549,22 @@ var Global = {
             var make = $('#select-make').find('select').val();
              console.log(make)
             Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehicle}, "get", _this, _this.loadModels);
-              $('#select-fuel').hide()
+              // $('#select-fuel').hide()
                 $('#select-model').show()
         });
         // -- Load Make
-         $('#select-model').change(function(event,data){
-            car_box =  document.getElementById('Carnew');
-            bike_box =  document.getElementById('Bikenew');
-             if (car_box.checked){
-            vehicle =    "Car"
-             $('#select-fuel').show()
-            }else{
-                 vehicle ="Bike"
-             $('#select-fuel').hide()
-                 $('#select-fuel').find('select').val('Petrol');
-             }
-        });
+        //  $('#select-model').change(function(event,data){
+        //     car_box =  document.getElementById('Carnew');
+        //     bike_box =  document.getElementById('Bikenew');
+        //     //  if (car_box.checked){
+        //     // vehicle =    "Car"
+        //     //  $('#select-fuel').show()
+        //     // }else{
+        //     //      vehicle ="Bike"
+        //     //  $('#select-fuel').hide()
+        //     //      // $('#select-fuel').find('select').val('Petrol');
+        //     //  }
+        // });
         // -- Load Service
          var call_category = function(){
              container =  $('#new-booking .service-select .category-select')
@@ -435,7 +601,10 @@ var Global = {
              }
              var make = $('#select-make').find('select').val();
              var model = $('#select-model').find('select').val();
-             var fuel = $('#select-fuel').find('select').val();
+            fuel_start = model.indexOf("(")
+            fuel_end = model.indexOf(")")
+               var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
+               model = model.substr(0,fuel_start-1)
             var category = $(this).find('select').val();
             Commons.ajaxData('get_jobs_vehicle', {make_id: make,model_id: model,fuel_id: fuel,service_type: category}, "get", $(this), _this.loadJobs);
         });
@@ -485,10 +654,16 @@ var Global = {
             // var otp = $('#otp').val();
             var comment = $('#comment').val();
             // cookie = local.load();
-            var fuel = $('#select-fuel').find('select').val();
+            // var fuel = $('#select-fuel').find('select').val();
             var veh_type = vehicle;
             var make = $('#select-make').find('select').val();
             var model = $('#select-model').find('select').val();
+            fuel_start = model.indexOf("(")
+           fuel_end = model.indexOf(")")
+
+           var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
+           model = model.substr(0,fuel_start-1)
+
             var reg_num = $('#reg_number').val();
             // var coupon = cookie['coupon']
             var is_paid = false
@@ -501,7 +676,12 @@ var Global = {
                 var flag= "False"
             }
             // console.log(time)
-
+            send_conf =  document.getElementById('send_details');
+             if (send_conf.checked){
+                send_mess =    "1"
+            }else{
+                 send_mess ="0"
+             }
             error = 0
             if(TOTAL_PRICE_NEW_BOOKING<= 0 ){
                 error = 1
@@ -571,7 +751,8 @@ var Global = {
                 ,paid_amt   : paid_amt
                 // ,coupon     : coupon
                 ,price_total: price_total
-                 , flag : flag}, "post", _this, _this.loadSendbooking,null, '.loading-pane');
+                 , flag : flag
+                ,int_summary :JSON.stringify(JOBS_SUMMARY_NEW_BOOKING),send_confirm:send_mess}, "post", _this, _this.loadSendbookingAdmin,null, '.loading-pane');
             }
 
 
@@ -715,10 +896,10 @@ var Global = {
               $('#user-detail #user_address').val('')
               $('#user-detail #user_locality').val('')
               $('#user-detail #user_city').val('')
-                document.getElementById('b2b_box').removeAttribute("checked", "");;
-                document.getElementById('agent_box').removeAttribute("checked", "");;
-                document.getElementById('admin_box').removeAttribute("checked", "");;
-                document.getElementById('staff_box').removeAttribute("checked", "");;
+                document.getElementById('b2b_box').removeAttribute("checked", "");
+                document.getElementById('agent_box').removeAttribute("checked", "");
+                document.getElementById('admin_box').removeAttribute("checked", "");
+                document.getElementById('staff_box').removeAttribute("checked", "");
 
         });
 
@@ -779,7 +960,7 @@ var Global = {
             html += '                    </div>'
             html += '                </div>'
             html += '                <div class="col l4 s3 m3 status-bar">'
-            html += '                    <span class="status">' + val.status + '</span>'
+            html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
             html += '                </div>'
             html += '            </div>'
             html += '        </div>'
@@ -814,7 +995,7 @@ var Global = {
             html += '											<td>'+i+'</td>';
             html += '											<td>'+val.first_name+' '+val.last_name+'</td>';
             html += '											<td>'+val.phone+'</td>';
-            html += '											<td>'+val.email[0]+'</td>';
+            html += '											<td>'+val.email_primary+'</td>';
             if (val.agent){
                 html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
             }else{
@@ -869,7 +1050,7 @@ var Global = {
                 $('#user-detail #user_number').attr('disabled',"")
                // try:
                try {
-                 $('#user-detail #user_email').val(val.email[0]);
+                 $('#user-detail #user_email').val(val.email_primary);
                 } catch (e) {
 
                 }
@@ -970,33 +1151,140 @@ var Global = {
         container.html('');
         html = ''
         $.each(data, function(ix, val) {
-                html+= '<div id="booking_id" class="col s12 m12 l12 book_id" booking_id="'+val.booking_id+'"><h4><b>#'+val.booking_id+'</h4></b></div>'
-                html+= '<div class="row"><div class="col s4 m4 l2 header">Name     </div><div class="col s8 m8 l4 detail">: '+val.cust_name +'</div>'
-                html+= '<div class="col s4 m4 l2 header">Number   </div><div class="col s8 m8 l4 detail">: '+val.cust_number+'</div>'
-                html+= '<div class="col s4 m4 l2 header">Address      </div><div class="col s8 m8 l4 detail">: '+val.cust_address+', '+val.cust_locality+', '+val.cust_city+'</div>'
-                html+= '<div class="col s4 m4 l2 header">'+val.cust_vehicle_type+'</div><div class="col s8 m8 l4 detail">: '+val.cust_make +' '+val.cust_model+' '+val.cust_fuel_varient+'</div>'
-                html+= '<div class="col s4 m4 l2 header">Coupon</div><div class="col s8 m8 l4 detail">: '+val.coupon+'</div>'
-                html+= '<div class="col s4 m4 l2 header">Amount Paid</div><div class="col s8 m8 l4 detail">: Rs. '+val.amount_paid+'</div>'
-                html+= '<div class="col s4 m4 l2 header">Source</div><div class="col s8 m8 l4 detail">: '+val.source+'</div>'
-                html+= '<div class="col s4 m4 l2 header">Status</div><div class="col s8 m8 l4 detail">: '+val.status+'</div>'
-                html+= '<div class="col s4 m4 l2 header">Agent</div><div class="col s8 m8 l4 detail">: '+ val.agent_details+'</div></div>'
-                html+= '<div class="row"><div class="col s4 m4 l2 header header-var">Email</div><div class="col s8 m8 l10"><input id="email" type="text" class="" value ="'+val.cust_email+'" aria-required="true"></div>'
-                html+= '<div class="col s4 m4 l2 header header-var">#Veh Reg</div><div class="col s8 m8 l10"><input id="cust_regnumber" type="text" class="" value ="'+val.cust_regnumber+'" aria-required="true"></div>'
-                if (val.booking_flag){
-                    html+= '<div class="row"><div class="col s4 m4 l2 header header-var">Booking Date</div><div class="col s8 m8 l10 input-field"><input id="date" type="date" value ="'+ val.date_booking +'" class="datepicker"><label for="date"></label></div>'
-                }else{
-                    html+= '<div class="row"><div class="col s4 m4 l2 header header-var">Follow Up/ Booking Date</div><div class="col s8 m8 l10 input-field"><input id="date" type="date" value ="'+ val.date_booking +'" class="datepicker"><label for="date"></label></div>'
+            // <--- old booking data --->
+                // html+= '<div id="booking_id" class="col s12 m12 l12 book_id" booking_id="'+val.booking_id+'"><h4><b>#'+val.booking_id+'</h4></b></div>'
+                // html+= '<div class="row"><div class="col s4 m4 l2 header">Name     </div><div class="col s8 m8 l4 detail">: '+val.cust_name +'</div>'
+                // html+= '<div class="col s4 m4 l2 header">Number   </div><div class="col s8 m8 l4 detail">: '+val.cust_number+'</div>'
+                // html+= '<div class="col s4 m4 l2 header">Address      </div><div class="col s8 m8 l4 detail">: '+val.cust_address+', '+val.cust_locality+', '+val.cust_city+'</div>'
+                // html+= '<div class="col s4 m4 l2 header">'+val.cust_vehicle_type+'</div><div class="col s8 m8 l4 detail">: '+val.cust_make +' '+val.cust_model+' '+val.cust_fuel_varient+'</div>'
+                // html+= '<div class="col s4 m4 l2 header">Coupon</div><div class="col s8 m8 l4 detail">: '+val.coupon+'</div>'
+                // html+= '<div class="col s4 m4 l2 header">Amount Paid</div><div class="col s8 m8 l4 detail">: Rs. '+val.amount_paid+'</div>'
+                // html+= '<div class="col s4 m4 l2 header">Source</div><div class="col s8 m8 l4 detail">: '+val.source+'</div>'
+                // html+= '<div class="col s4 m4 l2 header">Status</div><div class="col s8 m8 l4 detail">: '+val.status+'</div>'
+                // html+= '<div class="col s4 m4 l2 header">Agent</div><div class="col s8 m8 l4 detail">: '+ val.agent_details+'</div></div>'
+                // html+= '<div class="row"><div class="col s4 m4 l2 header header-var">Email</div><div class="col s8 m8 l10"><input id="email" type="text" class="" value ="'+val.cust_email+'" aria-required="true"></div>'
+                // html+= '<div class="col s4 m4 l2 header header-var">#Veh Reg</div><div class="col s8 m8 l10"><input id="cust_regnumber" type="text" style="text-transform:uppercase" class="" value ="'+val.cust_regnumber+'" aria-required="true"></div>'
+                // if (val.booking_flag){
+                //     html+= '<div class="row"><div class="col s4 m4 l2 header header-var">Booking Date</div><div class="col s8 m8 l10 input-field"><input id="date" type="date" value ="'+ val.date_booking +'" class="datepicker"><label for="date"></label></div>'
+                // }else{
+                //     html+= '<div class="row"><div class="col s4 m4 l2 header header-var">Follow Up/ Booking Date</div><div class="col s8 m8 l10 input-field"><input id="date" type="date" value ="'+ val.date_booking +'" class="datepicker"><label for="date"></label></div>'
+                // }
+                // html+= '<div class="col s4 m4 l2 header header-var">Time</div><div class="col s8 m8 l10"><input id="time_booking" type="text" class="" value="'+ val.time_booking +'" aria-required="true"></div></div>'
+                // html+= '</div><div class="row"><div class="col s4 m4 l2 header header-var">Requests </div><div class="col s8 m8 l10 input-field"><textarea id="comments" class="materialize-textarea" >'+ val.comments +'</textarea></div></div>'
+            // <---- Old booking data--->>
+            // <---- New Booking Data --->>
+            html += '<div class="row">'
+            html += '<div id="booking_id" class="col s12 m12 l12 book_id" booking_id="'+val.booking_id+'"><h4><b>#'+val.booking_id+'</h4></b></div>'
+            html += '</div>'
+            html += '<div class="row">'
+            html += '<div class="col s12 m12 l12">'
+            html += '<div class="status-2 '+val.status.replace(" ","-") +'">'+val.status +'</div>'
+            html += '</div>'
+            html += '</div>'
+            html += '<div class="col s12 m12 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="'+ val.cust_name +'"class="validate"><label for="cust_name">Name</label></div>'
+            html += '</div>'
+            html += '<div class="col s12 m12 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="'+ val.cust_number +'"class="validate"><label for="cust_number">Number</label></div>'
+            html += '</div>'
+            html += '<div class="col s12 m12 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">my_location</i><input id="cust_address" type="text"  disabled value ="'+ val.cust_address+', '+val.cust_locality+', '+val.cust_city +'"class="validate"><label for="cust_address">Address</label></div>'
+            html += '</div>'
+            html += '<div class="col s12 m12 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_vehicle" type="text" disabled  value ="'+ val.cust_make +' '+val.cust_model+' '+val.cust_fuel_varient +'"class="validate"><label for="cust_vehicle">'+val.cust_vehicle_type+'</label></div>'
+            html += '</div>'
+            html += '<div class="col s12 m12 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_coupon" type="text" disabled  value ="'+ val.coupon +'"class="validate"><label for="cust_coupon">Coupon</label></div>'
+            html += '</div>'
+            html += '<div class="col s12 m12 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled  type="text" value ="'+ val.amount_paid +'"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
+            html += '</div>'
+            html += '<div class="col s12 m12 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text" disabled  value ="'+ val.source +'"class="validate"><label for="source">Source</label></div>'
+            html += '</div>'
+            html += '<div class="col s12 m12 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="'+ val.agent_details +'"class="validate"><label for="agent_details">Agent Details</label></div>'
+            html += '</div>'
+            // if (is_agent)
+            if (val.req_user_agent || val.req_user_staff || val.req_user_admin) {
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">email</i><input id="email" type="email" value ="' + val.cust_email + '"class="validate"><label for="email">Email</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_regnumber" type="text" value ="' + val.cust_regnumber + '"class="validate" style="text-transform: uppercase;"><label for="cust_regnumber">#Registration</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
+                html += '</div>'
+            }else{
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">email</i><input id="email" disabled type="email" value ="' + val.cust_email + '"class="validate"><label for="email">Email</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_regnumber" disabled  type="text" value ="' + val.cust_regnumber + '"class="validate" style="text-transform: uppercase;"><label for="cust_regnumber">#Registration</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" disabled  value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" disabled  class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled  class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
+                html += '</div>'
+
+            }
+            // <----- New Booking Data---->>
+                if (val.req_user_agent) {
+                    if (val.status == "Agent Left") {
+                        $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1').show()
+                        $('#customer-detail .booking-data .agent-button-row .btn-update-status.status-btn-1').attr("status_next", "Job Completed")
+                        $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1 #status_change-1').text("Job Completed")
+                        $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-2').attr("status_next", "Reached Workshop")
+                        $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-2').show()
+                        $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-2 #status_change-2').text("Reached Workshop")
+                    } else if (val.status == "Reached Workshop") {
+                        $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').hide()
+                        $('#customer-detail .booking-data .agent-button-row .btn-update-status.status-btn-2').hide()
+                    } else {
+                        $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').attr("status_next", val.status_next)
+                        $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1 #status_change-1').text(val.status_next)
+                        $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-2').hide()
+                        $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').show()
+                    }
+
+                    if (val.status == "Job Completed" || val.status == "Feedback Taken") {
+                        $('#customer-detail.agent-button-row').hide()
+                        $('#customer-detail .agent-button-row').hide()
+
+                        console.log('Check')
+
+                    } else {
+                        // console.log('Check')
+                        $('#customer-detail .agent-button-row').show()
+                    }
                 }
-                html+= '<div class="col s4 m4 l2 header header-var">Time</div><div class="col s8 m8 l10"><input id="time_booking" type="text" class="" value="'+ val.time_booking +'" aria-required="true"></div></div>'
-                html+= '</div><div class="row"><div class="col s4 m4 l2 header header-var">Requests </div><div class="col s8 m8 l10 input-field"><textarea id="comments" class="materialize-textarea" >'+ val.comments +'</textarea></div></div>'
         })
-         container.html(html);
+        container.html(html);
 
         container.find('.datepicker').pickadate({
             format: 'dd-mm-yyyy',
             closeOnSelect: false,
             min: new Date(),
         });
+
         var container2 = $('#customer-detail .booking-job-data .pre-data');
         container2.html('');
         html = ''
@@ -1032,58 +1320,92 @@ var Global = {
             // TOTAL_DISCOUNT = 0;
             // TOTAL_ITEMS = 0;
             for (i = 0; i < compLen; i++) {
-                CURRENT_CART_ADMIN.push({"name": val.service_items[i].name,
-                        "price": val.service_items[i].name,
-                        "price_comp": val.service_items[i].price,
-                        "action": val.service_items[i].action,
-                        "type": val.service_items[i].type,
-                        "quantity": val.service_items[i].quantity})
-                TOTAL_ITEMS_ADMIN = i+1
-                if (val.service_items[i].type=="Labour"){
-                        TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(val.service_items[i].price)
-                        TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(val.service_items[i].price)
-                }else if(val.service_items[i].type == "Part"){
-                        TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(val.service_items[i].price)
-                        TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(val.service_items[i].price)
-                }else if(val.service_items[i].type == "Discount"){
-                        TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN - parseFloat(val.service_items[i].price)
-                        TOTAL_DISCOUNT_ADMIN = TOTAL_DISCOUNT_ADMIN + parseFloat(val.service_items[i].price)
-                }else{
-                        TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN
+                CURRENT_CART_ADMIN.push({
+                    "name": val.service_items[i].name,
+                    "price": val.service_items[i].name,
+                    "price_comp": val.service_items[i].price,
+                    "action": val.service_items[i].action,
+                    "type": val.service_items[i].type,
+                    "quantity": val.service_items[i].quantity
+                })
+                TOTAL_ITEMS_ADMIN = i + 1
+                if (val.service_items[i].type == "Labour") {
+                    TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(val.service_items[i].price)
+                    TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(val.service_items[i].price)
+                } else if (val.service_items[i].type == "Part") {
+                    TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(val.service_items[i].price)
+                    TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(val.service_items[i].price)
+                } else if (val.service_items[i].type == "Discount") {
+                    TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN - parseFloat(val.service_items[i].price)
+                    TOTAL_DISCOUNT_ADMIN = TOTAL_DISCOUNT_ADMIN + parseFloat(val.service_items[i].price)
+                } else {
+                    TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN
                 }
+
+            if (val.req_user_agent || val.req_user_staff || val.req_user_admin) {
 
                 item_no = i + 1;
                 html += '										<tr>';
-                html += '											<td>'+item_no+'</td>';
-                html += '											<td>'+'<input id="Name-'+item_no+'" type="text" class="browser-default" value ="'+val.service_items[i].name+'" aria-required="true">'+'</td>';
+                html += '											<td>' + item_no + '</td>';
+                html += '											<td>' + '<input id="Name-' + item_no + '" type="text" class="browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
                 // html += '											<td>'+'<input id="type-'+item_no+'" type="text" class="" value ="'+val.service_items[i].type+'" aria-required="true">'+'</td>';
 
-                html += '											<td>'+'<div class="input-field sort" id ="part_type"><select  class="browser-default">'
-                if (val.service_items[i].type=="Part"){
-                     html+=        '<option value="Part" selected>Part</option>'
-                        }else{
-                     html+=  '<option value="Part">Part</option>'
-                        }
-                if (val.service_items[i].type=="Labour"){
-                     html+=        '<option value="Labour" selected>Labour</option>'
-                        }else{
-                     html+=  '<option value="Labour">Labour</option>'
-                        }
-                if (val.service_items[i].type=="Discount"){
-                     html+=        '<option value="Discount" selected>Discount</option>'
-                        }else{
-                     html+=  '<option value="Discount">Discount</option>'
-                        }
-                html +=    '</select></div>'+'</td>';
-                html += '											<td>'+'<input id="price-'+item_no+'" type="number" class="browser-default" value ="'+val.service_items[i].price+'" aria-required="true">'+'</td>';
+                html += '											<td>' + '<div class="input-field sort" id ="part_type"><select  class="browser-default">'
+                if (val.service_items[i].type == "Part") {
+                    html += '<option value="Part" selected>Part</option>'
+                } else {
+                    html += '<option value="Part">Part</option>'
+                }
+                if (val.service_items[i].type == "Labour") {
+                    html += '<option value="Labour" selected>Labour</option>'
+                } else {
+                    html += '<option value="Labour">Labour</option>'
+                }
+                if (val.service_items[i].type == "Discount") {
+                    html += '<option value="Discount" selected>Discount</option>'
+                } else {
+                    html += '<option value="Discount">Discount</option>'
+                }
+                html += '</select></div>' + '</td>';
+                html += '											<td>' + '<input id="price-' + item_no + '" type="number" class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
                 html += '										</tr>';
+            }else{
+                item_no = i + 1;
+                html += '										<tr>';
+                html += '											<td>' + item_no + '</td>';
+                html += '											<td>' + '<input id="Name-' + item_no + '" type="text" disabled class="browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
+                // html += '											<td>'+'<input id="type-'+item_no+'" type="text" class="" value ="'+val.service_items[i].type+'" aria-required="true">'+'</td>';
+
+                html += '											<td>' + '<div class="input-field sort" id ="part_type"><select disabled   class="browser-default">'
+                if (val.service_items[i].type == "Part") {
+                    html += '<option value="Part" selected>Part</option>'
+                } else {
+                    html += '<option value="Part">Part</option>'
+                }
+                if (val.service_items[i].type == "Labour") {
+                    html += '<option value="Labour" selected>Labour</option>'
+                } else {
+                    html += '<option value="Labour">Labour</option>'
+                }
+                if (val.service_items[i].type == "Discount") {
+                    html += '<option value="Discount" selected>Discount</option>'
+                } else {
+                    html += '<option value="Discount">Discount</option>'
+                }
+                html += '</select></div>' + '</td>';
+                html += '											<td>' + '<input id="price-' + item_no + '" type="number" disabled  class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
+                html += '										</tr>';
+
+            }
             }
             html += '										</tbody>';
             html += '									</table>';
             html += '								</div>';
         })
         container2.html(html);
-        container2.find('select').material_select();
+        // container2.find('select').material_select();
+        Materialize.updateTextFields();
+
 
         // <div class="id_100">
     },
@@ -1103,6 +1425,7 @@ var Global = {
 
     },
     loadUpdateUser:function (data) {
+        alert("User updated!")
             // Commons.ajaxData('fetch_all_users', {}, "get", _this, _this.loadAdminUsers,null, '.loading-pane');
     },
     updateCart:function(){
@@ -1150,8 +1473,11 @@ var Global = {
                 }
             },
     loadCustomerupdate:function(){
+        alert('Updated!')
     },
-    loadAddCoupon:function(){},
+    loadAddCoupon:function(){
+        alert('Coupon Added!')
+    },
     loadCoupon:function(data){
            $.each(data, function(ix, val) {
                $('#coupon-detail #coup_name').val(val.coupon_code)
@@ -1237,7 +1563,8 @@ var Global = {
             var html = '<select class="browser-default">';
             html +=    '<option value="" disabled selected>Select Model</option>';
             $.each(data, function(ix, val){
-                html += '<option value="'+val.model+'">'+val.model+'</option>';
+                  html += '<option value="' + val.full_veh_name + '" data-placeholder="true">'+ val.full_veh_name + '</option>'
+                // html += '<option value="'+val.model+'">'+val.model+'</option>';
             });
             html += '</select>';
             container.html(html);
@@ -1286,7 +1613,7 @@ var Global = {
             }else{
             ALL_JOBS_NEW_BOOKING = ALL_JOBS_NEW_BOOKING +', '+val.job_name;
             }
-            JOBS_SUMMARY_NEW_BOOKING.push({'category':val.service_cat,'price_total':val.total_price,'price_part':val.total_part,'price_labour':val.total_labour,'price_discount':val.total_discount})
+            JOBS_SUMMARY_NEW_BOOKING.push({'category':val.service_cat,'job_name':val.job_name,'price_total':val.total_price,'price_part':val.total_part,'price_labour':val.total_labour,'price_discount':val.total_discount,"doorstep":val.doorstep})
         });
 
         $.each(data['cart_summary'], function(ix, val) {
@@ -1303,6 +1630,24 @@ var Global = {
             $('#new-booking .service-select .amount').text(TOTAL_PRICE_NEW_BOOKING)
             });
     },
+    date_format:function(date_str) {
+            dd = date_str.getDate();
+            mm = date_str.getMonth() + 1;//January is 0!`
+            yyyy = date_str.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            date_new = dd + '-' + mm + '-' + yyyy
+            // today = mm+'/'+dd+'/'+yyyy;
+            return date_new;
+            // console.log(date)
+        },
+    loadSendbookingAdmin:function(data){
+        alert('Order Placed!')
+    }
 
 };
 
