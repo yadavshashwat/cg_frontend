@@ -938,10 +938,18 @@ var Global = {
             html += '                </div>'
             html += '                <div class="col l7 s7 m7">'
             html += '                    <div class="col l12 s12 m12">'
+            if (val.booking_user_name == ""){
             html += '                        <b>Name : </b><span class="custname">' + val.cust_name + '</span>'
+            }else{
+            html += '                        <b>Name : </b><span class="custname">' + val.booking_user_name + '</span>'
+            }
             html += '                    </div>'
             html += '                    <div class="col l12 s12 m12">'
+            if (val.booking_user_number == ""){
             html += '                        <b>Number : </b><span class="custname">' + val.cust_number + '</span>'
+            }else{
+            html += '                        <b>Number : </b><span class="custname">' + val.booking_user_number + '</span>'
+            }
             html += '                    </div>'
             html += '                    <div class="col l12 s12 m12">'
             html += '                        <b><span class="custvehicletype">' + val.cust_vehicle_type + '</span>&nbsp;:&nbsp;</b><span class="vehiclename">' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + '</span>'
@@ -1182,10 +1190,18 @@ var Global = {
             html += '</div>'
             html += '</div>'
             html += '<div class="col s12 m12 l6">'
+            if (val.booking_user_name == ""){
             html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="'+ val.cust_name +'"class="validate"><label for="cust_name">Name</label></div>'
+            }else{
+            html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="'+ val.booking_user_name +'"class="validate"><label for="cust_name">Name</label></div>'
+            }
             html += '</div>'
             html += '<div class="col s12 m12 l6">'
+            if (val.booking_user_number ==""){
+            html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="'+ val.booking_user_number +'"class="validate"><label for="cust_number">Number</label></div>'
+            }else{
             html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="'+ val.cust_number +'"class="validate"><label for="cust_number">Number</label></div>'
+            }
             html += '</div>'
             html += '<div class="col s12 m12 l6">'
             html += '<div class="input-field"><i class="material-icons prefix">my_location</i><input id="cust_address" type="text"  disabled value ="'+ val.cust_address+', '+val.cust_locality+', '+val.cust_city +'"class="validate"><label for="cust_address">Address</label></div>'

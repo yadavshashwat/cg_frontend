@@ -368,9 +368,11 @@ var Login = {
             $('.admin-page #new-booking #name').val(name);
             $('.admin-page #new-booking  #telephone').val(number);
             $('.admin-page #new-booking  #email').val(email);
+            $('.admin-page #new-booking  #email').attr('disabled','');
             $('.admin-page #new-booking  #address').val(address);
             $('.admin-page #new-booking  #locality').val(locality);
             $('.admin-page #new-booking  #city').val(city);
+            $('.admin-page #new-booking  .pocdetails').text('POC');
             Materialize.updateTextFields();
 
 
