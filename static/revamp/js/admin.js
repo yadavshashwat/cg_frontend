@@ -222,11 +222,11 @@ var Global = {
                                 veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
              $('#bookings .date-filter .date-box').removeClass('selected');
              $('#bookings .date-filter .date-box.today').addClass('selected');
-
          })
 
          $('#bookings #sort').change(function(){
             SORT_TYPE = $('#bookings  #sort').find('select').val();
+             console.log(SORT_TYPE)
               Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                                 lead_booking:LEAD_TYPE,
                                 sort:SORT_TYPE,

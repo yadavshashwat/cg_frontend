@@ -326,6 +326,7 @@ var Login = {
             $('.admin-page .login').hide()
             $('.admin-page .items-list li.coupon-button').hide()
             $('.admin-page .items-list li.users-button').hide()
+            $('.admin-page .items-list li.lead-button').hide()
             $('.admin-page .staff-button-row').hide()
         }else if(data['auth_rights']['b2b']){
             $('.admin-page-html').show()
@@ -335,9 +336,49 @@ var Login = {
             $('.admin-page .items-list li.lead-button').hide()
             $('.admin-page .agent-button-row').hide()
             $('.admin-page .staff-button-row').hide()
+            cookie = local.load();
+            console.log('b2b')
+            if (cookie['c_user_id']){
+                name = cookie['c_user_first_name'] + " " + cookie['c_user_last_name']  ;
+                number = cookie['c_user_number'];
+                email = cookie['c_user_email'];
+                if(email==null || email===false){
+                    }
+                else{email = email.substr(1,email.length-2)}
+                }
+                address = cookie['c_user_address'];
+                if(address==null || address===false){}else{
+                if (address.split(' ').length > 1){
+                    address = address.substr(1,address.length-2)
+                    }
+                }
+                locality = cookie['c_user_locality'];
+                if(locality==null || locality===false){}else {
+                    if (locality.split(' ').length > 1) {
+                        locality = locality.substr(1, locality.length - 2)
+                    }
+                }
+                city = cookie['c_user_city'];
+                if(city==null || city===false){}else {
+                if (city.split(' ').length > 1){
+                    city = city.substr(1,city.length-2)
+                }}
+
+            // local.load()
+            $('.admin-page #new-booking #name').val(name);
+            $('.admin-page #new-booking  #telephone').val(number);
+            $('.admin-page #new-booking  #email').val(email);
+            $('.admin-page #new-booking  #address').val(address);
+            $('.admin-page #new-booking  #locality').val(locality);
+            $('.admin-page #new-booking  #city').val(city);
+            Materialize.updateTextFields();
+
+
+
+
         }else{
             $('.admin-page .admin-page-html').hide()
-            $('.admin-page .login').hide()
+            // $('.admin-page .login').show()
             $('.admin-page .navbar').hide()
             $('.admin-page .agent-button-row').hide()
             $('.admin-page .staff-button-row').hide()
