@@ -823,6 +823,7 @@ var Global = {
                 // console.log("didnt work")
                 return;
             }else{
+                $('html, body').animate({scrollTop : 0},800);
                 Commons.ajaxData('send_booking', {
                 name       : name
                 ,number     : number
