@@ -242,9 +242,14 @@ var Global = {
         $('#bookings-list .booking-list').on('click','.booking',function(event,data){
             $('#bookings').hide()
             $('#booking-details').show()
+             $('#customer-detail .booking-data').show();
+              $('#customer-detail .booking-job-data').hide();
+              $('#customer-detail .service-detail').removeClass('selected')
+              $('#customer-detail .cust-detail:hover').addClass('selected')
             bid =$(this).attr('data-class')
             Commons.ajaxData('view_all_bookings', {b_id:bid}, "get", _this, _this.loadBookingData,null, '.loading-pane');
             Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", _this, _this.loadAgentdata,null, '.loading-pane');
+
         });
         // Switch between estimate and details in a booking
         $('#customer-detail .cust-detail').click(function(){
@@ -1496,14 +1501,6 @@ var Global = {
             TOTAL_DISCOUNT_ADMIN = 0;
             TOTAL_ITEMS_ADMIN = 0;
             ALL_JOBS_ADMIN = "";
-
-            //
-            // CURRENT_CART = []
-            // TOTAL_PRICE = 0;
-            // TOTAL_LABOUR = 0;
-            // TOTAL_PARTS = 0;
-            // TOTAL_DISCOUNT = 0;
-            // TOTAL_ITEMS = 0;
             for (i = 0; i < compLen; i++) {
                 CURRENT_CART_ADMIN.push({
                     "name": val.service_items[i].name,

@@ -934,7 +934,7 @@ body>.select2-container{width:auto !important;
    transform: translate(-50%, -50%);
    -webkit-transform: translate(-50%, -50%);
    -ms-transform: translate(-50%, -50%);
-    z-index: 99;
+    z-index: 98;
 }
 
 #login .login-input-row{
