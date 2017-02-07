@@ -321,6 +321,7 @@ var Login = {
             $('.admin-page .admin-page-html').show()
             $('.admin-page .login').hide()
             $('.admin-page .agent-button-row').hide()
+            $('.admin-page .b2b-button-row').hide()
         }else if(data['auth_rights']['agent']){
             $('.admin-page .admin-page-html').show()
             $('.admin-page .login').hide()
@@ -328,6 +329,7 @@ var Login = {
             $('.admin-page .items-list li.users-button').hide()
             $('.admin-page .items-list li.lead-button').hide()
             $('.admin-page .staff-button-row').hide()
+            $('.admin-page .b2b-button-row').hide()
         }else if(data['auth_rights']['b2b']){
             $('.admin-page-html').show()
             $('.admin-page .login').hide()
@@ -366,13 +368,15 @@ var Login = {
 
             // local.load()
             $('.admin-page #new-booking #name').val(name);
+            $('.admin-page #new-booking  #name').attr('disabled','');
             $('.admin-page #new-booking  #telephone').val(number);
+            $('.admin-page #new-booking  #telephone').attr('disabled','');
             $('.admin-page #new-booking  #email').val(email);
             $('.admin-page #new-booking  #email').attr('disabled','');
             $('.admin-page #new-booking  #address').val(address);
             $('.admin-page #new-booking  #locality').val(locality);
             $('.admin-page #new-booking  #city').val(city);
-            $('.admin-page #new-booking  .pocdetails').text('POC');
+            // $('.admin-page #new-booking  .pocdetails').text('POC');
             Materialize.updateTextFields();
 
 
@@ -384,6 +388,7 @@ var Login = {
             $('.admin-page .navbar').hide()
             $('.admin-page .agent-button-row').hide()
             $('.admin-page .staff-button-row').hide()
+            $('.admin-page .b2b-button-row').hide()
         }
 
 

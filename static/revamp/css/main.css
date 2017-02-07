@@ -70,6 +70,11 @@ body {
     /*margin-left: auto;*/
     /*margin-right: auto;*/
     text-align: center;
+     position: fixed;
+    top: 50% !important;
+    left:50%;
+    /*margin-top: -58px;*/
+    /*margin-left: -138px;*/
 }
 .loading-pane{
     z-index: 96!important;
@@ -1116,6 +1121,17 @@ body>.select2-container{width:auto !important;
 /* ==========================================================================
    Home Styles
    ========================================================================== */
+#background {
+    width: 100%;
+    position: fixed;
+    top:0px;
+    left: 0px;
+    z-index: -1;
+}
+#background img{
+    width: 100%;
+}
+
 #home {
 	background: rgba(74,20,140,0.75);
 	/*background: rgba(248, 93, 93,0.92);*/
@@ -1197,7 +1213,7 @@ body>.select2-container{width:auto !important;
 	/*border-top: 4px solid #F44336;*/
 }
 
-#home .home-form-2 .vehicle-details,#vehicle-select-form .home-form-2  .vehicle-details{
+#home .home-form-2 .vehicle-details,#vehicle-select-form .home-form-2  .vehicle-details, .home-form .vehicle-details{
 	padding: 5%;
 }
 
@@ -1291,6 +1307,10 @@ body>.select2-container{width:auto !important;
 	/*height: 80px;*/
 	font-size: 12px;
 	/*line-height: 50px;*/
+}
+
+#home .form-row{
+    padding: 5%;
 }
 
 #home .service-card .service-name{
@@ -2641,6 +2661,10 @@ color:dimgrey;
     cursor: pointer;
     line-height: 60px;
     margin-top: 5px;
+}
+
+#new-booking .btn-copy-poc{
+        margin: 1.46rem 0 1.168rem 0;
 }
 
 

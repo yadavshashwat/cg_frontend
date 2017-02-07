@@ -4,6 +4,7 @@ document.onreadystatechange = function () {
 
 $(document).ready(function() {
     $('select').material_select();
+    // $('select').select2();
 });
 
 
@@ -123,13 +124,47 @@ $(function() {
     });
 });
 
+var PAGEHEADER = "CAR & BIKE CARE <br> MADE EASY"
+var FEATURES = "One Stop Shop&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Doorstep Service&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Instant Cost Estimate"
 //Onload FadeIn
+
 $(document).ready(function(){
     $(".fadeOnLoad").hide(0).delay(1000).fadeIn(700)
+     vehtype = $('#home').attr('data-vehicle-type')
+     service = $('#home').attr('data-service-type')
+    if (vehtype == "Car" && service == "CarCare"){
+        var PAGEHEADER = "BEST CAR CLEANING SERVICES IN GURUGRAM"
+        var FEATURES = "3M/Meguiar products&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Expert cleaners&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;doorstep service"
+    }else if(vehtype =="Car" && service == "Servicing"){
+        var PAGEHEADER = "BEST CAR SERVICING WORKSHOP IN GURUGRAM"
+        var FEATURES = "Lowest price - Upfront estimate&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics"
+    }else if(vehtype =="Car" && service == "Repairing"){
+        var PAGEHEADER = " TOP QUALITY CAR REPAIRS IN GURUGRAM"
+        var FEATURES = "OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop"
+    }else if(vehtype =="Car" && service == "Denting"){
+        var PAGEHEADER = "BEST IN CLASS DENTING/PAINTNING FACILITY IN GURUGRAM"
+        var FEATURES = "Upto 60% less than market&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;No paint mismatch with 1 year warranty&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop"
+    }else if(vehtype =="Bike" && service == "Repairing"){
+        var PAGEHEADER = "DOORSTEP BIKE REPAIRS. NOW IN GURUGRAM"
+        var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Top quality repairs"
+    }else if(vehtype =="Bike" && service == "Servicing"){
+        var PAGEHEADER = "DOORSTEP BIKE SERVICING. NOW IN GURUGRAM"
+        var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;From Rs. 249 only!"
+    }else{
+        var PAGEHEADER = "CAR & BIKE CARE <br> MADE EASY"
+        var FEATURES = "One Stop Shop&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Doorstep Service&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Instant Cost Estimate"
+    }
+    $('#home span.header').html(PAGEHEADER);
+    $('#home span.features').html(FEATURES);
+
 });
 
-
-
+$(window).ready(function() {
+     setTimeout(function() {
+         $('.loading-pane-2').hide();
+         $('#overlay').hide();
+            }, 2200);
+});
 
 var Global = {
     init:function() {
@@ -232,8 +267,9 @@ var Global = {
 
 
         var callbrands =function(){
-            vehtype = $('#home .veh-cat-card.selected').text().trim()
-            console.log(vehtype)
+            vehtype = $('#home').attr('data-vehicle-type')
+
+            // console.log(vehtype)
             if(vehtype == ""){
                 vehtype ="Car"
             }else{
@@ -252,15 +288,15 @@ var Global = {
 
 
       $('#brand-select').change(function(event,data){
-            vehtype = $('#home .veh-cat-card.selected').text().trim()
+         vehtype = $('#home').attr('data-vehicle-type')
             // console.log(vehtype)
             if(vehtype == ""){
                 vehtype ="Car"
             }else{
 
             }
-
-            var make = $(this).find('.active span').text();
+            var make = $(this).find('.select2-selection__rendered').text().trim();
+          console.log(make)
             Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehtype}, "get", _this, _this.loadModels);
         });
 
@@ -308,59 +344,71 @@ var Global = {
             // $('#locality').removeClass('invalid')
         // });
        $('#home .home-form .proceed button').click(function(event){
-           var make = $('#brand-select').find('.active span').text();
-           var model = $('#vehicle-select').find('.active span').text();
-           var fuel = $('#fuel-type-select').find('.active span').text();
-           var category = $('#selected-service .selected').text();
+           // var make = $('#brand-select').find('.active span').text();
+           // var model = $('#vehicle-select').find('.active span').text();
+           var make = $('#brand-select').find('.select2-selection__rendered').text().trim();
+           var model = $('#vehicle-select').find('.select2-selection__rendered').text().trim();
+
+           // var fuel = $('#fuel-type-select').find('.active span').text();
+           // var category = $('#selected-service .selected').text();
            var additional = $('#additional').val();
            var error = 0 ;
-           if(make == "" || model == "" || fuel == "") {
+           if(make == "" || model == "" ) {
                $('#choose-vehicle-error').text('Please select vehicle');
                 error = 1;
             }
-           if(category == "") {
-               $('#choose-category-error').text('Please choose service category');
-
-               error = 1;
-            }
+           // if(category == "") {
+           //     $('#choose-category-error').text('Please choose service category');
+           //
+           //     error = 1;
+           //  }
 
            if(error==1){
                return;
            }
 
-           $('.service-headers').addClass('invisible').removeClass('visible');
-           $('.form-row').addClass('visible').removeClass('invisible');
-           $('.vehicle-details').addClass('invisible').removeClass('visible');
-           $('#home .home-form .proceed').addClass('invisible');
-           $('#home .home-form .submit').removeClass('invisible').addClass('visible');
+           // $('.service-headers').addClass('invisible').removeClass('visible');
+           // $('.form-row').addClass('visible').removeClass('invisible');
+           // $('.vehicle-details').addClass('invisible').removeClass('visible');
+           // $('#home .home-form .proceed').addClass('invisible');
+           // $('#home .home-form .submit').removeClass('invisible').addClass('visible');
+           //
+
+           $('.service-headers').hide();
+           $('.form-row').show();
+           $('.vehicle-details').hide();
+           $('#home .home-form .proceed').hide();
+           $('#home .home-form .submit').show();
+
+
 
        });
 
         $('#home .home-form .submit button').click(function(event){
-           var make = $('#brand-select').find('.active span').text();
-           var model = $('#vehicle-select').find('.active span').text();
-           var fuel = $('#fuel-type-select').find('.active span').text();
-           var category = $('#selected-service .selected').text();
+          var make = $('#brand-select').find('.select2-selection__rendered').text().trim();
+           var model = $('#vehicle-select').find('.select2-selection__rendered').text().trim();
+           // var fuel = $('#fuel-type-select').find('.active span').text();
+           // var category = $('#selected-service .selected').text();
            var additional = $('#additional').val();
-           var fname = $('#first_name').val();
-           var lname = $('#last_name').val();
+           var name = $('#first_name').val();
+           // var lname = $('#last_name').val();
            var locality = $('#locality').val();
            var number = $('#telephone').val();
-           var email = $('#email').val();
+           // var email = $('#email').val();
            var date = $('#date').val();
            var time = $('#time-slot').find('.active span').text();
            var error = 0 ;
 
             // form validation
 
-           if(fname==""){
+           if(name==""){
                $('#first_name').addClass("invalid");
                error = 1;
            }
-           if(lname==""){
-               $('#last_name').addClass("invalid");
-               error = 1;
-           }
+           // if(lname==""){
+           //     $('#last_name').addClass("invalid");
+           //     error = 1;
+           // }
            if(locality==""){
                $('#locality').addClass("invalid");
                error = 1;
@@ -369,13 +417,13 @@ var Global = {
                $('#telephone').addClass("invalid");
                error = 1;
            }
-            if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
-               $('#email').addClass("valid");
-               // error = 1;
-           }else{
-               $('#email').addClass("invalid");
-               error =1;
-           }
+           //  if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+           //     $('#email').addClass("valid");
+           //     // error = 1;
+           // }else{
+           //     $('#email').addClass("invalid");
+           //     error =1;
+           // }
            if(date==""){
                $('#date').addClass("invalid");
                error = 1;
@@ -389,28 +437,85 @@ var Global = {
                console.log("didnt work")
                return;
            }
-           //
+            veh_type = $('#home').attr('data-vehicle-type')
+            service = $('#home').attr('data-service-type')
+
+            CURRENT_CART = [{"category": "Labour",
+                        "name": service,
+                        "price": 0,
+                        "price_comp": 0,
+                        "unit_price": 0,
+                        "action": "Labour",
+                        "quantity": "1"}]
+
+            var is_paid = false;
+            var coupon  = "-";
+            var paid_amt = "0";
+
+            if (service == "CarCare"){
+                doorstep = "1"
+                category = "Cleaning"
+            }else if(veh_type == "Bike"){
+                doorstep="1"
+                category = service
+            }else{
+                doorstep ="0"
+                category = service
+            }
+
+            fuel_start = model.indexOf("(")
+           fuel_end = model.indexOf(")")
+           var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
+           model = model.substr(0,fuel_start-1)
+
+
+            JOBS_SUMMARY_TOTAL = [{'category':service,'job_name':service,'price_total':"TBD",'price_part':"TBD",'price_labour':"TBD",'price_discount':"TBD","doorstep":doorstep}];
+            //
+
            // console.log("worked");
             timestamp =  Date.now();
+                        Commons.ajaxData('send_lead', {
+                            name       : name
+                ,number     : number
+                ,email      : "--"
+                ,reg_number : "--"
+                ,address    : "--"
+                ,locality   : locality
+                ,city       : "--"
+                ,order_list : JSON.stringify(CURRENT_CART)
+                ,make       : make
+                ,model      : model
+                ,fuel       : fuel
+                ,veh_type   : veh_type
+                ,date       : date
+                ,time       : time
+                ,comment    : service + ', '+ additional
+                ,is_paid    : is_paid
+                ,paid_amt   : paid_amt
+                ,coupon     : coupon
+                ,price_total: 0
+                ,int_summary :JSON.stringify(JOBS_SUMMARY_TOTAL)}, "post", _this, _this.loadPlaced,null, '.loading-pane');
+
             // Commons.ajaxData('get_location', {location_id: locality}, "get", _this, _this.loadLocation);
-            Commons.ajaxData('post_lead', {firstname       : fname,
-                                            lastname        : lname,
-                                            car_bike        : "Car",
-                                            make            : make,
-                                            model           : model,
-                                            fuel_type       : fuel,
-                                            service_category: category,
-                                            additional         : additional,
-                                            address         : "",
-                                            locality        : locality,
-                                            date_requested  : date,
-                                            time_requested  : time,
-                                            number          : number,
-                                            email           : email,
-                                            source          : "",
-                                            time_stamp      : timestamp}, "get", _this, _this.loadPlaced,null, '.loading-pane');
+            // Commons.ajaxData('post_lead', {firstname       : fname,
+            //                                 lastname        : lname,
+            //                                 car_bike        : "Car",
+            //                                 make            : make,
+            //                                 model           : model,
+            //                                 fuel_type       : fuel,
+            //                                 service_category: category,
+            //                                 additional         : additional,
+            //                                 address         : "",
+            //                                 locality        : locality,
+            //                                 date_requested  : date,
+            //                                 time_requested  : time,
+            //                                 number          : number,
+            //                                 email           : email,
+            //                                 source          : "",
+            //                                 time_stamp      : timestamp}, "get", _this, _this.loadPlaced,null, '.loading-pane');
 
        });
+
         $('#contact .contact-us .message-submit').click(function(event){
            // // var make = $('#brand-select').find('.active span').text();
            // // var model = $('#vehicle-select').find('.active span').text();
@@ -483,7 +588,7 @@ var Global = {
 
     loadBrands:function(data){
             var container = $('#brand-select');
-             vehtype = $('#home .veh-cat-card.selected').text().trim()
+              vehtype = $('#home').attr('data-vehicle-type')
             // console.log(vehtype)
             if(vehtype == ""){
                 vehtype ="Car"
@@ -494,16 +599,29 @@ var Global = {
             container.html('');
             var html = '<select id="brand-select-list">';
             html += '<option value="" disabled selected>Make</option>';
-            if (vehtype=="Car"){
+
             $.each(data, function(ix, val){
-                html += '<option value="' + val.make + 'data-placeholder="true" data-icon="../../static/revamp/img/Brands/Car/'+ val.make +'.png" class="left circle">'+ val.make + '</option>'});
-            }else{
-            $.each(data, function(ix, val){
-                html += '<option value="' + val.make + 'data-placeholder="true" data-icon="../../static/revamp/img/Brands/Bikes/'+ val.make +'.png" class="left circle">'+ val.make + '</option>'});
-            }
+                html += '<option value="' + val.make + '">'+ val.make + '</option>'
+            });
+
             html += '<select>';
             container.html(html);
-            container.find('select').material_select();
+
+            function formatmodelname (modelname) {
+                if (!modelname.id) { return modelname.text; }
+                if (vehtype=="Car"){
+                    var modelname = $('<span><img src="/../../static/revamp/img/Brands/Car/' + modelname.element.value + '.png" class="img-flag img-brand" /> ' + modelname.text + '</span>')
+                }else{
+                    var modelname = $('<span><img src="/../../static/revamp/img/Brands/Bikes/' + modelname.element.value + '.png" class="img-flag img-brand" /> ' + modelname.text + '</span>')
+                }
+                return modelname;
+            };
+
+            container.find('select').select2({
+                templateResult: formatmodelname
+            });
+
+
         },
 
     // loadBrands2:function(data){
@@ -534,16 +652,22 @@ var Global = {
             // }else{
             //
             // }
-            var container = $('#vehicle-select');
+        vehtype = $('#home').attr('data-vehicle-type')
+
+           var container = $('#vehicle-select');
             container.html('');
-            var html = '<select id="vehicle-select-list">';
+            var html = '<select id="vehicle-select-list" class="js-example-responsive">';
             html += '<option value="" disabled selected>Model</option>';
             $.each(data, function(ix, val){
-                html += '<option value="' + val.model + ' data-placeholder="true">'+ val.model + '</option>'});
+                html += '<option value="' + val.make +' '+val.model+' '+val.fuel_type + '" data-placeholder="true">'+ val.full_veh_name + '</option>'
+                // console.log(val.model)
 
-            html += '<select>';
+            });
+            html += '</select>';
             container.html(html);
-            container.find('select').material_select();
+            // container.find('select').material_select();
+            container.find('select').select2();
+
     },
     loadLocation:function(data){
             var container = $('input.autocomplete');
@@ -563,9 +687,9 @@ var Global = {
             })
     },
     loadPlaced:function(data){
-        $('#home .form-row').removeClass('visible').addClass('invisible');
-        $('#home .button-row').removeClass('visible').addClass('invisible');
-        $('#home .order-confirm').removeClass('invisible').addClass('visible');
+        $('#home .form-row').hide();
+        $('#home .button-row').hide();
+        $('#home .order-confirm').show();
 
     },
     loadMessaged:function(data){

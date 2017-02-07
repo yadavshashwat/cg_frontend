@@ -325,7 +325,7 @@ var Global = {
            local.save('fullname',make+" "+model+" "+fuel)
            // window.location.href = '/get_quote';
            setTimeout(function(){
-                              window.location.href = '/'+vehtype+'/'+make.replace(" ", "_")+'-'+model.replace(" ", "_")+'-'+fuel;
+                              window.location.href = 'Book/'+vehtype+'/'+make.replace(" ", "_")+'-'+model.replace(" ", "_")+'-'+fuel;
 
            },10);
 

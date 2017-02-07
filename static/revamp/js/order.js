@@ -338,7 +338,7 @@ var Global = {
                 return
             }
             // console.log(window.location.pathname.split('/').length)
-            if(window.location.pathname.split('/').length == 4){
+            if(window.location.pathname.split('/').length == 5){
                 var new_path =  window.location.pathname+classy+'/'
                 history.pushState({},'',new_path)
             }
@@ -386,7 +386,7 @@ var Global = {
                 return
             }
             // console.log(window.location.pathname.split('/').length)
-            if(window.location.pathname.split('/').length == 5){
+            if(window.location.pathname.split('/').length == 6){
                 var a = window.location.pathname.split('/')
                 var new_path =  a.slice(0,a.length-2).join('/')+'/'+classy+'/'
                 history.pushState({},'',new_path)
@@ -422,7 +422,7 @@ var Global = {
                 return
             }
             // console.log(window.location.pathname.split('/').length)
-            if(window.location.pathname.split('/').length == 5){
+            if(window.location.pathname.split('/').length == 6){
                 var a = window.location.pathname.split('/')
                 var new_path =  a.slice(0,a.length-2).join('/')+'/'+classy+'/'
                 history.pushState({},'',new_path)
@@ -569,7 +569,7 @@ var Global = {
         $('#cart .btn-checkout').on('click' ,function(e){
             $('.order-page .nav-services').hide();
             $('#jobs').hide()
-            if(window.location.pathname.split('/').length == 5){
+            if(window.location.pathname.split('/').length == 6){
                 var a = window.location.pathname.split('/')
                 var new_path =  a.slice(0,a.length-2).join('/')+'/checkout/'
                 history.pushState({},'',new_path)

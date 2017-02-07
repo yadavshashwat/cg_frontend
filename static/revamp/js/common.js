@@ -60,6 +60,8 @@ var Commons = {
         'add_modify_coupon':'/api/add_modify_coupon/',
         'view_all_coupons':'/api/view_all_coupons/',
         'check_coupon':'/api/check_coupon/',
+        'send_lead':'/api/send_lead/',
+
     },
 
     getOrigin: function(){

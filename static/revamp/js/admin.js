@@ -261,6 +261,50 @@ var Global = {
         });
         // Update Booking
         // - add more items to cart
+        var loadsource = function(){
+             var container = $('#customer-detail #source input.autocomplete');
+            console.log('check')
+            var source = {};
+            container.autocomplete({
+                data : {
+                    'Google Adwords':null,
+                    'Repeat Customer':null,
+                    'Employee Referral':null,
+                    'External Referral':null,
+                    'JustDial':null,
+                    'Pamphlet':null,
+                    'Auto Advertisement':null,
+                    'On-Ground Marketing':null,
+                    'Sulekha':null,
+                    'Database - Cold Calling':null,
+                    'Chat':null,
+                    'B2B':null,
+                    'Partner - Droom':null,
+                    'Partner - Wishup':null,
+                    'Partner - Housejoy':null,
+                    'Walk in':null,
+                    'Partner - Mr. Right':null,
+                    'Web Search':null,
+                    'Unknown':null,
+                    'Society camps':null,
+                    'Check up camps':null,
+                    'Sign up lead':null,
+                    'Facebook Ad':null
+                }
+            })
+            Materialize.updateTextFields();
+
+        }
+        $('#customer-detail').on('keypress','#source',function(e,event,data){
+            var code = (e.keyCode || e.which);
+            // do nothing if it's an arrow key
+            if(code == 37 || code == 38 || code == 39 || code == 40) {
+                return;
+            }
+             // var source = $(this).val();
+                loadsource
+        });
+
         $('#customer-detail .add-item .btn-additem-est').click(function(){
             container_parent = $('#customer-detail #estimate-table').find('tbody')
             container =  $('#customer-detail #estimate-table').find('tbody').clone();
@@ -290,7 +334,7 @@ var Global = {
             // new_container.appendTo(container);
             TOTAL_ITEMS_ADMIN = item_no;
         });
-        // - update-customer
+        // - update-customer-booking
         $('#customer-detail .btn-update-cust').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             email_n = $('#customer-detail #email').val();
@@ -299,15 +343,13 @@ var Global = {
             time_n = $('#customer-detail #time_booking').val();
             comment_n = $('#customer-detail #comments').val();
             notes_n = $('#customer-detail #notes').val();
-
-
-            // console.log(bid);
-            // console.log(email_n)
-            // console.log(reg_n)
-            // console.log(date_n)
-            // console.log(time_n)
-            // console.log(comment_n)
-            // console.log(agent_n)
+            amount_paid_n = $('#customer-detail #cust_amount_paid').val()
+            cust_name = $('#customer-detail #cust_name').val()
+            cust_number = $('#customer-detail #cust_number').val()
+            cust_address = $('#customer-detail #cust_address').val()
+            cust_locality = $('#customer-detail #cust_locality').val()
+            cust_city = $('#customer-detail #cust_city').val()
+            source = $('#customer-detail #source').val()
             ALL_JOBS_ADMIN = comment_n
             Commons.ajaxData('update_booking', {b_id: bid,
                                                 email: email_n,
@@ -315,7 +357,14 @@ var Global = {
                                                 comment: comment_n,
                                                 time: time_n,
                                                 date: date_n,
-                                                note:notes_n
+                                                note:notes_n,
+                                                name : cust_name,
+                                                number : cust_number,
+                                                amount_paid : amount_paid_n,
+                                                address : cust_address,
+                                                locality : cust_locality,
+                                                city : cust_city,
+                                                source : source,
                                                 }, "post", _this, _this.loadCustomerupdate,null, '.loading-pane');
         });
 
@@ -344,7 +393,7 @@ var Global = {
                                                 }, "post", _this, _this.loadCustomerAgent,null, '.loading-pane');
         });
                 // change-status
-        $('#customer-detail .staff-button-row .btn-update-status').click(function(){
+        $('#customer-detail .staff-button-row .confirm-row .btn-update-status').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $('#status-select').find('option:selected').val()
             console.log("Status Update")
@@ -354,6 +403,22 @@ var Global = {
         });
 
         $('#customer-detail .agent-button-row .btn-update-status').click(function(){
+            bid = $('#customer-detail #booking_id').attr('booking_id');
+            status_n = $(this).attr('status_next')
+            Commons.ajaxData('change_status', {b_id: bid,
+                                                status_id: status_n,
+                                                }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
+        });
+
+         $('#customer-detail .b2b-button-row .btn-update-status').click(function(){
+            bid = $('#customer-detail #booking_id').attr('booking_id');
+            status_n = $(this).attr('status_next')
+            Commons.ajaxData('change_status', {b_id: bid,
+                                                status_id: status_n,
+                                                }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
+        });
+
+        $('#customer-detail .staff-button-row .lead-row .btn-update-status').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $(this).attr('status_next')
             Commons.ajaxData('change_status', {b_id: bid,
@@ -491,6 +556,18 @@ var Global = {
 
 
         // New Booking
+
+         $('#locality').on('keypress',function(e,event,data){
+            var code = (e.keyCode || e.which);
+            // do nothing if it's an arrow key
+            if(code == 37 || code == 38 || code == 39 || code == 40) {
+                return;
+            }
+             var locality = $(this).val();
+            Commons.ajaxData('get_location', {location_id: locality}, "get", _this, _this.loadLocation);
+            $('#locality').removeClass('invalid')
+        });
+
         $('.navbar .new-booking-button').click(function(){
             // console.log('check')
             $('#booking-details').hide()
@@ -636,6 +713,14 @@ var Global = {
             container.remove()
             calculate_items()
         });
+        // $('#new-booking .btn-copy-poc').click(function(){
+        //     name = $('#name').val();
+        //     number = $('#telephone').val();
+        //     $('#new-booking #namepoc').val(name);
+        //     $('#new-booking #telephonepoc').val(number);
+        //     Materialize.updateTextFields();
+        // })
+
         $('#new-booking .btn-send-booking').click(function () {
              car_box =  document.getElementById('Carnew');
             bike_box =  document.getElementById('Bikenew');
@@ -646,6 +731,8 @@ var Global = {
              }
             var name = $('#name').val();
             var number = $('#telephone').val();
+            var pocname = $('#new-booking #namepoc').val();
+            var pocnumber = $('#new-booking #telephonepoc').val();
             var email = $('#email').val();
             var address =  $('#address').val();
             var locality =  $('#locality').val();
@@ -752,7 +839,10 @@ var Global = {
                 // ,coupon     : coupon
                 ,price_total: price_total
                  , flag : flag
-                ,int_summary :JSON.stringify(JOBS_SUMMARY_NEW_BOOKING),send_confirm:send_mess}, "post", _this, _this.loadSendbookingAdmin,null, '.loading-pane');
+                ,int_summary : JSON.stringify(JOBS_SUMMARY_NEW_BOOKING)
+                ,send_confirm: send_mess
+                ,booking_user_name: pocname
+                ,booking_user_number: pocnumber}, "post", _this, _this.loadSendbookingAdmin, null, '.loading-pane');
             }
 
 
@@ -938,12 +1028,17 @@ var Global = {
             html += '                </div>'
             html += '                <div class="col l7 s7 m7">'
             html += '                    <div class="col l12 s12 m12">'
-            if (val.booking_user_name == ""){
+            // if (val.booking_user_name == ""){
             html += '                        <b>Name : </b><span class="custname">' + val.cust_name + '</span>'
-            }else{
-            html += '                        <b>Name : </b><span class="custname">' + val.booking_user_name + '</span>'
-            }
+            // }else{
+            // html += '                        <b>Name : </b><span class="custname">' + val.booking_user_name + '</span>'
+            // }
             html += '                    </div>'
+            if (val.booking_user_name != val.cust_name && val.booking_user_name != ""){
+            html += '                    <div class="col l12 s12 m12">'
+            html += '                        <b>POC Name : </b><span class="custname">' + val.booking_user_name + '</span>'
+            html += '                    </div>'
+            }
             html += '                    <div class="col l12 s12 m12">'
             if (val.booking_user_number == ""){
             html += '                        <b>Number : </b><span class="custname">' + val.cust_number + '</span>'
@@ -1189,38 +1284,93 @@ var Global = {
             html += '<div class="status-2 '+val.status.replace(" ","-") +'">'+val.status +'</div>'
             html += '</div>'
             html += '</div>'
-            html += '<div class="col s12 m12 l6">'
-            if (val.booking_user_name == ""){
-            html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="'+ val.cust_name +'"class="validate"><label for="cust_name">Name</label></div>'
+
+
+            if (val.req_user_staff || val.req_user_admin) {
+                if (val.booking_user_name != val.cust_name) {
+                    html += '<div class="col s12 m12 l12">'
+                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="b2b_name" disabled type="text"  value ="' + val.cust_name + '"class="validate"><label for="cust_name">Company Name</label></div>'
+                    html += '</div>'
+                }
+                html += '<div class="col s12 m12 l6">'
+                if (val.booking_user_name == "") {
+                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text"  value ="' + val.cust_name + '"class="validate"><label for="cust_name">Name</label></div>'
+                } else {
+                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text"  value ="' + val.booking_user_name + '"class="validate"><label for="cust_name">Name</label></div>'
+                }
+                html += '</div>'
+                html += '<div class="col s12 m12 l6">'
+                if (val.booking_user_number == "") {
+                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"   value ="' + val.cust_number + '"class="validate"><label for="cust_number">Number</label></div>'
+                } else {
+                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"   value ="' + val.booking_user_number + '"class="validate"><label for="cust_number">Number</label></div>'
+                }
+                html += '</div>'
+                html += '<div class="col s12 m12 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">my_location</i><input id="cust_address" type="text"   value ="' + val.cust_address + '"class="validate"><label for="cust_address">Address</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">location_on</i><input id="cust_locality" type="text"   value ="' +  val.cust_locality + '"class="validate"><label for="cust_address">Locality</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">business</i><input id="cust_city" type="text"   value ="'  + val.cust_city + '"class="validate"><label for="cust_address">City</label></div>'
+                html += '</div>'
+
+                html += '<div class="col s12 m12 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_vehicle" type="text"  disabled   value ="' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + '"class="validate"><label for="cust_vehicle">' + val.cust_vehicle_type + '</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_coupon" type="text"  disabled   value ="' + val.coupon + '"class="validate"><label for="cust_coupon">Coupon</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid"   type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text"   value ="' + val.source + '"class="autocomplete"><label for="source">Source</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Agent Details</label></div>'
+                html += '</div>'
             }else{
-            html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="'+ val.booking_user_name +'"class="validate"><label for="cust_name">Name</label></div>'
+                if (val.booking_user_name != val.cust_name) {
+                    html += '<div class="col s12 m12 l12">'
+                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="' + val.cust_name + '"class="validate"><label for="cust_name">Company Name</label></div>'
+                    html += '</div>'
+                }
+                html += '<div class="col s12 m12 l6">'
+                if (val.booking_user_name == "") {
+                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="' + val.cust_name + '"class="validate"><label for="cust_name">Name</label></div>'
+                } else {
+                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="' + val.booking_user_name + '"class="validate"><label for="cust_name">Name</label></div>'
+                }
+                html += '</div>'
+                html += '<div class="col s12 m12 l6">'
+                if (val.booking_user_number == "") {
+                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="' + val.cust_number + '"class="validate"><label for="cust_number">Number</label></div>'
+                } else {
+                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="' + val.booking_user_number + '"class="validate"><label for="cust_number">Number</label></div>'
+                }
+                html += '</div>'
+                html += '<div class="col s12 m12 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">my_location</i><input id="cust_address" type="text"  disabled value ="' + val.cust_address + ', ' + val.cust_locality + ', ' + val.cust_city + '"class="validate"><label for="cust_address">Address</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_vehicle" type="text" disabled  value ="' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + '"class="validate"><label for="cust_vehicle">' + val.cust_vehicle_type + '</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_coupon" type="text" disabled  value ="' + val.coupon + '"class="validate"><label for="cust_coupon">Coupon</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid"  type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text" disabled  value ="' + val.source + '"class="validate"><label for="source">Source</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Agent Details</label></div>'
+                html += '</div>'
+
             }
-            html += '</div>'
-            html += '<div class="col s12 m12 l6">'
-            if (val.booking_user_number ==""){
-            html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="'+ val.booking_user_number +'"class="validate"><label for="cust_number">Number</label></div>'
-            }else{
-            html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="'+ val.cust_number +'"class="validate"><label for="cust_number">Number</label></div>'
-            }
-            html += '</div>'
-            html += '<div class="col s12 m12 l6">'
-            html += '<div class="input-field"><i class="material-icons prefix">my_location</i><input id="cust_address" type="text"  disabled value ="'+ val.cust_address+', '+val.cust_locality+', '+val.cust_city +'"class="validate"><label for="cust_address">Address</label></div>'
-            html += '</div>'
-            html += '<div class="col s12 m12 l6">'
-            html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_vehicle" type="text" disabled  value ="'+ val.cust_make +' '+val.cust_model+' '+val.cust_fuel_varient +'"class="validate"><label for="cust_vehicle">'+val.cust_vehicle_type+'</label></div>'
-            html += '</div>'
-            html += '<div class="col s12 m12 l6">'
-            html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_coupon" type="text" disabled  value ="'+ val.coupon +'"class="validate"><label for="cust_coupon">Coupon</label></div>'
-            html += '</div>'
-            html += '<div class="col s12 m12 l6">'
-            html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled  type="text" value ="'+ val.amount_paid +'"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
-            html += '</div>'
-            html += '<div class="col s12 m12 l6">'
-            html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text" disabled  value ="'+ val.source +'"class="validate"><label for="source">Source</label></div>'
-            html += '</div>'
-            html += '<div class="col s12 m12 l6">'
-            html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="'+ val.agent_details +'"class="validate"><label for="agent_details">Agent Details</label></div>'
-            html += '</div>'
             // if (is_agent)
             if (val.req_user_agent || val.req_user_staff || val.req_user_admin) {
                 html += '<div class="col s12 m12 l12">'
@@ -1241,7 +1391,7 @@ var Global = {
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
                 html += '</div>'
-            }else{
+                    }else{
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">email</i><input id="email" disabled type="email" value ="' + val.cust_email + '"class="validate"><label for="email">Email</label></div>'
                 html += '</div>'
@@ -1255,12 +1405,11 @@ var Global = {
                 html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" disabled  value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" disabled  class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" disabled class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled  class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
                 html += '</div>'
-
             }
             // <----- New Booking Data---->>
                 if (val.req_user_agent) {
@@ -1292,6 +1441,24 @@ var Global = {
                         $('#customer-detail .agent-button-row').show()
                     }
                 }
+            if (val.req_user_b2b){
+                if (val.status == "Confirmed"){
+                     $('#customer-detail .b2b-button-row').show()
+                }else{
+                     $('#customer-detail .b2b-button-row').hide()
+                }
+            }
+
+            if (val.req_user_staff || val.req_user_admin){
+                if(val.status == "Lead"){
+                     $('#customer-detail .lead-row').show()
+                     $('#customer-detail .confirm-row').hide()
+
+                }else{
+                     $('#customer-detail .lead-row').hide()
+                     $('#customer-detail .confirm-row').show()
+                }
+            }
         })
         container.html(html);
 
@@ -1313,7 +1480,9 @@ var Global = {
             html += '											<th data-field="part">Name</th>';
             html += '											<th data-field="action">Action</th>';
             // html += '											<th data-field="part">Type</th>';
-            html += '											<th data-field="price">Item Price</th>';
+            if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff){
+                html += '											<th data-field="price">Item Price</th>';
+            }
             html += '										</tr>';
             html += '										</thead>';
             html += '										<tbody>';
@@ -1359,13 +1528,10 @@ var Global = {
                 }
 
             if (val.req_user_agent || val.req_user_staff || val.req_user_admin) {
-
                 item_no = i + 1;
                 html += '										<tr>';
                 html += '											<td>' + item_no + '</td>';
-                html += '											<td>' + '<input id="Name-' + item_no + '" type="text" class="browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
-                // html += '											<td>'+'<input id="type-'+item_no+'" type="text" class="" value ="'+val.service_items[i].type+'" aria-required="true">'+'</td>';
-
+                html += '											<td>' + '<input id="part_name" type="text" class="browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
                 html += '											<td>' + '<div class="input-field sort" id ="part_type"><select  class="browser-default">'
                 if (val.service_items[i].type == "Part") {
                     html += '<option value="Part" selected>Part</option>'
@@ -1383,13 +1549,15 @@ var Global = {
                     html += '<option value="Discount">Discount</option>'
                 }
                 html += '</select></div>' + '</td>';
-                html += '											<td>' + '<input id="price-' + item_no + '" type="number" class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
-                html += '										</tr>';
+                 if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff) {
+                     html += '											<td>' + '<input id="part_price" type="number" class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
+                 }
+                     html += '										</tr>';
             }else{
                 item_no = i + 1;
                 html += '										<tr>';
                 html += '											<td>' + item_no + '</td>';
-                html += '											<td>' + '<input id="Name-' + item_no + '" type="text" disabled class="browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
+                html += '											<td>' + '<input id="part_name" type="text" disabled class="browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
                 // html += '											<td>'+'<input id="type-'+item_no+'" type="text" class="" value ="'+val.service_items[i].type+'" aria-required="true">'+'</td>';
 
                 html += '											<td>' + '<div class="input-field sort" id ="part_type"><select disabled   class="browser-default">'
@@ -1409,9 +1577,10 @@ var Global = {
                     html += '<option value="Discount">Discount</option>'
                 }
                 html += '</select></div>' + '</td>';
-                html += '											<td>' + '<input id="price-' + item_no + '" type="number" disabled  class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
-                html += '										</tr>';
-
+                 if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff) {
+                     html += '											<td>' + '<input id="part_price" type="number" disabled  class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
+                 }
+                     html += '										</tr>';
             }
             }
             html += '										</tbody>';
@@ -1419,6 +1588,7 @@ var Global = {
             html += '								</div>';
         })
         container2.html(html);
+        $('#customer-detail .total-amount').text(TOTAL_PRICE_ADMIN)
         // container2.find('select').material_select();
         Materialize.updateTextFields();
 
@@ -1663,8 +1833,61 @@ var Global = {
         },
     loadSendbookingAdmin:function(data){
         alert('Order Placed!')
-    }
+    },
+    loadCustomerStatus:function(data){
+        alert('Status Updated!')
+    },
+    loadLocation:function(data){
+            var container = $('input.autocomplete');
+            var locations = {};
+            container.autocomplete({
+                data : locations
+            })
+            // var locations = {};
 
+            $.each(data.predictions, function(ix, val){
+                 locations[val.description] = null
+            });
+            console.log(locations)
+            container.autocomplete({
+                data : locations
+            })
+            Materialize.updateTextFields();
+    },
+    // loadSource:function(){
+    //       var container = $('#customer-detail #source input.autocomplete');
+    //     console.log('check')
+    //         var source = {};
+    //         container.autocomplete({
+    //             data : {
+    //                 'Google Adwords':null,
+    //                 'Repeat Customer':null,
+    //                 'Employee Referral':null,
+    //                 'External Referral':null,
+    //                 'JustDial':null,
+    //                 'Pamphlet':null,
+    //                 'Auto Advertisement':null,
+    //                 'On-Ground Marketing':null,
+    //                 'Sulekha':null,
+    //                 'Database - Cold Calling':null,
+    //                 'Chat':null,
+    //                 'B2B':null,
+    //                 'Partner - Droom':null,
+    //                 'Partner - Wishup':null,
+    //                 'Partner - Housejoy':null,
+    //                 'Walk in':null,
+    //                 'Partner - Mr. Right':null,
+    //                 'Web Search':null,
+    //                 'Unknown':null,
+    //                 'Society camps':null,
+    //                 'Check up camps':null,
+    //                 'Sign up lead':null,
+    //                 'Facebook Ad':null
+    //             }
+    //         })
+    //         Materialize.updateTextFields();
+    //
+    // }
 };
 
 
