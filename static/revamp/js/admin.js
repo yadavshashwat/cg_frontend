@@ -1367,7 +1367,7 @@ var Global = {
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_coupon" type="text" disabled  value ="' + val.coupon + '"class="validate"><label for="cust_coupon">Coupon</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid"  type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text" disabled  value ="' + val.source + '"class="validate"><label for="source">Source</label></div>'
