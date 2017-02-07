@@ -245,7 +245,7 @@ var Global = {
              $('#customer-detail .booking-data').show();
               $('#customer-detail .booking-job-data').hide();
               $('#customer-detail .service-detail').removeClass('selected')
-              $('#customer-detail .cust-detail:hover').addClass('selected')
+              $('#customer-detail .cust-detail').addClass('selected')
             bid =$(this).attr('data-class')
             Commons.ajaxData('view_all_bookings', {b_id:bid}, "get", _this, _this.loadBookingData,null, '.loading-pane');
             Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", _this, _this.loadAgentdata,null, '.loading-pane');
