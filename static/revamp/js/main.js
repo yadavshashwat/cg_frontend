@@ -10,7 +10,8 @@ document.onready = function () {
 
 $(document).ready(function() {
     // $('select').material_select();
-    $('select').select2();
+    // $('select').select2();
+    $('select').selectize();
 });
 
 // $(window).ready(function() {
@@ -178,7 +179,7 @@ var Global = {
                 500
             );
         });
-        
+
         $('.learn-more-button').on('click', function(e){
             $('body,html').animate(
                 {'scrollTop':$('#home').outerHeight()},
@@ -267,7 +268,7 @@ var Global = {
             }else{
 
             }
-            var make = $(this).find('.select2-selection__rendered').text().trim();
+            var make = $(this).find('.selectize-input').find('div').attr('data-value');
           console.log(make)
             Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehtype}, "get", _this, _this.loadModels);
         });
@@ -281,14 +282,14 @@ var Global = {
             html += '<option value="" disabled selected>Model</option>';
             html += '</select>';
              $('#home #vehicle-select').html(html);
-           $('#home #vehicle-select').find('select').select2();
+           $('#home #vehicle-select').find('select').selectize();
             vehicle = $('#home .veh-cat-card:hover').text()
            $('#home .home-form-2 .vehicle-type').text(vehicle);
         });
 
        $('#home .home-form-2 .form-proceed').click(function(event){
-           var make = $('#brand-select').find('.select2-selection__rendered').text().trim();
-           var model = $('#vehicle-select').find('.select2-selection__rendered').text().trim();
+           var make = $('#brand-select').find('.selectize-input').find('div').attr('data-value');
+           var model = $('#vehicle-select').find('.selectize-input').find('div').attr('data-value');
            // var fuel = $('#fuel-type-select').find('.active span').text();
            var vehtype = $('#home .veh-cat-card.selected').text().trim()
            var error = 0 ;
@@ -421,21 +422,41 @@ var Global = {
 
             html += '<select>';
             container.html(html);
-            function formatmodelname (modelname) {
-                if (!modelname.id) { return modelname.text; }
-                if (vehtype=="Car"){
-                    var modelname = $('<span><img src="/../../static/revamp/img/Brands/Car/' + modelname.element.value + '.png" class="img-flag img-brand" /> ' + modelname.text + '</span>')
-                }else{
-                    var modelname = $('<span><img src="/../../static/revamp/img/Brands/Bikes/' + modelname.element.value + '.png" class="img-flag img-brand" /> ' + modelname.text + '</span>')
-                }
-                return modelname;
-            };
+            // function formatmodelname (modelname) {
+            //     if (!modelname.id) { return modelname.text; }
+            //     if (vehtype=="Car"){
+            //         var modelname = $('<span><img src="/../../static/revamp/img/Brands/Car/' + modelname.element.value + '.png" class="img-flag img-brand" /> ' + modelname.text + '</span>')
+            //     }else{
+            //         var modelname = $('<span><img src="/../../static/revamp/img/Brands/Bikes/' + modelname.element.value + '.png" class="img-flag img-brand" /> ' + modelname.text + '</span>')
+            //     }
+            //     return modelname;
+            // };
 
             // container.find('select').material_select();
-            container.find('select').select2({
-                  // allowClear: true
-                templateResult: formatmodelname
-            });
+        container.find('select').selectize({
+            render: {
+                item: function(item, escape) {
+                    // console.log(item.value)
+                    if (vehtype=="Car") {
+                        return '<div><img src="/../../static/revamp/img/Brands/Car/' + item.value + '.png" class="img-flag img-brand" alt="brand icon" />&nbsp;' + escape(item.value) + '</div>';
+                    }else{
+                        return '<div><img src="/../../static/revamp/img/Brands/Bikes/' + item.value + '.png" class="img-flag img-brand" alt="brand icon" />&nbsp;' + escape(item.value) + '</div>';
+                    }
+                    },
+                 option: function(item, escape) {
+                    if (vehtype=="Car") {
+                        return '<div><img src="/../../static/revamp/img/Brands/Car/' + item.value + '.png" class="img-flag img-brand" alt="brand icon" />&nbsp;' + escape(item.value) + '</div>';
+                    }else{
+                        return '<div><img src="/../../static/revamp/img/Brands/Bikes/' + item.value + '.png" class="img-flag img-brand" alt="brand icon" />&nbsp;' + escape(item.value) + '</div>';
+                    }
+                }
+            }
+        });
+
+        // container.find('select').select2({
+        //           // allowClear: true
+        //         templateResult: formatmodelname
+        //     });
 
         },
 
@@ -472,14 +493,15 @@ var Global = {
             var html = '<select id="vehicle-select-list" class="js-example-responsive">';
             html += '<option value="" disabled selected>Model</option>';
             $.each(data, function(ix, val){
-                html += '<option value="' + val.make +' '+val.model+' '+val.fuel_type + '" data-placeholder="true">'+ val.full_veh_name + '</option>'
+                html += '<option value="'+val.model+' ('+val.fuel_type + ')" data-placeholder="true">'+ val.full_veh_name + '</option>'
                 // console.log(val.model)
 
             });
             html += '</select>';
             container.html(html);
             // container.find('select').material_select();
-            container.find('select').select2();
+            // container.find('select').select2();
+            container.find('select').selectize();
 
     },
     loadLocation:function(data){
