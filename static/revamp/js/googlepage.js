@@ -345,6 +345,7 @@ var Global = {
             // / Commons.ajaxData('get_location', {location_id: locality}, "get", _this, _this.loadLocation);
             // $('#locality').removeClass('invalid')
         // });
+
        $('#home .home-form .proceed button').click(function(event){
            // var make = $('#brand-select').find('.active span').text();
            // var model = $('#vehicle-select').find('.active span').text();
