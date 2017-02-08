@@ -24,6 +24,8 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800italic,800' rel='stylesheet' type='text/css'>
 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.css" rel="stylesheet" />
+
 
 	<!-- Fav and touch icons -->
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
@@ -82,19 +84,19 @@
 			<div id="service-select" class="nav-wrapper navbar-services small-list hide-on-large-only">
 				<div class="input-field col s10 m10 l10 offset-m1 offset-s1 offset-l1 car-services invisible" >
 					<select>
-						<option data-class ="servicing" class ="car-servicing" value="servicing-button">Servicing</option>
-						<option data-class ="repairing" class ="car-repairing"   value="repairs-button">Repairing</option>
-						<option data-class ="denting" class ="car-denting"   value="painting-button">Denting Painting</option>
-						<option  data-class ="carcare" class ="car-care"   value="cleaning-button">Car Care</option>
-						<option data-class ="subscription" class ="car-subscription"  value="amc-button">Subscription</option>
-						<option data-class ="emergency" class ="car-emergency"   value="emergency-button">Emergency</option>
+						<option data-class ="servicing" class ="car-servicing" value="servicing">Servicing</option>
+						<option data-class ="repairing" class ="car-repairing"   value="repairing">Repairing</option>
+						<option data-class ="denting" class ="car-denting"   value="denting">Denting Painting</option>
+						<option  data-class ="carcare" class ="car-care"   value="carcare">Car Care</option>
+						<option data-class ="subscription" class ="car-subscription"  value="subscription">Subscription</option>
+						<option data-class ="emergency" class ="car-emergency"   value="emergency">Emergency</option>
 					</select>
 				</div>
 				<div class="input-field col s10 m10 l10 offset-m1 offset-s1 offset-l1 bike-services invisible" >
 					<select>
-						<option data-class ="servicing"  class ="bike-servicing"  value="servicing-button">Servicing</option>
-						<option data-class ="repairing"  class ="bike-repairing"  value="repairs-button">Repairing</option>
-						<option  data-class ="emergency"  class ="bike-emergency" value="emergency-button">Emergency</option>
+						<option data-class ="servicing"  class ="bike-servicing"  value="servicing">Servicing</option>
+						<option data-class ="repairing"  class ="bike-repairing"  value="repairing">Repairing</option>
+						<option  data-class ="emergency"  class ="bike-emergency" value="emergency">Emergency</option>
 					</select>
 				</div>
 			</div>
@@ -618,11 +620,11 @@
 
 												<select>
 													<option value="" disabled selected>Time-Slot</option>
-													<option value="1">09:30AM - 11:30AM </option>
-													<option value="2">11:30AM - 01:30PM </option>
-													<option value="3">01:30PM - 03:30PM </option>
-													<option value="4">03:30PM - 05:30PM </option>
-													<option value="5">05:30PM - 07:30PM </option>
+													<option value="09:30AM - 11:30AM">09:30AM - 11:30AM </option>
+													<option value="11:30AM - 01:30PM">11:30AM - 01:30PM </option>
+													<option value="01:30PM - 03:30PM">01:30PM - 03:30PM </option>
+													<option value="03:30PM - 05:30PM">03:30PM - 05:30PM </option>
+													<option value="05:30PM - 07:30PM">05:30PM - 07:30PM </option>
 												</select>
 												<span id ="choose-time-slot" class="error-message"></span>
 											</div>
@@ -1318,7 +1320,9 @@
 <script src="/../../static/revamp/js/forms.js"></script>
 <script src="/../../static/revamp/js/jquery.backstretch.js"></script>
 <script src="/../../static/revamp/js/jquery.cycle.lite.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.js"></script>
+
 
 <!-- Google Code for Remarketing Tag -->
 <!--------------------------------------------------
