@@ -2657,6 +2657,13 @@ color:dimgrey;
     margin: 0px 0px 15px 0px;
 }
 
+#customer-detail .source-admin{
+    margin-bottom : 20px;
+}
+#customer-detail .header{
+line-height: 50px;
+}
+
 
 #bookings .booking .booking-id-bar {
     /*background-color: #eaeaea;*/

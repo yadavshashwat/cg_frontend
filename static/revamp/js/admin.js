@@ -54,6 +54,29 @@ var STATUS_TYPE = "";
 var SORT_TYPE = "";
 var BOOKING_ID = "";
 var VEH_TYPE = "";
+var SOURCES = ['Google Adwords',
+'Repeat Customer',
+'Employee Referral',
+'External Referral',
+'JustDial',
+'Pamphlet',
+'Auto Advertisement',
+'On-Ground Marketing',
+'Sulekha',
+'Database - Cold Calling',
+'Chat',
+'B2B',
+'Partner - Droom',
+'Partner - Wishup',
+'Partner - Housejoy',
+'Walk in',
+'Partner - Mr. Right',
+'Web Search',
+'Unknown',
+'Society camps',
+'Check up camps',
+'Sign up lead',
+'Facebook Ad']
  // DATE_TYPE =
 
 var Global = {
@@ -266,49 +289,49 @@ var Global = {
         });
         // Update Booking
         // - add more items to cart
-        var loadsource = function(){
-             var container = $('#customer-detail #source input.autocomplete');
-            console.log('check')
-            var source = {};
-            container.autocomplete({
-                data : {
-                    'Google Adwords':null,
-                    'Repeat Customer':null,
-                    'Employee Referral':null,
-                    'External Referral':null,
-                    'JustDial':null,
-                    'Pamphlet':null,
-                    'Auto Advertisement':null,
-                    'On-Ground Marketing':null,
-                    'Sulekha':null,
-                    'Database - Cold Calling':null,
-                    'Chat':null,
-                    'B2B':null,
-                    'Partner - Droom':null,
-                    'Partner - Wishup':null,
-                    'Partner - Housejoy':null,
-                    'Walk in':null,
-                    'Partner - Mr. Right':null,
-                    'Web Search':null,
-                    'Unknown':null,
-                    'Society camps':null,
-                    'Check up camps':null,
-                    'Sign up lead':null,
-                    'Facebook Ad':null
-                }
-            })
-            Materialize.updateTextFields();
-
-        }
-        $('#customer-detail').on('keypress','#source',function(e,event,data){
-            var code = (e.keyCode || e.which);
-            // do nothing if it's an arrow key
-            if(code == 37 || code == 38 || code == 39 || code == 40) {
-                return;
-            }
-             // var source = $(this).val();
-                loadsource
-        });
+        // var loadsource = function(){
+        //      var container = $('#customer-detail #source input.autocomplete');
+        //     console.log('check')
+        //     var source = {};
+        //     container.autocomplete({
+        //         data : {
+        //             'Google Adwords':null,
+        //             'Repeat Customer':null,
+        //             'Employee Referral':null,
+        //             'External Referral':null,
+        //             'JustDial':null,
+        //             'Pamphlet':null,
+        //             'Auto Advertisement':null,
+        //             'On-Ground Marketing':null,
+        //             'Sulekha':null,
+        //             'Database - Cold Calling':null,
+        //             'Chat':null,
+        //             'B2B':null,
+        //             'Partner - Droom':null,
+        //             'Partner - Wishup':null,
+        //             'Partner - Housejoy':null,
+        //             'Walk in':null,
+        //             'Partner - Mr. Right':null,
+        //             'Web Search':null,
+        //             'Unknown':null,
+        //             'Society camps':null,
+        //             'Check up camps':null,
+        //             'Sign up lead':null,
+        //             'Facebook Ad':null
+        //         }
+        //     })
+        //     Materialize.updateTextFields();
+        //
+        // }
+        // $('#customer-detail').on('keypress','#source',function(e,event,data){
+        //     var code = (e.keyCode || e.which);
+        //     // do nothing if it's an arrow key
+        //     if(code == 37 || code == 38 || code == 39 || code == 40) {
+        //         return;
+        //     }
+        //      // var source = $(this).val();
+        //         loadsource
+        // });
 
         $('#customer-detail .add-item .btn-additem-est').click(function(){
             container_parent = $('#customer-detail #estimate-table').find('tbody')
@@ -1331,8 +1354,24 @@ var Global = {
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid"   type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
                 html += '</div>'
-                html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text"   value ="' + val.source + '"class="autocomplete"><label for="source">Source</label></div>'
+                html += '<div class="col s12 m12 l1 header">'
+                html += '<b>Source:</b>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l5">'
+                html += '<div class="input-field source-admin">'
+                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text"   value ="' + val.source + '"class="validate"><label for="source">Source</label></div>'
+                html += '<select id="source" class="browser-default">'
+                html += '<option value="">Source</option>'
+                sourcelen = SOURCES.length;
+                for (i = 0; i < sourcelen; i++) {
+                    if (val.source == SOURCES[i]){
+                        html += '<option value="'+SOURCES[i]+'" selected>'+SOURCES[i]+'</option>'
+                    }else{
+                        html += '<option value="'+SOURCES[i]+'">'+SOURCES[i]+'</option>'
+                    }
+                }
+                html +='</select>'
+                html += '</div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Agent Details</label></div>'
