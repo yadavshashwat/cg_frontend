@@ -48,9 +48,12 @@ body {
     zoom: 85%; /* Webkit browsers */
 }
 
-.navbar-fixed{
-    z-index: 96!important;
-}
+/*.navbar-fixed{*/
+    /*z-index: 96!important;*/
+/*}*/
+
+.navbar-fixed{z-index:96 !important}
+.navbar-fixed.nav-services{z-index:95 !important}
 
 .loading-pane-2 {
     z-index: 99;
@@ -519,7 +522,7 @@ body>.select2-container{width:auto !important;
     border-bottom: 1px solid #9e9e9e!important;
     border-radius: 0!important;
     outline: none!important;
-    height: 3rem;
+    height: 2.5rem;
     font-size: 1rem!important;
     /*margin: 0 0 20px 0;*/
     padding: 0px!important;
@@ -1940,8 +1943,14 @@ footer a:hover {
 }
 
 #city-select img{
-        height: 150px;
+        height: 100px;
 }
+
+#city-select .city .city-content{
+    padding:5px;
+}
+
+
 #city-select .city .city-name{
     /*color:#4a148c;*/
     font-weight: 400;
