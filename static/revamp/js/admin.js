@@ -10,8 +10,7 @@ $(document).ready(function() {
 
 $('.datepicker').pickadate({
     format: 'dd-mm-yyyy',
-    closeOnSelect: false,
-    // min: new Date(),
+    closeOnSelect: true,
 });
 
 
@@ -335,8 +334,18 @@ var Global = {
 
         $('#customer-detail .add-item .btn-additem-est').click(function(){
             container_parent = $('#customer-detail #estimate-table').find('tbody')
-            container =  $('#customer-detail #estimate-table').find('tbody').clone();
-            html = container.html()
+            var row = container_parent.find('tr').eq(0).clone();
+            container_parent.append(row)
+
+            TOTAL_ITEMS_ADMIN += 1;
+            row.find('td:eq(0)').text(TOTAL_ITEMS_ADMIN)
+            row.find('td:eq(1) input').val('')
+            row.find('td:eq(3) input').val('')
+
+            return
+            // container =  $('#customer-detail #estimate-table').find('tbody').clone();
+            // html = container.html()
+
 
             // container =  $('#new-booking .service-select .services-list .service-row.to-copy-row')
             // container_parent =  $('#new-booking .service-select .services-list')
@@ -345,23 +354,27 @@ var Global = {
             // new_container.appendTo(container_parent);
             //  html = ''
             // html = container.html();
-
-            item_no = TOTAL_ITEMS_ADMIN + 1;
-            html += '										<tr>';
-            html += '<td>'+item_no+'</td>';
-            html += '<td>'+'<input id="Name-'+item_no+'" type="text" class="browser-default" aria-required="true"></td>';
-            html += '<td>'+'<div class="input-field sort" id ="part_type"><select  class="browser-default">'
-            html+=  '<option value="Part">Part</option>'
-            html+=  '<option value="Labour" selected>Labour</option>'
-            html+=  '<option value="Discount" >Discount</option>'
-            html += '</select></div>'+'</td>';
-            html += '<td>'+'<input id="price-'+item_no+'" type="number" class="browser-default" aria-required="true"></td>';
-            html += '</tr>';
-            container_parent.html(html);
-            // new_container =
-            // new_container.appendTo(container);
-            TOTAL_ITEMS_ADMIN = item_no;
+            // item_no = TOTAL_ITEMS_ADMIN + 1;
+            // html += '										<tr>';
+            // html += '<td>'+item_no+'</td>';
+            // html += '<td>'+'<input id="Name-'+item_no+'" type="text" class="browser-default" aria-required="true"></td>';
+            // html += '<td>'+'<div class="input-field sort" id ="part_type"><select  class="browser-default">'
+            // html+=  '<option value="Part">Part</option>'
+            // html+=  '<option value="Labour" selected>Labour</option>'
+            // html+=  '<option value="Discount" >Discount</option>'
+            // html += '</select></div>'+'</td>';
+            // html += '<td>'+'<input id="price-'+item_no+'" type="number" class="browser-default" aria-required="true"></td>';
+            // html += '</tr>';
+            // container_parent.html(html);
+            // // new_container =
+            // // new_container.appendTo(container);
+            // TOTAL_ITEMS_ADMIN = item_no;
         });
+
+        $('#customer-detail').on('click',' #estimate-table .delete',function(){
+            $(this).closest('tr').remove()
+        })
+
         // - update-customer-booking
         $('#customer-detail .btn-update-cust').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
@@ -406,6 +419,18 @@ var Global = {
                                                 estimate: estimate,
                                                 }, "post", _this, _this.loadCustomerestimate,null, '.loading-pane');
         });
+
+        // $('#customer-detail .delete').click(function(){
+        //
+        //     // bid = $('#customer-detail #booking_id').attr('booking_id');
+        //     // _this.updateCart()
+        //     // console.log(CURRENT_CART_ADMIN)
+        //     // estimate = JSON.stringify(CURRENT_CART_ADMIN)
+        //     // Commons.ajaxData('update_estimate', {b_id: bid,
+        //     //                                     estimate: estimate,
+        //     //                                     }, "post", _this, _this.loadCustomerestimate,null, '.loading-pane');
+        // });
+
         // Update-Agent
             $('#customer-detail .btn-update-agent').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
@@ -1425,7 +1450,8 @@ var Global = {
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_regnumber" type="text" value ="' + val.cust_regnumber + '"class="validate" style="text-transform: uppercase;"><label for="cust_regnumber">#Registration</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+                // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" class="datepicker"><label for="date">Date</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
@@ -1444,7 +1470,8 @@ var Global = {
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_regnumber" disabled  type="text" value ="' + val.cust_regnumber + '"class="validate" style="text-transform: uppercase;"><label for="cust_regnumber">#Registration</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled class="datepicker"><label for="date">Date</label></div>'
+                // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" disabled  value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
@@ -1504,14 +1531,21 @@ var Global = {
                      $('#customer-detail .confirm-row').show()
                 }
             }
+             date_string = val.date_booking
         })
         container.html(html);
-
-        container.find('.datepicker').pickadate({
+        var $input = $('#customer-detail #date.datepicker').pickadate({
             format: 'dd-mm-yyyy',
-            closeOnSelect: false,
             min: new Date(),
-        });
+        })
+        var picker = $input.pickadate('picker')
+        picker.set('select', date_string, { format: 'dd-mm-yyyy' })
+        // container.find('.datepicker').pickadate({
+        //     format: 'dd-mm-yyyy',
+        //     closeOnSelect: true,
+        //     formatSubmit: undefined,
+        //
+        // });
 
         var container2 = $('#customer-detail .booking-job-data .pre-data');
         container2.html('');
@@ -1528,6 +1562,12 @@ var Global = {
             if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff){
                 html += '											<th data-field="price">Item Price</th>';
             }
+            if (val.req_user_admin || val.req_user_staff){
+                html += '											<th data-field="cat-settle">CAT Settlement</th>';
+            }
+            if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
+            html += '											<th data-field="delete"></th>';
+                }
             html += '										</tr>';
             html += '										</thead>';
             html += '										<tbody>';
@@ -1544,11 +1584,12 @@ var Global = {
             for (i = 0; i < compLen; i++) {
                 CURRENT_CART_ADMIN.push({
                     "name": val.service_items[i].name,
-                    "price": val.service_items[i].name,
-                    "price_comp": val.service_items[i].price,
+                    "price": val.service_items[i].price,
+                    "price_comp": val.service_items[i].price_comp,
                     "action": val.service_items[i].action,
                     "type": val.service_items[i].type,
-                    "quantity": val.service_items[i].quantity
+                    "quantity": val.service_items[i].quantity,
+                    "settlement_cat":val.service_items[i].settlement_cat
                 })
                 TOTAL_ITEMS_ADMIN = i + 1
                 if (val.service_items[i].type == "Labour") {
@@ -1585,11 +1626,79 @@ var Global = {
                 } else {
                     html += '<option value="Discount">Discount</option>'
                 }
+                if (val.service_items[i].type == "Total") {
+                    html += '<option value="Total" selected>Total</option>'
+                } else {
+                    html += '<option value="Total">Total</option>'
+                }
                 html += '</select></div>' + '</td>';
-                 if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff) {
+
+
+                if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff || val.req_user_agent ) {
                      html += '											<td>' + '<input id="part_price" type="number" class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
                  }
-                     html += '										</tr>';
+                if (val.req_user_admin || val.req_user_staff) {
+                    html += '<td>' + '<div class="input-field sort" id ="settle_type"><select  class="browser-default">'
+                    // try{
+
+                    if (val.service_items[i].settlement_cat==null || val.service_items[i].settlement_cat===false){
+                                        if (val.service_items[i].type == "Part") {
+                            html += '<option value="Part" selected>Part</option>'
+                        } else {
+                            html += '<option value="Part">Part</option>'
+                        }
+                        if (val.service_items[i].type == "Labour") {
+                            html += '<option value="Labour" selected>Labour</option>'
+                        } else {
+                            html += '<option value="Labour">Labour</option>'
+                        }
+                        if (val.service_items[i].type == "Discount") {
+                            html += '<option value="Discount" selected>Discount</option>'
+                        } else {
+                            html += '<option value="Discount">Discount</option>'
+                        }
+                        if (val.service_items[i].type == "VAS") {
+                            html += '<option value="VAS" selected>VAS</option>'
+                        } else {
+                            html += '<option value="VAS">VAS</option>'
+                        }
+                        if (val.service_items[i].type == "Denting") {
+                            html += '<option value="Denting" selected>Denting</option>'
+                        } else {
+                            html += '<option value="Denting">Denting</option>'
+                        }
+                    }else{
+                         if (val.service_items[i].settlement_cat == "Part") {
+                            html += '<option value="Part" selected>Part</option>'
+                        } else {
+                            html += '<option value="Part">Part</option>'
+                        }
+                        if (val.service_items[i].settlement_cat == "Labour") {
+                            html += '<option value="Labour" selected>Labour</option>'
+                        } else {
+                            html += '<option value="Labour">Labour</option>'
+                        }
+                        if (val.service_items[i].settlement_cat == "Discount") {
+                            html += '<option value="Discount" selected>Discount</option>'
+                        } else {
+                            html += '<option value="Discount">Discount</option>'
+                        }
+                        if (val.service_items[i].settlement_cat == "VAS") {
+                            html += '<option value="VAS" selected>VAS</option>'
+                        } else {
+                            html += '<option value="VAS">VAS</option>'
+                        }
+                        if (val.service_items[i].settlement_cat == "Denting") {
+                            html += '<option value="Denting" selected>Denting</option>'
+                        } else {
+                            html += '<option value="Denting">Denting</option>'
+                        }
+                    }
+                }
+                    html +=' 									<td><div class="delete x25">';
+                    html +=' 										<i class="fa fa-trash-o"></i>';
+                    html +=' 									</div></td>';
+                    html += '										</tr>';
             }else{
                 item_no = i + 1;
                 html += '										<tr>';
@@ -1671,7 +1780,9 @@ var Global = {
                         } else if (j == 3) {
                             price_item = $(row.cells[j]).find('input,select').eq(0).val()
                             // console.log(price_item)
-                        } else {
+                        } else if (j == 4){
+                             settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
+
                         }
                     }
                 // }
@@ -1691,8 +1802,13 @@ var Global = {
                         "name": name_item,
                         "price": price_item,
                         "type": type_item,
+                        "settlement_cat":settlement_cat
                     }
-                    CURRENT_CART_ADMIN.push(cart_item)
+                    if (name_item != ""){
+                        CURRENT_CART_ADMIN.push(cart_item)
+                    }else{
+
+                    }
                 }
             },
     loadCustomerupdate:function(){
