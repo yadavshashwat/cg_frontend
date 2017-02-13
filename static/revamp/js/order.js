@@ -98,7 +98,7 @@ var logoMap = {
         'Door Rear Left':'<img class="" src="/../../static/revamp/img/Panel/Door Rear Left.png">',
         'Door Rear Right':'<img class="" src="/../../static/revamp/img/Panel/Door Rear Right.png">',
         'Fender Left':'<img class="" src="/../../static/revamp/img/Panel/Fender Left.png">',
-        'Fender Rear':'<img class="" src="/../../static/revamp/img/Panel/Fender Rear.png">',
+        'Fender Right':'<img class="" src="/../../static/revamp/img/Panel/Fender Rear.png">',
         'Bumper Front':'<img class="" src="/../../static/revamp/img/Panel/Bumper Front.png">',
         'Front Bumper':'<img class="" src="/../../static/revamp/img/Panel/Front Bumper.png">',
         'Quarter Panel Left':'<img class="" src="/../../static/revamp/img/Panel/Quarter Panel Left.png">',
