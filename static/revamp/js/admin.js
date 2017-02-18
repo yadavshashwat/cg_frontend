@@ -6,6 +6,24 @@ document.onreadystatechange = function () {
 // materialize css
 $(document).ready(function() {
     $('select').material_select();
+   var a = $(window).height();
+    // var b = $('.home-form').height();
+    console.log(a)
+    alfa = parseInt('80px')
+    // console.log(a-alfa)
+
+
+        var viewportWidth = $(window).width();
+    if (viewportWidth <= 600) {
+        // $("#bookings .pre-data").height(a/1.5 - alfa)
+
+    }else if (viewportWidth <= 992){
+        // $("#bookings .pre-data").height(a/1.5 - alfa)
+    }else{
+    $("#bookings .pre-data").height(a - alfa)
+    }
+
+
 });
 
 $('.datepicker').pickadate({
@@ -98,10 +116,13 @@ var Global = {
         $('#bookings').on('click','.filter-sort.closed',function () {
             $('#bookings .filter-option').show();
             $('#bookings .filter-sort').addClass('open').removeClass('closed');
+            $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-up')
         });
         $('#bookings').on('click','.filter-sort.open',function () {
             $('#bookings .filter-option').hide();
             $('#bookings .filter-sort').addClass('closed').removeClass('open');
+            $(this).find('i').removeClass('fa-caret-up').addClass('fa-caret-down')
+
         });
         // Open Bookings
         $('.navbar .booking-button').click(function(event,data){
@@ -110,7 +131,15 @@ var Global = {
             $('#user-details').hide()
             $('#coupon-details').hide()
             $('#new-booking').hide()
+            $('#bookings .delivery-list').show()
             LEAD_TYPE = "Booking"
+            if (DATE_TYPE != ""){
+             $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
+             $('#bookings #delivery-list').show()
+            }
+            $('#bookings #bookings-list .header-id-bar.bookings').text('Bookings')
+             $('#bookings #bookings-list .booking-bar-2 .agent').text('Agent Details')
+
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                                 lead_booking:LEAD_TYPE,
                                 sort:SORT_TYPE,
@@ -128,6 +157,10 @@ var Global = {
             $('#coupon-details').hide()
             $('#new-booking').hide()
             LEAD_TYPE = "Lead"
+            $('#bookings #bookings-list .header-id-bar.bookings').text('Leads')
+             $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
+             $('#bookings #delivery-list').hide()
+            $('#bookings #bookings-list .booking-bar-2 .agent').text('')
             // type = "Lead"
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                                 lead_booking:LEAD_TYPE,
@@ -148,23 +181,40 @@ var Global = {
            $(this).addClass('selected');
             date = $(this).attr('data-class')
             // console.log(date)
-
             // console.log(date)
+             $('#bookings #bookings-list').removeClass('l6')
             date_str = new Date();
             DATE_TYPE = _this.date_format(date_str);
             if (date=="Today"){
                 // console.log(date)
                 date_str = new Date();
                 DATE_TYPE = _this.date_format(date_str);
+                        $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
+                        $('#bookings #delivery-list').show()
+                if (LEAD_TYPE == "Lead"){
+                        $('#bookings #delivery-list').hide()
+                        $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
+                    }
             }else if (date == "Tomorrow"){
                 // console.log(date)
                 date_str = new Date((new Date()).valueOf() + 1000*3600*24);
                 DATE_TYPE = _this.date_format(date_str);
+                    $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
+                    $('#bookings #delivery-list').show()
+                    if (LEAD_TYPE == "Lead"){
+                        $('#bookings #delivery-list').hide()
+                        $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
+                    }
+
             }else{
                 // console.log(date)
                 DATE_TYPE = "";
+                    $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
+                    $('#bookings #delivery-list').hide()
+
             }
             // console.log(DATE_TYPE)
+
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                                 lead_booking:LEAD_TYPE,
                                 sort:SORT_TYPE,
@@ -173,6 +223,16 @@ var Global = {
                                 name:CUST_NAME,
                                 reg:REG_NUMBER,
                                 veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                                lead_booking:LEAD_TYPE,
+                                sort:SORT_TYPE,
+                                del_date:DATE_TYPE,
+                                status:STATUS_TYPE,
+                                name:CUST_NAME,
+                                reg:REG_NUMBER,
+                                veh_type:VEH_TYPE}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+
         })
 
         $('#bookings  .btn-apply-filter').click(function(){
@@ -215,6 +275,16 @@ var Global = {
                                 name:CUST_NAME,
                                 reg:REG_NUMBER,
                                 veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                                lead_booking:LEAD_TYPE,
+                                sort:SORT_TYPE,
+                                del_date:DATE_TYPE,
+                                status:STATUS_TYPE,
+                                name:CUST_NAME,
+                                reg:REG_NUMBER,
+                                veh_type:VEH_TYPE}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+
             $('#bookings .filter-option').hide();
             $('#bookings .filter-sort').addClass('closed').removeClass('open');
 
@@ -391,6 +461,8 @@ var Global = {
             cust_locality = $('#customer-detail #cust_locality').val()
             cust_city = $('#customer-detail #cust_city').val()
             source = $('#customer-detail #source').val()
+            date_del = $('#customer-detail #date_delivery').val()
+
             ALL_JOBS_ADMIN = comment_n
             Commons.ajaxData('update_booking', {b_id: bid,
                                                 email: email_n,
@@ -406,6 +478,7 @@ var Global = {
                                                 locality : cust_locality,
                                                 city : cust_city,
                                                 source : source,
+                                                date_del : date_del,
                                                 }, "post", _this, _this.loadCustomerupdate,null, '.loading-pane');
         });
 
@@ -1080,7 +1153,7 @@ var Global = {
             html += '                <div class="col l1 s2 m2 booking-id-bar">'
             html += '                    <b>#<span class="id">' + val.booking_id + '</span></b>'
             html += '                </div>'
-            html += '                <div class="col l7 s7 m7">'
+            html += '                <div class="col l5 s7 m7">'
             html += '                    <div class="col l12 s12 m12">'
             // if (val.booking_user_name == ""){
             html += '                        <b>Name : </b><span class="custname">' + val.cust_name + '</span>'
@@ -1116,7 +1189,12 @@ var Global = {
             html += '                        <b>Address : </b><span class="address">' + val.cust_address + ' ' + val.cust_locality + ' ' + val.cust_city + '</span>'
             html += '                    </div>'
             html += '                </div>'
-            html += '                <div class="col l4 s3 m3 status-bar">'
+            html += '                <div class="col l3 s3 m3 centered-text hide-on-med-and-down">'
+            if (LEAD_TYPE == "Booking"){
+                html += '                    <b><span class="agent-details">'+val.agent_details+'</span></b>'
+                }
+            html += '                </div>'
+            html += '                <div class="col l3 s3 m3 status-bar">'
             html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
             html += '                </div>'
             html += '            </div>'
@@ -1125,6 +1203,66 @@ var Global = {
             container.html(html);
             // container.find('select').material_select();
     },
+    loadDelivery:function(data){
+        var container = $('#delivery-list .delivery-list .pre-data');
+        container.html('');
+        html = ''
+
+        $.each(data, function(ix, val) {
+            html += '        <div class="row card cardhover no-border-radius booking" data-class="' + val.booking_id + '">'
+            html += '            <div class="row">'
+            html += '                <div class="col l1 s2 m2 booking-id-bar">'
+            html += '                    <b>#<span class="id">' + val.booking_id + '</span></b>'
+            html += '                </div>'
+            html += '                <div class="col l5 s7 m7">'
+            html += '                    <div class="col l12 s12 m12">'
+            // if (val.booking_user_name == ""){
+            html += '                        <b>Name : </b><span class="custname">' + val.cust_name + '</span>'
+            // }else{
+            // html += '                        <b>Name : </b><span class="custname">' + val.booking_user_name + '</span>'
+            // }
+            html += '                    </div>'
+            if (val.booking_user_name != val.cust_name && val.booking_user_name != ""){
+            html += '                    <div class="col l12 s12 m12">'
+            html += '                        <b>POC Name : </b><span class="custname">' + val.booking_user_name + '</span>'
+            html += '                    </div>'
+            }
+            html += '                    <div class="col l12 s12 m12">'
+            if (val.booking_user_number == ""){
+            html += '                        <b>Number : </b><span class="custname">' + val.cust_number + '</span>'
+            }else{
+            html += '                        <b>Number : </b><span class="custname">' + val.booking_user_number + '</span>'
+            }
+            html += '                    </div>'
+            html += '                    <div class="col l12 s12 m12">'
+            html += '                        <b><span class="custvehicletype">' + val.cust_vehicle_type + '</span>&nbsp;:&nbsp;</b><span class="vehiclename">' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + '</span>'
+            html += '                    </div>'
+            html += '                    <div class="col l12 hide-on-med-and-down">'
+            html += '                        <b>Date & Time : </b><span class="time">' + val.time_booking + '</span> on <span class="date">' + val.date_booking + '</span>'
+            html += '                    </div>'
+            html += '                    <div class="col l12 hide-on-large-only">'
+            html += '                        <b>Date : </b><span class="date">' + val.date_booking + '</span>'
+            html += '                    </div>'
+            html += '                    <div class="col l12 s12 m12 hide-on-large-only">'
+            html += '                        <b>Time : </b><span class="time">' + val.time_booking + '</span>'
+            html += '                    </div>'
+            html += '                    <div class="col l12 s12 m12">'
+            html += '                        <b>Address : </b><span class="address">' + val.cust_address + ' ' + val.cust_locality + ' ' + val.cust_city + '</span>'
+            html += '                    </div>'
+            html += '                </div>'
+            html += '                <div class="col l3 s3 m3 centered-text hide-on-med-and-down">'
+            html += '                    <b><span class="agent-details">'+val.agent_details+'</span></b>'
+            html += '                </div>'
+            html += '                <div class="col l3 s3 m3 status-bar">'
+            html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
+            html += '                </div>'
+            html += '            </div>'
+            html += '        </div>'
+        })
+            container.html(html);
+            // container.find('select').material_select();
+    },
+
 
     loadUsers:function(data){
         container =        $('#user-details .user-list .pre-data')
@@ -1457,6 +1595,11 @@ var Global = {
                 html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l12">'
+                // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" class="datepicker"><label for="date">Date Delivery</label></div>'
+                html += '</div>'
+
+                html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l12">'
@@ -1476,6 +1619,11 @@ var Global = {
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" disabled  value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
                 html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" disabled class="datepicker"><label for="date">Date Delivery</label></div>'
+                // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+                html += '</div>'
+
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" disabled class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
                 html += '</div>'
@@ -1532,14 +1680,28 @@ var Global = {
                 }
             }
              date_string = val.date_booking
+            if (val.date_delivery==null){
+                date_delivery_string = val.date_booking
+            } else{
+                 date_delivery_string = val.date_delivery
+            }
         })
         container.html(html);
         var $input = $('#customer-detail #date.datepicker').pickadate({
             format: 'dd-mm-yyyy',
-            min: new Date(),
+            // min: new Date(),
         })
+
+        var $input2 = $('#customer-detail #date_delivery.datepicker').pickadate({
+            format: 'dd-mm-yyyy',
+            // min: new Date(),
+        })
+
         var picker = $input.pickadate('picker')
         picker.set('select', date_string, { format: 'dd-mm-yyyy' })
+
+        var picker2 = $input2.pickadate('picker')
+        picker2.set('select', date_delivery_string, { format: 'dd-mm-yyyy' })
         // container.find('.datepicker').pickadate({
         //     format: 'dd-mm-yyyy',
         //     closeOnSelect: true,
@@ -1557,7 +1719,7 @@ var Global = {
             html += '										<tr>';
             html += '											<th data-field="id">S.No.</th>';
             html += '											<th data-field="part">Name</th>';
-            html += '											<th data-field="action">Action</th>';
+            html += '											<th data-field="action">Type</th>';
             // html += '											<th data-field="part">Type</th>';
             if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff){
                 html += '											<th data-field="price">Item Price</th>';
@@ -1703,30 +1865,34 @@ var Global = {
                 item_no = i + 1;
                 html += '										<tr>';
                 html += '											<td>' + item_no + '</td>';
-                html += '											<td>' + '<input id="part_name" type="text" disabled class="browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
-                // html += '											<td>'+'<input id="type-'+item_no+'" type="text" class="" value ="'+val.service_items[i].type+'" aria-required="true">'+'</td>';
+                // html += '											<td>' + '<input id="part_name" type="text" disabled class="browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
+                html += '											<td>' + val.service_items[i].name +'</td>';
+                html += '											<td>' + val.service_items[i].type +'</td>';
 
-                html += '											<td>' + '<div class="input-field sort" id ="part_type"><select disabled   class="browser-default">'
-                if (val.service_items[i].type == "Part") {
-                    html += '<option value="Part" selected>Part</option>'
-                } else {
-                    html += '<option value="Part">Part</option>'
-                }
-                if (val.service_items[i].type == "Labour") {
-                    html += '<option value="Labour" selected>Labour</option>'
-                } else {
-                    html += '<option value="Labour">Labour</option>'
-                }
-                if (val.service_items[i].type == "Discount") {
-                    html += '<option value="Discount" selected>Discount</option>'
-                } else {
-                    html += '<option value="Discount">Discount</option>'
-                }
-                html += '</select></div>' + '</td>';
-                 if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff) {
-                     html += '											<td>' + '<input id="part_price" type="number" disabled  class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
+                // html += '											<td>' + '<div class="input-field sort" id ="part_type"><select disabled   class="browser-default">'
+                // if (val.service_items[i].type == "Part") {
+                //     html += '<option value="Part" selected>Part</option>'
+                // } else {
+                //     html += '<option value="Part">Part</option>'
+                // }
+                // if (val.service_items[i].type == "Labour") {
+                //     html += '<option value="Labour" selected>Labour</option>'
+                // } else {
+                //     html += '<option value="Labour">Labour</option>'
+                // }
+                // if (val.service_items[i].type == "Discount") {
+                //     html += '<option value="Discount" selected>Discount</option>'
+                // } else {
+                //     html += '<option value="Discount">Discount</option>'
+                // }
+                // html += '</select></div>' + '</td>';
+             if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff) {
+                    html += '											<td>' + val.service_items[i].price + '</td>';
+
+                     // html += '											<td>' + '<input id="part_price" type="number" disabled  class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
                  }
-                     html += '										</tr>';
+
+                html += '										</tr>';
             }
             }
             html += '										</tbody>';
