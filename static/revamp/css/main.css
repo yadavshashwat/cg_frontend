@@ -2684,11 +2684,11 @@ color:dimgrey;
 }
 
 #bookings .booking-list .pre-data{
-    overflow: scroll;
+    /*overflow: scroll;*/
 }
 
 #bookings .delivery-list .pre-data{
-    overflow: scroll;
+    /*overflow: scroll;*/
     /*height: 1000px;*/
 
 }
