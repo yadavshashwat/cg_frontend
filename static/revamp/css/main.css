@@ -1850,7 +1850,7 @@ footer a:hover {
                     position: fixed;
                     top: 0px;
                     height: 100%;
-                    z-index: 0;
+                    z-index: -1;
 }
 
 .order-page .nav-service-list{
@@ -2563,7 +2563,8 @@ color:dimgrey;
 
 
 #bookings .btn-remove-filter{
-    margin-top: 10px;
+    margin-top: 5px;
+    width:100%
 }
 #bookings .box{
     /*background: #eaeaea;*/

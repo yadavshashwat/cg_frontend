@@ -131,14 +131,17 @@ var Global = {
             $('#user-details').hide()
             $('#coupon-details').hide()
             $('#new-booking').hide()
-            $('#bookings .delivery-list').show()
+            // $('#bookings .delivery-list').show()
+          $('#bookings .booking-filter').show();
+
             LEAD_TYPE = "Booking"
             if (DATE_TYPE != ""){
-             $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
-             $('#bookings #delivery-list').show()
+             // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
+             // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
+             // $('#bookings #delivery-list').show()
             }
             $('#bookings #bookings-list .header-id-bar.bookings').text('Bookings')
-             $('#bookings #bookings-list .booking-bar-2 .agent').text('Agent Details')
+            $('#bookings #bookings-list .booking-bar-2 .agent').text('Agent Details')
 
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                                 lead_booking:LEAD_TYPE,
@@ -158,9 +161,14 @@ var Global = {
             $('#new-booking').hide()
             LEAD_TYPE = "Lead"
             $('#bookings #bookings-list .header-id-bar.bookings').text('Leads')
-             $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
+             // $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
+             $('#bookings #bookings-list').show()
              $('#bookings #delivery-list').hide()
-            $('#bookings #bookings-list .booking-bar-2 .agent').text('')
+             $('#bookings .booking-filter .date-box').removeClass('selected');
+             $('#bookings .booking-filter .bookings-filter').addClass('selected');
+             $('#bookings #bookings-list .booking-bar-2 .agent').text('')
+             $('#bookings .booking-filter').hide();
+
             // type = "Lead"
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                                 lead_booking:LEAD_TYPE,
@@ -189,28 +197,27 @@ var Global = {
                 // console.log(date)
                 date_str = new Date();
                 DATE_TYPE = _this.date_format(date_str);
-                        $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
-                        $('#bookings #delivery-list').show()
+                        // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
+                        // $('#bookings #delivery-list').show()
                 if (LEAD_TYPE == "Lead"){
                         $('#bookings #delivery-list').hide()
-                        $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
+                        // $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
                     }
             }else if (date == "Tomorrow"){
                 // console.log(date)
                 date_str = new Date((new Date()).valueOf() + 1000*3600*24);
                 DATE_TYPE = _this.date_format(date_str);
-                    $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
-                    $('#bookings #delivery-list').show()
+                    // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
+                    // $('#bookings #delivery-list').show()
                     if (LEAD_TYPE == "Lead"){
                         $('#bookings #delivery-list').hide()
-                        $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
+                        // $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
                     }
-
             }else{
                 // console.log(date)
                 DATE_TYPE = "";
-                    $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
-                    $('#bookings #delivery-list').hide()
+                    // $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
+                    // $('#bookings #delivery-list').hide()
 
             }
             // console.log(DATE_TYPE)
@@ -234,6 +241,24 @@ var Global = {
                                 veh_type:VEH_TYPE}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
         })
+
+        $('#bookings .booking-filter .date-box').click(function(){
+           $('#bookings .booking-filter .date-box').removeClass('selected');
+           $(this).addClass('selected');
+            toshow = $(this).attr('data-class')
+
+            if (toshow=="Delivery"){
+            $('#bookings #bookings-list').hide()
+            $('#bookings #delivery-list').show()
+
+            }else{
+            $('#bookings #bookings-list').show()
+            $('#bookings #delivery-list').hide()
+
+            }
+        })
+
+
 
         $('#bookings  .btn-apply-filter').click(function(){
             date_selected = $('#bookings #filterdate').val();
@@ -331,7 +356,7 @@ var Global = {
          })
 
         // Open Individual Booking
-        $('#bookings-list .booking-list').on('click','.booking',function(event,data){
+        $('#bookings .pre-data').on('click','.booking',function(event,data){
             $('#bookings').hide()
             $('#booking-details').show()
              $('#customer-detail .booking-data').show();
@@ -1477,7 +1502,7 @@ var Global = {
             html += '</div>'
             html += '</div>'
 
-
+            html += '<div class="row card">'
             if (val.req_user_staff || val.req_user_admin) {
                 if (val.booking_user_name != val.cust_name) {
                     html += '<div class="col s12 m12 l12">'
@@ -1631,6 +1656,8 @@ var Global = {
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
                 html += '</div>'
             }
+            html += '</div>'
+
             // <----- New Booking Data---->>
                 if (val.req_user_agent) {
                     if (val.status == "Agent Left") {
@@ -1887,7 +1914,7 @@ var Global = {
                 // }
                 // html += '</select></div>' + '</td>';
              if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff) {
-                    html += '											<td>' + val.service_items[i].price + '</td>';
+                    html += '											<td>Rs. ' + val.service_items[i].price + '</td>';
 
                      // html += '											<td>' + '<input id="part_price" type="number" disabled  class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
                  }
