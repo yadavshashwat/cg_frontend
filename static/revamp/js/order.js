@@ -397,12 +397,13 @@ var Global = {
             }
         });
 
-        $('#service-select').change(function(event,data){
+        $('#service-select').on('change','.visible',function(event,data){
 
             var classy = $(this).find('.selectize-input').find('div').attr('data-value').toLowerCase().replace(/\s+/g, '');;
-            // console.log(classy)
+            console.log(classy)
             var name = $('#services').attr('data-vehicle-name')
             name = name.split('-')
+
             $('#jobs .service-sub-category.car-care').hide()
             $('#jobs .service-sub-category.denting').hide()
 

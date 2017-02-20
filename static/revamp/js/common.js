@@ -38,6 +38,7 @@ var Commons = {
     URLFromName : {
         'get_type_make':'/api/get_type_make/',
         'get_make_model':'/api/get_make_model/',
+        'get_all_models':'/api/get_all_models/',
         'get_jobs_vehicle':'/api/get_jobs_vehicle/',
         'add_job_cart':'/api/add_job_cart/',
         'send_otp_new':'/api/send_otp_new/',

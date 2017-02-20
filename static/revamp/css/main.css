@@ -2800,6 +2800,21 @@ line-height: 50px;
         margin: 1.46rem 0 1.168rem 0;
 }
 
+.static-page .list-links{
+    margin-left: 30px;
+}
+
+.static-page .list-cars ul, .static-page .list-bikes ul{
+    list-style: none;
+    width: 100%;
+    margin: 1px;
+}
+
+.static-page .list-cars li, .static-page .list-bikes li{
+    display: inline;
+    /*width:40PX;*/
+    padding: 0px 15px 0px 15px;
+}
 
 
 
