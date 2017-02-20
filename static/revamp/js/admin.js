@@ -726,7 +726,26 @@ var Global = {
             $('#user-details').hide()
             $('#coupon-details').hide()
             $('#new-booking').show()
-               Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
+            container = $('#new-booking .source-list')
+            container.html('')
+            html = ""
+
+            html += '<div class="input-field source-admin" id="source-booking">'
+                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text"   value ="' + val.source + '"class="validate"><label for="source">Source</label></div>'
+                html += '<select class="browser-default">'
+                html += '<option value="" selected disabled>Source</option>'
+                sourcelen = SOURCES.length;
+                for (i = 0; i < sourcelen; i++) {
+                    // if (val.source == SOURCES[i]){
+                    //     html += '<option value="'+SOURCES[i]+'" selected>'+SOURCES[i]+'</option>'
+                    // }else{
+                        html += '<option value="'+SOURCES[i]+'">'+SOURCES[i]+'</option>'
+                    // }
+                }
+                html +='</select>'
+            console.log(html)
+            container.html(html)
+               // Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
         });
         $('#new-booking .header-booking .book-btn').click(function(){
             $('#new-booking  .lead-btn').removeClass('selected')
@@ -896,6 +915,8 @@ var Global = {
             var veh_type = vehicle;
             var make = $('#select-make').find('select').val();
             var model = $('#select-model').find('select').val();
+            var source = $('#source-booking').find('select').val();
+            // console.log()
             fuel_start = model.indexOf("(")
            fuel_end = model.indexOf(")")
 
@@ -994,7 +1015,9 @@ var Global = {
                 ,int_summary : JSON.stringify(JOBS_SUMMARY_NEW_BOOKING)
                 ,send_confirm: send_mess
                 ,booking_user_name: pocname
-                ,booking_user_number: pocnumber}, "post", _this, _this.loadSendbookingAdmin, null, '.loading-pane');
+                ,booking_user_number: pocnumber
+                ,source : source
+                }, "post", _this, _this.loadSendbookingAdmin, null, '.loading-pane');
             }
 
 
