@@ -10621,11 +10621,6 @@
         <changefreq>weekly</changefreq>
         <priority>0.65</priority>
     </url>
-    <url>
-        <loc>tel:+91-9555-95-0000</loc>
-        <changefreq>weekly</changefreq>
-        <priority>0.65</priority>
-    </url>
 
 
 </urlset>
