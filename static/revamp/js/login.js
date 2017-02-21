@@ -138,7 +138,9 @@ var Login = {
         });
 
         $('.navbar').on('click','.log-out-button',function () {
-            Commons.ajaxData('logout_view', {path:window.location.pathname}, "get", _this, _this.loadLogout, null, '.loading-pane');
+            path_name = window.location.pathname
+            console.log(path_name)
+            Commons.ajaxData('logout_view', {path: path_name}, "get", _this, _this.loadLogout, null, '.loading-pane');
         });
 
 
