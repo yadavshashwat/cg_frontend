@@ -834,6 +834,7 @@ var Global = {
                 }
             }
         });
+     $(".selectize-input input").attr('readonly','readonly');
     },
     loadModels:function(data){
         //  vehtype = $('#home .veh-cat-card.selected').text().trim()
@@ -857,6 +858,7 @@ var Global = {
             // container.find('select').material_select();
             // container.find('select').select2();
             container.find('select').selectize();
+         $(".selectize-input input").attr('readonly','readonly');
 
     },
     loadCart:function(data){
