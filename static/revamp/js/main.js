@@ -27,7 +27,7 @@ $(window).ready(function() {
             }, 2200);
 });
 
-
+$(".selectize-input input").attr('readonly','readonly');
 // Scroll To Top
 $(document).ready(function(){
 
