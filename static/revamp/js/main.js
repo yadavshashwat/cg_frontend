@@ -14,6 +14,8 @@ $(document).ready(function() {
     $('select').selectize();
 });
 
+
+
 // $(window).ready(function() {
 //     $('#loading').hide();
 // });

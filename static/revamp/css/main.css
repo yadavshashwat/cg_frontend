@@ -529,13 +529,14 @@ body>.select2-container{width:auto !important;
     border-bottom: 1px solid #9e9e9e!important;
     border-radius: 0!important;
     outline: none!important;
-    height: 2.5rem;
+    height: 3.5rem;
     font-size: 1rem!important;
     /*margin: 0 0 20px 0;*/
     padding: 0px!important;
     box-shadow: none!important;
     box-sizing: content-box!important;
     transition: all 0.3s;
+    line-height: 3.5rem!important;
 
 }
 
@@ -1826,8 +1827,9 @@ footer a:hover {
 	/*color: #444;*/
 	/*text-decoration: none;*/
 	position:fixed;
-	bottom:4%;
-	left: 7%;
+	bottom:0%;
+    margin-bottom: 35px;
+	left: 8%;
 	z-index: 95;
 	/*display:none;*/
 }
@@ -2485,7 +2487,7 @@ overflow: hidden;
 	line-height: 20px;
 	margin-top: -1px;
 	text-align: right;
-        padding: 0px 0.6rem;
+    padding: 0px 0.6rem;
 }
 
 #booking-details .box-card {

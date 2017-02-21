@@ -1273,6 +1273,17 @@ var Global = {
         $('#booking-details').hide()
         local.clearKey('cgcart')
         local.clearKey('coupon')
+        ga('require', 'ecommerce');
+       $.each(data['booking'], function(ix, val) {
+        ga('ecommerce:addTransaction', {
+          'id': val.booking_id,                     // Transaction ID. Required.
+          'affiliation': val.Summary,   // Affiliation or store name.
+          'revenue': val.price_total,               // Grand Total.
+          'shipping': '0',                  // Shipping.
+          'tax': '0'                     // Tax.
+        });
+           ga('ecommerce:send');
+       })
         
     },
 
