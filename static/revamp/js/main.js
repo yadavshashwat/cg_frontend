@@ -27,7 +27,6 @@ $(window).ready(function() {
             }, 2200);
 });
 
-$(".selectize-input input").attr('readonly','readonly');
 // Scroll To Top
 $(document).ready(function(){
 
@@ -454,6 +453,7 @@ var Global = {
                 }
             }
         });
+        $(".selectize-input input").attr('readonly','readonly');
 
         // container.find('select').select2({
         //           // allowClear: true
@@ -504,6 +504,8 @@ var Global = {
             // container.find('select').material_select();
             // container.find('select').select2();
             container.find('select').selectize();
+            $(".selectize-input input").attr('readonly','readonly');
+
 
     },
     loadLocation:function(data){
