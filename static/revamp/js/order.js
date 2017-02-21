@@ -60,38 +60,38 @@ var SHOW_ESTIMATE = 0;
 var COUPON_CODE = "";
 
 var logoMap = {
-        'Standard Service':'<i class="cg-icon cg-icon-card icon-cg-car-standard x80"></i>',
-        'Standard Service2':'<i class="cg-icon cg-icon-card icon-cg-bike-standard x80"></i>',
-        'Comprehensive Service':'<i class="cg-icon cg-icon-card icon-cg-car-comp x80"></i>',
-        'AC Check':'<i class="cg-icon cg-icon-card icon-cg-accheck x80"></i>',
-        'Wheel Alignment And Balancing':'<i class="cg-icon cg-icon-card icon-cg-alignment x80"></i>',
-        'Comprehensive Check-Up':'<i class="cg-icon cg-icon-card icon-cg-checkup x80"></i>',
-        'Scanning':'<i class="cg-icon cg-icon-card icon-cg-scan x80"></i>',
-        'Brake Pad/Disc Pad Replacement':'<i class="cg-icon cg-icon-card icon-cg-brake x80"></i>',
-        'Clutch Check':'<i class="cg-icon cg-icon-card icon-cg-clutch x80"></i>',
-        'Battery Charging/Replacement':'<i class="cg-icon cg-icon-card icon-cg-battery x80"></i>',
-        'Other Diagnosis':'<i class="cg-icon cg-icon-card icon-cg-repair x80"></i>',
-        'Complete Car Detailing':'<i class="cg-icon cg-icon-card icon-cg-exterior x80"></i>',
-        'Interior Dry Cleaning':'<i class="cg-icon cg-icon-card icon-cg-dryclean x80"></i>',
-        'Exterior Rubbing Polishing':'<i class="cg-icon cg-icon-card icon-cg-exterior x80"></i>',
-        'Teflon Coating':'<i class="cg-icon cg-icon-card icon-cg-exterior x80"></i>',
-        'Underbody Anti Rust Treatment':'<i class="cg-icon cg-icon-card icon-cg-underbody x80"></i>',
-        'Exterior Car Washing':'<i class="cg-icon cg-icon-card icon-cg-wash x80"></i>',
-        'Flat Tyre':'<i class="cg-icon cg-icon-card icon-cg-tyre2 x80"></i>',
-        'Battery Jump Start':'<i class="cg-icon cg-icon-card icon-cg-battery x80"></i>',
-        'Towing':'<i class="cg-icon cg-icon-card icon-cg-tow x80"></i>',
-        'Minor Repairs':'<i class="cg-icon cg-icon-card icon-cg-repair x80"></i>',
-        'Key Lockout':'<i class="cg-icon cg-icon-card icon-cg-key x80"></i>',
-        'Emergency Fuel (5 Litres)':'<i class="cg-icon cg-icon-card icon-cg-fuel x80"></i>',
-        'Tyre Replacement':'<i class="cg-icon cg-icon-card icon-cg-tyre x80"></i>',
-        'Clickgarage Assist':'<i class="cg-icon cg-icon-card icon-cg-contract x80"></i>',
-        'General Check Up':'<i class="cg-icon cg-icon-card icon-cg-checkup-1 x80"></i>',
-        'Cable Replacement':'<i class="cg-icon cg-icon-card icon-cg-wire x80"></i>',
-        'Clutch Overhaul':'<i class="cg-icon cg-icon-card icon-cg-clutch x80"></i>',
-        'Front Fork Oil Or Seal Replacement':'<i class="cg-icon cg-icon-card icon-cg-fork x80"></i>',
-        'Chain Sprocket Replacement':'<i class="cg-icon cg-icon-card icon-cg-chain x80"></i>',
-        'Spark Plug Replacement':'<i class="cg-icon cg-icon-card icon-cg-spark x80"></i>',
-        'Engine Check':'<i class="cg-icon cg-icon-card icon-cg-engine x80"></i>',
+        'Standard Service':'<i class="cg-icon cg-icon-card icon-cg-car-standard x70"></i>',
+        'Standard Service2':'<i class="cg-icon cg-icon-card icon-cg-bike-standard x70"></i>',
+        'Comprehensive Service':'<i class="cg-icon cg-icon-card icon-cg-car-comp x70"></i>',
+        'AC Check':'<i class="cg-icon cg-icon-card icon-cg-accheck x70"></i>',
+        'Wheel Alignment And Balancing':'<i class="cg-icon cg-icon-card icon-cg-alignment x70"></i>',
+        'Comprehensive Check-Up':'<i class="cg-icon cg-icon-card icon-cg-checkup x70"></i>',
+        'Scanning':'<i class="cg-icon cg-icon-card icon-cg-scan x70"></i>',
+        'Brake Pad/Disc Pad Replacement':'<i class="cg-icon cg-icon-card icon-cg-brake x70"></i>',
+        'Clutch Check':'<i class="cg-icon cg-icon-card icon-cg-clutch x70"></i>',
+        'Battery Charging/Replacement':'<i class="cg-icon cg-icon-card icon-cg-battery x70"></i>',
+        'Other Diagnosis':'<i class="cg-icon cg-icon-card icon-cg-repair x70"></i>',
+        'Complete Car Detailing':'<i class="cg-icon cg-icon-card icon-cg-exterior x70"></i>',
+        'Interior Dry Cleaning':'<i class="cg-icon cg-icon-card icon-cg-dryclean x70"></i>',
+        'Exterior Rubbing Polishing':'<i class="cg-icon cg-icon-card icon-cg-exterior x70"></i>',
+        'Teflon Coating':'<i class="cg-icon cg-icon-card icon-cg-exterior x70"></i>',
+        'Underbody Anti Rust Treatment':'<i class="cg-icon cg-icon-card icon-cg-underbody x70"></i>',
+        'Exterior Car Washing':'<i class="cg-icon cg-icon-card icon-cg-wash x70"></i>',
+        'Flat Tyre':'<i class="cg-icon cg-icon-card icon-cg-tyre2 x70"></i>',
+        'Battery Jump Start':'<i class="cg-icon cg-icon-card icon-cg-battery x70"></i>',
+        'Towing':'<i class="cg-icon cg-icon-card icon-cg-tow x70"></i>',
+        'Minor Repairs':'<i class="cg-icon cg-icon-card icon-cg-repair x70"></i>',
+        'Key Lockout':'<i class="cg-icon cg-icon-card icon-cg-key x70"></i>',
+        'Emergency Fuel (5 Litres)':'<i class="cg-icon cg-icon-card icon-cg-fuel x70"></i>',
+        'Tyre Replacement':'<i class="cg-icon cg-icon-card icon-cg-tyre x70"></i>',
+        'Clickgarage Assist':'<i class="cg-icon cg-icon-card icon-cg-contract x70"></i>',
+        'General Check Up':'<i class="cg-icon cg-icon-card icon-cg-checkup-1 x70"></i>',
+        'Cable Replacement':'<i class="cg-icon cg-icon-card icon-cg-wire x70"></i>',
+        'Clutch Overhaul':'<i class="cg-icon cg-icon-card icon-cg-clutch x70"></i>',
+        'Front Fork Oil Or Seal Replacement':'<i class="cg-icon cg-icon-card icon-cg-fork x70"></i>',
+        'Chain Sprocket Replacement':'<i class="cg-icon cg-icon-card icon-cg-chain x70"></i>',
+        'Spark Plug Replacement':'<i class="cg-icon cg-icon-card icon-cg-spark x70"></i>',
+        'Engine Check':'<i class="cg-icon cg-icon-card icon-cg-engine x70"></i>',
         'Bumper Rear':'<img class="" src="/../../static/revamp/img/Panel/Bumper Rear.png">',
         'Door Front Left':'<img class="" src="/../../static/revamp/img/Panel/Door Front Left.png">',
         'Door Front Right':'<img class="" src="/../../static/revamp/img/Panel/Door Front Right.png">',
@@ -396,6 +396,8 @@ var Global = {
                 history.pushState({},'',new_path)
             }
         });
+        $("#service-select .selectize-input input").attr('readonly','readonly');
+        $("#time-slot .selectize-input input").attr('readonly','readonly');
 
         $('#service-select').on('change','.visible',function(event,data){
 
@@ -834,7 +836,15 @@ var Global = {
                 }
             }
         });
-     $(".selectize-input input").attr('readonly','readonly');
+        function isTouchDevice(){
+            return typeof window.ontouchstart !== 'undefined';
+        }
+        if (isTouchDevice()){
+        console.log("touch device")
+        $(".selectize-input input").attr('readonly','readonly');
+        }
+
+
     },
     loadModels:function(data){
         //  vehtype = $('#home .veh-cat-card.selected').text().trim()
@@ -858,7 +868,14 @@ var Global = {
             // container.find('select').material_select();
             // container.find('select').select2();
             container.find('select').selectize();
-         $(".selectize-input input").attr('readonly','readonly');
+         function isTouchDevice(){
+            return typeof window.ontouchstart !== 'undefined';
+        }
+        if (isTouchDevice()){
+        console.log("touch device")
+        $(".selectize-input input").attr('readonly','readonly');
+        }
+
 
     },
     loadCart:function(data){
