@@ -40,9 +40,17 @@
 <div class="navbar navbar-fixed">
 	<nav class="nav2">
 		<div class="nav-wrapper navbar-custom">
-			<div class="logo-cg logo-color visible">
-				<a href="/Book/{{veh_type}}/{{veh}}" class="brand-logo"><img class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>
+
+			<div class="logo-cg logo-color visible" itemscope itemtype="http://schema.org/Organization">
+				<a itemprop="url" href="/Book/{{veh_type}}/{{veh}}" class="brand-logo"><img itemprop="logo" class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>
 			</div>
+
+
+
+
+			<!--<div class="logo-cg logo-color visible">-->
+				<!--<a href="/Book/{{veh_type}}/{{veh}}" class="brand-logo"><img class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>-->
+			<!--</div>-->
 			<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			<a href="tel:+91-9555-95-0000" data-activates="mobile" class="call-button-nav  hide-on-large-only"><i class="material-icons">phone</i></a>
 			<ul class="right hide-on-med-and-down items-list">
@@ -543,12 +551,12 @@
 								Got a coupon code? <span class="discount-link visible">Add</span>
 							</div>
 							<div class ="col s12 m12 l12 coupon-box invisible">
-								<div class="input-field col s7 m7 l7 coupon-btn ">
+								<div class="input-field col s6 m6 l6 coupon-btn ">
 									<!--<i class="material-icons prefix">receipt</i>-->
 									<input id="coupon_box" type="text" class="validate" style="text-transform:uppercase">
 									<label for="coupon_box" data-error="">Promo Code</label>
 								</div>
-								<div class="col s5 m5 l5 coupon-btn">
+								<div class="col s6 m6 l6 coupon-btn">
 									<button class="waves-effect waves-light btn red btn-service btn-coupon" type="submit" name="action">Apply
 										<!--<i class="material-icons right">send</i>-->
 									</button>
@@ -560,7 +568,7 @@
 						</div>
 						<div class="row cart-checkout">
 							<div class="col s12 m12 l12">
-								<button class="waves-effect waves-light btn-large red btn-service btn-checkout disabled" type="submit" name="action">Book Now
+								<button class="waves-effect waves-light btn red btn-service btn-checkout disabled" type="submit" name="action">Book Now
 									<i class="material-icons right">send</i>
 								</button>
 							</div>
@@ -576,8 +584,8 @@
 	<div class="booking-select-section">
 		<div class="container-fluid services">
 			<div class="row">
-				<div class="col l12 s12 m12 centered-text">
-					<h3>Booking Details</h3>
+				<div class="col l12 s12 m12  centered-text">
+					<h3 class="page-header">Booking Details</h3>
 				</div>
 			</div>
 
@@ -591,7 +599,7 @@
 									1
 								</div>
 								<div class="col l10 m9 s9 box-header">
-									<h3>Booking Date & Time</h3>
+									<h3 class="form-header">Booking Date & Time</h3>
 								</div>
 							</div>
 
@@ -647,7 +655,7 @@
 									2
 								</div>
 								<div class="col l10 m9 s9 box-header">
-									<h3>Customer Details</h3>
+									<h3 class="form-header">Booking Details</h3>
 								</div>
 							</div>
 

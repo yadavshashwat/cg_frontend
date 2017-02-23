@@ -42,11 +42,12 @@
 <div class="navbar navbar-fixed">
 	<nav class="nav2">
 		<div class="nav-wrapper navbar-trans">
-			<div class="logo-cg logo-trans visible">
-				<a href="" class="brand-logo"><img class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-white-small1.png"></a>
+
+			<div class="logo-cg logo-trans visible" itemscope itemtype="http://schema.org/Organization">
+				<a itemprop="url" href="http://www.clickgarage.in/" class="brand-logo"><img itemprop="logo" class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-white-small1.png"></a>
 			</div>
-			<div class="logo-cg logo-color invisible">
-				<a href="" class="brand-logo"><img class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>
+			<div class="logo-cg logo-color invisible" itemscope itemtype="http://schema.org/Organization">
+				<a itemprop="url" href="http://www.clickgarage.in/" class="brand-logo"><img itemprop="logo" class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>
 			</div>
 			<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			<ul class="right hide-on-med-and-down items-list">
@@ -107,7 +108,7 @@
 
 				<div class="row text-left vehicle-details">
 					<!--<div class="row field-title text-left">-->
-						<!--<h4>Vehicle Details</h4>-->
+					<!--<h4>Vehicle Details</h4>-->
 					<!--</div>-->
 					<form id="formValidate">
 						<div class="input-field col s12 m12 l12 " id="brand-select">
@@ -139,70 +140,70 @@
 				</div>
 
 				<!--<div class = "row service-headers" id="selected-service">-->
-					<!--<div class="row field-title text-left">-->
-						<!--<h4>Service Details</h4>-->
-					<!--</div>-->
+				<!--<div class="row field-title text-left">-->
+				<!--<h4>Service Details</h4>-->
+				<!--</div>-->
 
-					<!--<div class="col s6 m6 l4">-->
-						<!--<div class="card cardhover service-card">-->
-							<!--<div class="card-content service-name">-->
-								<!--<p>Servicing</p>-->
-							<!--</div>-->
-						<!--</div>-->
-					<!--</div>-->
-					<!--<div class="col s6 m6 l4">-->
-						<!--<div class="card cardhover service-card">-->
-							<!--<div class="card-content service-name">-->
-								<!--<p>Car Care</p>-->
-							<!--</div>-->
-						<!--</div>-->
-					<!--</div>-->
-					<!--<div class="col s6 m6 l4">-->
-						<!--<div class="card cardhover service-card">-->
-							<!--<div class="card-content service-name">-->
-								<!--<p>Repairing</p>-->
-							<!--</div>-->
-						<!--</div>-->
-					<!--</div>-->
-					<!--<div class="col s6 m6 l4">-->
-						<!--<div class="card cardhover service-card">-->
-							<!--<div class="card-content service-name">-->
-								<!--<p>Denting/Painting</p>-->
-							<!--</div>-->
-						<!--</div>-->
-					<!--</div>-->
-					<!--<div class="col s6 m6 l4">-->
-						<!--<div class="card cardhover service-card">-->
-							<!--<div class="card-content service-name">-->
-								<!--<p>General Check-Up</p>-->
-							<!--</div>-->
-						<!--</div>-->
-					<!--</div>-->
-					<!--<div class="col s6 m6 l4">-->
-						<!--<div class="card cardhover service-card">-->
-							<!--<div class="card-content service-name">-->
-								<!--<p>Emergency</p>-->
-							<!--</div>-->
-						<!--</div>-->
-					<!--</div>-->
-					<!--<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-category-error"></span>-->
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>Servicing</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>Car Care</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>Repairing</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>Denting/Painting</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>General Check-Up</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>Emergency</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-category-error"></span>-->
 				<!--</div>-->
 				<div class="col s12 service-headers" id="selected-service">
 					<form>
-							<div class="row">
-								<div class="input-field col s12" >
-									<i class="material-icons prefix">report_problem</i>
-									<textarea id="additional" class="materialize-textarea"></textarea>
-									<label for="additional">Specific issues/ request?</label>
-								</div>
+						<div class="row">
+							<div class="input-field col s12" >
+								<i class="material-icons prefix">report_problem</i>
+								<textarea id="additional" class="materialize-textarea"></textarea>
+								<label for="additional">Specific issues/ request?</label>
 							</div>
+						</div>
 					</form>
 				</div>
 
 				<div class="row form-row invisible">
 					<form class="col s12">
 						<!--<div class="row field-title text-left">-->
-							<!--<h4>Booking Details</h4>-->
+						<!--<h4>Booking Details</h4>-->
 						<!--</div>-->
 
 						<div class="row">
@@ -213,8 +214,8 @@
 							</div>
 							<!--<div class="input-field col s6">-->
 
-								<!--<input id="last_name" type="text" class="validate" required="" aria-required="true">-->
-								<!--<label for="last_name" data-error="Required">Last Name</label>-->
+							<!--<input id="last_name" type="text" class="validate" required="" aria-required="true">-->
+							<!--<label for="last_name" data-error="Required">Last Name</label>-->
 							<!--</div>-->
 						</div>
 						<div class="row">
@@ -238,11 +239,11 @@
 							</div>
 						</div>
 						<!--<div class="row">-->
-							<!--<div class="input-field col s12">-->
-								<!--<i class="material-icons prefix">email</i>-->
-								<!--<input id="email" type="email" class="validate" required="" aria-required="true">-->
-								<!--<label for="email" data-error="Invalid e-mail id">Email</label>-->
-							<!--</div>-->
+						<!--<div class="input-field col s12">-->
+						<!--<i class="material-icons prefix">email</i>-->
+						<!--<input id="email" type="email" class="validate" required="" aria-required="true">-->
+						<!--<label for="email" data-error="Invalid e-mail id">Email</label>-->
+						<!--</div>-->
 						<!--</div>-->
 						<div class="row">
 							<div class="input-field col s6">
@@ -353,7 +354,7 @@
 	<div class="red-overlay">
 		<div class="client-section">
 			<div class="container-fluid">
-		<div class="row row-zero-margin">
+				<div class="row row-zero-margin">
 					<div class="col s12 m12 l4 featured-section-title">
 						<h3 class="section-title"><img src="/../../static/revamp/img/by-line.png" alt="by-line">Our partners</h3>
 					</div>
@@ -394,7 +395,7 @@
 				</div>
 			</div>
 
-		<div class="row testi-row row-zero-margin">
+			<div class="row testi-row row-zero-margin">
 				<div class="col s12 m12 l4">
 					<div class="testimonial-column card  large">
 						<div class="card-image waves-effect waves-block waves-light">
@@ -561,13 +562,13 @@
 <section id="contact">
 
 	<div class="container-fluid">
-			<div class="row row-zero-margin">
+		<div class="row row-zero-margin">
 			<div class="col m12 l12 s12 text-left">
 				<h3 class="section-title"><img src="/../../static/revamp/img/by-line.png" alt="by-line">Contact Us</h3>
 			</div>
 		</div>
 
-			<div class="row row-zero-margin">
+		<div class="row row-zero-margin">
 
 			<!--<div class="col m4 l4 s12 text-left">-->
 			<!--<ul>-->
@@ -606,16 +607,19 @@
 				<h4><b>Where we are</b></h4>
 				</br>
 				<h5><b>Registered Office</b></h5>
-				<p>W22, Second Floor, Green Park Main<br />
-					New Delhi, Delhi - 110016</p>
+				<div itemscope itemtype="http://schema.org/ContactPoint">
+					<div itemscope itemtype="schema.org/PostalAddress">
+						<p><span itemprop="streetAddress">W22, Second Floor</span>, <span itemprop="addressLocality">Green Park Main<br />
+						New Delhi</span>, Delhi - <span itemprop="postalCode">110016</span></p>
+					</div>
+					<h5><b>Gurgaon Office</b></h5>
+					<p>B702, Hex Tax Aprtments, Sector 43<br />
+						Gurgaon, Haryana - 122009</p>
 
-				<h5><b>Gurgaon Office</b></h5>
-				<p>B702, Hex Tax Aprtments, Sector 43<br />
-					Gurgaon, Haryana - 122009</p>
-
-				<p class="tel"><a href="tel:+919555950000"><i class="fa fa-whatsapp"></i>&nbsp;/&nbsp;<i class="fa fa-phone"></i> &nbsp; +91-9555-95-0000</p><br />
-				<div class="contact-btn text-left">
-					<a class="waves-effect waves-light waves-cg btn red cg-btn-2 scroll" href="mailto:info@clickgarage.in"><i class="fa fa-envelope"></i> &nbsp; Contact Us</a>
+					<p class="tel"><a href="tel:+919555950000"><i class="fa fa-whatsapp"></i>&nbsp;/&nbsp;<i class="fa fa-phone"></i> &nbsp; <span itemprop="telephone">+91-9555-95-0000</span></p></br>
+					<div class="contact-btn text-left">
+						<a class="waves-effect waves-light waves-cg btn red cg-btn-2 scroll" href="mailto:info@clickgarage.in"><i class="fa fa-envelope"></i> &nbsp; Contact Us</a>
+					</div>
 				</div>
 			</div>
 
@@ -697,19 +701,19 @@
 		<img src="/../../static/revamp/img/Backgrounds/{{veh_type}}-{{service}}.jpg" alt="" class="background">
 	</div>
 	<!--<div class="Car-Servicing">-->
-		<!--<img src="/../../static/revamp/img/Backgrounds/Car-Servicing.jpg" alt="" class="background">-->
+	<!--<img src="/../../static/revamp/img/Backgrounds/Car-Servicing.jpg" alt="" class="background">-->
 	<!--</div>-->
 	<!--<div class="Car-Repairing">-->
-		<!--<img src="/../../static/revamp/img/Backgrounds/Car-Repairing.jpg" alt="" class="background">-->
+	<!--<img src="/../../static/revamp/img/Backgrounds/Car-Repairing.jpg" alt="" class="background">-->
 	<!--</div>-->
 	<!--<div class="Car-Denting">-->
-		<!--<img src="/../../static/revamp/img/Backgrounds/Car-Denting.jpg" alt="" class="background">-->
+	<!--<img src="/../../static/revamp/img/Backgrounds/Car-Denting.jpg" alt="" class="background">-->
 	<!--</div>-->
 	<!--<div class="Bike-Servicing">-->
-		<!--<img src="/../../static/revamp/img/Backgrounds/Bike-Servicing.jpg" alt="" class="background">-->
+	<!--<img src="/../../static/revamp/img/Backgrounds/Bike-Servicing.jpg" alt="" class="background">-->
 	<!--</div>-->
 	<!--<div class="Bike-Servicing">-->
-		<!--<img src="/../../static/revamp/img/Backgrounds/Bike-Repairing.jpg" alt="" class="background">-->
+	<!--<img src="/../../static/revamp/img/Backgrounds/Bike-Repairing.jpg" alt="" class="background">-->
 	<!--</div>-->
 
 </div>
@@ -723,7 +727,7 @@
 
 <div class="loading-pane-2">
 	<!--<span class="image-centre">-->
-		<img src="/../../static/revamp/img/page_loader.gif" alt="" class="loading-gif">
+	<img src="/../../static/revamp/img/page_loader.gif" alt="" class="loading-gif">
 	<!--</span>-->
 </div>
 <div id="overlay"></div>
@@ -748,15 +752,15 @@
 
 
 <!--<script>-->
-	<!--$(document).ready(function() {-->
-		<!--$.backstretch([-->
-			<!--"/../../static/revamp/img/Backgrounds/bg1.jpg",-->
+<!--$(document).ready(function() {-->
+<!--$.backstretch([-->
+<!--"/../../static/revamp/img/Backgrounds/bg1.jpg",-->
 <!--//				"/../../static/revamp/img/header2.jpg"-->
-		<!--], {-->
-			<!--fade: 1000,-->
-			<!--duration: 3000-->
-		<!--});-->
-	<!--});-->
+<!--], {-->
+<!--fade: 1000,-->
+<!--duration: 3000-->
+<!--});-->
+<!--});-->
 <!--</script>-->
 
 
@@ -766,29 +770,29 @@
 Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: https://google.com/ads/remarketingsetup
 --------------------------------------------------->
 <script type="text/javascript">
-/* <![CDATA[ */
-var google_conversion_id = 932007205;
-var google_custom_params = window.google_tag_params;
-var google_remarketing_only = true;
-/* ]]> */
+	/* <![CDATA[ */
+	var google_conversion_id = 932007205;
+	var google_custom_params = window.google_tag_params;
+	var google_remarketing_only = true;
+	/* ]]> */
 </script>
 <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
 </script>
 <noscript>
-<div style="display:inline;">
-<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/932007205/?guid=ON&amp;script=0"/>
-</div>
+	<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/932007205/?guid=ON&amp;script=0"/>
+	</div>
 </noscript>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-68064927-1', 'auto');
-  ga('send', 'pageview');
+	ga('create', 'UA-68064927-1', 'auto');
+	ga('send', 'pageview');
 
 </script>
 <!--Googel Tags End-->
@@ -796,15 +800,15 @@ var google_remarketing_only = true;
 
 <!--Start of Tawk.to Script-->
 <!--<script type="text/javascript">-->
-	<!--var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();-->
-	<!--(function(){-->
-		<!--var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];-->
-		<!--s1.async=true;-->
-		<!--s1.src='https://embed.tawk.to/5687bb1cbc4176802560a8a2/1b4iq4he6';-->
-		<!--s1.charset='UTF-8';-->
-		<!--s1.setAttribute('crossorigin','*');-->
-		<!--s0.parentNode.insertBefore(s1,s0);-->
-	<!--})();-->
+<!--var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();-->
+<!--(function(){-->
+<!--var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];-->
+<!--s1.async=true;-->
+<!--s1.src='https://embed.tawk.to/5687bb1cbc4176802560a8a2/1b4iq4he6';-->
+<!--s1.charset='UTF-8';-->
+<!--s1.setAttribute('crossorigin','*');-->
+<!--s0.parentNode.insertBefore(s1,s0);-->
+<!--})();-->
 <!--</script>-->
 <!--End of Tawk.to Script-->
 
