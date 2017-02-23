@@ -60,38 +60,38 @@ var SHOW_ESTIMATE = 0;
 var COUPON_CODE = "";
 
 var logoMap = {
-        'Standard Service':'<i class="cg-icon cg-icon-card icon-cg-car-standard x70"></i>',
-        'Standard Service2':'<i class="cg-icon cg-icon-card icon-cg-bike-standard x70"></i>',
-        'Comprehensive Service':'<i class="cg-icon cg-icon-card icon-cg-car-comp x70"></i>',
-        'AC Check':'<i class="cg-icon cg-icon-card icon-cg-accheck x70"></i>',
-        'Wheel Alignment And Balancing':'<i class="cg-icon cg-icon-card icon-cg-alignment x70"></i>',
-        'Comprehensive Check-Up':'<i class="cg-icon cg-icon-card icon-cg-checkup x70"></i>',
-        'Scanning':'<i class="cg-icon cg-icon-card icon-cg-scan x70"></i>',
-        'Brake Pad/Disc Pad Replacement':'<i class="cg-icon cg-icon-card icon-cg-brake x70"></i>',
-        'Clutch Check':'<i class="cg-icon cg-icon-card icon-cg-clutch x70"></i>',
-        'Battery Charging/Replacement':'<i class="cg-icon cg-icon-card icon-cg-battery x70"></i>',
-        'Other Diagnosis':'<i class="cg-icon cg-icon-card icon-cg-repair x70"></i>',
-        'Complete Car Detailing':'<i class="cg-icon cg-icon-card icon-cg-exterior x70"></i>',
-        'Interior Dry Cleaning':'<i class="cg-icon cg-icon-card icon-cg-dryclean x70"></i>',
-        'Exterior Rubbing Polishing':'<i class="cg-icon cg-icon-card icon-cg-exterior x70"></i>',
-        'Teflon Coating':'<i class="cg-icon cg-icon-card icon-cg-exterior x70"></i>',
-        'Underbody Anti Rust Treatment':'<i class="cg-icon cg-icon-card icon-cg-underbody x70"></i>',
-        'Exterior Car Washing':'<i class="cg-icon cg-icon-card icon-cg-wash x70"></i>',
-        'Flat Tyre':'<i class="cg-icon cg-icon-card icon-cg-tyre2 x70"></i>',
-        'Battery Jump Start':'<i class="cg-icon cg-icon-card icon-cg-battery x70"></i>',
-        'Towing':'<i class="cg-icon cg-icon-card icon-cg-tow x70"></i>',
-        'Minor Repairs':'<i class="cg-icon cg-icon-card icon-cg-repair x70"></i>',
-        'Key Lockout':'<i class="cg-icon cg-icon-card icon-cg-key x70"></i>',
-        'Emergency Fuel (5 Litres)':'<i class="cg-icon cg-icon-card icon-cg-fuel x70"></i>',
-        'Tyre Replacement':'<i class="cg-icon cg-icon-card icon-cg-tyre x70"></i>',
-        'Clickgarage Assist':'<i class="cg-icon cg-icon-card icon-cg-contract x70"></i>',
-        'General Check Up':'<i class="cg-icon cg-icon-card icon-cg-checkup-1 x70"></i>',
-        'Cable Replacement':'<i class="cg-icon cg-icon-card icon-cg-wire x70"></i>',
-        'Clutch Overhaul':'<i class="cg-icon cg-icon-card icon-cg-clutch x70"></i>',
-        'Front Fork Oil Or Seal Replacement':'<i class="cg-icon cg-icon-card icon-cg-fork x70"></i>',
-        'Chain Sprocket Replacement':'<i class="cg-icon cg-icon-card icon-cg-chain x70"></i>',
-        'Spark Plug Replacement':'<i class="cg-icon cg-icon-card icon-cg-spark x70"></i>',
-        'Engine Check':'<i class="cg-icon cg-icon-card icon-cg-engine x70"></i>',
+        'Standard Service':'<i class="cg-icon cg-icon-card icon-cg-car-standard x50"></i>',
+        'Standard Service2':'<i class="cg-icon cg-icon-card icon-cg-bike-standard x50"></i>',
+        'Comprehensive Service':'<i class="cg-icon cg-icon-card icon-cg-car-comp x50"></i>',
+        'AC Check':'<i class="cg-icon cg-icon-card icon-cg-accheck x50"></i>',
+        'Wheel Alignment And Balancing':'<i class="cg-icon cg-icon-card icon-cg-alignment x50"></i>',
+        'Comprehensive Check-Up':'<i class="cg-icon cg-icon-card icon-cg-checkup x50"></i>',
+        'Scanning':'<i class="cg-icon cg-icon-card icon-cg-scan x50"></i>',
+        'Brake Pad/Disc Pad Replacement':'<i class="cg-icon cg-icon-card icon-cg-brake x50"></i>',
+        'Clutch Check':'<i class="cg-icon cg-icon-card icon-cg-clutch x50"></i>',
+        'Battery Charging/Replacement':'<i class="cg-icon cg-icon-card icon-cg-battery x50"></i>',
+        'Other Diagnosis':'<i class="cg-icon cg-icon-card icon-cg-repair x50"></i>',
+        'Complete Car Detailing':'<i class="cg-icon cg-icon-card icon-cg-exterior x50"></i>',
+        'Interior Dry Cleaning':'<i class="cg-icon cg-icon-card icon-cg-dryclean x50"></i>',
+        'Exterior Rubbing Polishing':'<i class="cg-icon cg-icon-card icon-cg-exterior x50"></i>',
+        'Teflon Coating':'<i class="cg-icon cg-icon-card icon-cg-exterior x50"></i>',
+        'Underbody Anti Rust Treatment':'<i class="cg-icon cg-icon-card icon-cg-underbody x50"></i>',
+        'Exterior Car Washing':'<i class="cg-icon cg-icon-card icon-cg-wash x50"></i>',
+        'Flat Tyre':'<i class="cg-icon cg-icon-card icon-cg-tyre2 x50"></i>',
+        'Battery Jump Start':'<i class="cg-icon cg-icon-card icon-cg-battery x50"></i>',
+        'Towing':'<i class="cg-icon cg-icon-card icon-cg-tow x50"></i>',
+        'Minor Repairs':'<i class="cg-icon cg-icon-card icon-cg-repair x50"></i>',
+        'Key Lockout':'<i class="cg-icon cg-icon-card icon-cg-key x50"></i>',
+        'Emergency Fuel (5 Litres)':'<i class="cg-icon cg-icon-card icon-cg-fuel x50"></i>',
+        'Tyre Replacement':'<i class="cg-icon cg-icon-card icon-cg-tyre x50"></i>',
+        'Clickgarage Assist':'<i class="cg-icon cg-icon-card icon-cg-contract x50"></i>',
+        'General Check Up':'<i class="cg-icon cg-icon-card icon-cg-checkup-1 x50"></i>',
+        'Cable Replacement':'<i class="cg-icon cg-icon-card icon-cg-wire x50"></i>',
+        'Clutch Overhaul':'<i class="cg-icon cg-icon-card icon-cg-clutch x50"></i>',
+        'Front Fork Oil Or Seal Replacement':'<i class="cg-icon cg-icon-card icon-cg-fork x50"></i>',
+        'Chain Sprocket Replacement':'<i class="cg-icon cg-icon-card icon-cg-chain x50"></i>',
+        'Spark Plug Replacement':'<i class="cg-icon cg-icon-card icon-cg-spark x50"></i>',
+        'Engine Check':'<i class="cg-icon cg-icon-card icon-cg-engine x50"></i>',
         'Bumper Rear':'<img class="" src="/../../static/revamp/img/Panel/Bumper Rear.png">',
         'Door Front Left':'<img class="" src="/../../static/revamp/img/Panel/Door Front Left.png">',
         'Door Front Right':'<img class="" src="/../../static/revamp/img/Panel/Door Front Right.png">',
@@ -906,7 +906,7 @@ var Global = {
             JOBS_SUMMARY.push({'category':val.service_cat,'job_name':val.job_name,'price_total':val.total_price,'price_part':val.total_part,'price_labour':val.total_labour,'price_discount':val.total_discount,"doorstep":val.doorstep})
             html +='<div class="cart-item" job-id="'+val.id+'">';
             html +=' 								<div class="col s1 m1 l1">';
-            html +=' 									<div class="delete x25">';
+            html +=' 									<div class="delete x20">';
             html +=' 										<i class="fa fa-trash-o"></i>';
             html +=' 									</div>';
             html +=' 								</div>';
@@ -1134,7 +1134,7 @@ var Global = {
             // html += '										<img class=""  src="/../../static/revamp/img/Icons-Services/Emergency.png">';
             html += '									</div>';
             html += '									<div class="card-content job-content">';
-            html += '										<div class="col s12 m12 l6">';
+            html += '										<div class="col s12 m12 l5">';
             html += '											<div class="job-name">'+ val.job_name +'</div>';
             // html += '											<div class="job-desc">';
             html += '											<div class="job-desc">';
@@ -1157,15 +1157,15 @@ var Global = {
                 html += '											<div class="job-tat">Time : '+(parseFloat(val.time)/60)+' Hrs</div>';
             }
             html += '										</div>';
-            html += '										<div class="col l3 s12 m12 button-col hide-on-med-and-down">';
-            html += '											<button class="waves-effect waves-light btn cg-primary btn-service closed-more-info" type="submit" name="action">Info';
+            html += '										<div class="col l4 s12 m12 button-col hide-on-med-and-down">';
+            html += '											<button class="waves-effect waves-light btn cg-primary btn-small btn-service closed-more-info" type="submit" name="action">Info';
             html += '												<i class="material-icons right">turned_in</i>';
             html += '											</button>';
 
             if (cart_list.indexOf(val.id)>=0){
-                html += '											<button class="waves-effect waves-light btn cg-primary  btn-service book-btn disabled" type="submit" name="action">Book';
+                html += '											<button class="waves-effect waves-light btn btn-small cg-primary  btn-service book-btn disabled" type="submit" name="action">Book';
             }else{
-                html += '											<button class="waves-effect waves-light btn cg-primary  btn-service book-btn" type="submit" name="action">Book';
+                html += '											<button class="waves-effect waves-light btn btn-small cg-primary  btn-service book-btn" type="submit" name="action">Book';
             }
             html += '												<i class="material-icons right">send</i>';
             html += '											</button>';
