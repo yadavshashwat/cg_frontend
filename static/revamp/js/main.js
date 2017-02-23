@@ -453,13 +453,18 @@ var Global = {
                 }
             }
         });
-        function isTouchDevice(){
-            return typeof window.ontouchstart !== 'undefined';
-        }
-        if (isTouchDevice()){
-        console.log("touch device")
-        $(".selectize-input input").attr('readonly','readonly');
-        }
+        // function isTouchDevice(){
+        //     return typeof window.ontouchstart !== 'undefined';
+        // }
+        // if (isTouchDevice()){
+        // console.log("touch device")
+        // $(".selectize-input input").attr('readonly','readonly');
+        // }
+
+         var viewportWidth = $(window).width();
+         if (viewportWidth <= 992){
+              $(".selectize-input input").attr('readonly','readonly');
+         }
 
         // container.find('select').select2({
         //           // allowClear: true
@@ -510,13 +515,10 @@ var Global = {
             // container.find('select').material_select();
             // container.find('select').select2();
             container.find('select').selectize();
-            function isTouchDevice(){
-            return typeof window.ontouchstart !== 'undefined';
-        }
-        if (isTouchDevice()){
-        console.log("touch device")
-        $(".selectize-input input").attr('readonly','readonly');
-        }
+         var viewportWidth = $(window).width();
+         if (viewportWidth <= 992){
+              $(".selectize-input input").attr('readonly','readonly');
+         }
 
 
     },

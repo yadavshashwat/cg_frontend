@@ -8,7 +8,7 @@ $(document).ready(function() {
     // $('select').material_select();
     // $('select').select2();
     // $('#service-select').
-    $('select').selectize();
+    // $('select').selectize();
 
 });
 
@@ -153,7 +153,7 @@ var Global = {
             $('#cover').hide()
         });
 
-
+        $('#time-slot').find('select').selectize()
         var callbrands =function(){
             vehtype = $('#vehicle-select-form .veh-cat-card.selected').text().trim()
             // console.log(vehtype)
@@ -311,6 +311,11 @@ var Global = {
             var vehicle_type = $('#services').attr('data-vehicle-type')
             $('#jobs .service-sub-category.car-care').hide()
             $('#jobs .service-sub-category.denting').hide()
+            $('#service-select').find("option[value=" + classy +"]").attr('selected', true);
+            // $('.selDiv option[value="+classy+"]').addattr
+            // $('#service-select .selectize-dropdown-content').find("[data-value='" + classy + "']").addClass('selected').addClass('active');
+            $('#service-select').find('select').selectize()
+
             name = name.split('-')
             // console.log(classy);
             if(classy == 'servicing'){
@@ -836,13 +841,10 @@ var Global = {
                 }
             }
         });
-        function isTouchDevice(){
-            return typeof window.ontouchstart !== 'undefined';
-        }
-        if (isTouchDevice()){
-        console.log("touch device")
-        $(".selectize-input input").attr('readonly','readonly');
-        }
+        var viewportWidth = $(window).width();
+         if (viewportWidth <= 992){
+              $(".selectize-input input").attr('readonly','readonly');
+         }
 
 
     },
@@ -868,14 +870,10 @@ var Global = {
             // container.find('select').material_select();
             // container.find('select').select2();
             container.find('select').selectize();
-         function isTouchDevice(){
-            return typeof window.ontouchstart !== 'undefined';
-        }
-        if (isTouchDevice()){
-        console.log("touch device")
-        $(".selectize-input input").attr('readonly','readonly');
-        }
-
+         var viewportWidth = $(window).width();
+         if (viewportWidth <= 992){
+              $(".selectize-input input").attr('readonly','readonly');
+         }
 
     },
     loadCart:function(data){
