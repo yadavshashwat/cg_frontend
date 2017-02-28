@@ -279,7 +279,7 @@ var Global = {
             $('#home .veh-cat-card').removeClass('selected');
             $('#home .veh-cat-card:hover').addClass('selected');
 
-           var html = '<select id="vehicle-select-list" class="js-example-responsive">';
+           var html = '<select id="vehicle-select-list" class="">';
             html += '<option value="" disabled selected>Model</option>';
             html += '</select>';
              $('#home #vehicle-select').html(html);
@@ -414,7 +414,7 @@ var Global = {
             }
             // console.log(vehtype)
             container.html('');
-            var html = '<select id="brand-select-list" class="js-example-responsive">';
+            var html = '<select id="brand-select-list" class="">';
             html += '<option value="" disabled selected>Make</option>';
 
             $.each(data, function(ix, val){
@@ -435,6 +435,10 @@ var Global = {
 
             // container.find('select').material_select();
         container.find('select').selectize({
+            create: true,
+            sortField: 'text',
+            // openOnFocus:false,
+            // maxOptions:10,
             render: {
                 item: function(item, escape) {
                     // console.log(item.value)

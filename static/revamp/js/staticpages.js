@@ -119,7 +119,7 @@ var Global = {
             container.html(html)
         },
 
-        loadBikeService:function(data){
+    loadBikeService:function(data){
             var container = $('#dynamic-pages .bikes .pre-data');
             container.html('')
             make_name = ""

@@ -61,6 +61,7 @@ var TOTAL_PARTS_NEW_BOOKING = 0;
 var TOTAL_DISCOUNT_NEW_BOOKING = 0;
 var COUP_DISCOUNT_NEW_BOOKING = 0 ;
 var TOTAL_JOBS_NEW_BOOKING = 0;
+// var TOTAL_ITEM_ESTIMATE = 0;
 
 // Sort Filter
 var LEAD_TYPE = "";
@@ -381,51 +382,6 @@ var Global = {
             $('#customer-detail .cust-detail').removeClass('selected')
             $('#customer-detail .service-detail:hover').addClass('selected')
         });
-        // Update Booking
-        // - add more items to cart
-        // var loadsource = function(){
-        //      var container = $('#customer-detail #source input.autocomplete');
-        //     console.log('check')
-        //     var source = {};
-        //     container.autocomplete({
-        //         data : {
-        //             'Google Adwords':null,
-        //             'Repeat Customer':null,
-        //             'Employee Referral':null,
-        //             'External Referral':null,
-        //             'JustDial':null,
-        //             'Pamphlet':null,
-        //             'Auto Advertisement':null,
-        //             'On-Ground Marketing':null,
-        //             'Sulekha':null,
-        //             'Database - Cold Calling':null,
-        //             'Chat':null,
-        //             'B2B':null,
-        //             'Partner - Droom':null,
-        //             'Partner - Wishup':null,
-        //             'Partner - Housejoy':null,
-        //             'Walk in':null,
-        //             'Partner - Mr. Right':null,
-        //             'Web Search':null,
-        //             'Unknown':null,
-        //             'Society camps':null,
-        //             'Check up camps':null,
-        //             'Sign up lead':null,
-        //             'Facebook Ad':null
-        //         }
-        //     })
-        //     Materialize.updateTextFields();
-        //
-        // }
-        // $('#customer-detail').on('keypress','#source',function(e,event,data){
-        //     var code = (e.keyCode || e.which);
-        //     // do nothing if it's an arrow key
-        //     if(code == 37 || code == 38 || code == 39 || code == 40) {
-        //         return;
-        //     }
-        //      // var source = $(this).val();
-        //         loadsource
-        // });
 
         $('#customer-detail .add-item .btn-additem-est').click(function(){
             container_parent = $('#customer-detail #estimate-table').find('tbody')
@@ -436,39 +392,126 @@ var Global = {
             row.find('td:eq(0)').text(TOTAL_ITEMS_ADMIN)
             row.find('td:eq(1) input').val('')
             row.find('td:eq(3) input').val('')
+            row.find('td:eq(4) input').val('')
+            row.find('td:eq(5) input').val('')
+            row.find('td:eq(6) input').val('')
+            row.find('td:eq(7)').html('')
+            row.find('td:eq(8) input').removeAttr('checked', this.checked)
 
             return
-            // container =  $('#customer-detail #estimate-table').find('tbody').clone();
-            // html = container.html()
-
-
-            // container =  $('#new-booking .service-select .services-list .service-row.to-copy-row')
-            // container_parent =  $('#new-booking .service-select .services-list')
-            // html =''
-            // new_container = container.clone().removeClass('invisible').removeClass('to-copy-row');
-            // new_container.appendTo(container_parent);
-            //  html = ''
-            // html = container.html();
-            // item_no = TOTAL_ITEMS_ADMIN + 1;
-            // html += '										<tr>';
-            // html += '<td>'+item_no+'</td>';
-            // html += '<td>'+'<input id="Name-'+item_no+'" type="text" class="browser-default" aria-required="true"></td>';
-            // html += '<td>'+'<div class="input-field sort" id ="part_type"><select  class="browser-default">'
-            // html+=  '<option value="Part">Part</option>'
-            // html+=  '<option value="Labour" selected>Labour</option>'
-            // html+=  '<option value="Discount" >Discount</option>'
-            // html += '</select></div>'+'</td>';
-            // html += '<td>'+'<input id="price-'+item_no+'" type="number" class="browser-default" aria-required="true"></td>';
-            // html += '</tr>';
-            // container_parent.html(html);
-            // // new_container =
-            // // new_container.appendTo(container);
-            // TOTAL_ITEMS_ADMIN = item_no;
         });
 
-        $('#customer-detail').on('click',' #estimate-table .delete',function(){
-            $(this).closest('tr').remove()
+        $('#customer-detail').on('keyup click','table',function(e,event,data){
+                TOTAL_PRICE_ADMIN = 0;
+                TOTAL_LABOUR_ADMIN = 0;
+                TOTAL_PARTS_ADMIN = 0;
+                TOTAL_DISCOUNT_ADMIN = 0;
+            var table = document.getElementById('estimate-table');
+                // units = $(this).closest('tr').find('#part_units').eq(0).val()
+                // unit_price = $(this).closest('tr').find('#part_unitprice').eq(0).val()
+                // console.log(units)
+                // console.log(unit_price)
+                // part_total_price = $(this).closest('tr').find('#part_units').val() * $(this).closest('tr').find('#part_unitprice').val();
+
+                // $(this).closest('tr').find('#part_price').val(part_total_price)
+                for (var i = 1, row; row = table.rows[i]; i++) {
+                    for (var j = 0, col; col = row.cells[j]; j++) {
+                        if (j == 1) {
+                            name_item = $(row.cells[j]).find('input,select').eq(0).val()
+                            // console.log(name_item)
+                        }else if (j == 2) {
+                            type_item = $(row.cells[j]).find('input,select').eq(0).val()
+                            // console.log(type_item)
+                        } else if (j == 3) {
+                            quantity = $(row.cells[j]).find('input,select').eq(0).val()
+                            // console.log(type_item)
+                        }else if (j == 4) {
+                            unit_price = $(row.cells[j]).find('input,select').eq(0).val()
+                            // console.log(type_item)
+                        }else if (j == 5) {
+                            price_item = unit_price * quantity;
+                            $(row.cells[j]).find('input,select').eq(0).val(price_item)
+                            // console.log(price_item)
+                        }else if (j == 6){
+                             comment =  $(row.cells[j]).find('input,select').eq(0).val()
+                        }else if (j == 8){
+                             if($(row.cells[j]).find('input,select')[0].checked){
+                                 approved = "Yes"
+                                 // console.log(approved)
+                             }else{
+                                 approved = "TBD"
+                                 // console.log(approved)
+                             }
+                        }else if (j == 9){
+                             settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
+                        }
+                    }
+
+
+                        if (type_item == "Labour") {
+                            TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
+                            TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(price_item)
+                        } else if (type_item == "Part" ||  type_item == "Lube" || type_item == "Consumable") {
+                            TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
+                            TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(price_item)
+                        } else if (type_item == "Discount") {
+                            TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN - parseFloat(price_item)
+                            TOTAL_DISCOUNT_ADMIN = TOTAL_DISCOUNT_ADMIN + parseFloat(price_item)
+                        } else {
+                            TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN
+                        }
+                    $('#customer-detail .total-amount').text(TOTAL_PRICE_ADMIN)
+                }
+        });
+
+        $('#customer-detail #comp_all_select').click(function(){
+            active_box =  document.getElementById('comp_all_select');
+            // console.log(active_box.checked)
+            if (active_box.checked){
+                $('#customer-detail .approve-item.tochange').prop('checked', this.checked)
+            }else{
+                $('#customer-detail .approve-item.tochange').removeAttr('checked', this.checked)
+            }
         })
+
+        $('#customer-detail').on('click',' #estimate-table .delete',function(){
+                TOTAL_PRICE_ADMIN = 0;
+            $(this).closest('tr').remove()
+             TOTAL_ITEMS_ADMIN -= 1;
+             var table = document.getElementById('estimate-table');
+                for (var i = 1, row; row = table.rows[i]; i++) {
+                    for (var j = 0, col; col = row.cells[j]; j++) {
+                        if (j == 0) {
+                            $(row.cells[j]).text(i)
+                            // console.log(name_item)
+                        }if (j == 1) {
+                            name_item = $(row.cells[j]).find('input,select').eq(0).val()
+                            // console.log(name_item)
+                        } else if (j == 2) {
+                            type_item = $(row.cells[j]).find('input,select').eq(0).val()
+                            // console.log(type_item)
+                        } else if (j == 3) {
+                            price_item = $(row.cells[j]).find('input,select').eq(0).val()
+                            // console.log(price_item)
+                        } else if (j == 4){
+                             settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
+                        }
+                    }
+                        if (type_item == "Labour") {
+                            TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
+                            TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(price_item)
+                        } else if (type_item == "Part" || type_item == "Lube" || type_item == "Consumable") {
+                            TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
+                            TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(price_item)
+                        } else if (type_item == "Discount") {
+                            TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN - parseFloat(price_item)
+                            TOTAL_DISCOUNT_ADMIN = TOTAL_DISCOUNT_ADMIN + parseFloat(price_item)
+                        } else {
+                            TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN
+                        }
+                }
+            $('#customer-detail .total-amount').text(TOTAL_PRICE_ADMIN)
+        });
 
         // - update-customer-booking
         $('#customer-detail .btn-update-cust').click(function(){
@@ -516,6 +559,22 @@ var Global = {
             Commons.ajaxData('update_estimate', {b_id: bid,
                                                 estimate: estimate,
                                                 }, "post", _this, _this.loadCustomerestimate,null, '.loading-pane');
+        });
+
+        $('#customer-detail .btn-view-bill').click(function(){
+            bid = $('#customer-detail #booking_id').attr('booking_id');
+            b_data_id = $('#customer-detail #booking_id').attr('booking_data_id');
+
+            _this.updateCart()
+            console.log(CURRENT_CART_ADMIN)
+            estimate = JSON.stringify(CURRENT_CART_ADMIN)
+            Commons.ajaxData('update_estimate', {b_id: bid,
+                                                estimate: estimate,
+                                                }, "post", _this, _this.loadCustomerestimate,null, '.loading-pane');
+
+            window.open(
+                window.location.pathname.split('/')[0] + '/bills/' + b_data_id
+            );
         });
 
         // $('#customer-detail .delete').click(function(){
@@ -873,7 +932,9 @@ var Global = {
             container =  $('#new-booking .service-select .services-list .service-row.to-copy-row')
             container_parent =  $('#new-booking .service-select .services-list')
             html =''
-            new_container = container.clone().removeClass('invisible').removeClass('to-copy-row');
+            new_container = cont
+
+            ainer.clone().removeClass('invisible').removeClass('to-copy-row');
             new_container.appendTo(container_parent);
         });
         // -- DELETE ITEM
@@ -1067,6 +1128,10 @@ var Global = {
             b2b_box =  document.getElementById('b2b_box');
             admin_box =  document.getElementById('admin_box');
             staff_box =  document.getElementById('staff_box');
+            user_state = $('#user-detail #user_state').val()
+            agent_vat = $('#user-detail #agent_vat').val()
+            agent_stax = $('#user-detail #agent_stax').val()
+            agent_cin = $('#user-detail #agent_cin').val()
 
             agent = agent_box.checked
             b2b = b2b_box.checked
@@ -1074,7 +1139,24 @@ var Global = {
             staff= staff_box.checked
 
             error =0
-
+            if (agent){
+                if(user_state==""){
+                    $('#user-detail #user_state').addClass("invalid");
+                    error =1 ;
+                }
+                if(agent_vat==""){
+                    $('#user-detail #agent_vat').addClass("invalid");
+                    error =1 ;
+                }
+                if(agent_stax==""){
+                    $('#user-detail #agent_stax').addClass("invalid");
+                    error =1 ;
+                }
+                if(agent_cin==""){
+                    $('#user-detail #agent_cin').addClass("invalid");
+                    error =1 ;
+                }
+            }
 
             if(user_name==""){
                 $('#user-detail #user_name').addClass("invalid");
@@ -1109,7 +1191,7 @@ var Global = {
                 return;
             }else{
                 Commons.ajaxData('update_user',
-                        {user_id:user_id, user_num: user_number, user_name : user_name, user_email: user_email, user_add: user_address, user_loc: user_locality, user_city:user_city,b2b_st:b2b, admin_st:admin, staff_st:staff,agent_st:agent}
+                        {user_id:user_id, user_num: user_number, user_name : user_name, user_email: user_email, user_add: user_address, user_loc: user_locality, user_city:user_city,user_state :user_state, agent_vat:agent_vat, agent_cin:agent_cin, agent_stax:agent_stax,b2b_st:b2b, admin_st:admin, staff_st:staff,agent_st:agent}
                     // {
                                 // c_id: coupon_code  ,
                                 //     d_start: coupon_start ,
@@ -1165,7 +1247,10 @@ var Global = {
                 document.getElementById('agent_box').removeAttribute("checked", "");
                 document.getElementById('admin_box').removeAttribute("checked", "");
                 document.getElementById('staff_box').removeAttribute("checked", "");
-
+                $('#user-detail #user_state').val('')
+            $('#user-detail #agent_vat').val('')
+            $('#user-detail #agent_cin').val('')
+            $('#user-detail #agent_stax').val('')
         });
 
 
@@ -1404,6 +1489,27 @@ var Global = {
                 } catch (e) {
 
                 }
+               try {
+                 $('#user-detail #user_state').val(val.user_state);
+                } catch (e) {
+
+                }
+               try {
+                 $('#user-detail #agent_cin').val(val.agent_cin);
+                } catch (e) {
+
+                }
+               try {
+                 $('#user-detail #agent_vat').val(val.agent_vat);
+                } catch (e) {
+
+                }
+               try {
+                 $('#user-detail #agent_stax').val(val.agent_stax);
+                } catch (e) {
+
+                }
+
               if (val.agent){
                    document.getElementById('agent_box').setAttribute("checked", "");
                }
@@ -1517,7 +1623,7 @@ var Global = {
             // <---- Old booking data--->>
             // <---- New Booking Data --->>
             html += '<div class="row">'
-            html += '<div id="booking_id" class="col s12 m12 l12 book_id" booking_id="'+val.booking_id+'"><h4><b>#'+val.booking_id+'</h4></b></div>'
+            html += '<div id="booking_id" class="col s12 m12 l12 book_id" booking_data_id="'+val.id +'" booking_id="'+val.booking_id+'"><h4><b>#'+val.booking_id+'</h4></b></div>'
             html += '</div>'
             html += '<div class="row">'
             html += '<div class="col s12 m12 l12">'
@@ -1625,7 +1731,6 @@ var Global = {
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Agent Details</label></div>'
                 html += '</div>'
-
             }
             // if (is_agent)
             if (val.req_user_agent || val.req_user_staff || val.req_user_admin) {
@@ -1703,9 +1808,7 @@ var Global = {
                     if (val.status == "Job Completed" || val.status == "Feedback Taken") {
                         $('#customer-detail.agent-button-row').hide()
                         $('#customer-detail .agent-button-row').hide()
-
                         console.log('Check')
-
                     } else {
                         // console.log('Check')
                         $('#customer-detail .agent-button-row').show()
@@ -1713,9 +1816,14 @@ var Global = {
                 }
             if (val.req_user_b2b){
                 if (val.status == "Confirmed"){
-                     $('#customer-detail .b2b-button-row').show()
+                     $('#customer-detail .b2b-button-row-1').show()
                 }else{
-                     $('#customer-detail .b2b-button-row').hide()
+                     $('#customer-detail .b2b-button-row-1').hide()
+                }
+                if (val.status == "Job Completed" || val.status == "Feedback Taken" || val.status == "Cancelled"){
+                     $('#customer-detail .b2b-button-row-2').hide()
+                }else{
+                     $('#customer-detail .b2b-button-row-2').show()
                 }
             }
 
@@ -1731,7 +1839,7 @@ var Global = {
             }
              date_string = val.date_booking
             if (val.date_delivery==null){
-                date_delivery_string = val.date_booking
+                 date_delivery_string = val.date_booking
             } else{
                  date_delivery_string = val.date_delivery
             }
@@ -1758,33 +1866,48 @@ var Global = {
         //     formatSubmit: undefined,
         //
         // });
-
+        TOTAL_ITEM_ESTIMATE = 0;
         var container2 = $('#customer-detail .booking-job-data .pre-data');
         container2.html('');
         html = ''
+        // Service Table Start
         $.each(data, function(ix, val) {
-            html += '								<div class="desc-content col s12 m12 l8 offset-l2">';
-            html += '									<table class="striped" id="estimate-table">';
-            html += '										<thead>';
-            html += '										<tr>';
-            html += '											<th data-field="id">S.No.</th>';
-            html += '											<th data-field="part">Name</th>';
-            html += '											<th data-field="action">Type</th>';
-            // html += '											<th data-field="part">Type</th>';
-            if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff){
-                html += '											<th data-field="price">Item Price</th>';
+            html += '                               <div class="desc-content col s12 m12 l10 offset-l1">';
+            html += '                                   <table class="striped" id="estimate-table">';
+            html += '                                       <thead>';
+            html += '                                       <tr>';
+            html += '                                           <th data-field="id">S.No.</th>';
+            html += '                                           <th data-field="part">Name</th>';
+            html += '                                           <th data-field="action">Type</th>';
+            // html += '                                            <th data-field="part">Type</th>';
+            if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff || val.req_user_agent){
+                html += '                                           <th data-field="unit">Units</th>';
+                html += '                                           <th data-field="unit_price">Unit Price (Rs.)</th>';
+                html += '                                           <th data-field="price">Item Price (Rs.)</th>';
+            }else{
+                html += '                                           <th data-field="price" class="invisible">Item Price (Rs.)</th>';
             }
-            if (val.req_user_admin || val.req_user_staff){
-                html += '											<th data-field="cat-settle">CAT Settlement</th>';
-            }
-            if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-            html += '											<th data-field="delete"></th>';
-                }
-            html += '										</tr>';
-            html += '										</thead>';
-            html += '										<tbody>';
-            compLen = val.service_items.length;
+            // if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
+            html += '                                           <th data-field="part-comment">Comment</th>';
+            html += '<th>Status</th>'
+            html += '<th>Approve</th>'
 
+
+            if (val.req_user_admin || val.req_user_staff){
+                html += '                                           <th data-field="cat-settle">Settlement</th>';
+            }else{
+                html += '                                           <th data-field="cat-settle" class="invisible">Settlement</th>';
+            }
+
+            // }
+            if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
+            html += '                                           <th data-field="delete"></th>';
+                }
+            html += '                                       </tr>';
+            html += '                                       </thead>';
+            html += '                                       <tbody>';
+            compLen = val.service_items.length;
+            // TOTAL_ITEM_ESTIMATE = compLen
 
             CURRENT_CART_ADMIN = [];
             TOTAL_PRICE_ADMIN = 0;
@@ -1807,7 +1930,7 @@ var Global = {
                 if (val.service_items[i].type == "Labour") {
                     TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(val.service_items[i].price)
                     TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(val.service_items[i].price)
-                } else if (val.service_items[i].type == "Part") {
+                } else if (val.service_items[i].type == "Part" || val.service_items[i].type == "Lube" || val.service_items[i].type == "Consumable") {
                     TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(val.service_items[i].price)
                     TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(val.service_items[i].price)
                 } else if (val.service_items[i].type == "Discount") {
@@ -1817,47 +1940,173 @@ var Global = {
                     TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN
                 }
 
-            if (val.req_user_agent || val.req_user_staff || val.req_user_admin) {
                 item_no = i + 1;
-                html += '										<tr>';
-                html += '											<td>' + item_no + '</td>';
-                html += '											<td>' + '<input id="part_name" type="text" class="browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
-                html += '											<td>' + '<div class="input-field sort" id ="part_type"><select  class="browser-default">'
-                if (val.service_items[i].type == "Part") {
-                    html += '<option value="Part" selected>Part</option>'
-                } else {
-                    html += '<option value="Part">Part</option>'
+                html += '<tr>';
+                // Cell item no.
+                html += '<td class="centered-text">' + item_no + '</td>';
+                // Part Name
+                if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
+                    html += '<td>' + '<input id="part_name" type="text" class="browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
+                }else{
+                    html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
                 }
-                if (val.service_items[i].type == "Labour") {
-                    html += '<option value="Labour" selected>Labour</option>'
-                } else {
-                    html += '<option value="Labour">Labour</option>'
-                }
-                if (val.service_items[i].type == "Discount") {
-                    html += '<option value="Discount" selected>Discount</option>'
-                } else {
-                    html += '<option value="Discount">Discount</option>'
-                }
-                if (val.service_items[i].type == "Total") {
-                    html += '<option value="Total" selected>Total</option>'
-                } else {
-                    html += '<option value="Total">Total</option>'
-                }
-                html += '</select></div>' + '</td>';
+                // Part Type
+                if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
+                    html += '<td>' + '<div class="input-field sort" id ="part_type"><select  class="browser-default">'
+                    if (val.service_items[i].type == "Part") {
+                        html += '<option value="Part" selected>Part</option>'
+                    } else {
+                        html += '<option value="Part">Part</option>'
+                    }
+                    if (val.service_items[i].type == "Lube") {
+                        html += '<option value="Lube" selected>Lube</option>'
+                    } else {
+                        html += '<option value="Lube">Lube</option>'
+                    }
+                    if (val.service_items[i].type == "Consumable") {
+                        html += '<option value="Consumable" selected>Consumable</option>'
+                    } else {
+                        html += '<option value="Consumable">Consumable</option>'
+                    }
 
+                    if (val.service_items[i].type == "Labour") {
+                        html += '<option value="Labour" selected>Labour</option>'
+                    } else {
+                        html += '<option value="Labour">Labour</option>'
+                    }
+                    if (val.service_items[i].type == "Discount") {
+                        html += '<option value="Discount" selected>Discount</option>'
+                    } else {
+                        html += '<option value="Discount">Discount</option>'
+                    }
+                    if (val.service_items[i].type == "Total") {
+                        html += '<option value="Total" selected>Total</option>'
+                    } else {
+                        html += '<option value="Total">Total</option>'
+                    }
+                    html += '</select></div>' + '</td>';
+                }else{
+                    html += '<td>' + '<input id="part_type" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].type + '" aria-required="true">' + '</td>';
+                }
 
+                // Price
                 if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff || val.req_user_agent ) {
-                     html += '											<td>' + '<input id="part_price" type="number" class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
-                 }
+                    if (val.req_user_admin || val.req_user_staff || val.req_user_agent ) {
+                          if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
+                              html += '<td>' + '<input id="part_units" type="number" class="browser-default" value ="1" aria-required="true">' + '</td>';
+                              html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
+                              html += '<td>' + '<input id="part_price" type="number" class="browser-default" disabled value ="' + val.service_items[i].price  + '" aria-required="true">' + '</td>';
+
+                          }else{
+                              html += '<td>' + '<input id="part_units" type="number" class="browser-default" value ="' + val.service_items[i].quantity + '" aria-required="true">' + '</td>';
+                              html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" value ="' + val.service_items[i].unit_price + '" aria-required="true">' + '</td>';
+                              html += '<td>' + '<input id="part_price" type="number" class="browser-default" disabled value ="' + parseFloat(String(parseFloat(val.service_items[i].quantity) * parseFloat(val.service_items[i].unit_price)))  + '" aria-required="true">' + '</td>';
+
+                          }
+                    }else{
+                          if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
+                              html += '<td>' + '<input id="part_units" type="number" class="browser-default" value ="1" aria-required="true">' + '</td>';
+                              html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
+                              html += '<td>' + '<input id="part_price" type="number" class="browser-default" disabled value ="' + val.service_items[i].price  + '" aria-required="true">' + '</td>';
+
+                          }else{
+                              html += '<td>' + '<input id="part_units" type="number" class="browser-default" value ="' + val.service_items[i].quantity + '" aria-required="true">' + '</td>';
+                              html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" value ="' + val.service_items[i].unit_price + '" aria-required="true">' + '</td>';
+                              html += '<td>' + '<input id="part_price" type="number" class="browser-default" disabled value ="' + parseFloat(String(parseFloat(val.service_items[i].quantity) * parseFloat(val.service_items[i].unit_price)))  + '" aria-required="true">' + '</td>';
+
+                          }
+                    }
+                 }else{
+                          if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
+                              html += '<td>' + '<input id="part_units" type="number" class="browser-default" value ="1" aria-required="true">' + '</td>';
+                              html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
+                              html += '<td>' + '<input id="part_price" type="number" class="browser-default" disabled value ="' + val.service_items[i].price  + '" aria-required="true">' + '</td>';
+
+                          }else{
+                              html += '<td>' + '<input id="part_units" type="number" class="browser-default" value ="' + val.service_items[i].quantity + '" aria-required="true">' + '</td>';
+                              html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" value ="' + val.service_items[i].unit_price + '" aria-required="true">' + '</td>';
+                              html += '<td>' + '<input id="part_price" type="number" class="browser-default" disabled value ="' + parseFloat(String(parseFloat(val.service_items[i].quantity) * parseFloat(val.service_items[i].unit_price)))  + '" aria-required="true">' + '</td>';
+
+                          }
+                    }
+
+                // Part Comment
+                if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
+                  if ( val.service_items[i].comment==null ||  val.service_items[i].comment===false) {
+                        html += '<td>' + '<input id="part_comment" type="text" class="browser-default" aria-required="true">' + '</td>';
+                    }else{
+                        html += '<td>' + '<input id="part_comment" type="text" class="browser-default" value ="' + val.service_items[i].comment + '" aria-required="true">' + '</td>';
+                    }
+                }else{
+                  if ( val.service_items[i].comment==null ||  val.service_items[i].comment===false) {
+                        html += '<td>' + '<input id="part_comment" type="text" class="browser-default noborder" aria-required="true">' + '</td>';
+                    }else{
+                        html += '<td>' + '<input id="part_comment" type="text" class="browser-default noborder" disabled value ="' + val.service_items[i].comment + '" aria-required="true">' + '</td>';
+                    }
+                }
+
+                // approval status
+                if (val.req_user_admin || val.req_user_staff ){
+
+                    if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
+                        html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
+                        html += '<td><input type="checkbox" class="filled-in approve-item tochange"  id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+
+                    }else{
+                        if (val.service_items[i].approved == "Yes"){
+                            html += '<td class="centered-text"><span class="approved">Approved</span></td>'
+                            html += '<td><input type="checkbox" class="filled-in approve-item tochange" checked="checked" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                        }else{
+                            html += '<td class="centered-text"><span class="denied">TBD</span></td>'
+                            html += '<td><input type="checkbox" class="filled-in approve-item tochange" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                        }
+                    }
+                }else if(val.req_user_agent){
+                      if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
+                        html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
+                        html += '<td><input type="checkbox" class="filled-in approve-item" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+
+                    }else{
+                        if (val.service_items[i].approved == "Yes"){
+                            html += '<td class="centered-text"><span class="approved">Approved</span></td>'
+                            html += '<td><input type="checkbox" class="filled-in approve-item" disabled checked="checked" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                        }else{
+                            html += '<td class="centered-text"><span class="denied">TBD</span></td>'
+                            html += '<td><input type="checkbox" class="filled-in approve-item" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                        }
+                    }
+                }else{
+                    if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
+                        html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
+                        html += '<td><input type="checkbox" class="filled-in approve-item tochange"  id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                    }else{
+                        if (val.service_items[i].approved == "Yes"){
+                            html += '<td class="centered-text"><span class="approved">Approved</span></td>'
+                            html += '<td><input type="checkbox" class="filled-in approve-item" disabled checked="checked" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                        }else{
+                            html += '<td class="centered-text"><span class="denied">TBD</span></td>'
+                            html += '<td><input type="checkbox" class="filled-in approve-item tochange" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                        }
+                    }
+                }
+                // Settlemet Status
                 if (val.req_user_admin || val.req_user_staff) {
                     html += '<td>' + '<div class="input-field sort" id ="settle_type"><select  class="browser-default">'
-                    // try{
-
                     if (val.service_items[i].settlement_cat==null || val.service_items[i].settlement_cat===false){
-                                        if (val.service_items[i].type == "Part") {
+                        if (val.service_items[i].type == "Part") {
                             html += '<option value="Part" selected>Part</option>'
                         } else {
                             html += '<option value="Part">Part</option>'
+                        }
+                        if (val.service_items[i].type == "Lube") {
+                            html += '<option value="Lube" selected>Lube</option>'
+                        } else {
+                            html += '<option value="Lube">Lube</option>'
+                        }
+                        if (val.service_items[i].type == "Consumable") {
+                            html += '<option value="Consumable" selected>Consumable</option>'
+                        } else {
+                            html += '<option value="Consumable">Consumable</option>'
                         }
                         if (val.service_items[i].type == "Labour") {
                             html += '<option value="Labour" selected>Labour</option>'
@@ -1885,6 +2134,16 @@ var Global = {
                         } else {
                             html += '<option value="Part">Part</option>'
                         }
+                        if (val.service_items[i].type == "Lube") {
+                            html += '<option value="Lube" selected>Lube</option>'
+                        } else {
+                            html += '<option value="Lube">Lube</option>'
+                        }
+                        if (val.service_items[i].type == "Consumable") {
+                            html += '<option value="Consumable" selected>Consumable</option>'
+                        } else {
+                            html += '<option value="Consumable">Consumable</option>'
+                        }
                         if (val.service_items[i].settlement_cat == "Labour") {
                             html += '<option value="Labour" selected>Labour</option>'
                         } else {
@@ -1906,55 +2165,29 @@ var Global = {
                             html += '<option value="Denting">Denting</option>'
                         }
                     }
+                }else{
+                        html += '<td class="invisible">' + '<input id="settle_type" type="text" disabled class="browser-default" value ="' + val.service_items[i].settlement_cat + '" aria-required="true">' + '</td>';
+
                 }
-                    html +=' 									<td><div class="delete x25">';
-                    html +=' 										<i class="fa fa-trash-o"></i>';
-                    html +=' 									</div></td>';
-                    html += '										</tr>';
-            }else{
-                item_no = i + 1;
-                html += '										<tr>';
-                html += '											<td>' + item_no + '</td>';
-                // html += '											<td>' + '<input id="part_name" type="text" disabled class="browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
-                html += '											<td>' + val.service_items[i].name +'</td>';
-                html += '											<td>' + val.service_items[i].type +'</td>';
+                // Row Deletion
+                if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
+                    html +='                                    <td><div class="delete x25">';
+                    html +='                                        <i class="fa fa-trash-o"></i>';
+                    html +='                                    </div></td>';
+                }else{
+                    html +='                                    <td><div class="delete x25">';
+                    html +='                                    </div></td>';
+                }
+                    html += '                                       </tr>';
+                }
 
-                // html += '											<td>' + '<div class="input-field sort" id ="part_type"><select disabled   class="browser-default">'
-                // if (val.service_items[i].type == "Part") {
-                //     html += '<option value="Part" selected>Part</option>'
-                // } else {
-                //     html += '<option value="Part">Part</option>'
-                // }
-                // if (val.service_items[i].type == "Labour") {
-                //     html += '<option value="Labour" selected>Labour</option>'
-                // } else {
-                //     html += '<option value="Labour">Labour</option>'
-                // }
-                // if (val.service_items[i].type == "Discount") {
-                //     html += '<option value="Discount" selected>Discount</option>'
-                // } else {
-                //     html += '<option value="Discount">Discount</option>'
-                // }
-                // html += '</select></div>' + '</td>';
-             if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff) {
-                    html += '											<td>Rs. ' + val.service_items[i].price + '</td>';
-
-                     // html += '											<td>' + '<input id="part_price" type="number" disabled  class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
-                 }
-
-                html += '										</tr>';
-            }
-            }
-            html += '										</tbody>';
-            html += '									</table>';
-            html += '								</div>';
         })
+
+        // Service Table End
         container2.html(html);
         $('#customer-detail .total-amount').text(TOTAL_PRICE_ADMIN)
         // container2.find('select').material_select();
         Materialize.updateTextFields();
-
-
         // <div class="id_100">
     },
     loadAgentdata:function(data){
@@ -1990,22 +2223,37 @@ var Global = {
                         if (j == 1) {
                             name_item = $(row.cells[j]).find('input,select').eq(0).val()
                             // console.log(name_item)
-                        } else if (j == 2) {
+                        }else if (j == 2) {
                             type_item = $(row.cells[j]).find('input,select').eq(0).val()
                             // console.log(type_item)
                         } else if (j == 3) {
+                            quantity = $(row.cells[j]).find('input,select').eq(0).val()
+                            // console.log(type_item)
+                        }else if (j == 4) {
+                            unit_price = $(row.cells[j]).find('input,select').eq(0).val()
+                            // console.log(type_item)
+                        }else if (j == 5) {
                             price_item = $(row.cells[j]).find('input,select').eq(0).val()
                             // console.log(price_item)
-                        } else if (j == 4){
+                        }else if (j == 6){
+                             comment =  $(row.cells[j]).find('input,select').eq(0).val()
+                        }else if (j == 8){
+                             if($(row.cells[j]).find('input,select')[0].checked){
+                                 approved = "Yes"
+                                 console.log(approved)
+                             }else{
+                                 approved = "TBD"
+                                 console.log(approved)
+                             }
+                        }else if (j == 9){
                              settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
-
                         }
                     }
                 // }
                     if (type_item == "Labour") {
                         TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
                         TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(price_item)
-                    } else if (type_item == "Part") {
+                    } else if (type_item == "Part" || type_item == "Lube" || type_item == "Consumable") {
                         TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
                         TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(price_item)
                     } else if (type_item == "Discount") {
@@ -2018,7 +2266,11 @@ var Global = {
                         "name": name_item,
                         "price": price_item,
                         "type": type_item,
-                        "settlement_cat":settlement_cat
+                        "settlement_cat":settlement_cat,
+                        "comment":comment,
+                        "quantity":quantity,
+                        "unit_price":unit_price,
+                        "approved":approved
                     }
                     if (name_item != ""){
                         CURRENT_CART_ADMIN.push(cart_item)

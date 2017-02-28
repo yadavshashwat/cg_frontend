@@ -1,0 +1,200 @@
+/* ==========================================================================
+   Insert Your Bill Styles Below. All styles located in this file will
+   override existing main.css stylesheets.
+   ========================================================================== */
+
+.invoice-box{
+    max-width:800px;
+    margin:auto;
+    padding:30px;
+    /*border:1px solid #eee;*/
+    /*box-shadow:0 0 10px rgba(0, 0, 0, .15);*/
+    font-size:16px;
+    line-height:24px;
+    font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    color:#555;
+}
+
+.invoice-box .company-name{
+    font-size:16px!important;
+    color:#555!important;
+    line-height: 20px!important;
+}
+
+.tax{
+    font-size: 10px;
+    line-height: 5px;
+}
+
+
+.invoice-box table{
+    width:100%;
+    line-height:inherit;
+    text-align:left;
+}
+
+.invoice-box table td{
+    padding:5px;
+    vertical-align:top;
+}
+
+.invoice-box table tr td:nth-child(2){
+    text-align:right;
+}
+
+
+body {
+  background: rgb(204,204,204);
+}
+
+page {
+  background: white;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.5cm;
+  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+}
+page[size="A4"] {
+  width: 21cm;
+  height: 29.7cm;
+}
+page[size="A4"][layout="portrait"] {
+  width: 29.7cm;
+  height: 21cm;
+}
+page[size="A3"] {
+  width: 29.7cm;
+  height: 42cm;
+}
+page[size="A3"][layout="portrait"] {
+  width: 42cm;
+  height: 29.7cm;
+}
+page[size="A5"] {
+  width: 14.8cm;
+  height: 21cm;
+}
+page[size="A5"][layout="portrait"] {
+  width: 21cm;
+  height: 14.8cm;
+}
+@media print {
+  body, page {
+    margin: 0;
+    box-shadow: 0;
+  }
+}
+
+
+.invoice-box .information tr td {
+     text-align:left!important;
+}
+.invoice-box table tr.top table td{
+    padding-bottom:0px;
+    padding: 0px;
+    line-height: 20px;
+}
+
+.invoice-box .customer-details td{
+    padding: 0px!important;;
+    padding-bottom: 0px!important;
+    text-align: left!important;
+}
+.invoice-box table tr.top table td.title{
+    font-size:45px;
+    line-height:45px;
+    color:#333;
+}
+
+.invoice-box table tr.information table td{
+    padding-bottom:0px;
+}
+
+.invoice-box .agent-details td:nth-child(1){
+    width: 50%;
+}
+.invoice-box .agent-details td:nth-child(2){
+    width: 50%;
+}
+
+.invoice-box .information-cust td:nth-child(1){
+    width: 50%;
+}
+.invoice-box .information-cust td:nth-child(2){
+    width: 50%;
+}
+.invoice-box .information-cust .customer-details td:nth-child(1){
+    width: 40%;
+}
+.invoice-box .information-cust .customer-details td:nth-child(2){
+    width: 60%;
+}
+
+.invoice-box table thead.heading td{
+    background:#eee;
+    border-bottom:1px solid #ddd;
+    font-weight:bold;
+}
+
+.invoice-box .parts-table td:nth-child(1){
+    width: 40%;
+}
+.invoice-box .parts-table td:nth-child(2){
+    width: 20%;
+    text-align: center;
+}
+.invoice-box .parts-table td:nth-child(3){
+    width: 20%;
+    text-align: center;
+
+}
+.row{
+    margin-bottom:5px;
+}
+.recommendation{
+    margin-left: 10px;
+}
+.invoice-box .parts-table td:nth-child(4){
+    width: 20%;
+    text-align: right;
+
+}
+
+.invoice-box .summary td{
+    text-align: right;
+}
+
+.invoice-box table tr.details td{
+    padding-bottom:20px;
+}
+
+.invoice-box table tr.item td{
+    border-bottom:1px solid #eee;
+}
+
+.invoice-box table tr.item.last td{
+    border-bottom:none;
+}
+
+
+.invoice-box .summary{
+    border-top:2px solid #eee;
+}
+.invoice-box table tr.total td:nth-child(1){
+    border-top:2px solid #eee;
+    font-weight:bold;
+}
+
+@media only screen and (max-width: 600px) {
+    .invoice-box table tr.top table td{
+        width:100%;
+        display:block;
+        text-align:center;
+    }
+
+    .invoice-box table tr.information table td{
+        width:100%;
+        display:block;
+        text-align:center;
+    }
+}

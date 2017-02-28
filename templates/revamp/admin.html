@@ -43,7 +43,7 @@
 					<a itemprop="url" href="/adminpanel" class="brand-logo"><img itemprop="logo" class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>
 				</div>
 				<!--<div class="logo-cg logo-color visible">-->
-					<!--<a href="/adminpanel" class="brand-logo"><img class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>-->
+				<!--<a href="/adminpanel" class="brand-logo"><img class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>-->
 				<!--</div>-->
 				<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 				<ul class="right hide-on-med-and-down items-list">
@@ -335,9 +335,9 @@
 				</div>
 				<div class="staff-button-row card ">
 					<!--<div class="row">-->
-						<!--<div class="col l12 m12 s12 box-header">-->
-							<!--<h3>Additional Details:</h3>-->
-						<!--</div>-->
+					<!--<div class="col l12 m12 s12 box-header">-->
+					<!--<h3>Additional Details:</h3>-->
+					<!--</div>-->
 					<!--</div>-->
 					<br>
 					<div class="row">
@@ -587,21 +587,21 @@
 						<!--<div class="row">-->
 						<div class="row">
 							<div class="col l12 s12 m12">
-								<button status_next="" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action"><span class="change-status"><span id="status_change-1"></span>
+								<button status_next="" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action"><span class="change-status"><span id="status_change-1"></span></span>
 										<i class="material-icons right">send</i>
 								</button>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col l12 s12 m12">
-								<button status_next="" class="waves-effect status-btn-2 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action"><span class="change-status"><span id="status_change-2"></span>
+								<button status_next="" class="waves-effect status-btn-2 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action"><span class="change-status"><span id="status_change-2"></span></span>
 										<i class="material-icons right">send</i>
 								</button>
 							</div>
 						</div>
 						<!--</div>-->
 					</div>
-					<div class="row b2b-button-row card invisible">
+					<div class="row b2b-button-row-1 card invisible">
 						<div class="row">
 							<div class="col l12 s12 m12">
 								<button status_next="Cancelled" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action"><span class="change-status">Cancel Booking</span>
@@ -678,10 +678,27 @@
 				<div class="row booking-job-data invisible">
 					<div class="row summary-data centered-text">
 						<h3>Total Amount : <span class="total-amount">0</span></h3>
-					</div>
-					<div class="row pre-data card">
+						<br>
 					</div>
 
+					<div class="row card">
+						<br>
+						<div class="row centered-text">
+							<input type="checkbox" class="filled-in" id="comp_all_select"/><label for="comp_all_select">Select All</label>
+						</div>
+						<!--<br>-->
+						<div class="row pre-data ">
+						</div>
+					</div>
+					<div class="row b2b-button-row-2 invisible card">
+						<div class="row">
+							<div class="col l12 s12 m12 centered-text">
+								<button class="waves-effect waves-light btn cg-primary btn-update-estimate page-wide" type="submit" name="action">Approve Items
+									<i class="material-icons right">send</i>
+								</button>
+							</div>
+						</div>
+					</div>
 					<div class="row agent-button-row card">
 						<div class="row add-item">
 							<!--<div class="row">-->
@@ -699,6 +716,14 @@
 								</button>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col l12 s12 m12 centered-text">
+								<button class="waves-effect waves-light btn cg-primary btn-view-bill page-wide" booking="" type="submit" name="action">View & Generate Bill
+									<i class="material-icons right">send</i>
+								</button>
+							</div>
+						</div>
+
 						<!--<div class="row">-->
 						<!--<div class="col l12 s12 m12 centered-text visible">-->
 						<!--<button class="waves-effect waves-light btn cg-primary btn-share-est page-wide" type="submit" name="action">Share Estimate-->
@@ -725,6 +750,13 @@
 								</button>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col l12 s12 m12 centered-text">
+								<button class="waves-effect waves-light btn cg-primary btn-view-bill page-wide" booking="" type="submit" name="action">View & Generate Bill
+									<i class="material-icons right">send</i>
+								</button>
+							</div>
+						</div>
 						<!--<div class="row">-->
 						<!--<div class="col l12 s12 m12 centered-text visible">-->
 						<!--<button class="waves-effect waves-light btn cg-primary btn-share-est page-wide" type="submit" name="action">Share Estimate-->
@@ -746,7 +778,7 @@
 					All Users
 				</div>
 				<div class="col s6 m6 l6 date-box card cardhover single-user">
-					Add/Edit User
+					Add/Modify User
 				</div>
 			</div>
 			<div class="row card">
@@ -846,6 +878,85 @@
 								<i class="material-icons prefix">business</i>
 								<input id="user_city" type="text" class="validate" required="" aria-required="true">
 								<label for="user_city" data-error="Required">User City</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<h3>Additional Agent Details</h3>
+					</div>
+					<div class="row">
+						<div class="col l12 s12 m12">
+							<div class="input-field">
+								<select id="user_state" class="browser-default">
+									<option value='' selected disabled>Select User State</option>
+									<option value='Andaman and Nicobar Islands'>Andaman and Nicobar Islands</option>
+									<option value='Andhra Pradesh'>Andhra Pradesh</option>
+									<option value='Arunachal Pradesh'>Arunachal Pradesh</option>
+									<option value='Assam'>Assam</option>
+									<option value='Bihar'>Bihar</option>
+									<option value='Chandigarh'>Chandigarh</option>
+									<option value='Chhattisgarh'>Chhattisgarh</option>
+									<option value='Dadra and Nagar Haveli'>Dadra and Nagar Haveli</option>
+									<option value='Daman and Diu'>Daman and Diu</option>
+									<option value='Delhi' >Delhi</option>
+									<option value='Goa'>Goa</option>
+									<option value='Gujarat'>Gujarat</option>
+									<option value='Haryana'>Haryana</option>
+									<option value='Himachal Pradesh'>Himachal Pradesh</option>
+									<option value='Jammu and Kashmir'>Jammu and Kashmir</option>
+									<option value='Jharkhand'>Jharkhand</option>
+									<option value='Karnataka'>Karnataka</option>
+									<option value='Kerala'>Kerala</option>
+									<option value='Lakshadweep'>Lakshadweep</option>
+									<option value='Madhya Pradesh'>Madhya Pradesh</option>
+									<option value='Maharashtra'>Maharashtra</option>
+									<option value='Manipur'>Manipur</option>
+									<option value='Meghalaya'>Meghalaya</option>
+									<option value='Mizoram'>Mizoram</option>
+									<option value='Nagaland'>Nagaland</option>
+									<option value='Odisha'>Odisha</option>
+									<option value='Puducherry'>Puducherry</option>
+									<option value='Punjab'>Punjab</option>
+									<option value='Rajasthan'>Rajasthan</option>
+									<option value='Sikkim'>Sikkim</option>
+									<option value='Tamil Nadu'>Tamil Nadu</option>
+									<option value='Telangana'>Telangana</option>
+									<option value='Tripura'>Tripura</option>
+									<option value='Uttar Pradesh'>Uttar Pradesh</option>
+									<option value='Uttarakhand'>Uttarakhand</option>
+									<option value='West Bengal'>West Bengal</option>
+								</select>
+								<!--<i class="material-icons prefix">business</i>-->
+								<!--<input id="user_state" type="text" class="validate" required="" aria-required="true">-->
+								<!--<label for="user_state" data-error="Required">Agent State</label>-->
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col l12 s12 m12">
+							<div class="input-field">
+								<i class="material-icons prefix">receipt</i>
+								<input id="agent_vat" type="text" class="validate" required="" aria-required="true">
+								<label for="agent_vat" data-error="Required">VAT Number</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col l12 s12 m12">
+							<div class="input-field">
+								<i class="material-icons prefix">receipt</i>
+								<input id="agent_stax" type="text" class="validate" required="" aria-required="true">
+								<label for="agent_stax" data-error="Required">Service Tax Number</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col l12 s12 m12">
+							<div class="input-field">
+								<i class="material-icons prefix">receipt</i>
+								<input id="agent_cin" type="text" class="validate" required="" aria-required="true">
+								<label for="agent_cin" data-error="Required">CIN Number</label>
 							</div>
 						</div>
 					</div>

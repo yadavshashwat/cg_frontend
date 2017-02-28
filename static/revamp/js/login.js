@@ -340,6 +340,7 @@ var Login = {
             $('.admin-page .items-list li.lead-button').hide()
             $('.admin-page .agent-button-row').hide()
             $('.admin-page .staff-button-row').hide()
+            $('.admin-page .b2b-button-row').show()
             cookie = local.load();
             console.log('b2b')
             if (cookie['c_user_id']){
