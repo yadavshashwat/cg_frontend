@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="/../../static/revamp/css/styles.css">
 	<!--<link rel="stylesheet" href="/../../static/revamp/css/bootstrap.min.css">-->
 	<link rel="stylesheet" href="/../../static/revamp/css/materialize.min.css">
-	<!--<link rel="stylesheet" href="/../../static/revamp/css/main.css">-->
+	<link rel="stylesheet" href="/../../static/revamp/css/main.css">
 	<link rel="stylesheet" href="/../../static/revamp/css/custom-styles.css">
 	<link rel="stylesheet" href="/../../static/revamp/css/bill.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
@@ -38,141 +38,188 @@
 
 <body class="bill-page">
 
-<page id="bill" class="billpage" style="" size="A4">
+<div class="navbar navbar-fixed visible">
+	<nav class="nav2">
+		<div class="nav-wrapper navbar-custom">
+			<div class="logo-cg logo-color visible" itemscope itemtype="http://schema.org/Organization">
+				<a itemprop="url" href="/adminpanel" class="brand-logo"><img itemprop="logo" class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>
+			</div>
+			<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+		</div>
+	</nav>
+</div>
+
+<div class="actionables">
+	<br>
+	<div class="bill-input-row row new-bill">
+		<div class="input-field col s12 m12 l12" >
+			<select class="browser-default" id ="payment-mode">
+				<option value="" disabled selected>Select Payment Mode</option>
+				<option value="Cash">Cash</option>
+				<option value="Online">Online</option>
+				<option value="Cheque">Cheque</option>
+				<option value="PayTM">PayTM</option>
+				<option value="Card">Card</option>
+				<option value="Credit">Credit</option>
+			</select>
+		</div>
+	</div>
+	<div class="row button-row new-bill">
+		<div class="col l6 s12 m12 centered-text">
+			<button class="waves-effect waves-light btn-large cg-primary save-bill bill-btn" type="submit" name="action">Generate Bill
+				<i class="material-icons right">send</i>
+			</button>
+		</div>
+		<div class="col l6 s12 m12 centered-text">
+			<button class="waves-effect waves-light btn-large cg-primary save-send-bill bill-btn" type="submit" name="action">Generate and Send Bill
+				<i class="material-icons right">send</i>
+			</button>
+		</div>
+		<!--<div class="col l4 s12 m12 centered-text">-->
+			<!--<button class="waves-effect waves-light btn-large cg-primary save-print-bill bill-btn" type="submit" name="action">Generate and Print Bill-->
+				<!--<i class="material-icons right">send</i>-->
+			<!--</button>-->
+		<!--</div>-->
+	</div>
+	<!--<div class="row hide-on-large-only centered-text">-->
+		<!--<div class="show-pdf view-pdf-box">Show PDF</div>-->
+	<!--</div>-->
+</div>
+<page id="bill" class="" style="" size="A4">
 	<div class="invoice-box">
-		<table cellpadding="0" cellspacing="0">
-			<tr class="top">
-				<td colspan="2">
-					<table class="agent-details">
-						<tr>
-							<td class="title company-name">
-								<img src="/../../static/revamp/img/ClickGarage/logo-color-small1.png" style="width:100%; max-width:150px;"><br>
-								<span id="agent-name">Sui Generis Innovations Private Limited</span><br>
-								<span id="agent-address">W22, Second Floor</span><br>
-								<span id="agent-locality">Green Park Main</span><br>
-								<span id="agent-city">New Delhi</span>-<span class="agent-pin">New Delhi</span><br>
-							</td>
-
-							<td>
-								<table class="bill-details">
-									<tr><td>Invoice #: </td><td><span id="bill-number">123</span></td></tr>
-									<tr><td>Booking #: </td><td><span id="booking-id">123</span></td></tr>
-									<tr><td>Created: </td><td><span id="bill-date">21st July</span></td></tr>
-									<tr><td>Payment Type : </td><td><span id="bill-type">Credit</span></td></tr>
-									<tr><td>TIN : </td><td><span id = "agent-tin">DSADSAJHDJASH</span></td></tr>
-									<tr><td>CIN : </td><td><span id = "agent-cin">1234567890</span></td></tr>
-									<tr><td>Service Tax : </td><td><span id = "agent-stax">SDSADS123456789</span></td></tr>
-								</table>
-							</td>
-						</tr>
-					</table>
+		<!--<table cellpadding="0" cellspacing="0">-->
+		<!--<tr class="top">-->
+		<!--<td colspan="2">-->
+		<table class="agent-details">
+			<tr>
+				<td class="title company-name">
+					<img src="/../../static/revamp/img/ClickGarage/logo-color-small1.png" style="width:100%; max-width:150px;"><br>
+					<span id="agent-name">Sui Generis Innovations Private Limited</span><br>
+					<span id="agent-address">W22, Second Floor</span><br>
+					<span id="agent-locality">Green Park Main</span><br>
+					<span id="agent-city">New Delhi</span>-<span class="agent-pin">New Delhi</span><br>
 				</td>
-			</tr>
-			<tr class="information">
-				<td colspan="2">
-					<table class="information-cust">
-						<tr>
-							<td>
-								<b>Customer Details:  </b><br>
-								<table class="customer-details">
-									<tr><td>&nbsp;&nbsp;Name </td><td><span id="cust-name">Shashwat Yadav</span></td></tr>
-									<tr><td>&nbsp;&nbsp;Address </td><td><span id="cust-address">B702</span>, <span id="cust-locality">Hex Tax Commune</span>, <span id="cust-city">Gurgaon</span></td></tr>
 
-								</table>
-							</td>
-							<td>
-								<b>Vehicle Details: </b><br>
-								<table class="customer-details">
-									<tr><td>&nbsp;&nbsp;Registration </td><td><span id="veh-reg">RJ02CC4222</span></td></tr>
-									<tr><td>&nbsp;&nbsp;Vehicle Name </td><td><span id="veh-name">Hyundai i20 Diesel</span></td></tr>
-								</table>
-							</td>
-
-						</tr>
+				<td>
+					<table class="bill-details">
+						<tr><td>Invoice #: </td><td><span id="bill-number">--</span></td></tr>
+						<tr><td>Booking #: </td><td><span id="booking-id">--</span></td></tr>
+						<tr><td>Created: </td><td><span id="bill-date"></span></td></tr>
+						<tr><td>Payment Type : </td><td><span id="bill-type"></span></td></tr>
+						<tr><td>TIN : </td><td><span id = "agent-tin">--</span></td></tr>
+						<tr><td>CIN : </td><td><span id = "agent-cin">--</span></td></tr>
+						<tr><td>Service Tax : </td><td><span id = "agent-stax">--</span></td></tr>
 					</table>
 				</td>
 			</tr>
 		</table>
+		<!--</td>-->
+		<!--</tr>-->
+		<table class="information information-cust">
+			<tr>
+				<!--<td colspan="2">-->
+				<!--<table class="">-->
+				<!--<tr>-->
+				<td>
+					<b>Customer Details:  </b><br>
+					<table class="customer-details">
+						<tr><td>&nbsp;&nbsp;Name </td><td><span id="cust-name">--</span></td></tr>
+						<tr><td>&nbsp;&nbsp;Address </td><td><span id="cust-address">--</span>, <span id="cust-locality">--</span>, <span id="cust-city">--</span></td></tr>
+
+					</table>
+				</td>
+				<td>
+					<b>Vehicle Details: </b><br>
+					<table class="customer-details">
+						<tr><td>&nbsp;&nbsp;Registration </td><td><span id="veh-reg">--</span></td></tr>
+						<tr><td>&nbsp;&nbsp;Vehicle Name </td><td><span id="veh-name">--</span></td></tr>
+					</table>
+				</td>
+
+			</tr>
+		</table>
+		<!--</td>-->
+		<!--</tr>-->
+		<!--</table>-->
 		<table class="parts-table">
-				<thead class="heading">
-				<td>
-					Parts
-				</td>
-				<td>
-					Units
-				</td>
-				<td>
-					Unit Price
-				</td>
-				<td>
-					Price
-				</td>
-				</thead>
-				<tbody class="parts-list">
-				<tr class="item">
-					<td>
-						Engine Oil
-					</td>
-					<td>
-						3.5
-					</td>
-					<td>
-						320
-					</td>
-					<td>
-						Rs. 1280.00
-					</td>
-				</tr>
-				</tbody>
+			<thead class="heading">
+			<td>
+				Parts
+			</td>
+			<td>
+				Units
+			</td>
+			<td>
+				Unit Price
+			</td>
+			<td>
+				Price
+			</td>
+			</thead>
+			<tbody class="parts-list">
+			<!--<tr class="item">-->
+				<!--<td>-->
+					<!--Engine Oil-->
+				<!--</td>-->
+				<!--<td>-->
+					<!--3.5-->
+				<!--</td>-->
+				<!--<td>-->
+					<!--320-->
+				<!--</td>-->
+				<!--<td>-->
+					<!--Rs. 1280.00-->
+				<!--</td>-->
+			<!--</tr>-->
+			</tbody>
 		</table>
 		<br>
 		<table class="service-table">
-				<thead class="heading">
-				<td>
-					Services/Labour
-				</td>
-				<td>
-					Price
-				</td>
-				</thead>
+			<thead class="heading">
+			<td>
+				Services/Labour
+			</td>
+			<td>
+				Price
+			</td>
+			</thead>
 
-				<tbody class="service-list">
-				<tr class="item">
-					<td>
-						Standard Service
-					</td>
-					<td>
-						Rs. 1280.00
-					</td>
-				</tr>
-				</tbody>
-
+			<tbody class="service-list">
+			<!--<tr class="item">-->
+				<!--<td>-->
+					<!--Standard Service-->
+				<!--</td>-->
+				<!--<td>-->
+					<!--Rs. 1280.00-->
+				<!--</td>-->
+			<!--</tr>-->
+			</tbody>
 		</table>
 		<br>
 		<table class="summary">
 			<tr class="tax">
 				<td>
-					VAT (Parts) @ <span id="vat-part-percent">20</span>%: ₹<span class="vat-part-amount">385.00</span>
+					VAT (Parts) @ <span id="vat-part-percent"></span>%: ₹<span class="vat-part-amount">--</span>
 				</td>
 			</tr>
 			<tr class="tax">
 				<td>
-					VAT (Lubes) @ <span id="vat-lube-percent">12.5</span>%: ₹<span class="vat-lube-amount">385.00</span>
+					VAT (Lubes) @ <span id="vat-lube-percent"></span>%: ₹<span class="vat-lube-amount">--</span>
 				</td>
 			</tr>
 			<tr class="tax">
 				<td>
-					VAT (Consumables) @ <span id="vat-consumbale-percent">5</span>%: ₹<span class="vat-consumbale-amount">385.00</span>
+					VAT (Consumables) @ <span id="vat-consumable-percent"></span>%: ₹<span class="vat-consumable-amount">--</span>
 				</td>
 			</tr>
 			<tr class="tax">
 				<td>
-					Service Tax + Krishna Kalyan Cess + Swachha Bharat Cess @ <span id="stax-percent">15</span>%: ₹<span class="stax-amount">385.00</span>
+					Service Tax + Krishna Kalyan Cess + Swachha Bharat Cess @ <span id="stax-percent"></span>%: ₹<span class="stax-amount">--</span>
 				</td>
 			</tr>
 			<tr class="total">
 				<td>
-					Total Amount: ₹ <span id="cust-total">385.00</span>
+					Total Amount: ₹ <span id="cust-total">--</span>
 				</td>
 			</tr>
 		</table>
@@ -181,13 +228,19 @@
 				<b>Recommendations:</b>
 			</div>
 			<div class="row">
-				<span class="recommendaton">Dry Cleaning etc.</span>
+				<span class="recommendation"></span>
 			</div>
 		</div>
 	</div>
 </page>
 
+<section id="cover" class="invisible"></section>
 
+<!--<div class="loading-pane-2">-->
+	<!--<img src="/../../static/revamp/img/page_loader.gif" alt="" class="loading-gif">-->
+<!--</div>-->
+<div id="overlay"></div>
+<!--<div class="overlay-pat"></div>-->
 
 <!-- Javascript
 ================================================== -->

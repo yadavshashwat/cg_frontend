@@ -2,7 +2,31 @@
    Insert Your Bill Styles Below. All styles located in this file will
    override existing main.css stylesheets.
    ========================================================================== */
+.actionables{
+    /*background: #eaeaea;*/
+    /*padding: 4%;*/
+    margin-bottom: 2%;
+    /*width: 100%;*/
+    background: #FFF;
+    /*height: 5%;*/
+}
 
+.button-row{
+    padding: 3%;
+}
+.bill-btn{
+    width: 300px;
+    margin: 5px;
+
+}
+
+.view-pdf-box{
+    /*border:1px solid #4a148c;*/
+    /*width:100px;*/
+    /*margin-left:50%;*/
+    /*left:50px;*/
+
+}
 .invoice-box{
     max-width:800px;
     margin:auto;
@@ -20,6 +44,15 @@
     color:#555!important;
     line-height: 20px!important;
 }
+
+.invoice-box .bill-details{
+    font-size:16px!important;
+    color:#555!important;
+    line-height: 10px!important;
+
+}
+
+
 
 .tax{
     font-size: 10px;
@@ -56,7 +89,7 @@ page {
 }
 page[size="A4"] {
   width: 21cm;
-  height: 29.7cm;
+  /*height: 29.7cm;*/
 }
 page[size="A4"][layout="portrait"] {
   width: 29.7cm;
