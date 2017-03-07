@@ -134,6 +134,8 @@ var Global = {
             $('#new-booking').hide()
             // $('#bookings .delivery-list').show()
           $('#bookings .booking-filter').show();
+          $('#customer-detail .bill-row').show();
+
 
             LEAD_TYPE = "Booking"
             if (DATE_TYPE != ""){
@@ -169,6 +171,7 @@ var Global = {
              $('#bookings .booking-filter .bookings-filter').addClass('selected');
              $('#bookings #bookings-list .booking-bar-2 .agent').text('')
              $('#bookings .booking-filter').hide();
+             $('#customer-detail .bill-row').hide();
 
             // type = "Lead"
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
@@ -561,7 +564,7 @@ var Global = {
                                                 }, "post", _this, _this.loadCustomerestimate,null, '.loading-pane');
         });
 
-        $('#customer-detail .btn-view-bill').click(function(){
+        $('#customer-detail .btn-view-generate-bill').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             b_data_id = $('#customer-detail #booking_id').attr('booking_data_id');
 
@@ -571,9 +574,16 @@ var Global = {
             Commons.ajaxData('update_estimate', {b_id: bid,
                                                 estimate: estimate,
                                                 }, "post", _this, _this.loadCustomerestimate,null, '.loading-pane');
-
             window.open(
-                window.location.pathname.split('/')[0] + '/bills/' + b_data_id
+                window.location.pathname.split('/')[0] + '/bills/new/' + b_data_id
+            );
+        });
+
+        $('#customer-detail .btn-view-bill').click(function(){
+            bid = $('#customer-detail #booking_id').attr('booking_id');
+            b_data_id = $('#customer-detail #booking_id').attr('booking_data_id');
+            window.open(
+                window.location.pathname.split('/')[0] + '/bills/old/' + b_data_id + '#print'
             );
         });
 
@@ -1407,13 +1417,13 @@ var Global = {
             html += '										<thead>';
             html += '										<tr>';
             html += '											<th data-field="id">S.No.</th>';
-            html += '											<th data-field="code">Name</th>';
-            html += '											<th data-field="veh_type">Number</th>';
-            html += '											<th data-field="category">Email</th>';
-            html += '											<th data-field="start_date">Agent</th>';
-            html += '											<th data-field="end_date">B2B</th>';
-            html += '											<th data-field="type">Staff</th>';
-            html += '											<th data-field="status">Admin</th>';
+            html += '											<th data-field="name">Name</th>';
+            html += '											<th data-field="number">Number</th>';
+            html += '											<th data-field="email">Email</th>';
+            html += '											<th data-field="agent">Engineer</th>';
+            html += '											<th data-field="b2b">B2B</th>';
+            html += '											<th data-field="staff">Staff</th>';
+            html += '											<th data-field="admin">Admin</th>';
             html += '											<th data-field="modify"></th>';
             html += '										</tr>';
             html += '										</thead>';
@@ -1691,7 +1701,7 @@ var Global = {
                 html += '</div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Agent Details</label></div>'
+                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Engineer Details</label></div>'
                 html += '</div>'
             }else{
                 if (val.booking_user_name != val.cust_name) {
@@ -1729,7 +1739,7 @@ var Global = {
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text" disabled  value ="' + val.source + '"class="validate"><label for="source">Source</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Agent Details</label></div>'
+                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Engineer Details</label></div>'
                 html += '</div>'
             }
             // if (is_agent)
@@ -1843,12 +1853,22 @@ var Global = {
             } else{
                  date_delivery_string = val.date_delivery
             }
+
+            $('#customer-detail .generated-bill').show()
+            $('#customer-detail .non-generated-bill').hide()
+            // console.log('1')
+            if (!val.bill_generation_flag){
+                $('#customer-detail .generated-bill').hide()
+                $('#customer-detail .non-generated-bill').show()
+            }
         })
         container.html(html);
         var $input = $('#customer-detail #date.datepicker').pickadate({
             format: 'dd-mm-yyyy',
             // min: new Date(),
         })
+
+
 
         var $input2 = $('#customer-detail #date_delivery.datepicker').pickadate({
             format: 'dd-mm-yyyy',
@@ -2384,7 +2404,19 @@ var Global = {
             // var html = '<select class="browser-default">';
             html +=    '<option value="" disabled selected>Select Service</option>';
             $.each(data, function(ix, val){
-                html += '<option value="'+val.id+'">'+val.job_name+'</option>';
+                if (val.doorstep == "1"){
+                    if (val.job_sub_cat == "NA"){
+                        html += '<option value="'+val.id+'">'+val.job_name+' (Doorstep)</option>';
+                    }else{
+                        html += '<option value="'+val.id+'">'+val.job_name+' (Doorstep) ('+ val.job_sub_cat +')</option>';
+                    }
+                }else{
+                    if (val.job_sub_cat == "NA"){
+                        html += '<option value="'+val.id+'">'+val.job_name+' (Workshop)</option>';
+                    }else{
+                        html += '<option value="'+val.id+'">'+val.job_name+' (Workshop) ('+ val.job_sub_cat +')</option>';
+                    }
+                }
             });
             // html += '</select>';
             container.html(html);
@@ -2452,12 +2484,15 @@ var Global = {
             return date_new;
             // console.log(date)
         },
+    
     loadSendbookingAdmin:function(data){
         alert('Order Placed!')
     },
+
     loadCustomerStatus:function(data){
         alert('Status Updated!')
     },
+
     loadLocation:function(data){
             var container = $('input.autocomplete');
             var locations = {};

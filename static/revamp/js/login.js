@@ -328,8 +328,8 @@ var Login = {
             $('.admin-page .admin-page-html').show()
             $('.admin-page .login').hide()
             $('.admin-page .items-list li.coupon-button').hide()
-            $('.admin-page .items-list li.users-button').hide()
-            $('.admin-page .items-list li.lead-button').hide()
+            // $('.admin-page .items-list li.users-button').hide()
+            // $('.admin-page .items-list li.lead-button').hide()
             $('.admin-page .staff-button-row').hide()
             $('.admin-page .b2b-button-row').hide()
         }else if(data['auth_rights']['b2b']){
