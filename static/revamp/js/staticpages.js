@@ -251,7 +251,6 @@ var Global = {
              });
             container.html(html)
         },
-
     loadBikeService:function(data){
             var container = $('#dynamic-pages .bikes .pre-data');
             container.html('')
@@ -283,7 +282,7 @@ var Global = {
              });
             container.html(html)
         },
-        loadBrands:function(data){
+    loadBrands:function(data){
         var container = $('#veh_make');
         vehtype = $('#veh_make').attr('veh-type')
 

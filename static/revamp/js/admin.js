@@ -8,7 +8,7 @@ $(document).ready(function() {
     $('select').material_select();
     var a = $(window).height();
     // var b = $('.home-form').height();
-    console.log(a)
+    // console.log(a)
     alfa = parseInt('80px')
     // console.log(a-alfa)
 
@@ -113,7 +113,7 @@ var Global = {
         console.log('adding hanlder');
 
 // =====================================================================================
-//     Booking/ LEAD Management
+//     Booking/ Lead Management
 // =====================================================================================
 
         // Open Bookings
@@ -656,92 +656,181 @@ var Global = {
             $('#new-booking').hide()
             Commons.ajaxData('view_all_subscription', {}, "get", _this, _this.loadSubscriptionAll,null, '.loading-pane');
         });
+        // -- Load Make
+        var callBrands2 = function(){
+            veh_type                = $('#sub_veh_type').find('select').val()
+            console.log(veh_type)
+            if (veh_type == "Car"){
+                $('.make-model-prefix').removeClass('fa-motorcycle').addClass('fa-car')
+            }else{
+                 $('.make-model-prefix').removeClass('fa-car').addClass('fa-motorcycle')
+            }
+
+             Commons.ajaxData('get_type_make', {vehicle_type: veh_type}, "get", _this, _this.loadBrands2);
+
+        }
+        $('#subscription-detail #sub_veh_type').change(callBrands2)
+        // --- Load Models
+        $('#subscription-detail #sub_veh_make').change(function(){
+             veh_type                = $('#sub_veh_type').find('select').val()
+             veh_make                = $('#sub_veh_make').find('select').val()
+
+             console.log(veh_type)
+            Commons.ajaxData('get_make_model', {make_id: veh_make, vehicle_type: veh_type}, "get", _this, _this.loadModels2);
+        })
 
         //     - ADD Subscription
-        $('#subscription-detail .add-subscription').click(function(){
-            coupon_code = $('#coupon-detail #coup_name').val()
-            coupon_start = $('#coupon-detail #start_date').val()
-            coupon_end = $('#coupon-detail #end_date').val()
-            coup_veh_type = $('#coupon-detail #coup_veh_type').find('option:selected').val()
-            coup_cat_type = $('#coupon-detail #coup_cat').find('option:selected').val()
-            coup_type = $('#coupon-detail #coup_type').find('option:selected').val()
-            coup_val = $('#coupon-detail #coup_value').val()
-            coup_cap = $('#coupon-detail #coup_cap').val()
-            coup_message = $('#coupon-detail #coup_message').val()
-            active_box =  document.getElementById('coupon_active');
-            coup_active = active_box.checked
-            // console.log(coupon_code  )
-            // console.log(coupon_start )
-            // console.log(coupon_end   )
-            // console.log(coup_veh_type)
-            // console.log(coup_cat_type)
-            // console.log(coup_type    )
-            // console.log(coup_message    )
-            // console.log(coup_val     )
-            // console.log(coup_cap     )
+        $('#subscription-detail .submit-rsa').click(function(){
+            sub_id                  = $('#sub_id').val()
+            cust_fname              = $('#firstname').val()
+            cust_lname              = $('#lastname').val()
+            cust_num_p              = $('#sub_telephone').val()
+            cust_num_s              = $('#sub_alt_telephone').val()
+            cust_email              = $('#sub_email').val()
+            cust_add                = $('#sub_address').val()
+            cust_loc                = $('#sub_locality').val()
+            cust_city               = $('#sub_city').val()
+            cust_state              = $('#sub_state').find('select').val()
+            make                    = $('#sub_veh_make').find('select').val()
+            veh_type                = $('#sub_veh_type').find('select').val()
+            model                   = $('#sub_veh_model').find('select').val()
 
-            error =0
-            if(coupon_code==""){
-                $('#coupon-detail #coup_name').addClass("invalid");
-                error = 1;
-            }
-            if(coupon_start==""){
-                $('#coupon-detail #start_date').addClass("invalid");
-                error = 1;
-            }
-            if(coupon_end==""){
-                $('#coupon-detail #end_date').addClass("invalid");
-                error = 1;
-            }
-            if(coup_veh_type==""){
-                $('#coupon-detail #coup_veh_type').addClass("invalid-select-box");
-                error = 1;
-            }
-            if(coup_cat_type==""){
-                $('#coupon-detail #coup_cat').addClass("invalid-select-box");
-                error = 1;
-            }
-            if(coup_type==""){
-                $('#coupon-detail #coup_type').addClass("invalid-select-box");
-                error = 1;
-            }
-            if(coup_val==""){
-                $('#coupon-detail #coup_value').addClass("invalid");
-                error = 1;
-            }
-            if(coup_cap==""){
-                $('#coupon-detail #coup_cap').addClass("invalid");
-                error = 1;
-            }
-            if(coup_message==""){
-                $('#coupon-detail #coup_message').addClass("invalid");
-                error = 1;
-            }
-            if(error==1){
-                // console.log("didnt work")
-                return;
-            }else{
-                Commons.ajaxData('add_modify_coupon', {c_id: coupon_code  ,
-                    d_start: coupon_start ,
-                    d_end: coupon_end   ,
-                    veh_type: coup_veh_type,
-                    cat_id: coup_cat_type,
-                    type: coup_type    ,
-                    val: coup_val     ,
-                    cap: coup_cap     ,
-                    message: coup_message ,
-                    active: coup_active  }, "get", _this, _this.loadAddCoupon,null, '.loading-pane');
-            }
+
+            fuel_start              = model.indexOf("(")
+            fuel_end                = model.indexOf(")")
+            fuel                    = model.substr(fuel_start+1,fuel_end-fuel_start-1)
+            model                   = model.substr(0,fuel_start-1)
+
+            vehicle_vin             = $('#sub_vin_number').val()
+            vehicle_regno           = $('#sub_reg_number').val()
+
+            sub_type                = $('#sub_category').val()
+            pack_name               = $('#sub_package_name').val()
+            comment                 = $('#sub_comment').val()
+
+            date_veh_purchase       = $('#sub_veh_date_purchase').val();
+            date_start              = $('#sub_date_start').val();
+            date_end                = $('#sub_date_end').val();
+
+            active_box              =  document.getElementById('policy_active');
+            pol_active              = active_box.checked
+            status = $('#sub_status').find('select').val()
+             error = 0
+                if(cust_fname==""){
+                    $('#firstname').addClass("invalid");
+                    error = 1;
+                }
+                if(cust_lname==""){
+                    $('#lastname').addClass("invalid");
+                    error = 1;
+                }
+                if(cust_add==""){
+                    $('#sub_address').addClass("invalid");
+                    error = 1;
+                }
+                if(cust_loc==""){
+                    $('#sub_locality').addClass("invalid");
+                    error = 1;
+                }
+                if(cust_city==""){
+                    $('#sub_city').addClass("invalid");
+                    error = 1;
+                }
+                if(cust_state==""){
+                    $('#sub_state').addClass("invalid");
+                    error = 1;
+                }
+               if(make == "" || model == "" ||make == "Make" || model == "Model" ) {
+                   $('#choose-vehicle-error').text('Please select vehicle');
+                    error = 1;
+                }
+
+                if(cust_num_p <= 100000000 || cust_num_p >= 9999999999){
+                    $('#sub_telephone').addClass("invalid");
+                    error = 1;
+                }
+
+                if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(cust_email)){
+                    $('#sub_email').addClass("valid");
+                    // error = 1;
+                }else{
+                    $('#sub_email').addClass("invalid");
+                    error =1;
+                }
+                if(vehicle_vin==""){
+                    $('#sub_vin_number').addClass("invalid");
+                    error = 1;
+                }
+                if(vehicle_regno==""){
+                    $('#sub_reg_number').addClass("invalid");
+                    error = 1;
+                }
+                if(date_veh_purchase==""){
+                    $('#sub_date_purchase').addClass("invalid");
+                    error = 1;
+                }
+                if(date_start==""){
+                    $('#sub_date_start').addClass("invalid");
+                    error = 1;
+                }
+                if(date_end==""){
+                    $('#sub_date_end').addClass("invalid");
+                    error = 1;
+                }
+                if(sub_type==""){
+                    $('#sub_category').addClass("invalid");
+                    error = 1;
+                }
+                if(pack_name==""){
+                    $('#sub_package_name').addClass("invalid");
+                    error = 1;
+                }
+
+
+                if(error==1){
+                    return;
+                }else{
+
+                    Commons.ajaxData('add_modify_subscription', {
+                                                            sub_id          : sub_id,
+                                                            cust_fname      :cust_fname           ,
+                                                            cust_lname           :cust_lname           ,
+                                                            cust_num_p           :cust_num_p           ,
+                                                            cust_num_s           :cust_num_s           ,
+                                                            cust_email           :cust_email           ,
+                                                            cust_add             :cust_add             ,
+                                                            cust_loc             :cust_loc             ,
+                                                            cust_city            :cust_city            ,
+                                                            cust_state           :cust_state           ,
+                                                            make                 :make                 ,
+                                                            veh_type             :veh_type             ,
+                                                            fuel                 :fuel                 ,
+                                                            model                :model                ,
+                                                            vehicle_vin          :vehicle_vin          ,
+                                                            vehicle_regno        :vehicle_regno        ,
+                                                            sub_type             :sub_type             ,
+                                                            pack_name            :pack_name            ,
+                                                            date_veh_purchase    :date_veh_purchase    ,
+                                                            comment              :comment              ,
+                                                            date_start           :date_start    ,
+                                                            date_end             :date_end    ,
+                                                            is_active            :pol_active    ,
+                                                            status : status
+
+                                                            }, "get", _this, _this.loadSubscriptionModify);
+
+
+                }
         });
         // -- Modify Subscription
         $('#subscription-detail .subscription-list').on('click','.modify-btn',function(){
-            coupon_id = $(this).closest('tr').attr('data-class')
-            console.log(coupon_id)
-            $('#coupon-detail .coupon-list').hide()
-            $('#coupon-detail .coupon-add-mod').show()
-            $('#coupon-detail  .all-coupon').removeClass('selected')
-            $('#coupon-detail  .single-coupon').addClass('selected')
-            Commons.ajaxData('view_all_coupons', {c_id:coupon_id}, "get", _this, _this.loadCoupon,null, '.loading-pane');
+            subscription_id = $(this).closest('tr').attr('data-class')
+            // console.log(subscription_id)
+            $('#subscription-detail .subscription-list').hide()
+            $('#subscription-detail .subscription-add-mod').show()
+            $('#subscription-detail  .all-subscription').removeClass('selected')
+            $('#subscription-detail  .single-subscription').addClass('selected')
+            Commons.ajaxData('view_all_subscription', {subs_id:subscription_id}, "get", _this, _this.loadSubscription,null, '.loading-pane');
 
         });
         // -- Switch between list and add/modify in a Subscription
@@ -757,7 +846,30 @@ var Global = {
             $('#subscription-detail  .subscription-add-mod').show();
             $('#subscription-detail  .all-subscription').removeClass('selected')
             $('#subscription-detail  .single-subscription:hover').addClass('selected')
-
+            $('#sub_id').val('')
+            $('#firstname').val('')
+            $('#lastname').val('')
+            $('#sub_telephone').val('')
+            $('#sub_alt_telephone').val('')
+            $('#sub_email').val('')
+            $('#sub_address').val('')
+            $('#sub_locality').val('')
+            $('#sub_city').val('')
+            $('#sub_state').find('select').val('')
+            $('#sub_veh_type').find('select').val('')
+            $('#sub_veh_make').find('select').val('')
+            $('#sub_veh_model').find('select').val('')
+            $('#sub_vin_number').val('')
+            $('#sub_reg_number').val('')
+            $('#sub_category').val('')
+            $('#sub_package_name').val('')
+            $('#sub_comment').val('')
+            $('#sub_veh_date_purchase').val('');
+            $('#sub_date_start').val('');
+            $('#sub_date_end').val('');
+            $('#sub_status').val('Under Review');
+             document.getElementById("policy_active").checked = false;
+            Materialize.updateTextFields();
         });
 
 
@@ -2338,10 +2450,11 @@ var Global = {
             $('#coupon-detail #coup_cap').val(val.cap)
             $('#coupon-detail #coup_message').val(val.message)
             if (val.active){
-                document.getElementById('coupon_active').setAttribute("checked", "");;
+                document.getElementById("coupon_active").checked = true;
             } else {
-                // document.getElementById('coupon_active');
+                 document.getElementById("coupon_active").checked = false;
             }
+
         });
         Materialize.updateTextFields();
     },
@@ -2405,8 +2518,31 @@ var Global = {
         html += '</select>';
         container.html(html);
     },
+    loadBrands2:function(data){
+        var container = $('#sub_veh_make');
+        container.html('');
+        var html = '<select class="browser-default">';
+        html +=    '<option value="" disabled selected>Select Make</option>';
+        $.each(data, function(ix, val){
+            html += '<option value="'+val.make+'">'+val.make+'</option>';
+        });
+        html += '</select>';
+        container.html(html);
+    },
     loadModels:function(data){
         var container = $('#select-model');
+        container.html('');
+        var html = '<select class="browser-default">';
+        html +=    '<option value="" disabled selected>Select Model</option>';
+        $.each(data, function(ix, val){
+            html += '<option value="' + val.full_veh_name + '" data-placeholder="true">'+ val.full_veh_name + '</option>'
+            // html += '<option value="'+val.model+'">'+val.model+'</option>';
+        });
+        html += '</select>';
+        container.html(html);
+    },
+    loadModels2:function(data){
+        var container = $('#sub_veh_model');
         container.html('');
         var html = '<select class="browser-default">';
         html +=    '<option value="" disabled selected>Select Model</option>';
@@ -2578,6 +2714,80 @@ var Global = {
 
         container.html(html);
 
+    },
+    loadSubscription:function(data){
+        $.each(data, function(ix, val) {
+            $('#sub_id').val(val.subscription_id)
+            $('#firstname').val(val.cust_fname)
+            $('#lastname').val(val.cust_lname)
+            $('#sub_telephone').val(val.cust_number_primary)
+            $('#sub_alt_telephone').val(val.cust_number_secondary)
+            $('#sub_email').val(val.cust_email)
+            $('#sub_address').val(val.cust_address)
+            $('#sub_locality').val(val.cust_locality)
+            $('#sub_city').val(val.cust_city)
+            $('#sub_state').find('select').val(val.cust_state)
+            $('#sub_veh_type').find('select').val(val.cust_vehicle_type).trigger("change");
+               setTimeout(function(){
+                  $('#sub_veh_make').find('select').val(val.cust_make).trigger("change");
+                   // console.log('1')
+                    setTimeout(function(){
+                       $('#sub_veh_model').find('select').val(val.cust_model+' ('+val.cust_fuel_varient+')');
+                         // console.log('2')
+                    }, 1000);
+               }, 1500);
+
+
+            $('#sub_vin_number').val(val.cust_vehicle_vin)
+            $('#sub_reg_number').val(val.cust_regnumber)
+            $('#sub_category').val(val.subscription_type)
+            $('#sub_package_name').val(val.package_name)
+            $('#sub_comment').val(val.comment)
+            $('#sub_status').val(val.status)
+            // $('#sub_veh_date_purchase').val(val.date_veh_purchase);
+            // $('#sub_date_start').val(val.date_start);
+            // $('#sub_date_end').val(val.date_end);
+
+
+            date_purchase   = val.date_veh_purchase
+            date_start      = val.date_start
+            date_end        = val.date_end
+
+
+
+            if (val.is_active){
+                document.getElementById("policy_active").checked = true;
+            }else{
+                 document.getElementById("policy_active").checked = false;
+            }
+
+        });
+
+        var $input = $('#sub_veh_date_purchase').pickadate({
+                format: 'dd-mm-yyyy',
+                })
+
+        var $input2 = $('#sub_date_start').pickadate({
+                format: 'dd-mm-yyyy',
+                })
+
+        var $input3 = $('#sub_date_end').pickadate({
+                format: 'dd-mm-yyyy',
+                })
+
+        var picker = $input.pickadate('picker')
+            picker.set('select', date_purchase, { format: 'dd-mm-yyyy' })
+
+        var picker2 = $input2.pickadate('picker')
+        picker2.set('select', date_start, { format: 'dd-mm-yyyy' })
+
+        var picker3 = $input3.pickadate('picker')
+        picker3.set('select', date_end, { format: 'dd-mm-yyyy' })
+
+        Materialize.updateTextFields();
+    },
+    loadSubscriptionModify:function(data){
+        alert("Subscription Added/Modified")
     },
     loadCustomerestimate:function(date){
          alert('Estimate Updated!')
