@@ -6,21 +6,21 @@ document.onreadystatechange = function () {
 // materialize css
 $(document).ready(function() {
     $('select').material_select();
-   var a = $(window).height();
+    var a = $(window).height();
     // var b = $('.home-form').height();
     console.log(a)
     alfa = parseInt('80px')
     // console.log(a-alfa)
 
 
-        var viewportWidth = $(window).width();
+    var viewportWidth = $(window).width();
     if (viewportWidth <= 600) {
         // $("#bookings .pre-data").height(a/1.5 - alfa)
 
     }else if (viewportWidth <= 992){
         // $("#bookings .pre-data").height(a/1.5 - alfa)
     }else{
-    $("#bookings .pre-data").height(a - alfa)
+        $("#bookings .pre-data").height(a - alfa)
     }
 
 
@@ -33,10 +33,10 @@ $('.datepicker').pickadate({
 
 
 $(window).ready(function() {
-     setTimeout(function() {
-         $('.loading-pane-2').hide();
-         $('#overlay').hide();
-            }, 1000);
+    setTimeout(function() {
+        $('.loading-pane-2').hide();
+        $('#overlay').hide();
+    }, 1000);
 });
 
 $(".button-collapse").sideNav();
@@ -73,29 +73,29 @@ var SORT_TYPE = "";
 var BOOKING_ID = "";
 var VEH_TYPE = "";
 var SOURCES = ['Google Adwords',
-'Repeat Customer',
-'Employee Referral',
-'External Referral',
-'JustDial',
-'Pamphlet',
-'Auto Advertisement',
-'On-Ground Marketing',
-'Sulekha',
-'Database - Cold Calling',
-'Chat',
-'B2B',
-'Partner - Droom',
-'Partner - Wishup',
-'Partner - Housejoy',
-'Walk in',
-'Partner - Mr. Right',
-'Web Search',
-'Unknown',
-'Society camps',
-'Check up camps',
-'Sign up lead',
-'Facebook Ad']
- // DATE_TYPE =
+    'Repeat Customer',
+    'Employee Referral',
+    'External Referral',
+    'JustDial',
+    'Pamphlet',
+    'Auto Advertisement',
+    'On-Ground Marketing',
+    'Sulekha',
+    'Database - Cold Calling',
+    'Chat',
+    'B2B',
+    'Partner - Droom',
+    'Partner - Wishup',
+    'Partner - Housejoy',
+    'Walk in',
+    'Partner - Mr. Right',
+    'Web Search',
+    'Unknown',
+    'Society camps',
+    'Check up camps',
+    'Sign up lead',
+    'Facebook Ad']
+// DATE_TYPE =
 
 var Global = {
     init:function() {
@@ -112,7 +112,70 @@ var Global = {
         _this.eventsAdded = true;
         console.log('adding hanlder');
 
-        // Bookings Management
+// =====================================================================================
+//     Booking/ LEAD Management
+// =====================================================================================
+
+        // Open Bookings
+        $('.navbar .booking-button').click(function(event,data){
+            $('#booking-details').hide();
+            $('#bookings').show()
+            $('#user-details').hide()
+            $('#coupon-details').hide()
+            $('#new-booking').hide()
+            $('#subscription-details').hide()
+            // $('#bookings .delivery-list').show()
+            $('#bookings .booking-filter').show();
+            $('#customer-detail .bill-row').show();
+
+
+            LEAD_TYPE = "Booking"
+            if (DATE_TYPE != ""){
+                // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
+                // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
+                // $('#bookings #delivery-list').show()
+            }
+            $('#bookings #bookings-list .header-id-bar.bookings').text('Bookings')
+            $('#bookings #bookings-list .booking-bar-2 .agent').text('Agent Details')
+
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                date:DATE_TYPE,
+                status:STATUS_TYPE,
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+        });
+        // Open Lead
+        $('.navbar .lead-button').click(function(event,data){
+            $('#booking-details').hide();
+            $('#bookings').show()
+            $('#user-details').hide()
+            $('#coupon-details').hide()
+            $('#new-booking').hide()
+            $('#subscription-details').hide()
+            LEAD_TYPE = "Lead"
+            $('#bookings #bookings-list .header-id-bar.bookings').text('Leads')
+            // $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
+            $('#bookings #bookings-list').show()
+            $('#bookings #delivery-list').hide()
+            $('#bookings .booking-filter .date-box').removeClass('selected');
+            $('#bookings .booking-filter .bookings-filter').addClass('selected');
+            $('#bookings #bookings-list .booking-bar-2 .agent').text('')
+            $('#bookings .booking-filter').hide();
+            $('#customer-detail .bill-row').hide();
+
+            // type = "Lead"
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                date:DATE_TYPE,
+                status:STATUS_TYPE,
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+        });
 
         $('#bookings').on('click','.filter-sort.closed',function () {
             $('#bookings .filter-option').show();
@@ -125,144 +188,86 @@ var Global = {
             $(this).find('i').removeClass('fa-caret-up').addClass('fa-caret-down')
 
         });
-        // Open Bookings
-        $('.navbar .booking-button').click(function(event,data){
-            $('#booking-details').hide();
-            $('#bookings').show()
-            $('#user-details').hide()
-            $('#coupon-details').hide()
-            $('#new-booking').hide()
-            // $('#bookings .delivery-list').show()
-          $('#bookings .booking-filter').show();
-          $('#customer-detail .bill-row').show();
 
 
-            LEAD_TYPE = "Booking"
-            if (DATE_TYPE != ""){
-             // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
-             // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
-             // $('#bookings #delivery-list').show()
-            }
-            $('#bookings #bookings-list .header-id-bar.bookings').text('Bookings')
-            $('#bookings #bookings-list .booking-bar-2 .agent').text('Agent Details')
-
-            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
-                                lead_booking:LEAD_TYPE,
-                                sort:SORT_TYPE,
-                                date:DATE_TYPE,
-                                status:STATUS_TYPE,
-                                name:CUST_NAME,
-                                reg:REG_NUMBER,
-                                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
-        });
-
-        $('.navbar .lead-button').click(function(event,data){
-            $('#booking-details').hide();
-            $('#bookings').show()
-            $('#user-details').hide()
-            $('#coupon-details').hide()
-            $('#new-booking').hide()
-            LEAD_TYPE = "Lead"
-            $('#bookings #bookings-list .header-id-bar.bookings').text('Leads')
-             // $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
-             $('#bookings #bookings-list').show()
-             $('#bookings #delivery-list').hide()
-             $('#bookings .booking-filter .date-box').removeClass('selected');
-             $('#bookings .booking-filter .bookings-filter').addClass('selected');
-             $('#bookings #bookings-list .booking-bar-2 .agent').text('')
-             $('#bookings .booking-filter').hide();
-             $('#customer-detail .bill-row').hide();
-
-            // type = "Lead"
-            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
-                                lead_booking:LEAD_TYPE,
-                                sort:SORT_TYPE,
-                                date:DATE_TYPE,
-                                status:STATUS_TYPE,
-                                name:CUST_NAME,
-                                reg:REG_NUMBER,
-                                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
-        });
 
         DATE_TYPE = _this.date_format( new Date());
 
         //Filtering/ Date Selection
         $('#bookings .date-filter .date-box').click(function(){
-           $('#filterdate').val('');
-           $('#bookings .date-filter .date-box').removeClass('selected');
-           $(this).addClass('selected');
+            $('#filterdate').val('');
+            $('#bookings .date-filter .date-box').removeClass('selected');
+            $(this).addClass('selected');
             date = $(this).attr('data-class')
             // console.log(date)
             // console.log(date)
-             $('#bookings #bookings-list').removeClass('l6')
+            $('#bookings #bookings-list').removeClass('l6')
             date_str = new Date();
             DATE_TYPE = _this.date_format(date_str);
             if (date=="Today"){
                 // console.log(date)
                 date_str = new Date();
                 DATE_TYPE = _this.date_format(date_str);
-                        // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
-                        // $('#bookings #delivery-list').show()
+                // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
+                // $('#bookings #delivery-list').show()
                 if (LEAD_TYPE == "Lead"){
-                        $('#bookings #delivery-list').hide()
-                        // $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
-                    }
+                    $('#bookings #delivery-list').hide()
+                    // $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
+                }
             }else if (date == "Tomorrow"){
                 // console.log(date)
                 date_str = new Date((new Date()).valueOf() + 1000*3600*24);
                 DATE_TYPE = _this.date_format(date_str);
-                    // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
-                    // $('#bookings #delivery-list').show()
-                    if (LEAD_TYPE == "Lead"){
-                        $('#bookings #delivery-list').hide()
-                        // $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
-                    }
+                // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
+                // $('#bookings #delivery-list').show()
+                if (LEAD_TYPE == "Lead"){
+                    $('#bookings #delivery-list').hide()
+                    // $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
+                }
             }else{
                 // console.log(date)
                 DATE_TYPE = "";
-                    // $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
-                    // $('#bookings #delivery-list').hide()
+                // $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
+                // $('#bookings #delivery-list').hide()
 
             }
             // console.log(DATE_TYPE)
 
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
-                                lead_booking:LEAD_TYPE,
-                                sort:SORT_TYPE,
-                                date:DATE_TYPE,
-                                status:STATUS_TYPE,
-                                name:CUST_NAME,
-                                reg:REG_NUMBER,
-                                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                date:DATE_TYPE,
+                status:STATUS_TYPE,
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
 
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
-                                lead_booking:LEAD_TYPE,
-                                sort:SORT_TYPE,
-                                del_date:DATE_TYPE,
-                                status:STATUS_TYPE,
-                                name:CUST_NAME,
-                                reg:REG_NUMBER,
-                                veh_type:VEH_TYPE}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                del_date:DATE_TYPE,
+                status:STATUS_TYPE,
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                veh_type:VEH_TYPE}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
         })
 
         $('#bookings .booking-filter .date-box').click(function(){
-           $('#bookings .booking-filter .date-box').removeClass('selected');
-           $(this).addClass('selected');
+            $('#bookings .booking-filter .date-box').removeClass('selected');
+            $(this).addClass('selected');
             toshow = $(this).attr('data-class')
 
             if (toshow=="Delivery"){
-            $('#bookings #bookings-list').hide()
-            $('#bookings #delivery-list').show()
+                $('#bookings #bookings-list').hide()
+                $('#bookings #delivery-list').show()
 
             }else{
-            $('#bookings #bookings-list').show()
-            $('#bookings #delivery-list').hide()
+                $('#bookings #bookings-list').show()
+                $('#bookings #delivery-list').hide()
 
             }
         })
-
-
 
         $('#bookings  .btn-apply-filter').click(function(){
             date_selected = $('#bookings #filterdate').val();
@@ -297,76 +302,76 @@ var Global = {
                 REG_NUMBER = reg_selected
             }
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
-                                lead_booking:LEAD_TYPE,
-                                sort:SORT_TYPE,
-                                date:DATE_TYPE,
-                                status:STATUS_TYPE,
-                                name:CUST_NAME,
-                                reg:REG_NUMBER,
-                                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                date:DATE_TYPE,
+                status:STATUS_TYPE,
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
 
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
-                                lead_booking:LEAD_TYPE,
-                                sort:SORT_TYPE,
-                                del_date:DATE_TYPE,
-                                status:STATUS_TYPE,
-                                name:CUST_NAME,
-                                reg:REG_NUMBER,
-                                veh_type:VEH_TYPE}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                del_date:DATE_TYPE,
+                status:STATUS_TYPE,
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                veh_type:VEH_TYPE}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
             $('#bookings .filter-option').hide();
             $('#bookings .filter-sort').addClass('closed').removeClass('open');
 
         })
 
-         $('#bookings  .btn-remove-filter').click(function(){
+        $('#bookings  .btn-remove-filter').click(function(){
             $('#bookings #filterdate').val('');
             $('#bookings  #Status').find('select').val('');
             $('#bookings  #Vehicle_type').find('select').val('');
             $('#bookings  #custname').val('');
             $('#bookings  #booking_id').val('');
             $('#bookings  #regnumber').val('');
-             DATE_TYPE = _this.date_format( new Date());
-             REG_NUMBER = "";
-             CUST_NAME = "";
-             STATUS_TYPE = "";
-             SORT_TYPE = "";
-             BOOKING_ID = "";
-             VEH_TYPE = "";
-             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
-                                lead_booking:LEAD_TYPE,
-                                sort:SORT_TYPE,
-                                date:DATE_TYPE,
-                                status:STATUS_TYPE,
-                                name:CUST_NAME,
-                                reg:REG_NUMBER,
-                                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
-             $('#bookings .date-filter .date-box').removeClass('selected');
-             $('#bookings .date-filter .date-box.today').addClass('selected');
-         })
+            DATE_TYPE = _this.date_format( new Date());
+            REG_NUMBER = "";
+            CUST_NAME = "";
+            STATUS_TYPE = "";
+            SORT_TYPE = "";
+            BOOKING_ID = "";
+            VEH_TYPE = "";
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                date:DATE_TYPE,
+                status:STATUS_TYPE,
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+            $('#bookings .date-filter .date-box').removeClass('selected');
+            $('#bookings .date-filter .date-box.today').addClass('selected');
+        })
 
-         $('#bookings #sort').change(function(){
+        $('#bookings #sort').change(function(){
             SORT_TYPE = $('#bookings  #sort').find('select').val();
-             console.log(SORT_TYPE)
-              Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
-                                lead_booking:LEAD_TYPE,
-                                sort:SORT_TYPE,
-                                date:DATE_TYPE,
-                                status:STATUS_TYPE,
-                                name:CUST_NAME,
-                                reg:REG_NUMBER,
-                                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+            console.log(SORT_TYPE)
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                date:DATE_TYPE,
+                status:STATUS_TYPE,
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
 
-         })
+        })
 
         // Open Individual Booking
         $('#bookings .pre-data').on('click','.booking',function(event,data){
             $('#bookings').hide()
             $('#booking-details').show()
-             $('#customer-detail .booking-data').show();
-              $('#customer-detail .booking-job-data').hide();
-              $('#customer-detail .service-detail').removeClass('selected')
-              $('#customer-detail .cust-detail').addClass('selected')
+            $('#customer-detail .booking-data').show();
+            $('#customer-detail .booking-job-data').hide();
+            $('#customer-detail .service-detail').removeClass('selected')
+            $('#customer-detail .cust-detail').addClass('selected')
             bid =$(this).attr('data-class')
             Commons.ajaxData('view_all_bookings', {b_id:bid}, "get", _this, _this.loadBookingData,null, '.loading-pane');
             Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", _this, _this.loadAgentdata,null, '.loading-pane');
@@ -374,10 +379,10 @@ var Global = {
         });
         // Switch between estimate and details in a booking
         $('#customer-detail .cust-detail').click(function(){
-              $('#customer-detail .booking-data').show();
-              $('#customer-detail .booking-job-data').hide();
-              $('#customer-detail .service-detail').removeClass('selected')
-              $('#customer-detail .cust-detail:hover').addClass('selected')
+            $('#customer-detail .booking-data').show();
+            $('#customer-detail .booking-job-data').hide();
+            $('#customer-detail .service-detail').removeClass('selected')
+            $('#customer-detail .cust-detail:hover').addClass('selected')
         });
         $('#customer-detail .service-detail').click(function(){
             $('#customer-detail .booking-data').hide();
@@ -405,66 +410,66 @@ var Global = {
         });
 
         $('#customer-detail').on('keyup click','table',function(e,event,data){
-                TOTAL_PRICE_ADMIN = 0;
-                TOTAL_LABOUR_ADMIN = 0;
-                TOTAL_PARTS_ADMIN = 0;
-                TOTAL_DISCOUNT_ADMIN = 0;
+            TOTAL_PRICE_ADMIN = 0;
+            TOTAL_LABOUR_ADMIN = 0;
+            TOTAL_PARTS_ADMIN = 0;
+            TOTAL_DISCOUNT_ADMIN = 0;
             var table = document.getElementById('estimate-table');
-                // units = $(this).closest('tr').find('#part_units').eq(0).val()
-                // unit_price = $(this).closest('tr').find('#part_unitprice').eq(0).val()
-                // console.log(units)
-                // console.log(unit_price)
-                // part_total_price = $(this).closest('tr').find('#part_units').val() * $(this).closest('tr').find('#part_unitprice').val();
+            // units = $(this).closest('tr').find('#part_units').eq(0).val()
+            // unit_price = $(this).closest('tr').find('#part_unitprice').eq(0).val()
+            // console.log(units)
+            // console.log(unit_price)
+            // part_total_price = $(this).closest('tr').find('#part_units').val() * $(this).closest('tr').find('#part_unitprice').val();
 
-                // $(this).closest('tr').find('#part_price').val(part_total_price)
-                for (var i = 1, row; row = table.rows[i]; i++) {
-                    for (var j = 0, col; col = row.cells[j]; j++) {
-                        if (j == 1) {
-                            name_item = $(row.cells[j]).find('input,select').eq(0).val()
-                            // console.log(name_item)
-                        }else if (j == 2) {
-                            type_item = $(row.cells[j]).find('input,select').eq(0).val()
-                            // console.log(type_item)
-                        } else if (j == 3) {
-                            quantity = $(row.cells[j]).find('input,select').eq(0).val()
-                            // console.log(type_item)
-                        }else if (j == 4) {
-                            unit_price = $(row.cells[j]).find('input,select').eq(0).val()
-                            // console.log(type_item)
-                        }else if (j == 5) {
-                            price_item = unit_price * quantity;
-                            $(row.cells[j]).find('input,select').eq(0).val(price_item)
-                            // console.log(price_item)
-                        }else if (j == 6){
-                             comment =  $(row.cells[j]).find('input,select').eq(0).val()
-                        }else if (j == 8){
-                             if($(row.cells[j]).find('input,select')[0].checked){
-                                 approved = "Yes"
-                                 // console.log(approved)
-                             }else{
-                                 approved = "TBD"
-                                 // console.log(approved)
-                             }
-                        }else if (j == 9){
-                             settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
+            // $(this).closest('tr').find('#part_price').val(part_total_price)
+            for (var i = 1, row; row = table.rows[i]; i++) {
+                for (var j = 0, col; col = row.cells[j]; j++) {
+                    if (j == 1) {
+                        name_item = $(row.cells[j]).find('input,select').eq(0).val()
+                        // console.log(name_item)
+                    }else if (j == 2) {
+                        type_item = $(row.cells[j]).find('input,select').eq(0).val()
+                        // console.log(type_item)
+                    } else if (j == 3) {
+                        quantity = $(row.cells[j]).find('input,select').eq(0).val()
+                        // console.log(type_item)
+                    }else if (j == 4) {
+                        unit_price = $(row.cells[j]).find('input,select').eq(0).val()
+                        // console.log(type_item)
+                    }else if (j == 5) {
+                        price_item = unit_price * quantity;
+                        $(row.cells[j]).find('input,select').eq(0).val(price_item)
+                        // console.log(price_item)
+                    }else if (j == 6){
+                        comment =  $(row.cells[j]).find('input,select').eq(0).val()
+                    }else if (j == 8){
+                        if($(row.cells[j]).find('input,select')[0].checked){
+                            approved = "Yes"
+                            // console.log(approved)
+                        }else{
+                            approved = "TBD"
+                            // console.log(approved)
                         }
+                    }else if (j == 9){
+                        settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
                     }
-
-
-                        if (type_item == "Labour") {
-                            TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
-                            TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(price_item)
-                        } else if (type_item == "Part" ||  type_item == "Lube" || type_item == "Consumable") {
-                            TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
-                            TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(price_item)
-                        } else if (type_item == "Discount") {
-                            TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN - parseFloat(price_item)
-                            TOTAL_DISCOUNT_ADMIN = TOTAL_DISCOUNT_ADMIN + parseFloat(price_item)
-                        } else {
-                            TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN
-                        }
-                    $('#customer-detail .total-amount').text(TOTAL_PRICE_ADMIN)
                 }
+
+
+                if (type_item == "Labour") {
+                    TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
+                    TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(price_item)
+                } else if (type_item == "Part" ||  type_item == "Lube" || type_item == "Consumable") {
+                    TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
+                    TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(price_item)
+                } else if (type_item == "Discount") {
+                    TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN - parseFloat(price_item)
+                    TOTAL_DISCOUNT_ADMIN = TOTAL_DISCOUNT_ADMIN + parseFloat(price_item)
+                } else {
+                    TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN
+                }
+                $('#customer-detail .total-amount').text(TOTAL_PRICE_ADMIN)
+            }
         });
 
         $('#customer-detail #comp_all_select').click(function(){
@@ -478,41 +483,41 @@ var Global = {
         })
 
         $('#customer-detail').on('click',' #estimate-table .delete',function(){
-                TOTAL_PRICE_ADMIN = 0;
+            TOTAL_PRICE_ADMIN = 0;
             $(this).closest('tr').remove()
-             TOTAL_ITEMS_ADMIN -= 1;
-             var table = document.getElementById('estimate-table');
-                for (var i = 1, row; row = table.rows[i]; i++) {
-                    for (var j = 0, col; col = row.cells[j]; j++) {
-                        if (j == 0) {
-                            $(row.cells[j]).text(i)
-                            // console.log(name_item)
-                        }if (j == 1) {
-                            name_item = $(row.cells[j]).find('input,select').eq(0).val()
-                            // console.log(name_item)
-                        } else if (j == 2) {
-                            type_item = $(row.cells[j]).find('input,select').eq(0).val()
-                            // console.log(type_item)
-                        } else if (j == 3) {
-                            price_item = $(row.cells[j]).find('input,select').eq(0).val()
-                            // console.log(price_item)
-                        } else if (j == 4){
-                             settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
-                        }
+            TOTAL_ITEMS_ADMIN -= 1;
+            var table = document.getElementById('estimate-table');
+            for (var i = 1, row; row = table.rows[i]; i++) {
+                for (var j = 0, col; col = row.cells[j]; j++) {
+                    if (j == 0) {
+                        $(row.cells[j]).text(i)
+                        // console.log(name_item)
+                    }if (j == 1) {
+                        name_item = $(row.cells[j]).find('input,select').eq(0).val()
+                        // console.log(name_item)
+                    } else if (j == 2) {
+                        type_item = $(row.cells[j]).find('input,select').eq(0).val()
+                        // console.log(type_item)
+                    } else if (j == 3) {
+                        price_item = $(row.cells[j]).find('input,select').eq(0).val()
+                        // console.log(price_item)
+                    } else if (j == 4){
+                        settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
                     }
-                        if (type_item == "Labour") {
-                            TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
-                            TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(price_item)
-                        } else if (type_item == "Part" || type_item == "Lube" || type_item == "Consumable") {
-                            TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
-                            TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(price_item)
-                        } else if (type_item == "Discount") {
-                            TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN - parseFloat(price_item)
-                            TOTAL_DISCOUNT_ADMIN = TOTAL_DISCOUNT_ADMIN + parseFloat(price_item)
-                        } else {
-                            TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN
-                        }
                 }
+                if (type_item == "Labour") {
+                    TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
+                    TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(price_item)
+                } else if (type_item == "Part" || type_item == "Lube" || type_item == "Consumable") {
+                    TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
+                    TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(price_item)
+                } else if (type_item == "Discount") {
+                    TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN - parseFloat(price_item)
+                    TOTAL_DISCOUNT_ADMIN = TOTAL_DISCOUNT_ADMIN + parseFloat(price_item)
+                } else {
+                    TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN
+                }
+            }
             $('#customer-detail .total-amount').text(TOTAL_PRICE_ADMIN)
         });
 
@@ -536,21 +541,21 @@ var Global = {
 
             ALL_JOBS_ADMIN = comment_n
             Commons.ajaxData('update_booking', {b_id: bid,
-                                                email: email_n,
-                                                reg_number: reg_n,
-                                                comment: comment_n,
-                                                time: time_n,
-                                                date: date_n,
-                                                note:notes_n,
-                                                name : cust_name,
-                                                number : cust_number,
-                                                amount_paid : amount_paid_n,
-                                                address : cust_address,
-                                                locality : cust_locality,
-                                                city : cust_city,
-                                                source : source,
-                                                date_del : date_del,
-                                                }, "post", _this, _this.loadCustomerupdate,null, '.loading-pane');
+                email: email_n,
+                reg_number: reg_n,
+                comment: comment_n,
+                time: time_n,
+                date: date_n,
+                note:notes_n,
+                name : cust_name,
+                number : cust_number,
+                amount_paid : amount_paid_n,
+                address : cust_address,
+                locality : cust_locality,
+                city : cust_city,
+                source : source,
+                date_del : date_del,
+            }, "post", _this, _this.loadCustomerupdate,null, '.loading-pane');
         });
 
         // - update-estimate
@@ -560,8 +565,8 @@ var Global = {
             console.log(CURRENT_CART_ADMIN)
             estimate = JSON.stringify(CURRENT_CART_ADMIN)
             Commons.ajaxData('update_estimate', {b_id: bid,
-                                                estimate: estimate,
-                                                }, "post", _this, _this.loadCustomerestimate,null, '.loading-pane');
+                estimate: estimate,
+            }, "post", _this, _this.loadCustomerestimate,null, '.loading-pane');
         });
 
         $('#customer-detail .btn-view-generate-bill').click(function(){
@@ -572,8 +577,8 @@ var Global = {
             console.log(CURRENT_CART_ADMIN)
             estimate = JSON.stringify(CURRENT_CART_ADMIN)
             Commons.ajaxData('update_estimate', {b_id: bid,
-                                                estimate: estimate,
-                                                }, "post", _this, _this.loadCustomerestimate,null, '.loading-pane');
+                estimate: estimate,
+            }, "post", _this, _this.loadCustomerestimate,null, '.loading-pane');
             window.open(
                 window.location.pathname.split('/')[0] + '/bills/new/' + b_data_id
             );
@@ -587,68 +592,181 @@ var Global = {
             );
         });
 
-        // $('#customer-detail .delete').click(function(){
-        //
-        //     // bid = $('#customer-detail #booking_id').attr('booking_id');
-        //     // _this.updateCart()
-        //     // console.log(CURRENT_CART_ADMIN)
-        //     // estimate = JSON.stringify(CURRENT_CART_ADMIN)
-        //     // Commons.ajaxData('update_estimate', {b_id: bid,
-        //     //                                     estimate: estimate,
-        //     //                                     }, "post", _this, _this.loadCustomerestimate,null, '.loading-pane');
-        // });
-
         // Update-Agent
-            $('#customer-detail .btn-update-agent').click(function(){
+        $('#customer-detail .btn-update-agent').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             agent_n = $('#agent-select').find('option:selected').val()
             Commons.ajaxData('update_agent', {b_id: bid,
-                                                agent_id: agent_n,
-                                                // email: email_n,
-                                                // reg_number: reg_n,
-                                                // comment: comment_n,
-                                                // estimate: estimate,
-                                                // time: time_n,
-                                                // date: date_n,
-                                                }, "post", _this, _this.loadCustomerAgent,null, '.loading-pane');
+                agent_id: agent_n,
+                // email: email_n,
+                // reg_number: reg_n,
+                // comment: comment_n,
+                // estimate: estimate,
+                // time: time_n,
+                // date: date_n,
+            }, "post", _this, _this.loadCustomerAgent,null, '.loading-pane');
         });
-                // change-status
+        // change-status
         $('#customer-detail .staff-button-row .confirm-row .btn-update-status').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $('#status-select').find('option:selected').val()
             console.log("Status Update")
             Commons.ajaxData('change_status', {b_id: bid,
-                                                status_id: status_n,
-                                                }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
+                status_id: status_n,
+            }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
         });
 
         $('#customer-detail .agent-button-row .btn-update-status').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $(this).attr('status_next')
             Commons.ajaxData('change_status', {b_id: bid,
-                                                status_id: status_n,
-                                                }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
+                status_id: status_n,
+            }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
         });
 
-         $('#customer-detail .b2b-button-row .btn-update-status').click(function(){
+        $('#customer-detail .b2b-button-row .btn-update-status').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $(this).attr('status_next')
             Commons.ajaxData('change_status', {b_id: bid,
-                                                status_id: status_n,
-                                                }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
+                status_id: status_n,
+            }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
         });
 
         $('#customer-detail .staff-button-row .lead-row .btn-update-status').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $(this).attr('status_next')
             Commons.ajaxData('change_status', {b_id: bid,
-                                                status_id: status_n,
-                                                }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
+                status_id: status_n,
+            }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
+        });
+
+// =====================================================================================
+//     Subscription Management
+// =====================================================================================
+
+
+     // -- Load Subscription
+        $('.navbar .subscription-button').click(function(){
+            // console.log('check')
+            $('#booking-details').hide()
+            $('#bookings').hide()
+            $('#user-details').hide()
+            $('#coupon-details').hide()
+            $('#subscription-details').show()
+            $('#new-booking').hide()
+            Commons.ajaxData('view_all_subscription', {}, "get", _this, _this.loadSubscriptionAll,null, '.loading-pane');
+        });
+
+        //     - ADD Subscription
+        $('#subscription-detail .add-subscription').click(function(){
+            coupon_code = $('#coupon-detail #coup_name').val()
+            coupon_start = $('#coupon-detail #start_date').val()
+            coupon_end = $('#coupon-detail #end_date').val()
+            coup_veh_type = $('#coupon-detail #coup_veh_type').find('option:selected').val()
+            coup_cat_type = $('#coupon-detail #coup_cat').find('option:selected').val()
+            coup_type = $('#coupon-detail #coup_type').find('option:selected').val()
+            coup_val = $('#coupon-detail #coup_value').val()
+            coup_cap = $('#coupon-detail #coup_cap').val()
+            coup_message = $('#coupon-detail #coup_message').val()
+            active_box =  document.getElementById('coupon_active');
+            coup_active = active_box.checked
+            // console.log(coupon_code  )
+            // console.log(coupon_start )
+            // console.log(coupon_end   )
+            // console.log(coup_veh_type)
+            // console.log(coup_cat_type)
+            // console.log(coup_type    )
+            // console.log(coup_message    )
+            // console.log(coup_val     )
+            // console.log(coup_cap     )
+
+            error =0
+            if(coupon_code==""){
+                $('#coupon-detail #coup_name').addClass("invalid");
+                error = 1;
+            }
+            if(coupon_start==""){
+                $('#coupon-detail #start_date').addClass("invalid");
+                error = 1;
+            }
+            if(coupon_end==""){
+                $('#coupon-detail #end_date').addClass("invalid");
+                error = 1;
+            }
+            if(coup_veh_type==""){
+                $('#coupon-detail #coup_veh_type').addClass("invalid-select-box");
+                error = 1;
+            }
+            if(coup_cat_type==""){
+                $('#coupon-detail #coup_cat').addClass("invalid-select-box");
+                error = 1;
+            }
+            if(coup_type==""){
+                $('#coupon-detail #coup_type').addClass("invalid-select-box");
+                error = 1;
+            }
+            if(coup_val==""){
+                $('#coupon-detail #coup_value').addClass("invalid");
+                error = 1;
+            }
+            if(coup_cap==""){
+                $('#coupon-detail #coup_cap').addClass("invalid");
+                error = 1;
+            }
+            if(coup_message==""){
+                $('#coupon-detail #coup_message').addClass("invalid");
+                error = 1;
+            }
+            if(error==1){
+                // console.log("didnt work")
+                return;
+            }else{
+                Commons.ajaxData('add_modify_coupon', {c_id: coupon_code  ,
+                    d_start: coupon_start ,
+                    d_end: coupon_end   ,
+                    veh_type: coup_veh_type,
+                    cat_id: coup_cat_type,
+                    type: coup_type    ,
+                    val: coup_val     ,
+                    cap: coup_cap     ,
+                    message: coup_message ,
+                    active: coup_active  }, "get", _this, _this.loadAddCoupon,null, '.loading-pane');
+            }
+        });
+        // -- Modify Subscription
+        $('#subscription-detail .subscription-list').on('click','.modify-btn',function(){
+            coupon_id = $(this).closest('tr').attr('data-class')
+            console.log(coupon_id)
+            $('#coupon-detail .coupon-list').hide()
+            $('#coupon-detail .coupon-add-mod').show()
+            $('#coupon-detail  .all-coupon').removeClass('selected')
+            $('#coupon-detail  .single-coupon').addClass('selected')
+            Commons.ajaxData('view_all_coupons', {c_id:coupon_id}, "get", _this, _this.loadCoupon,null, '.loading-pane');
+
+        });
+        // -- Switch between list and add/modify in a Subscription
+        $('#subscription-detail .all-subscription').click(function(){
+            $('#subscription-detail .subscription-list').show();
+            $('#subscription-detail  .subscription-add-mod').hide();
+            $('#subscription-detail  .single-subscription').removeClass('selected')
+            $('#subscription-detail  .all-subscription:hover').addClass('selected')
+        });
+
+        $('#subscription-detail .single-subscription').click(function(){
+            $('#subscription-detail .subscription-list').hide();
+            $('#subscription-detail  .subscription-add-mod').show();
+            $('#subscription-detail  .all-subscription').removeClass('selected')
+            $('#subscription-detail  .single-subscription:hover').addClass('selected')
+
         });
 
 
 
-        //Coupon Management
+
+
+// =====================================================================================
+//    Coupon Management
+// =====================================================================================
         // -- Load Coupon
         $('.navbar .coupon-button').click(function(){
             // console.log('check')
@@ -657,7 +775,8 @@ var Global = {
             $('#user-details').hide()
             $('#coupon-details').show()
             $('#new-booking').hide()
-               Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
+            $('#subscription-details').hide()
+            Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
         });
         //     - ADD Coupon
         $('#coupon-detail .add-coupon').click(function(){
@@ -700,15 +819,15 @@ var Global = {
                 error = 1;
             }
             if(coup_cat_type==""){
-               $('#coupon-detail #coup_cat').addClass("invalid-select-box");
+                $('#coupon-detail #coup_cat').addClass("invalid-select-box");
                 error = 1;
             }
             if(coup_type==""){
-               $('#coupon-detail #coup_type').addClass("invalid-select-box");
+                $('#coupon-detail #coup_type').addClass("invalid-select-box");
                 error = 1;
             }
             if(coup_val==""){
-               $('#coupon-detail #coup_value').addClass("invalid");
+                $('#coupon-detail #coup_value').addClass("invalid");
                 error = 1;
             }
             if(coup_cap==""){
@@ -724,15 +843,15 @@ var Global = {
                 return;
             }else{
                 Commons.ajaxData('add_modify_coupon', {c_id: coupon_code  ,
-                                    d_start: coupon_start ,
-                                    d_end: coupon_end   ,
-                                    veh_type: coup_veh_type,
-                                    cat_id: coup_cat_type,
-                                    type: coup_type    ,
-                                    val: coup_val     ,
-                                    cap: coup_cap     ,
-                                    message: coup_message ,
-                                    active: coup_active  }, "get", _this, _this.loadAddCoupon,null, '.loading-pane');
+                    d_start: coupon_start ,
+                    d_end: coupon_end   ,
+                    veh_type: coup_veh_type,
+                    cat_id: coup_cat_type,
+                    type: coup_type    ,
+                    val: coup_val     ,
+                    cap: coup_cap     ,
+                    message: coup_message ,
+                    active: coup_active  }, "get", _this, _this.loadAddCoupon,null, '.loading-pane');
             }
         });
         // -- Modify Coupon
@@ -741,52 +860,44 @@ var Global = {
             console.log(coupon_id)
             $('#coupon-detail .coupon-list').hide()
             $('#coupon-detail .coupon-add-mod').show()
-             $('#coupon-detail  .all-coupon').removeClass('selected')
-              $('#coupon-detail  .single-coupon').addClass('selected')
-             Commons.ajaxData('view_all_coupons', {c_id:coupon_id}, "get", _this, _this.loadCoupon,null, '.loading-pane');
+            $('#coupon-detail  .all-coupon').removeClass('selected')
+            $('#coupon-detail  .single-coupon').addClass('selected')
+            Commons.ajaxData('view_all_coupons', {c_id:coupon_id}, "get", _this, _this.loadCoupon,null, '.loading-pane');
 
         });
         // -- Switch between list and add/modify in a coupon
         $('#coupon-detail .all-coupon').click(function(){
-              $('#coupon-detail .coupon-list').show();
-              $('#coupon-detail  .coupon-add-mod').hide();
-              $('#coupon-detail  .single-coupon').removeClass('selected')
-              $('#coupon-detail  .all-coupon:hover').addClass('selected')
+            $('#coupon-detail .coupon-list').show();
+            $('#coupon-detail  .coupon-add-mod').hide();
+            $('#coupon-detail  .single-coupon').removeClass('selected')
+            $('#coupon-detail  .all-coupon:hover').addClass('selected')
         });
 
         $('#coupon-detail .single-coupon').click(function(){
-              $('#coupon-detail .coupon-list').hide();
-              $('#coupon-detail  .coupon-add-mod').show();
-              $('#coupon-detail  .all-coupon').removeClass('selected')
-              $('#coupon-detail  .single-coupon:hover').addClass('selected')
-                $('#coupon-detail #coup_name').val('')
-               $('#coupon-detail #start_date').val('')
-               $('#coupon-detail #end_date').val('')
-               $('#coupon-detail #coup_veh_type').val('')
-               $('#coupon-detail #coup_cat').val('')
-               $('#coupon-detail #coup_type').val('')
-               $('#coupon-detail #coup_value').val('')
-               $('#coupon-detail #coup_cap').val('')
-               $('#coupon-detail #coup_message').val('')
-               document.getElementById('coupon_active').removeAttribute("checked", "");;
+            $('#coupon-detail .coupon-list').hide();
+            $('#coupon-detail  .coupon-add-mod').show();
+            $('#coupon-detail  .all-coupon').removeClass('selected')
+            $('#coupon-detail  .single-coupon:hover').addClass('selected')
+            $('#coupon-detail #coup_name').val('')
+            $('#coupon-detail #start_date').val('')
+            $('#coupon-detail #end_date').val('')
+            $('#coupon-detail #coup_veh_type').val('')
+            $('#coupon-detail #coup_cat').val('')
+            $('#coupon-detail #coup_type').val('')
+            $('#coupon-detail #coup_value').val('')
+            $('#coupon-detail #coup_cap').val('')
+            $('#coupon-detail #coup_message').val('')
+            document.getElementById('coupon_active').removeAttribute("checked", "");;
 
-                   // document.getElementById('coupon_active');
+            // document.getElementById('coupon_active');
 
         });
 
 
-        // New Booking
+// =====================================================================================
+//    New Booking
+// =====================================================================================
 
-         $('#locality').on('keypress',function(e,event,data){
-            var code = (e.keyCode || e.which);
-            // do nothing if it's an arrow key
-            if(code == 37 || code == 38 || code == 39 || code == 40) {
-                return;
-            }
-             var locality = $(this).val();
-            Commons.ajaxData('get_location', {location_id: locality}, "get", _this, _this.loadLocation);
-            $('#locality').removeClass('invalid')
-        });
 
         $('.navbar .new-booking-button').click(function(){
             // console.log('check')
@@ -795,34 +906,36 @@ var Global = {
             $('#user-details').hide()
             $('#coupon-details').hide()
             $('#new-booking').show()
+            $('#subscription-details').hide()
             container = $('#new-booking .source-list')
             container.html('')
             html = ""
 
             html += '<div class="input-field source-admin" id="source-booking">'
-                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text"   value ="' + val.source + '"class="validate"><label for="source">Source</label></div>'
-                html += '<select class="browser-default">'
-                html += '<option value="" selected disabled>Source</option>'
-                sourcelen = SOURCES.length;
-                for (i = 0; i < sourcelen; i++) {
-                    // if (val.source == SOURCES[i]){
-                    //     html += '<option value="'+SOURCES[i]+'" selected>'+SOURCES[i]+'</option>'
-                    // }else{
-                        html += '<option value="'+SOURCES[i]+'">'+SOURCES[i]+'</option>'
-                    // }
-                }
-                html +='</select>'
+            // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text"   value ="' + val.source + '"class="validate"><label for="source">Source</label></div>'
+            html += '<select class="browser-default">'
+            html += '<option value="" selected disabled>Source</option>'
+            sourcelen = SOURCES.length;
+            for (i = 0; i < sourcelen; i++) {
+                // if (val.source == SOURCES[i]){
+                //     html += '<option value="'+SOURCES[i]+'" selected>'+SOURCES[i]+'</option>'
+                // }else{
+                html += '<option value="'+SOURCES[i]+'">'+SOURCES[i]+'</option>'
+                // }
+            }
+            html +='</select>'
             console.log(html)
             container.html(html)
-               // Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
+            // Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
         });
+
         $('#new-booking .header-booking .book-btn').click(function(){
             $('#new-booking  .lead-btn').removeClass('selected')
             $('#new-booking  .book-btn:hover').addClass('selected')
             $('#new-booking  .booking-lead').text("Booking")
             $('#new-booking  .booking-lead-2').text("Booking")
-             $('#new-booking  .send-reminder').show()
-           document.getElementById('send_details').setAttribute("checked", "");;
+            $('#new-booking  .send-reminder').show()
+            document.getElementById('send_details').setAttribute("checked", "");;
 
         });
 
@@ -831,21 +944,33 @@ var Global = {
             $('#new-booking  .lead-btn:hover').addClass('selected')
             $('#new-booking  .booking-lead').text("Lead")
             $('#new-booking  .booking-lead-2').text("Lead Follow Up")
-              document.getElementById('send_details').removeAttribute("checked", "");
+            document.getElementById('send_details').removeAttribute("checked", "");
             $('#new-booking  .send-reminder').hide()
 
 
+        });
+
+        // -- Locality Search
+        $('#locality').on('keypress',function(e,event,data){
+            var code = (e.keyCode || e.which);
+            // do nothing if it's an arrow key
+            if(code == 37 || code == 38 || code == 39 || code == 40) {
+                return;
+            }
+            var locality = $(this).val();
+            Commons.ajaxData('get_location', {location_id: locality}, "get", _this, _this.loadLocation);
+            $('#locality').removeClass('invalid')
         });
 
         // -- Load Make
         var callbrands =function(){
             car_box =  document.getElementById('Carnew');
             bike_box =  document.getElementById('Bikenew');
-             if (car_box.checked){
-            vehicle =    "Car"
+            if (car_box.checked){
+                vehicle =    "Car"
             }else{
-                 vehicle ="Bike"
-             }
+                vehicle ="Bike"
+            }
             console.log(vehicle)
             Commons.ajaxData('get_type_make', {vehicle_type: vehicle}, "get", _this, _this.loadBrands);
             $('#select-fuel').hide()
@@ -854,86 +979,74 @@ var Global = {
         $('#new-booking .vehicle-select .veh-type-select').click(callbrands);
         $('.navbar .new-booking-button').click(callbrands);
         // -- Load Model
-         $('#select-make').change(function(event,data){
+        $('#select-make').change(function(event,data){
             car_box =  document.getElementById('Carnew');
             bike_box =  document.getElementById('Bikenew');
-             if (car_box.checked){
-            vehicle =    "Car"
-            }else{
-                 vehicle ="Bike"
-             }
-            var make = $('#select-make').find('select').val();
-             console.log(make)
-            Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehicle}, "get", _this, _this.loadModels);
-              // $('#select-fuel').hide()
-                $('#select-model').show()
-        });
-        // -- Load Make
-        //  $('#select-model').change(function(event,data){
-        //     car_box =  document.getElementById('Carnew');
-        //     bike_box =  document.getElementById('Bikenew');
-        //     //  if (car_box.checked){
-        //     // vehicle =    "Car"
-        //     //  $('#select-fuel').show()
-        //     // }else{
-        //     //      vehicle ="Bike"
-        //     //  $('#select-fuel').hide()
-        //     //      // $('#select-fuel').find('select').val('Petrol');
-        //     //  }
-        // });
-        // -- Load Service
-         var call_category = function(){
-             container =  $('#new-booking .service-select .category-select')
-             container.html('')
-             car_box =  document.getElementById('Carnew');
-             bike_box =  document.getElementById('Bikenew');
-             if (car_box.checked){
+            if (car_box.checked){
                 vehicle =    "Car"
-                }else{
-                 vehicle ="Bike"
-             }
-             html = ''
-             html +=  '<select class="browser-default">'
-             html +=  '<option value="" disabled selected>Select Category</option>'
-             html +=  '<option value="Servicing">Servicing</option>'
-             html +=  '<option value="Repairing">Repairing</option>'
-             html +=  '<option value="Subscription">Subscription</option>'
-            if(vehicle=='Car'){
-             html +=  '<option value="Denting">Denting/ Painting</option>'
-             html +=  '<option value="Cleaning">Car Care</option>'
+            }else{
+                vehicle ="Bike"
             }
-             html +=  '</select>'
-             container.html(html)
-         }
+            var make = $('#select-make').find('select').val();
+            console.log(make)
+            Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehicle}, "get", _this, _this.loadModels);
+            // $('#select-fuel').hide()
+            $('#select-model').show()
+        });
+
+        // -- Load Service
+        var call_category = function(){
+            container =  $('#new-booking .service-select .category-select')
+            container.html('')
+            car_box =  document.getElementById('Carnew');
+            bike_box =  document.getElementById('Bikenew');
+            if (car_box.checked){
+                vehicle =    "Car"
+            }else{
+                vehicle ="Bike"
+            }
+            html = ''
+            html +=  '<select class="browser-default">'
+            html +=  '<option value="" disabled selected>Select Category</option>'
+            html +=  '<option value="Servicing">Servicing</option>'
+            html +=  '<option value="Repairing">Repairing</option>'
+            html +=  '<option value="Subscription">Subscription</option>'
+            if(vehicle=='Car'){
+                html +=  '<option value="Denting">Denting/ Painting</option>'
+                html +=  '<option value="Cleaning">Car Care</option>'
+            }
+            html +=  '</select>'
+            container.html(html)
+        }
         $('#new-booking .vehicle-select .veh-type-select').click(call_category);
         $('.navbar .new-booking-button').click(call_category);
         $('#new-booking .service-select').on('change ','.category-select',function(){
             car_box =  document.getElementById('Carnew');
             bike_box =  document.getElementById('Bikenew');
-             if (car_box.checked){
-            vehicle =    "Car"
+            if (car_box.checked){
+                vehicle =    "Car"
             }else{
-                 vehicle ="Bike"
-             }
-             var make = $('#select-make').find('select').val();
-             var model = $('#select-model').find('select').val();
+                vehicle ="Bike"
+            }
+            var make = $('#select-make').find('select').val();
+            var model = $('#select-model').find('select').val();
             fuel_start = model.indexOf("(")
             fuel_end = model.indexOf(")")
-               var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
-               model = model.substr(0,fuel_start-1)
+            var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
+            model = model.substr(0,fuel_start-1)
             var category = $(this).find('select').val();
             Commons.ajaxData('get_jobs_vehicle', {make_id: make,model_id: model,fuel_id: fuel,service_type: category}, "get", $(this), _this.loadJobs);
         });
         // -- Calculate selected items
         var calculate_items = function(){
-         CART_IDS_NEW_BOOKING = [];
+            CART_IDS_NEW_BOOKING = [];
             $('#new-booking .service-select .service-select select').each(function(){
                 if($(this).val() != null){
                     CART_IDS_NEW_BOOKING.push($(this).val())
                 }
             });
             cart_new = JSON.stringify(CART_IDS_NEW_BOOKING)
-          Commons.ajaxData('add_job_cart', {service_names:cart_new}, "get", _this, _this.loadCart);
+            Commons.ajaxData('add_job_cart', {service_names:cart_new}, "get", _this, _this.loadCart);
         }
         $('#new-booking .service-select').on('change ','.service-select',calculate_items);
 
@@ -954,22 +1067,15 @@ var Global = {
             container.remove()
             calculate_items()
         });
-        // $('#new-booking .btn-copy-poc').click(function(){
-        //     name = $('#name').val();
-        //     number = $('#telephone').val();
-        //     $('#new-booking #namepoc').val(name);
-        //     $('#new-booking #telephonepoc').val(number);
-        //     Materialize.updateTextFields();
-        // })
 
         $('#new-booking .btn-send-booking').click(function () {
-             car_box =  document.getElementById('Carnew');
+            car_box =  document.getElementById('Carnew');
             bike_box =  document.getElementById('Bikenew');
-             if (car_box.checked){
-            vehicle =    "Car"
+            if (car_box.checked){
+                vehicle =    "Car"
             }else{
-                 vehicle ="Bike"
-             }
+                vehicle ="Bike"
+            }
             var name = $('#name').val();
             var number = $('#telephone').val();
             var pocname = $('#new-booking #namepoc').val();
@@ -989,10 +1095,10 @@ var Global = {
             var source = $('#source-booking').find('select').val();
             // console.log()
             fuel_start = model.indexOf("(")
-           fuel_end = model.indexOf(")")
+            fuel_end = model.indexOf(")")
 
-           var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
-           model = model.substr(0,fuel_start-1)
+            var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
+            model = model.substr(0,fuel_start-1)
 
             var reg_num = $('#reg_number').val();
             // var coupon = cookie['coupon']
@@ -1007,11 +1113,11 @@ var Global = {
             }
             // console.log(time)
             send_conf =  document.getElementById('send_details');
-             if (send_conf.checked){
+            if (send_conf.checked){
                 send_mess =    "1"
             }else{
-                 send_mess ="0"
-             }
+                send_mess ="0"
+            }
             error = 0
             if(TOTAL_PRICE_NEW_BOOKING<= 0 ){
                 error = 1
@@ -1063,31 +1169,31 @@ var Global = {
             }else{
                 $('html, body').animate({scrollTop : 0},800);
                 Commons.ajaxData('send_booking', {
-                name       : name
-                ,number     : number
-                ,email      : email
-                ,reg_number : reg_num
-                ,address    : address
-                ,locality   : locality
-                ,city       : city
-                ,order_list : JSON.stringify(CURRENT_CART_NEW_BOOKING)
-                ,make       : make
-                ,model      : model
-                ,fuel       : fuel
-                ,veh_type   : veh_type
-                ,date       : date
-                ,time       : time
-                ,comment    : ALL_JOBS_NEW_BOOKING + ', '+ comment
-                ,is_paid    : is_paid
-                ,paid_amt   : paid_amt
-                // ,coupon     : coupon
-                ,price_total: price_total
-                 , flag : flag
-                ,int_summary : JSON.stringify(JOBS_SUMMARY_NEW_BOOKING)
-                ,send_confirm: send_mess
-                ,booking_user_name: pocname
-                ,booking_user_number: pocnumber
-                ,source : source
+                    name       : name
+                    ,number     : number
+                    ,email      : email
+                    ,reg_number : reg_num
+                    ,address    : address
+                    ,locality   : locality
+                    ,city       : city
+                    ,order_list : JSON.stringify(CURRENT_CART_NEW_BOOKING)
+                    ,make       : make
+                    ,model      : model
+                    ,fuel       : fuel
+                    ,veh_type   : veh_type
+                    ,date       : date
+                    ,time       : time
+                    ,comment    : ALL_JOBS_NEW_BOOKING + ', '+ comment
+                    ,is_paid    : is_paid
+                    ,paid_amt   : paid_amt
+                    // ,coupon     : coupon
+                    ,price_total: price_total
+                    , flag : flag
+                    ,int_summary : JSON.stringify(JOBS_SUMMARY_NEW_BOOKING)
+                    ,send_confirm: send_mess
+                    ,booking_user_name: pocname
+                    ,booking_user_number: pocnumber
+                    ,source : source
                 }, "post", _this, _this.loadSendbookingAdmin, null, '.loading-pane');
             }
 
@@ -1113,7 +1219,11 @@ var Global = {
 
 
         });
-        // User Management
+
+// =====================================================================================
+//    User Management
+// =====================================================================================
+
         // --Get all user
         $('.navbar .users-button').click(function(event,data){
             $('#booking-details').hide()
@@ -1121,10 +1231,11 @@ var Global = {
             $('#user-details').show()
             $('#coupon-details').hide()
             $('#new-booking').hide()
+            $('#subscription-details').hide()
 
             Commons.ajaxData('fetch_all_users', {}, "get", _this, _this.loadUsers,null, '.loading-pane');
         });
-                //     - ADD User
+        //     - ADD User
         $('#user-detail .add-user').click(function(){
             user_id = $('#user-detail #user_id').attr('data-class')
             user_name = $('#user-detail #user_name').val()
@@ -1185,15 +1296,15 @@ var Global = {
                 error = 1;
             }
             if(user_city==""){
-               $('#user-detail #user_city').addClass("invalid");
+                $('#user-detail #user_city').addClass("invalid");
                 error = 1;
             }
             if(user_locality==""){
-               $('#user-detail #user_locality').addClass("invalid");
+                $('#user-detail #user_locality').addClass("invalid");
                 error = 1;
             }
             if(user_address==""){
-               $('#user-detail #user_address').addClass("invalid");
+                $('#user-detail #user_address').addClass("invalid");
                 error = 1;
             }
 
@@ -1201,20 +1312,20 @@ var Global = {
                 return;
             }else{
                 Commons.ajaxData('update_user',
-                        {user_id:user_id, user_num: user_number, user_name : user_name, user_email: user_email, user_add: user_address, user_loc: user_locality, user_city:user_city,user_state :user_state, agent_vat:agent_vat, agent_cin:agent_cin, agent_stax:agent_stax,b2b_st:b2b, admin_st:admin, staff_st:staff,agent_st:agent}
+                    {user_id:user_id, user_num: user_number, user_name : user_name, user_email: user_email, user_add: user_address, user_loc: user_locality, user_city:user_city,user_state :user_state, agent_vat:agent_vat, agent_cin:agent_cin, agent_stax:agent_stax,b2b_st:b2b, admin_st:admin, staff_st:staff,agent_st:agent}
                     // {
-                                // c_id: coupon_code  ,
-                                //     d_start: coupon_start ,
-                                //     d_end: coupon_end   ,
-                                //     veh_type: coup_veh_type,
-                                //     cat_id: coup_cat_type,
-                                //     type: coup_type    ,
-                                //     val: coup_val     ,
-                                //     cap: coup_cap     ,
-                                //     message: coup_message ,
-                                //     active: coup_active
-                // }
-            , "get", _this, _this.loadUpdateUser,null, '.loading-pane');
+                    // c_id: coupon_code  ,
+                    //     d_start: coupon_start ,
+                    //     d_end: coupon_end   ,
+                    //     veh_type: coup_veh_type,
+                    //     cat_id: coup_cat_type,
+                    //     type: coup_type    ,
+                    //     val: coup_val     ,
+                    //     cap: coup_cap     ,
+                    //     message: coup_message ,
+                    //     active: coup_active
+                    // }
+                    , "get", _this, _this.loadUpdateUser,null, '.loading-pane');
             }
         });
         // -- Modify User
@@ -1224,66 +1335,47 @@ var Global = {
             // console.log(coupon_id)
             $('#user-detail .user-list').hide()
             $('#user-detail .user-add-mod').show()
-             $('#user-detail  .all-user').removeClass('selected')
-              $('#user-detail  .single-user').addClass('selected')
+            $('#user-detail  .all-user').removeClass('selected')
+            $('#user-detail  .single-user').addClass('selected')
 
-             Commons.ajaxData('fetch_all_users', {u_id:user_id}, "get", _this, _this.loadUser,null, '.loading-pane');
+            Commons.ajaxData('fetch_all_users', {u_id:user_id}, "get", _this, _this.loadUser,null, '.loading-pane');
         });
+
         // -- Switch between list and add/modify in a USer
         $('#user-detail .all-user').click(function(){
-              $('#user-detail .user-list').show();
-              $('#user-detail  .user-add-mod').hide();
-              // $('#user-detail #user_number').removeAttr('disabled')
-              $('#user-detail  .single-user').removeClass('selected')
-              $('#user-detail  .all-user:hover').addClass('selected')
+            $('#user-detail .user-list').show();
+            $('#user-detail  .user-add-mod').hide();
+            // $('#user-detail #user_number').removeAttr('disabled')
+            $('#user-detail  .single-user').removeClass('selected')
+            $('#user-detail  .all-user:hover').addClass('selected')
         });
 
         $('#user-detail .single-user').click(function(){
-              $('#user-detail .user-list').hide();
-              $('#user-detail  .user-add-mod').show();
-              $('#user-detail  .all-user').removeClass('selected')
-              $('#user-detail  .single-user:hover').addClass('selected')
-              $('#user-detail #user_id').attr('data-class','')
-              $('#user-detail #user_number').removeAttr('disabled')
-              $('#user-detail #user_name').val('')
-              $('#user-detail #user_number').val('')
-              $('#user-detail #user_number').val('')
-              $('#user-detail #user_email').val('')
-              $('#user-detail #user_password').val('')
-              $('#user-detail #user_address').val('')
-              $('#user-detail #user_locality').val('')
-              $('#user-detail #user_city').val('')
-                document.getElementById('b2b_box').removeAttribute("checked", "");
-                document.getElementById('agent_box').removeAttribute("checked", "");
-                document.getElementById('admin_box').removeAttribute("checked", "");
-                document.getElementById('staff_box').removeAttribute("checked", "");
-                $('#user-detail #user_state').val('')
+            $('#user-detail .user-list').hide();
+            $('#user-detail  .user-add-mod').show();
+            $('#user-detail  .all-user').removeClass('selected')
+            $('#user-detail  .single-user:hover').addClass('selected')
+            $('#user-detail #user_id').attr('data-class','')
+            $('#user-detail #user_number').removeAttr('disabled')
+            $('#user-detail #user_name').val('')
+            $('#user-detail #user_number').val('')
+            $('#user-detail #user_number').val('')
+            $('#user-detail #user_email').val('')
+            $('#user-detail #user_password').val('')
+            $('#user-detail #user_address').val('')
+            $('#user-detail #user_locality').val('')
+            $('#user-detail #user_city').val('')
+            document.getElementById('b2b_box').removeAttribute("checked", "");
+            document.getElementById('agent_box').removeAttribute("checked", "");
+            document.getElementById('admin_box').removeAttribute("checked", "");
+            document.getElementById('staff_box').removeAttribute("checked", "");
+            $('#user-detail #user_state').val('')
             $('#user-detail #agent_vat').val('')
             $('#user-detail #agent_cin').val('')
             $('#user-detail #agent_stax').val('')
         });
 
 
-
-
-
-        // $('#user-detail .user-data').on('click','.btn-user-update',function(event,data){
-        //     // console.log(check)
-        //     user = $(this).attr('data-class');
-        //     row = $(this).attr('row_n');
-        //     b2b_box =  document.getElementById('b2b_box-'+row);
-        //     admin_box = document.getElementById('admin_box-'+row);
-        //     staff_box =  document.getElementById('staff_box-'+row);
-        //     agent_box =  document.getElementById('agent_box-'+row);
-        //     b2b = b2b_box.checked
-        //     admin = admin_box.checked
-        //     staff = staff_box.checked
-        //     agent = agent_box.checked
-        //     // parent = $(this).
-        //     // var parent = $(this).closest('tr');
-        //     // parent.find('#b2b_box-').
-        //     Commons.ajaxData('update_user', {user_id:user, b2b_st:b2b, admin_st:admin, staff_st:staff,agent_st:agent}, "get", _this, _this.loadUpdateUser,null, '.loading-pane');
-        // });
     },
     loadBookings:function(data){
         var container = $('#bookings-list .booking-list .pre-data');
@@ -1305,15 +1397,15 @@ var Global = {
             // }
             html += '                    </div>'
             if (val.booking_user_name != val.cust_name && val.booking_user_name != ""){
-            html += '                    <div class="col l12 s12 m12">'
-            html += '                        <b>POC Name : </b><span class="custname">' + val.booking_user_name + '</span>'
-            html += '                    </div>'
+                html += '                    <div class="col l12 s12 m12">'
+                html += '                        <b>POC Name : </b><span class="custname">' + val.booking_user_name + '</span>'
+                html += '                    </div>'
             }
             html += '                    <div class="col l12 s12 m12">'
             if (val.booking_user_number == ""){
-            html += '                        <b>Number : </b><span class="custname">' + val.cust_number + '</span>'
+                html += '                        <b>Number : </b><span class="custname">' + val.cust_number + '</span>'
             }else{
-            html += '                        <b>Number : </b><span class="custname">' + val.booking_user_number + '</span>'
+                html += '                        <b>Number : </b><span class="custname">' + val.booking_user_number + '</span>'
             }
             html += '                    </div>'
             html += '                    <div class="col l12 s12 m12">'
@@ -1335,7 +1427,7 @@ var Global = {
             html += '                <div class="col l3 s3 m3 centered-text hide-on-med-and-down">'
             if (LEAD_TYPE == "Booking"){
                 html += '                    <b><span class="agent-details">'+val.agent_details+'</span></b>'
-                }
+            }
             html += '                </div>'
             html += '                <div class="col l3 s3 m3 status-bar">'
             html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
@@ -1343,8 +1435,8 @@ var Global = {
             html += '            </div>'
             html += '        </div>'
         })
-            container.html(html);
-            // container.find('select').material_select();
+        container.html(html);
+        // container.find('select').material_select();
     },
     loadDelivery:function(data){
         var container = $('#delivery-list .delivery-list .pre-data');
@@ -1366,15 +1458,15 @@ var Global = {
             // }
             html += '                    </div>'
             if (val.booking_user_name != val.cust_name && val.booking_user_name != ""){
-            html += '                    <div class="col l12 s12 m12">'
-            html += '                        <b>POC Name : </b><span class="custname">' + val.booking_user_name + '</span>'
-            html += '                    </div>'
+                html += '                    <div class="col l12 s12 m12">'
+                html += '                        <b>POC Name : </b><span class="custname">' + val.booking_user_name + '</span>'
+                html += '                    </div>'
             }
             html += '                    <div class="col l12 s12 m12">'
             if (val.booking_user_number == ""){
-            html += '                        <b>Number : </b><span class="custname">' + val.cust_number + '</span>'
+                html += '                        <b>Number : </b><span class="custname">' + val.cust_number + '</span>'
             }else{
-            html += '                        <b>Number : </b><span class="custname">' + val.booking_user_number + '</span>'
+                html += '                        <b>Number : </b><span class="custname">' + val.booking_user_number + '</span>'
             }
             html += '                    </div>'
             html += '                    <div class="col l12 s12 m12">'
@@ -1402,32 +1494,30 @@ var Global = {
             html += '            </div>'
             html += '        </div>'
         })
-            container.html(html);
-            // container.find('select').material_select();
+        container.html(html);
+        // container.find('select').material_select();
     },
-
-
     loadUsers:function(data){
         container =        $('#user-details .user-list .pre-data')
         container.html('')
         html=''
         i=1
-           html += '								<div class="desc-content col s12 m12 l12">';
-            html += '									<table class="striped">';
-            html += '										<thead>';
-            html += '										<tr>';
-            html += '											<th data-field="id">S.No.</th>';
-            html += '											<th data-field="name">Name</th>';
-            html += '											<th data-field="number">Number</th>';
-            html += '											<th data-field="email">Email</th>';
-            html += '											<th data-field="agent">Engineer</th>';
-            html += '											<th data-field="b2b">B2B</th>';
-            html += '											<th data-field="staff">Staff</th>';
-            html += '											<th data-field="admin">Admin</th>';
-            html += '											<th data-field="modify"></th>';
-            html += '										</tr>';
-            html += '										</thead>';
-            html += '										<tbody>';
+        html += '								<div class="desc-content col s12 m12 l12">';
+        html += '									<table class="striped">';
+        html += '										<thead>';
+        html += '										<tr>';
+        html += '											<th data-field="id">S.No.</th>';
+        html += '											<th data-field="name">Name</th>';
+        html += '											<th data-field="number">Number</th>';
+        html += '											<th data-field="email">Email</th>';
+        html += '											<th data-field="agent">Engineer</th>';
+        html += '											<th data-field="b2b">B2B</th>';
+        html += '											<th data-field="staff">Staff</th>';
+        html += '											<th data-field="admin">Admin</th>';
+        html += '											<th data-field="modify"></th>';
+        html += '										</tr>';
+        html += '										</thead>';
+        html += '										<tbody>';
         $.each(data, function(ix, val) {
             html += '<tr class="coupon-row" data-class="'+val.id+'">'
             html += '											<td>'+i+'</td>';
@@ -1459,177 +1549,108 @@ var Global = {
             i=i+1
         })
 
-            html += '										</tbody>';
-            html += '									</table>';
-            html += '								</div>';
+        html += '										</tbody>';
+        html += '									</table>';
+        html += '								</div>';
 
-            container.html(html);
+        container.html(html);
     },
-        loadUser:function(data){
-              $('#user-detail #user_id').attr('data-class','')
-              $('#user-detail #user_number').removeAttr('disabled')
-              $('#user-detail #user_name').val('')
-              $('#user-detail #user_number').val('')
-              $('#user-detail #user_number').val('')
-              $('#user-detail #user_email').val('')
-              $('#user-detail #user_password').val('')
-              $('#user-detail #user_address').val('')
-              $('#user-detail #user_locality').val('')
-              $('#user-detail #user_city').val('')
-                document.getElementById('b2b_box').removeAttribute("checked", "");;
-                document.getElementById('agent_box').removeAttribute("checked", "");;
-                document.getElementById('admin_box').removeAttribute("checked", "");;
-                document.getElementById('staff_box').removeAttribute("checked", "");;
+    loadUser:function(data){
+        $('#user-detail #user_id').attr('data-class','')
+        $('#user-detail #user_number').removeAttr('disabled')
+        $('#user-detail #user_name').val('')
+        $('#user-detail #user_number').val('')
+        $('#user-detail #user_number').val('')
+        $('#user-detail #user_email').val('')
+        $('#user-detail #user_password').val('')
+        $('#user-detail #user_address').val('')
+        $('#user-detail #user_locality').val('')
+        $('#user-detail #user_city').val('')
+        document.getElementById('b2b_box').removeAttribute("checked", "");;
+        document.getElementById('agent_box').removeAttribute("checked", "");;
+        document.getElementById('admin_box').removeAttribute("checked", "");;
+        document.getElementById('staff_box').removeAttribute("checked", "");;
 
-           $.each(data, function(ix, val) {
-                $('#user-detail #user_id').attr('data-class',val.id);
-                $('#user-detail #user_name').val(val.first_name +" "+val.last_name);
-                $('#user-detail #user_number').val(val.phone);
-                $('#user-detail #user_number').attr('disabled',"")
-               // try:
-               try {
-                 $('#user-detail #user_email').val(val.email_primary);
-                } catch (e) {
+        $.each(data, function(ix, val) {
+            $('#user-detail #user_id').attr('data-class',val.id);
+            $('#user-detail #user_name').val(val.first_name +" "+val.last_name);
+            $('#user-detail #user_number').val(val.phone);
+            $('#user-detail #user_number').attr('disabled',"")
+            // try:
+            try {
+                $('#user-detail #user_email').val(val.email_primary);
+            } catch (e) {
 
-                }
-               try {
-                   $('#user-detail #user_address').val(val.user_address[0]['address'])
-                   $('#user-detail #user_locality').val(val.user_address[0]['locality'])
-                   $('#user-detail #user_city').val(val.user_address[0]['city'])
-                } catch (e) {
+            }
+            try {
+                $('#user-detail #user_address').val(val.user_address[0]['address'])
+                $('#user-detail #user_locality').val(val.user_address[0]['locality'])
+                $('#user-detail #user_city').val(val.user_address[0]['city'])
+            } catch (e) {
 
-                }
-               try {
-                 $('#user-detail #user_state').val(val.user_state);
-                } catch (e) {
+            }
+            try {
+                $('#user-detail #user_state').val(val.user_state);
+            } catch (e) {
 
-                }
-               try {
-                 $('#user-detail #agent_cin').val(val.agent_cin);
-                } catch (e) {
+            }
+            try {
+                $('#user-detail #agent_cin').val(val.agent_cin);
+            } catch (e) {
 
-                }
-               try {
-                 $('#user-detail #agent_vat').val(val.agent_vat);
-                } catch (e) {
+            }
+            try {
+                $('#user-detail #agent_vat').val(val.agent_vat);
+            } catch (e) {
 
-                }
-               try {
-                 $('#user-detail #agent_stax').val(val.agent_stax);
-                } catch (e) {
+            }
+            try {
+                $('#user-detail #agent_stax').val(val.agent_stax);
+            } catch (e) {
 
-                }
+            }
 
-              if (val.agent){
-                   document.getElementById('agent_box').setAttribute("checked", "");
-               }
-               if (val.b2b){
-                   document.getElementById('b2b_box').setAttribute("checked", "");
-               }
-               if (val.staff){
-                   document.getElementById('staff_box').setAttribute("checked", "");
-               }
-               if (val.admin){
-                   document.getElementById('admin_box').setAttribute("checked", "");
-               }
+            if (val.agent){
+                document.getElementById('agent_box').setAttribute("checked", "");
+            }
+            if (val.b2b){
+                document.getElementById('b2b_box').setAttribute("checked", "");
+            }
+            if (val.staff){
+                document.getElementById('staff_box').setAttribute("checked", "");
+            }
+            if (val.admin){
+                document.getElementById('admin_box').setAttribute("checked", "");
+            }
 
-           });
-            Materialize.updateTextFields();
-            },
-    // loadUsers:function(data){
-    //     var container = $('#user-detail .user-data');
-    //     container.html('');
-    //     html = ''
-    //     i=1
-    //        html += '								<div class="desc-content col s12 m12 l12">';
-    //         html += '									<table class="striped">';
-    //         html += '										<thead>';
-    //         html += '										<tr>';
-    //         html += '											<th data-field="id">S.No.</th>';
-    //         html += '											<th data-field="part">Name</th>';
-    //         // html += '											<th data-field="part">Last Name</th>';
-    //         html += '											<th data-field="action">Number</th>';
-    //         html += '											<th data-field="action">Email</th>';
-    //         html += '											<th data-field="price">Rights</th>';
-    //         // html += '											<th data-field="price">Give Rights</th>';
-    //         html += '											<th data-field="price">Button</th>';
-    //         html += '										</tr>';
-    //         html += '										</thead>';
-    //         html += '										<tbody>';
-    //     $.each(data, function(ix, val) {
-    //         html += '<tr data-class="'+val.id+'">'
-    //         html += '											<td>'+i+'</td>';
-    //         html += '											<td>'+val.first_name+' '+val.last_name+'</td>';
-    //         html += '											<td>'+val.phone+'</td>';
-    //         html += '											<td>'+val.email+'</td>';
-    //         html += '											<td><p>';
-    //
-    //         if (val.agent){
-    //            html += '<input type="checkbox" class="filled-in" id="agent_box-'+i+'" checked="checked" /><label for="agent_box-'+i+'">Agent</label>'
-    //         }else{
-    //            html +='<input type="checkbox" class="filled-in" id="agent_box-'+i+'"/><label for="agent_box-'+i+'">Agent</label>'
-    //         }
-    //         if (val.b2b){
-    //            html += '<input type="checkbox" class="filled-in" id="b2b_box-'+i+'" checked="checked" /><label for="b2b_box-'+i+'">B2B</label>'
-    //         }else{
-    //            html +='<input type="checkbox" class="filled-in" id="b2b_box-'+i+'" /><label for="b2b_box-'+i+'">B2B</label>'
-    //         }
-    //         html+='</p><p>'
-    //         if (val.staff){
-    //            html += '<input type="checkbox" class="filled-in" id="staff_box-'+i+'" checked="checked" /><label for="staff_box-'+i+'">Staff</label>'
-    //         }else{
-    //            html +='<input type="checkbox" class="filled-in" id="staff_box-'+i+'"/><label for="staff_box-'+i+'">Staff</label>'
-    //         }
-    //         if (val.admin){
-    //            html += '<input type="checkbox" class="filled-in" id="admin_box-'+i+'" checked="checked" /><label for="admin_box-'+i+'">Admin</label>'
-    //         }else{
-    //            html +='<input type="checkbox" class="filled-in" id="admin_box-'+i+'"/><label for="admin_box-'+i+'">Admin</label>'
-    //         }
-    //         html+='</p>'
-    //         //
-    //         // if (val.user){
-    //         //    html += '<input type="checkbox" class="filled-in" id="user_box"checked="checked" /><label for="user_box">User</label>'
-    //         // }else{
-    //         //    html +='<input type="checkbox" class="filled-in" id="user_box"/><label for="user_box">User</label></p>'
-    //         // }
-    //         html += '										</td><td>';
-    //         html += '<button class="waves-effect waves-light btn red btn-user-update" data-class="'+val.id+'" row_n ="'+i+'" type="submit" name="action">Update Rights</button></td>'
-    //         html += '										</tr>';
-    //         i=i+1
-    //     })
-    //
-    //         html += '										</tbody>';
-    //         html += '									</table>';
-    //         html += '								</div>';
-    //
-    //         container.html(html);
-    //         // container.find('select').material_select();
-    // },
+        });
+        Materialize.updateTextFields();
+    },
     loadBookingData:function(data){
         var container = $('#customer-detail .booking-data .pre-data');
         container.html('');
         html = ''
         $.each(data, function(ix, val) {
             // <--- old booking data --->
-                // html+= '<div id="booking_id" class="col s12 m12 l12 book_id" booking_id="'+val.booking_id+'"><h4><b>#'+val.booking_id+'</h4></b></div>'
-                // html+= '<div class="row"><div class="col s4 m4 l2 header">Name     </div><div class="col s8 m8 l4 detail">: '+val.cust_name +'</div>'
-                // html+= '<div class="col s4 m4 l2 header">Number   </div><div class="col s8 m8 l4 detail">: '+val.cust_number+'</div>'
-                // html+= '<div class="col s4 m4 l2 header">Address      </div><div class="col s8 m8 l4 detail">: '+val.cust_address+', '+val.cust_locality+', '+val.cust_city+'</div>'
-                // html+= '<div class="col s4 m4 l2 header">'+val.cust_vehicle_type+'</div><div class="col s8 m8 l4 detail">: '+val.cust_make +' '+val.cust_model+' '+val.cust_fuel_varient+'</div>'
-                // html+= '<div class="col s4 m4 l2 header">Coupon</div><div class="col s8 m8 l4 detail">: '+val.coupon+'</div>'
-                // html+= '<div class="col s4 m4 l2 header">Amount Paid</div><div class="col s8 m8 l4 detail">: Rs. '+val.amount_paid+'</div>'
-                // html+= '<div class="col s4 m4 l2 header">Source</div><div class="col s8 m8 l4 detail">: '+val.source+'</div>'
-                // html+= '<div class="col s4 m4 l2 header">Status</div><div class="col s8 m8 l4 detail">: '+val.status+'</div>'
-                // html+= '<div class="col s4 m4 l2 header">Agent</div><div class="col s8 m8 l4 detail">: '+ val.agent_details+'</div></div>'
-                // html+= '<div class="row"><div class="col s4 m4 l2 header header-var">Email</div><div class="col s8 m8 l10"><input id="email" type="text" class="" value ="'+val.cust_email+'" aria-required="true"></div>'
-                // html+= '<div class="col s4 m4 l2 header header-var">#Veh Reg</div><div class="col s8 m8 l10"><input id="cust_regnumber" type="text" style="text-transform:uppercase" class="" value ="'+val.cust_regnumber+'" aria-required="true"></div>'
-                // if (val.booking_flag){
-                //     html+= '<div class="row"><div class="col s4 m4 l2 header header-var">Booking Date</div><div class="col s8 m8 l10 input-field"><input id="date" type="date" value ="'+ val.date_booking +'" class="datepicker"><label for="date"></label></div>'
-                // }else{
-                //     html+= '<div class="row"><div class="col s4 m4 l2 header header-var">Follow Up/ Booking Date</div><div class="col s8 m8 l10 input-field"><input id="date" type="date" value ="'+ val.date_booking +'" class="datepicker"><label for="date"></label></div>'
-                // }
-                // html+= '<div class="col s4 m4 l2 header header-var">Time</div><div class="col s8 m8 l10"><input id="time_booking" type="text" class="" value="'+ val.time_booking +'" aria-required="true"></div></div>'
-                // html+= '</div><div class="row"><div class="col s4 m4 l2 header header-var">Requests </div><div class="col s8 m8 l10 input-field"><textarea id="comments" class="materialize-textarea" >'+ val.comments +'</textarea></div></div>'
+            // html+= '<div id="booking_id" class="col s12 m12 l12 book_id" booking_id="'+val.booking_id+'"><h4><b>#'+val.booking_id+'</h4></b></div>'
+            // html+= '<div class="row"><div class="col s4 m4 l2 header">Name     </div><div class="col s8 m8 l4 detail">: '+val.cust_name +'</div>'
+            // html+= '<div class="col s4 m4 l2 header">Number   </div><div class="col s8 m8 l4 detail">: '+val.cust_number+'</div>'
+            // html+= '<div class="col s4 m4 l2 header">Address      </div><div class="col s8 m8 l4 detail">: '+val.cust_address+', '+val.cust_locality+', '+val.cust_city+'</div>'
+            // html+= '<div class="col s4 m4 l2 header">'+val.cust_vehicle_type+'</div><div class="col s8 m8 l4 detail">: '+val.cust_make +' '+val.cust_model+' '+val.cust_fuel_varient+'</div>'
+            // html+= '<div class="col s4 m4 l2 header">Coupon</div><div class="col s8 m8 l4 detail">: '+val.coupon+'</div>'
+            // html+= '<div class="col s4 m4 l2 header">Amount Paid</div><div class="col s8 m8 l4 detail">: Rs. '+val.amount_paid+'</div>'
+            // html+= '<div class="col s4 m4 l2 header">Source</div><div class="col s8 m8 l4 detail">: '+val.source+'</div>'
+            // html+= '<div class="col s4 m4 l2 header">Status</div><div class="col s8 m8 l4 detail">: '+val.status+'</div>'
+            // html+= '<div class="col s4 m4 l2 header">Agent</div><div class="col s8 m8 l4 detail">: '+ val.agent_details+'</div></div>'
+            // html+= '<div class="row"><div class="col s4 m4 l2 header header-var">Email</div><div class="col s8 m8 l10"><input id="email" type="text" class="" value ="'+val.cust_email+'" aria-required="true"></div>'
+            // html+= '<div class="col s4 m4 l2 header header-var">#Veh Reg</div><div class="col s8 m8 l10"><input id="cust_regnumber" type="text" style="text-transform:uppercase" class="" value ="'+val.cust_regnumber+'" aria-required="true"></div>'
+            // if (val.booking_flag){
+            //     html+= '<div class="row"><div class="col s4 m4 l2 header header-var">Booking Date</div><div class="col s8 m8 l10 input-field"><input id="date" type="date" value ="'+ val.date_booking +'" class="datepicker"><label for="date"></label></div>'
+            // }else{
+            //     html+= '<div class="row"><div class="col s4 m4 l2 header header-var">Follow Up/ Booking Date</div><div class="col s8 m8 l10 input-field"><input id="date" type="date" value ="'+ val.date_booking +'" class="datepicker"><label for="date"></label></div>'
+            // }
+            // html+= '<div class="col s4 m4 l2 header header-var">Time</div><div class="col s8 m8 l10"><input id="time_booking" type="text" class="" value="'+ val.time_booking +'" aria-required="true"></div></div>'
+            // html+= '</div><div class="row"><div class="col s4 m4 l2 header header-var">Requests </div><div class="col s8 m8 l10 input-field"><textarea id="comments" class="materialize-textarea" >'+ val.comments +'</textarea></div></div>'
             // <---- Old booking data--->>
             // <---- New Booking Data --->>
             html += '<div class="row">'
@@ -1768,7 +1789,7 @@ var Global = {
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
                 html += '</div>'
-                    }else{
+            }else{
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">email</i><input id="email" disabled type="email" value ="' + val.cust_email + '"class="validate"><label for="email">Email</label></div>'
                 html += '</div>'
@@ -1797,61 +1818,61 @@ var Global = {
             html += '</div>'
 
             // <----- New Booking Data---->>
-                if (val.req_user_agent) {
-                    if (val.status == "Agent Left") {
-                        $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1').show()
-                        $('#customer-detail .booking-data .agent-button-row .btn-update-status.status-btn-1').attr("status_next", "Job Completed")
-                        $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1 #status_change-1').text("Job Completed")
-                        $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-2').attr("status_next", "Reached Workshop")
-                        $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-2').show()
-                        $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-2 #status_change-2').text("Reached Workshop")
-                    } else if (val.status == "Reached Workshop") {
-                        $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').hide()
-                        $('#customer-detail .booking-data .agent-button-row .btn-update-status.status-btn-2').hide()
-                    } else {
-                        $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').attr("status_next", val.status_next)
-                        $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1 #status_change-1').text(val.status_next)
-                        $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-2').hide()
-                        $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').show()
-                    }
-
-                    if (val.status == "Job Completed" || val.status == "Feedback Taken") {
-                        $('#customer-detail.agent-button-row').hide()
-                        $('#customer-detail .agent-button-row').hide()
-                        console.log('Check')
-                    } else {
-                        // console.log('Check')
-                        $('#customer-detail .agent-button-row').show()
-                    }
+            if (val.req_user_agent) {
+                if (val.status == "Agent Left") {
+                    $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1').show()
+                    $('#customer-detail .booking-data .agent-button-row .btn-update-status.status-btn-1').attr("status_next", "Job Completed")
+                    $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1 #status_change-1').text("Job Completed")
+                    $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-2').attr("status_next", "Reached Workshop")
+                    $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-2').show()
+                    $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-2 #status_change-2').text("Reached Workshop")
+                } else if (val.status == "Reached Workshop") {
+                    $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').hide()
+                    $('#customer-detail .booking-data .agent-button-row .btn-update-status.status-btn-2').hide()
+                } else {
+                    $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').attr("status_next", val.status_next)
+                    $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1 #status_change-1').text(val.status_next)
+                    $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-2').hide()
+                    $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').show()
                 }
+
+                if (val.status == "Job Completed" || val.status == "Feedback Taken") {
+                    $('#customer-detail.agent-button-row').hide()
+                    $('#customer-detail .agent-button-row').hide()
+                    console.log('Check')
+                } else {
+                    // console.log('Check')
+                    $('#customer-detail .agent-button-row').show()
+                }
+            }
             if (val.req_user_b2b){
                 if (val.status == "Confirmed"){
-                     $('#customer-detail .b2b-button-row-1').show()
+                    $('#customer-detail .b2b-button-row-1').show()
                 }else{
-                     $('#customer-detail .b2b-button-row-1').hide()
+                    $('#customer-detail .b2b-button-row-1').hide()
                 }
                 if (val.status == "Job Completed" || val.status == "Feedback Taken" || val.status == "Cancelled"){
-                     $('#customer-detail .b2b-button-row-2').hide()
+                    $('#customer-detail .b2b-button-row-2').hide()
                 }else{
-                     $('#customer-detail .b2b-button-row-2').show()
+                    $('#customer-detail .b2b-button-row-2').show()
                 }
             }
 
             if (val.req_user_staff || val.req_user_admin){
                 if(val.status == "Lead"){
-                     $('#customer-detail .lead-row').show()
-                     $('#customer-detail .confirm-row').hide()
+                    $('#customer-detail .lead-row').show()
+                    $('#customer-detail .confirm-row').hide()
 
                 }else{
-                     $('#customer-detail .lead-row').hide()
-                     $('#customer-detail .confirm-row').show()
+                    $('#customer-detail .lead-row').hide()
+                    $('#customer-detail .confirm-row').show()
                 }
             }
-             date_string = val.date_booking
+            date_string = val.date_booking
             if (val.date_delivery==null){
-                 date_delivery_string = val.date_booking
+                date_delivery_string = val.date_booking
             } else{
-                 date_delivery_string = val.date_delivery
+                date_delivery_string = val.date_delivery
             }
 
             $('#customer-detail .generated-bill').show()
@@ -1905,6 +1926,8 @@ var Global = {
                 html += '                                           <th data-field="unit_price">Unit Price (Rs.)</th>';
                 html += '                                           <th data-field="price">Item Price (Rs.)</th>';
             }else{
+                html += '                                           <th data-field="unit" class="invisible">Units</th>';
+                html += '                                           <th data-field="unit_price" class="invisible">Unit Price (Rs.)</th>';
                 html += '                                           <th data-field="price" class="invisible">Item Price (Rs.)</th>';
             }
             // if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
@@ -1921,8 +1944,8 @@ var Global = {
 
             // }
             if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-            html += '                                           <th data-field="delete"></th>';
-                }
+                html += '                                           <th data-field="delete"></th>';
+            }
             html += '                                       </tr>';
             html += '                                       </thead>';
             html += '                                       <tbody>';
@@ -2012,53 +2035,51 @@ var Global = {
                 // Price
                 if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff || val.req_user_agent ) {
                     if (val.req_user_admin || val.req_user_staff || val.req_user_agent ) {
-                          if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
-                              html += '<td>' + '<input id="part_units" type="number" class="browser-default" value ="1" aria-required="true">' + '</td>';
-                              html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
-                              html += '<td>' + '<input id="part_price" type="number" class="browser-default" disabled value ="' + val.service_items[i].price  + '" aria-required="true">' + '</td>';
+                        if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
+                            html += '<td>' + '<input id="part_units" type="number" class="browser-default" value ="1" aria-required="true">' + '</td>';
+                            html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
+                            html += '<td>' + '<input id="part_price" type="number" class="browser-default" disabled value ="' + val.service_items[i].price  + '" aria-required="true">' + '</td>';
+                        }else{
+                            html += '<td>' + '<input id="part_units" type="number" class="browser-default" value ="' + val.service_items[i].quantity + '" aria-required="true">' + '</td>';
+                            html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" value ="' + val.service_items[i].unit_price + '" aria-required="true">' + '</td>';
+                            html += '<td>' + '<input id="part_price" type="number" class="browser-default " disabled value ="' + parseFloat(String(parseFloat(val.service_items[i].quantity) * parseFloat(val.service_items[i].unit_price)))  + '" aria-required="true">' + '</td>';
 
-                          }else{
-                              html += '<td>' + '<input id="part_units" type="number" class="browser-default" value ="' + val.service_items[i].quantity + '" aria-required="true">' + '</td>';
-                              html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" value ="' + val.service_items[i].unit_price + '" aria-required="true">' + '</td>';
-                              html += '<td>' + '<input id="part_price" type="number" class="browser-default" disabled value ="' + parseFloat(String(parseFloat(val.service_items[i].quantity) * parseFloat(val.service_items[i].unit_price)))  + '" aria-required="true">' + '</td>';
-
-                          }
+                        }
                     }else{
-                          if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
-                              html += '<td>' + '<input id="part_units" type="number" class="browser-default" value ="1" aria-required="true">' + '</td>';
-                              html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
-                              html += '<td>' + '<input id="part_price" type="number" class="browser-default" disabled value ="' + val.service_items[i].price  + '" aria-required="true">' + '</td>';
+                        if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
+                            html += '<td>' + '<input id="part_units" type="number" class="browser-default" disabled value ="1" aria-required="true">' + '</td>';
+                            html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" disabled  value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
+                            html += '<td>' + '<input id="part_price" type="number" class="browser-default" disabled value ="' + val.service_items[i].price  + '" aria-required="true">' + '</td>';
+                        }else{
+                            html += '<td>' + '<input id="part_units" type="number" class="browser-default noborder" disabled  value ="' + val.service_items[i].quantity + '" aria-required="true">' + '</td>';
+                            html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default noborder" disabled  value ="' + val.service_items[i].unit_price + '" aria-required="true">' + '</td>';
+                            html += '<td>' + '<input id="part_price" type="number" class="browser-default noborder" disabled value ="' + parseFloat(String(parseFloat(val.service_items[i].quantity) * parseFloat(val.service_items[i].unit_price)))  + '" aria-required="true">' + '</td>';
 
-                          }else{
-                              html += '<td>' + '<input id="part_units" type="number" class="browser-default" value ="' + val.service_items[i].quantity + '" aria-required="true">' + '</td>';
-                              html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" value ="' + val.service_items[i].unit_price + '" aria-required="true">' + '</td>';
-                              html += '<td>' + '<input id="part_price" type="number" class="browser-default" disabled value ="' + parseFloat(String(parseFloat(val.service_items[i].quantity) * parseFloat(val.service_items[i].unit_price)))  + '" aria-required="true">' + '</td>';
-
-                          }
+                        }
                     }
-                 }else{
-                          if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
-                              html += '<td>' + '<input id="part_units" type="number" class="browser-default" value ="1" aria-required="true">' + '</td>';
-                              html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
-                              html += '<td>' + '<input id="part_price" type="number" class="browser-default" disabled value ="' + val.service_items[i].price  + '" aria-required="true">' + '</td>';
+                }else{
+                    if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
+                        html += '<td class="invisible">' + '<input id="part_units" type="number" class="browser-default noborder " disabled  value ="1" aria-required="true">' + '</td>';
+                        html += '<td class="invisible">' + '<input id="part_unitprice" type="number" class="browser-default noborder " disabled  value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
+                        html += '<td class="invisible">' + '<input id="part_price" type="number" class="browser-default noborder " disabled value ="' + val.service_items[i].price  + '" aria-required="true">' + '</td>';
 
-                          }else{
-                              html += '<td>' + '<input id="part_units" type="number" class="browser-default" value ="' + val.service_items[i].quantity + '" aria-required="true">' + '</td>';
-                              html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" value ="' + val.service_items[i].unit_price + '" aria-required="true">' + '</td>';
-                              html += '<td>' + '<input id="part_price" type="number" class="browser-default" disabled value ="' + parseFloat(String(parseFloat(val.service_items[i].quantity) * parseFloat(val.service_items[i].unit_price)))  + '" aria-required="true">' + '</td>';
+                    }else{
+                        html += '<td class="invisible">' + '<input id="part_units" type="number" class="browser-default noborder " disabled  value ="' + val.service_items[i].quantity + '" aria-required="true">' + '</td>';
+                        html += '<td class="invisible">' + '<input id="part_unitprice" type="number" class="browser-default noborder " disabled  value ="' + val.service_items[i].unit_price + '" aria-required="true">' + '</td>';
+                        html += '<td class="invisible">' + '<input id="part_price" type="number" class="browser-default noborder " disabled value ="' + parseFloat(String(parseFloat(val.service_items[i].quantity) * parseFloat(val.service_items[i].unit_price)))  + '" aria-required="true">' + '</td>';
 
-                          }
                     }
+                }
 
                 // Part Comment
                 if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-                  if ( val.service_items[i].comment==null ||  val.service_items[i].comment===false) {
+                    if ( val.service_items[i].comment==null ||  val.service_items[i].comment===false) {
                         html += '<td>' + '<input id="part_comment" type="text" class="browser-default" aria-required="true">' + '</td>';
                     }else{
                         html += '<td>' + '<input id="part_comment" type="text" class="browser-default" value ="' + val.service_items[i].comment + '" aria-required="true">' + '</td>';
                     }
                 }else{
-                  if ( val.service_items[i].comment==null ||  val.service_items[i].comment===false) {
+                    if ( val.service_items[i].comment==null ||  val.service_items[i].comment===false) {
                         html += '<td>' + '<input id="part_comment" type="text" class="browser-default noborder" aria-required="true">' + '</td>';
                     }else{
                         html += '<td>' + '<input id="part_comment" type="text" class="browser-default noborder" disabled value ="' + val.service_items[i].comment + '" aria-required="true">' + '</td>';
@@ -2082,7 +2103,7 @@ var Global = {
                         }
                     }
                 }else if(val.req_user_agent){
-                      if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
+                    if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
                         html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
                         html += '<td><input type="checkbox" class="filled-in approve-item" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
 
@@ -2149,7 +2170,7 @@ var Global = {
                             html += '<option value="Denting">Denting</option>'
                         }
                     }else{
-                         if (val.service_items[i].settlement_cat == "Part") {
+                        if (val.service_items[i].settlement_cat == "Part") {
                             html += '<option value="Part" selected>Part</option>'
                         } else {
                             html += '<option value="Part">Part</option>'
@@ -2186,7 +2207,7 @@ var Global = {
                         }
                     }
                 }else{
-                        html += '<td class="invisible">' + '<input id="settle_type" type="text" disabled class="browser-default" value ="' + val.service_items[i].settlement_cat + '" aria-required="true">' + '</td>';
+                    html += '<td class="invisible">' + '<input id="settle_type" type="text" disabled class="browser-default" value ="' + val.service_items[i].settlement_cat + '" aria-required="true">' + '</td>';
 
                 }
                 // Row Deletion
@@ -2198,8 +2219,8 @@ var Global = {
                     html +='                                    <td><div class="delete x25">';
                     html +='                                    </div></td>';
                 }
-                    html += '                                       </tr>';
-                }
+                html += '                                       </tr>';
+            }
 
         })
 
@@ -2216,9 +2237,9 @@ var Global = {
         html = '';
         html = '<select class="agent-list browser-default""><option value="" selected disabled>Select Agent</option>'
         // html += '<option value="" disabled>Select Agent</option>'
-         $.each(data, function(ix, val) {
-                html += '<option value="'+val.id+'">'+val.first_name +' '+ val.last_name+' - '+val.phone +'</option>'
-         });
+        $.each(data, function(ix, val) {
+            html += '<option value="'+val.id+'">'+val.first_name +' '+ val.last_name+' - '+val.phone +'</option>'
+        });
         html += '<select>'
         container3.html(html);
         // console.log(container3);
@@ -2227,78 +2248,78 @@ var Global = {
     },
     loadUpdateUser:function (data) {
         alert("User updated!")
-            // Commons.ajaxData('fetch_all_users', {}, "get", _this, _this.loadAdminUsers,null, '.loading-pane');
+        // Commons.ajaxData('fetch_all_users', {}, "get", _this, _this.loadAdminUsers,null, '.loading-pane');
     },
     updateCart:function(){
-                TOTAL_PRICE_ADMIN = 0;
-                TOTAL_LABOUR_ADMIN = 0;
-                TOTAL_PARTS_ADMIN = 0;
-                TOTAL_DISCOUNT_ADMIN = 0;
-                TOTAL_ITEMS_ADMIN = 0
-                CURRENT_CART_ADMIN = []
-                var table = document.getElementById('estimate-table');
-                for (var i = 1, row; row = table.rows[i]; i++) {
-                    TOTAL_ITEMS_ADMIN = i;
-                    for (var j = 0, col; col = row.cells[j]; j++) {
-                        if (j == 1) {
-                            name_item = $(row.cells[j]).find('input,select').eq(0).val()
-                            // console.log(name_item)
-                        }else if (j == 2) {
-                            type_item = $(row.cells[j]).find('input,select').eq(0).val()
-                            // console.log(type_item)
-                        } else if (j == 3) {
-                            quantity = $(row.cells[j]).find('input,select').eq(0).val()
-                            // console.log(type_item)
-                        }else if (j == 4) {
-                            unit_price = $(row.cells[j]).find('input,select').eq(0).val()
-                            // console.log(type_item)
-                        }else if (j == 5) {
-                            price_item = $(row.cells[j]).find('input,select').eq(0).val()
-                            // console.log(price_item)
-                        }else if (j == 6){
-                             comment =  $(row.cells[j]).find('input,select').eq(0).val()
-                        }else if (j == 8){
-                             if($(row.cells[j]).find('input,select')[0].checked){
-                                 approved = "Yes"
-                                 console.log(approved)
-                             }else{
-                                 approved = "TBD"
-                                 console.log(approved)
-                             }
-                        }else if (j == 9){
-                             settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
-                        }
-                    }
-                // }
-                    if (type_item == "Labour") {
-                        TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
-                        TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(price_item)
-                    } else if (type_item == "Part" || type_item == "Lube" || type_item == "Consumable") {
-                        TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
-                        TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(price_item)
-                    } else if (type_item == "Discount") {
-                        TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN - parseFloat(price_item)
-                        TOTAL_DISCOUNT_ADMIN = TOTAL_DISCOUNT_ADMIN + parseFloat(price_item)
-                    } else {
-                        TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN
-                    }
-                    cart_item = {
-                        "name": name_item,
-                        "price": price_item,
-                        "type": type_item,
-                        "settlement_cat":settlement_cat,
-                        "comment":comment,
-                        "quantity":quantity,
-                        "unit_price":unit_price,
-                        "approved":approved
-                    }
-                    if (name_item != ""){
-                        CURRENT_CART_ADMIN.push(cart_item)
+        TOTAL_PRICE_ADMIN = 0;
+        TOTAL_LABOUR_ADMIN = 0;
+        TOTAL_PARTS_ADMIN = 0;
+        TOTAL_DISCOUNT_ADMIN = 0;
+        TOTAL_ITEMS_ADMIN = 0
+        CURRENT_CART_ADMIN = []
+        var table = document.getElementById('estimate-table');
+        for (var i = 1, row; row = table.rows[i]; i++) {
+            TOTAL_ITEMS_ADMIN = i;
+            for (var j = 0, col; col = row.cells[j]; j++) {
+                if (j == 1) {
+                    name_item = $(row.cells[j]).find('input,select').eq(0).val()
+                    // console.log(name_item)
+                }else if (j == 2) {
+                    type_item = $(row.cells[j]).find('input,select').eq(0).val()
+                    // console.log(type_item)
+                } else if (j == 3) {
+                    quantity = $(row.cells[j]).find('input,select').eq(0).val()
+                    // console.log(type_item)
+                }else if (j == 4) {
+                    unit_price = $(row.cells[j]).find('input,select').eq(0).val()
+                    // console.log(type_item)
+                }else if (j == 5) {
+                    price_item = $(row.cells[j]).find('input,select').eq(0).val()
+                    // console.log(price_item)
+                }else if (j == 6){
+                    comment =  $(row.cells[j]).find('input,select').eq(0).val()
+                }else if (j == 8){
+                    if($(row.cells[j]).find('input,select')[0].checked){
+                        approved = "Yes"
+                        console.log(approved)
                     }else{
-
+                        approved = "TBD"
+                        console.log(approved)
                     }
+                }else if (j == 9){
+                    settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
                 }
-            },
+            }
+            // }
+            if (type_item == "Labour") {
+                TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
+                TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(price_item)
+            } else if (type_item == "Part" || type_item == "Lube" || type_item == "Consumable") {
+                TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
+                TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(price_item)
+            } else if (type_item == "Discount") {
+                TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN - parseFloat(price_item)
+                TOTAL_DISCOUNT_ADMIN = TOTAL_DISCOUNT_ADMIN + parseFloat(price_item)
+            } else {
+                TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN
+            }
+            cart_item = {
+                "name": name_item,
+                "price": price_item,
+                "type": type_item,
+                "settlement_cat":settlement_cat,
+                "comment":comment,
+                "quantity":quantity,
+                "unit_price":unit_price,
+                "approved":approved
+            }
+            if (name_item != ""){
+                CURRENT_CART_ADMIN.push(cart_item)
+            }else{
+
+            }
+        }
+    },
     loadCustomerupdate:function(){
         alert('Updated!')
     },
@@ -2306,45 +2327,45 @@ var Global = {
         alert('Coupon Added!')
     },
     loadCoupon:function(data){
-           $.each(data, function(ix, val) {
-               $('#coupon-detail #coup_name').val(val.coupon_code)
-               $('#coupon-detail #start_date').val(val.date_start)
-               $('#coupon-detail #end_date').val(val.expiry_date)
-               $('#coupon-detail #coup_veh_type').val(val.car_bike)
-               $('#coupon-detail #coup_cat').val(val.category)
-               $('#coupon-detail #coup_type').val(val.type)
-               $('#coupon-detail #coup_value').val(val.value)
-               $('#coupon-detail #coup_cap').val(val.cap)
-               $('#coupon-detail #coup_message').val(val.message)
-               if (val.active){
-                   document.getElementById('coupon_active').setAttribute("checked", "");;
-               } else {
-                   // document.getElementById('coupon_active');
-               }
-           });
-            Materialize.updateTextFields();
-            },
+        $.each(data, function(ix, val) {
+            $('#coupon-detail #coup_name').val(val.coupon_code)
+            $('#coupon-detail #start_date').val(val.date_start)
+            $('#coupon-detail #end_date').val(val.expiry_date)
+            $('#coupon-detail #coup_veh_type').val(val.car_bike)
+            $('#coupon-detail #coup_cat').val(val.category)
+            $('#coupon-detail #coup_type').val(val.type)
+            $('#coupon-detail #coup_value').val(val.value)
+            $('#coupon-detail #coup_cap').val(val.cap)
+            $('#coupon-detail #coup_message').val(val.message)
+            if (val.active){
+                document.getElementById('coupon_active').setAttribute("checked", "");;
+            } else {
+                // document.getElementById('coupon_active');
+            }
+        });
+        Materialize.updateTextFields();
+    },
     loadCouponAll:function(data){
         container =        $('#coupon-details .coupon-list .pre-data')
         container.html('')
         html=''
         i=1
-           html += '								<div class="desc-content col s12 m12 l12">';
-            html += '									<table class="striped">';
-            html += '										<thead>';
-            html += '										<tr>';
-            html += '											<th data-field="id">S.No.</th>';
-            html += '											<th data-field="code">Code</th>';
-            html += '											<th data-field="veh_type">Vehicle</th>';
-            html += '											<th data-field="category">Category</th>';
-            html += '											<th data-field="start_date">Start</th>';
-            html += '											<th data-field="end_date">End</th>';
-            html += '											<th data-field="type">Type</th>';
-            html += '											<th data-field="status">Status</th>';
-            html += '											<th data-field="modify"></th>';
-            html += '										</tr>';
-            html += '										</thead>';
-            html += '										<tbody>';
+        html += '								<div class="desc-content col s12 m12 l12">';
+        html += '									<table class="striped">';
+        html += '										<thead>';
+        html += '										<tr>';
+        html += '											<th data-field="id">S.No.</th>';
+        html += '											<th data-field="code">Code</th>';
+        html += '											<th data-field="veh_type">Vehicle</th>';
+        html += '											<th data-field="category">Category</th>';
+        html += '											<th data-field="start_date">Start</th>';
+        html += '											<th data-field="end_date">End</th>';
+        html += '											<th data-field="type">Type</th>';
+        html += '											<th data-field="status">Status</th>';
+        html += '											<th data-field="modify"></th>';
+        html += '										</tr>';
+        html += '										</thead>';
+        html += '										<tbody>';
         $.each(data, function(ix, val) {
             html += '<tr class="coupon-row" data-class="'+val.id+'">'
             html += '											<td>'+i+'</td>';
@@ -2359,67 +2380,67 @@ var Global = {
                 html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
             }else{
                 html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
-            // html += '											<td></td>';
+                // html += '											<td></td>';
             }
             html += '											<td style="color:purple; cursor:pointer" class="modify-btn"><i class="fa fa-pencil"></i></td>';
             html += '										</tr>';
             i=i+1
         })
 
-            html += '										</tbody>';
-            html += '									</table>';
-            html += '								</div>';
+        html += '										</tbody>';
+        html += '									</table>';
+        html += '								</div>';
 
-            container.html(html);
+        container.html(html);
 
     },
     loadBrands:function(data){
-            var container = $('#select-make');
-            container.html('');
-            var html = '<select class="browser-default">';
-            html +=    '<option value="" disabled selected>Select Make</option>';
-            $.each(data, function(ix, val){
-                html += '<option value="'+val.make+'">'+val.make+'</option>';
-            });
-            html += '</select>';
-            container.html(html);
-        },
+        var container = $('#select-make');
+        container.html('');
+        var html = '<select class="browser-default">';
+        html +=    '<option value="" disabled selected>Select Make</option>';
+        $.each(data, function(ix, val){
+            html += '<option value="'+val.make+'">'+val.make+'</option>';
+        });
+        html += '</select>';
+        container.html(html);
+    },
     loadModels:function(data){
         var container = $('#select-model');
-            container.html('');
-            var html = '<select class="browser-default">';
-            html +=    '<option value="" disabled selected>Select Model</option>';
-            $.each(data, function(ix, val){
-                  html += '<option value="' + val.full_veh_name + '" data-placeholder="true">'+ val.full_veh_name + '</option>'
-                // html += '<option value="'+val.model+'">'+val.model+'</option>';
-            });
-            html += '</select>';
-            container.html(html);
+        container.html('');
+        var html = '<select class="browser-default">';
+        html +=    '<option value="" disabled selected>Select Model</option>';
+        $.each(data, function(ix, val){
+            html += '<option value="' + val.full_veh_name + '" data-placeholder="true">'+ val.full_veh_name + '</option>'
+            // html += '<option value="'+val.model+'">'+val.model+'</option>';
+        });
+        html += '</select>';
+        container.html(html);
     },
     loadJobs:function(data){
         // console.log('check')
-         container = $(this).closest('.service-row').find('.service-select select');
-         container.html('');
-            html =''
-            // var html = '<select class="browser-default">';
-            html +=    '<option value="" disabled selected>Select Service</option>';
-            $.each(data, function(ix, val){
-                if (val.doorstep == "1"){
-                    if (val.job_sub_cat == "NA"){
-                        html += '<option value="'+val.id+'">'+val.job_name+' (Doorstep)</option>';
-                    }else{
-                        html += '<option value="'+val.id+'">'+val.job_name+' (Doorstep) ('+ val.job_sub_cat +')</option>';
-                    }
+        container = $(this).closest('.service-row').find('.service-select select');
+        container.html('');
+        html =''
+        // var html = '<select class="browser-default">';
+        html +=    '<option value="" disabled selected>Select Service</option>';
+        $.each(data, function(ix, val){
+            if (val.doorstep == "1"){
+                if (val.job_sub_cat == "NA"){
+                    html += '<option value="'+val.id+'">'+val.job_name+' (Doorstep)</option>';
                 }else{
-                    if (val.job_sub_cat == "NA"){
-                        html += '<option value="'+val.id+'">'+val.job_name+' (Workshop)</option>';
-                    }else{
-                        html += '<option value="'+val.id+'">'+val.job_name+' (Workshop) ('+ val.job_sub_cat +')</option>';
-                    }
+                    html += '<option value="'+val.id+'">'+val.job_name+' (Doorstep) ('+ val.job_sub_cat +')</option>';
                 }
-            });
-            // html += '</select>';
-            container.html(html);
+            }else{
+                if (val.job_sub_cat == "NA"){
+                    html += '<option value="'+val.id+'">'+val.job_name+' (Workshop)</option>';
+                }else{
+                    html += '<option value="'+val.id+'">'+val.job_name+' (Workshop) ('+ val.job_sub_cat +')</option>';
+                }
+            }
+        });
+        // html += '</select>';
+        container.html(html);
     },
     loadCart:function(data){
         var html ='';
@@ -2445,12 +2466,12 @@ var Global = {
         $.each(data['cart_details'], function(ix, val) {
             jsLen = val.default_comp.length;
             for (i = 0; i < jsLen; i++) {
-              CURRENT_CART_NEW_BOOKING.push(val.default_comp[i])
+                CURRENT_CART_NEW_BOOKING.push(val.default_comp[i])
             }
             if (ALL_JOBS_NEW_BOOKING ==''){
-            ALL_JOBS_NEW_BOOKING = val.job_name;
+                ALL_JOBS_NEW_BOOKING = val.job_name;
             }else{
-            ALL_JOBS_NEW_BOOKING = ALL_JOBS_NEW_BOOKING +', '+val.job_name;
+                ALL_JOBS_NEW_BOOKING = ALL_JOBS_NEW_BOOKING +', '+val.job_name;
             }
             JOBS_SUMMARY_NEW_BOOKING.push({'category':val.service_cat,'job_name':val.job_name,'price_total':val.total_price,'price_part':val.total_part,'price_labour':val.total_labour,'price_discount':val.total_discount,"doorstep":val.doorstep})
         });
@@ -2467,83 +2488,100 @@ var Global = {
             console.log(TOTAL_PRICE_NEW_BOOKING)
 
             $('#new-booking .service-select .amount').text(TOTAL_PRICE_NEW_BOOKING)
-            });
+        });
     },
     date_format:function(date_str) {
-            dd = date_str.getDate();
-            mm = date_str.getMonth() + 1;//January is 0!`
-            yyyy = date_str.getFullYear();
-            if (dd < 10) {
-                dd = '0' + dd
-            }
-            if (mm < 10) {
-                mm = '0' + mm
-            }
-            date_new = dd + '-' + mm + '-' + yyyy
-            // today = mm+'/'+dd+'/'+yyyy;
-            return date_new;
-            // console.log(date)
-        },
-    
+        dd = date_str.getDate();
+        mm = date_str.getMonth() + 1;//January is 0!`
+        yyyy = date_str.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+        date_new = dd + '-' + mm + '-' + yyyy
+        // today = mm+'/'+dd+'/'+yyyy;
+        return date_new;
+        // console.log(date)
+    },
     loadSendbookingAdmin:function(data){
         alert('Order Placed!')
     },
-
     loadCustomerStatus:function(data){
         alert('Status Updated!')
     },
-
     loadLocation:function(data){
-            var container = $('input.autocomplete');
-            var locations = {};
-            container.autocomplete({
-                data : locations
-            })
-            // var locations = {};
+        var container = $('input.autocomplete');
+        var locations = {};
+        container.autocomplete({
+            data : locations
+        })
+        // var locations = {};
 
-            $.each(data.predictions, function(ix, val){
-                 locations[val.description] = null
-            });
-            console.log(locations)
-            container.autocomplete({
-                data : locations
-            })
-            Materialize.updateTextFields();
+        $.each(data.predictions, function(ix, val){
+            locations[val.description] = null
+        });
+        console.log(locations)
+        container.autocomplete({
+            data : locations
+        })
+        Materialize.updateTextFields();
     },
-    // loadSource:function(){
-    //       var container = $('#customer-detail #source input.autocomplete');
-    //     console.log('check')
-    //         var source = {};
-    //         container.autocomplete({
-    //             data : {
-    //                 'Google Adwords':null,
-    //                 'Repeat Customer':null,
-    //                 'Employee Referral':null,
-    //                 'External Referral':null,
-    //                 'JustDial':null,
-    //                 'Pamphlet':null,
-    //                 'Auto Advertisement':null,
-    //                 'On-Ground Marketing':null,
-    //                 'Sulekha':null,
-    //                 'Database - Cold Calling':null,
-    //                 'Chat':null,
-    //                 'B2B':null,
-    //                 'Partner - Droom':null,
-    //                 'Partner - Wishup':null,
-    //                 'Partner - Housejoy':null,
-    //                 'Walk in':null,
-    //                 'Partner - Mr. Right':null,
-    //                 'Web Search':null,
-    //                 'Unknown':null,
-    //                 'Society camps':null,
-    //                 'Check up camps':null,
-    //                 'Sign up lead':null,
-    //                 'Facebook Ad':null
-    //             }
-    //         })
-    //         Materialize.updateTextFields();
-    //
-    // }
+    loadSubscriptionAll:function(data){
+        container =        $('#subscription-details .subscription-list .pre-data')
+
+        container.html('')
+        html=''
+        i=1
+        html += '								<div class="desc-content col s12 m12 l12">';
+        html += '									<table class="striped">';
+        html += '										<thead>';
+        html += '										<tr>';
+        html += '											<th data-field="id">S.No.</th>';
+        html += '											<th data-field="name">Name</th>';
+        html += '											<th data-field="number">Number</th>';
+        html += '											<th data-field="type">Category</th>';
+        html += '											<th data-field="start_date">Start</th>';
+        html += '											<th data-field="end_date">End</th>';
+        html += '											<th data-field="status">Status</th>';
+        html += '											<th data-field="status">Active</th>';
+        html += '											<th data-field="modify"></th>';
+        html += '										</tr>';
+        html += '										</thead>';
+        html += '										<tbody>';
+        $.each(data, function(ix, val) {
+            html += '<tr class="subscription-row" data-class="'+val.id+'">'
+            html += '											<td>'+i+'</td>';
+            html += '											<td>'+val.cust_fname+' '+val.cust_lname+'</td>';
+            html += '											<td>'+val.cust_number_primary+', '+val.cust_number_secondary+'</td>';
+            html += '											<td>'+val.subscription_type+'</td>';
+            html += '											<td>'+val.date_start+'</td>';
+            html += '											<td>'+val.date_end+'</td>';
+            html += '											<td>'+val.status+'</td>';
+
+            // console.log(val.active)
+            if (val.is_active){
+                html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
+            }else{
+                html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
+                // html += '											<td></td>';
+            }
+            html += '											<td style="color:purple; cursor:pointer" class="modify-btn"><i class="fa fa-pencil"></i></td>';
+            html += '										</tr>';
+            i=i+1
+        })
+
+        html += '										</tbody>';
+        html += '									</table>';
+        html += '								</div>';
+
+        container.html(html);
+
+    },
+    loadCustomerestimate:function(date){
+         alert('Estimate Updated!')
+    }
 };
 
 

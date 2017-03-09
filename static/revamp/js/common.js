@@ -63,6 +63,8 @@ var Commons = {
         'check_coupon':'/api/check_coupon/',
         'send_lead':'/api/send_lead/',
         'generate_bill':'/api/generate_bill/',
+        'add_modify_subscription':'/api/add_modify_subscription/',
+        'view_all_subscription':'/api/view_all_subscription/',
 
     },
 

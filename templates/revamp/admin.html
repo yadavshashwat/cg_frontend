@@ -49,6 +49,7 @@
 					<li class ="coupon-button"><a>Coupon Management</a></li>
 					<li class ="users-button"><a>User Management</a></li>
 					<!--<li class ="analytics-button"><a>Analytics</a></li>-->
+					<li class ="subscription-button"><a>Subscriptions</a></li>
 					<li class ="lead-button"><a>Leads</a></li>
 					<li class ="booking-button"><a>Bookings</a></li>
 					<li class ="log-in-button"><a><span class="log-in"></span></a></li>
@@ -59,6 +60,7 @@
 					<li class ="coupon-button"><a>Coupon Management</a></li>
 					<li class ="users-button"><a>User Management</a></li>
 					<!--<li class ="analytics-button"><a>Analytics</a></li>-->
+					<li class ="subscription-button"><a>Subscriptions</a></li>
 					<li class ="lead-button"><a>Leads</a></li>
 					<li class ="booking-button"><a>Bookings</a></li>
 					<li class ="log-in-button"><a><span class="log-in"></span></a></li>
@@ -377,8 +379,6 @@
 		<!--</div>-->
 	</section>
 
-
-
 	<section id="bookings" class="invisible">
 		<div class="booking-select-section card">
 			<!--<div class="container-fluid services">-->
@@ -594,14 +594,14 @@
 						<div class="row">
 							<div class="col l12 s12 m12">
 								<button status_next="" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action"><span class="change-status"><span id="status_change-1"></span></span>
-										<i class="material-icons right">send</i>
+									<i class="material-icons right">send</i>
 								</button>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col l12 s12 m12">
 								<button status_next="" class="waves-effect status-btn-2 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action"><span class="change-status"><span id="status_change-2"></span></span>
-										<i class="material-icons right">send</i>
+									<i class="material-icons right">send</i>
 								</button>
 							</div>
 						</div>
@@ -1001,11 +1001,269 @@
 						</div>
 					</div>
 					<div class="row">
-					<div class="col l12 s12 m12 centered-text">
-						<button class="waves-effect waves-light btn-large cg-primary add-user" type="submit" name="action">Add/ Modify User
-							<i class="material-icons right">send</i>
-						</button>
+						<div class="col l12 s12 m12 centered-text">
+							<button class="waves-effect waves-light btn-large cg-primary add-user" type="submit" name="action">Add/ Modify User
+								<i class="material-icons right">send</i>
+							</button>
+						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="subscription-details" class="invisible">
+		<div id="subscription-detail">
+			<div class="row header-subscription">
+				<div class="col s6 m6 l6 date-box card cardhover all-subscription selected">
+					All Subscription
+				</div>
+				<div class="col s6 m6 l6 date-box card cardhover single-subscription">
+					Add/Edit Subscription
+				</div>
+			</div>
+			<div class="row card">
+				<div class="row subscription-list visible">
+					<div class="row pre-data">
+
+					</div>
+				</div>
+				<div class="row subscription-add-mod invisible">
+					<div class="rsa-form card row">
+						<br>
+						<!--<br>-->
+						<div class="row centered-text">
+							<h3>Customer Details</h3>
+						</div>
+						<form>
+							<div class="col l12 s12 m12">
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">account_circle</i>
+										<input id="firstname" type="text" class="validate" required="" aria-required="true">
+										<label for="firstname" data-error="Required">First Name</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">account_circle</i>
+										<input id="lastname" type="text" class="validate" required="" aria-required="true">
+										<label for="lastname" data-error="Required">Last Name</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">phone</i>
+										<input id="telephone" type="number" required="" aria-required="true">
+										<label for="telephone" data-error="Invalid Number" >Mobile</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">phone</i>
+										<input id="alt_telephone" type="number" required="" aria-required="true">
+										<label for="alt_telephone" data-error="Invalid Number" >Alternate Number</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">email</i>
+										<input id="email" type="email" class="validate" required="" aria-required="true">
+										<label for="email" data-error="Invalid e-mail id">Email</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">my_location</i>
+										<input type="text" id="address" required="" aria-required="true">
+										<label for="address" data-error="Required">Address</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">location_on</i>
+										<input type="text" id="locality" class="autocomplete" required="" aria-required="true">
+										<label for="locality" data-error="Required">Locality</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">business</i>
+										<input type="text" id="city" class="" required="" aria-required="true">
+										<label for="city" data-error="Required">City</label>
+									</div>
+								</div>
+								<div class="row select-div">
+									<div class="prefix-select">
+										<i class ="fa fa-map x25"></i>
+									</div>
+									<div class="input-field select-width" id="state">
+										<select class="">
+											<option value='' selected disabled>Select State</option>
+											<option value='Andaman and Nicobar Islands'>Andaman and Nicobar Islands</option>
+											<option value='Andhra Pradesh'>Andhra Pradesh</option>
+											<option value='Arunachal Pradesh'>Arunachal Pradesh</option>
+											<option value='Assam'>Assam</option>
+											<option value='Bihar'>Bihar</option>
+											<option value='Chandigarh'>Chandigarh</option>
+											<option value='Chhattisgarh'>Chhattisgarh</option>
+											<option value='Dadra and Nagar Haveli'>Dadra and Nagar Haveli</option>
+											<option value='Daman and Diu'>Daman and Diu</option>
+											<option value='Delhi' >Delhi</option>
+											<option value='Goa'>Goa</option>
+											<option value='Gujarat'>Gujarat</option>
+											<option value='Haryana'>Haryana</option>
+											<option value='Himachal Pradesh'>Himachal Pradesh</option>
+											<option value='Jammu and Kashmir'>Jammu and Kashmir</option>
+											<option value='Jharkhand'>Jharkhand</option>
+											<option value='Karnataka'>Karnataka</option>
+											<option value='Kerala'>Kerala</option>
+											<option value='Lakshadweep'>Lakshadweep</option>
+											<option value='Madhya Pradesh'>Madhya Pradesh</option>
+											<option value='Maharashtra'>Maharashtra</option>
+											<option value='Manipur'>Manipur</option>
+											<option value='Meghalaya'>Meghalaya</option>
+											<option value='Mizoram'>Mizoram</option>
+											<option value='Nagaland'>Nagaland</option>
+											<option value='Odisha'>Odisha</option>
+											<option value='Puducherry'>Puducherry</option>
+											<option value='Punjab'>Punjab</option>
+											<option value='Rajasthan'>Rajasthan</option>
+											<option value='Sikkim'>Sikkim</option>
+											<option value='Tamil Nadu'>Tamil Nadu</option>
+											<option value='Telangana'>Telangana</option>
+											<option value='Tripura'>Tripura</option>
+											<option value='Uttar Pradesh'>Uttar Pradesh</option>
+											<option value='Uttarakhand'>Uttarakhand</option>
+											<option value='West Bengal'>West Bengal</option>
+										</select>
+									</div>
+
+								</div>
+							</div>
+						</form>
+						<br>
+						<br>
+						<div class="row centered-text">
+							<h3>Vehicle Details</h3>
+						</div>
+						<form>
+							<div class="col l12 s12 m12">
+								<div class="row select-div">
+									<div class="prefix-select">
+										<i class ="make-model-prefix fa x25"></i>
+									</div>
+									<div class="input-field select-width" id="veh_type">
+										<select  class="">
+											<option value='' selected disabled>Select Vehicle Type</option>
+											<option value='' selected disabled>Car</option>
+											<option value='' selected disabled>Bike</option>
+										</select>
+									</div>
+								</div>
+								<div class="row select-div">
+									<div class="prefix-select">
+										<i class ="make-model-prefix fa fa-car x25"></i>
+									</div>
+									<div class="input-field select-width" id="veh_make">
+										<select  class="">
+											<option value='' selected disabled>Select Make</option>
+										</select>
+									</div>
+								</div>
+								<div class="row select-div">
+									<div class="prefix-select">
+										<i class ="make-model-prefix fa fa-car x25"></i>
+									</div>
+									<div class="input-field select-width" id="veh_model">
+										<select  class="">
+											<option value='' selected disabled>Select Model</option>
+										</select>
+									</div>
+								</div>
+								<div class="row">
+									<span id="choose-vehicle-error" class="error"></span>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">receipt</i>
+										<input id="reg_number" type="text" class="validate" required="" aria-required="true">
+										<label for="reg_number" data-error="Required">Vehicle Registration Number</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">receipt</i>
+										<input id="vin_number" type="text" class="validate" required="" aria-required="true">
+										<label for="vin_number" data-error="Required">Vehicle Identification Number (VIN) / Chassis Number</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">today</i>
+										<input id="date_purchase" type="date" class="datepicker">
+										<label for="date_purchase" data-error="required">Date Purchase</label>
+									</div>
+								</div>
+
+							</div>
+						</form>
+						<div class="row centered-text">
+							<h3>Policy Details</h3>
+						</div>
+						<form>
+							<div class="col l12 s12 m12">
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">receipt</i>
+										<input id="category" type="text" class="validate" required="" aria-required="true">
+										<label for="category" data-error="Required">Category</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">receipt</i>
+										<input id="package_name" type="text" class="validate" required="" aria-required="true">
+										<label for="package_name" data-error="Required">Package Name</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">receipt</i>
+										<input id="comment_subs" type="text" class="validate" required="" aria-required="true">
+										<label for="comment_subs" data-error="Required">Comment</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">today</i>
+										<input id="date_start" type="date" class="datepicker">
+										<label for="date_start" data-error="required">Date Start</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">today</i>
+										<input id="date_end" type="date" class="datepicker">
+										<label for="date_end" data-error="required">Date End</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">today</i>
+										<input id="amount_paid" type="number" class="datepicker">
+										<label for="amount_paid" data-error="required">Amount Paid</label>
+									</div>
+								</div>
+							</div>
+						</form>
+						<div class="centered-text">
+							<button class="waves-effect waves-light btn-large cg-primary submit-rsa" type="submit" name="action">Submit Details
+								<i class="material-icons right">send</i>
+							</button>
+							<br>
+							<br>
+						</div>
 					</div>
 				</div>
 			</div>
