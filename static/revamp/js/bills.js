@@ -51,7 +51,23 @@ var TOTAL_LUBE = 0;
 var TOTAL_CONSUMABLE = 0;
 var TOTAL_LABOUR = 0;
 
+var CGHARYANA_VAT_NO = "06301844038"
+var CGHARYANA_STAX_NO = "AAVCS6335ESD001"
+var CGHARYANA_PAN_NO = "AAVCS6335E"
+var CGHARYANA_CIN_NO = "U72200DL2015PTC278194"
+var CGHARYANA_NAME = "Sui Generis Innovations Private Limited"
+var CGHARYANA_ADDRESS = "2401, Basement"
+var CGHARYANA_LOCALITY = "DLF Phase 4, Opp. Galleria Market"
+var CGHARYANA_CITY = "Gurgaon"
 
+var CGDELHI_VAT_NO = "07146991638"
+var CGDELHI_STAX_NO = "AAVCS6335ESD001"
+var CGDELHI_PAN_NO = "AAVCS6335E"
+var CGDELHI_CIN_NO = "U72200DL2015PTC278194"
+var CGDELHI_NAME = "Sui Generis Innovations Private Limited"
+var CGDELHI_ADDRESS = "W22, 2nd Floor"
+var CGDELHI_LOCALITY = "Green Park Main"
+var CGDELHI_CITY = "New Delhi"
 
 // materialize css
 
@@ -85,6 +101,17 @@ var Global = {
         console.log('adding hanlder')
 
         $(document).ready(function(){
+            bill_2 = $('#bill_type_owner').val()
+            if (bill_2=="Agent"){
+                state = ""
+            }else if(bill_2=="CG Haryana"){
+                state = "Haryana"
+            }else if (bill_2=="CG Delhi"){
+                state = "Delhi"
+            }else{
+                state = "NA"
+            }
+            console.log(state)
             hash_state = window.location.hash
             if (hash_state == "#print"){
                 $('.navbar').hide()
@@ -103,12 +130,47 @@ var Global = {
                 $('.bill-page #save-send-bill').text('Generate and Send Bill')
                 $('.bill-page #save-bill').text('Generate Bill')
             }
-            console.log(b_data_id)
+            // console.log(b_data_id)
             $('.invoice-box').attr('booking-data',b_data_id)
 
-            Commons.ajaxData('view_all_bookings', {data_id:b_data_id}, "get", _this, _this.loadBillData,null, '.loading-pane');
+            Commons.ajaxData('view_all_bookings', {data_id:b_data_id, state:state}, "get", _this, _this.loadBillData,null, '.loading-pane');
             });
 
+        $('#bill_type_owner').change(function(){
+            bill_2 = $('#bill_type_owner').val()
+            if (bill_2=="Agent"){
+                state = ""
+            }else if(bill_2=="CG Haryana"){
+                state = "Haryana"
+            }else if (bill_2=="CG Delhi"){
+                state = "Delhi"
+            }else{
+                state = "NA"
+            }
+            console.log(state)
+            hash_state = window.location.hash
+            if (hash_state == "#print"){
+                $('.navbar').hide()
+                $('.actionables').hide()
+            }else{
+                $('.navbar').show()
+                $('.actionables').show()
+            }
+            b_data_id = window.location.pathname.split('/')[3]
+            bill_type = window.location.pathname.split('/')[2]
+
+            if (bill_type == "old"){
+                $('.bill-page #save-send-bill').text('Modify and Send Bill')
+                $('.bill-page #save-bill').text('Modify Bill')
+            }else{
+                $('.bill-page #save-send-bill').text('Generate and Send Bill')
+                $('.bill-page #save-bill').text('Generate Bill')
+            }
+            // console.log(b_data_id)
+            $('.invoice-box').attr('booking-data',b_data_id)
+
+            Commons.ajaxData('view_all_bookings', {data_id:b_data_id, state:state}, "get", _this, _this.loadBillData,null, '.loading-pane');
+        })
 
         // Save Bill
         $('.bill-page #payment-mode').change(function(){
@@ -127,50 +189,151 @@ var Global = {
             $(this).addClass('disabled')
             $('.bill-page #save-send-bill').text('Send Bill')
             $('.bill-page btn.save-send-bill').removeClass('save-send-bill').addClass('send-bill')
+            agent_vat_no             =  $('.invoice-box #agent-tin').text();
+            agent_cin                =  $('.invoice-box #agent-cin').text();
+            agent_stax               =  $('.invoice-box #agent-stax').text();
+            full_agent_name          =  $('.invoice-box #agent-name').text();
+            agent_address            =  $('.invoice-box #agent-address').text();
+            agent_locality           =  $('.invoice-box #agent-locality').text();
+            agent_city               =  $('.invoice-box #agent-city').text();
+            bill_2 = $('#bill_type_owner').val()
 
-            // bill_owner =
-            Commons.ajaxData('generate_bill', {data_id   			: b_data_id
-                                                        // ,invoice_number 	: invoice_number
-                                                        ,cg_internal_flag	: cg_internal_flag
-                                                        ,bill_owner      	: agent_id
-                                                        ,total_amount    	: TOTAL
-                                                        ,part_amount     	: TOTAL_PART
-                                                        ,lube_amount     	: TOTAL_LUBE
-                                                        ,consumable_amount	: TOTAL_CONSUMABLE
-                                                        ,labour_amount 		: TOTAL_LABOUR
-                                                        ,vat_part 			: VAT_PART
-                                                        ,vat_lube 			: VAT_LUBE
-                                                        ,vat_consumable 	: VAT_CONSUMABLE
-                                                        ,service_tax 		: SERVICE_TAX
-                                                        // ,cancel          	: cancel
-                                                        // ,file_name 			: file_name
-                                                        // ,payment_status 	: payment_status
-                                                        // ,amount_paid 		: amount_paid
-                                                        ,payment_mode 		: mode
+            if (bill_2=="Agent"){
+                state = ""
+            }else if(bill_2=="CG Haryana"){
+                state = "Haryana"
+            }else if (bill_2=="CG Delhi"){
+                state = "Delhi"
+            }else{
+                state = "NA"
+            }
+
+            vat_part_percent        = $('.invoice-box #vat-part-percent').text();
+            vat_lube_percent        = $('.invoice-box #vat-lube-percent').text();
+            vat_consumable_percent  = $('.invoice-box #vat-consumable-percent').text();
+            service_tax_percent     = $('.invoice-box #stax-percent').text()
+
+            Commons.ajaxData('generate_bill', {data_id   			               : b_data_id
+                                                        ,cg_internal_flag	       : cg_internal_flag
+                                                        ,bill_owner      	       : agent_id
+                                                        ,total_amount    	       : TOTAL
+                                                        ,part_amount     	       : TOTAL_PART
+                                                        ,lube_amount     	       : TOTAL_LUBE
+                                                        ,consumable_amount	       : TOTAL_CONSUMABLE
+                                                        ,labour_amount 		       : TOTAL_LABOUR
+                                                        ,vat_part 			       : VAT_PART
+                                                        ,vat_lube 			       : VAT_LUBE
+                                                        ,vat_consumable 	       : VAT_CONSUMABLE
+                                                        ,service_tax 		       : SERVICE_TAX
+                                                        ,payment_mode 		       : mode
+                                                        , agent_vat_no             : agent_vat_no
+                                                        , agent_cin                : agent_cin
+                                                        , agent_stax               : agent_stax
+                                                        , full_agent_name          : full_agent_name
+                                                        , agent_address            : agent_address
+                                                        , agent_locality           : agent_locality
+                                                        , agent_city               : agent_city
+                                                        , bill_type                : bill_2
+                                                        , state                    : state
+                                                        ,vat_part_percent          : vat_part_percent
+                                                        ,vat_lube_percent          : vat_lube_percent
+                                                        ,vat_consumable_percent    : vat_consumable_percent
+                                                        ,service_tax_percent       : service_tax_percent
+
+
                         }, "get", _this, _this.loadBillGenerate,null, '.loading-pane');
 
             // Comm
         });
+
+
     },
     loadBillGenerate:function(data){
             window.alert("Bill Generated")
     },
     loadBillData:function(data){
         bill_type = window.location.pathname.split('/')[2]
-
+        bill_2 = $('#bill_type_owner').val()
+        // console.log(bill_type)
+        $('.invoice-box .reciept').show();
         $.each(data, function(ix, val){
+            if (val.req_user_agent){
+                if (val.booking_owner=="ClickGarage"){
+                    console.log('1')
+                    $('.actionables').hide()
+                }else{
+                    console.log('2')
+                    $('.actionables').show()
+                    $('.bill-type-select').hide()
+                }
+            }else if(val.req_user_staff || val.req_user_admin){
+                if (val.booking_owner=="ClickGarage"){
+                    console.log('3')
+                    $('.actionables').show()
+                }else{
+                    console.log('4')
+                    $('.actionables').hide()
+                }
+            }else{
+                console.log('5')
+                 $('.actionables').hide()
+            }
+
+            mode = $('.bill-page #payment-mode').val()
+            $('#bill-type').text(mode)
             if (bill_type == "new"){
-                $('.invoice-box #agent-name').text(val.agent_name);
-                $('.invoice-box #agent-address').text(val.agent_address);
-                $('.invoice-box #agent-locality').text(val.agent_locality);
-                $('.invoice-box #agent-city').text(val.agent_city);
                 today = new Date()
                 // console.log(today)
                 $('.invoice-box #booking-id').text(val.booking_id);
                 $('.invoice-box #bill-date').text(today.getDate()+'-'+today.getMonth()+'-'+today.getFullYear());
-                $('.invoice-box #agent-tin').text(val.agent_vat);
-                $('.invoice-box #agent-cin').text(val.agent_cin);
-                $('.invoice-box #agent-stax').text(val.agent_stax);
+                // console.log("")
+                // console.log(val.req_user_agent)
+                if (val.req_user_agent || val.booking_owner != "ClickGarage"){
+                    console.log('1')
+                    $('.invoice-box #agent-tin').text(val.agent_vat);
+                    $('.invoice-box #agent-cin').text(val.agent_cin);
+                    $('.invoice-box #agent-stax').text(val.agent_stax);
+                    $('.invoice-box #agent-name').text(val.agent_name);
+                    $('.invoice-box #agent-address').text(val.agent_address);
+                    $('.invoice-box #agent-locality').text(val.agent_locality);
+                    $('.invoice-box #agent-city').text(val.agent_city);
+                }else{
+                    if (bill_2 == "Agent"){
+                        $('.invoice-box #agent-tin').text(val.agent_vat);
+                        $('.invoice-box #agent-cin').text(val.agent_cin);
+                        $('.invoice-box #agent-stax').text(val.agent_stax);
+                        $('.invoice-box #agent-name').text(val.agent_name);
+                        $('.invoice-box #agent-address').text(val.agent_address);
+                        $('.invoice-box #agent-locality').text(val.agent_locality);
+                        $('.invoice-box #agent-city').text(val.agent_city);
+                    }else if(bill_2=="CG Delhi"){
+                        $('.invoice-box #agent-tin').text(CGDELHI_VAT_NO);
+                        $('.invoice-box #agent-cin').text(CGDELHI_CIN_NO);
+                        $('.invoice-box #agent-stax').text(CGDELHI_STAX_NO);
+                        $('.invoice-box #agent-name').text(CGDELHI_NAME);
+                        $('.invoice-box #agent-address').text(CGDELHI_ADDRESS);
+                        $('.invoice-box #agent-locality').text(CGDELHI_LOCALITY);
+                        $('.invoice-box #agent-city').text(CGDELHI_CITY);
+                    }else if(bill_2=="CG Haryana"){
+                        $('.invoice-box #agent-tin').text(CGHARYANA_VAT_NO);
+                        $('.invoice-box #agent-cin').text(CGHARYANA_CIN_NO);
+                        $('.invoice-box #agent-stax').text(CGHARYANA_STAX_NO);
+                        $('.invoice-box #agent-name').text(CGHARYANA_NAME);
+                        $('.invoice-box #agent-address').text(CGHARYANA_ADDRESS);
+                        $('.invoice-box #agent-locality').text(CGHARYANA_LOCALITY);
+                        $('.invoice-box #agent-city').text(CGHARYANA_CITY);
+                    }else if(bill_2 == "Reciept"){
+                        $('.invoice-box .reciept').hide()
+                        // $('.invoice-box #agent-tin').text(val.agent_vat);
+                        // $('.invoice-box #agent-cin').text(val.agent_cin);
+                        // $('.invoice-box #agent-stax').text(val.agent_stax);
+                        $('.invoice-box #agent-name').text(CGDELHI_NAME);
+                        $('.invoice-box #agent-address').text(CGDELHI_ADDRESS);
+                        $('.invoice-box #agent-locality').text(CGDELHI_LOCALITY);
+                        $('.invoice-box #agent-city').text(CGDELHI_CITY);
+                    }
+                }
+
                 $('.invoice-box #cust-name').text(val.cust_name);
                 $('.invoice-box #cust-address').text(val.cust_address);
                 $('.invoice-box #cust-locality').text(val.cust_locality);
@@ -196,7 +359,7 @@ var Global = {
                 TOTAL_LABOUR = 0;
 
                 for (i = 0; i < cartLen; i++) {
-                    console.log(val.service_items[i].type)
+                    // console.log(val.service_items[i].type)
                     if (val.service_items[i].type == "Part"){
                         html_parts += '<tr class="item">'
                         html_parts += '<td>'+val.service_items[i].name+'</td>'
@@ -258,6 +421,14 @@ var Global = {
                 $('.invoice-box #vat-consumable-percent').text(val.vat_consumable);
                 $('.invoice-box #stax-percent').text(val.service_tax);
             }else if(bill_type == "old"){
+                if (val.bill_type == "Reciept"){
+                    // console.log('1')
+                   $('.invoice-box .reciept').hide()
+                }else{
+                    // console.log('2')/
+                   $('.invoice-box .reciept').show()
+                }
+
                 $('.invoice-box #bill-type').text(val.bill_payment_mode)
                 $('.invoice-box #bill-number').text(val.invoice_number);
                 $('.invoice-box #agent-name').text(val.bill_agent_name);
@@ -276,6 +447,10 @@ var Global = {
                 $('.invoice-box #veh-reg').text(val.bill_reg_number);
                 $('.invoice-box #veh-name').text(val.bill_make +' '+ val.bill_model);
                 $('.invoice-box .agent-details').attr('agent-id',val.agent)
+
+
+
+
                 var cartLen = val.bill_components.length;
                 part_container = $('.invoice-box .parts-table .parts-list');
                 part_container.html('');
@@ -294,7 +469,7 @@ var Global = {
                 TOTAL_LABOUR = 0;
 
                 for (i = 0; i < cartLen; i++) {
-                    console.log(val.bill_components[i].type)
+                    // console.log(val.bill_components[i].type)
                     if (val.service_items[i].type == "Part"){
                         html_parts += '<tr class="item">'
                         html_parts += '<td>'+val.bill_components[i].name+'</td>'

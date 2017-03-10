@@ -1167,9 +1167,7 @@ var Global = {
             container =  $('#new-booking .service-select .services-list .service-row.to-copy-row')
             container_parent =  $('#new-booking .service-select .services-list')
             html =''
-            new_container = cont
-
-            ainer.clone().removeClass('invisible').removeClass('to-copy-row');
+            new_container = container.clone().removeClass('invisible').removeClass('to-copy-row');
             new_container.appendTo(container_parent);
         });
         // -- DELETE ITEM
@@ -2361,6 +2359,9 @@ var Global = {
     loadUpdateUser:function (data) {
         alert("User updated!")
         // Commons.ajaxData('fetch_all_users', {}, "get", _this, _this.loadAdminUsers,null, '.loading-pane');
+    },
+    loadCustomerAgent:function(data){
+        alert('Agent Updated!');
     },
     updateCart:function(){
         TOTAL_PRICE_ADMIN = 0;

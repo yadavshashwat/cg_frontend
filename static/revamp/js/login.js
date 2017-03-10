@@ -331,6 +331,7 @@ var Login = {
             $('.admin-page .items-list li.subscription-button').hide()
             // $('.admin-page .items-list li.users-button').hide()
             // $('.admin-page .items-list li.lead-button').hide()
+            $('.bill-page .staff-button-row').hide()
             $('.admin-page .staff-button-row').hide()
             $('.admin-page .b2b-button-row').hide()
         }else if(data['auth_rights']['b2b']){
@@ -342,6 +343,7 @@ var Login = {
             $('.admin-page .items-list li.subscription-button').hide()
             $('.admin-page .agent-button-row').hide()
             $('.admin-page .staff-button-row').hide()
+            $('.bill-page .staff-button-row').hide()
             $('.admin-page .b2b-button-row').show()
             cookie = local.load();
             console.log('b2b')
