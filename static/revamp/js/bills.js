@@ -257,12 +257,19 @@ var Global = {
         // console.log(bill_type)
         $('.invoice-box .reciept').show();
         $.each(data, function(ix, val){
-            if (val.req_user_agent){
+            hash_state = window.location.hash
+            if (hash_state == "#print"){
+                $('.navbar').hide()
+                $('.actionables').hide()
+            }else{
+                if (val.req_user_agent){
                 if (val.booking_owner=="ClickGarage"){
+
                     console.log('1')
                     $('.actionables').hide()
                 }else{
                     console.log('2')
+
                     $('.actionables').show()
                     $('.bill-type-select').hide()
                 }
@@ -278,6 +285,9 @@ var Global = {
                 console.log('5')
                  $('.actionables').hide()
             }
+            }
+
+
 
             mode = $('.bill-page #payment-mode').val()
             $('#bill-type').text(mode)
