@@ -294,7 +294,15 @@ var Global = {
            // var fuel = $('#fuel-type-select').find('.active span').text();
            var vehtype = $('#home .veh-cat-card.selected').text().trim()
            var error = 0 ;
-           if(make == "" || model == "" ||make == "Make" || model == "Model" ) {
+           if (typeof(model) != "undefined") {
+               fuel_start = model.indexOf("(")
+               fuel_end = model.indexOf(")")
+               var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
+               model = model.substr(0, fuel_start - 1)
+           }
+
+
+           if(typeof(model) == "undefined" ||typeof(make) == "undefined"  ) {
                $('#choose-vehicle-error').text('Please select vehicle');
                 error = 1;
             }
@@ -302,12 +310,7 @@ var Global = {
                return;
            }
            local.save('vehmake',make);
-
-           fuel_start = model.indexOf("(")
-           fuel_end = model.indexOf(")")
-
-           var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
-           model = model.substr(0,fuel_start-1)
+           
 
            cookie = local.load()
 

@@ -102,8 +102,11 @@ $(document).ready(function(){
     var b = $('.home-form').height();
     if (a>=b){
         $("#home").height(a - 0)
+        $('#background img').height(a)
     }else{
         $("#home").height(b + 50)
+        $('#background img').height(b + 50)
+
     }
 });
 
@@ -144,7 +147,7 @@ $(document).ready(function(){
         var PAGEHEADER = " TOP QUALITY CAR REPAIRS IN GURUGRAM"
         var FEATURES = "OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop"
     }else if(vehtype =="Car" && service == "Denting"){
-        var PAGEHEADER = "BEST IN CLASS DENTING/PAINTNING FACILITY IN GURUGRAM"
+        var PAGEHEADER = "BEST IN CLASS DENTING/ PAINTING FACILITY IN GURUGRAM"
         var FEATURES = "Upto 60% less than market&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;No paint mismatch with 1 year warranty&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop"
     }else if(vehtype =="Bike" && service == "Repairing"){
         var PAGEHEADER = "DOORSTEP BIKE REPAIRS. NOW IN GURUGRAM"
@@ -356,7 +359,16 @@ var Global = {
            // var category = $('#selected-service .selected').text();
            var additional = $('#additional').val();
            var error = 0 ;
-           if(make == "" || model == "" ) {
+           // console.log(make)
+           // console.log(model)
+           console.log(model)
+            if (typeof(model) != "undefined"){
+               fuel_start = model.indexOf("(")
+               fuel_end = model.indexOf(")")
+               var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
+               model = model.substr(0,fuel_start-1)
+            }
+           if(typeof(model) == "undefined" ||typeof(make) == "undefined"  ) {
                $('#choose-vehicle-error').text('Please select vehicle');
                 error = 1;
             }
@@ -687,7 +699,7 @@ var Global = {
             var html = '<select id="vehicle-select-list" class="js-example-responsive">';
             html += '<option value="" disabled selected>Model</option>';
             $.each(data, function(ix, val){
-                html += '<option value="' + val.make +' '+val.model+' '+val.fuel_type + '" data-placeholder="true">'+ val.full_veh_name + '</option>'
+                html += '<option value="' + val.full_veh_name + '" data-placeholder="true">'+ val.full_veh_name + '</option>'
                 // console.log(val.model)
 
             });

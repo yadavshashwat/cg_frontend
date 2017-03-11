@@ -1248,6 +1248,7 @@ body>.select2-container{width:auto !important;
 }
 #background img{
     width: 100%;
+    /*height: auto;*/
 }
 
 #home {
