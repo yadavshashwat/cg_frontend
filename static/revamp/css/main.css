@@ -531,7 +531,7 @@ body>.select2-container{width:auto !important;
 
 /*<---- Selecize Dropdown --->*/
 .vehicle-details .selectize-input{
-    height: 4rem!important;
+    height: 3.5rem!important;
 }
 
 
@@ -568,7 +568,19 @@ body>.select2-container{width:auto !important;
      font-family: Roboto;
     /*height:300px!important;*/
 }
+/*.selectize-input div.item + input { display: none; }*/
+
+.selectize-dropdown-content {
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* max-height: 200px; */
+    max-height:400px!important;
+    -webkit-overflow-scrolling: touch;
+}
+
+
 /*.selectize-input div.item + input { display: inline-block; }*/
+
 .selectize-dropdown:hover{
     /*height:300px!important;*/
 }

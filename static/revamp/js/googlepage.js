@@ -640,10 +640,16 @@ var Global = {
                     }else{
                         return '<div><img src="/../../static/revamp/img/Brands/Bikes/' + item.value + '.png" class="img-flag img-brand" alt="brand icon" />&nbsp;' + escape(item.value) + '</div>';
                     }
+
+
                 }
             }
 
         })
+         var viewportWidth = $(window).width();
+         if (viewportWidth <= 992){
+              $(".selectize-input input").attr('readonly','readonly');
+         }
     },
 
     // loadBrands2:function(data){
@@ -689,6 +695,10 @@ var Global = {
             container.html(html);
             // container.find('select').material_select();
             container.find('select').selectize();
+            var viewportWidth = $(window).width();
+         if (viewportWidth <= 992){
+              $(".selectize-input input").attr('readonly','readonly');
+         }
 
     },
     loadLocation:function(data){
