@@ -429,7 +429,7 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
 	height : 2rem!important;
 }
 
-.order-page input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea{
+.order-page input[type=text],.order-page input[type=password],.order-page input[type=email],.order-page input[type=url],.order-page input[type=time],.order-page input[type=date],.order-page input[type=datetime],.order-page input[type=datetime-local],.order-page input[type=tel],.order-page input[type=number],.order-page input[type=search],.order-page textarea.materialize-textarea{
 	height : 2.5rem!important;
 }
 
@@ -534,7 +534,15 @@ body>.select2-container{width:auto !important;
     height: 3.5rem!important;
 }
 
-
+.selectize-dropdown, .selectize-input, .selectize-input input {
+    color: black!important;
+    /*position: absolute;*/
+    /*top: 0.8rem;*/
+    /*left: 0;*/
+    /*font-size: 1rem;*/
+    /*cursor: text;*/
+    /*transition: .2s ease-out;*/
+}
 .selectize-input{
     background-color: transparent;
     border: none!important;
@@ -563,7 +571,7 @@ body>.select2-container{width:auto !important;
     transition: box-shadow .25s!important;;
     border-radius: 2px!important;;
      border: none!important;
-     box-sizing: 0px!important;
+     /*box-sizing: none!important;*/
      box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
      font-family: Roboto;
     /*height:300px!important;*/
@@ -1412,6 +1420,42 @@ body>.select2-container{width:auto !important;
 	text-align: right;
 	margin-top: -10px;
 }
+.error-border{
+border-bottom: 2px solid red!important;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #9e9e9e;
+    left: 0;
+    font-size: 1rem;
+    margin-left: 5px;
+
+    /*top: 0.8rem;*/
+
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #9e9e9e;
+    left: 0;
+    font-size: 1rem;
+    margin-left: 5px;
+
+     /*top: 0.8rem;*/
+}
+:-ms-input-placeholder { /* IE 10+ */
+ color: #9e9e9e;
+    left: 0;
+    font-size: 1rem;
+    margin-left: 5px;
+
+     /*top: 0.8rem;*/
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #9e9e9e;
+    left: 0;
+    font-size: 1rem;
+     margin-left: 5px;
+     /*top: 0.8rem;*/
+}
 
 /*#home .home-form-2 .error-message{*/
 	/*color: red;*/
@@ -1429,7 +1473,7 @@ body>.select2-container{width:auto !important;
 }
 
 #home .form-row{
-    padding: 5%;
+    padding: 5% 1%;
 }
 
 #home .service-card .service-name{
@@ -2952,16 +2996,22 @@ border-radius: 20%/50%;
 
 
 .prefix-select{
-    width:3rem;
-    padding: 10px 0px 0px 0px;
+    width:3.3rem;
+    padding: 5px 0px 0px 0px;
 }
 .static-page .list-links{
     margin-left: 30px;
 }
+
 .select-div{
     display: inline-flex;
     width: 100%;
     padding: 0 0.75rem;
+}
+
+.ad-page-select{
+    height:51px;
+    margin-bottom: 2%;
 }
 
 .static-page .list-cars ul, .static-page .list-bikes ul{

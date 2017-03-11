@@ -217,7 +217,7 @@ input:not([type])+label:after,input[type=text]+label:after,input[type=password]+
     content:"";
     position:absolute;
     top:0px!important;
-    right:0px!important;
+    right:1px!important;
     opacity:0;
     transition:.2s opacity ease-out, .2s color ease-out}
 

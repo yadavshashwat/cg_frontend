@@ -116,7 +116,14 @@ $(document).ready(function(){
 $('.datepicker').pickadate({
     format: 'dd-mm-yyyy',
     closeOnSelect: true,
-    min: new Date(),
+    min: new Date() + 1,
+    onSet: function( arg ){
+        if ( 'select' in arg ){ //prevent closing on selecting month/year
+            this.close();
+            $('#time-slot').click()
+        }
+    }
+
 });
 
 $(".button-collapse").sideNav();
@@ -407,11 +414,12 @@ var Global = {
            var additional = $('#additional').val();
            var name = $('#first_name').val();
            // var lname = $('#last_name').val();
-           var locality = $('#locality').val();
+           // var locality = $('#locality').val();
            var number = $('#telephone').val();
            // var email = $('#email').val();
            var date = $('#date').val();
            var time = $('#time-slot').find('.selectize-input').find('div').attr('data-value');
+           var city = $('#city').find('.selectize-input').find('div').attr('data-value');
            var error = 0 ;
 
             // form validation
@@ -424,8 +432,9 @@ var Global = {
            //     $('#last_name').addClass("invalid");
            //     error = 1;
            // }
-           if(locality==""){
-               $('#locality').addClass("invalid");
+           if(typeof(city) == "undefined" ){
+               $('#city').find('.selectize-input').addClass('error-border')
+               // $('#locality').addClass("invalid");
                error = 1;
            }
            if(number <= 100000000 || number >= 9999999999){
@@ -443,11 +452,11 @@ var Global = {
                $('#date').addClass("invalid");
                error = 1;
            }
-           if(time==""){
-               $('#time').addClass("invalid");
-               $('#choose-time-slot').text('Choose Time Slot');
-               error = 1;
-           }
+           // if(time==""){
+           //     $('#time').addClass("invalid");
+           //     $('#choose-time-slot').text('Choose Time Slot');
+           //     error = 1;
+           // }
             if(error==1){
                console.log("didnt work")
                return;
@@ -495,15 +504,15 @@ var Global = {
                 ,email      : "--"
                 ,reg_number : "--"
                 ,address    : "--"
-                ,locality   : locality
-                ,city       : "--"
+                ,locality   : "--"
+                ,city       : city
                 ,order_list : JSON.stringify(CURRENT_CART)
                 ,make       : make
                 ,model      : model
                 ,fuel       : fuel
                 ,veh_type   : veh_type
                 ,date       : date
-                ,time       : time
+                ,time       : "--"
                 ,comment    : service + ', '+ additional
                 ,is_paid    : is_paid
                 ,paid_amt   : paid_amt
