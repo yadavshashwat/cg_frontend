@@ -200,6 +200,9 @@ p {
 	margin: 0px 0px 4px 0px;
 }
 
+.btn-row{
+    margin: 0px 0px 0px 0px!important;
+}
 .field-title h4 {
 	margin-left : 40px;
 	/*padding: 10px;*/
@@ -540,8 +543,11 @@ body>.select2-container{width:auto !important;
     font-weight: 700;
 }
 
+
+
 .selectize-dropdown, .selectize-input, .selectize-input input {
     color: black!important;
+    font-size: 16px!important;;
     /*position: absolute;*/
     /*top: 0.8rem;*/
     /*left: 0;*/
@@ -1434,8 +1440,8 @@ border-bottom: 2px solid red!important;
     color: #9e9e9e;
     left: 0;
     font-size: 1rem;
-    margin-left: 5px;
-
+    /*margin-left: 30px;*/
+    padding-left: 5px;
     /*top: 0.8rem;*/
 
 }
@@ -1443,24 +1449,25 @@ border-bottom: 2px solid red!important;
   color: #9e9e9e;
     left: 0;
     font-size: 1rem;
-    margin-left: 5px;
-
+    /*margin-left: 30px;*/
+padding-left: 5px;
      /*top: 0.8rem;*/
 }
 :-ms-input-placeholder { /* IE 10+ */
  color: #9e9e9e;
     left: 0;
     font-size: 1rem;
-    margin-left: 5px;
-
+    /*margin-left: 30px;*/
+padding-left: 5px;
      /*top: 0.8rem;*/
 }
 :-moz-placeholder { /* Firefox 18- */
   color: #9e9e9e;
     left: 0;
     font-size: 1rem;
-     margin-left: 5px;
+     /*margin-left: 30px;*/
      /*top: 0.8rem;*/
+    padding-left: 5px;
 }
 
 /*#home .home-form-2 .error-message{*/
@@ -2136,8 +2143,9 @@ footer a:hover {
     font-size :20px;
 }
 #services .service-description{
-	color: #232527;
+	color: #9e9e9e;
     margin : 1px!important;
+    font-size: 15px!important;
 }
 
 #services .service-card img{
@@ -2294,7 +2302,7 @@ list-style: circle;
 	height: 50px;
 }
 #jobs .services .service-name .button-row .btn-service{
-	width: 130px;
+	width: 110px;
 	margin: 1%;
 }
 
@@ -2413,10 +2421,16 @@ list-style: circle;
     /*top : 140px;*/
     /*bottom: 30px;*/
     right: 10px;
-	padding-bottom: 50px;
+	padding-bottom: 150px;
     z-index: 1;
 }
 
+.edit-veh-button{
+     color: #9e9e9e;
+    font-weight: 400;
+    cursor: pointer;
+
+}
 #cart .cart-section, #summary .cart-section {
     border-bottom: 2px solid #dcdcdc;
 }
@@ -3013,6 +3027,12 @@ border-radius: 20%/50%;
     display: inline-flex;
     width: 100%;
     padding: 0 0.75rem;
+}
+.select-div-2{
+    display: inline-flex;
+    width: 100%;
+     padding: 0 0 0.75rem 0;
+    /*padding: 0 0.75rem;*/
 }
 
 .ad-page-select{

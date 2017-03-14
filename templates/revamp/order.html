@@ -497,6 +497,7 @@
 								Vehicle :
 								<span id="vehicle-name1" class="vehicle-name"></span>
 								<span id="vehicle-varient1" class="vehicle-name"></span>
+								&nbsp;&nbsp;<i class="fa fa-pencil edit-veh-button"></i>
 							</div>
 						</div>
 						<div class="row cart-section cart-list">
@@ -547,8 +548,8 @@
 							</div>
 						</div>
 						<div class="row cart-section cart-coupon">
-							<div class="col s12 m12 l12 add-btn">
-								Got a coupon code? <span class="discount-link visible">Add</span>
+							<div class="col s12 m12 l12 add-btn centered-text">
+								<span class="discount-link visible">Add coupon</span>
 							</div>
 							<div class ="col s12 m12 l12 coupon-box invisible">
 								<div class="input-field col s6 m6 l6 coupon-btn ">
@@ -614,35 +615,49 @@
 												<input id="date" type="date" class="datepicker">
 												<label for="date" data-error="required">Date</label>
 											</div>
-											<div class="col l2 m2 s2 time-form">
-												<i class="fa fa-clock-o"></i>
-												<!--Time:-->
+
+
+
+											<div class="col s12 m12 l6">
+												<div class="select-div-2">
+													<div class="prefix-select">
+														<i class="fa fa-clock-o x25"></i>
+													</div>
+													<div class="input-field select-width" id ="time-slot">
+														<select>
+															<option value="" disabled selected>Time</option>
+															<option value="09:30AM - 11:30AM">09:30AM - 11:30AM </option>
+															<option value="11:30AM - 01:30PM">11:30AM - 01:30PM </option>
+															<option value="01:30PM - 03:30PM">01:30PM - 03:30PM </option>
+															<option value="03:30PM - 05:30PM">03:30PM - 05:30PM </option>
+															<option value="05:30PM - 07:30PM">05:30PM - 07:30PM </option>
+														</select>
+														<span id ="choose-time-slot" class="error-message"></span>
+													</div>
+												</div>
 											</div>
 
-											<div class="input-field col s10 m10 l4" id ="time-slot">
-												<!--<div class="col s9 m9 l9" id ="time-slot">-->
-												<!--<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>-->
-												<!--<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>-->
-												<!--<div class="card box-card cardhover col l4 m4 s4 offset-s2 offset-m2 offset-l2" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>-->
-												<!--<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>-->
-												<!--<div class="card box-card cardhover col l4 m4 s4 offset-s2 offset-m2 offset-l2" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>-->
+											<!--<div class="col l2 m2 s2 time-form">-->
 
-												<select>
-													<option value="" disabled selected>Time</option>
-													<option value="09:30AM - 11:30AM">09:30AM - 11:30AM </option>
-													<option value="11:30AM - 01:30PM">11:30AM - 01:30PM </option>
-													<option value="01:30PM - 03:30PM">01:30PM - 03:30PM </option>
-													<option value="03:30PM - 05:30PM">03:30PM - 05:30PM </option>
-													<option value="05:30PM - 07:30PM">05:30PM - 07:30PM </option>
-												</select>
-												<span id ="choose-time-slot" class="error-message"></span>
-											</div>
+												<!--&lt;!&ndash;Time:&ndash;&gt;-->
+											<!--</div>-->
+
+											<!--<div class="input-field col s10 m10 l4" ">-->
+												<!--&lt;!&ndash;<div class="col s9 m9 l9" id ="time-slot">&ndash;&gt;-->
+												<!--&lt;!&ndash;<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>&ndash;&gt;-->
+												<!--&lt;!&ndash;<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>&ndash;&gt;-->
+												<!--&lt;!&ndash;<div class="card box-card cardhover col l4 m4 s4 offset-s2 offset-m2 offset-l2" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>&ndash;&gt;-->
+												<!--&lt;!&ndash;<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>&ndash;&gt;-->
+												<!--&lt;!&ndash;<div class="card box-card cardhover col l4 m4 s4 offset-s2 offset-m2 offset-l2" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>&ndash;&gt;-->
+
+
+											<!--</div>-->
 										</div>
 										<div class="row">
-											<div class="input-field col s12" >
+											<div class="input-field col s12 l11 m11" >
 												<i class="material-icons prefix">report_problem</i>
 												<input id="comment" type="text"  aria-required="true">
-												<label for="comment">Specific issues/ request?</label>
+												<label for="comment">Additional Info</label>
 											</div>
 										</div>
 									</form>
@@ -655,7 +670,7 @@
 									<!--2-->
 								<!--</div>-->
 								<div class="col l10 m9 s9 box-header">
-									<h3 class="form-header">Booking Details</h3>
+									<h3 class="form-header">Customer Details</h3>
 								</div>
 							</div>
 
@@ -1081,7 +1096,7 @@
 	<div class="container-fluid">
 		<div class="card">
 			<div class="row order-confirm ">
-				Thank you for placing your order! Our team will contact you shortly regarding your booking.
+				Thank you for placing your order! Our team will contact you shortly to confirm your booking.
 			</div>
 		</div>
 	</div>

@@ -147,6 +147,11 @@ var Global = {
             $('#cover').show()
         })
 
+        $('.order-page .edit-veh-button').click(function () {
+            $('#vehicle-select-form').show()
+            $('#cover').show()
+        })
+
         $('#cover').click(function () {
             // console.log('check')
             $('#vehicle-select-form').hide()
@@ -521,7 +526,7 @@ var Global = {
             var ch = $('#cart').height() + 250;
             if (wh >= ch){
                 if ($(this).scrollTop() > 0) {
-                    $('#cart').css({position: 'fixed', top: '140px'});
+                    $('#cart').css({position: 'fixed'});
                 }
             } else {
                 if ($(this).scrollTop() > 0) {
@@ -552,6 +557,10 @@ var Global = {
             // console.log(local.load('cgcart'))
             Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
             $(this).addClass('disabled')
+
+            $(this).find('.book-status').text('Booked')
+            $(this).parent('.row').find('i').hide()
+
         });
 
         // Deleting item cart
@@ -576,6 +585,8 @@ var Global = {
             Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
             job_div = $("#jobs").find("[job-id='" + delC + "']");
             job_div.find('.book-btn').removeClass('disabled')
+            job_div.find('.book-btn .book-status').text('Book')
+            job_div.find('.book-btn').parent('.row').find('i').show()
         });
 
         $('#cart .btn-checkout').on('click' ,function(e){
@@ -726,6 +737,7 @@ var Global = {
             }
              var locality = $(this).val();
             Commons.ajaxData('get_location', {location_id: locality}, "get", _this, _this.loadLocation);
+            Materialize.updateTextFields();
             $('#locality').removeClass('invalid')
         });
 
@@ -1162,17 +1174,22 @@ var Global = {
             }
             html += '										</div>';
             html += '										<div class="col l4 s12 m12 button-col hide-on-med-and-down">';
+            html += '<div class="row btn-row">'
             html += '											<button class="waves-effect waves-light btn cg-primary btn-small btn-service closed-more-info" type="submit" name="action">Info';
             html += '												<i class="material-icons right">turned_in</i>';
             html += '											</button>';
-
+            html += '</div>'
+            html += '<div class="row btn-row">'
             if (cart_list.indexOf(val.id)>=0){
-                html += '											<button class="waves-effect waves-light btn btn-small cg-primary  btn-service book-btn disabled" type="submit" name="action">Book';
+                html += '											<button class="waves-effect waves-light btn btn-small cg-primary  btn-service book-btn disabled" type="submit" name="action"><span class="book-status">Booked</span>';
+                 html += '										<i class="material-icons right invisible">send</i>';
             }else{
-                html += '											<button class="waves-effect waves-light btn btn-small cg-primary  btn-service book-btn" type="submit" name="action">Book';
+                html += '											<button class="waves-effect waves-light btn btn-small cg-primary  btn-service book-btn" type="submit" name="action"><span class="book-status">Book</span>';
+                html += '												<i class="material-icons right">send</i>';
             }
-            html += '												<i class="material-icons right">send</i>';
+
             html += '											</button>';
+            html += '</div>'
             html += '										</div>';
             html += '									</div>';
             html += '								</div>';
@@ -1191,15 +1208,17 @@ var Global = {
             html += '							</div>';
             html += '							<div class="row button-row hide-on-large-only">';
             html += '								<div class="col l12 s12 m12">';
-            html += '									<button class="waves-effect waves-light btn cg-primary btn-service closed-more-info" type="submit" name="action">Info';
+            html += '									<button class="waves-effect waves-light btn btn-small cg-primary btn-service closed-more-info" type="submit" name="action">Info';
             html += '										<i class="material-icons right">turned_in</i>';
             html += '									</button>';
             if (cart_list.indexOf(val.id)>=0){
-                html += '											<button class="waves-effect waves-light btn cg-primary  btn-service book-btn disabled" type="submit" name="action">Book';
+                html += '											<button class="waves-effect waves-light btn btn-small  cg-primary  btn-service book-btn disabled" type="submit" name="action"><span class="book-status">Booked</span>';
+                html += '										<i class="material-icons right invisible">send</i>';
             }else{
-                html += '											<button class="waves-effect waves-light btn cg-primary  btn-service book-btn" type="submit" name="action">Book';
+                html += '											<button class="waves-effect waves-light btn btn-small  cg-primary  btn-service book-btn" type="submit" name="action"><span class="book-status">Book</span>';
+                html += '										<i class="material-icons right">send</i>';
             }
-            html += '										<i class="material-icons right">send</i>';
+
             html += '									</button>';
             html += '								</div>';
             html += '							</div>';
