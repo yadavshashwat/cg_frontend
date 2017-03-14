@@ -801,28 +801,34 @@ var Global = {
             var html = '<select id="brand-select-list" class="js-example-responsive">';
             html += '<option value="" disabled selected>Make</option>';
 
+            var html2 = ""
+            var html3 = ""
+            var POPULAR_BRANDS  = ["Maruti Suzuki", "Hyundai", "Honda", "Tata", "Toyota", "Ford", "Hero", "Bajaj","Yamaha"]
+
             $.each(data, function(ix, val){
-                html += '<option value="' + val.make + '">'+ val.make + '</option>'
+            if (POPULAR_BRANDS.indexOf(val.make) >= 0){
+                html2 += '<option value="' + val.make + '">'+ val.make + '</option>'
+            }else{
+                html3 += '<option value="' + val.make + '">'+ val.make + '</option>'
+            }
+
             });
+
+            html += '<optgroup label="Popular Brands">'
+            html += html2
+            html += '</optgroup>'
+            html += '<optgroup label="Other Brands">'
+            html += html3
+            html += '</optgroup>'
 
             html += '<select>';
             container.html(html);
-            // function formatmodelname (modelname) {
-            //     if (!modelname.id) { return modelname.text; }
-            //     if (vehtype=="Car"){
-            //         var modelname = $('<span><img src="/../../static/revamp/img/Brands/Car/' + modelname.element.value + '.png" class="img-flag img-brand" /> ' + modelname.text + '</span>')
-            //     }else{
-            //         var modelname = $('<span><img src="/../../static/revamp/img/Brands/Bikes/' + modelname.element.value + '.png" class="img-flag img-brand" /> ' + modelname.text + '</span>')
-            //     }
-            //     return modelname;
-            // };
-            //
-            // // container.find('select').material_select();
-            // container.find('select').select2({
-            //       // allowClear: true
-            //     templateResult: formatmodelname
-            // });
             container.find('select').selectize({
+            create: false,
+            sortField: 'true',
+            lockOptgroupOrder: true,
+            // openOnFocus:false,
+            // maxOptions:10,
             render: {
                 item: function(item, escape) {
                     // console.log(item.value)
