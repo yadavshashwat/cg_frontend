@@ -49,7 +49,7 @@
 
 
 			<!--<div class="logo-cg logo-color visible">-->
-				<!--<a href="/Book/{{veh_type}}/{{veh}}" class="brand-logo"><img class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>-->
+			<!--<a href="/Book/{{veh_type}}/{{veh}}" class="brand-logo"><img class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>-->
 			<!--</div>-->
 			<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			<a href="tel:+91-9555-95-0000" data-activates="mobile" class="call-button-nav  hide-on-large-only"><i class="material-icons">phone</i></a>
@@ -597,7 +597,7 @@
 						<div class="card">
 							<div class="row">
 								<!--<div class="col l1 m1 s1 number centered-text">-->
-									<!--1-->
+								<!--1-->
 								<!--</div>-->
 								<div class="col l10 m9 s9 box-header">
 									<h3 class="form-header">Booking Date & Time</h3>
@@ -639,16 +639,16 @@
 
 											<!--<div class="col l2 m2 s2 time-form">-->
 
-												<!--&lt;!&ndash;Time:&ndash;&gt;-->
+											<!--&lt;!&ndash;Time:&ndash;&gt;-->
 											<!--</div>-->
 
 											<!--<div class="input-field col s10 m10 l4" ">-->
-												<!--&lt;!&ndash;<div class="col s9 m9 l9" id ="time-slot">&ndash;&gt;-->
-												<!--&lt;!&ndash;<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>&ndash;&gt;-->
-												<!--&lt;!&ndash;<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>&ndash;&gt;-->
-												<!--&lt;!&ndash;<div class="card box-card cardhover col l4 m4 s4 offset-s2 offset-m2 offset-l2" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>&ndash;&gt;-->
-												<!--&lt;!&ndash;<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>&ndash;&gt;-->
-												<!--&lt;!&ndash;<div class="card box-card cardhover col l4 m4 s4 offset-s2 offset-m2 offset-l2" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>&ndash;&gt;-->
+											<!--&lt;!&ndash;<div class="col s9 m9 l9" id ="time-slot">&ndash;&gt;-->
+											<!--&lt;!&ndash;<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>&ndash;&gt;-->
+											<!--&lt;!&ndash;<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>&ndash;&gt;-->
+											<!--&lt;!&ndash;<div class="card box-card cardhover col l4 m4 s4 offset-s2 offset-m2 offset-l2" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>&ndash;&gt;-->
+											<!--&lt;!&ndash;<div class="card box-card cardhover col l4 m4 s4" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>&ndash;&gt;-->
+											<!--&lt;!&ndash;<div class="card box-card cardhover col l4 m4 s4 offset-s2 offset-m2 offset-l2" value="09:30AM - 11:30AM">09:30AM - 11:30AM </div>&ndash;&gt;-->
 
 
 											<!--</div>-->
@@ -667,7 +667,7 @@
 							<!--<div class="card">-->
 							<div class="row">
 								<!--<div class="col l1 m1 s1 number centered-text">-->
-									<!--2-->
+								<!--2-->
 								<!--</div>-->
 								<div class="col l10 m9 s9 box-header">
 									<h3 class="form-header">Customer Details</h3>
@@ -701,6 +701,26 @@
 											</div>
 										</div>
 									</div>
+
+
+									<!--<div class="select-div-2">-->
+									<!--<div class="prefix-select">-->
+									<!--<i class="fa fa-clock-o x25"></i>-->
+									<!--</div>-->
+									<!--<div class="input-field select-width" id ="city">-->
+									<!--<select>-->
+									<!--<option value="" disabled selected>City</option>-->
+									<!--<option value="Gurgaon">Gurgaon</option>-->
+									<!--<option value="New Delhi">New Delhi</option>-->
+									<!--<option value="Noida">Noida</option>-->
+									<!--<option value="Ghaziabad">Ghaziabad</option>-->
+									<!--<option value="Faridabad">Faridabad</option>-->
+									<!--</select>-->
+									<!--<span id ="choose-time-slot" class="error-message"></span>-->
+									<!--</div>-->
+									<!--</div>-->
+									<!--</div>-->
+
 									<div class="col l5 s12 m12">
 										<div class="row">
 											<div class="input-field col s12">
@@ -716,11 +736,34 @@
 												<label for="locality" data-error="Required">Locality</label>
 											</div>
 										</div>
+
 										<div class="row">
-											<div class="input-field col s12">
-												<i class="material-icons prefix">business</i>
-												<input type="text" id="city" class="" required="" aria-required="true">
-												<label for="city" data-error="Required">City</label>
+											<div class="select-div" id="#city">
+												<div class="prefix-select">
+													<i class="fa fa-map x25"></i>
+												</div>
+												<div class="input-field select-width invisible" id ="city-bike">
+													<select>
+														<option value="" disabled selected>City</option>
+														<option value="Gurgaon" >Gurgaon</option>
+														<option value="New Delhi" disabled>New Delhi</option>
+														<option value="Noida" disabled>Noida</option>
+														<option value="Ghaziabad" disabled>Ghaziabad</option>
+														<option value="Faridabad" disabled>Faridabad</option>
+													</select>
+												</div>
+												<div class="input-field select-width invisible" id ="city-car">
+													<select>
+														<option value="" disabled selected>City</option>
+														<option value="Gurgaon" >Gurgaon</option>
+														<option value="New Delhi" >New Delhi</option>
+														<option value="Noida" >Noida</option>
+														<option value="Ghaziabad" >Ghaziabad</option>
+														<option value="Faridabad" >Faridabad</option>
+													</select>
+												</div>
+												<span id ="choose-city" class="error-message"></span>
+
 											</div>
 										</div>
 									</div>
@@ -1098,6 +1141,10 @@
 			<div class="row order-confirm ">
 				Thank you for placing your order! Our team will contact you shortly to confirm your booking.
 			</div>
+			<!--<div class="row order-confirm ">-->
+				<!--Your Booking Details-->
+			<!--</div>-->
+
 		</div>
 	</div>
 </section>
@@ -1358,44 +1405,44 @@
 Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: https://google.com/ads/remarketingsetup
 --------------------------------------------------->
 <script type="text/javascript">
-/* <![CDATA[ */
-var google_conversion_id = 932007205;
-var google_custom_params = window.google_tag_params;
-var google_remarketing_only = true;
-/* ]]> */
+	/* <![CDATA[ */
+	var google_conversion_id = 932007205;
+	var google_custom_params = window.google_tag_params;
+	var google_remarketing_only = true;
+	/* ]]> */
 </script>
 <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
 </script>
 <noscript>
-<div style="display:inline;">
-<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/932007205/?guid=ON&amp;script=0"/>
-</div>
+	<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/932007205/?guid=ON&amp;script=0"/>
+	</div>
 </noscript>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-68064927-1', 'auto');
-  ga('send', 'pageview');
+	ga('create', 'UA-68064927-1', 'auto');
+	ga('send', 'pageview');
 
 </script>
 <!--Googel Tags End-->
 
 <!--Start of Tawk.to Script-->
 <!--<script type="text/javascript">-->
-	<!--var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();-->
-	<!--(function(){-->
-		<!--var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];-->
-		<!--s1.async=true;-->
-		<!--s1.src='https://embed.tawk.to/5687bb1cbc4176802560a8a2/1b4iq4he6';-->
-		<!--s1.charset='UTF-8';-->
-		<!--s1.setAttribute('crossorigin','*');-->
-		<!--s0.parentNode.insertBefore(s1,s0);-->
-	<!--})();-->
+<!--var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();-->
+<!--(function(){-->
+<!--var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];-->
+<!--s1.async=true;-->
+<!--s1.src='https://embed.tawk.to/5687bb1cbc4176802560a8a2/1b4iq4he6';-->
+<!--s1.charset='UTF-8';-->
+<!--s1.setAttribute('crossorigin','*');-->
+<!--s0.parentNode.insertBefore(s1,s0);-->
+<!--})();-->
 <!--</script>-->
 <!--End of Tawk.to Script-->
 

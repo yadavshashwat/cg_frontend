@@ -420,22 +420,10 @@ var Global = {
             var html = '<select id="brand-select-list" class="">';
             html += '<option value="" disabled selected>Make</option>';
 
-            // <optgroup label="Climbing">
-							// <option value="pitons">Pitons</option>
-							// <option value="cams">Cams</option>
-							// <option value="nuts">Nuts</option>
-							// <option value="bolts">Bolts</option>
-							// <option value="stoppers">Stoppers</option>
-							// <option value="sling">Sling</option>
-						// </optgroup>
-						// <optgroup label="Skiing">
-							// <option value="skis">Skis</option>
-							// <option value="skins">Skins</option>
-							// <option value="poles">Poles</option>
-						// </optgroup>
+           
             var html2 = ""
             var html3 = ""
-            var POPULAR_BRANDS  = ["Maruti Suzuki", "Hyundai", "Honda", "Tata", "Toyota", "Ford", "Hero", "Bajaj","Yamaha"]
+            var POPULAR_BRANDS  = ["Maruti Suzuki", "Hyundai", "Honda", "Tata", "Toyota", "Mahindra", "Hero", "Bajaj","Yamaha"]
 
             $.each(data, function(ix, val){
             if (POPULAR_BRANDS.indexOf(val.make) >= 0){

@@ -1063,7 +1063,7 @@ var Global = {
         });
 
         // -- Locality Search
-        $('#locality').on('keypress',function(e,event,data){
+        $('#locality').on('keyup',function(e,event,data){
             var code = (e.keyCode || e.which);
             // do nothing if it's an arrow key
             if(code == 37 || code == 38 || code == 39 || code == 40) {

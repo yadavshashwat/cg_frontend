@@ -5,7 +5,7 @@ document.onreadystatechange = function () {
 
 // materialize css
 $(document).ready(function() {
-    // $('select').material_select();
+    // $('#city').find('select').material_select();
     // $('select').select2();
     // $('#service-select').
     // $('select').selectize();
@@ -13,10 +13,10 @@ $(document).ready(function() {
 });
 
 $(window).ready(function() {
-     setTimeout(function() {
-         $('.loading-pane-2').hide();
-         $('#overlay').hide();
-            }, 1000);
+    setTimeout(function() {
+        $('.loading-pane-2').hide();
+        $('#overlay').hide();
+    }, 1000);
 });
 
 
@@ -60,52 +60,52 @@ var SHOW_ESTIMATE = 0;
 var COUPON_CODE = "";
 
 var logoMap = {
-        'Standard Service':'<i class="cg-icon cg-icon-card icon-cg-car-standard x50"></i>',
-        'Standard Service2':'<i class="cg-icon cg-icon-card icon-cg-bike-standard x50"></i>',
-        'Comprehensive Service':'<i class="cg-icon cg-icon-card icon-cg-car-comp x50"></i>',
-        'AC Check':'<i class="cg-icon cg-icon-card icon-cg-accheck x50"></i>',
-        'Wheel Alignment And Balancing':'<i class="cg-icon cg-icon-card icon-cg-alignment x50"></i>',
-        'Comprehensive Check-Up':'<i class="cg-icon cg-icon-card icon-cg-checkup x50"></i>',
-        'Scanning':'<i class="cg-icon cg-icon-card icon-cg-scan x50"></i>',
-        'Brake Pad/Disc Pad Replacement':'<i class="cg-icon cg-icon-card icon-cg-brake x50"></i>',
-        'Clutch Check':'<i class="cg-icon cg-icon-card icon-cg-clutch x50"></i>',
-        'Battery Charging/Replacement':'<i class="cg-icon cg-icon-card icon-cg-battery x50"></i>',
-        'Other Diagnosis':'<i class="cg-icon cg-icon-card icon-cg-repair x50"></i>',
-        'Complete Car Detailing':'<i class="cg-icon cg-icon-card icon-cg-exterior x50"></i>',
-        'Interior Dry Cleaning':'<i class="cg-icon cg-icon-card icon-cg-dryclean x50"></i>',
-        'Exterior Rubbing Polishing':'<i class="cg-icon cg-icon-card icon-cg-exterior x50"></i>',
-        'Teflon Coating':'<i class="cg-icon cg-icon-card icon-cg-exterior x50"></i>',
-        'Underbody Anti Rust Treatment':'<i class="cg-icon cg-icon-card icon-cg-underbody x50"></i>',
-        'Exterior Car Washing':'<i class="cg-icon cg-icon-card icon-cg-wash x50"></i>',
-        'Flat Tyre':'<i class="cg-icon cg-icon-card icon-cg-tyre2 x50"></i>',
-        'Battery Jump Start':'<i class="cg-icon cg-icon-card icon-cg-battery x50"></i>',
-        'Towing':'<i class="cg-icon cg-icon-card icon-cg-tow x50"></i>',
-        'Minor Repairs':'<i class="cg-icon cg-icon-card icon-cg-repair x50"></i>',
-        'Key Lockout':'<i class="cg-icon cg-icon-card icon-cg-key x50"></i>',
-        'Emergency Fuel (5 Litres)':'<i class="cg-icon cg-icon-card icon-cg-fuel x50"></i>',
-        'Tyre Replacement':'<i class="cg-icon cg-icon-card icon-cg-tyre x50"></i>',
-        'Clickgarage Assist':'<i class="cg-icon cg-icon-card icon-cg-contract x50"></i>',
-        'General Check Up':'<i class="cg-icon cg-icon-card icon-cg-checkup-1 x50"></i>',
-        'Cable Replacement':'<i class="cg-icon cg-icon-card icon-cg-wire x50"></i>',
-        'Clutch Overhaul':'<i class="cg-icon cg-icon-card icon-cg-clutch x50"></i>',
-        'Front Fork Oil Or Seal Replacement':'<i class="cg-icon cg-icon-card icon-cg-fork x50"></i>',
-        'Chain Sprocket Replacement':'<i class="cg-icon cg-icon-card icon-cg-chain x50"></i>',
-        'Spark Plug Replacement':'<i class="cg-icon cg-icon-card icon-cg-spark x50"></i>',
-        'Engine Check':'<i class="cg-icon cg-icon-card icon-cg-engine x50"></i>',
-        'Bumper Rear':'<img class="" src="/../../static/revamp/img/Panel/Bumper Rear.png">',
-        'Door Front Left':'<img class="" src="/../../static/revamp/img/Panel/Door Front Left.png">',
-        'Door Front Right':'<img class="" src="/../../static/revamp/img/Panel/Door Front Right.png">',
-        'Door Rear Left':'<img class="" src="/../../static/revamp/img/Panel/Door Rear Left.png">',
-        'Door Rear Right':'<img class="" src="/../../static/revamp/img/Panel/Door Rear Right.png">',
-        'Fender Left':'<img class="" src="/../../static/revamp/img/Panel/Fender Left.png">',
-        'Fender Right':'<img class="" src="/../../static/revamp/img/Panel/Fender Rear.png">',
-        'Bumper Front':'<img class="" src="/../../static/revamp/img/Panel/Bumper Front.png">',
-        'Front Bumper':'<img class="" src="/../../static/revamp/img/Panel/Front Bumper.png">',
-        'Quarter Panel Left':'<img class="" src="/../../static/revamp/img/Panel/Quarter Panel Left.png">',
-        'Quarter Panel Right':'<img class="" src="/../../static/revamp/img/Panel/Quarter Panel Right.png">',
-        'Running Board Left':'<img class="" src="/../../static/revamp/img/Panel/Running Board Left.png">',
-        'Running Board Right':'<img class="" src="/../../static/revamp/img/Panel/Running Board Right.png">',
-        'Full Body':'<img class="" src="/../../static/revamp/img/Panel/Full Body.png">',
+    'Standard Service':'<i class="cg-icon cg-icon-card icon-cg-car-standard x50"></i>',
+    'Standard Service2':'<i class="cg-icon cg-icon-card icon-cg-bike-standard x50"></i>',
+    'Comprehensive Service':'<i class="cg-icon cg-icon-card icon-cg-car-comp x50"></i>',
+    'AC Check':'<i class="cg-icon cg-icon-card icon-cg-accheck x50"></i>',
+    'Wheel Alignment And Balancing':'<i class="cg-icon cg-icon-card icon-cg-alignment x50"></i>',
+    'Comprehensive Check-Up':'<i class="cg-icon cg-icon-card icon-cg-checkup x50"></i>',
+    'Scanning':'<i class="cg-icon cg-icon-card icon-cg-scan x50"></i>',
+    'Brake Pad/Disc Pad Replacement':'<i class="cg-icon cg-icon-card icon-cg-brake x50"></i>',
+    'Clutch Check':'<i class="cg-icon cg-icon-card icon-cg-clutch x50"></i>',
+    'Battery Charging/Replacement':'<i class="cg-icon cg-icon-card icon-cg-battery x50"></i>',
+    'Other Diagnosis':'<i class="cg-icon cg-icon-card icon-cg-repair x50"></i>',
+    'Complete Car Detailing':'<i class="cg-icon cg-icon-card icon-cg-exterior x50"></i>',
+    'Interior Dry Cleaning':'<i class="cg-icon cg-icon-card icon-cg-dryclean x50"></i>',
+    'Exterior Rubbing Polishing':'<i class="cg-icon cg-icon-card icon-cg-exterior x50"></i>',
+    'Teflon Coating':'<i class="cg-icon cg-icon-card icon-cg-exterior x50"></i>',
+    'Underbody Anti Rust Treatment':'<i class="cg-icon cg-icon-card icon-cg-underbody x50"></i>',
+    'Exterior Car Washing':'<i class="cg-icon cg-icon-card icon-cg-wash x50"></i>',
+    'Flat Tyre':'<i class="cg-icon cg-icon-card icon-cg-tyre2 x50"></i>',
+    'Battery Jump Start':'<i class="cg-icon cg-icon-card icon-cg-battery x50"></i>',
+    'Towing':'<i class="cg-icon cg-icon-card icon-cg-tow x50"></i>',
+    'Minor Repairs':'<i class="cg-icon cg-icon-card icon-cg-repair x50"></i>',
+    'Key Lockout':'<i class="cg-icon cg-icon-card icon-cg-key x50"></i>',
+    'Emergency Fuel (5 Litres)':'<i class="cg-icon cg-icon-card icon-cg-fuel x50"></i>',
+    'Tyre Replacement':'<i class="cg-icon cg-icon-card icon-cg-tyre x50"></i>',
+    'Clickgarage Assist':'<i class="cg-icon cg-icon-card icon-cg-contract x50"></i>',
+    'General Check Up':'<i class="cg-icon cg-icon-card icon-cg-checkup-1 x50"></i>',
+    'Cable Replacement':'<i class="cg-icon cg-icon-card icon-cg-wire x50"></i>',
+    'Clutch Overhaul':'<i class="cg-icon cg-icon-card icon-cg-clutch x50"></i>',
+    'Front Fork Oil Or Seal Replacement':'<i class="cg-icon cg-icon-card icon-cg-fork x50"></i>',
+    'Chain Sprocket Replacement':'<i class="cg-icon cg-icon-card icon-cg-chain x50"></i>',
+    'Spark Plug Replacement':'<i class="cg-icon cg-icon-card icon-cg-spark x50"></i>',
+    'Engine Check':'<i class="cg-icon cg-icon-card icon-cg-engine x50"></i>',
+    'Bumper Rear':'<img class="" src="/../../static/revamp/img/Panel/Bumper Rear.png">',
+    'Door Front Left':'<img class="" src="/../../static/revamp/img/Panel/Door Front Left.png">',
+    'Door Front Right':'<img class="" src="/../../static/revamp/img/Panel/Door Front Right.png">',
+    'Door Rear Left':'<img class="" src="/../../static/revamp/img/Panel/Door Rear Left.png">',
+    'Door Rear Right':'<img class="" src="/../../static/revamp/img/Panel/Door Rear Right.png">',
+    'Fender Left':'<img class="" src="/../../static/revamp/img/Panel/Fender Left.png">',
+    'Fender Right':'<img class="" src="/../../static/revamp/img/Panel/Fender Rear.png">',
+    'Bumper Front':'<img class="" src="/../../static/revamp/img/Panel/Bumper Front.png">',
+    'Front Bumper':'<img class="" src="/../../static/revamp/img/Panel/Front Bumper.png">',
+    'Quarter Panel Left':'<img class="" src="/../../static/revamp/img/Panel/Quarter Panel Left.png">',
+    'Quarter Panel Right':'<img class="" src="/../../static/revamp/img/Panel/Quarter Panel Right.png">',
+    'Running Board Left':'<img class="" src="/../../static/revamp/img/Panel/Running Board Left.png">',
+    'Running Board Right':'<img class="" src="/../../static/revamp/img/Panel/Running Board Right.png">',
+    'Full Body':'<img class="" src="/../../static/revamp/img/Panel/Full Body.png">',
 };
 
 
@@ -131,9 +131,11 @@ var Global = {
         // On page load adding items car
         //     Change vehicle button
         $('.autocomplete-option').click(function() {
-          $input.val($(this).text().trim());
-          $('.autocomplete-option').addClass('hide');
+            $input.val($(this).text().trim());
+            $('.autocomplete-option').addClass('hide');
         });
+
+        // City Select on Page load
 
         $('#city-select .city').click(function(){
             city = $(this).attr('data-class')
@@ -142,23 +144,23 @@ var Global = {
             $('#cover2').hide()
         })
 
+        // Time Slot Selectize
+        $('#time-slot').find('select').selectize()
+
+        // Change Vehicle
         $('.order-page .nav2 .change-button').click(function () {
             $('#vehicle-select-form').show()
             $('#cover').show()
         })
-
         $('.order-page .edit-veh-button').click(function () {
             $('#vehicle-select-form').show()
             $('#cover').show()
         })
-
         $('#cover').click(function () {
             // console.log('check')
             $('#vehicle-select-form').hide()
             $('#cover').hide()
         });
-
-        $('#time-slot').find('select').selectize()
         var callbrands =function(){
             vehtype = $('#vehicle-select-form .veh-cat-card.selected').text().trim()
             // console.log(vehtype)
@@ -168,9 +170,6 @@ var Global = {
             }
             Commons.ajaxData('get_type_make', {vehicle_type: vehtype}, "get", _this, _this.loadBrands);
         }
-
-
-
         $(document).on('ready',callbrands);
         $('#vehicle-select-form').on('click','.veh-cat-card',callbrands);
         $('#brand-select').change(function(event,data){
@@ -182,66 +181,64 @@ var Global = {
 
             }
             var make = $(this).find('.selectize-input').find('div').attr('data-value');
-          console.log(make)
+            console.log(make)
             Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehtype}, "get", _this, _this.loadModels);
         });
-
-
         $('#vehicle-select-form .veh-cat-card').click(function(){
             $('#vehicle-select-form .veh-cat-card').removeClass('selected');
             $('#vehicle-select-form .veh-cat-card:hover').addClass('selected');
             vehicle = $('#vehicle-select-form .veh-cat-card:hover').text()
-             var html = '<select id="vehicle-select-list" class="js-example-responsive">';
+            var html = '<select id="vehicle-select-list" class="js-example-responsive">';
             html += '<option value="" disabled selected>Model</option>';
             html += '</select>';
-             $('#vehicle-select-form #vehicle-select').html(html);
+            $('#vehicle-select-form #vehicle-select').html(html);
             // $('#vehicle-select-form #vehicle-select').selectize();
             $('#vehicle-select-form .home-form-2 .vehicle-type').text(vehicle);
 
         });
-
         $('#vehicle-select-form .home-form-2 .form-proceed').click(function(event){
-           var make = $('#brand-select').find('.selectize-input').find('div').attr('data-value');
-           var model = $('#vehicle-select').find('.selectize-input').find('div').attr('data-value');
-           // var fuel = $('#fuel-type-select').find('.active span').text();
-           var vehtype = $('#vehicle-select-form .veh-cat-card.selected').text().trim()
+            var make = $('#brand-select').find('.selectize-input').find('div').attr('data-value');
+            var model = $('#vehicle-select').find('.selectize-input').find('div').attr('data-value');
+            // var fuel = $('#fuel-type-select').find('.active span').text();
+            var vehtype = $('#vehicle-select-form .veh-cat-card.selected').text().trim()
             var error = 0 ;
-           if(make == "" || model == "" ||make == "Make" || model == "Model" ) {
-               $('#choose-vehicle-error').text('Please select vehicle');
+            if(make == "" || model == "" ||make == "Make" || model == "Model" ) {
+                $('#choose-vehicle-error').text('Please select vehicle');
                 error = 1;
             }
-           if(error==1){
-               return;
-           }
+            if(error==1){
+                return;
+            }
 
-           cookie = local.load()
+            cookie = local.load()
 
-           if(cookie['vehtype']==null || cookie['vehtype']===false){
-                    local.clearKey('cg_city')
+            if(cookie['vehtype']==null || cookie['vehtype']===false){
+                local.clearKey('cg_city')
             }else{
                 if (vehtype != cookie['vehtype']){
                     console.log('check')
                     local.clearKey('cg_city')
                 }
-           }
+            }
 
-           fuel_start = model.indexOf("(")
-           fuel_end = model.indexOf(")")
-           var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
-           model = model.substr(0,fuel_start-1)
-           local.clearKey('cgcart')
-           local.save('vehmake',make);
-           local.save('vehmodel',model);
-           local.save('vehfuel',fuel);
-           local.save('vehtype',vehtype);
-           local.save('fullname',make+" "+model+" "+fuel)
+            fuel_start = model.indexOf("(")
+            fuel_end = model.indexOf(")")
+            var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
+            model = model.substr(0,fuel_start-1)
+            local.clearKey('cgcart')
+            local.save('vehmake',make);
+            local.save('vehmodel',model);
+            local.save('vehfuel',fuel);
+            local.save('vehtype',vehtype);
+            local.save('fullname',make+" "+model+" "+fuel)
 
-          setTimeout(function(){
-                              window.location.href = '/Book/'+vehtype+'/'+make.replace(" ", "_")+'-'+model.replace(" ", "_")+'-'+fuel;
+            setTimeout(function(){
+                window.location.href = '/Book/'+vehtype+'/'+make.replace(" ", "_")+'-'+model.replace(" ", "_")+'-'+fuel;
 
-           },10);
+            },10);
         });
 
+        // loading service categories based on car and bike
         $(document).ready(function() {
             cookie = local.load()
             vehicle_type_c = cookie['vehtype'];
@@ -252,15 +249,15 @@ var Global = {
             url_list = window.location.pathname.split('/')
 
             if(cookie['cg_city']==null || cookie['cg_city']===false){
-                 $('#city-select').show()
+                $('#city-select').show()
                 if (vehicle_type_c == "Bike"){
-                   $('#city-select .row-bike').show()
+                    $('#city-select .row-bike').show()
                 }else{
                     $('#city-select .row-car').show()
                 }
-                  $('#cover2').show()
+                $('#cover2').show()
             }else{
-                    // cart_list = cookie_name['cgcart'];
+                // cart_list = cookie_name['cgcart'];
             }
 
 
@@ -305,168 +302,169 @@ var Global = {
             Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
         });
 
-
-
-        // Service Select Load Jobs - Start
-        $('#services .service-card').on('click' ,function(e){
-            $(' .desktop-list  .service-item').removeClass('selected');
-            $(' .desktop-list  .service-item:hover').addClass('selected');
-            var classy = $(this).attr('data-class');
-            var name = $('#services').attr('data-vehicle-name')
-            var vehicle_type = $('#services').attr('data-vehicle-type')
-            $('#jobs .service-sub-category.car-care').hide()
-            $('#jobs .service-sub-category.denting').hide()
-            $('#service-select').find("option[value=" + classy +"]").attr('selected', true);
-            // $('.selDiv option[value="+classy+"]').addattr
-            // $('#service-select .selectize-dropdown-content').find("[data-value='" + classy + "']").addClass('selected').addClass('active');
-            $('#service-select').find('select').selectize()
-
-            name = name.split('-')
-            // console.log(classy);
-            if(classy == 'servicing'){
-                $('.nav-services').find('.car-servicing').addClass('selected');
-                $('.nav-services').find('.bike-servicing').addClass('selected');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
-            }else if(classy =='repairing'){
-                $('.nav-services').find('.car-repairing').addClass('selected');
-                $('.nav-services').find('.bike-repairing').addClass('selected');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Repairing"}, "get", _this, _this.loadJobs);
-            }else if(classy =='emergency'){
-                $('.nav-services').find('.car-emergency').addClass('selected');
-                $('.nav-services').find('.bike-emergency').addClass('selected');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Emergency"}, "get", _this, _this.loadJobs);
-            }else if(classy =='subscription'){
-                $('.nav-services').find('.car-subscription').addClass('selected');
-                $('.nav-services').find('.bike-subscription').addClass('selected');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
-            }else if(classy =='carcare'){
-                $('.nav-services').find('.car-care').addClass('selected');
-                $('#jobs .service-sub-category.car-care').show();
-                var doorstep = $('#jobs .service-sub-category.car-care .selected').attr('doorstep');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);            }else if(classy =='denting'){
-                $('.nav-services').find('.car-denting').addClass('selected');
-                $('#jobs .service-sub-category.denting').show();
-                var sub_cat = $('#jobs .service-sub-category.denting .selected').attr('sub_cat');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
-            }else{
-                return
-            }
-            // console.log(window.location.pathname.split('/').length)
-            if(window.location.pathname.split('/').length == 5){
-                var new_path =  window.location.pathname+classy+'/'
-                history.pushState({},'',new_path)
-            }
-            $('#services').slideUp('slow', function() {
-                $('#jobs').show();
-            });
-            $('.order-page .nav-services').show();
-            if (vehicle_type == "Car"){
-                $('.order-page .nav-services .items-list-car').addClass('visible').removeClass('invisible')
-                $('.order-page .nav-services .car-services').addClass('visible').removeClass('invisible')
-
-            }else if(vehicle_type =="Bike"){
-                $('.order-page .nav-services .items-list-bike').addClass('visible').removeClass('invisible')
-                $('.order-page .nav-services .bike-services').addClass('visible').removeClass('invisible')
-            }
-            $('#nav-cart').show()
-        });
-
-
-        $('.order-page .desktop-list .service-item').on('click', function(e){
-            $(' .desktop-list  .service-item').removeClass('selected');
-            $(' .desktop-list  .service-item:hover').addClass('selected');
-            var name = $('#services').attr('data-vehicle-name')
-            name = name.split('-')
-            var classy = $(this).attr('data-class');
-            $('#jobs .service-sub-category.car-care').hide()
-            $('#jobs .service-sub-category.denting').hide()
-            if(classy == 'servicing'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
-            }else if(classy =='repairing'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Repairing"}, "get", _this, _this.loadJobs);
-            }else if(classy =='emergency'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Emergency"}, "get", _this, _this.loadJobs);
-            }else if(classy =='subscription'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
-            }else if(classy =='carcare'){
-                $('#jobs .service-sub-category.car-care').show();
-                var doorstep = $('#jobs .service-sub-category.car-care .selected').attr('doorstep');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);
-            }else if(classy =='denting'){
-                $('#jobs .service-sub-category.denting').show();
-                var sub_cat = $('#jobs .service-sub-category.denting .selected').attr('sub_cat');
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
-            }else{
-                return
-            }
-            // console.log(window.location.pathname.split('/').length)
-            if(window.location.pathname.split('/').length == 6){
-                var a = window.location.pathname.split('/')
-                var new_path =  a.slice(0,a.length-2).join('/')+'/'+classy+'/'
-                history.pushState({},'',new_path)
-            }
-        });
+        // Making service and time slot dropdown read only
         $("#service-select .selectize-input input").attr('readonly','readonly');
         $("#time-slot .selectize-input input").attr('readonly','readonly');
 
-        $('#service-select').on('change','.visible',function(event,data){
 
-            var classy = $(this).find('.selectize-input').find('div').attr('data-value').toLowerCase().replace(/\s+/g, '');;
-            console.log(classy)
-            var name = $('#services').attr('data-vehicle-name')
-            name = name.split('-')
+        // Service Select Load Jobs - Start
 
-            $('#jobs .service-sub-category.car-care').hide()
-            $('#jobs .service-sub-category.denting').hide()
+            $('#services .service-card').on('click' ,function(e){
+                $(' .desktop-list  .service-item').removeClass('selected');
+                $(' .desktop-list  .service-item:hover').addClass('selected');
+                var classy = $(this).attr('data-class');
+                var name = $('#services').attr('data-vehicle-name')
+                var vehicle_type = $('#services').attr('data-vehicle-type')
+                $('#jobs .service-sub-category.car-care').hide()
+                $('#jobs .service-sub-category.denting').hide()
+                $('#service-select').find("option[value=" + classy +"]").attr('selected', true);
+                // $('.selDiv option[value="+classy+"]').addattr
+                // $('#service-select .selectize-dropdown-content').find("[data-value='" + classy + "']").addClass('selected').addClass('active');
+                $('#service-select').find('select').selectize()
 
-             if(classy == 'servicing'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
-            }else if(classy =='repairing'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Repairing"}, "get", _this, _this.loadJobs);
-            }else if(classy =='emergency'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Emergency"}, "get", _this, _this.loadJobs);
-            }else if(classy =='subscription'){
-                Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
-            }else if(classy =='carcare'){
-                $('#jobs .service-sub-category.car-care').show();
+                name = name.split('-')
+                // console.log(classy);
+                if(classy == 'servicing'){
+                    $('.nav-services').find('.car-servicing').addClass('selected');
+                    $('.nav-services').find('.bike-servicing').addClass('selected');
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
+                }else if(classy =='repairing'){
+                    $('.nav-services').find('.car-repairing').addClass('selected');
+                    $('.nav-services').find('.bike-repairing').addClass('selected');
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Repairing"}, "get", _this, _this.loadJobs);
+                }else if(classy =='emergency'){
+                    $('.nav-services').find('.car-emergency').addClass('selected');
+                    $('.nav-services').find('.bike-emergency').addClass('selected');
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Emergency"}, "get", _this, _this.loadJobs);
+                }else if(classy =='subscription'){
+                    $('.nav-services').find('.car-subscription').addClass('selected');
+                    $('.nav-services').find('.bike-subscription').addClass('selected');
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
+                }else if(classy =='carcare'){
+                    $('.nav-services').find('.car-care').addClass('selected');
+                    $('#jobs .service-sub-category.car-care').show();
+                    var doorstep = $('#jobs .service-sub-category.car-care .selected').attr('doorstep');
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);            }else if(classy =='denting'){
+                    $('.nav-services').find('.car-denting').addClass('selected');
+                    $('#jobs .service-sub-category.denting').show();
+                    var sub_cat = $('#jobs .service-sub-category.denting .selected').attr('sub_cat');
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
+                }else{
+                    return
+                }
+                // console.log(window.location.pathname.split('/').length)
+                if(window.location.pathname.split('/').length == 5){
+                    var new_path =  window.location.pathname+classy+'/'
+                    history.pushState({},'',new_path)
+                }
+                $('#services').slideUp('slow', function() {
+                    $('#jobs').show();
+                });
+                $('.order-page .nav-services').show();
+                if (vehicle_type == "Car"){
+                    $('.order-page .nav-services .items-list-car').addClass('visible').removeClass('invisible')
+                    $('.order-page .nav-services .car-services').addClass('visible').removeClass('invisible')
+
+                }else if(vehicle_type =="Bike"){
+                    $('.order-page .nav-services .items-list-bike').addClass('visible').removeClass('invisible')
+                    $('.order-page .nav-services .bike-services').addClass('visible').removeClass('invisible')
+                }
+                $('#nav-cart').show()
+            });
+            // Jobs load when clickcked on service item list on navbar desktop
+            $('.order-page .desktop-list .service-item').on('click', function(e){
+                $(' .desktop-list  .service-item').removeClass('selected');
+                $(' .desktop-list  .service-item:hover').addClass('selected');
+                var name = $('#services').attr('data-vehicle-name')
+                name = name.split('-')
+                var classy = $(this).attr('data-class');
+                $('#jobs .service-sub-category.car-care').hide()
+                $('#jobs .service-sub-category.denting').hide()
+                if(classy == 'servicing'){
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
+                }else if(classy =='repairing'){
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Repairing"}, "get", _this, _this.loadJobs);
+                }else if(classy =='emergency'){
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Emergency"}, "get", _this, _this.loadJobs);
+                }else if(classy =='subscription'){
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
+                }else if(classy =='carcare'){
+                    $('#jobs .service-sub-category.car-care').show();
+                    var doorstep = $('#jobs .service-sub-category.car-care .selected').attr('doorstep');
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);
+                }else if(classy =='denting'){
+                    $('#jobs .service-sub-category.denting').show();
+                    var sub_cat = $('#jobs .service-sub-category.denting .selected').attr('sub_cat');
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
+                }else{
+                    return
+                }
+                // console.log(window.location.pathname.split('/').length)
+                if(window.location.pathname.split('/').length == 6){
+                    var a = window.location.pathname.split('/')
+                    var new_path =  a.slice(0,a.length-2).join('/')+'/'+classy+'/'
+                    history.pushState({},'',new_path)
+                }
+            });
+            // Jobs load when dropdownn change list on navbar mobile
+            $('#service-select').on('change','.visible',function(event,data){
+
+                var classy = $(this).find('.selectize-input').find('div').attr('data-value').toLowerCase().replace(/\s+/g, '');;
+                console.log(classy)
+                var name = $('#services').attr('data-vehicle-name')
+                name = name.split('-')
+
+                $('#jobs .service-sub-category.car-care').hide()
+                $('#jobs .service-sub-category.denting').hide()
+
+                if(classy == 'servicing'){
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Servicing"}, "get", _this, _this.loadJobs);
+                }else if(classy =='repairing'){
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Repairing"}, "get", _this, _this.loadJobs);
+                }else if(classy =='emergency'){
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Emergency"}, "get", _this, _this.loadJobs);
+                }else if(classy =='subscription'){
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Subscription"}, "get", _this, _this.loadJobs);
+                }else if(classy =='carcare'){
+                    $('#jobs .service-sub-category.car-care').show();
+                    var doorstep = $('#jobs .service-sub-category.car-care .selected').attr('doorstep');
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);
+                }else if(classy =='denting'){
+                    $('#jobs .service-sub-category.denting').show();
+                    var sub_cat = $('#jobs .service-sub-category.denting .selected').attr('sub_cat');
+                    Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
+                }else{
+                    return
+                }
+                // console.log(window.location.pathname.split('/').length)
+                if(window.location.pathname.split('/').length == 6){
+                    var a = window.location.pathname.split('/')
+                    var new_path =  a.slice(0,a.length-2).join('/')+'/'+classy+'/'
+                    history.pushState({},'',new_path)
+                }
+            });
+
+            // Sub category handling denting and car care
+            $('#jobs .service-sub-category.car-care').click(function () {
+                $('#jobs .service-sub-category.car-care .job-cat-card').removeClass('selected')
+                $('#jobs .service-sub-category.car-care .job-cat-card:hover').addClass('selected')
+                var name = $('#services').attr('data-vehicle-name')
+                name = name.split('-')
                 var doorstep = $('#jobs .service-sub-category.car-care .selected').attr('doorstep');
                 Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);
-            }else if(classy =='denting'){
-                $('#jobs .service-sub-category.denting').show();
+            })
+            $('#jobs .service-sub-category.denting').click(function () {
+                $('#jobs .service-sub-category.denting .job-cat-card').removeClass('selected')
+                $('#jobs .service-sub-category.denting .job-cat-card:hover').addClass('selected')
+                var name = $('#services').attr('data-vehicle-name')
+                name = name.split('-')
                 var sub_cat = $('#jobs .service-sub-category.denting .selected').attr('sub_cat');
                 Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
-            }else{
-                return
-            }
-            // console.log(window.location.pathname.split('/').length)
-            if(window.location.pathname.split('/').length == 6){
-                var a = window.location.pathname.split('/')
-                var new_path =  a.slice(0,a.length-2).join('/')+'/'+classy+'/'
-                history.pushState({},'',new_path)
-            }
-        });
-
-        $('#jobs .service-sub-category.car-care').click(function () {
-            $('#jobs .service-sub-category.car-care .job-cat-card').removeClass('selected')
-            $('#jobs .service-sub-category.car-care .job-cat-card:hover').addClass('selected')
-            var name = $('#services').attr('data-vehicle-name')
-            name = name.split('-')
-            var doorstep = $('#jobs .service-sub-category.car-care .selected').attr('doorstep');
-            Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Cleaning",doorstep:doorstep}, "get", _this, _this.loadJobs);
-        })
-
-        $('#jobs .service-sub-category.denting').click(function () {
-            $('#jobs .service-sub-category.denting .job-cat-card').removeClass('selected')
-            $('#jobs .service-sub-category.denting .job-cat-card:hover').addClass('selected')
-            var name = $('#services').attr('data-vehicle-name')
-            name = name.split('-')
-            var sub_cat = $('#jobs .service-sub-category.denting .selected').attr('sub_cat');
-            Commons.ajaxData('get_jobs_vehicle', {make_id: name[0].replace("_", " "),model_id: name[1].replace("_", " "),fuel_id: name[2],service_type: "Denting",sub_cat:sub_cat}, "get", _this, _this.loadJobs);
-        })
-
+            })
 
         // Service Select Load Jobs - End
 
+        // Hiding and showing cart on mobile
         $('#nav-cart').click(function(){
             $('#jobs .service-sub-category.car-care').hide();
             $('#jobs .service-sub-category.denting').hide();
@@ -475,7 +473,6 @@ var Global = {
             $('#jobs .service-list').hide()
             $('#nav-cart').hide()
         });
-
         $('#cart .close-cart').click(function(){
             $('#cart').hide().removeClass('page-width-cart')
             $('.order-page .nav-services').show();
@@ -484,7 +481,7 @@ var Global = {
         })
 
 
-
+        // Job Info expansion and closing
         $('#jobs').on('click',' .job .closed-more-info', function(e){
             var parent = $(this).closest('.job');
             parent.find('.closed-more-info').addClass('open-more-info').removeClass('closed-more-info');
@@ -492,7 +489,6 @@ var Global = {
             parent.find('.info-div').slideDown('slow', function() {});
 
         });
-
         $('#jobs').on('click','.job .open-more-info' ,function(e){
             var parent = $(this).closest('.job');
             parent.find('.open-more-info').addClass('closed-more-info').removeClass('open-more-info');
@@ -506,7 +502,6 @@ var Global = {
             var ch = $('#jobs .service-list').height()+20;
             $('#jobs').height(ch)
         })
-
         $('#nav-cart').click(function () {
             var ch = $('#cart').height();
             $('#jobs').height(ch)
@@ -521,6 +516,7 @@ var Global = {
             // $('#jobs').height(ch)
         })
 
+        // Cart fixed on scroll
         $(window).scroll(function(){
             var wh = $(window).height();
             var ch = $('#cart').height() + 250;
@@ -535,6 +531,7 @@ var Global = {
             }
         });
 
+        // cart coupon addition
         $('#cart .cart-coupon .discount-link').on('click',function(e){
             // console.log('check')
             $('#cart .cart-coupon .discount-link').hide();
@@ -542,7 +539,6 @@ var Global = {
         });
 
         // adding item cart
-
         $('#jobs').on('click','.job .book-btn',function(e){
             var parent = $(this).closest('.job');
             var newC = parent.attr('job-id');
@@ -564,7 +560,6 @@ var Global = {
         });
 
         // Deleting item cart
-
         $('#cart').on('click','.cart-item .delete',function(e){
             var parent = $(this).closest('.cart-item');
             var delC = parent.attr('job-id');
@@ -588,7 +583,6 @@ var Global = {
             job_div.find('.book-btn .book-status').text('Book')
             job_div.find('.book-btn').parent('.row').find('i').show()
         });
-
         $('#cart .btn-checkout').on('click' ,function(e){
             $('.order-page .nav-services').hide();
             $('#jobs').hide()
@@ -612,13 +606,13 @@ var Global = {
                 if(email==null || email===false){
                 }
                 else{
-                email = email.substr(1,email.length-2)
+                    email = email.substr(1,email.length-2)
                 }
                 address = cookie['c_user_address'];
                 if(address==null || address===false){}else{
-                if (address.split(' ').length > 1){
-                    address = address.substr(1,address.length-2)
-                }
+                    if (address.split(' ').length > 1){
+                        address = address.substr(1,address.length-2)
+                    }
                 }
 
                 locality = cookie['c_user_locality'];
@@ -632,9 +626,9 @@ var Global = {
                 city = cookie['c_user_city'];
                 if(city==null || city===false){}else {
 
-                if (city.split(' ').length > 1){
-                    city = city.substr(1,city.length-2)
-                }}
+                    if (city.split(' ').length > 1){
+                        city = city.substr(1,city.length-2)
+                    }}
             }else{
                 city = cookie['cg_city']
                 // if (city.split(' ').length > 1) {
@@ -648,13 +642,26 @@ var Global = {
             $('#email').val(email);
             $('#address').val(address);
             $('#locality').val(locality);
-            $('#city').val(city);
+            veh_type = cookie['vehtype'];
+            if (veh_type == "Bike"){
+                $('#city-bike').show()
+                $('#city-car').hide()
+                // #To Change During Bike Expansion
+                if (city == "Gurgaon"){
+                    $('#city-bike').find('select').val(city).material_select();
+                }
+                $('#city-bike').find('select').material_select();
+            }else{
+                $('#city-bike').hide()
+                $('#city-car').show()
+                $('#city-car').find('select').val(city).material_select();
+            }
             Materialize.updateTextFields();
             $('#booking-details').show();
         });
 
         var sendotp = function(){
-             number = $('#telephone').val();
+            number = $('#telephone').val();
             Commons.ajaxData('send_otp_new', {phone: number}, "get", _this, _this.loadOTP,null, '.loading-pane');
 
         };
@@ -669,7 +676,18 @@ var Global = {
             var email = $('#email').val();
             var address =  $('#address').val();
             var locality =  $('#locality').val();
-            var city =  $('#city').val();
+
+
+            veh_type = cookie['vehtype'];
+            if (veh_type == "Bike"){
+                var city = $('#city-bike input').val()
+            }else{
+                var city = $('#city-car input').val();
+            }
+            // console.log(city)
+            // // var make = $('#brand-select').find('.active span').text();
+
+            // var city =  $('#city').val();
             var date = $('#date').val();
             var time = $('#time-slot').find('.selectize-input').find('div').attr('data-value');
             // form validation
@@ -686,7 +704,7 @@ var Global = {
                 $('#locality').addClass("invalid");
                 error = 1;
             }if(city==""){
-                $('#city').addClass("invalid");
+                $('#city').find('input').addClass("error-border");
                 error = 1;
             }
             if(number <= 100000000 || number >= 9999999999){
@@ -704,11 +722,19 @@ var Global = {
                 $('#date').addClass("invalid");
                 error = 1;
             }
-            if(time==""){
-                $('#time').addClass("invalid");
-                $('#choose-time-slot').text('Choose Time Slot');
+
+
+
+            if(typeof(time) == "undefined" ){
+                $('#time-slot').find('.selectize-input').addClass('error-border')
+                // $('#locality').addClass("invalid");
                 error = 1;
             }
+            // if(time==""){
+            //     $('#time').addClass("invalid");
+            //     $('#choose-time-slot').text('Choose Time Slot');
+            //     error = 1;
+            // }
             if(error==1){
                 return;
             }else{
@@ -729,13 +755,14 @@ var Global = {
 
         });
 
-        $('#locality').on('keypress',function(e,event,data){
+        $('#locality').on('keyup',function(e,event,data){
             var code = (e.keyCode || e.which);
             // do nothing if it's an arrow key
             if(code == 37 || code == 38 || code == 39 || code == 40) {
                 return;
             }
-             var locality = $(this).val();
+            var locality = $(this).val();
+            console.log(locality)
             Commons.ajaxData('get_location', {location_id: locality}, "get", _this, _this.loadLocation);
             Materialize.updateTextFields();
             $('#locality').removeClass('invalid')
@@ -748,13 +775,19 @@ var Global = {
             var email = $('#email').val();
             var address =  $('#address').val();
             var locality =  $('#locality').val();
-            var city =  $('#city').val();
+            var veh_type = cookie['vehtype'];
+            if (veh_type == "Bike"){
+                var city = $('#city-bike input').val()
+            }else{
+                var city = $('#city-car input').val();
+            }
+
             var date = $('#date').val();
             var otp = $('#otp').val();
             var comment = $('#comment').val();
             cookie = local.load();
             var fuel = cookie['vehfuel'];
-            var veh_type = cookie['vehtype'];
+
             var make = cookie['vehmake'];
             var model = cookie['vehmodel'];
             var coupon = COUPON_CODE;
@@ -804,38 +837,38 @@ var Global = {
         vehtype = $('#vehicle-select-form .veh-cat-card.selected').text().trim()
         // console.log(vehtype)
         if(vehtype == ""){
-                vehtype ="Car"
-            }else{
+            vehtype ="Car"
+        }else{
 
-            }
-            // console.log(vehtype)
-            container.html('');
-            var html = '<select id="brand-select-list" class="js-example-responsive">';
-            html += '<option value="" disabled selected>Make</option>';
+        }
+        // console.log(vehtype)
+        container.html('');
+        var html = '<select id="brand-select-list" class="js-example-responsive">';
+        html += '<option value="" disabled selected>Make</option>';
 
-            var html2 = ""
-            var html3 = ""
-            var POPULAR_BRANDS  = ["Maruti Suzuki", "Hyundai", "Honda", "Tata", "Toyota", "Ford", "Hero", "Bajaj","Yamaha"]
+        var html2 = ""
+        var html3 = ""
+        var POPULAR_BRANDS  = ["Maruti Suzuki", "Hyundai", "Honda", "Tata", "Toyota", "Mahindra", "Hero", "Bajaj","Yamaha"]
 
-            $.each(data, function(ix, val){
+        $.each(data, function(ix, val){
             if (POPULAR_BRANDS.indexOf(val.make) >= 0){
                 html2 += '<option value="' + val.make + '">'+ val.make + '</option>'
             }else{
                 html3 += '<option value="' + val.make + '">'+ val.make + '</option>'
             }
 
-            });
+        });
 
-            html += '<optgroup label="Popular Brands">'
-            html += html2
-            html += '</optgroup>'
-            html += '<optgroup label="Other Brands">'
-            html += html3
-            html += '</optgroup>'
+        html += '<optgroup label="Popular Brands">'
+        html += html2
+        html += '</optgroup>'
+        html += '<optgroup label="Other Brands">'
+        html += html3
+        html += '</optgroup>'
 
-            html += '<select>';
-            container.html(html);
-            container.find('select').selectize({
+        html += '<select>';
+        container.html(html);
+        container.find('select').selectize({
             create: false,
             sortField: 'true',
             lockOptgroupOrder: true,
@@ -849,8 +882,8 @@ var Global = {
                     }else{
                         return '<div><img src="/../../static/revamp/img/Brands/Bikes/' + item.value + '.png" class="img-flag img-brand" alt="brand icon" />&nbsp;' + escape(item.value) + '</div>';
                     }
-                    },
-                 option: function(item, escape) {
+                },
+                option: function(item, escape) {
                     if (vehtype=="Car") {
                         return '<div><img src="/../../static/revamp/img/Brands/Car/' + item.value + '.png" class="img-flag img-brand" alt="brand icon" />&nbsp;' + escape(item.value) + '</div>';
                     }else{
@@ -860,9 +893,9 @@ var Global = {
             }
         });
         var viewportWidth = $(window).width();
-         if (viewportWidth <= 992){
-              $(".selectize-input input").attr('readonly','readonly');
-         }
+        if (viewportWidth <= 992){
+            $(".selectize-input input").attr('readonly','readonly');
+        }
 
 
     },
@@ -875,23 +908,23 @@ var Global = {
         //
         // }
         var container = $('#vehicle-select');
-            container.html('');
-            var html = '<select id="vehicle-select-list" class="js-example-responsive">';
-            html += '<option value="" disabled selected>Model</option>';
-            $.each(data, function(ix, val){
-                html += '<option value="'+val.model+' ('+val.fuel_type + ')" data-placeholder="true">'+ val.full_veh_name + '</option>'
-                // console.log(val.model)
+        container.html('');
+        var html = '<select id="vehicle-select-list" class="js-example-responsive">';
+        html += '<option value="" disabled selected>Model</option>';
+        $.each(data, function(ix, val){
+            html += '<option value="'+val.model+' ('+val.fuel_type + ')" data-placeholder="true">'+ val.full_veh_name + '</option>'
+            // console.log(val.model)
 
-            });
-            html += '</select>';
-            container.html(html);
-            // container.find('select').material_select();
-            // container.find('select').select2();
-            container.find('select').selectize();
-         var viewportWidth = $(window).width();
-         if (viewportWidth <= 992){
-              $(".selectize-input input").attr('readonly','readonly');
-         }
+        });
+        html += '</select>';
+        container.html(html);
+        // container.find('select').material_select();
+        // container.find('select').select2();
+        container.find('select').selectize();
+        var viewportWidth = $(window).width();
+        if (viewportWidth <= 992){
+            $(".selectize-input input").attr('readonly','readonly');
+        }
 
     },
     loadCart:function(data){
@@ -983,12 +1016,12 @@ var Global = {
             if (PICK_DROP >0 ){
                 // JOBS_SUMMARY_TOTAL
                 pick_drop_val = {"category": "Labour",
-                        "name": "Visiting/Pick Drop",
-                        "price": PICK_DROP,
-                        "price_comp": PICK_DROP,
-                        "unit_price": PICK_DROP,
-                        "action": "Labour",
-                        "quantity": "1"};
+                    "name": "Visiting/Pick Drop",
+                    "price": PICK_DROP,
+                    "price_comp": PICK_DROP,
+                    "unit_price": PICK_DROP,
+                    "action": "Labour",
+                    "quantity": "1"};
 
                 JOBS_SUMMARY_TOTAL.push(pick_drop_val);
                 CURRENT_CART.push(pick_drop_val)
@@ -1143,9 +1176,9 @@ var Global = {
             html += '								<div class="card-image">';
             // html += '<i class="cg-icon cg-icon-card icon-cg-quality x100"></i>'
             if (val.job_name =="Standard Service" && val.car_bike == "Bike"){
-            html += logoMap[val.job_name + "2"]
+                html += logoMap[val.job_name + "2"]
             }else{
-            html += logoMap[val.job_name]
+                html += logoMap[val.job_name]
             }
             // html += '										<img class=""  src="/../../static/revamp/img/Icons-Services/Emergency.png">';
             html += '									</div>';
@@ -1182,7 +1215,7 @@ var Global = {
             html += '<div class="row btn-row">'
             if (cart_list.indexOf(val.id)>=0){
                 html += '											<button class="waves-effect waves-light btn btn-small cg-primary  btn-service book-btn disabled" type="submit" name="action"><span class="book-status">Booked</span>';
-                 html += '										<i class="material-icons right invisible">send</i>';
+                html += '										<i class="material-icons right invisible">send</i>';
             }else{
                 html += '											<button class="waves-effect waves-light btn btn-small cg-primary  btn-service book-btn" type="submit" name="action"><span class="book-status">Book</span>';
                 html += '												<i class="material-icons right">send</i>';
@@ -1316,19 +1349,18 @@ var Global = {
         local.clearKey('cgcart')
         local.clearKey('coupon')
         ga('require', 'ecommerce');
-       $.each(data['booking'], function(ix, val) {
-        ga('ecommerce:addTransaction', {
-          'id': val.booking_id,                     // Transaction ID. Required.
-          'affiliation': val.Summary,   // Affiliation or store name.
-          'revenue': val.price_total,               // Grand Total.
-          'shipping': '0',                  // Shipping.
-          'tax': '0'                     // Tax.
-        });
-           ga('ecommerce:send');
-       })
-        
-    },
+        $.each(data['booking'], function(ix, val) {
+            ga('ecommerce:addTransaction', {
+                'id': val.booking_id,                     // Transaction ID. Required.
+                'affiliation': val.Summary,   // Affiliation or store name.
+                'revenue': val.price_total,               // Grand Total.
+                'shipping': '0',                  // Shipping.
+                'tax': '0'                     // Tax.
+            });
+            ga('ecommerce:send');
+        })
 
+    },
     loadCheckCoupon:function(data){
         message = data.msg
         APPLIED_COUP_LABOUR = 0
@@ -1411,22 +1443,22 @@ var Global = {
         $('#cart .coupon-message .coup-mess').text(message)
     },
     loadLocation:function(data){
-            var container = $('input.autocomplete');
-            var locations = {};
-            container.autocomplete({
-                data : locations
-            })
-            // var locations = {};
+        var container = $('input.autocomplete');
+        var locations = {};
+        container.autocomplete({
+            data : locations
+        })
+        // var locations = {};
 
-            $.each(data.predictions, function(ix, val){
-                 locations[val.description] = null
-            });
-            // locations += '}';
-            console.log(locations)
-            container.autocomplete({
-                data : locations
-            })
-            Materialize.updateTextFields();
+        $.each(data.predictions, function(ix, val){
+            locations[val.description] = null
+        });
+        // locations += '}';
+        // console.log(locations)
+        container.autocomplete({
+            data : locations
+        })
+        Materialize.updateTextFields();
 
     },
 };

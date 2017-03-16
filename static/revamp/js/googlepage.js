@@ -5,7 +5,7 @@ document.onreadystatechange = function () {
 $(document).ready(function() {
     // $('select').material_select();
     // $('select').select2();
-    $('select').selectize();
+    // $('select').selectize();
 
 });
 
@@ -79,12 +79,12 @@ $(document).ready(function(){
 	//Check to see if the window is top if not then display button
 	$(window).scroll(function(){
 		if ($(this).scrollTop() > 20) {
-        $('.navbar .nav-wrapper').removeClass('navbar-trans').addClass('navbar-custom');
+        $('.navbar .nav-wrapper').removeClass('navbar-trans').removeClass('navbar-trans-ad').addClass('navbar-custom');
         $('.navbar .nav-wrapper .logo-trans').removeClass('visible').addClass('invisible');
         $('.navbar .nav-wrapper .logo-color').removeClass('invisible').addClass('visible');
         } else {
             // if (viewportWidth > 992){
-            $('.navbar .nav-wrapper').addClass('navbar-trans').removeClass('navbar-custom');
+            $('.navbar .nav-wrapper').addClass('navbar-trans').addClass('navbar-trans-ad').removeClass('navbar-custom');
             $('.navbar .nav-wrapper .logo-trans').addClass('visible').removeClass('invisible');
             $('.navbar .nav-wrapper .logo-color').addClass('invisible').removeClass('visible');
             // }}
@@ -155,7 +155,7 @@ $(document).ready(function(){
         var FEATURES = "OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop"
     }else if(vehtype =="Car" && service == "Denting"){
         var PAGEHEADER = "BEST IN CLASS DENTING/ PAINTING FACILITY IN GURUGRAM"
-        var FEATURES = "Upto 60% less than market&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;No paint mismatch with 1 year warranty&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop"
+        var FEATURES = "Upto 60% less than market&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;No paint mismatch with 1 year warranty&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Dust free paint booths"
     }else if(vehtype =="Bike" && service == "Repairing"){
         var PAGEHEADER = "DOORSTEP BIKE REPAIRS. NOW IN GURUGRAM"
         var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Top quality repairs"
@@ -168,6 +168,16 @@ $(document).ready(function(){
     }
     $('#home span.header').html(PAGEHEADER);
     $('#home span.features').html(FEATURES);
+
+            if (vehtype == "Bike"){
+                $('#city-bike').show()
+                $('#city-car').hide()
+                $('#city-bike').find('select').material_select();
+            }else{
+                $('#city-bike').hide()
+                $('#city-car').show()
+                $('#city-car').find('select').material_select();
+            }
 
 });
 
@@ -327,7 +337,7 @@ var Global = {
            $('#home .home-form-2 .vehicle-type').text(vehicle);
         });
 
-        $('#locality').on('keypress',function(e,event,data){
+        $('#locality').on('keyup',function(e,event,data){
             var code = (e.keyCode || e.which);
             // do nothing if it's an arrow key
             if(code == 37 || code == 38 || code == 39 || code == 40) {
@@ -409,6 +419,16 @@ var Global = {
         $('#home .home-form .submit button').click(function(event){
           var make = $('#brand-select').find('.selectize-input').find('div').attr('data-value');
            var model = $('#vehicle-select').find('.selectize-input').find('div').attr('data-value');
+           var source_type = $('#home').attr('source-type')
+
+            if (source_type == "Google"){
+                source_type = "Google Adwords"
+            }else if(source_type == "Facebook"){
+                source_type ="Facebook Ad"
+            }else{
+                source_type = "Unknown"
+            }
+
            // var fuel = $('#fuel-type-select').find('.active span').text();
            // var category = $('#selected-service .selected').text();
            var additional = $('#additional').val();
@@ -419,11 +439,17 @@ var Global = {
            // var email = $('#email').val();
            var date = $('#date').val();
            var time = $('#time-slot').find('.selectize-input').find('div').attr('data-value');
-           var city = $('#city').find('.selectize-input').find('div').attr('data-value');
-           var error = 0 ;
+           // var city = $('#city').find('.selectize-input').find('div').attr('data-value');
 
+            veh_type = $('#home').attr('data-vehicle-type')
+
+            if (veh_type == "Bike"){
+                var city = $('#city-bike input').val()
+            }else{
+                var city = $('#city-car input').val();
+            }
             // form validation
-
+            var error = 0 ;
            if(name==""){
                $('#first_name').addClass("invalid");
                error = 1;
@@ -432,10 +458,15 @@ var Global = {
            //     $('#last_name').addClass("invalid");
            //     error = 1;
            // }
-           if(typeof(city) == "undefined" ){
-               $('#city').find('.selectize-input').addClass('error-border')
-               // $('#locality').addClass("invalid");
-               error = 1;
+
+           if(city == "" || city == "City" ){
+               $('#city').find('input').addClass("error-border");
+                error = 1;
+               console.log(city)
+
+               // $('#city').find('.selectize-input').addClass('error-border')
+               // // $('#locality').addClass("invalid");
+               // error = 1;
            }
            if(number <= 100000000 || number >= 9999999999){
                $('#telephone').addClass("invalid");
@@ -461,7 +492,6 @@ var Global = {
                console.log("didnt work")
                return;
            }
-            veh_type = $('#home').attr('data-vehicle-type')
             service = $('#home').attr('data-service-type')
 
             CURRENT_CART = [{"category": "Labour",
@@ -518,6 +548,7 @@ var Global = {
                 ,paid_amt   : paid_amt
                 ,coupon     : coupon
                 ,price_total: 0
+                ,source     : source_type
                 ,int_summary :JSON.stringify(JOBS_SUMMARY_TOTAL)}, "post", _this, _this.loadPlaced,null, '.loading-pane');
 
             // Commons.ajaxData('get_location', {location_id: locality}, "get", _this, _this.loadLocation);
@@ -624,12 +655,42 @@ var Global = {
             var html = '<select id="brand-select-list">';
             html += '<option value="" disabled selected>Make</option>';
 
+
+            var html2 = ""
+            var html3 = ""
+            var POPULAR_BRANDS  = ["Maruti Suzuki", "Hyundai", "Honda", "Tata", "Toyota", "Mahindra", "Hero", "Bajaj","Yamaha"]
+
             $.each(data, function(ix, val){
-                html += '<option value="' + val.make + '">'+ val.make + '</option>'
+            if (POPULAR_BRANDS.indexOf(val.make) >= 0){
+                html2 += '<option value="' + val.make + '">'+ val.make + '</option>'
+            }else{
+                html3 += '<option value="' + val.make + '">'+ val.make + '</option>'
+            }
+
             });
+
+            html += '<optgroup label="Popular Brands">'
+            html += html2
+            html += '</optgroup>'
+            html += '<optgroup label="Other Brands">'
+            html += html3
+            html += '</optgroup>'
 
             html += '<select>';
             container.html(html);
+            container.find('select').selectize({
+            create: false,
+            sortField: 'true',
+            lockOptgroupOrder: true,
+
+
+
+            // $.each(data, function(ix, val){
+            //     html += '<option value="' + val.make + '">'+ val.make + '</option>'
+            // });
+            //
+            // html += '<select>';
+            // container.html(html);
 
             // function formatmodelname (modelname) {
             //     if (!modelname.id) { return modelname.text; }
@@ -645,7 +706,7 @@ var Global = {
             //     templateResult: formatmodelname
             // });
 
-             container.find('select').selectize({
+             // container.find('select').selectize({
             render: {
                 item: function(item, escape) {
                     // console.log(item.value)
