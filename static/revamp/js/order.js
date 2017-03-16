@@ -7,8 +7,9 @@ document.onreadystatechange = function () {
 $(document).ready(function() {
     // $('#city').find('select').material_select();
     // $('select').select2();
-    // $('#service-select').
+    $('#service-select').find('select').selectize();
     // $('select').selectize();
+
 
 });
 
