@@ -140,6 +140,8 @@ var Global = {
 
         $('#city-select .city').click(function(){
             city = $(this).attr('data-class')
+            $('body').removeClass('stop-scrolling')
+
             local.save('cg_city',city)
             $('#city-select').hide()
             $('#cover2').hide()
@@ -251,6 +253,7 @@ var Global = {
 
             if(cookie['cg_city']==null || cookie['cg_city']===false){
                 $('#city-select').show()
+                $('body').addClass('stop-scrolling')
                 if (vehicle_type_c == "Bike"){
                     $('#city-select .row-bike').show()
                 }else{
