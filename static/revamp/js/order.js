@@ -1045,10 +1045,16 @@ var Global = {
             html2 += '<div class="col s12 m12 l12">';
 
             if (SHOW_ESTIMATE > 0){
+                $('#nav-cart .cart-1').hide()
+                $('#nav-cart .cart-2').show()
+
                 html2 += '									<div class="row">';
                 html2 += '										<div class="col s12 m12 l12 centered-text">Request Total Estimate</div>';
                 html2 += '									</div>';
             }else{
+                $('#nav-cart .cart-1').show()
+                $('#nav-cart .cart-2').hide()
+
                 html2 += '									<div class="row dealer-price">';
                 html2 += '										<div class="col s7 m7 l7"> Dealer Price :</div>';
                 html2 += '										<div class="col s5 m5 l5 price">';

@@ -1979,10 +1979,15 @@ var Global = {
                 }
             }
             date_string = val.date_booking
-            if (val.date_delivery==null){
+            if (val.delivery_date==null){
+                // console.log("1")
+                // console.log(val.delivery_date)
                 date_delivery_string = val.date_booking
             } else{
-                date_delivery_string = val.date_delivery
+                console.log(val.delivery_date)
+
+                // console.log("2")
+                date_delivery_string = val.delivery_date
             }
 
             $('#customer-detail .generated-bill').show()
@@ -1999,7 +2004,7 @@ var Global = {
             // min: new Date(),
         })
 
-
+        // console.log(date_de)
 
         var $input2 = $('#customer-detail #date_delivery.datepicker').pickadate({
             format: 'dd-mm-yyyy',
