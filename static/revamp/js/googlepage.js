@@ -6,6 +6,7 @@ $(document).ready(function() {
     // $('select').material_select();
     // $('select').select2();
     // $('select').selectize();
+    $('#vehicle-select').find('select').selectize();
 
 });
 
