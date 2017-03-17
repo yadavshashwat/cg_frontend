@@ -136,7 +136,7 @@ var Global = {
                 // $('#bookings #delivery-list').show()
             }
             $('#bookings #bookings-list .header-id-bar.bookings').text('Bookings')
-            $('#bookings #bookings-list .booking-bar-2 .agent').text('Agent Details')
+            $('#bookings #bookings-list .booking-bar-2 .agent').text('Engineer Details')
 
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
@@ -1929,7 +1929,7 @@ var Global = {
 
             // <----- New Booking Data---->>
             if (val.req_user_agent) {
-                if (val.status == "Agent Left") {
+                if (val.status == "Engineer Left") {
                     $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1').show()
                     $('#customer-detail .booking-data .agent-button-row .btn-update-status.status-btn-1').attr("status_next", "Job Completed")
                     $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1 #status_change-1').text("Job Completed")
@@ -2366,7 +2366,7 @@ var Global = {
         // Commons.ajaxData('fetch_all_users', {}, "get", _this, _this.loadAdminUsers,null, '.loading-pane');
     },
     loadCustomerAgent:function(data){
-        alert('Agent Updated!');
+        alert('Engineer Updated!');
     },
     updateCart:function(){
         TOTAL_PRICE_ADMIN = 0;
