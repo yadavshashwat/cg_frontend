@@ -80,9 +80,9 @@ $(document).ready(function(){
 	//Check to see if the window is top if not then display button
 	$(window).scroll(function(){
 		if ($(this).scrollTop() > 20) {
-        $('.navbar .nav-wrapper').removeClass('navbar-trans').removeClass('navbar-trans-ad').addClass('navbar-custom');
-        $('.navbar .nav-wrapper .logo-trans').removeClass('visible').addClass('invisible');
-        $('.navbar .nav-wrapper .logo-color').removeClass('invisible').addClass('visible');
+            $('.navbar .nav-wrapper').removeClass('navbar-trans').removeClass('navbar-trans-ad').addClass('navbar-custom');
+            $('.navbar .nav-wrapper .logo-trans').removeClass('visible').addClass('invisible');
+            $('.navbar .nav-wrapper .logo-color').removeClass('invisible').addClass('visible');
         } else {
             // if (viewportWidth > 992){
             $('.navbar .nav-wrapper').addClass('navbar-trans').addClass('navbar-trans-ad').removeClass('navbar-custom');
@@ -143,8 +143,11 @@ var FEATURES = "One Stop Shop&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Do
 
 $(document).ready(function(){
     $(".fadeOnLoad").hide(0).delay(1000).fadeIn(700)
-     vehtype = $('#home').attr('data-vehicle-type')
-     service = $('#home').attr('data-service-type')
+
+     var vehtype = $('#home').attr('data-vehicle-type')
+     var service = $('#home').attr('data-service-type')
+     var source_type = $('#home').attr('source-type')
+
     if (vehtype == "Car" && service == "CarCare"){
         var PAGEHEADER = "BEST CAR CLEANING SERVICES IN GURUGRAM"
         var FEATURES = "3M/Meguiar products&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Expert cleaners&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;doorstep service"
@@ -161,8 +164,14 @@ $(document).ready(function(){
         var PAGEHEADER = "DOORSTEP BIKE REPAIRS. NOW IN GURUGRAM"
         var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Top quality repairs"
     }else if(vehtype =="Bike" && service == "Servicing"){
-        var PAGEHEADER = "DOORSTEP BIKE SERVICING. NOW IN GURUGRAM"
-        var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;From Rs. 249 only!"
+
+        if(source_type == "Mahindra"){
+            var PAGEHEADER = "MAHINDRA AUTHORIZED DOORSTEP BIKE SERVICING. NOW IN GURUGRAM"
+            var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Mahindra Authorized Service"
+        }else{
+            var PAGEHEADER = "DOORSTEP BIKE SERVICING. NOW IN GURUGRAM"
+            var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;From Rs. 249 only!"
+        }
     }else{
         var PAGEHEADER = "CAR & BIKE CARE <br> MADE EASY"
         var FEATURES = "One Stop Shop&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Doorstep Service&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Instant Cost Estimate"
@@ -426,8 +435,10 @@ var Global = {
                 source_type = "Google Adwords"
             }else if(source_type == "Facebook"){
                 source_type ="Facebook Ad"
+            }else if(source_type == "Mahindra"){
+                source_type = "Mahindra Authorized"
             }else{
-                source_type = "Unknown"
+                // source_type = "Unknown"
             }
 
            // var fuel = $('#fuel-type-select').find('.active span').text();
@@ -643,6 +654,8 @@ var Global = {
     },
 
     loadBrands:function(data){
+        var source_type = $('#home').attr('source-type')
+
             var container = $('#brand-select');
               vehtype = $('#home').attr('data-vehicle-type')
             // console.log(vehtype)
@@ -654,22 +667,21 @@ var Global = {
             // console.log(vehtype)
             container.html('');
             var html = '<select id="brand-select-list">';
-            html += '<option value="" disabled selected>Make</option>';
 
-
+            var POPULAR_BRANDS  = ["Maruti Suzuki", "Hyundai", "Honda", "Tata", "Toyota", "Mahindra", "Hero", "Bajaj","Yamaha"]
             var html2 = ""
             var html3 = ""
-            var POPULAR_BRANDS  = ["Maruti Suzuki", "Hyundai", "Honda", "Tata", "Toyota", "Mahindra", "Hero", "Bajaj","Yamaha"]
-
+        if (source_type == "Mahindra"){
+            html += '<option value="Mahindra" selected>Mahindra</option>';
+        }else{
+            html += '<option value="" disabled selected>Make</option>';
             $.each(data, function(ix, val){
             if (POPULAR_BRANDS.indexOf(val.make) >= 0){
                 html2 += '<option value="' + val.make + '">'+ val.make + '</option>'
             }else{
                 html3 += '<option value="' + val.make + '">'+ val.make + '</option>'
             }
-
             });
-
             html += '<optgroup label="Popular Brands">'
             html += html2
             html += '</optgroup>'
@@ -677,37 +689,16 @@ var Global = {
             html += html3
             html += '</optgroup>'
 
+        }
+
+
+
             html += '<select>';
             container.html(html);
             container.find('select').selectize({
             create: false,
             sortField: 'true',
             lockOptgroupOrder: true,
-
-
-
-            // $.each(data, function(ix, val){
-            //     html += '<option value="' + val.make + '">'+ val.make + '</option>'
-            // });
-            //
-            // html += '<select>';
-            // container.html(html);
-
-            // function formatmodelname (modelname) {
-            //     if (!modelname.id) { return modelname.text; }
-            //     if (vehtype=="Car"){
-            //         var modelname = $('<span><img src="/../../static/revamp/img/Brands/Car/' + modelname.element.value + '.png" class="img-flag img-brand" /> ' + modelname.text + '</span>')
-            //     }else{
-            //         var modelname = $('<span><img src="/../../static/revamp/img/Brands/Bikes/' + modelname.element.value + '.png" class="img-flag img-brand" /> ' + modelname.text + '</span>')
-            //     }
-            //     return modelname;
-            // };
-            //
-            // container.find('select').select2({
-            //     templateResult: formatmodelname
-            // });
-
-             // container.find('select').selectize({
             render: {
                 item: function(item, escape) {
                     // console.log(item.value)
@@ -729,6 +720,13 @@ var Global = {
             }
 
         })
+        if (source_type == "Mahindra"){
+            var dropdowntodisable = container.find('select').selectize();
+            var dropdowntodisable_1 = dropdowntodisable[0].selectize;
+            dropdowntodisable_1.disable();
+            $('#brand-select').change()
+
+        }
          var viewportWidth = $(window).width();
          if (viewportWidth <= 992){
               $(".selectize-input input").attr('readonly','readonly');

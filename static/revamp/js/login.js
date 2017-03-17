@@ -343,6 +343,7 @@ var Login = {
             $('.admin-page .items-list li.users-button').hide()
             $('.admin-page .items-list li.lead-button').hide()
             $('.admin-page .items-list li.subscription-button').hide()
+            $('.admin-page .items-list li.new-lead-button').hide()
             $('.admin-page .agent-button-row').hide()
             $('.admin-page .staff-button-row').hide()
             $('.bill-page .staff-button-row').hide()

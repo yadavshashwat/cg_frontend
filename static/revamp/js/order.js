@@ -284,6 +284,7 @@ var Global = {
             $('#vehicle-varient').text(name[2]+" Varient")
             $('#vehicle-name1').text(name[0].replace("_", " ") + " " +name[1].replace("_", " "))
             $('#vehicle-varient1').text(name[2]+"")
+
             rand_number = Math.floor(Math.random() * 3) + 1
             if (rand_number == 1){
                 $('#intro-sentence').text('How can we help with your '+name[0].replace("_", " ")+' '+name[1].replace("_", " ")+'?')
@@ -300,6 +301,7 @@ var Global = {
             }
 
             var service = $('#jobs').attr('data-service')
+            
             if(service.length){
                 $('#services .service-card[data-class="'+service+'"]').click()
             }

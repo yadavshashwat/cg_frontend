@@ -72,6 +72,7 @@ var STATUS_TYPE = "";
 var SORT_TYPE = "";
 var BOOKING_ID = "";
 var VEH_TYPE = "";
+
 var SOURCES = ['Google Adwords',
     'Repeat Customer',
     'Employee Referral',
@@ -94,7 +95,8 @@ var SOURCES = ['Google Adwords',
     'Society camps',
     'Check up camps',
     'Sign up lead',
-    'Facebook Ad']
+    'Facebook Ad',
+    'Mahindra Authorized']
 // DATE_TYPE =
 
 var Global = {
@@ -113,11 +115,97 @@ var Global = {
         console.log('adding hanlder');
 
 // =====================================================================================
+//     Url State Management
+// =====================================================================================
+
+$(document).ready(function() {
+     url_list = window.location.pathname.split('/')
+     var sub_page_1      = $('#admin-page-state').attr('sub-page-1')
+     var sub_page_2      = $('#admin-page-state').attr('sub-page-2')
+     var data_id         = $('#admin-page-state').attr('data-id')
+    console.log(sub_page_1)
+    console.log(sub_page_2)
+    console.log(data_id)
+
+    if (sub_page_1 == "bookings" || typeof(sub_page_1)=="undefined" || sub_page_1 == null || sub_page_1 =="" ){
+        $('.navbar .booking-button').click()
+        if (sub_page_2 == "single"){
+            openbooking(data_id)
+        }else{
+
+        }
+
+    }else if(sub_page_1 == "leads"){
+        $('.navbar .lead-button').click()
+        if (sub_page_2 == "single"){
+            try {
+                openbooking(data_id)
+            }
+            catch(err){
+            }
+        }else{
+
+        }
+    }else if(sub_page_1 == "subscriptions"){
+        $('.navbar .subscription-button').click()
+        if (sub_page_2 == "single"){
+                $('#subscription-detail .single-subscription').click()
+            if (data_id != ""){
+                opensubscription(data_id)
+            }
+        }else{
+
+
+        }
+
+    }else if(sub_page_1 == "users"){
+        $('.navbar .users-button').click()
+        if (sub_page_2 == "single"){
+                $('#user-detail .single-user').click()
+            if (data_id != ""){
+                openuser(data_id)
+            }
+        }else{
+
+        }
+    }else if (sub_page_1 == "coupons"){
+        $('.navbar .coupon-button').click()
+        if (sub_page_2 == "single"){
+                $('#coupon-detail  .single-coupon').click()
+            if (data_id != ""){
+                opencoupon(data_id)
+            }
+        }else{
+
+        }
+
+    }else if (sub_page_1 == "newbooking"){
+        $('.navbar .new-booking-button').click()
+    }else if (sub_page_1 == "newlead"){
+        $('.navbar .new-lead-button').click()
+
+    }
+
+});
+
+
+
+
+// =====================================================================================
 //     Booking/ Lead Management
 // =====================================================================================
 
         // Open Bookings
         $('.navbar .booking-button').click(function(event,data){
+             DATE_TYPE = "";
+             REG_NUMBER = "";
+             CUST_NAME = "";
+             STATUS_TYPE = "";
+             SORT_TYPE = "";
+             BOOKING_ID = "";
+             VEH_TYPE = "";
+
+
             $('#booking-details').hide();
             $('#bookings').show()
             $('#user-details').hide()
@@ -146,9 +234,22 @@ var Global = {
                 name:CUST_NAME,
                 reg:REG_NUMBER,
                 veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+
+
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/bookings/all'
+            history.pushState({},'',new_path)
+
         });
         // Open Lead
         $('.navbar .lead-button').click(function(event,data){
+             DATE_TYPE = "";
+             REG_NUMBER = "";
+             CUST_NAME = "";
+             STATUS_TYPE = "";
+             SORT_TYPE = "";
+             BOOKING_ID = "";
+             VEH_TYPE = "";
             $('#booking-details').hide();
             $('#bookings').show()
             $('#user-details').hide()
@@ -175,6 +276,10 @@ var Global = {
                 name:CUST_NAME,
                 reg:REG_NUMBER,
                 veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/leads/all'
+            history.pushState({},'',new_path)
         });
 
         $('#bookings').on('click','.filter-sort.closed',function () {
@@ -365,17 +470,29 @@ var Global = {
         })
 
         // Open Individual Booking
-        $('#bookings .pre-data').on('click','.booking',function(event,data){
+
+          var openbooking = function(data_id){
             $('#bookings').hide()
             $('#booking-details').show()
             $('#customer-detail .booking-data').show();
             $('#customer-detail .booking-job-data').hide();
             $('#customer-detail .service-detail').removeClass('selected')
             $('#customer-detail .cust-detail').addClass('selected')
-            bid =$(this).attr('data-class')
-            Commons.ajaxData('view_all_bookings', {b_id:bid}, "get", _this, _this.loadBookingData,null, '.loading-pane');
+            Commons.ajaxData('view_all_bookings', {data_id:data_id}, "get", _this, _this.loadBookingData,null, '.loading-pane');
             Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", _this, _this.loadAgentdata,null, '.loading-pane');
 
+
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/single/' + data_id
+            history.pushState({},'',new_path)
+
+
+        }
+
+
+        $('#bookings .pre-data').on('click','.booking',function(event,data){
+            bid =$(this).attr('data-class')
+            openbooking(bid)
         });
         // Switch between estimate and details in a booking
         $('#customer-detail .cust-detail').click(function(){
@@ -654,7 +771,13 @@ var Global = {
             $('#coupon-details').hide()
             $('#subscription-details').show()
             $('#new-booking').hide()
+            $('#subscription-detail .subscription-list').show()
+            $('#subscription-detail .subscription-add-mod').hide()
             Commons.ajaxData('view_all_subscription', {}, "get", _this, _this.loadSubscriptionAll,null, '.loading-pane');
+
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/subscriptions/all'
+            history.pushState({},'',new_path)
         });
         // -- Load Make
         var callBrands2 = function(){
@@ -823,14 +946,23 @@ var Global = {
                 }
         });
         // -- Modify Subscription
-        $('#subscription-detail .subscription-list').on('click','.modify-btn',function(){
-            subscription_id = $(this).closest('tr').attr('data-class')
-            // console.log(subscription_id)
+
+        var opensubscription = function(data_id){
             $('#subscription-detail .subscription-list').hide()
             $('#subscription-detail .subscription-add-mod').show()
             $('#subscription-detail  .all-subscription').removeClass('selected')
             $('#subscription-detail  .single-subscription').addClass('selected')
             Commons.ajaxData('view_all_subscription', {subs_id:subscription_id}, "get", _this, _this.loadSubscription,null, '.loading-pane');
+
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/single/' + data_id
+            history.pushState({},'',new_path)
+        }
+
+        $('#subscription-detail .subscription-list').on('click','.modify-btn',function(){
+            subscription_id = $(this).closest('tr').attr('data-class')
+            // console.log(subscription_id)
+            opensubscription(subscription_id)
 
         });
         // -- Switch between list and add/modify in a Subscription
@@ -838,14 +970,17 @@ var Global = {
             $('#subscription-detail .subscription-list').show();
             $('#subscription-detail  .subscription-add-mod').hide();
             $('#subscription-detail  .single-subscription').removeClass('selected')
-            $('#subscription-detail  .all-subscription:hover').addClass('selected')
+            $('#subscription-detail  .all-subscription').addClass('selected')
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/all/'
+            history.pushState({},'',new_path)
         });
 
         $('#subscription-detail .single-subscription').click(function(){
             $('#subscription-detail .subscription-list').hide();
             $('#subscription-detail  .subscription-add-mod').show();
             $('#subscription-detail  .all-subscription').removeClass('selected')
-            $('#subscription-detail  .single-subscription:hover').addClass('selected')
+            $('#subscription-detail  .single-subscription').addClass('selected')
             $('#sub_id').val('')
             $('#firstname').val('')
             $('#lastname').val('')
@@ -870,6 +1005,9 @@ var Global = {
             $('#sub_status').val('Under Review');
              document.getElementById("policy_active").checked = false;
             Materialize.updateTextFields();
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/single/'
+            history.pushState({},'',new_path)
         });
 
 
@@ -888,7 +1026,11 @@ var Global = {
             $('#coupon-details').show()
             $('#new-booking').hide()
             $('#subscription-details').hide()
+            $('#coupon-detail  .all-coupon').click()
             Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/coupons/all'
+            history.pushState({},'',new_path)
         });
         //     - ADD Coupon
         $('#coupon-detail .add-coupon').click(function(){
@@ -967,14 +1109,26 @@ var Global = {
             }
         });
         // -- Modify Coupon
-        $('#coupon-detail .coupon-list').on('click','.modify-btn',function(){
-            coupon_id = $(this).closest('tr').attr('data-class')
-            console.log(coupon_id)
+
+        var opencoupon = function(data_id){
+
             $('#coupon-detail .coupon-list').hide()
             $('#coupon-detail .coupon-add-mod').show()
             $('#coupon-detail  .all-coupon').removeClass('selected')
             $('#coupon-detail  .single-coupon').addClass('selected')
-            Commons.ajaxData('view_all_coupons', {c_id:coupon_id}, "get", _this, _this.loadCoupon,null, '.loading-pane');
+            Commons.ajaxData('view_all_coupons', {c_id:data_id}, "get", _this, _this.loadCoupon,null, '.loading-pane');
+
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/single/' + data_id
+            history.pushState({},'',new_path)
+
+        };
+
+        $('#coupon-detail .coupon-list').on('click','.modify-btn',function(){
+            coupon_id = $(this).closest('tr').attr('data-class')
+            console.log(coupon_id)
+            opencoupon(coupon_id)
+
 
         });
         // -- Switch between list and add/modify in a coupon
@@ -982,14 +1136,17 @@ var Global = {
             $('#coupon-detail .coupon-list').show();
             $('#coupon-detail  .coupon-add-mod').hide();
             $('#coupon-detail  .single-coupon').removeClass('selected')
-            $('#coupon-detail  .all-coupon:hover').addClass('selected')
+            $('#coupon-detail  .all-coupon').addClass('selected')
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/all/'
+            history.pushState({},'',new_path)
         });
 
         $('#coupon-detail .single-coupon').click(function(){
             $('#coupon-detail .coupon-list').hide();
             $('#coupon-detail  .coupon-add-mod').show();
             $('#coupon-detail  .all-coupon').removeClass('selected')
-            $('#coupon-detail  .single-coupon:hover').addClass('selected')
+            $('#coupon-detail  .single-coupon').addClass('selected')
             $('#coupon-detail #coup_name').val('')
             $('#coupon-detail #start_date').val('')
             $('#coupon-detail #end_date').val('')
@@ -999,7 +1156,10 @@ var Global = {
             $('#coupon-detail #coup_value').val('')
             $('#coupon-detail #coup_cap').val('')
             $('#coupon-detail #coup_message').val('')
-            document.getElementById('coupon_active').removeAttribute("checked", "");;
+            document.getElementById('coupon_active').removeAttribute("checked", "");
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/single/'
+            history.pushState({},'',new_path)
 
             // document.getElementById('coupon_active');
 
@@ -1012,6 +1172,7 @@ var Global = {
 
 
         $('.navbar .new-booking-button').click(function(){
+
             // console.log('check')
             $('#booking-details').hide()
             $('#bookings').hide()
@@ -1036,9 +1197,57 @@ var Global = {
                 // }
             }
             html +='</select>'
-            console.log(html)
+            // console.log(html)
             container.html(html)
             // Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
+            $('#new-booking  .booking-lead').text("Booking")
+            $('#new-booking  .booking-lead-2').text("Booking")
+
+            $('#new-booking  .send-reminder').show()
+            document.getElementById("send_details").checked = true;
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/newbooking/'
+            history.pushState({},'',new_path)
+
+        });
+
+        $('.navbar .new-lead-button').click(function(){
+            // console.log('check')
+            $('#booking-details').hide()
+            $('#bookings').hide()
+            $('#user-details').hide()
+            $('#coupon-details').hide()
+            $('#new-booking').show()
+            $('#subscription-details').hide()
+            container = $('#new-booking .source-list')
+            container.html('')
+            html = ""
+
+            html += '<div class="input-field source-admin" id="source-booking">'
+            // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text"   value ="' + val.source + '"class="validate"><label for="source">Source</label></div>'
+            html += '<select class="browser-default">'
+            html += '<option value="" selected disabled>Source</option>'
+            sourcelen = SOURCES.length;
+            for (i = 0; i < sourcelen; i++) {
+                // if (val.source == SOURCES[i]){
+                //     html += '<option value="'+SOURCES[i]+'" selected>'+SOURCES[i]+'</option>'
+                // }else{
+                html += '<option value="'+SOURCES[i]+'">'+SOURCES[i]+'</option>'
+                // }
+            }
+            html +='</select>'
+            // console.log(html)
+            container.html(html)
+            $('#new-booking  .booking-lead').text("Lead")
+            $('#new-booking  .booking-lead-2').text("Lead Follow Up")
+
+            // Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
+            $('#new-booking  .send-reminder').hide()
+            document.getElementById("send_details").checked = false;
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/newlead/'
+            history.pushState({},'',new_path)
+
         });
 
         $('#new-booking .header-booking .book-btn').click(function(){
@@ -1047,7 +1256,7 @@ var Global = {
             $('#new-booking  .booking-lead').text("Booking")
             $('#new-booking  .booking-lead-2').text("Booking")
             $('#new-booking  .send-reminder').show()
-            document.getElementById('send_details').setAttribute("checked", "");;
+            document.getElementById("send_details").checked = true;
 
         });
 
@@ -1056,7 +1265,8 @@ var Global = {
             $('#new-booking  .lead-btn:hover').addClass('selected')
             $('#new-booking  .booking-lead').text("Lead")
             $('#new-booking  .booking-lead-2').text("Lead Follow Up")
-            document.getElementById('send_details').removeAttribute("checked", "");
+            document.getElementById("send_details").checked = false;
+            // document.getElementById('send_details').removeAttribute("checked", "");
             $('#new-booking  .send-reminder').hide()
 
 
@@ -1342,8 +1552,13 @@ var Global = {
             $('#coupon-details').hide()
             $('#new-booking').hide()
             $('#subscription-details').hide()
+            $('#user-detail .all-user').click()
 
             Commons.ajaxData('fetch_all_users', {}, "get", _this, _this.loadUsers,null, '.loading-pane');
+
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/users/'
+            history.pushState({},'',new_path)
         });
         //     - ADD User
         $('#user-detail .add-user').click(function(){
@@ -1439,32 +1654,41 @@ var Global = {
             }
         });
         // -- Modify User
-
-        $('#user-detail .user-list').on('click','.modify-btn',function(){
-            user_id = $(this).closest('tr').attr('data-class')
-            // console.log(coupon_id)
+        var openuser = function(data_id){
             $('#user-detail .user-list').hide()
             $('#user-detail .user-add-mod').show()
             $('#user-detail  .all-user').removeClass('selected')
             $('#user-detail  .single-user').addClass('selected')
+            Commons.ajaxData('fetch_all_users', {u_id:data_id}, "get", _this, _this.loadUser,null, '.loading-pane');
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/single/' + data_id
+            history.pushState({},'',new_path)
+        }
 
-            Commons.ajaxData('fetch_all_users', {u_id:user_id}, "get", _this, _this.loadUser,null, '.loading-pane');
+        $('#user-detail .user-list').on('click','.modify-btn',function(){
+            user_id = $(this).closest('tr').attr('data-class')
+            // console.log(user_id)
+            // console.log(coupon_id)
+            openuser(user_id)
+
         });
 
         // -- Switch between list and add/modify in a USer
         $('#user-detail .all-user').click(function(){
             $('#user-detail .user-list').show();
             $('#user-detail  .user-add-mod').hide();
-            // $('#user-detail #user_number').removeAttr('disabled')
             $('#user-detail  .single-user').removeClass('selected')
-            $('#user-detail  .all-user:hover').addClass('selected')
+            $('#user-detail  .all-user').addClass('selected')
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/all/'
+            history.pushState({},'',new_path)
         });
 
         $('#user-detail .single-user').click(function(){
             $('#user-detail .user-list').hide();
             $('#user-detail  .user-add-mod').show();
             $('#user-detail  .all-user').removeClass('selected')
-            $('#user-detail  .single-user:hover').addClass('selected')
+            $('#user-detail  .single-user').addClass('selected')
             $('#user-detail #user_id').attr('data-class','')
             $('#user-detail #user_number').removeAttr('disabled')
             $('#user-detail #user_name').val('')
@@ -1483,8 +1707,10 @@ var Global = {
             $('#user-detail #agent_vat').val('')
             $('#user-detail #agent_cin').val('')
             $('#user-detail #agent_stax').val('')
+             var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/single/'
+            history.pushState({},'',new_path)
         });
-
 
     },
     loadBookings:function(data){
@@ -1493,7 +1719,7 @@ var Global = {
         html = ''
 
         $.each(data, function(ix, val) {
-            html += '        <div class="row card cardhover no-border-radius booking" data-class="' + val.booking_id + '">'
+            html += '        <div class="row card cardhover no-border-radius booking" data-class="' + val.id + '">'
             html += '            <div class="row">'
             html += '                <div class="col l1 s2 m2 booking-id-bar">'
             html += '                    <b>#<span class="id">' + val.booking_id + '</span></b>'
@@ -1554,7 +1780,7 @@ var Global = {
         html = ''
 
         $.each(data, function(ix, val) {
-            html += '        <div class="row card cardhover no-border-radius booking" data-class="' + val.booking_id + '">'
+            html += '        <div class="row card cardhover no-border-radius booking" data-class="' + val.id + '">'
             html += '            <div class="row">'
             html += '                <div class="col l1 s2 m2 booking-id-bar">'
             html += '                    <b>#<span class="id">' + val.booking_id + '</span></b>'
@@ -2363,10 +2589,9 @@ var Global = {
     },
     loadUpdateUser:function (data) {
         alert("User updated!")
-        // Commons.ajaxData('fetch_all_users', {}, "get", _this, _this.loadAdminUsers,null, '.loading-pane');
     },
     loadCustomerAgent:function(data){
-        alert('Engineer Updated!');
+        location.reload();
     },
     updateCart:function(){
         TOTAL_PRICE_ADMIN = 0;
@@ -2648,6 +2873,17 @@ var Global = {
         // console.log(date)
     },
     loadSendbookingAdmin:function(data){
+            var pocname = $('#new-booking #namepoc').val('');
+            var pocnumber = $('#new-booking #telephonepoc').val('');
+            var date = $('#date').val('');
+            // var otp = $('#otp').val();
+            var comment = $('#comment').val('');
+            // cookie = local.load();
+            // var fuel = $('#select-fuel').find('select').val();
+            // console.log()
+            var reg_num = $('#reg_number').val('');
+            // var coupon = cookie['coupon']
+            var time = $('#time-slot').find('select').val('');
         alert('Order Placed!')
     },
     loadCustomerStatus:function(data){

@@ -34,7 +34,7 @@
 </head>
 
 <body class="admin-page">
-<div class="admin-page-html invisible">
+<div id="admin-page-state" class="admin-page-html invisible" sub-page-1 ="{{cat_type}}" sub-page-2="{{all_single}}" data-id="{{data_id}}">
     <div class="navbar navbar-fixed visible">
         <nav class="nav2">
             <div class="nav-wrapper navbar-custom">
@@ -46,6 +46,7 @@
                 <ul class="right hide-on-med-and-down items-list">
                     <li class ="name"><a><span class="uname"></span></a></li>
                     <li class ="new-booking-button"><a>New Booking</a></li>
+                    <li class ="new-lead-button"><a>New Lead</a></li>
                     <li class ="coupon-button"><a>Coupon Management</a></li>
                     <li class ="users-button"><a>User Management</a></li>
                     <!--<li class ="analytics-button"><a>Analytics</a></li>-->
@@ -57,6 +58,7 @@
                 <ul class="side-nav items-list" id="mobile">
                     <li class ="name"><a><span class="uname"></span></a></li>
                     <li class ="new-booking-button"><a>New Booking</a></li>
+                    <li class ="new-lead-button"><a>New Lead</a></li>
                     <li class ="coupon-button"><a>Coupon Management</a></li>
                     <li class ="users-button"><a>User Management</a></li>
                     <!--<li class ="analytics-button"><a>Analytics</a></li>-->
@@ -70,22 +72,22 @@
     </div>
 
     <section id="new-booking" class="invisible">
-        <div class="row header-booking staff-button-row">
-            <div class="col s6 m6 l6 date-box card cardhover book-btn selected">
-                Booking
-            </div>
-            <div class="col s6 m6 l6 date-box card cardhover lead-btn">
-                Lead
-            </div>
-        </div>
-        <div class="row header-booking agent-button-row">
-            <div class="col s6 m6 l6 date-box card cardhover book-btn selected">
-                Booking
-            </div>
-            <div class="col s6 m6 l6 date-box card cardhover lead-btn">
-                Lead
-            </div>
-        </div>
+        <!--<div class="row header-booking staff-button-row">-->
+            <!--<div class="col s6 m6 l6 date-box card cardhover book-btn selected">-->
+                <!--Booking-->
+            <!--</div>-->
+            <!--<div class="col s6 m6 l6 date-box card cardhover lead-btn">-->
+                <!--Lead-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="row header-booking agent-button-row">-->
+            <!--<div class="col s6 m6 l6 date-box card cardhover book-btn selected">-->
+                <!--Booking-->
+            <!--</div>-->
+            <!--<div class="col s6 m6 l6 date-box card cardhover lead-btn">-->
+                <!--Lead-->
+            <!--</div>-->
+        <!--</div>-->
 
         <div class="row">
             <div class="row booking-add visible">
@@ -479,10 +481,10 @@
             </div>
             <div class="box visible">
                 <div class="row">
-                    <div class="col l2 m2 s2 sort-booking">
-                        <span class="">Sort :</span>
-                    </div>
-                    <div class="col l6 m6 s6">
+                    <!--<div class="col l2 m2 s2 sort-booking">-->
+                        <!--<span class="">Sort :</span>-->
+                    <!--</div>-->
+                    <div class="col l5 m4 s4">
                         <div class="input-field sort" id ="sort">
                             <select class="browser-default">
                                 <option value="Booking ID">Booking ID</option>
@@ -491,7 +493,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col s4 m4 l4 centered-text booking-filter">
+                    <div class="col s8 m8 l7 centered-text booking-filter">
                         <div class="col l6 m6 s6 date-box card bookings-filter cardhover selected" data-class="Bookings">
                             Bookings
                         </div>

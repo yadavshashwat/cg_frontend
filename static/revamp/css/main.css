@@ -394,7 +394,7 @@ footer a:hover{color:#979797;text-decoration:none;}
 .Lead{background:#eaeaea!important;color:black!important;}
 .Confirmed{background:#eaeaea!important;color:black!important;}
 .Assigned{background:#00A4E4!important;color:black!important;}
-.Agent-Left{background:#0D47A1!important;color:white!important;}
+.Engineer-Left{background:#0D47A1!important;color:white!important;}
 .Reached-Workshop{background:#3B5572!important;color:white!important;}
 .Estimate-Shared{background:#3B5572!important;color:white!important;}
 .Job-Completed{background:green!important;color:white!important;}
@@ -409,7 +409,7 @@ footer a:hover{color:#979797;text-decoration:none;}
 #bookings .date-box,#booking-details .service-box ,#coupon-details .date-box, #new-booking .date-box, #user-details .date-box, #subscription-details .date-box{height:45px;text-align:center;line-height:45px;margin:0px;border-radius:0px;font-size:20px;}
 #bookings .date-box.selected, #booking-details .service-box.selected, #coupon-details .date-box.selected, #new-booking .date-box.selected, #user-details .date-box.selected, #subscription-details .date-box.selected{z-index:10;color:#FFFFFF!important;background:#4a148c !important;}
 #bookings .date-box:hover, #booking-details .service-box:hover,#coupon-details .date-box:hover, #new-booking .date-box:hover, #user-details .date-box:hover, #subscription-details .date-box:hover{z-index:200;color:#4a148c;cursor:pointer;}
-#bookings .booking-select-section{z-index:85;}
+#bookings .booking-select-section{z-index:34;}
 #bookings .booking-select-section input{z-index:99;}
 #bookings .booking-select-section .sort input{z-index:12;}
 #bookings .booking-list{z-index:1;}
