@@ -3,7 +3,7 @@
 
 document.onready = function () {
     // alert("Hi")
-    Login.init()
+    // Login.init()
     Global.init();
 
 }
@@ -111,7 +111,7 @@ var Global = {
             }else{
                 state = "NA"
             }
-            console.log(state)
+            // console.log(state)
             hash_state = window.location.hash
             if (hash_state == "#print"){
                 $('.navbar').hide()
@@ -196,6 +196,7 @@ var Global = {
             agent_address            =  $('.invoice-box #agent-address').text();
             agent_locality           =  $('.invoice-box #agent-locality').text();
             agent_city               =  $('.invoice-box #agent-city').text();
+            console.log(agent_city)
             bill_2 = $('#bill_type_owner').val()
 
             if (bill_2=="Agent"){
@@ -450,10 +451,11 @@ var Global = {
                 $('.invoice-box #agent-tin').text(val.bill_agent_vat_no);
                 $('.invoice-box #agent-cin').text(val.bill_agent_cin);
                 $('.invoice-box #agent-stax').text(val.bill_agent_stax);
+
                 $('.invoice-box #cust-name').text(val.bill_cust_name);
                 $('.invoice-box #cust-address').text(val.bill_cust_address);
                 $('.invoice-box #cust-locality').text(val.bill_cust_locality);
-                $('.invoice-box #cust-city').text(val.bill_cust__city);
+                $('.invoice-box #cust-city').text(val.bill_cust_city);
                 $('.invoice-box #veh-reg').text(val.bill_reg_number);
                 $('.invoice-box #veh-name').text(val.bill_make +' '+ val.bill_model);
                 $('.invoice-box .agent-details').attr('agent-id',val.agent)
