@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+
+	<title>ClickGarage- Servicing, Repair & Cleaning </title>
+	<meta name="description" content="Solution to all your vehicle maintenance needs. Compare prices & choose from a range of services at ClickGarage."/>
+	<meta name="keywords" content="Car, Car Repair, Car Dry Cleaning, Bike, Bike Repair , car dent repair, Bumper Repair, car interior cleaning, road side assistance, motorcycle maintenance"/>
+	<meta property="og:image" content="/../../static/revamp/img/Logo-Black.jpg"/>
+	<meta name="viewport" content="width=device-width">
+	<meta property="og:title" content="Car & Bike - Repair, Cleaning, Servicing | Road Side Assistance | Doorstep services">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://www.clickgarage.in">
+	<meta property="og:site_name" content="ClickGarage">
+	<meta property="og:description" content="Click Garage is the ideal one-stop solution for all types of car & bike repair, service, interior cleaning and other associated works. We also offer quick and efficient road side assistance for cars (Nissan, Datsun, Volkswagen, Toyota, Tata, Skoda,  Renault, Maruti Suzuki, Mahindra, Hyundai, Honda, Ford, Fiat, Chevrolet) and bikes (Royal Enfield, Suzuki, TVS, Bajaj, KTM, Yamaha, Hero).">
+
+	<!-- Styles -->
+	<link rel="stylesheet" href="/../../static/revamp/css/font-awesome.css">
+	<link rel="stylesheet" href="/../../static/revamp/css/animate.css">
+	<link rel="stylesheet" href="/../../static/revamp/css/styles.css">
+	<!--<link rel="stylesheet" href="/../../static/revamp/css/bootstrap.min.css">-->
+	<link rel="stylesheet" href="/../../static/revamp/css/materialize.min.css">
+	<link rel="stylesheet" href="/../../static/revamp/css/main.css">
+	<link rel="stylesheet" href="/../../static/revamp/css/custom-styles.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800italic,800' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.css" rel="stylesheet" />
+
+
+	<!-- Fav and touch icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-57-precomposed.png">
+	<link rel="shortcut icon" href="/../../static/revamp/img/favicon-3.ico">
+</head>
+
+<body class="order-page">
+
+<div class="navbar navbar-fixed">
+	<nav class="nav2">
+		<div class="nav-wrapper navbar-custom">
+
+			<div class="logo-cg logo-color visible" itemscope itemtype="http://schema.org/Organization">
+				<a itemprop="url" href="/Book/{{veh_type}}/{{veh}}" class="brand-logo"><img itemprop="logo" class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>
+			</div>
+
+
+
+
+			<!--<div class="logo-cg logo-color visible">-->
+			<!--<a href="/Book/{{veh_type}}/{{veh}}" class="brand-logo"><img class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>-->
+			<!--</div>-->
+			<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+			<a href="tel:+91-9555-95-0000" data-activates="mobile" class="call-button-nav  hide-on-large-only"><i class="material-icons">phone</i></a>
+			<ul class="right hide-on-med-and-down items-list">
+				<li class ="name"><a><span class="uname"></span></a></li>
+				<li class ="home-button"><a href="/">Home</a></li>
+				<li class ="change-button"><a>Change Vehicle</a></li>
+				<!--<li class ="history-button"><a>Booking History</a></li>-->
+				<li class ="log-in-button"><a><span class="log-in"></span></a></li>
+			</ul>
+			<ul class="side-nav items-list" id="mobile">
+				<li class ="name"><a><span class="uname"></span></a></li>
+				<li class ="home-button"><a href="/">Home</a></li>
+				<li class ="change-button"><a>Change Vehicle</a></li>
+				<!--<li class ="history-button"><a>Booking History</a></li>-->
+				<li class ="log-in-button"><a><span class="log-in"></span></a></li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<!--service jobs Section-->
+
+<section id="vehicle-select-form" class="invisible">
+	<div class="row">
+		<div class = "vehicle-select-form col s12 m12 l6 offset-l3 offset-s0 offset-m0">
+			<div class="row row-zero-margin">
+				<div class="col s6 m6 l6 veh-cat-col">
+					<div class="card veh-cat-card car-card cardhover selected">
+						Car
+					</div>
+				</div>
+				<div class="col s6 m6 l6 veh-cat-col">
+					<div class="card veh-cat-card bike-card cardhover">
+						Bike
+					</div>
+				</div>
+			</div>
+			<div class="row home-form-2 card">
+				<!--<div class="row form-title text-left">-->
+				<!--<h3><img src="/../../static/revamp/img/by-line.png" alt="by-line">Select <span class="vehicle-type">Car</span></h3>-->
+				<!--</div>-->
+				<br>
+				<br>
+				<br>
+
+
+				<div class="row text-left vehicle-details">
+
+					<!--<div class="row field-title text-left">-->
+					<!--<h4>Vehicle Details</h4>-->
+					<!--</div>-->
+
+					<form id="formValidate">
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<div class="input" id="brand-select">
+									<!--<i class="fa fa-car prefix"></i>-->
+									<!--<select id="brand-select">-->
+									<!--&lt;!&ndash;<option value="" disabled selected>Choose Make</option>&ndash;&gt;-->
+									<!--&lt;!&ndash;&lt;!&ndash;<option value="Hyundai">Hyundai</option>&ndash;&gt;&ndash;&gt;-->
+									<!--&lt;!&ndash;&lt;!&ndash;<option value="Maruti">Maruti</option>&ndash;&gt;&ndash;&gt;-->
+									<!--</select>-->
+									<!--<label data-error="Select a Brand">Type of Question</label>-->
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<div class="input" id="vehicle-select">
+									<select class ="js-example-responsive">
+										<option value="" disabled selected>Model</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<!--<div class="input-field col s5 m5 l5" id="fuel-type-select">-->
+						<!--<select>-->
+						<!--<option value="" disabled selected>Fuel</option>-->
+						<!--<option value="petrol">Petrol</option>-->
+						<!--<option value="diesel">Diesel</option>-->
+						<!--&lt;!&ndash;<option value="cng">LPG/CNG</option>&ndash;&gt;-->
+						<!--</select>-->
+						<!--</div>-->
+					</form>
+					<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-vehicle-error"></span>
+				</div>
+
+				<!--<div class = "row service-headers" id="selected-service">-->
+				<!--<div class="row field-title text-left">-->
+				<!--<h4>Service Details</h4>-->
+				<!--</div>-->
+
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>Servicing</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>Car Care</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>Repairing</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>Denting/Painting</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>General Check-Up</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col s6 m6 l4">-->
+				<!--<div class="card cardhover service-card">-->
+				<!--<div class="card-content service-name">-->
+				<!--<p>Emergency</p>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-category-error"></span>-->
+				<!--<form class="col s12">-->
+				<!--<div class="row">-->
+				<!--<div class="input-field col s12" >-->
+				<!--<i class="material-icons prefix">report_problem</i>-->
+				<!--<textarea id="additional" class="materialize-textarea"></textarea>-->
+				<!--<label for="additional">Specific issues/ request?</label>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</form>-->
+				<!--</div>-->
+
+				<!--<div class="row form-row invisible">-->
+				<!--<form class="col s12">-->
+				<!--<div class="row field-title text-left">-->
+				<!--<h4>Booking Details</h4>-->
+				<!--</div>-->
+
+				<!--<div class="row">-->
+				<!--<div class="input-field col s6">-->
+				<!--<i class="material-icons prefix">account_circle</i>-->
+				<!--<input id="first_name" type="text" class="validate" required="" aria-required="true">-->
+				<!--<label for="first_name" data-error="Required">First Name</label>-->
+				<!--</div>-->
+				<!--<div class="input-field col s6">-->
+
+				<!--<input id="last_name" type="text" class="validate" required="" aria-required="true">-->
+				<!--<label for="last_name" data-error="Required">Last Name</label>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="row">-->
+				<!--&lt;!&ndash;<div class="input-field col s6">&ndash;&gt;-->
+				<!--&lt;!&ndash;<i class="material-icons prefix">location_on</i>&ndash;&gt;-->
+				<!--&lt;!&ndash;<input id="address" type="text" class="validate">&ndash;&gt;-->
+				<!--&lt;!&ndash;<label for="address">House No./ Street Name</label>&ndash;&gt;-->
+				<!--&lt;!&ndash;</div>&ndash;&gt;-->
+				<!--<div class="input-field col s12">-->
+				<!--<i class="material-icons prefix">location_on</i>-->
+				<!--<input type="text" id="locality" class="autocomplete" required="" aria-required="true">-->
+				<!--<label for="locality" data-error="Required">Locality</label>-->
+
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="row">-->
+				<!--<div class="input-field col s12">-->
+				<!--<i class="material-icons prefix">phone</i>-->
+				<!--<input id="telephone" type="number" required="" aria-required="true">-->
+				<!--<label for="telephone" data-error="Invalid Number | Example : 9829098290" >Mobile</label>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="row">-->
+				<!--<div class="input-field col s12">-->
+				<!--<i class="material-icons prefix">email</i>-->
+				<!--<input id="email" type="email" class="validate" required="" aria-required="true">-->
+				<!--<label for="email" data-error="Invalid e-mail id">Email</label>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="row">-->
+				<!--<div class="input-field col s6">-->
+				<!--<i class="material-icons prefix">today</i>-->
+				<!--<input id="date" type="date" class="datepicker">-->
+				<!--<label for="date" data-error="required">date</label>-->
+				<!--</div>-->
+				<!--<div class="input-field col s6 m6 l6" id ="time-slot">-->
+				<!--<select>-->
+				<!--<option value="" disabled selected>Time-Slot</option>-->
+				<!--<option value="1">09:30AM - 11:30AM </option>-->
+				<!--<option value="2">11:30AM - 01:30PM </option>-->
+				<!--<option value="3">01:30PM - 03:30PM </option>-->
+				<!--<option value="4">03:30PM - 05:30PM </option>-->
+				<!--<option value="5">05:30PM - 07:30PM </option>-->
+				<!--</select>-->
+				<!--<span id ="choose-time-slot" class="error-message"></span>-->
+				<!--</div>-->
+
+				<!--</div>-->
+
+				<!--</form>-->
+				<!--</div>-->
+				<div class="row button-row proceed">
+					<!--<a href="#home">	-->
+					<button class="waves-effect waves-light btn-large red form-proceed" type="submit" name="action">Proceed
+						<i class="material-icons right">send</i>
+					</button>
+					<!--</a>-->
+				</div>
+				<!--<div class="row button-row invisible submit">-->
+				<!--<button class="waves-effect waves-light btn red form-submit" type="submit" name="action">Book Now-->
+				<!--<i class="material-icons right">send</i>-->
+				<!--</button>-->
+				<!--</div>-->
+				<!--<div class="row order-confirm invisible">-->
+				<!--Thank you for placing your order! Our team will contact you shortly regarding the same.-->
+				<!--</div>-->
+
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="confirm-booking" class="visible">
+	<div class="container-fluid">
+		<div class="card">
+			<div class="row order-confirm ">
+				Thank you for placing your order! Your relationship manager will get in touch with you shortly to confirm your booking and better understand your requirements.
+
+			</div>
+			<!--<div class="row order-confirm ">-->
+				<!--Your Booking Details-->
+			<!--</div>-->
+
+		</div>
+	</div>
+</section>
+
+<section id="login" class="login invisible" style="">
+	<div class="materialContainer card">
+		<div class="box">
+			<button class="waves-effect waves-light btn red  btn-service book-btn close-btn" type="submit" name="action"><i class="fa fa-times"></i>
+			</button>
+			<div class="title row">LOGIN</div>
+			<div class="row login-input-row">
+				<div class="input-field login-input">
+					<i class="material-icons prefix">phone</i>
+					<input id="telephone_login" type="tel" class="validate">
+					<label for="telephone_login" data-error="Invalid Number">Telephone : 10 Digits</label>
+				</div>
+			</div>
+			<div class="row btn-row login-method-row">
+				<div class="col s12 m12 l5">
+					<button class="btn waves-effect waves-light btn-large red use-otp" href="">Use OTP
+						<i class="material-icons right">send</i>
+					</button>
+				</div>
+				<div class="col s12 m12 l2">
+					Or
+				</div>
+				<div class="col s12 m12 l5">
+					<button class="btn waves-effect waves-light btn-large red use-pass" href="">Password
+						<i class="material-icons right">turned_in_not</i>
+					</button>
+				</div>
+				<div class="col s12 m12 l12 centered-text pass-forgot">
+					Forgot Your Password?
+				</div>
+			</div>
+			<div class="login-pass-change invisible">
+				<div class="row pass login-method-input">
+					<div class="input-field">
+						<i class="material-icons prefix">verified_user</i>
+						<input id="password-new" type="password" class="validate">
+						<label for="password-new" data-error="Required">Enter New Password</label>
+					</div>
+				</div>
+				<div class="row centered-text send-otp-row">
+					<div class="col s12 m12 l12">
+						<button class="btn waves-effect waves-light btn-large red change-pass-otp" href="">SEND OTP
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="row login-passchange-btn-row-otp invisible">
+				<div class="row otp login-method-input">
+					<div class="input-field">
+						<i class="material-icons prefix">dialpad</i>
+						<input id="otp-pass-new" type="tel" class="validate">
+						<label for="otp-pass-new">Enter OTP</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s12 m12 l6">
+						<button class="btn waves-effect waves-light btn-large red resend-otp" href="">RESEND
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+					<div class="col s12 m12 l6">
+						<button class="btn waves-effect waves-light btn-large red verify-btn-pass" href="">VERIFY
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+				<div class="row login-message-row invisible">
+					<span class="login-message"></span>
+				</div>
+			</div>
+			<div class="login-method-inputs">
+				<div class="row pass login-method-input invisible">
+					<div class="input-field login-input">
+						<i class="material-icons prefix">verified_user</i>
+						<input id="password" type="password" class="validate">
+						<label for="password">Enter Password</label>
+					</div>
+				</div>
+
+				<div class="row otp login-method-input invisible">
+					<div class="input-field login-input">
+						<i class="material-icons prefix">verified_user</i>
+						<input id="otp_login" type="tel" class="validate">
+						<label for="otp_login">Enter OTP</label>
+					</div>
+				</div>
+			</div>
+			<div class="row login-method-btn-row-otp invisible">
+				<div class="row">
+					<div class="col s12 m12 l6">
+						<button class="btn waves-effect waves-light btn-large red resend-otp" href="">RESEND
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+					<!--</div>-->
+					<!--<div class="row btn-row login-method-btn-row invisible">-->
+					<div class="col s12 m12 l6">
+						<button class="btn waves-effect waves-light btn-large red verify-btn" href="">VERIFY
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+				<div class="row login-message-row invisible">
+					<span class="login-message"></span>
+				</div>
+			</div>
+			<div class="row login-method-btn-row invisible">
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<button class="btn waves-effect waves-light btn-large red verify-btn" href="">VERIFY
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+				<div class="row login-message-row invisible">
+					<span class="login-message"></span>
+				</div>
+			</div>
+		</div>
+		<div class="overbox">
+			<div class="material-button alt-2"><span class="shape"></span><span class="btn-sign">SIGN UP</span></div>
+			<div class="title">Sign Up</div>
+			<div class="row login-input-row signup-row">
+				<div class="input-field signup-input">
+					<i class="material-icons prefix">phone</i>
+					<input id="telephone-sign" type="tel" class="validate">
+					<label for="telephone-sign" data-error="Invalid Number">Telephone</label>
+				</div>
+			</div>
+			<div class="row signup-row">
+				<div class="input-field signup-input">
+					<i class="material-icons prefix">account_circle</i>
+					<input id="name_login" type="tel" class="validate">
+					<label for="name_login" data-error="Required">Name</label>
+				</div>
+			</div>
+			<div class="row signup-row">
+				<div class="input-field login-input">
+					<i class="material-icons prefix">verified_user</i>
+					<input id="password-sign" type="password" class="validate">
+					<label for="password-sign" data-error="Required">Password</label>
+				</div>
+			</div>
+			<div class="button button-otp-signup-row">
+				<button class="button-otp-signup"><span>SEND OTP</span></button>
+			</div>
+			<div class="row otp-btn-row signup-row invisible">
+				<div class="input-field login-input col l6 s6 m6">
+					<i class="material-icons prefix">verified_user</i>
+					<input id="otp-sign" type="text" class="validate">
+					<label for="otp-sign">OTP</label>
+				</div>
+				<div class="button button2">
+					<button class="col l3 m3 s3 verify-btn-sign"><span>VERIFY</span></button>
+					<button class="col l3 m3 s3 resend-otp-sign"><span>RESEND</span></button>
+				</div>
+			</div>
+			<div class="row login-message-row visible">
+				<span class="login-message">Success</span>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="cover" class="invisible"></section>
+<section id="cover2" class="invisible"></section>
+
+
+
+
+
+
+
+
+
+
+<!--<section id="checkout" class="visible">-->
+<!--<div class="checkout-select-section">-->
+<!--<div class="container-fluid services">-->
+<!--<div class="row">-->
+<!--<div class="col l12 s12 m12 centered-text">-->
+<!--Booking Details-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--<div class="col l12 s12 m12">-->
+<!--<div class="card">-->
+<!--<div class="row">-->
+<!--<div class="col l1 m1 s1 number centered-text">-->
+<!--1-->
+<!--</div>-->
+<!--<div class="col l11 m11 s11">-->
+<!--Order Summary-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--<div class="col l10 m10 s10 offset-l2 offset-m2 offset-s2 cart-list">-->
+
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--<div class="col l10 m10 s10 offset-l2 offset-m2 offset-s2 cart-list">-->
+
+<!--</div>-->
+<!--</div>-->
+
+<!--</div>-->
+
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</section>-->
+
+
+<div class="loading-pane">
+	<img src="/../../static/revamp/img/loading.gif" alt="" class="loading-gif">
+</div>
+
+<!--<div class="call-button order-page-call hide-on-large-only"><a href="tel:+91-9555-95-0000"><img src="/../../static/revamp/img/Call.png"></a></div>-->
+<div class="loading-pane-2">
+	<img src="/../../static/revamp/img/page_loader.gif" alt="" class="loading-gif">
+</div>
+<div id="overlay"></div>
+<div class="overlay-pat"></div>
+
+
+
+<!-- Javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>window.jQuery || document.write('<script src="/../../static/revamp/js/jquery-3.1.1.min.js"><\/script>')</script>
+<script src="/../../static/revamp/js/materialize.min.js"></script>
+<!--<script src="/../../static/revamp/js/order.js"></script>-->
+<script src="/../../static/revamp/js/staticpages.js"></script>
+<script src="/../../static/revamp/js/login.js"></script>
+<script src="/../../static/revamp/js/common.js"></script>
+<script src="/../../static/revamp/js/forms.js"></script>
+<script src="/../../static/revamp/js/jquery.backstretch.js"></script>
+<script src="/../../static/revamp/js/jquery.cycle.lite.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.js"></script>
+
+
+
+
+<!--Google Tag start-->
+<!-- Google Code for Remarketing Tag -->
+<!--------------------------------------------------
+Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: https://google.com/ads/remarketingsetup
+--------------------------------------------------->
+<script type="text/javascript">
+	/* <![CDATA[ */
+	var google_conversion_id = 932007205;
+	var google_custom_params = window.google_tag_params;
+	var google_remarketing_only = true;
+	/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+	<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/932007205/?guid=ON&amp;script=0"/>
+	</div>
+</noscript>
+
+<!-- Google Code for Complete Transaction Conversion Page -->
+
+
+<script type="text/javascript">
+/* <![CDATA[ */
+total_amount_value = parseFloat(QueryString.total)
+var google_conversion_id = 932007205;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "Y1dICJ_llGQQpZq1vAM";
+var google_conversion_value = total_amount_value;
+var google_conversion_currency = "INR";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+
+<div style="display:inline;">
+	<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/932007205/?value={{total_amount}}&amp;currency_code=INR&amp;label=Y1dICJ_llGQQpZq1vAM&amp;guid=ON&amp;script=0"
+/>
+</div>
+</noscript>
+
+
+
+
+
+<!--Google Analytics Tag-->
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-68064927-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+<script type="text/javascript">
+	ga('require', 'ecommerce');
+	booking_id = parseFloat(QueryString.booking_id)
+	total_amount_value = parseFloat(QueryString.total)
+	summary = QueryString.summary
+
+	             ga('ecommerce:addTransaction', {
+                 'id': booking_id,                     // Transaction ID. Required.
+                 'affiliation': summary,   // Affiliation or store name.
+                 'revenue': total_amount_value,               // Grand Total.
+                 'shipping': '0',                  // Shipping.
+                 'tax': '0'                     // Tax.
+             });
+             ga('ecommerce:send');
+</script>
+
+<!--Googel Tags End-->
+<!--Start of Tawk.to Script-->
+<!--<script type="text/javascript">-->
+<!--var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();-->
+<!--(function(){-->
+<!--var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];-->
+<!--s1.async=true;-->
+<!--s1.src='https://embed.tawk.to/5687bb1cbc4176802560a8a2/1b4iq4he6';-->
+<!--s1.charset='UTF-8';-->
+<!--s1.setAttribute('crossorigin','*');-->
+<!--s0.parentNode.insertBefore(s1,s0);-->
+<!--})();-->
+<!--</script>-->
+<!--End of Tawk.to Script-->
+
+<!--Fresh desk script start-->
+<script type='text/javascript'>var fc_JS=document.createElement('script');fc_JS.type='text/javascript';fc_JS.src='https://assets1.freshchat.io/production/assets/widget.js?t='+Date.now();(document.body?document.body:document.getElementsByTagName('head')[0]).appendChild(fc_JS); window._fcWidgetCode='QWO14Q3OVM';window._fcURL='https://clickgarage.freshchat.io';</script>
+<!--Fresh desk script end-->
+
+
+
+</body>
+</html>
