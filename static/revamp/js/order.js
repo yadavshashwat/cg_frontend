@@ -60,6 +60,9 @@ var PICK_DROP = 0;
 var SHOW_ESTIMATE = 0;
 var COUPON_CODE = "";
 
+
+var COMPLETION_PATH = ""
+
 var logoMap = {
     'Standard Service':'<i class="cg-icon cg-icon-card icon-cg-car-standard x50"></i>',
     'Standard Service2':'<i class="cg-icon cg-icon-card icon-cg-bike-standard x50"></i>',
@@ -205,13 +208,13 @@ var Global = {
             // var fuel = $('#fuel-type-select').find('.active span').text();
             var vehtype = $('#vehicle-select-form .veh-cat-card.selected').text().trim()
             var error = 0 ;
-            if(make == "" || model == "" ||make == "Make" || model == "Model" ) {
-                $('#choose-vehicle-error').text('Please select vehicle');
-                error = 1;
-            }
-            if(error==1){
-                return;
-            }
+            // if(make == "" || model == "" ||make == "Make" || model == "Model" ) {
+            //     $('#choose-vehicle-error').text('Please select vehicle');
+            //     error = 1;
+            // }
+            // if(error==1){
+            //     return;
+            // }
 
             cookie = local.load()
 
@@ -223,18 +226,35 @@ var Global = {
                     local.clearKey('cg_city')
                 }
             }
+            if (typeof(model) != "undefined") {
+               fuel_start = model.indexOf("(")
+               fuel_end = model.indexOf(")")
 
-            fuel_start = model.indexOf("(")
-            fuel_end = model.indexOf(")")
-            var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
-            model = model.substr(0,fuel_start-1)
+               var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
+               model = model.substr(0, fuel_start - 1)
+                // console.log(fuel_start)
+                // console.log(fuel_end)
+                // console.log
+            }
+
+
+           if(typeof(model) == "undefined" || typeof(make) == "undefined"  ) {
+               $('#choose-vehicle-error').text('Please select vehicle');
+                error = 1;
+            }
+           if(error==1){
+               return;
+           }
+            // var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
+
+            // model = model.substr(0,fuel_start-1)
             local.clearKey('cgcart')
             local.save('vehmake',make);
             local.save('vehmodel',model);
             local.save('vehfuel',fuel);
             local.save('vehtype',vehtype);
             local.save('fullname',make+" "+model+" "+fuel)
-
+            console.log(fuel)
             setTimeout(function(){
                 window.location.href = '/Book/'+vehtype+'/'+make.replace(" ", "_")+'-'+model.replace(" ", "_")+'-'+fuel;
 
@@ -1022,7 +1042,7 @@ var Global = {
             if (PICK_DROP >0 ){
                 // JOBS_SUMMARY_TOTAL
                 pick_drop_val = {"category": "Labour",
-                    "name": "Visiting/Pick Drop",
+                    "job_name": "Visiting/Pick Drop",
                     "price": PICK_DROP,
                     "price_comp": PICK_DROP,
                     "unit_price": PICK_DROP,
@@ -1356,21 +1376,42 @@ var Global = {
     },
     loadSendbooking:function(data) {
         console.log("Check")
-        $('#confirm-booking').show()
-        $('#booking-details').hide()
+        // $('#confirm-booking').show()
+        // $('#booking-details').hide()
         local.clearKey('cgcart')
         local.clearKey('coupon')
-        ga('require', 'ecommerce');
-        $.each(data['booking'], function(ix, val) {
-            ga('ecommerce:addTransaction', {
-                'id': val.booking_id,                     // Transaction ID. Required.
-                'affiliation': val.Summary,   // Affiliation or store name.
-                'revenue': val.price_total,               // Grand Total.
-                'shipping': '0',                  // Shipping.
-                'tax': '0'                     // Tax.
-            });
-            ga('ecommerce:send');
-        })
+        
+        // ga('require', 'ecommerce');
+        // $.each(data['booking'], function(ix, val) {
+            total= data['booking']['price_total']
+            booking_id = data['booking']['booking_id']
+            summary = data['booking']['Summary']
+
+            // console.log
+            // ga('ecommerce:addTransaction', {
+            //     'id': val.booking_id,                     // Transaction ID. Required.
+            //     'affiliation': val.Summary,   // Affiliation or store name.
+            //     'revenue': val.price_total,               // Grand Total.
+            //     'shipping': '0',                  // Shipping.
+            //     'tax': '0'                     // Tax.
+            // });
+            // ga('ecommerce:send');
+        // })
+        // console.log(total)
+        // console.log(booking_id)
+        // console.log(summary)
+        COMPLETION_PATH = "/completebooking/?total="
+        COMPLETION_PATH += total
+        COMPLETION_PATH +=    "&booking_id="
+        COMPLETION_PATH += booking_id
+        COMPLETION_PATH += "&summary="
+        COMPLETION_PATH += summary
+
+        console.log(COMPLETION_PATH)
+        // window.open(COMPLETION_PATH)
+        window.location.href =  COMPLETION_PATH;
+
+        // window.location.href =  COMPLETION_PATH;
 
     },
     loadCheckCoupon:function(data){

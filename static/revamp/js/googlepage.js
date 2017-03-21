@@ -800,20 +800,40 @@ var Global = {
             })
     },
     loadPlaced:function(data){
-        $('#home .form-row').hide();
-        $('#home .button-row').hide();
-        $('#home .order-confirm').show();
-        ga('require', 'ecommerce');
-       $.each(data['booking'], function(ix, val) {
-        ga('ecommerce:addTransaction', {
-          'id': val.booking_id,                     // Transaction ID. Required.
-          'affiliation': val.Summary,   // Affiliation or store name.
-          'revenue': val.price_total,               // Grand Total.
-          'shipping': '0',                  // Shipping.
-          'tax': '0'                     // Tax.
-        });
-           ga('ecommerce:send');
-       })
+        // $('#home .form-row').hide();
+        // $('#home .button-row').hide();
+        // $('#home .order-confirm').show();
+        total= data['booking']['price_total']
+        booking_id = data['booking']['booking_id']
+        summary = data['booking']['Summary']
+
+        console.log(total)
+        console.log(booking_id)
+        console.log(summary)
+
+        COMPLETION_PATH = "/completebooking/?total="
+        COMPLETION_PATH += total
+        COMPLETION_PATH +=    "&booking_id="
+        COMPLETION_PATH += booking_id
+        COMPLETION_PATH += "&summary="
+        COMPLETION_PATH += summary
+
+        console.log(COMPLETION_PATH)
+        // window.open(COMPLETION_PATH)
+        window.location.href =  COMPLETION_PATH;
+
+
+        // ga('require', 'ecommerce');
+       // $.each(data['booking'], function(ix, val) {
+       //  ga('ecommerce:addTransaction', {
+       //    'id': val.booking_id,                     // Transaction ID. Required.
+       //    'affiliation': val.Summary,   // Affiliation or store name.
+       //    'revenue': val.price_total,               // Grand Total.
+       //    'shipping': '0',                  // Shipping.
+       //    'tax': '0'                     // Tax.
+       //  });
+       //     ga('ecommerce:send');
+       // })
 
     },
     loadMessaged:function(data){

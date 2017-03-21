@@ -49,6 +49,28 @@ $(document).ready(function(){
 });
 
 
+  var QueryString = function () {
+  // This function is anonymous, is executed immediately and
+  // the return value is assigned to QueryString!
+          var query_string = {};
+          var query = window.location.search.substring(1);
+          var vars = query.split("&");
+          for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+                // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+              query_string[pair[0]] = decodeURIComponent(pair[1]);
+                // If second entry with this name
+            } else if (typeof query_string[pair[0]] === "string") {
+              var arr = [ query_string[pair[0]],decodeURIComponent(pair[1]) ];
+              query_string[pair[0]] = arr;
+                // If third or later entry with this name
+            } else {
+              query_string[pair[0]].push(decodeURIComponent(pair[1]));
+            }
+          }
+          return query_string;
+   }();
 
 
 
@@ -84,6 +106,7 @@ var Global = {
         _this.eventsAdded = true;
         console.log('adding hanlder')
 
+
         $(document).ready(function(){
             vehtype = $('#veh_make').attr('veh-type')
             if (vehtype == "Car"){
@@ -107,6 +130,108 @@ var Global = {
           // console.log(make)
             Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehtype}, "get", _this, _this.loadModels);
         });
+
+            // Change Vehicle
+        $('.order-page .nav2 .change-button').click(function () {
+            $('#vehicle-select-form').show()
+            $('#cover').show()
+        })
+        $('#cover').click(function () {
+            // console.log('check')
+            $('#vehicle-select-form').hide()
+            $('#cover').hide()
+        });
+
+        var callbrands =function(){
+            vehtype = $('#vehicle-select-form .veh-cat-card.selected').text().trim()
+            // console.log(vehtype)
+            if(vehtype == ""){
+                vehtype ="Car"
+            }else{
+            }
+            Commons.ajaxData('get_type_make', {vehicle_type: vehtype}, "get", _this, _this.loadBrands2);
+        }
+        $(document).on('ready',callbrands);
+        $('#vehicle-select-form').on('click','.veh-cat-card',callbrands);
+        $('#brand-select').change(function(event,data){
+            vehtype = $('#vehicle-select-form .veh-cat-card.selected').text().trim()
+            // console.log(vehtype)
+            if(vehtype == ""){
+                vehtype ="Car"
+            }else{
+
+            }
+            var make = $(this).find('.selectize-input').find('div').attr('data-value');
+            console.log(make)
+            Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehtype}, "get", _this, _this.loadModels2);
+        });
+        $('#vehicle-select-form .veh-cat-card').click(function(){
+            $('#vehicle-select-form .veh-cat-card').removeClass('selected');
+            $('#vehicle-select-form .veh-cat-card:hover').addClass('selected');
+            vehicle = $('#vehicle-select-form .veh-cat-card:hover').text()
+            var html = '<select id="vehicle-select-list" class="js-example-responsive">';
+            html += '<option value="" disabled selected>Model</option>';
+            html += '</select>';
+            $('#vehicle-select-form #vehicle-select').html(html);
+            // $('#vehicle-select-form #vehicle-select').selectize();
+            $('#vehicle-select-form .home-form-2 .vehicle-type').text(vehicle);
+
+        });
+      $('#vehicle-select-form .home-form-2 .form-proceed').click(function(event){
+            var make = $('#brand-select').find('.selectize-input').find('div').attr('data-value');
+            var model = $('#vehicle-select').find('.selectize-input').find('div').attr('data-value');
+            // var fuel = $('#fuel-type-select').find('.active span').text();
+            var vehtype = $('#vehicle-select-form .veh-cat-card.selected').text().trim()
+            var error = 0 ;
+            // if(make == "" || model == "" ||make == "Make" || model == "Model" ) {
+            //     $('#choose-vehicle-error').text('Please select vehicle');
+            //     error = 1;
+            // }
+            // if(error==1){
+            //     return;
+            // }
+
+            cookie = local.load()
+
+            if(cookie['vehtype']==null || cookie['vehtype']===false){
+                local.clearKey('cg_city')
+            }else{
+                if (vehtype != cookie['vehtype']){
+                    console.log('check')
+                    local.clearKey('cg_city')
+                }
+            }
+            if (typeof(model) != "undefined") {
+               fuel_start = model.indexOf("(")
+               fuel_end = model.indexOf(")")
+               var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
+               model = model.substr(0, fuel_start - 1)
+           }
+
+
+           if(typeof(model) == "undefined" ||typeof(make) == "undefined"  ) {
+               $('#choose-vehicle-error').text('Please select vehicle');
+                error = 1;
+            }
+           if(error==1){
+               return;
+           }
+            // var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
+            // model = model.substr(0,fuel_start-1)
+            local.clearKey('cgcart')
+            local.save('vehmake',make);
+            local.save('vehmodel',model);
+            local.save('vehfuel',fuel);
+            local.save('vehtype',vehtype);
+            local.save('fullname',make+" "+model+" "+fuel)
+
+            setTimeout(function(){
+                window.location.href = '/Book/'+vehtype+'/'+make.replace(" ", "_")+'-'+model.replace(" ", "_")+'-'+fuel;
+
+            },10);
+        });
+
+
 
         $('.submit-rsa').click(function(){
                 cust_fname              = $('#firstname').val()
@@ -282,6 +407,102 @@ var Global = {
              });
             container.html(html)
         },
+
+    loadModels2:function(data){
+        //  vehtype = $('#home .veh-cat-card.selected').text().trim()
+        // // console.log(vehtype)
+        // if(vehtype == ""){
+        //     vehtype ="Car"
+        // }else{
+        //
+        // }
+        var container = $('#vehicle-select');
+        container.html('');
+        var html = '<select id="vehicle-select-list" class="js-example-responsive">';
+        html += '<option value="" disabled selected>Model</option>';
+        $.each(data, function(ix, val){
+            html += '<option value="'+val.model+' ('+val.fuel_type + ')" data-placeholder="true">'+ val.full_veh_name + '</option>'
+            // console.log(val.model)
+
+        });
+        html += '</select>';
+        container.html(html);
+        // container.find('select').material_select();
+        // container.find('select').select2();
+        container.find('select').selectize();
+        var viewportWidth = $(window).width();
+        if (viewportWidth <= 992){
+            $(".selectize-input input").attr('readonly','readonly');
+        }
+
+    },
+    loadBrands2:function(data){
+        var container = $('#brand-select');
+        vehtype = $('#vehicle-select-form .veh-cat-card.selected').text().trim()
+        // console.log(vehtype)
+        if(vehtype == ""){
+            vehtype ="Car"
+        }else{
+
+        }
+        // console.log(vehtype)
+        container.html('');
+        var html = '<select id="brand-select-list" class="js-example-responsive">';
+        html += '<option value="" disabled selected>Make</option>';
+
+        var html2 = ""
+        var html3 = ""
+        var POPULAR_BRANDS  = ["Maruti Suzuki", "Hyundai", "Honda", "Tata", "Toyota", "Mahindra", "Hero", "Bajaj","Yamaha"]
+
+        $.each(data, function(ix, val){
+            if (POPULAR_BRANDS.indexOf(val.make) >= 0){
+                html2 += '<option value="' + val.make + '">'+ val.make + '</option>'
+            }else{
+                html3 += '<option value="' + val.make + '">'+ val.make + '</option>'
+            }
+
+        });
+
+        html += '<optgroup label="Popular Brands">'
+        html += html2
+        html += '</optgroup>'
+        html += '<optgroup label="Other Brands">'
+        html += html3
+        html += '</optgroup>'
+
+        html += '<select>';
+        container.html(html);
+        container.find('select').selectize({
+            create: false,
+            sortField: 'true',
+            lockOptgroupOrder: true,
+            // openOnFocus:false,
+            // maxOptions:10,
+            render: {
+                item: function(item, escape) {
+                    // console.log(item.value)
+                    if (vehtype=="Car") {
+                        return '<div><img src="/../../static/revamp/img/Brands/Car/' + item.value + '.png" class="img-flag img-brand" alt="brand icon" />&nbsp;' + escape(item.value) + '</div>';
+                    }else{
+                        return '<div><img src="/../../static/revamp/img/Brands/Bikes/' + item.value + '.png" class="img-flag img-brand" alt="brand icon" />&nbsp;' + escape(item.value) + '</div>';
+                    }
+                },
+                option: function(item, escape) {
+                    if (vehtype=="Car") {
+                        return '<div><img src="/../../static/revamp/img/Brands/Car/' + item.value + '.png" class="img-flag img-brand" alt="brand icon" />&nbsp;' + escape(item.value) + '</div>';
+                    }else{
+                        return '<div><img src="/../../static/revamp/img/Brands/Bikes/' + item.value + '.png" class="img-flag img-brand" alt="brand icon" />&nbsp;' + escape(item.value) + '</div>';
+                    }
+                }
+            }
+        });
+        var viewportWidth = $(window).width();
+        if (viewportWidth <= 992){
+            $(".selectize-input input").attr('readonly','readonly');
+        }
+
+
+    },
     loadBrands:function(data){
         var container = $('#veh_make');
         vehtype = $('#veh_make').attr('veh-type')

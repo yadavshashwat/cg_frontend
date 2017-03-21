@@ -37,7 +37,7 @@ img{vertical-align:middle;border:0;}
 .section-title{text-transform:uppercase;}
 ::selection{background:#F85D5D;color:#FFFFFF;}
 ::-moz-selection{background:#F85D5D;color:#FFFFFF;}
-iframe{width:100%;height:inherit;border:none;background-color:transparent;overflow:hidden;}
+/*iframe{width:100%;height:inherit;border:none;background-color:transparent;overflow:hidden;}*/
 .dropdown-backdrop{position:static;}
 .card{border-radius:10px;z-index:30;}
 .dark-grey{color:#636262;}
