@@ -326,6 +326,7 @@ var Login = {
             $('.admin-page .login').hide()
             $('.admin-page .agent-button-row').hide()
             $('.admin-page .b2b-button-row').hide()
+            $('#sms-credits').text('Not Applicable')
         }else if(data['auth_rights']['agent']){
             $('.admin-page .admin-page-html').show()
             $('.admin-page .login').hide()
@@ -336,6 +337,7 @@ var Login = {
             $('.bill-page .staff-button-row').hide()
             $('.admin-page .staff-button-row').hide()
             $('.admin-page .b2b-button-row').hide()
+            $('#sms-credits').text(data['agent_sms_credits'])
         }else if(data['auth_rights']['b2b']){
             $('.admin-page-html').show()
             $('.admin-page .login').hide()
@@ -343,6 +345,7 @@ var Login = {
             $('.admin-page .items-list li.users-button').hide()
             $('.admin-page .items-list li.lead-button').hide()
             $('.admin-page .items-list li.subscription-button').hide()
+            $('.admin-page .items-list li.campaign-button').hide()
             $('.admin-page .items-list li.new-lead-button').hide()
             $('.admin-page .agent-button-row').hide()
             $('.admin-page .staff-button-row').hide()

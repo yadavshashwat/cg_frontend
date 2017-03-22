@@ -74,16 +74,16 @@
 		</div>
 	</div>
 	<div class="row button-row new-bill">
-		<div class="col l6 s12 m12 centered-text">
+		<div class="col l12 s12 m12 centered-text">
 			<button class="waves-effect waves-light btn-large cg-primary save-bill bill-btn" type="submit" name="action"><span id="save-bill">Generate Bill</span>
 				<i class="material-icons right">send</i>
 			</button>
 		</div>
-		<div class="col l6 s12 m12 centered-text">
-			<button class="waves-effect waves-light btn-large cg-primary save-send-bill bill-btn" type="submit" name="action"><span id="save-send-bill">Generate and Send Bill</span>
-				<i class="material-icons right">send</i>
-			</button>
-		</div>
+		<!--<div class="col l6 s12 m12 centered-text">-->
+			<!--<button class="waves-effect waves-light btn-large cg-primary save-send-bill bill-btn" type="submit" name="action"><span id="save-send-bill">Generate and Send Bill</span>-->
+				<!--<i class="material-icons right">send</i>-->
+			<!--</button>-->
+		<!--</div>-->
 		<!--<div class="col l4 s12 m12 centered-text">-->
 			<!--<button class="waves-effect waves-light btn-large cg-primary save-print-bill bill-btn" type="submit" name="action">Generate and Print Bill-->
 				<!--<i class="material-icons right">send</i>-->
@@ -102,7 +102,8 @@
 		<table class="agent-details">
 			<tr>
 				<td class="title company-name">
-					<img src="/../../static/revamp/img/ClickGarage/logo-color-small1.png" style="width:100%; max-width:150px;"><br>
+					<!--<img id="bill-logo" src="/../../static/revamp/img/Bill Logos/ClickGarage.png" style="width:100%; max-width:150px;"><br>-->
+					<img id="bill-logo" src="" style="width:100%; max-width:150px;"><br>
 					<span id="agent-name">Sui Generis Innovations Private Limited</span><br>
 					<span id="agent-address">W22, Second Floor</span><br>
 					<span id="agent-locality">Green Park Main</span><br>
@@ -115,9 +116,9 @@
 						<tr><td>Booking #: </td><td><span id="booking-id">--</span></td></tr>
 						<tr><td>Created: </td><td><span id="bill-date"></span></td></tr>
 						<tr><td>Payment Type : </td><td><span id="bill-type"></span></td></tr>
-						<tr class="reciept"><td>TIN : </td><td><span id = "agent-tin">--</span></td></tr>
-						<tr class="reciept"><td>CIN : </td><td><span id = "agent-cin">--</span></td></tr>
-						<tr class="reciept"><td>Service Tax : </td><td><span id = "agent-stax">--</span></td></tr>
+						<tr class="reciept tin"><td>TIN : </td><td><span id = "agent-tin">--</span></td></tr>
+						<tr class="reciept cin"><td>CIN : </td><td><span id = "agent-cin">--</span></td></tr>
+						<tr class="reciept stax"><td>Service Tax : </td><td><span id = "agent-stax">--</span></td></tr>
 					</table>
 				</td>
 			</tr>
@@ -221,7 +222,7 @@
 					VAT (Consumables) @ <span id="vat-consumable-percent"></span>%: ₹<span class="vat-consumable-amount">--</span>
 				</td>
 			</tr>
-			<tr class="tax reciept">
+			<tr class="tax reciept stax">
 				<td>
 					Service Tax + Krishna Kalyan Cess + Swachha Bharat Cess @ <span id="stax-percent"></span>%: ₹<span class="stax-amount">--</span>
 				</td>
@@ -244,11 +245,17 @@
 </page>
 
 <section id="cover" class="invisible"></section>
+<div class="loading-pane">
+    <img src="/../../static/revamp/img/loading.gif" alt="" class="loading-gif">
+</div>
 
 <!--<div class="loading-pane-2">-->
 	<!--<img src="/../../static/revamp/img/page_loader.gif" alt="" class="loading-gif">-->
 <!--</div>-->
 <div id="overlay"></div>
+<div id="download" class="invisible">
+	<iframe></iframe>
+</div>
 <!--<div class="overlay-pat"></div>-->
 
 <!-- Javascript

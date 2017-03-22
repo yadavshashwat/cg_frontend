@@ -127,6 +127,7 @@ $(document).ready(function() {
     console.log(sub_page_2)
     console.log(data_id)
 
+
     if (sub_page_1 == "bookings" || typeof(sub_page_1)=="undefined" || sub_page_1 == null || sub_page_1 =="" ){
         $('.navbar .booking-button').click()
         if (sub_page_2 == "single"){
@@ -183,9 +184,9 @@ $(document).ready(function() {
         $('.navbar .new-booking-button').click()
     }else if (sub_page_1 == "newlead"){
         $('.navbar .new-lead-button').click()
-
+    }else if (sub_page_1 == "campaign") {
+        $('.navbar .campaign-button').click()
     }
-
 });
 
 
@@ -212,6 +213,8 @@ $(document).ready(function() {
             $('#coupon-details').hide()
             $('#new-booking').hide()
             $('#subscription-details').hide()
+                          $('#campaign-details').hide()
+
             // $('#bookings .delivery-list').show()
             $('#bookings .booking-filter').show();
             $('#customer-detail .bill-row').show();
@@ -771,6 +774,8 @@ $(document).ready(function() {
             $('#coupon-details').hide()
             $('#subscription-details').show()
             $('#new-booking').hide()
+                          $('#campaign-details').hide()
+
             $('#subscription-detail .subscription-list').show()
             $('#subscription-detail .subscription-add-mod').hide()
             Commons.ajaxData('view_all_subscription', {}, "get", _this, _this.loadSubscriptionAll,null, '.loading-pane');
@@ -1026,6 +1031,8 @@ $(document).ready(function() {
             $('#coupon-details').show()
             $('#new-booking').hide()
             $('#subscription-details').hide()
+                          $('#campaign-details').hide()
+
             $('#coupon-detail  .all-coupon').click()
             Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
             var path = window.location.pathname.split('/')
@@ -1165,7 +1172,33 @@ $(document).ready(function() {
 
         });
 
+// =====================================================================================
+//    SMS Management
+// =====================================================================================
 
+          $('.navbar .campaign-button').click(function(){
+
+            // console.log('check')
+            $('#booking-details').hide()
+            $('#bookings').hide()
+            $('#user-details').hide()
+            $('#coupon-details').hide()
+            $('#new-booking').hide()
+            $('#subscription-details').hide()
+            $('#campaign-details').show()
+
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/campaign/'
+            history.pushState({},'',new_path)
+
+        });
+         $('#campaign-details .send-sms-campaign').click(function() {
+            message =     $('#sms_campaign_message').val()
+             Commons.ajaxData('send_sms_campaign',  {message: message}, "get", _this, _this.loadCampaign,null, '.loading-pane');
+
+             // Commons.ajaxData('send_sms_campaign', {message: message}, "get", _this, _this.loadModels);
+
+             });
 // =====================================================================================
 //    New Booking
 // =====================================================================================
@@ -1180,6 +1213,7 @@ $(document).ready(function() {
             $('#coupon-details').hide()
             $('#new-booking').show()
             $('#subscription-details').hide()
+              $('#campaign-details').hide()
             container = $('#new-booking .source-list')
             container.html('')
             html = ""
@@ -1219,6 +1253,8 @@ $(document).ready(function() {
             $('#coupon-details').hide()
             $('#new-booking').show()
             $('#subscription-details').hide()
+          $('#campaign-details').hide()
+
             container = $('#new-booking .source-list')
             container.html('')
             html = ""
@@ -1540,6 +1576,8 @@ $(document).ready(function() {
 
         });
 
+
+
 // =====================================================================================
 //    User Management
 // =====================================================================================
@@ -1552,6 +1590,8 @@ $(document).ready(function() {
             $('#coupon-details').hide()
             $('#new-booking').hide()
             $('#subscription-details').hide()
+           $('#campaign-details').hide()
+
             $('#user-detail .all-user').click()
 
             Commons.ajaxData('fetch_all_users', {}, "get", _this, _this.loadUsers,null, '.loading-pane');
@@ -1578,6 +1618,7 @@ $(document).ready(function() {
             agent_vat = $('#user-detail #agent_vat').val()
             agent_stax = $('#user-detail #agent_stax').val()
             agent_cin = $('#user-detail #agent_cin').val()
+            sms_credits = $('#user-detail #agent_sms_credits').val()
 
             agent = agent_box.checked
             b2b = b2b_box.checked
@@ -1594,14 +1635,14 @@ $(document).ready(function() {
                     $('#user-detail #agent_vat').addClass("invalid");
                     error =1 ;
                 }
-                if(agent_stax==""){
-                    $('#user-detail #agent_stax').addClass("invalid");
-                    error =1 ;
-                }
-                if(agent_cin==""){
-                    $('#user-detail #agent_cin').addClass("invalid");
-                    error =1 ;
-                }
+                // if(agent_stax==""){
+                //     $('#user-detail #agent_stax').addClass("invalid");
+                //     error =1 ;
+                // }
+                // if(agent_cin==""){
+                //     $('#user-detail #agent_cin').addClass("invalid");
+                //     error =1 ;
+                // }
             }
 
             if(user_name==""){
@@ -1637,7 +1678,7 @@ $(document).ready(function() {
                 return;
             }else{
                 Commons.ajaxData('update_user',
-                    {user_id:user_id, user_num: user_number, user_name : user_name, user_email: user_email, user_add: user_address, user_loc: user_locality, user_city:user_city,user_state :user_state, agent_vat:agent_vat, agent_cin:agent_cin, agent_stax:agent_stax,b2b_st:b2b, admin_st:admin, staff_st:staff,agent_st:agent}
+                    {user_id:user_id, user_num: user_number, user_name : user_name, user_email: user_email, user_add: user_address, user_loc: user_locality, user_city:user_city,user_state :user_state, agent_vat:agent_vat, agent_cin:agent_cin, agent_stax:agent_stax,b2b_st:b2b, admin_st:admin, staff_st:staff,agent_st:agent,sms_credits:sms_credits}
                     // {
                     // c_id: coupon_code  ,
                     //     d_start: coupon_start ,
@@ -1707,6 +1748,8 @@ $(document).ready(function() {
             $('#user-detail #agent_vat').val('')
             $('#user-detail #agent_cin').val('')
             $('#user-detail #agent_stax').val('')
+            $('#user-detail #agent_sms_credits').val('')
+
              var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/single/'
             history.pushState({},'',new_path)
@@ -1838,48 +1881,72 @@ $(document).ready(function() {
         container.html('')
         html=''
         i=1
-        html += '								<div class="desc-content col s12 m12 l12">';
-        html += '									<table class="striped">';
-        html += '										<thead>';
-        html += '										<tr>';
-        html += '											<th data-field="id">S.No.</th>';
-        html += '											<th data-field="name">Name</th>';
-        html += '											<th data-field="number">Number</th>';
-        html += '											<th data-field="email">Email</th>';
-        html += '											<th data-field="agent">Engineer</th>';
-        html += '											<th data-field="b2b">B2B</th>';
-        html += '											<th data-field="staff">Staff</th>';
-        html += '											<th data-field="admin">Admin</th>';
-        html += '											<th data-field="modify"></th>';
-        html += '										</tr>';
-        html += '										</thead>';
-        html += '										<tbody>';
+        // html += '								<div class="desc-content col s12 m12 l12">';
+        // html += '									<table class="striped">';
+        // html += '										<thead>';
+        // html += '										<tr>';
+        // html += '											<th data-field="id">S.No.</th>';
+        // html += '											<th data-field="name">Name</th>';
+        // html += '											<th data-field="number">Number</th>';
+        // html += '											<th data-field="email">Email</th>';
+        //
+        // html += '											<th data-field="agent">Engineer</th>';
+        // html += '											<th data-field="b2b">B2B</th>';
+        // html += '											<th data-field="staff">Staff</th>';
+        // html += '											<th data-field="admin">Admin</th>';
+        // html += '											<th data-field="modify"></th>';
+        // html += '										</tr>';
+        // html += '										</thead>';
+        // html += '										<tbody>';
         $.each(data, function(ix, val) {
+            html2 = ""
+            html2 += '								<div class="desc-content col s12 m12 l12">';
+            html2 += '									<table class="striped">';
+            html2 += '										<thead>';
+            html2 += '										<tr>';
+            html2 += '											<th data-field="id">S.No.</th>';
+            html2 += '											<th data-field="name">Name</th>';
+            html2 += '											<th data-field="number">Number</th>';
+            html2 += '											<th data-field="email">Email</th>';
+            if (val.req_user_staff || val.req_user_admin){
+            html2 += '											<th data-field="agent">Engineer</th>';
+            html2 += '											<th data-field="b2b">B2B</th>';
+            html2 += '											<th data-field="staff">Staff</th>';
+            html2 += '											<th data-field="admin">Admin</th>';
+            }
+            html2 += '											<th data-field="modify"></th>';
+            html2 += '										</tr>';
+            html2 += '										</thead>';
+            html2 += '										<tbody>';
+
+
             html += '<tr class="coupon-row" data-class="'+val.id+'">'
             html += '											<td>'+i+'</td>';
             html += '											<td>'+val.first_name+' '+val.last_name+'</td>';
             html += '											<td>'+val.phone+'</td>';
             html += '											<td>'+val.email_primary+'</td>';
-            if (val.agent){
-                html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
-            }else{
-                html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
-            }
-            if (val.b2b){
-                html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
-            }else{
-                html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
-            }
-            if (val.staff){
-                html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
-            }else{
-                html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
-            }
-            if (val.admin){
-                html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
-            }else{
-                html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
-            }
+             if (val.req_user_staff || val.req_user_admin) {
+                 if (val.agent) {
+                     html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
+                 } else {
+                     html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
+                 }
+                 if (val.b2b) {
+                     html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
+                 } else {
+                     html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
+                 }
+                 if (val.staff) {
+                     html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
+                 } else {
+                     html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
+                 }
+                 if (val.admin) {
+                     html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
+                 } else {
+                     html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
+                 }
+             }
             html += '											<td style="color:purple; cursor:pointer" class="modify-btn"><i class="fa fa-pencil"></i></td>';
             html += '										</tr>';
             i=i+1
@@ -1888,8 +1955,9 @@ $(document).ready(function() {
         html += '										</tbody>';
         html += '									</table>';
         html += '								</div>';
-
-        container.html(html);
+        html3 = html2
+        html3 +=html
+        container.html(html3);
     },
     loadUser:function(data){
         $('#user-detail #user_id').attr('data-class','')
@@ -1919,9 +1987,9 @@ $(document).ready(function() {
 
             }
             try {
-                $('#user-detail #user_address').val(val.user_address[0]['address'])
-                $('#user-detail #user_locality').val(val.user_address[0]['locality'])
-                $('#user-detail #user_city').val(val.user_address[0]['city'])
+                $('#user-detail #user_address').val(val.user_address)
+                $('#user-detail #user_locality').val(val.user_locality)
+                $('#user-detail #user_city').val(val.user_city)
             } catch (e) {
 
             }
@@ -1943,6 +2011,11 @@ $(document).ready(function() {
             try {
                 $('#user-detail #agent_stax').val(val.agent_stax);
             } catch (e) {
+
+            }
+            try {
+                 $('#user-detail #agent_sms_credits').val(val.agent_sms_credits);
+            } catch (e){
 
             }
 
@@ -2162,9 +2235,9 @@ $(document).ready(function() {
                     $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-2').attr("status_next", "Reached Workshop")
                     $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-2').show()
                     $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-2 #status_change-2').text("Reached Workshop")
-                } else if (val.status == "Reached Workshop") {
-                    $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').hide()
-                    $('#customer-detail .booking-data .agent-button-row .btn-update-status.status-btn-2').hide()
+                // } else if (val.status == "Reached Workshop") {
+                //     $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').hide()
+                //     $('#customer-detail .booking-data .agent-button-row .btn-update-status.status-btn-2').hide()
                 } else {
                     $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').attr("status_next", val.status_next)
                     $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1 #status_change-1').text(val.status_next)
@@ -2193,6 +2266,27 @@ $(document).ready(function() {
                     $('#customer-detail .b2b-button-row-2').show()
                 }
             }
+            if (val.agent_details=="Not Assigned"){
+                $('.bill-row').hide()
+            }
+            if (val.clickgarage_flag && val.req_user_agent){
+                   $('.bill-row').hide()
+            }
+
+            if ( (val.clickgarage_flag != true && val.req_user_staff) || (val.clickgarage_flag != true && val.req_user_admin) ){
+                   $('.bill-row').hide()
+                   $('.staff-button-row').hide()
+            }else if(val.req_user_agent){
+                $('.staff-button-row').hide()
+            }else{
+                   $('.staff-button-row').show()
+            }
+            // if ( (val.clickgarage_flag != true && val.req_user_staff)){
+            //        // $('.bill-row').hide()
+            //     $
+            // }
+
+
 
             if (val.req_user_staff || val.req_user_admin){
                 if(val.status == "Lead"){
@@ -2888,6 +2982,7 @@ $(document).ready(function() {
     },
     loadCustomerStatus:function(data){
         alert('Status Updated!')
+        location.reload()
     },
     loadLocation:function(data){
         var container = $('input.autocomplete');
@@ -3033,6 +3128,13 @@ $(document).ready(function() {
     },
     loadCustomerestimate:function(date){
          alert('Estimate Updated!')
+    },
+    loadCampaign:function(data){
+        alert(data['msg'])
+         setTimeout(function() {
+            location.reload()
+        }, 1000);
+
     }
 };
 

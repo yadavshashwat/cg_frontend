@@ -201,11 +201,15 @@ var Global = {
 
             if (bill_2=="Agent"){
                 state = ""
+                owner_bill = agent_id
             }else if(bill_2=="CG Haryana"){
                 state = "Haryana"
+                owner_bill = "ClickGarage"
             }else if (bill_2=="CG Delhi"){
                 state = "Delhi"
+                owner_bill = "ClickGarage"
             }else{
+                owner_bill = "ClickGarage"
                 state = "NA"
             }
 
@@ -214,35 +218,72 @@ var Global = {
             vat_consumable_percent  = $('.invoice-box #vat-consumable-percent').text();
             service_tax_percent     = $('.invoice-box #stax-percent').text()
 
-            Commons.ajaxData('generate_bill', {data_id   			               : b_data_id
-                                                        ,cg_internal_flag	       : cg_internal_flag
-                                                        ,bill_owner      	       : agent_id
-                                                        ,total_amount    	       : TOTAL
-                                                        ,part_amount     	       : TOTAL_PART
-                                                        ,lube_amount     	       : TOTAL_LUBE
-                                                        ,consumable_amount	       : TOTAL_CONSUMABLE
-                                                        ,labour_amount 		       : TOTAL_LABOUR
-                                                        ,vat_part 			       : VAT_PART
-                                                        ,vat_lube 			       : VAT_LUBE
-                                                        ,vat_consumable 	       : VAT_CONSUMABLE
-                                                        ,service_tax 		       : SERVICE_TAX
-                                                        ,payment_mode 		       : mode
-                                                        , agent_vat_no             : agent_vat_no
-                                                        , agent_cin                : agent_cin
-                                                        , agent_stax               : agent_stax
-                                                        , full_agent_name          : full_agent_name
-                                                        , agent_address            : agent_address
-                                                        , agent_locality           : agent_locality
-                                                        , agent_city               : agent_city
-                                                        , bill_type                : bill_2
-                                                        , state                    : state
-                                                        ,vat_part_percent          : vat_part_percent
-                                                        ,vat_lube_percent          : vat_lube_percent
-                                                        ,vat_consumable_percent    : vat_consumable_percent
-                                                        ,service_tax_percent       : service_tax_percent
+             // data_id                 = get_param(request,'data_id', None)
+             //    bill_owner              = get_param(request,'bill_owner',None)
+             //    total_amount            = get_param(request,'total_amount',None)
+             //    part_amount             = get_param(request,'part_amount',None)
+             //    lube_amount             = get_param(request,'lube_amount',None)
+             //    consumable_amount       = get_param(request,'consumable_amount',None)
+             //    labour_amount           = get_param(request, 'labour_amount', None)
+             //    vat_part                = get_param(request, 'vat_part', None)
+             //    vat_lube                = get_param(request, 'vat_lube', None)
+             //    vat_consumable          = get_param(request, 'vat_consumable', None)
+             //    service_tax             = get_param(request, 'service_tax', None)
+                // payment_status          = get_param(request, 'payment_status', None)
+                // amount_paid             = get_param(request, 'amount_paid', None)
+                // payment_mode             = get_param(request, 'payment_mode', None)
 
+                // full_agent_name         = get_param(request, 'full_agent_name', None)
+                // agent_address           = get_param(request, 'agent_address', None)
+                // agent_locality          = get_param(request, 'agent_locality', None)
+                // agent_city              = get_param(request, 'agent_city', None)
+                // agent_vat_no            = get_param(request, 'agent_vat_no', None)
+                // agent_cin               = get_param(request, 'agent_cin', None)
+                // agent_stax              = get_param(request, 'agent_stax', None)
 
-                        }, "get", _this, _this.loadBillGenerate,null, '.loading-pane');
+                // bill_type               = get_param(request,'bill_type',None)
+                // state                   = get_param(request, 'state', None)
+                // vat_part_percent        = get_param(request, 'vat_part_percent', None)
+                // vat_lube_percent        = get_param(request, 'vat_lube_percent', None)
+                // vat_consumable_percent  = get_param(request, 'vat_consumable_percent', None)
+                // service_tax_percent     = get_param(request, 'service_tax_percent', None)
+
+            var params = {
+                data_id   			               : b_data_id
+                // ,cg_internal_flag	       : cg_internal_flag
+                ,bill_owner      	       : owner_bill
+                ,total_amount    	       : TOTAL
+                ,part_amount     	       : TOTAL_PART
+                ,lube_amount     	       : TOTAL_LUBE
+                ,consumable_amount	       : TOTAL_CONSUMABLE
+                ,labour_amount 		       : TOTAL_LABOUR
+                ,vat_part 			       : VAT_PART
+                ,vat_lube 			       : VAT_LUBE
+                ,vat_consumable 	       : VAT_CONSUMABLE
+                ,service_tax 		       : SERVICE_TAX
+                ,payment_mode 		       : mode
+                , agent_vat_no             : agent_vat_no
+                , agent_cin                : agent_cin
+                , agent_stax               : agent_stax
+                , full_agent_name          : full_agent_name
+                , agent_address            : agent_address
+                , agent_locality           : agent_locality
+                , agent_city               : agent_city
+                , bill_type                : bill_2
+                , state                    : state
+                ,vat_part_percent          : vat_part_percent
+                ,vat_lube_percent          : vat_lube_percent
+                ,vat_consumable_percent    : vat_consumable_percent
+                ,service_tax_percent       : service_tax_percent
+            }
+
+            Commons.ajaxData('generate_bill', params, "get", _this, _this.loadBillGenerate,null, '.loading-pane');
+
+            var url = Commons.getOrigin()+Commons.URLFromName['generate_bill']+'?'+jQuery.param( params )
+            var url1 = 'http://local.clickgarage.in/api/generate_bill/?data_id=58d243f1c8ece6270d6e9304&bill_owner=ClickGarage&total_amount=800&part_amount=0&lube_amount=0&consumable_amount=0&labour_amount=695.6521739130435&vat_part=0&vat_lube=0&vat_consumable=0&service_tax=104.34782608695652&payment_mode=Cash&agent_vat_no=06301844038&agent_cin=U72200DL2015PTC278194&agent_stax=AAVCS6335ESD001&full_agent_name=Sui+Generis+Innovations+Private+Limited&agent_address=2401%2C+Basement&agent_locality=DLF+Phase+4%2C+Opp.+Galleria+Market&agent_city=Gurgaon&bill_type=CG+Haryana&state=Haryana&vat_part_percent=13.125&vat_lube_percent=13.125&vat_consumable_percent=13.125&service_tax_percent=15'
+            console.log(url)
+            console.log(url1)
+            $('#download').find('iframe').attr('src',url)
 
             // Comm
         });
@@ -261,7 +302,8 @@ var Global = {
             hash_state = window.location.hash
             if (hash_state == "#print"){
                 $('.navbar').hide()
-                $('.actionables').hide()
+                $('.actionables').hide();
+                $('#download').remove();
             }else{
                 if (val.req_user_agent){
                 if (val.booking_owner=="ClickGarage"){
@@ -288,6 +330,14 @@ var Global = {
             }
             }
 
+                if (val.booking_owner == "ClickGarage"){
+                    src = "/../../static/revamp/img/Bill Logos/ClickGarage.png"
+                    $('#bill-logo').attr('src',src)
+                }else{
+                    src = "/../../static/revamp/img/Bill Logos/"+val.agent_name+".png"
+                    $('#bill-logo').attr('src',src)
+                }
+
 
 
             mode = $('.bill-page #payment-mode').val()
@@ -299,8 +349,17 @@ var Global = {
                 $('.invoice-box #bill-date').text(today.getDate()+'-'+today.getMonth()+'-'+today.getFullYear());
                 // console.log("")
                 // console.log(val.req_user_agent)
+
                 if (val.req_user_agent || val.booking_owner != "ClickGarage"){
                     console.log('1')
+                    if (val.agent_stax == ""){
+                        $('.invoice-box .stax').hide()
+                    }
+
+                    if (val.agent_cin == ""){
+                        $('.invoice-box .cin').hide()
+                    }
+
                     $('.invoice-box #agent-tin').text(val.agent_vat);
                     $('.invoice-box #agent-cin').text(val.agent_cin);
                     $('.invoice-box #agent-stax').text(val.agent_stax);
@@ -310,6 +369,13 @@ var Global = {
                     $('.invoice-box #agent-city').text(val.agent_city);
                 }else{
                     if (bill_2 == "Agent"){
+                         if (val.agent_stax == ""){
+                            $('.invoice-box .stax').hide()
+                        }
+
+                    if (val.agent_cin == ""){
+                        $('.invoice-box .cin').hide()
+                    }
                         $('.invoice-box #agent-tin').text(val.agent_vat);
                         $('.invoice-box #agent-cin').text(val.agent_cin);
                         $('.invoice-box #agent-stax').text(val.agent_stax);
@@ -317,6 +383,7 @@ var Global = {
                         $('.invoice-box #agent-address').text(val.agent_address);
                         $('.invoice-box #agent-locality').text(val.agent_locality);
                         $('.invoice-box #agent-city').text(val.agent_city);
+
                     }else if(bill_2=="CG Delhi"){
                         $('.invoice-box #agent-tin').text(CGDELHI_VAT_NO);
                         $('.invoice-box #agent-cin').text(CGDELHI_CIN_NO);
@@ -440,6 +507,13 @@ var Global = {
                    $('.invoice-box .reciept').show()
                 }
 
+                 if (val.bill_agent_stax == ""){
+                            $('.invoice-box .stax').hide()
+                        }
+
+                    if (val.bill_agent_cin == ""){
+                        $('.invoice-box .cin').hide()
+                    }
                 $('.invoice-box #bill-type').text(val.bill_payment_mode)
                 $('.invoice-box #bill-number').text(val.invoice_number);
                 $('.invoice-box #agent-name').text(val.bill_agent_name);
