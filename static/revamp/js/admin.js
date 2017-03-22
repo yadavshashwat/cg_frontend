@@ -198,7 +198,7 @@ $(document).ready(function() {
 
         // Open Bookings
         $('.navbar .booking-button').click(function(event,data){
-             DATE_TYPE = "";
+             // DATE_TYPE = "";
              REG_NUMBER = "";
              CUST_NAME = "";
              STATUS_TYPE = "";
@@ -246,7 +246,7 @@ $(document).ready(function() {
         });
         // Open Lead
         $('.navbar .lead-button').click(function(event,data){
-             DATE_TYPE = "";
+             // DATE_TYPE = "";
              REG_NUMBER = "";
              CUST_NAME = "";
              STATUS_TYPE = "";
