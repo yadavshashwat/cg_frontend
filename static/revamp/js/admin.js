@@ -103,7 +103,7 @@ var Global = {
     init:function() {
         var _this = this;
         _this.events();
-        _this.events();
+        // _this.events();
         // Commons.eventHandlers();
     },
     events:function() {
@@ -483,8 +483,6 @@ $(document).ready(function() {
             $('#customer-detail .cust-detail').addClass('selected')
             Commons.ajaxData('view_all_bookings', {data_id:data_id}, "get", _this, _this.loadBookingData,null, '.loading-pane');
             Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", _this, _this.loadAgentdata,null, '.loading-pane');
-
-
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/single/' + data_id
             history.pushState({},'',new_path)
@@ -735,7 +733,97 @@ $(document).ready(function() {
                 status_id: status_n,
             }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
         });
+        var changestatus = function(bid,status_n){
+              data_id = $('#customer-detail #booking_id').attr('booking_data_id')
+            variable_pass = _this
+            Commons.ajaxData('change_status', {b_id: bid,
+                status_id: status_n,
+            }, "get", _this, _this.loadCustomerStatus,null, '.loading-pane');
 
+             if (status_n == "Confirmed"){
+                for (i = 1; i < 2; i++) {
+                     $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 2; i < 10; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(status_n == "Assigned"){
+                for (i = 1; i < 3; i++) {
+                     $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 3; i < 10; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(status_n == "Engineer Left"){
+                for (i = 1; i < 4; i++) {
+                     $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 4; i < 10; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(status_n == "Reached Workshop"){
+                for (i = 1; i < 5; i++) {
+                     $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 5; i < 10; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(status_n == "Estimate Shared"){
+                for (i = 1; i < 6; i++) {
+                     $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 6; i < 10; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(status_n == "Job Completed"){
+                for (i = 1; i < 7; i++) {
+                     $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 7; i < 10; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(status_n == "Feedback Taken"){
+                for (i = 1; i < 8; i++) {
+                     $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 8; i < 10; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(status_n == "Cancelled"){
+                for (i = 1; i < 8; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+                $('.status-change-8').addClass('selected')
+                $('.status-change-9').removeClass('selected')
+
+            }else if(status_n == "Escalation"){
+                for (i = 1; i < 9; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+                $('.status-change-9').addClass('selected')
+            }
+            // data_id = $('#customer-detail #booking_id').attr('booking_data_id')
+
+            // setTimeout(function(){
+            //           openbooking(data_id)
+            //         }, 1000);
+
+            
+        }
+        $('#customer-detail .circle-status').click(function(){
+            bid = $('#customer-detail #booking_id').attr('booking_id');
+            status_n = $(this).attr('data-class')
+            // $(this).addClass('selected')
+            changestatus(bid,status_n)
+            
+        });
+
+        $('#customer-detail .circle-status2').click(function(){
+            bid = $('#customer-detail #booking_id').attr('booking_id');
+            status_n = $(this).attr('data-class')
+            $(this).addClass('selected')
+            changestatus(bid,status_n)
+        });
         $('#customer-detail .agent-button-row .btn-update-status').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $(this).attr('status_next')
@@ -751,6 +839,74 @@ $(document).ready(function() {
                 status_id: status_n,
             }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
         });
+        
+        
+        $(window).load(function() {
+    var viewportWidth = $(window).width();
+    if (viewportWidth <= 600) {
+       $('.status-row-inline').removeClass('status-row-inline').addClass('status-vertical')
+        $('.confirm-row').find('.square').removeClass('square').addClass('square2')
+        $('.confirm-row').find('.square3').removeClass('square3').addClass('square4')
+        $('.confirm-row').find('.circle-status').removeClass('circle-status').addClass('circle-status2')
+        $('.confirm-row').find('.content-status').removeClass('content-status').addClass('content-status2')
+        $('.confirm-row').find('.status-bar-block').removeClass('status-bar-block').addClass('status-bar-inline')
+
+
+    }else if (viewportWidth <= 992){
+        $('.status-row-inline').removeClass('status-row-inline').addClass('status-vertical')
+        $('.confirm-row').find('.square').removeClass('square').addClass('square2')
+        $('.confirm-row').find('.square3').removeClass('square3').addClass('square4')
+
+        $('.confirm-row').find('.circle-status').removeClass('circle-status').addClass('circle-status2')
+
+        $('.confirm-row').find('.content-status').removeClass('content-status').addClass('content-status2')
+        $('.confirm-row').find('.status-bar-block').removeClass('status-bar-block').addClass('status-bar-inline')
+
+
+    }else{
+        $('.status-vertical').removeClass('status-vertical').addClass('status-row-inline')
+        $('.confirm-row').find('.square2').removeClass('square2').addClass('square')
+        $('.confirm-row').find('.square4').removeClass('square4').addClass('square3')
+        $('.confirm-row').find('.circle-status2').removeClass('circle-status2').addClass('circle-status')
+        $('.confirm-row').find('.content-status2').removeClass('content-status2').addClass('content-status')
+        $('.confirm-row').find('.status-bar-inline').removeClass('status-bar-inline').addClass('status-bar-block')
+
+    }
+
+});
+
+$(window).resize(function() {
+    var viewportWidth = $(window).width();
+    if (viewportWidth <= 600) {
+       $('.status-row-inline').removeClass('status-row-inline').addClass('status-vertical')
+        $('.confirm-row').find('.square').removeClass('square').addClass('square2')
+        $('.confirm-row').find('.square3').removeClass('square3').addClass('square4')
+        $('.confirm-row').find('.circle-status').removeClass('circle-status').addClass('circle-status2')
+        $('.confirm-row').find('.content-status').removeClass('content-status').addClass('content-status2')
+        $('.confirm-row').find('.status-bar-block').removeClass('status-bar-block').addClass('status-bar-inline')
+
+
+    }else if (viewportWidth <= 992){
+        $('.status-row-inline').removeClass('status-row-inline').addClass('status-vertical')
+        $('.confirm-row').find('.square').removeClass('square').addClass('square2')
+        $('.confirm-row').find('.square3').removeClass('square3').addClass('square4')
+
+        $('.confirm-row').find('.circle-status').removeClass('circle-status').addClass('circle-status2')
+
+        $('.confirm-row').find('.content-status').removeClass('content-status').addClass('content-status2')
+        $('.confirm-row').find('.status-bar-block').removeClass('status-bar-block').addClass('status-bar-inline')
+
+
+    }else{
+        $('.status-vertical').removeClass('status-vertical').addClass('status-row-inline')
+        $('.confirm-row').find('.square2').removeClass('square2').addClass('square')
+        $('.confirm-row').find('.square4').removeClass('square4').addClass('square3')
+        $('.confirm-row').find('.circle-status2').removeClass('circle-status2').addClass('circle-status')
+        $('.confirm-row').find('.content-status2').removeClass('content-status2').addClass('content-status')
+        $('.confirm-row').find('.status-bar-inline').removeClass('status-bar-inline').addClass('status-bar-block')
+
+    }
+});
 
         $('#customer-detail .staff-button-row .lead-row .btn-update-status').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
@@ -2225,7 +2381,68 @@ $(document).ready(function() {
                 html += '</div>'
             }
             html += '</div>'
+            if (val.status == "Confirmed"){
+                for (i = 1; i < 2; i++) {
+                     $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 2; i < 10; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(val.status == "Assigned"){
+                for (i = 1; i < 3; i++) {
+                     $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 3; i < 10; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(val.status == "Engineer Left"){
+                for (i = 1; i < 4; i++) {
+                     $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 4; i < 10; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(val.status == "Reached Workshop"){
+                for (i = 1; i < 5; i++) {
+                     $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 5; i < 10; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(val.status == "Estimate Shared"){
+                for (i = 1; i < 6; i++) {
+                     $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 6; i < 10; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(val.status == "Job Completed"){
+                for (i = 1; i < 7; i++) {
+                     $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 7; i < 10; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(val.status == "Feedback Taken"){
+                for (i = 1; i < 8; i++) {
+                     $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 8; i < 10; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(val.status == "Cancelled"){
+                for (i = 1; i < 8; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+                $('.status-change-8').addClass('selected')
+                $('.status-change-9').removeClass('selected')
 
+            }else if(val.status == "Escalation"){
+                for (i = 1; i < 9; i++) {
+                     $('.status-change-'+i ).removeClass('selected')
+                }
+                $('.status-change-9').addClass('selected')
+            }
             // <----- New Booking Data---->>
             if (val.req_user_agent) {
                 if (val.status == "Engineer Left") {
@@ -2273,7 +2490,10 @@ $(document).ready(function() {
                    $('.bill-row').hide()
             }
 
-            if ( (val.clickgarage_flag != true && val.req_user_staff) || (val.clickgarage_flag != true && val.req_user_admin) ){
+            if (val.clickgarage_flag != true && val.req_user_admin){
+                   $('.staff-button-row').show()
+
+            }else if ( (val.clickgarage_flag != true && val.req_user_staff)){
                    $('.bill-row').hide()
                    $('.staff-button-row').hide()
             }else if(val.req_user_agent){
@@ -2685,7 +2905,9 @@ $(document).ready(function() {
         alert("User updated!")
     },
     loadCustomerAgent:function(data){
-        location.reload();
+         data_id = $('#customer-detail #booking_id').attr('booking_data_id')
+         Global.openbooking_new(data_id)
+        // location.reload();
     },
     updateCart:function(){
         TOTAL_PRICE_ADMIN = 0;
@@ -2981,8 +3203,16 @@ $(document).ready(function() {
         alert('Order Placed!')
     },
     loadCustomerStatus:function(data){
-        alert('Status Updated!')
-        location.reload()
+         data_id = $('#customer-detail #booking_id').attr('booking_data_id')
+         Global.openbooking_new(data_id)
+            // setTimeout(function(){
+            //           openbooking(data_id)
+            //         }, 1000);
+
+        // data_id = $('#customer-detail #booking_id').attr('booking_data_id')
+        // (data_id)
+        // alert('Status Updated!')
+        // location.reload()
     },
     loadLocation:function(data){
         var container = $('input.autocomplete');
@@ -3135,6 +3365,19 @@ $(document).ready(function() {
             location.reload()
         }, 1000);
 
+    },
+    openbooking_new:function(data_id){
+            $('#bookings').hide()
+            $('#booking-details').show()
+            $('#customer-detail .booking-data').show();
+            $('#customer-detail .booking-job-data').hide();
+            $('#customer-detail .service-detail').removeClass('selected')
+            $('#customer-detail .cust-detail').addClass('selected')
+            Commons.ajaxData('view_all_bookings', {data_id:data_id}, "get", Global, Global.loadBookingData,null, '.loading-pane');
+            Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", Global, Global.loadAgentdata,null, '.loading-pane');
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/single/' + data_id
+            history.pushState({},'',new_path)
     }
 };
 

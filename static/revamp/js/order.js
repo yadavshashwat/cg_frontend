@@ -112,7 +112,12 @@ var logoMap = {
     'Full Body':'<img class="" src="/../../static/revamp/img/Panel/Full Body.png">',
 };
 
-
+// $(window).on("popstate", function () {
+//   // if the state is the page you expect, pull the name and load it.
+//   if (history.state) {
+//     load(history.state.name, true);
+//   }
+// });
 
 
 
@@ -381,7 +386,8 @@ var Global = {
                 // console.log(window.location.pathname.split('/').length)
                 if(window.location.pathname.split('/').length == 5){
                     var new_path =  window.location.pathname+classy+'/'
-                    history.pushState({},'',new_path)
+                    var state = {name: "Service Page", page: 'Service Page'};
+                    history.pushState(state,'Service Page',new_path)
                 }
                 $('#services').slideUp('slow', function() {
                     $('#jobs').show();
@@ -429,7 +435,9 @@ var Global = {
                 if(window.location.pathname.split('/').length == 6){
                     var a = window.location.pathname.split('/')
                     var new_path =  a.slice(0,a.length-2).join('/')+'/'+classy+'/'
-                    history.pushState({},'',new_path)
+                    var state = {name: "Service Page", page: 'Service Page'};
+                    history.pushState(state,'Service Page',new_path)
+                    // history.pushState(shate,'',new_path)
                 }
             });
             // Jobs load when dropdownn change list on navbar mobile
@@ -466,7 +474,9 @@ var Global = {
                 if(window.location.pathname.split('/').length == 6){
                     var a = window.location.pathname.split('/')
                     var new_path =  a.slice(0,a.length-2).join('/')+'/'+classy+'/'
-                    history.pushState({},'',new_path)
+                    var state = {name: "Service Page", page: 'Service Page'};
+                    history.pushState(state,'Service Page',new_path)
+                    // history.pushState({},'',new_path)
                 }
             });
 
@@ -615,7 +625,9 @@ var Global = {
             if(window.location.pathname.split('/').length == 6){
                 var a = window.location.pathname.split('/')
                 var new_path =  a.slice(0,a.length-2).join('/')+'/checkout/'
-                history.pushState({},'',new_path)
+                var state = {name: "Checkout Page", page: 'Checkout Page'};
+                history.pushState(state,'Checkout Page',new_path)
+                // history.pushState({},'',new_path)
             }
             name = ""
             number = ""
@@ -1375,7 +1387,7 @@ var Global = {
         $('#booking-details .login').show()
     },
     loadSendbooking:function(data) {
-        console.log("Check")
+        // console.log("Check")
         // $('#confirm-booking').show()
         // $('#booking-details').hide()
         local.clearKey('cgcart')
@@ -1383,9 +1395,24 @@ var Global = {
         
         // ga('require', 'ecommerce');
         // $.each(data['booking'], function(ix, val) {
+        try{
             total= data['booking']['price_total']
+        }catch(e){
+            total = 0
+        }
+
+        try{
             booking_id = data['booking']['booking_id']
+        }catch(e){
+            booking_id = 999999
+        }
+
+        try{
             summary = data['booking']['Summary']
+        }catch(e){
+            summary = "Incomplete Data"
+        }
+
 
             // console.log
             // ga('ecommerce:addTransaction', {
