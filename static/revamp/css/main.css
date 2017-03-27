@@ -401,6 +401,7 @@ footer a:hover{color:#979797;text-decoration:none;}
 .Feedback-Taken{background:green!important;color:white!important;}
 .Cancelled{background:indianred!important;color:white!important;}
 .Escalation{background:red!important;color:white!important;}
+.Follow-Up{background:orangered!important;color:white!important;}
 #bookings .btn-remove-filter{margin-top:5px;width:100%}
 #bookings .box{margin:0px!important;}
 #bookings .box .sort-booking{line-height:50px;text-align:right;font-weight:700;}

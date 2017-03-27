@@ -118,76 +118,76 @@ var Global = {
 //     Url State Management
 // =====================================================================================
 
-$(document).ready(function() {
-     url_list = window.location.pathname.split('/')
-     var sub_page_1      = $('#admin-page-state').attr('sub-page-1')
-     var sub_page_2      = $('#admin-page-state').attr('sub-page-2')
-     var data_id         = $('#admin-page-state').attr('data-id')
-    console.log(sub_page_1)
-    console.log(sub_page_2)
-    console.log(data_id)
+        $(document).ready(function() {
+            url_list = window.location.pathname.split('/')
+            var sub_page_1      = $('#admin-page-state').attr('sub-page-1')
+            var sub_page_2      = $('#admin-page-state').attr('sub-page-2')
+            var data_id         = $('#admin-page-state').attr('data-id')
+            console.log(sub_page_1)
+            console.log(sub_page_2)
+            console.log(data_id)
 
 
-    if (sub_page_1 == "bookings" || typeof(sub_page_1)=="undefined" || sub_page_1 == null || sub_page_1 =="" ){
-        $('.navbar .booking-button').click()
-        if (sub_page_2 == "single"){
-            openbooking(data_id)
-        }else{
+            if (sub_page_1 == "bookings" || typeof(sub_page_1)=="undefined" || sub_page_1 == null || sub_page_1 =="" ){
+                $('.navbar .booking-button').click()
+                if (sub_page_2 == "single"){
+                    openbooking(data_id)
+                }else{
 
-        }
+                }
 
-    }else if(sub_page_1 == "leads"){
-        $('.navbar .lead-button').click()
-        if (sub_page_2 == "single"){
-            try {
-                openbooking(data_id)
+            }else if(sub_page_1 == "leads"){
+                $('.navbar .lead-button').click()
+                if (sub_page_2 == "single"){
+                    try {
+                        openbooking(data_id)
+                    }
+                    catch(err){
+                    }
+                }else{
+
+                }
+            }else if(sub_page_1 == "subscriptions"){
+                $('.navbar .subscription-button').click()
+                if (sub_page_2 == "single"){
+                    $('#subscription-detail .single-subscription').click()
+                    if (data_id != ""){
+                        opensubscription(data_id)
+                    }
+                }else{
+
+
+                }
+
+            }else if(sub_page_1 == "users"){
+                $('.navbar .users-button').click()
+                if (sub_page_2 == "single"){
+                    $('#user-detail .single-user').click()
+                    if (data_id != ""){
+                        openuser(data_id)
+                    }
+                }else{
+
+                }
+            }else if (sub_page_1 == "coupons"){
+                $('.navbar .coupon-button').click()
+                if (sub_page_2 == "single"){
+                    $('#coupon-detail  .single-coupon').click()
+                    if (data_id != ""){
+                        opencoupon(data_id)
+                    }
+                }else{
+
+                }
+
+            }else if (sub_page_1 == "newbooking"){
+                $('.navbar .new-booking-button').click()
+            }else if (sub_page_1 == "newlead"){
+                $('.navbar .new-lead-button').click()
+            }else if (sub_page_1 == "campaign") {
+                $('.navbar .campaign-button').click()
             }
-            catch(err){
-            }
-        }else{
-
-        }
-    }else if(sub_page_1 == "subscriptions"){
-        $('.navbar .subscription-button').click()
-        if (sub_page_2 == "single"){
-                $('#subscription-detail .single-subscription').click()
-            if (data_id != ""){
-                opensubscription(data_id)
-            }
-        }else{
-
-
-        }
-
-    }else if(sub_page_1 == "users"){
-        $('.navbar .users-button').click()
-        if (sub_page_2 == "single"){
-                $('#user-detail .single-user').click()
-            if (data_id != ""){
-                openuser(data_id)
-            }
-        }else{
-
-        }
-    }else if (sub_page_1 == "coupons"){
-        $('.navbar .coupon-button').click()
-        if (sub_page_2 == "single"){
-                $('#coupon-detail  .single-coupon').click()
-            if (data_id != ""){
-                opencoupon(data_id)
-            }
-        }else{
-
-        }
-
-    }else if (sub_page_1 == "newbooking"){
-        $('.navbar .new-booking-button').click()
-    }else if (sub_page_1 == "newlead"){
-        $('.navbar .new-lead-button').click()
-    }else if (sub_page_1 == "campaign") {
-        $('.navbar .campaign-button').click()
-    }
-});
+        });
 
 
 
@@ -198,13 +198,13 @@ $(document).ready(function() {
 
         // Open Bookings
         $('.navbar .booking-button').click(function(event,data){
-             // DATE_TYPE = "";
-             REG_NUMBER = "";
-             CUST_NAME = "";
-             STATUS_TYPE = "";
-             SORT_TYPE = "";
-             BOOKING_ID = "";
-             VEH_TYPE = "";
+            // DATE_TYPE = "";
+            REG_NUMBER = "";
+            CUST_NAME = "";
+            STATUS_TYPE = "";
+            SORT_TYPE = "";
+            BOOKING_ID = "";
+            VEH_TYPE = "";
 
 
             $('#booking-details').hide();
@@ -213,7 +213,7 @@ $(document).ready(function() {
             $('#coupon-details').hide()
             $('#new-booking').hide()
             $('#subscription-details').hide()
-                          $('#campaign-details').hide()
+            $('#campaign-details').hide()
 
             // $('#bookings .delivery-list').show()
             $('#bookings .booking-filter').show();
@@ -246,13 +246,13 @@ $(document).ready(function() {
         });
         // Open Lead
         $('.navbar .lead-button').click(function(event,data){
-             // DATE_TYPE = "";
-             REG_NUMBER = "";
-             CUST_NAME = "";
-             STATUS_TYPE = "";
-             SORT_TYPE = "";
-             BOOKING_ID = "";
-             VEH_TYPE = "";
+            // DATE_TYPE = "";
+            REG_NUMBER = "";
+            CUST_NAME = "";
+            STATUS_TYPE = "";
+            SORT_TYPE = "";
+            BOOKING_ID = "";
+            VEH_TYPE = "";
             $('#booking-details').hide();
             $('#bookings').show()
             $('#user-details').hide()
@@ -474,7 +474,7 @@ $(document).ready(function() {
 
         // Open Individual Booking
 
-          var openbooking = function(data_id){
+        var openbooking = function(data_id){
             $('#bookings').hide()
             $('#booking-details').show()
             $('#customer-detail .booking-data').show();
@@ -733,72 +733,74 @@ $(document).ready(function() {
                 status_id: status_n,
             }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
         });
-        var changestatus = function(bid,status_n){
-              data_id = $('#customer-detail #booking_id').attr('booking_data_id')
-            variable_pass = _this
+
+
+
+        var changestatus_booking = function(bid,status_n){
+            data_id = $('#customer-detail #booking_id').attr('booking_data_id')
             Commons.ajaxData('change_status', {b_id: bid,
                 status_id: status_n,
             }, "get", _this, _this.loadCustomerStatus,null, '.loading-pane');
 
-             if (status_n == "Confirmed"){
+            if (status_n == "Confirmed"){
                 for (i = 1; i < 2; i++) {
-                     $('.status-change-'+i ).addClass('selected')
+                    $('.status-change-'+i ).addClass('selected')
                 }
                 for (i = 2; i < 10; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
+                    $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Assigned"){
                 for (i = 1; i < 3; i++) {
-                     $('.status-change-'+i ).addClass('selected')
+                    $('.status-change-'+i ).addClass('selected')
                 }
                 for (i = 3; i < 10; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
+                    $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Engineer Left"){
                 for (i = 1; i < 4; i++) {
-                     $('.status-change-'+i ).addClass('selected')
+                    $('.status-change-'+i ).addClass('selected')
                 }
                 for (i = 4; i < 10; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
+                    $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Reached Workshop"){
                 for (i = 1; i < 5; i++) {
-                     $('.status-change-'+i ).addClass('selected')
+                    $('.status-change-'+i ).addClass('selected')
                 }
                 for (i = 5; i < 10; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
+                    $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Estimate Shared"){
                 for (i = 1; i < 6; i++) {
-                     $('.status-change-'+i ).addClass('selected')
+                    $('.status-change-'+i ).addClass('selected')
                 }
                 for (i = 6; i < 10; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
+                    $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Job Completed"){
                 for (i = 1; i < 7; i++) {
-                     $('.status-change-'+i ).addClass('selected')
+                    $('.status-change-'+i ).addClass('selected')
                 }
                 for (i = 7; i < 10; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
+                    $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Feedback Taken"){
                 for (i = 1; i < 8; i++) {
-                     $('.status-change-'+i ).addClass('selected')
+                    $('.status-change-'+i ).addClass('selected')
                 }
                 for (i = 8; i < 10; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
+                    $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Cancelled"){
                 for (i = 1; i < 8; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
+                    $('.status-change-'+i ).removeClass('selected')
                 }
                 $('.status-change-8').addClass('selected')
                 $('.status-change-9').removeClass('selected')
 
             }else if(status_n == "Escalation"){
                 for (i = 1; i < 9; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
+                    $('.status-change-'+i ).removeClass('selected')
                 }
                 $('.status-change-9').addClass('selected')
             }
@@ -808,22 +810,85 @@ $(document).ready(function() {
             //           openbooking(data_id)
             //         }, 1000);
 
-            
         }
-        $('#customer-detail .circle-status').click(function(){
+
+
+        var changestatus_lead = function(bid,status_n){
+            data_id = $('#customer-detail #booking_id').attr('booking_data_id')
+            variable_pass = _this
+            Commons.ajaxData('change_status', {b_id: bid,
+                status_id: status_n,
+            }, "get", _this, _this.loadCustomerStatus,null, '.loading-pane');
+
+            if (status_n == "Lead"){
+                for (i = 1; i < 2; i++) {
+                    $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 2; i < 5; i++) {
+                    $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(status_n == "Follow Up"){
+                for (i = 1; i < 3; i++) {
+                    $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 3; i < 5; i++) {
+                    $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(status_n == "Confirmed"){
+                for (i = 1; i < 4; i++) {
+                    $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 4; i < 5; i++) {
+                    $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(status_n == "Cancelled"){
+                for (i = 1; i < 4; i++) {
+                    $('.status-change-'+i ).removeClass('selected')
+                }
+                $('.status-change-4').addClass('selected')
+
+            }
+            // data_id = $('#customer-detail #booking_id').attr('booking_data_id')
+
+            // setTimeout(function(){
+            //           openbooking(data_id)
+            //         }, 1000);
+
+        }
+
+
+
+        $('#customer-detail .confirm-row .circle-status').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $(this).attr('data-class')
             // $(this).addClass('selected')
-            changestatus(bid,status_n)
-            
+            changestatus_booking(bid,status_n)
+
         });
 
-        $('#customer-detail .circle-status2').click(function(){
+        $('#customer-detail .confirm-row .circle-status2').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $(this).attr('data-class')
             $(this).addClass('selected')
-            changestatus(bid,status_n)
+            changestatus_booking(bid,status_n)
         });
+
+        $('#customer-detail .lead-row .circle-status').click(function(){
+            bid = $('#customer-detail #booking_id').attr('booking_id');
+            status_n = $(this).attr('data-class')
+            // $(this).addClass('selected')
+            changestatus_lead(bid,status_n)
+
+        });
+
+        $('#customer-detail .lead-row .circle-status2').click(function(){
+            bid = $('#customer-detail #booking_id').attr('booking_id');
+            status_n = $(this).attr('data-class')
+            $(this).addClass('selected')
+            changestatus_lead(bid,status_n)
+        });
+
+
         $('#customer-detail .agent-button-row .btn-update-status').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $(this).attr('status_next')
@@ -839,74 +904,112 @@ $(document).ready(function() {
                 status_id: status_n,
             }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
         });
-        
-        
+
+
         $(window).load(function() {
-    var viewportWidth = $(window).width();
-    if (viewportWidth <= 600) {
-       $('.status-row-inline').removeClass('status-row-inline').addClass('status-vertical')
-        $('.confirm-row').find('.square').removeClass('square').addClass('square2')
-        $('.confirm-row').find('.square3').removeClass('square3').addClass('square4')
-        $('.confirm-row').find('.circle-status').removeClass('circle-status').addClass('circle-status2')
-        $('.confirm-row').find('.content-status').removeClass('content-status').addClass('content-status2')
-        $('.confirm-row').find('.status-bar-block').removeClass('status-bar-block').addClass('status-bar-inline')
+            var viewportWidth = $(window).width();
+            if (viewportWidth <= 600) {
+                $('.status-row-inline').removeClass('status-row-inline').addClass('status-vertical')
+                $('.confirm-row').find('.square').removeClass('square').addClass('square2')
+                $('.confirm-row').find('.square3').removeClass('square3').addClass('square4')
+                $('.confirm-row').find('.circle-status').removeClass('circle-status').addClass('circle-status2')
+                $('.confirm-row').find('.content-status').removeClass('content-status').addClass('content-status2')
+                $('.confirm-row').find('.status-bar-block').removeClass('status-bar-block').addClass('status-bar-inline')
+
+                $('.lead-row').find('.square').removeClass('square').addClass('square2')
+                $('.lead-row').find('.square3').removeClass('square3').addClass('square4')
+                $('.lead-row').find('.circle-status').removeClass('circle-status').addClass('circle-status2')
+                $('.lead-row').find('.content-status').removeClass('content-status').addClass('content-status2')
+                $('.lead-row').find('.status-bar-block').removeClass('status-bar-block').addClass('status-bar-inline')
 
 
-    }else if (viewportWidth <= 992){
-        $('.status-row-inline').removeClass('status-row-inline').addClass('status-vertical')
-        $('.confirm-row').find('.square').removeClass('square').addClass('square2')
-        $('.confirm-row').find('.square3').removeClass('square3').addClass('square4')
+            }else if (viewportWidth <= 992){
+                $('.status-row-inline').removeClass('status-row-inline').addClass('status-vertical')
+                $('.confirm-row').find('.square').removeClass('square').addClass('square2')
+                $('.confirm-row').find('.square3').removeClass('square3').addClass('square4')
+                $('.confirm-row').find('.circle-status').removeClass('circle-status').addClass('circle-status2')
+                $('.confirm-row').find('.content-status').removeClass('content-status').addClass('content-status2')
+                $('.confirm-row').find('.status-bar-block').removeClass('status-bar-block').addClass('status-bar-inline')
 
-        $('.confirm-row').find('.circle-status').removeClass('circle-status').addClass('circle-status2')
-
-        $('.confirm-row').find('.content-status').removeClass('content-status').addClass('content-status2')
-        $('.confirm-row').find('.status-bar-block').removeClass('status-bar-block').addClass('status-bar-inline')
-
-
-    }else{
-        $('.status-vertical').removeClass('status-vertical').addClass('status-row-inline')
-        $('.confirm-row').find('.square2').removeClass('square2').addClass('square')
-        $('.confirm-row').find('.square4').removeClass('square4').addClass('square3')
-        $('.confirm-row').find('.circle-status2').removeClass('circle-status2').addClass('circle-status')
-        $('.confirm-row').find('.content-status2').removeClass('content-status2').addClass('content-status')
-        $('.confirm-row').find('.status-bar-inline').removeClass('status-bar-inline').addClass('status-bar-block')
-
-    }
-
-});
-
-$(window).resize(function() {
-    var viewportWidth = $(window).width();
-    if (viewportWidth <= 600) {
-       $('.status-row-inline').removeClass('status-row-inline').addClass('status-vertical')
-        $('.confirm-row').find('.square').removeClass('square').addClass('square2')
-        $('.confirm-row').find('.square3').removeClass('square3').addClass('square4')
-        $('.confirm-row').find('.circle-status').removeClass('circle-status').addClass('circle-status2')
-        $('.confirm-row').find('.content-status').removeClass('content-status').addClass('content-status2')
-        $('.confirm-row').find('.status-bar-block').removeClass('status-bar-block').addClass('status-bar-inline')
+                $('.lead-row').find('.square').removeClass('square').addClass('square2')
+                $('.lead-row').find('.square3').removeClass('square3').addClass('square4')
+                $('.lead-row').find('.circle-status').removeClass('circle-status').addClass('circle-status2')
+                $('.lead-row').find('.content-status').removeClass('content-status').addClass('content-status2')
+                $('.lead-row').find('.status-bar-block').removeClass('status-bar-block').addClass('status-bar-inline')
 
 
-    }else if (viewportWidth <= 992){
-        $('.status-row-inline').removeClass('status-row-inline').addClass('status-vertical')
-        $('.confirm-row').find('.square').removeClass('square').addClass('square2')
-        $('.confirm-row').find('.square3').removeClass('square3').addClass('square4')
-
-        $('.confirm-row').find('.circle-status').removeClass('circle-status').addClass('circle-status2')
-
-        $('.confirm-row').find('.content-status').removeClass('content-status').addClass('content-status2')
-        $('.confirm-row').find('.status-bar-block').removeClass('status-bar-block').addClass('status-bar-inline')
 
 
-    }else{
-        $('.status-vertical').removeClass('status-vertical').addClass('status-row-inline')
-        $('.confirm-row').find('.square2').removeClass('square2').addClass('square')
-        $('.confirm-row').find('.square4').removeClass('square4').addClass('square3')
-        $('.confirm-row').find('.circle-status2').removeClass('circle-status2').addClass('circle-status')
-        $('.confirm-row').find('.content-status2').removeClass('content-status2').addClass('content-status')
-        $('.confirm-row').find('.status-bar-inline').removeClass('status-bar-inline').addClass('status-bar-block')
 
-    }
-});
+            }else{
+                $('.status-vertical').removeClass('status-vertical').addClass('status-row-inline')
+                $('.confirm-row').find('.square2').removeClass('square2').addClass('square')
+                $('.confirm-row').find('.square4').removeClass('square4').addClass('square3')
+                $('.confirm-row').find('.circle-status2').removeClass('circle-status2').addClass('circle-status')
+                $('.confirm-row').find('.content-status2').removeClass('content-status2').addClass('content-status')
+                $('.confirm-row').find('.status-bar-inline').removeClass('status-bar-inline').addClass('status-bar-block')
+
+                $('.lead-row').find('.square2').removeClass('square2').addClass('square')
+                $('.lead-row').find('.square4').removeClass('square4').addClass('square3')
+                $('.lead-row').find('.circle-status2').removeClass('circle-status2').addClass('circle-status')
+                $('.lead-row').find('.content-status2').removeClass('content-status2').addClass('content-status')
+                $('.lead-row').find('.status-bar-inline').removeClass('status-bar-inline').addClass('status-bar-block')
+
+            }
+
+        });
+
+        $(window).resize(function() {
+            var viewportWidth = $(window).width();
+            if (viewportWidth <= 600) {
+                $('.status-row-inline').removeClass('status-row-inline').addClass('status-vertical')
+                $('.confirm-row').find('.square').removeClass('square').addClass('square2')
+                $('.confirm-row').find('.square3').removeClass('square3').addClass('square4')
+                $('.confirm-row').find('.circle-status').removeClass('circle-status').addClass('circle-status2')
+                $('.confirm-row').find('.content-status').removeClass('content-status').addClass('content-status2')
+                $('.confirm-row').find('.status-bar-block').removeClass('status-bar-block').addClass('status-bar-inline')
+
+                $('.lead-row').find('.square').removeClass('square').addClass('square2')
+                $('.lead-row').find('.square3').removeClass('square3').addClass('square4')
+                $('.lead-row').find('.circle-status').removeClass('circle-status').addClass('circle-status2')
+                $('.lead-row').find('.content-status').removeClass('content-status').addClass('content-status2')
+                $('.lead-row').find('.status-bar-block').removeClass('status-bar-block').addClass('status-bar-inline')
+
+
+            }else if (viewportWidth <= 992){
+                $('.status-row-inline').removeClass('status-row-inline').addClass('status-vertical')
+                $('.confirm-row').find('.square').removeClass('square').addClass('square2')
+                $('.confirm-row').find('.square3').removeClass('square3').addClass('square4')
+                $('.confirm-row').find('.circle-status').removeClass('circle-status').addClass('circle-status2')
+                $('.confirm-row').find('.content-status').removeClass('content-status').addClass('content-status2')
+                $('.confirm-row').find('.status-bar-block').removeClass('status-bar-block').addClass('status-bar-inline')
+
+                $('.lead-row').find('.square').removeClass('square').addClass('square2')
+                $('.lead-row').find('.square3').removeClass('square3').addClass('square4')
+                $('.lead-row').find('.circle-status').removeClass('circle-status').addClass('circle-status2')
+                $('.lead-row').find('.content-status').removeClass('content-status').addClass('content-status2')
+                $('.lead-row').find('.status-bar-block').removeClass('status-bar-block').addClass('status-bar-inline')
+
+
+
+
+
+            }else{
+                $('.status-vertical').removeClass('status-vertical').addClass('status-row-inline')
+                $('.confirm-row').find('.square2').removeClass('square2').addClass('square')
+                $('.confirm-row').find('.square4').removeClass('square4').addClass('square3')
+                $('.confirm-row').find('.circle-status2').removeClass('circle-status2').addClass('circle-status')
+                $('.confirm-row').find('.content-status2').removeClass('content-status2').addClass('content-status')
+                $('.confirm-row').find('.status-bar-inline').removeClass('status-bar-inline').addClass('status-bar-block')
+
+                $('.lead-row').find('.square2').removeClass('square2').addClass('square')
+                $('.lead-row').find('.square4').removeClass('square4').addClass('square3')
+                $('.lead-row').find('.circle-status2').removeClass('circle-status2').addClass('circle-status')
+                $('.lead-row').find('.content-status2').removeClass('content-status2').addClass('content-status')
+                $('.lead-row').find('.status-bar-inline').removeClass('status-bar-inline').addClass('status-bar-block')
+
+            }
+        });
 
         $('#customer-detail .staff-button-row .lead-row .btn-update-status').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
@@ -921,7 +1024,7 @@ $(window).resize(function() {
 // =====================================================================================
 
 
-     // -- Load Subscription
+        // -- Load Subscription
         $('.navbar .subscription-button').click(function(){
             // console.log('check')
             $('#booking-details').hide()
@@ -930,7 +1033,7 @@ $(window).resize(function() {
             $('#coupon-details').hide()
             $('#subscription-details').show()
             $('#new-booking').hide()
-                          $('#campaign-details').hide()
+            $('#campaign-details').hide()
 
             $('#subscription-detail .subscription-list').show()
             $('#subscription-detail .subscription-add-mod').hide()
@@ -947,19 +1050,19 @@ $(window).resize(function() {
             if (veh_type == "Car"){
                 $('.make-model-prefix').removeClass('fa-motorcycle').addClass('fa-car')
             }else{
-                 $('.make-model-prefix').removeClass('fa-car').addClass('fa-motorcycle')
+                $('.make-model-prefix').removeClass('fa-car').addClass('fa-motorcycle')
             }
 
-             Commons.ajaxData('get_type_make', {vehicle_type: veh_type}, "get", _this, _this.loadBrands2);
+            Commons.ajaxData('get_type_make', {vehicle_type: veh_type}, "get", _this, _this.loadBrands2);
 
         }
         $('#subscription-detail #sub_veh_type').change(callBrands2)
         // --- Load Models
         $('#subscription-detail #sub_veh_make').change(function(){
-             veh_type                = $('#sub_veh_type').find('select').val()
-             veh_make                = $('#sub_veh_make').find('select').val()
+            veh_type                = $('#sub_veh_type').find('select').val()
+            veh_make                = $('#sub_veh_make').find('select').val()
 
-             console.log(veh_type)
+            console.log(veh_type)
             Commons.ajaxData('get_make_model', {make_id: veh_make, vehicle_type: veh_type}, "get", _this, _this.loadModels2);
         })
 
@@ -999,112 +1102,112 @@ $(window).resize(function() {
             active_box              =  document.getElementById('policy_active');
             pol_active              = active_box.checked
             status = $('#sub_status').find('select').val()
-             error = 0
-                if(cust_fname==""){
-                    $('#firstname').addClass("invalid");
-                    error = 1;
-                }
-                if(cust_lname==""){
-                    $('#lastname').addClass("invalid");
-                    error = 1;
-                }
-                if(cust_add==""){
-                    $('#sub_address').addClass("invalid");
-                    error = 1;
-                }
-                if(cust_loc==""){
-                    $('#sub_locality').addClass("invalid");
-                    error = 1;
-                }
-                if(cust_city==""){
-                    $('#sub_city').addClass("invalid");
-                    error = 1;
-                }
-                if(cust_state==""){
-                    $('#sub_state').addClass("invalid");
-                    error = 1;
-                }
-               if(make == "" || model == "" ||make == "Make" || model == "Model" ) {
-                   $('#choose-vehicle-error').text('Please select vehicle');
-                    error = 1;
-                }
+            error = 0
+            if(cust_fname==""){
+                $('#firstname').addClass("invalid");
+                error = 1;
+            }
+            if(cust_lname==""){
+                $('#lastname').addClass("invalid");
+                error = 1;
+            }
+            if(cust_add==""){
+                $('#sub_address').addClass("invalid");
+                error = 1;
+            }
+            if(cust_loc==""){
+                $('#sub_locality').addClass("invalid");
+                error = 1;
+            }
+            if(cust_city==""){
+                $('#sub_city').addClass("invalid");
+                error = 1;
+            }
+            if(cust_state==""){
+                $('#sub_state').addClass("invalid");
+                error = 1;
+            }
+            if(make == "" || model == "" ||make == "Make" || model == "Model" ) {
+                $('#choose-vehicle-error').text('Please select vehicle');
+                error = 1;
+            }
 
-                if(cust_num_p <= 100000000 || cust_num_p >= 9999999999){
-                    $('#sub_telephone').addClass("invalid");
-                    error = 1;
-                }
+            if(cust_num_p <= 100000000 || cust_num_p >= 9999999999){
+                $('#sub_telephone').addClass("invalid");
+                error = 1;
+            }
 
-                if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(cust_email)){
-                    $('#sub_email').addClass("valid");
-                    // error = 1;
-                }else{
-                    $('#sub_email').addClass("invalid");
-                    error =1;
-                }
-                if(vehicle_vin==""){
-                    $('#sub_vin_number').addClass("invalid");
-                    error = 1;
-                }
-                if(vehicle_regno==""){
-                    $('#sub_reg_number').addClass("invalid");
-                    error = 1;
-                }
-                if(date_veh_purchase==""){
-                    $('#sub_date_purchase').addClass("invalid");
-                    error = 1;
-                }
-                if(date_start==""){
-                    $('#sub_date_start').addClass("invalid");
-                    error = 1;
-                }
-                if(date_end==""){
-                    $('#sub_date_end').addClass("invalid");
-                    error = 1;
-                }
-                if(sub_type==""){
-                    $('#sub_category').addClass("invalid");
-                    error = 1;
-                }
-                if(pack_name==""){
-                    $('#sub_package_name').addClass("invalid");
-                    error = 1;
-                }
-
-
-                if(error==1){
-                    return;
-                }else{
-
-                    Commons.ajaxData('add_modify_subscription', {
-                                                            sub_id          : sub_id,
-                                                            cust_fname      :cust_fname           ,
-                                                            cust_lname           :cust_lname           ,
-                                                            cust_num_p           :cust_num_p           ,
-                                                            cust_num_s           :cust_num_s           ,
-                                                            cust_email           :cust_email           ,
-                                                            cust_add             :cust_add             ,
-                                                            cust_loc             :cust_loc             ,
-                                                            cust_city            :cust_city            ,
-                                                            cust_state           :cust_state           ,
-                                                            make                 :make                 ,
-                                                            veh_type             :veh_type             ,
-                                                            fuel                 :fuel                 ,
-                                                            model                :model                ,
-                                                            vehicle_vin          :vehicle_vin          ,
-                                                            vehicle_regno        :vehicle_regno        ,
-                                                            sub_type             :sub_type             ,
-                                                            pack_name            :pack_name            ,
-                                                            date_veh_purchase    :date_veh_purchase    ,
-                                                            comment              :comment              ,
-                                                            date_start           :date_start    ,
-                                                            date_end             :date_end    ,
-                                                            is_active            :pol_active    ,
-                                                            status : status
-
-                                                            }, "get", _this, _this.loadSubscriptionModify);
+            if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(cust_email)){
+                $('#sub_email').addClass("valid");
+                // error = 1;
+            }else{
+                $('#sub_email').addClass("invalid");
+                error =1;
+            }
+            if(vehicle_vin==""){
+                $('#sub_vin_number').addClass("invalid");
+                error = 1;
+            }
+            if(vehicle_regno==""){
+                $('#sub_reg_number').addClass("invalid");
+                error = 1;
+            }
+            if(date_veh_purchase==""){
+                $('#sub_date_purchase').addClass("invalid");
+                error = 1;
+            }
+            if(date_start==""){
+                $('#sub_date_start').addClass("invalid");
+                error = 1;
+            }
+            if(date_end==""){
+                $('#sub_date_end').addClass("invalid");
+                error = 1;
+            }
+            if(sub_type==""){
+                $('#sub_category').addClass("invalid");
+                error = 1;
+            }
+            if(pack_name==""){
+                $('#sub_package_name').addClass("invalid");
+                error = 1;
+            }
 
 
-                }
+            if(error==1){
+                return;
+            }else{
+
+                Commons.ajaxData('add_modify_subscription', {
+                    sub_id          : sub_id,
+                    cust_fname      :cust_fname           ,
+                    cust_lname           :cust_lname           ,
+                    cust_num_p           :cust_num_p           ,
+                    cust_num_s           :cust_num_s           ,
+                    cust_email           :cust_email           ,
+                    cust_add             :cust_add             ,
+                    cust_loc             :cust_loc             ,
+                    cust_city            :cust_city            ,
+                    cust_state           :cust_state           ,
+                    make                 :make                 ,
+                    veh_type             :veh_type             ,
+                    fuel                 :fuel                 ,
+                    model                :model                ,
+                    vehicle_vin          :vehicle_vin          ,
+                    vehicle_regno        :vehicle_regno        ,
+                    sub_type             :sub_type             ,
+                    pack_name            :pack_name            ,
+                    date_veh_purchase    :date_veh_purchase    ,
+                    comment              :comment              ,
+                    date_start           :date_start    ,
+                    date_end             :date_end    ,
+                    is_active            :pol_active    ,
+                    status : status
+
+                }, "get", _this, _this.loadSubscriptionModify);
+
+
+            }
         });
         // -- Modify Subscription
 
@@ -1164,7 +1267,7 @@ $(window).resize(function() {
             $('#sub_date_start').val('');
             $('#sub_date_end').val('');
             $('#sub_status').val('Under Review');
-             document.getElementById("policy_active").checked = false;
+            document.getElementById("policy_active").checked = false;
             Materialize.updateTextFields();
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/single/'
@@ -1187,7 +1290,7 @@ $(window).resize(function() {
             $('#coupon-details').show()
             $('#new-booking').hide()
             $('#subscription-details').hide()
-                          $('#campaign-details').hide()
+            $('#campaign-details').hide()
 
             $('#coupon-detail  .all-coupon').click()
             Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
@@ -1332,7 +1435,7 @@ $(window).resize(function() {
 //    SMS Management
 // =====================================================================================
 
-          $('.navbar .campaign-button').click(function(){
+        $('.navbar .campaign-button').click(function(){
 
             // console.log('check')
             $('#booking-details').hide()
@@ -1348,13 +1451,13 @@ $(window).resize(function() {
             history.pushState({},'',new_path)
 
         });
-         $('#campaign-details .send-sms-campaign').click(function() {
+        $('#campaign-details .send-sms-campaign').click(function() {
             message =     $('#sms_campaign_message').val()
-             Commons.ajaxData('send_sms_campaign',  {message: message}, "get", _this, _this.loadCampaign,null, '.loading-pane');
+            Commons.ajaxData('send_sms_campaign',  {message: message}, "get", _this, _this.loadCampaign,null, '.loading-pane');
 
-             // Commons.ajaxData('send_sms_campaign', {message: message}, "get", _this, _this.loadModels);
+            // Commons.ajaxData('send_sms_campaign', {message: message}, "get", _this, _this.loadModels);
 
-             });
+        });
 // =====================================================================================
 //    New Booking
 // =====================================================================================
@@ -1369,7 +1472,7 @@ $(window).resize(function() {
             $('#coupon-details').hide()
             $('#new-booking').show()
             $('#subscription-details').hide()
-              $('#campaign-details').hide()
+            $('#campaign-details').hide()
             container = $('#new-booking .source-list')
             container.html('')
             html = ""
@@ -1409,7 +1512,7 @@ $(window).resize(function() {
             $('#coupon-details').hide()
             $('#new-booking').show()
             $('#subscription-details').hide()
-          $('#campaign-details').hide()
+            $('#campaign-details').hide()
 
             container = $('#new-booking .source-list')
             container.html('')
@@ -1746,7 +1849,7 @@ $(window).resize(function() {
             $('#coupon-details').hide()
             $('#new-booking').hide()
             $('#subscription-details').hide()
-           $('#campaign-details').hide()
+            $('#campaign-details').hide()
 
             $('#user-detail .all-user').click()
 
@@ -1906,7 +2009,7 @@ $(window).resize(function() {
             $('#user-detail #agent_stax').val('')
             $('#user-detail #agent_sms_credits').val('')
 
-             var path = window.location.pathname.split('/')
+            var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/single/'
             history.pushState({},'',new_path)
         });
@@ -2065,10 +2168,10 @@ $(window).resize(function() {
             html2 += '											<th data-field="number">Number</th>';
             html2 += '											<th data-field="email">Email</th>';
             if (val.req_user_staff || val.req_user_admin){
-            html2 += '											<th data-field="agent">Engineer</th>';
-            html2 += '											<th data-field="b2b">B2B</th>';
-            html2 += '											<th data-field="staff">Staff</th>';
-            html2 += '											<th data-field="admin">Admin</th>';
+                html2 += '											<th data-field="agent">Engineer</th>';
+                html2 += '											<th data-field="b2b">B2B</th>';
+                html2 += '											<th data-field="staff">Staff</th>';
+                html2 += '											<th data-field="admin">Admin</th>';
             }
             html2 += '											<th data-field="modify"></th>';
             html2 += '										</tr>';
@@ -2081,28 +2184,28 @@ $(window).resize(function() {
             html += '											<td>'+val.first_name+' '+val.last_name+'</td>';
             html += '											<td>'+val.phone+'</td>';
             html += '											<td>'+val.email_primary+'</td>';
-             if (val.req_user_staff || val.req_user_admin) {
-                 if (val.agent) {
-                     html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
-                 } else {
-                     html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
-                 }
-                 if (val.b2b) {
-                     html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
-                 } else {
-                     html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
-                 }
-                 if (val.staff) {
-                     html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
-                 } else {
-                     html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
-                 }
-                 if (val.admin) {
-                     html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
-                 } else {
-                     html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
-                 }
-             }
+            if (val.req_user_staff || val.req_user_admin) {
+                if (val.agent) {
+                    html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
+                } else {
+                    html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
+                }
+                if (val.b2b) {
+                    html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
+                } else {
+                    html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
+                }
+                if (val.staff) {
+                    html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
+                } else {
+                    html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
+                }
+                if (val.admin) {
+                    html += '											<td><i style="color:green" class="fa fa-circle"></i></td>';
+                } else {
+                    html += '											<td><i style="color:red" class="fa fa-circle"></i></td>';
+                }
+            }
             html += '											<td style="color:purple; cursor:pointer" class="modify-btn"><i class="fa fa-pencil"></i></td>';
             html += '										</tr>';
             i=i+1
@@ -2170,7 +2273,7 @@ $(window).resize(function() {
 
             }
             try {
-                 $('#user-detail #agent_sms_credits').val(val.agent_sms_credits);
+                $('#user-detail #agent_sms_credits').val(val.agent_sms_credits);
             } catch (e){
 
             }
@@ -2381,70 +2484,170 @@ $(window).resize(function() {
                 html += '</div>'
             }
             html += '</div>'
-            if (val.status == "Confirmed"){
-                for (i = 1; i < 2; i++) {
-                     $('.status-change-'+i ).addClass('selected')
-                }
-                for (i = 2; i < 10; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
-                }
-            }else if(val.status == "Assigned"){
-                for (i = 1; i < 3; i++) {
-                     $('.status-change-'+i ).addClass('selected')
-                }
-                for (i = 3; i < 10; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
-                }
-            }else if(val.status == "Engineer Left"){
-                for (i = 1; i < 4; i++) {
-                     $('.status-change-'+i ).addClass('selected')
-                }
-                for (i = 4; i < 10; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
-                }
-            }else if(val.status == "Reached Workshop"){
-                for (i = 1; i < 5; i++) {
-                     $('.status-change-'+i ).addClass('selected')
-                }
-                for (i = 5; i < 10; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
-                }
-            }else if(val.status == "Estimate Shared"){
-                for (i = 1; i < 6; i++) {
-                     $('.status-change-'+i ).addClass('selected')
-                }
-                for (i = 6; i < 10; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
-                }
-            }else if(val.status == "Job Completed"){
-                for (i = 1; i < 7; i++) {
-                     $('.status-change-'+i ).addClass('selected')
-                }
-                for (i = 7; i < 10; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
-                }
-            }else if(val.status == "Feedback Taken"){
-                for (i = 1; i < 8; i++) {
-                     $('.status-change-'+i ).addClass('selected')
-                }
-                for (i = 8; i < 10; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
-                }
-            }else if(val.status == "Cancelled"){
-                for (i = 1; i < 8; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
-                }
-                $('.status-change-8').addClass('selected')
-                $('.status-change-9').removeClass('selected')
 
-            }else if(val.status == "Escalation"){
-                for (i = 1; i < 9; i++) {
-                     $('.status-change-'+i ).removeClass('selected')
+            if (val.booking_flag){
+                if (val.status == "Confirmed"){
+                    for (i = 1; i < 2; i++) {
+                        $('.status-change-'+i ).addClass('selected')
+                    }
+                    for (i = 2; i < 10; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                }else if(val.status == "Assigned"){
+                    for (i = 1; i < 3; i++) {
+                        $('.status-change-'+i ).addClass('selected')
+                    }
+                    for (i = 3; i < 10; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                }else if(val.status == "Engineer Left"){
+                    for (i = 1; i < 4; i++) {
+                        $('.status-change-'+i ).addClass('selected')
+                    }
+                    for (i = 4; i < 10; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                }else if(val.status == "Reached Workshop"){
+                    for (i = 1; i < 5; i++) {
+                        $('.status-change-'+i ).addClass('selected')
+                    }
+                    for (i = 5; i < 10; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                }else if(val.status == "Estimate Shared"){
+                    for (i = 1; i < 6; i++) {
+                        $('.status-change-'+i ).addClass('selected')
+                    }
+                    for (i = 6; i < 10; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                }else if(val.status == "Job Completed"){
+                    for (i = 1; i < 7; i++) {
+                        $('.status-change-'+i ).addClass('selected')
+                    }
+                    for (i = 7; i < 10; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                }else if(val.status == "Feedback Taken"){
+                    for (i = 1; i < 8; i++) {
+                        $('.status-change-'+i ).addClass('selected')
+                    }
+                    for (i = 8; i < 10; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                }else if(val.status == "Cancelled"){
+                    for (i = 1; i < 8; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                    $('.status-change-8').addClass('selected')
+                    $('.status-change-9').removeClass('selected')
+
+                }else if(val.status == "Escalation"){
+                    for (i = 1; i < 9; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                    $('.status-change-9').addClass('selected')
+                }}else{
+                if (val.status == "Lead"){
+                    for (i = 1; i < 2; i++) {
+                        $('.status-change-'+i ).addClass('selected')
+                    }
+                    for (i = 2; i < 5; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                }else if(val.status == "Follow Up"){
+                    for (i = 1; i < 3; i++) {
+                        $('.status-change-'+i ).addClass('selected')
+                    }
+                    for (i = 3; i < 5; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                }else if(val.status == "Confirmed"){
+                    for (i = 1; i < 4; i++) {
+                        $('.status-change-'+i ).addClass('selected')
+                    }
+                    for (i = 4; i < 5; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                }else if(val.status == "Cancelled"){
+                    for (i = 1; i < 4; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                    $('.status-change-4').addClass('selected')
+
                 }
-                $('.status-change-9').addClass('selected')
             }
             // <----- New Booking Data---->>
-            if (val.req_user_agent) {
+
+
+
+
+
+
+
+            if (val.req_user_admin){
+
+                // Lead/ Booking Diff
+                if(val.booking_flag){
+                    $('#customer-detail .lead-row').hide()
+                    $('#customer-detail .confirm-row').show()
+
+                }else{
+                    $('#customer-detail .lead-row').show()
+                    $('#customer-detail .confirm-row').hide()
+
+                }
+
+
+                if (val.agent_details=="Not Assigned"){
+                    $('.bill-row').hide()
+                }else if (!val.bill_generation_flag){
+                    $('#customer-detail .non-generated-bill').show()
+                    $('#customer-detail .generated-bill').hide()
+
+                }else{
+                    $('#customer-detail .non-generated-bill').show()
+                    $('#customer-detail .generated-bill').hide()
+                }
+
+
+
+            }else if (val.req_user_staff){
+                // Lead/ Booking Diff
+
+                if(val.booking_flag){
+                    $('#customer-detail .lead-row').hide()
+                    $('#customer-detail .confirm-row').show()
+
+                }else{
+                    $('#customer-detail .lead-row').show()
+                    $('#customer-detail .confirm-row').hide()
+
+                }
+
+
+                if (val.clickgarage_flag != true) {
+                    $('.staff-button-row').hide()
+                }
+
+                if (val.agent_details=="Not Assigned" || val.clickgarage_flag != true){
+                    $('.bill-row').hide()
+
+                }else if (!val.bill_generation_flag){
+                    $('#customer-detail .non-generated-bill').show()
+                    $('#customer-detail .generated-bill').hide()
+
+                }else{
+                    $('#customer-detail .non-generated-bill').show()
+                    $('#customer-detail .generated-bill').hide()
+                }
+
+
+
+
+
+            }else if(val.req_user_agent){
+
                 if (val.status == "Engineer Left") {
                     $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1').show()
                     $('#customer-detail .booking-data .agent-button-row .btn-update-status.status-btn-1').attr("status_next", "Job Completed")
@@ -2452,72 +2655,59 @@ $(window).resize(function() {
                     $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-2').attr("status_next", "Reached Workshop")
                     $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-2').show()
                     $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-2 #status_change-2').text("Reached Workshop")
-                // } else if (val.status == "Reached Workshop") {
-                //     $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').hide()
-                //     $('#customer-detail .booking-data .agent-button-row .btn-update-status.status-btn-2').hide()
-                } else {
+                    // } else if (val.status == "Reached Workshop") {
+                    //     $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').hide()
+                    //     $('#customer-detail .booking-data .agent-button-row .btn-update-status.status-btn-2').hide()
+                }else  if (val.status == "Job Completed" || val.status == "Feedback Taken") {
+                    $('#customer-detail.agent-button-row').hide()
+                    $('#customer-detail .agent-button-row').hide()
+
+                }else{
                     $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').attr("status_next", val.status_next)
                     $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1 #status_change-1').text(val.status_next)
                     $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-2').hide()
                     $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').show()
                 }
 
-                if (val.status == "Job Completed" || val.status == "Feedback Taken") {
-                    $('#customer-detail.agent-button-row').hide()
-                    $('#customer-detail .agent-button-row').hide()
-                    console.log('Check')
-                } else {
-                    // console.log('Check')
-                    $('#customer-detail .agent-button-row').show()
+                if (val.clickgarage_flag == true){
+                    $('.bill-row').hide()
+                }else if (!val.bill_generation_flag){
+
+                   $('#customer-detail .non-generated-bill').show()
+                    $('#customer-detail .generated-bill').hide()
+
+                }else{
+                    $('#customer-detail .non-generated-bill').show()
+                    $('#customer-detail .generated-bill').hide()
                 }
-            }
-            if (val.req_user_b2b){
+
+            }else if (val.req_user_b2b){
                 if (val.status == "Confirmed"){
                     $('#customer-detail .b2b-button-row-1').show()
                 }else{
                     $('#customer-detail .b2b-button-row-1').hide()
                 }
+
                 if (val.status == "Job Completed" || val.status == "Feedback Taken" || val.status == "Cancelled"){
                     $('#customer-detail .b2b-button-row-2').hide()
                 }else{
                     $('#customer-detail .b2b-button-row-2').show()
                 }
-            }
-            if (val.agent_details=="Not Assigned"){
-                $('.bill-row').hide()
-            }
-            if (val.clickgarage_flag && val.req_user_agent){
-                   $('.bill-row').hide()
-            }
 
-            if (val.clickgarage_flag != true && val.req_user_admin){
-                   $('.staff-button-row').show()
-
-            }else if ( (val.clickgarage_flag != true && val.req_user_staff)){
-                   $('.bill-row').hide()
-                   $('.staff-button-row').hide()
-            }else if(val.req_user_agent){
-                $('.staff-button-row').hide()
-            }else{
-                   $('.staff-button-row').show()
-            }
-            // if ( (val.clickgarage_flag != true && val.req_user_staff)){
-            //        // $('.bill-row').hide()
-            //     $
-            // }
-
-
-
-            if (val.req_user_staff || val.req_user_admin){
-                if(val.status == "Lead"){
-                    $('#customer-detail .lead-row').show()
-                    $('#customer-detail .confirm-row').hide()
+                if (!val.bill_generation_flag){
+                    $('#customer-detail .generated-bill').hide()
 
                 }else{
-                    $('#customer-detail .lead-row').hide()
-                    $('#customer-detail .confirm-row').show()
+                    $('#customer-detail .generated-bill').show()
                 }
+
+
             }
+
+
+
+
+
             date_string = val.date_booking
             if (val.delivery_date==null){
                 // console.log("1")
@@ -2530,13 +2720,7 @@ $(window).resize(function() {
                 date_delivery_string = val.delivery_date
             }
 
-            $('#customer-detail .generated-bill').show()
-            $('#customer-detail .non-generated-bill').hide()
-            // console.log('1')
-            if (!val.bill_generation_flag){
-                $('#customer-detail .generated-bill').hide()
-                $('#customer-detail .non-generated-bill').show()
-            }
+
         })
         container.html(html);
         var $input = $('#customer-detail #date.datepicker').pickadate({
@@ -2556,16 +2740,12 @@ $(window).resize(function() {
 
         var picker2 = $input2.pickadate('picker')
         picker2.set('select', date_delivery_string, { format: 'dd-mm-yyyy' })
-        // container.find('.datepicker').pickadate({
-        //     format: 'dd-mm-yyyy',
-        //     closeOnSelect: true,
-        //     formatSubmit: undefined,
-        //
-        // });
+
         TOTAL_ITEM_ESTIMATE = 0;
         var container2 = $('#customer-detail .booking-job-data .pre-data');
         container2.html('');
         html = ''
+        TO_SHOW_TOTAL = 0
         // Service Table Start
         $.each(data, function(ix, val) {
             html += '                               <div class="desc-content col s12 m12 l10 offset-l1">';
@@ -2577,6 +2757,7 @@ $(window).resize(function() {
             html += '                                           <th data-field="action">Type</th>';
             // html += '                                            <th data-field="part">Type</th>';
             if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff || val.req_user_agent){
+                TO_SHOW_TOTAL = 1
                 html += '                                           <th data-field="unit">Units</th>';
                 html += '                                           <th data-field="unit_price">Unit Price (Rs.)</th>';
                 html += '                                           <th data-field="price">Item Price (Rs.)</th>';
@@ -2785,6 +2966,7 @@ $(window).resize(function() {
                         }
                     }
                 }
+
                 // Settlemet Status
                 if (val.req_user_admin || val.req_user_staff) {
                     html += '<td>' + '<div class="input-field sort" id ="settle_type"><select  class="browser-default">'
@@ -2877,11 +3059,17 @@ $(window).resize(function() {
                 html += '                                       </tr>';
             }
 
+
         })
 
         // Service Table End
         container2.html(html);
-        $('#customer-detail .total-amount').text(TOTAL_PRICE_ADMIN)
+        if (TO_SHOW_TOTAL == 1){
+            $('#customer-detail .total-amount').text(TOTAL_PRICE_ADMIN)
+        }else{
+             $('#customer-detail .total-amount').text("TBD")
+
+        }
         // container2.find('select').material_select();
         Materialize.updateTextFields();
         // <div class="id_100">
@@ -2905,8 +3093,8 @@ $(window).resize(function() {
         alert("User updated!")
     },
     loadCustomerAgent:function(data){
-         data_id = $('#customer-detail #booking_id').attr('booking_data_id')
-         Global.openbooking_new(data_id)
+        data_id = $('#customer-detail #booking_id').attr('booking_data_id')
+        Global.openbooking_new(data_id)
         // location.reload();
     },
     updateCart:function(){
@@ -2999,7 +3187,7 @@ $(window).resize(function() {
             if (val.active){
                 document.getElementById("coupon_active").checked = true;
             } else {
-                 document.getElementById("coupon_active").checked = false;
+                document.getElementById("coupon_active").checked = false;
             }
 
         });
@@ -3189,25 +3377,25 @@ $(window).resize(function() {
         // console.log(date)
     },
     loadSendbookingAdmin:function(data){
-            var pocname = $('#new-booking #namepoc').val('');
-            var pocnumber = $('#new-booking #telephonepoc').val('');
-            var date = $('#date').val('');
-            // var otp = $('#otp').val();
-            var comment = $('#comment').val('');
-            // cookie = local.load();
-            // var fuel = $('#select-fuel').find('select').val();
-            // console.log()
-            var reg_num = $('#reg_number').val('');
-            // var coupon = cookie['coupon']
-            var time = $('#time-slot').find('select').val('');
+        var pocname = $('#new-booking #namepoc').val('');
+        var pocnumber = $('#new-booking #telephonepoc').val('');
+        var date = $('#date').val('');
+        // var otp = $('#otp').val();
+        var comment = $('#comment').val('');
+        // cookie = local.load();
+        // var fuel = $('#select-fuel').find('select').val();
+        // console.log()
+        var reg_num = $('#reg_number').val('');
+        // var coupon = cookie['coupon']
+        var time = $('#time-slot').find('select').val('');
         alert('Order Placed!')
     },
     loadCustomerStatus:function(data){
-         data_id = $('#customer-detail #booking_id').attr('booking_data_id')
-         Global.openbooking_new(data_id)
-            // setTimeout(function(){
-            //           openbooking(data_id)
-            //         }, 1000);
+        data_id = $('#customer-detail #booking_id').attr('booking_data_id')
+        Global.openbooking_new(data_id)
+        // setTimeout(function(){
+        //           openbooking(data_id)
+        //         }, 1000);
 
         // data_id = $('#customer-detail #booking_id').attr('booking_data_id')
         // (data_id)
@@ -3295,14 +3483,14 @@ $(window).resize(function() {
             $('#sub_city').val(val.cust_city)
             $('#sub_state').find('select').val(val.cust_state)
             $('#sub_veh_type').find('select').val(val.cust_vehicle_type).trigger("change");
-               setTimeout(function(){
-                  $('#sub_veh_make').find('select').val(val.cust_make).trigger("change");
-                   // console.log('1')
-                    setTimeout(function(){
-                       $('#sub_veh_model').find('select').val(val.cust_model+' ('+val.cust_fuel_varient+')');
-                         // console.log('2')
-                    }, 1000);
-               }, 1500);
+            setTimeout(function(){
+                $('#sub_veh_make').find('select').val(val.cust_make).trigger("change");
+                // console.log('1')
+                setTimeout(function(){
+                    $('#sub_veh_model').find('select').val(val.cust_model+' ('+val.cust_fuel_varient+')');
+                    // console.log('2')
+                }, 1000);
+            }, 1500);
 
 
             $('#sub_vin_number').val(val.cust_vehicle_vin)
@@ -3325,25 +3513,25 @@ $(window).resize(function() {
             if (val.is_active){
                 document.getElementById("policy_active").checked = true;
             }else{
-                 document.getElementById("policy_active").checked = false;
+                document.getElementById("policy_active").checked = false;
             }
 
         });
 
         var $input = $('#sub_veh_date_purchase').pickadate({
-                format: 'dd-mm-yyyy',
-                })
+            format: 'dd-mm-yyyy',
+        })
 
         var $input2 = $('#sub_date_start').pickadate({
-                format: 'dd-mm-yyyy',
-                })
+            format: 'dd-mm-yyyy',
+        })
 
         var $input3 = $('#sub_date_end').pickadate({
-                format: 'dd-mm-yyyy',
-                })
+            format: 'dd-mm-yyyy',
+        })
 
         var picker = $input.pickadate('picker')
-            picker.set('select', date_purchase, { format: 'dd-mm-yyyy' })
+        picker.set('select', date_purchase, { format: 'dd-mm-yyyy' })
 
         var picker2 = $input2.pickadate('picker')
         picker2.set('select', date_start, { format: 'dd-mm-yyyy' })
@@ -3357,27 +3545,27 @@ $(window).resize(function() {
         alert("Subscription Added/Modified")
     },
     loadCustomerestimate:function(date){
-         alert('Estimate Updated!')
+        alert('Estimate Updated!')
     },
     loadCampaign:function(data){
         alert(data['msg'])
-         setTimeout(function() {
+        setTimeout(function() {
             location.reload()
         }, 1000);
 
     },
     openbooking_new:function(data_id){
-            $('#bookings').hide()
-            $('#booking-details').show()
-            $('#customer-detail .booking-data').show();
-            $('#customer-detail .booking-job-data').hide();
-            $('#customer-detail .service-detail').removeClass('selected')
-            $('#customer-detail .cust-detail').addClass('selected')
-            Commons.ajaxData('view_all_bookings', {data_id:data_id}, "get", Global, Global.loadBookingData,null, '.loading-pane');
-            Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", Global, Global.loadAgentdata,null, '.loading-pane');
-            var path = window.location.pathname.split('/')
-            var new_path = path.slice(0,3).join('/')+'/single/' + data_id
-            history.pushState({},'',new_path)
+        $('#bookings').hide()
+        $('#booking-details').show()
+        $('#customer-detail .booking-data').show();
+        $('#customer-detail .booking-job-data').hide();
+        $('#customer-detail .service-detail').removeClass('selected')
+        $('#customer-detail .cust-detail').addClass('selected')
+        Commons.ajaxData('view_all_bookings', {data_id:data_id}, "get", Global, Global.loadBookingData,null, '.loading-pane');
+        Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", Global, Global.loadAgentdata,null, '.loading-pane');
+        var path = window.location.pathname.split('/')
+        var new_path = path.slice(0,3).join('/')+'/single/' + data_id
+        history.pushState({},'',new_path)
     }
 };
 
