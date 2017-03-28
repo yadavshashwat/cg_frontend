@@ -39,6 +39,9 @@ img{vertical-align:middle;border:0;}
 ::-moz-selection{background:#F85D5D;color:#FFFFFF;}
 /*iframe{width:100%;height:inherit;border:none;background-color:transparent;overflow:hidden;}*/
 .dropdown-backdrop{position:static;}
+.date-time-select.card{
+    z-index: 31;
+}
 .card{border-radius:10px;z-index:30;}
 .dark-grey{color:#636262;}
 .background-grey{color:#FAFBFC;}

@@ -2547,7 +2547,8 @@ var Global = {
                         $('.status-change-'+i ).removeClass('selected')
                     }
                     $('.status-change-9').addClass('selected')
-                }}else{
+                }
+            }else{
                 if (val.status == "Lead"){
                     for (i = 1; i < 2; i++) {
                         $('.status-change-'+i ).addClass('selected')
