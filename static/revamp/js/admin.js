@@ -479,10 +479,13 @@ var Global = {
             $('#booking-details').show()
             $('#customer-detail .booking-data').show();
             $('#customer-detail .booking-job-data').hide();
+            $('#customer-detail .feedback-data').hide();
+            $('#customer-detail .feedback-detail').removeClass('selected')
             $('#customer-detail .service-detail').removeClass('selected')
             $('#customer-detail .cust-detail').addClass('selected')
             Commons.ajaxData('view_all_bookings', {data_id:data_id}, "get", _this, _this.loadBookingData,null, '.loading-pane');
             Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", _this, _this.loadAgentdata,null, '.loading-pane');
+            Commons.ajaxData('get_all_feedback', {booking_data_id:data_id}, "get", _this, _this.loadFeedback,null, '.loading-pane');
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/single/' + data_id
             history.pushState({},'',new_path)
@@ -491,7 +494,7 @@ var Global = {
         }
 
 
-        $('#bookings .pre-data').on('click','.booking',function(event,data){
+        $('#bookings .pre-data').on('click','.booking ',function(event,data){
             bid =$(this).attr('data-class')
             openbooking(bid)
         });
@@ -499,14 +502,26 @@ var Global = {
         $('#customer-detail .cust-detail').click(function(){
             $('#customer-detail .booking-data').show();
             $('#customer-detail .booking-job-data').hide();
+            $('#customer-detail .feedback-data').hide();
             $('#customer-detail .service-detail').removeClass('selected')
-            $('#customer-detail .cust-detail:hover').addClass('selected')
+            $('#customer-detail .feedback-detail').removeClass('selected')
+            $('#customer-detail .cust-detail').addClass('selected')
         });
         $('#customer-detail .service-detail').click(function(){
             $('#customer-detail .booking-data').hide();
             $('#customer-detail .booking-job-data').show();
+            $('#customer-detail .feedback-data').hide();
+            $('#customer-detail .feedback-detail').removeClass('selected')
             $('#customer-detail .cust-detail').removeClass('selected')
-            $('#customer-detail .service-detail:hover').addClass('selected')
+            $('#customer-detail .service-detail').addClass('selected')
+        });
+        $('#customer-detail .feedback-detail').click(function(){
+            $('#customer-detail .booking-data').hide();
+            $('#customer-detail .booking-job-data').hide();
+            $('#customer-detail .feedback-data').show();
+            $('#customer-detail .feedback-detail').addClass('selected')
+            $('#customer-detail .cust-detail').removeClass('selected')
+            $('#customer-detail .service-detail').removeClass('selected')
         });
 
         $('#customer-detail .add-item .btn-additem-est').click(function(){
@@ -1019,6 +1034,160 @@ var Global = {
             }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
         });
 
+
+        $('#customer-detail .btn-update-feedback-1').click(function(){
+            bid = $('#customer-detail #booking_id').attr('booking_data_id');
+
+            pick_on_time_yes =  document.getElementById('pick_on_time_yes').checked;
+            pick_on_time_no =  document.getElementById('pick_on_time_no').checked;
+
+            if (pick_on_time_yes == true){
+                pick_on_time = "Yes"
+            }else if(pick_on_time_no == true){
+                    pick_on_time = "No"
+            }else{
+                pick_on_time = "Unanswered"
+            }
+
+            delivery_on_time_yes =  document.getElementById('delivery_on_time_yes').checked;
+            delivery_on_time_no =  document.getElementById('delivery_on_time_no').checked;
+
+            if (delivery_on_time_yes ==true){
+                delivery_on_time = "Yes"
+            }else if(delivery_on_time_no == true){
+                    delivery_on_time = "No"
+            }else{
+                delivery_on_time = "Unanswered"
+            }
+
+            courteous_yes =  document.getElementById('courteous_yes').checked;
+            courteous_no =  document.getElementById('courteous_no').checked;
+            if (courteous_yes ==true){
+                courteous = "Yes"
+            }else if(courteous_no == true){
+                    courteous = "No"
+            }else{
+                courteous = "Unanswered"
+            }
+
+            washing_1 =  document.getElementById('washing_1').checked;
+            washing_2 =  document.getElementById('washing_2').checked;
+            washing_3 =  document.getElementById('washing_3').checked;
+            washing_4 =  document.getElementById('washing_4').checked;
+            washing_5 =  document.getElementById('washing_5').checked;
+            washing_6 =  document.getElementById('washing_6').checked;
+            washing_7 =  document.getElementById('washing_7').checked;
+            washing_8 =  document.getElementById('washing_8').checked;
+            washing_9 =  document.getElementById('washing_9').checked;
+            washing_10 =  document.getElementById('washing_10').checked;
+
+            if (washing_1 == true){washing = 1}
+            else if(washing_2==true){washing =2}
+            else if(washing_3==true){washing =3}
+            else if(washing_4==true){washing =4}
+            else if(washing_5==true){washing =5}
+            else if(washing_6==true){washing =6}
+            else if(washing_7==true){washing =7}
+            else if(washing_8==true){washing =8}
+            else if(washing_9==true){washing =9}
+            else if(washing_10==true){washing =10}
+            else{washing = "Unanswered"}
+
+            Commons.ajaxData('send_feedback', {booking_data_id: bid,
+                pick_on_time: pick_on_time,
+                 delivery_on_time: delivery_on_time,
+                 courteous: courteous,
+                washing:washing,
+                feedback_type:"1"
+            }, "post", _this, _this.loadCustomerFeedback,null, '.loading-pane');
+
+
+        })
+
+            $('#customer-detail .btn-update-feedback-2').click(function(){
+            bid = $('#customer-detail #booking_id').attr('booking_data_id');
+
+            quality_of_service_1 =  document.getElementById('quality_of_service_1').checked;
+            quality_of_service_2 =  document.getElementById('quality_of_service_2').checked;
+            quality_of_service_3 =  document.getElementById('quality_of_service_3').checked;
+            quality_of_service_4 =  document.getElementById('quality_of_service_4').checked;
+            quality_of_service_5 =  document.getElementById('quality_of_service_5').checked;
+            quality_of_service_6 =  document.getElementById('quality_of_service_6').checked;
+            quality_of_service_7 =  document.getElementById('quality_of_service_7').checked;
+            quality_of_service_8 =  document.getElementById('quality_of_service_8').checked;
+            quality_of_service_9 =  document.getElementById('quality_of_service_9').checked;
+            quality_of_service_10 =  document.getElementById('quality_of_service_10').checked;
+
+            if (quality_of_service_1 == true){quality_of_service = 1}
+            else if(quality_of_service_2==true){quality_of_service =2}
+            else if(quality_of_service_3==true){quality_of_service =3}
+            else if(quality_of_service_4==true){quality_of_service =4}
+            else if(quality_of_service_5==true){quality_of_service =5}
+            else if(quality_of_service_6==true){quality_of_service =6}
+            else if(quality_of_service_7==true){quality_of_service =7}
+            else if(quality_of_service_8==true){quality_of_service =8}
+            else if(quality_of_service_9==true){quality_of_service =9}
+            else if(quality_of_service_10==true){quality_of_service =10}
+            else{quality_of_service = "Unanswered"}
+             
+             experience_1 =  document.getElementById('experience_1').checked;
+            experience_2 =  document.getElementById('experience_2').checked;
+            experience_3 =  document.getElementById('experience_3').checked;
+            experience_4 =  document.getElementById('experience_4').checked;
+            experience_5 =  document.getElementById('experience_5').checked;
+            experience_6 =  document.getElementById('experience_6').checked;
+            experience_7 =  document.getElementById('experience_7').checked;
+            experience_8 =  document.getElementById('experience_8').checked;
+            experience_9 =  document.getElementById('experience_9').checked;
+            experience_10 =  document.getElementById('experience_10').checked;
+
+            if (experience_1 == true){experience = 1}
+            else if(experience_2==true){experience =2}
+            else if(experience_3==true){experience =3}
+            else if(experience_4==true){experience =4}
+            else if(experience_5==true){experience =5}
+            else if(experience_6==true){experience =6}
+            else if(experience_7==true){experience =7}
+            else if(experience_8==true){experience =8}
+            else if(experience_9==true){experience =9}
+            else if(experience_10==true){experience =10}
+            else{experience = "Unanswered"}
+
+             recommend_factor_1 =  document.getElementById('recommend_factor_1').checked;
+            recommend_factor_2 =  document.getElementById('recommend_factor_2').checked;
+            recommend_factor_3 =  document.getElementById('recommend_factor_3').checked;
+            recommend_factor_4 =  document.getElementById('recommend_factor_4').checked;
+            recommend_factor_5 =  document.getElementById('recommend_factor_5').checked;
+            recommend_factor_6 =  document.getElementById('recommend_factor_6').checked;
+            recommend_factor_7 =  document.getElementById('recommend_factor_7').checked;
+            recommend_factor_8 =  document.getElementById('recommend_factor_8').checked;
+            recommend_factor_9 =  document.getElementById('recommend_factor_9').checked;
+            recommend_factor_10 =  document.getElementById('recommend_factor_10').checked;
+
+            if (recommend_factor_1 == true){recommend_factor = 1}
+            else if(recommend_factor_2==true){recommend_factor =2}
+            else if(recommend_factor_3==true){recommend_factor =3}
+            else if(recommend_factor_4==true){recommend_factor =4}
+            else if(recommend_factor_5==true){recommend_factor =5}
+            else if(recommend_factor_6==true){recommend_factor =6}
+            else if(recommend_factor_7==true){recommend_factor =7}
+            else if(recommend_factor_8==true){recommend_factor =8}
+            else if(recommend_factor_9==true){recommend_factor =9}
+            else if(recommend_factor_10==true){recommend_factor =10}
+            else{recommend_factor = "Unanswered"}
+
+            additional = $('#additional').val()
+
+            Commons.ajaxData('send_feedback', {booking_data_id: bid,
+                additional: additional,
+                 quality_of_service: quality_of_service,
+                 experience: experience,
+                recommend_factor:recommend_factor,
+                feedback_type:"2"
+            }, "post", _this, _this.loadCustomerFeedback,null, '.loading-pane');
+
+
+        })
 // =====================================================================================
 //     Subscription Management
 // =====================================================================================
@@ -2022,11 +2191,11 @@ var Global = {
 
         $.each(data, function(ix, val) {
             html += '        <div class="row card cardhover no-border-radius booking" data-class="' + val.id + '">'
-            html += '            <div class="row">'
+            html += '            <div class="row"><div class="booking-open-btn">'
             html += '                <div class="col l1 s2 m2 booking-id-bar">'
             html += '                    <b>#<span class="id">' + val.booking_id + '</span></b>'
             html += '                </div>'
-            html += '                <div class="col l5 s7 m7">'
+            html += '                <div class="col l6 s7 m7">'
             html += '                    <div class="col l12 s12 m12">'
             // if (val.booking_user_name == ""){
             html += '                        <b>Name : </b><span class="custname">' + val.cust_name + '</span>'
@@ -2067,9 +2236,21 @@ var Global = {
                 html += '                    <b><span class="agent-details">'+val.agent_details+'</span></b>'
             }
             html += '                </div>'
-            html += '                <div class="col l3 s3 m3 status-bar">'
+            html += '                <div class="col l2 s3 m3 status-bar">'
             html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
-            html += '                </div>'
+            html += '                </div></div>'
+
+            // html += '<div class="col l2 hide-on-med-and-down feedback-btn-col">'
+            // // html += '<div class="row">'
+            // // html += '<button status_next="" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action">Feedback 1'
+            // // html += '<i class="material-icons right">send</i>'
+            // // html += '</button>'
+            // // html += '</div>'
+            // html += '<div class="row">'
+            // html += '<button status_next="" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action">Feedback'
+            // html += '<i class="material-icons right">send</i>'
+            // html += '</button>'
+            // html += '</div></div>'
             html += '            </div>'
             html += '        </div>'
         })
@@ -2299,28 +2480,6 @@ var Global = {
         container.html('');
         html = ''
         $.each(data, function(ix, val) {
-            // <--- old booking data --->
-            // html+= '<div id="booking_id" class="col s12 m12 l12 book_id" booking_id="'+val.booking_id+'"><h4><b>#'+val.booking_id+'</h4></b></div>'
-            // html+= '<div class="row"><div class="col s4 m4 l2 header">Name     </div><div class="col s8 m8 l4 detail">: '+val.cust_name +'</div>'
-            // html+= '<div class="col s4 m4 l2 header">Number   </div><div class="col s8 m8 l4 detail">: '+val.cust_number+'</div>'
-            // html+= '<div class="col s4 m4 l2 header">Address      </div><div class="col s8 m8 l4 detail">: '+val.cust_address+', '+val.cust_locality+', '+val.cust_city+'</div>'
-            // html+= '<div class="col s4 m4 l2 header">'+val.cust_vehicle_type+'</div><div class="col s8 m8 l4 detail">: '+val.cust_make +' '+val.cust_model+' '+val.cust_fuel_varient+'</div>'
-            // html+= '<div class="col s4 m4 l2 header">Coupon</div><div class="col s8 m8 l4 detail">: '+val.coupon+'</div>'
-            // html+= '<div class="col s4 m4 l2 header">Amount Paid</div><div class="col s8 m8 l4 detail">: Rs. '+val.amount_paid+'</div>'
-            // html+= '<div class="col s4 m4 l2 header">Source</div><div class="col s8 m8 l4 detail">: '+val.source+'</div>'
-            // html+= '<div class="col s4 m4 l2 header">Status</div><div class="col s8 m8 l4 detail">: '+val.status+'</div>'
-            // html+= '<div class="col s4 m4 l2 header">Agent</div><div class="col s8 m8 l4 detail">: '+ val.agent_details+'</div></div>'
-            // html+= '<div class="row"><div class="col s4 m4 l2 header header-var">Email</div><div class="col s8 m8 l10"><input id="email" type="text" class="" value ="'+val.cust_email+'" aria-required="true"></div>'
-            // html+= '<div class="col s4 m4 l2 header header-var">#Veh Reg</div><div class="col s8 m8 l10"><input id="cust_regnumber" type="text" style="text-transform:uppercase" class="" value ="'+val.cust_regnumber+'" aria-required="true"></div>'
-            // if (val.booking_flag){
-            //     html+= '<div class="row"><div class="col s4 m4 l2 header header-var">Booking Date</div><div class="col s8 m8 l10 input-field"><input id="date" type="date" value ="'+ val.date_booking +'" class="datepicker"><label for="date"></label></div>'
-            // }else{
-            //     html+= '<div class="row"><div class="col s4 m4 l2 header header-var">Follow Up/ Booking Date</div><div class="col s8 m8 l10 input-field"><input id="date" type="date" value ="'+ val.date_booking +'" class="datepicker"><label for="date"></label></div>'
-            // }
-            // html+= '<div class="col s4 m4 l2 header header-var">Time</div><div class="col s8 m8 l10"><input id="time_booking" type="text" class="" value="'+ val.time_booking +'" aria-required="true"></div></div>'
-            // html+= '</div><div class="row"><div class="col s4 m4 l2 header header-var">Requests </div><div class="col s8 m8 l10 input-field"><textarea id="comments" class="materialize-textarea" >'+ val.comments +'</textarea></div></div>'
-            // <---- Old booking data--->>
-            // <---- New Booking Data --->>
             html += '<div class="row">'
             html += '<div id="booking_id" class="col s12 m12 l12 book_id" booking_data_id="'+val.id +'" booking_id="'+val.booking_id+'"><h4><b>#'+val.booking_id+'</h4></b></div>'
             html += '</div>'
@@ -2587,7 +2746,6 @@ var Global = {
 
 
             if (val.req_user_admin){
-
                 // Lead/ Booking Diff
                 if(val.booking_flag){
                     $('#customer-detail .lead-row').hide()
@@ -3555,18 +3713,102 @@ var Global = {
         }, 1000);
 
     },
+    loadFeedback:function(data){
+         $.each(data, function(ix, val) {
+            if (val.pick_on_time=="Yes"){
+                document.getElementById("pick_on_time_yes").checked = true;
+            }else if(val.pick_on_time == "No"){
+                document.getElementById("pick_on_time_no").checked = true;
+            }else{
+
+            }
+             if (val.delivery_on_time=="Yes"){
+                document.getElementById("delivery_on_time_yes").checked = true;
+            }else if(val.delivery_on_time == "No"){
+                document.getElementById("delivery_on_time_no").checked = true;
+            }else{
+
+            }
+
+             if (val.courteous=="Yes"){
+                document.getElementById("courteous_yes").checked = true;
+            }else if(val.courteous == "No"){
+                document.getElementById("courteous_no").checked = true;
+            }else{
+
+            }
+
+             if(val.washing == "1"){document.getElementById("washing_1").checked = true;}
+             else if(val.washing =="2"){document.getElementById("washing_2").checked = true;}
+             else if(val.washing =="3"){document.getElementById("washing_3").checked = true;}
+             else if(val.washing =="4"){document.getElementById("washing_4").checked = true;}
+             else if(val.washing =="5"){document.getElementById("washing_5").checked = true;}
+             else if(val.washing =="6"){document.getElementById("washing_6").checked = true;}
+             else if(val.washing =="7"){document.getElementById("washing_7").checked = true;}
+             else if(val.washing =="8"){document.getElementById("washing_8").checked = true;}
+             else if(val.washing =="9"){document.getElementById("washing_9").checked = true;}
+             else if(val.washing =="10"){document.getElementById("washing_10").checked = true;}else{}
+
+             
+             
+                          if(val.quality_of_service == "1"){document.getElementById("quality_of_service_1").checked = true;}
+             else if(val.quality_of_service =="2"){document.getElementById("quality_of_service_2").checked = true;}
+             else if(val.quality_of_service =="3"){document.getElementById("quality_of_service_3").checked = true;}
+             else if(val.quality_of_service =="4"){document.getElementById("quality_of_service_4").checked = true;}
+             else if(val.quality_of_service =="5"){document.getElementById("quality_of_service_5").checked = true;}
+             else if(val.quality_of_service =="6"){document.getElementById("quality_of_service_6").checked = true;}
+             else if(val.quality_of_service =="7"){document.getElementById("quality_of_service_7").checked = true;}
+             else if(val.quality_of_service =="8"){document.getElementById("quality_of_service_8").checked = true;}
+             else if(val.quality_of_service =="9"){document.getElementById("quality_of_service_9").checked = true;}
+             else if(val.quality_of_service =="10"){document.getElementById("quality_of_service_10").checked = true;}else{}
+
+                                       if(val.experience == "1"){document.getElementById("experience_1").checked = true;}
+             else if(val.experience =="2"){document.getElementById("experience_2").checked = true;}
+             else if(val.experience =="3"){document.getElementById("experience_3").checked = true;}
+             else if(val.experience =="4"){document.getElementById("experience_4").checked = true;}
+             else if(val.experience =="5"){document.getElementById("experience_5").checked = true;}
+             else if(val.experience =="6"){document.getElementById("experience_6").checked = true;}
+             else if(val.experience =="7"){document.getElementById("experience_7").checked = true;}
+             else if(val.experience =="8"){document.getElementById("experience_8").checked = true;}
+             else if(val.experience =="9"){document.getElementById("experience_9").checked = true;}
+             else if(val.experience =="10"){document.getElementById("experience_10").checked = true;}else{}
+
+             
+                          if(val.recommend_factor == "1"){document.getElementById("recommend_factor_1").checked = true;}
+             else if(val.recommend_factor =="2"){document.getElementById("recommend_factor_2").checked = true;}
+             else if(val.recommend_factor =="3"){document.getElementById("recommend_factor_3").checked = true;}
+             else if(val.recommend_factor =="4"){document.getElementById("recommend_factor_4").checked = true;}
+             else if(val.recommend_factor =="5"){document.getElementById("recommend_factor_5").checked = true;}
+             else if(val.recommend_factor =="6"){document.getElementById("recommend_factor_6").checked = true;}
+             else if(val.recommend_factor =="7"){document.getElementById("recommend_factor_7").checked = true;}
+             else if(val.recommend_factor =="8"){document.getElementById("recommend_factor_8").checked = true;}
+             else if(val.recommend_factor =="9"){document.getElementById("recommend_factor_9").checked = true;}
+             else if(val.recommend_factor =="10"){document.getElementById("recommend_factor_10").checked = true;}else{}
+
+             $('#additional').val(val.additional)
+
+
+        });
+
+    },
+    loadCustomerFeedback:function(data){
+        alert('Feedback Updated!')
+    },
     openbooking_new:function(data_id){
-        $('#bookings').hide()
-        $('#booking-details').show()
-        $('#customer-detail .booking-data').show();
-        $('#customer-detail .booking-job-data').hide();
-        $('#customer-detail .service-detail').removeClass('selected')
-        $('#customer-detail .cust-detail').addClass('selected')
-        Commons.ajaxData('view_all_bookings', {data_id:data_id}, "get", Global, Global.loadBookingData,null, '.loading-pane');
-        Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", Global, Global.loadAgentdata,null, '.loading-pane');
-        var path = window.location.pathname.split('/')
-        var new_path = path.slice(0,3).join('/')+'/single/' + data_id
-        history.pushState({},'',new_path)
+            $('#bookings').hide()
+            $('#booking-details').show()
+            $('#customer-detail .booking-data').show();
+            $('#customer-detail .booking-job-data').hide();
+            $('#customer-detail .feedback-data').hide();
+            $('#customer-detail .feedback-detail').removeClass('selected')
+            $('#customer-detail .service-detail').removeClass('selected')
+            $('#customer-detail .cust-detail').addClass('selected')
+            Commons.ajaxData('view_all_bookings', {data_id:data_id}, "get", Global, Global.loadBookingData,null, '.loading-pane');
+            Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", Global, Global.loadAgentdata,null, '.loading-pane');
+            Commons.ajaxData('get_all_feedback', {booking_data_id:data_id}, "get", Global, Global.loadFeedback,null, '.loading-pane');
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/single/' + data_id
+            history.pushState({},'',new_path)
     }
 };
 

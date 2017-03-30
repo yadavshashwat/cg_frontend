@@ -522,15 +522,19 @@
                         <div class="col l1 s2 m2 booking-id-bar">
                             <b><span class="id">ID</span></b>
                         </div>
-                        <div class="col l5 s7 m7">
+                        <div class="col l6 s7 m7">
                             <b>Details</b>
                         </div>
                         <div class="col l3 hide-on-med-and-down">
                             <b><span class="agent">Engineer Details</span></b>
                         </div>
-                        <div class="col l3 s3 m3 status-bar">
+                        <div class="col l2 s3 m3 status-bar">
                             <span class="status"><b>Status</b></span>
                         </div>
+                        <!--<div class="col l2 hide-on-med-and-down status-bar">-->
+                            <!--<span class="status"><b>Buttons</b></span>-->
+                        <!--</div>-->
+
                     </div>
                 </div>
                 <div class="booking-list">
@@ -570,14 +574,32 @@
 
     <section id="booking-details" class="invisible">
         <div id="customer-detail">
-            <div class="row header-booking">
+            <div class="row header-booking agent-button-row">
                 <div class="col s6 m6 l6 cust-detail service-box card cardhover selected">
                     Cust. Details
                 </div>
                 <div class="col s6 m6 l6 service-detail service-box card cardhover">
                     Service Desc.
                 </div>
-
+            </div>
+            <div class="row header-booking b2b-button-row">
+                <div class="col s6 m6 l6 cust-detail service-box card cardhover selected">
+                    Cust. Details
+                </div>
+                <div class="col s6 m6 l6 service-detail service-box card cardhover">
+                    Service Desc.
+                </div>
+            </div>
+            <div class="row header-booking staff-button-row">
+                <div class="col s4 m4 l4 cust-detail service-box card cardhover selected">
+                    Cust. Details
+                </div>
+                <div class="col s4 m4 l4 service-detail service-box card cardhover">
+                    Service Desc.
+                </div>
+                <div class="col s4 m4 l4 feedback-detail service-box card cardhover">
+                    Feedback
+                </div>
             </div>
 
 
@@ -1151,6 +1173,184 @@
                         <!--</div>-->
                         <!--</div>-->
 
+                    </div>
+                </div>
+                <div class="row feedback-data invisible">
+                    <div class="feedback-1 card">
+                        <h3 class="centered-text">Same Day Service Feedback</h3>
+                        <div class="question">Q1) Was the pickup done on time?</div>
+                        <div class="answer">
+                            <form action="">
+                            <p>
+                              <input name="question-1" type="radio" id="pick_on_time_yes" />
+                              <label for="pick_on_time_yes">Yes</label>
+                              <input name="question-1" type="radio" id="pick_on_time_no" />
+                              <label for="pick_on_time_no">No</label>
+                            </p>
+                          </form>
+                        </div>
+                        <br>
+                        <div class="question">Q2) Was the delivery on time?</div>
+                        <div class="answer">
+                            <form action="">
+                            <p>
+                              <input name="question-2" type="radio" id="delivery_on_time_yes" />
+                              <label for="delivery_on_time_yes">Yes</label>
+                              <input name="question-2" type="radio" id="delivery_on_time_no" />
+                              <label for="delivery_on_time_no">No</label>
+                            </p>
+                          </form>
+                        </div>
+                        <br>
+                        <div class="question">Q3) Was the service engineer courteous? Did he explain the problems to you in detail?</div>
+                        <div class="answer">
+                            <form action="">
+                            <p>
+                              <input name="question-3" type="radio" id="courteous_yes" />
+                              <label for="courteous_yes">Yes</label>
+                              <input name="question-3" type="radio" id="courteous_no" />
+                              <label for="courteous_no">No</label>
+                            </p>
+                          </form>
+                        </div>
+                        <br>
+                        <div class="question">Q4) How do you rate the quality of washing and cleaning of the vehicle?</div>
+                        <div class="answer">
+                            <form action="">
+                            <p>
+                              <input name="question-4" type="radio" id="washing_1" />
+                              <label for="washing_1">1</label>
+                              <input name="question-4" type="radio" id="washing_2" />
+                              <label for="washing_2">2</label>
+                              <input name="question-4" type="radio" id="washing_3" />
+                              <label for="washing_3">3</label>
+                              <input name="question-4" type="radio" id="washing_4" />
+                              <label for="washing_4">4</label>
+                              <input name="question-4" type="radio" id="washing_5" />
+                              <label for="washing_5">5</label>
+                              <input name="question-4" type="radio" id="washing_6" />
+                              <label for="washing_6">6</label>
+                              <input name="question-4" type="radio" id="washing_7" />
+                              <label for="washing_7">7</label>
+                              <input name="question-4" type="radio" id="washing_8" />
+                              <label for="washing_8">8</label>
+                              <input name="question-4" type="radio" id="washing_9" />
+                              <label for="washing_9">9</label>
+                              <input name="question-4" type="radio" id="washing_10" />
+                              <label for="washing_10">10</label>
+                            </p>
+                          </form>
+                        </div>
+                        <div class="row centered-text update-feed-row">
+                            <button status_next="" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-feedback-1" type="submit" name="action">Update
+                                 <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+
+                        </div>
+                        <div class="feedback-2 card">
+                        <h3 class="centered-text">Post Service Feedback</h3>
+                        <div class="question">Q1) How has the car been running? How was the quality of service?</div>
+                        <div class="answer">
+                            <form action="">
+                            <p>
+                              <input name="question-5" type="radio" id="quality_of_service_1" />
+                              <label for="quality_of_service_1">1</label>
+                              <input name="question-5" type="radio" id="quality_of_service_2" />
+                              <label for="quality_of_service_2">2</label>
+                              <input name="question-5" type="radio" id="quality_of_service_3" />
+                              <label for="quality_of_service_3">3</label>
+                              <input name="question-5" type="radio" id="quality_of_service_4" />
+                              <label for="quality_of_service_4">4</label>
+                              <input name="question-5" type="radio" id="quality_of_service_5" />
+                              <label for="quality_of_service_5">5</label>
+                              <input name="question-5" type="radio" id="quality_of_service_6" />
+                              <label for="quality_of_service_6">6</label>
+                              <input name="question-5" type="radio" id="quality_of_service_7" />
+                              <label for="quality_of_service_7">7</label>
+                              <input name="question-5" type="radio" id="quality_of_service_8" />
+                              <label for="quality_of_service_8">8</label>
+                              <input name="question-5" type="radio" id="quality_of_service_9" />
+                              <label for="quality_of_service_9">9</label>
+                              <input name="question-5" type="radio" id="quality_of_service_10" />
+                              <label for="quality_of_service_10">10</label>
+                            </p>
+                          </form>
+                        </div>
+                        <br>
+                        <div class="question">Q2) How do you rate the overall quality and experience?</div>
+                        <div class="answer">
+                            <form action="">
+                            <p>
+                              <input name="question-6" type="radio" id="experience_1" />
+                              <label for="experience_1">1</label>
+                              <input name="question-6" type="radio" id="experience_2" />
+                              <label for="experience_2">2</label>
+                              <input name="question-6" type="radio" id="experience_3" />
+                              <label for="experience_3">3</label>
+                              <input name="question-6" type="radio" id="experience_4" />
+                              <label for="experience_4">4</label>
+                              <input name="question-6" type="radio" id="experience_5" />
+                              <label for="experience_5">5</label>
+                              <input name="question-6" type="radio" id="experience_6" />
+                              <label for="experience_6">6</label>
+                              <input name="question-6" type="radio" id="experience_7" />
+                              <label for="experience_7">7</label>
+                              <input name="question-6" type="radio" id="experience_8" />
+                              <label for="experience_8">8</label>
+                              <input name="question-6" type="radio" id="experience_9" />
+                              <label for="experience_9">9</label>
+                              <input name="question-6" type="radio" id="experience_10" />
+                              <label for="experience_10">10</label>
+                            </p>
+                          </form>
+                        </div>
+                        <br>
+                        <div class="question">Q3) Any additional feedback/ideas for us?</div>
+                        <div class="answer">
+                            <form action="">
+                            <div class="input-field col s12">
+                                <textarea id="additional" class="materialize-textarea" data-length="400"></textarea>
+                                <label for="additional"></label>
+                            </div>
+                            </form>
+                        </div>
+                        <br>
+                        <div class="question">Q4) How likely will you recommend ClickGarage to others?</div>
+                        <div class="answer">
+                            <form action="">
+                            <p>
+                              <input name="question-8" type="radio" id="recommend_factor_1" />
+                              <label for="recommend_factor_1">1</label>
+                              <input name="question-8" type="radio" id="recommend_factor_2" />
+                              <label for="recommend_factor_2">2</label>
+                              <input name="question-8" type="radio" id="recommend_factor_3" />
+                              <label for="recommend_factor_3">3</label>
+                              <input name="question-8" type="radio" id="recommend_factor_4" />
+                              <label for="recommend_factor_4">4</label>
+                              <input name="question-8" type="radio" id="recommend_factor_5" />
+                              <label for="recommend_factor_5">5</label>
+                              <input name="question-8" type="radio" id="recommend_factor_6" />
+                              <label for="recommend_factor_6">6</label>
+                              <input name="question-8" type="radio" id="recommend_factor_7" />
+                              <label for="recommend_factor_7">7</label>
+                              <input name="question-8" type="radio" id="recommend_factor_8" />
+                              <label for="recommend_factor_8">8</label>
+                              <input name="question-8" type="radio" id="recommend_factor_9" />
+                              <label for="recommend_factor_9">9</label>
+                              <input name="question-8" type="radio" id="recommend_factor_10" />
+                              <label for="recommend_factor_10">10</label>
+                            </p>
+                          </form>
+
+                        </div>
+                        <div class="row centered-text update-feed-row">
+                            <button status_next="" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-feedback-2" type="submit" name="action">Update
+                                 <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+
+                        </div>
                     </div>
                 </div>
             </div>

@@ -66,6 +66,9 @@ var Commons = {
         'add_modify_subscription':'/api/add_modify_subscription/',
         'view_all_subscription':'/api/view_all_subscription/',
         'send_sms_campaign':'/api/send_sms_campaign/',
+        'send_feedback':'/api/send_feedback/',
+        'get_all_feedback':'/api/get_all_feedback/',
+
 
     },
 
