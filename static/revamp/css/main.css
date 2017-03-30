@@ -38,6 +38,7 @@ img{vertical-align:middle;border:0;}
 ::selection{background:#F85D5D;color:#FFFFFF;}
 ::-moz-selection{background:#F85D5D;color:#FFFFFF;}
 /*iframe{width:100%;height:inherit;border:none;background-color:transparent;overflow:hidden;}*/
+body > iframe{position:absolute;}
 .dropdown-backdrop{position:static;}
 .date-time-select.card{
     z-index: 31;
@@ -420,16 +421,23 @@ footer a:hover{color:#979797;text-decoration:none;}
 #bookings .booking-header{z-index:1!important;color:#fff;}
 #bookings .booking-bar-1{z-index:1!important;background:#F85D5D;}
 #bookings .booking-bar-2{z-index:1!important;background:#eaeaea;color:black;}
-#bookings .booking{z-index:1!important;cursor:pointer;}
+#bookings .booking{z-index:1!important;cursor:pointer;  }
+/*#bookings .booking .booking-open-btn{z-index:1!important;cursor:pointer;  }*/
 #bookings .booking-list .pre-data{}
 #bookings .delivery-list .pre-data{}
 #bookings .booking .status{background-color:#eaeaea;padding:20px 5px 20px 5px;border-radius:5px;}
 #bookings .booking .agent-details{line-height:125px;}
+#bookings .booking .feedback-btn-col{margin-top:42px}
+
 #booking-details .status-2{width:100%;padding:10px;border-radius:10px;text-align:center;margin:0px 0px 15px 0px;}
 #customer-detail .source-admin{margin-bottom:20px;}
 #customer-detail .header{line-height:50px;}
 #customer-detail .approved{border-radius:20%/50%;background-color:green;color:#fff;padding:5px 8px;text-align:center;}
 #customer-detail .denied{border-radius:20%/50%;background-color:orange;color:#fff;padding:5px 8px;text-align:center;}
+#customer-detail .question{font-size: 20px;font-weight: 500;margin: 0% 0% 0% 5%;}
+#customer-detail .answer{font-size: 20px;font-weight: 300;margin: 0% 0% 0% 6%;}
+#customer-detail .update-feed-row{padding: 30px;
+}
 #bookings .booking .booking-id-bar{margin-top:45px;text-align:center;}
 #bookings .booking .status-bar{margin-top:30px;text-align:center;}
 #bookings .booking.card{margin:5px!important;}
