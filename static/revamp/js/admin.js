@@ -2760,14 +2760,14 @@ var Global = {
 
                 if (val.agent_details=="Not Assigned"){
                     $('.bill-row').hide()
-                }else if (!val.bill_generation_flag){
-                    $('#customer-detail .non-generated-bill').show()
-                    $('#customer-detail .generated-bill').hide()
+                }else if (val.bill_generation_flag){
+                      $('#customer-detail .non-generated-bill').hide()
+                    $('#customer-detail .generated-bill').show()
 
                 }else{
                     $('#customer-detail .non-generated-bill').show()
                     $('#customer-detail .generated-bill').hide()
-                }
+                               }
 
 
 
@@ -2792,9 +2792,9 @@ var Global = {
                 if (val.agent_details=="Not Assigned" || val.clickgarage_flag != true){
                     $('.bill-row').hide()
 
-                }else if (!val.bill_generation_flag){
-                    $('#customer-detail .non-generated-bill').show()
-                    $('#customer-detail .generated-bill').hide()
+                }else if (val.bill_generation_flag){
+                    $('#customer-detail .non-generated-bill').hide()
+                    $('#customer-detail .generated-bill').show()
 
                 }else{
                     $('#customer-detail .non-generated-bill').show()
@@ -2806,6 +2806,16 @@ var Global = {
 
 
             }else if(val.req_user_agent){
+                if(val.booking_flag){
+                    $('#customer-detail .lead-row').hide()
+                    $('#customer-detail .confirm-row').show()
+
+                }else{
+                    $('#customer-detail .lead-row').show()
+                    $('#customer-detail .confirm-row').hide()
+
+                }
+
 
                 if (val.status == "Engineer Left") {
                     $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1').show()
@@ -2830,10 +2840,10 @@ var Global = {
 
                 if (val.clickgarage_flag == true){
                     $('.bill-row').hide()
-                }else if (!val.bill_generation_flag){
+                }else if (val.bill_generation_flag){
 
-                   $('#customer-detail .non-generated-bill').show()
-                    $('#customer-detail .generated-bill').hide()
+                 $('#customer-detail .non-generated-bill').hide()
+                    $('#customer-detail .generated-bill').show()
 
                 }else{
                     $('#customer-detail .non-generated-bill').show()
@@ -2853,11 +2863,11 @@ var Global = {
                     $('#customer-detail .b2b-button-row-2').show()
                 }
 
-                if (!val.bill_generation_flag){
-                    $('#customer-detail .generated-bill').hide()
+                if (val.bill_generation_flag){
+                    $('#customer-detail .generated-bill').show()
 
                 }else{
-                    $('#customer-detail .generated-bill').show()
+                    $('#customer-detail .generated-bill').hide()
                 }
 
 

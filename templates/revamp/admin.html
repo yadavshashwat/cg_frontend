@@ -575,11 +575,14 @@
     <section id="booking-details" class="invisible">
         <div id="customer-detail">
             <div class="row header-booking agent-button-row">
-                <div class="col s6 m6 l6 cust-detail service-box card cardhover selected">
+                <div class="col s4 m4 l4 cust-detail service-box card cardhover selected">
                     Cust. Details
                 </div>
-                <div class="col s6 m6 l6 service-detail service-box card cardhover">
+                <div class="col s4 m4 l4 service-detail service-box card cardhover">
                     Service Desc.
+                </div>
+                <div class="col s4 m4 l4 feedback-detail service-box card cardhover">
+                    Feedback
                 </div>
             </div>
             <div class="row header-booking b2b-button-row">
@@ -618,21 +621,385 @@
                             </div>
                         </div>
                         <!--<div class="row">-->
-                        <div class="row">
-                            <div class="col l12 s12 m12">
-                                <button status_next="" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action"><span class="change-status"><span id="status_change-1"></span></span>
-                                    <i class="material-icons right">send</i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col l12 s12 m12">
-                                <button status_next="" class="waves-effect status-btn-2 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action"><span class="change-status"><span id="status_change-2"></span></span>
-                                    <i class="material-icons right">send</i>
-                                </button>
-                            </div>
-                        </div>
+                        <!--<div class="row">-->
+                            <!--<div class="col l12 s12 m12">-->
+                                <!--<button status_next="" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action"><span class="change-status"><span id="status_change-1"></span></span>-->
+                                    <!--<i class="material-icons right">send</i>-->
+                                <!--</button>-->
+                            <!--</div>-->
                         <!--</div>-->
+                        <!--<div class="row">-->
+                            <!--<div class="col l12 s12 m12">-->
+                                <!--<button status_next="" class="waves-effect status-btn-2 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action"><span class="change-status"><span id="status_change-2"></span></span>-->
+                                    <!--<i class="material-icons right">send</i>-->
+                                <!--</button>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div class="confirm-row row invisible">
+                            <br>
+                            <!--New Status Change Start-->
+                            <div class="status-bar-block">
+                                <div class="status-row-inline">
+
+                                    <!--<div class="circle-status offset-l2 status-change-1" data-class="Confirmed">-->
+                                        <!--<div class="circle centered-text middle-circle">-->
+                                            <!--<i class="fa fa-drivers-license-o"></i>-->
+                                        <!--</div>-->
+                                        <!--&lt;!&ndash;<div class="centered-text content-status">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;Confirmed&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                    <!--</div>-->
+                                    <!--<div class="square status-change-2">-->
+
+                                    <!--</div>-->
+                                    <!--<div class="circle-status status-change-2" data-class="Assigned">-->
+                                        <!--<div class="circle centered-text middle-circle">-->
+                                            <!--<i class="fa fa-user"></i>-->
+                                        <!--</div>-->
+                                        <!--&lt;!&ndash;<div class="centered-text content-status">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;Assigned&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                    <!--</div>-->
+                                    <!--<div class="square status-change-3 ">-->
+
+                                    <!--</div>-->
+                                    <div class="circle-status  status-change-3 " data-class="Engineer Left">
+
+                                        <div class="circle centered-text middle-circle ">
+                                            <i class="fa fa-motorcycle"></i>
+                                        </div>
+                                        <!--<div class="centered-text content-status">-->
+                                        <!--Engineer Left-->
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="square status-change-4 ">
+
+                                    </div>
+                                    <div class="circle-status  status-change-4 " data-class="Reached Workshop">
+
+                                        <div class="circle centered-text middle-circle ">
+                                            <i class="fa fa-home"></i>
+                                        </div>
+                                        <!--<div class="centered-textc ontent-status">-->
+                                        <!--Reached Workshop-->
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="square status-change-5 ">
+
+                                    </div>
+                                    <div class="circle-status  status-change-5 " data-class="Estimate Shared">
+
+                                        <div class="circle centered-text middle-circle">
+                                            <i class="fa fa-list"></i>
+                                        </div>
+                                        <!--<div class="centered-text content-status">-->
+                                        <!--Estimate Shared-->
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="square status-change-6 ">
+
+                                    </div>
+                                    <div class="circle-status  status-change-6 " data-class="Job Completed">
+                                        <div class="circle centered-text middle-circle">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                        <!--<div class="centered-text content-status">-->
+                                        <!--Job Completed-->
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="square status-change-7 ">
+
+                                    </div>
+                                    <div class="circle-status  status-change-7 " data-class="Feedback Taken">
+                                        <div class="circle centered-text middle-circle">
+                                            <i class="fa fa-comment-o"></i>
+                                        </div>
+                                        <!--<div class="centered-text content-status">-->
+                                        <!--Feedback Taken-->
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="square status-change-8 ">
+
+                                    </div>
+                                    <div class="circle-status  status-change-8 " data-class="Cancelled">
+
+                                        <div class="circle centered-text middle-circle">
+                                            <i class="fa fa-ban"></i>
+                                        </div>
+                                        <!--<div class="centered-text content-status">-->
+                                        <!--Cancelled-->
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="square status-change-9">
+
+                                    </div>
+                                    <div class="circle-status status-change-9" data-class="Escalation">
+
+                                        <div class="circle centered-text middle-circle">
+                                            <i class="fa fa-warning"></i>
+                                        </div>
+                                        <!--<div class="centered-text content-status">-->
+                                        <!--Escalation-->
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                                <div class="status-row-inline">
+
+                                    <!--<div class="circle-status offset-l2  status-change-1 selected">-->
+                                        <!--&lt;!&ndash;<div class="circle centered-text middle-circle">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<i class="fa fa-car"></i>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                        <!--<div class="centered-text content-status">-->
+                                            <!--Confirmed-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="square3  status-change-2 selected">-->
+
+                                    <!--</div>-->
+                                    <!--<div class="circle-status   status-change-2 selected ">-->
+                                        <!--&lt;!&ndash;<div class="circle centered-text middle-circle">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<i class="fa fa-car"></i>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                        <!--<div class="centered-text content-status">-->
+                                            <!--Assigned-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="square3 status-change-3">-->
+
+                                    <!--</div>-->
+                                    <div class="circle-status  status-change-3">
+
+                                        <!--<div class="circle centered-text middle-circle ">-->
+                                        <!--<i class="fa fa-car"></i>-->
+                                        <!--</div>-->
+                                        <div class="centered-text content-status">
+                                            Engineer Left
+                                        </div>
+                                    </div>
+                                    <div class="square3 status-change-4">
+
+                                    </div>
+                                    <div class="circle-status  status-change-4">
+
+                                        <!--<div class="circle centered-text middle-circle ">-->
+                                        <!--<i class="fa fa-car"></i>-->
+                                        <!--</div>-->
+                                        <div class="centered-text content-status">
+                                            Reached Workshop
+                                        </div>
+                                    </div>
+                                    <div class="square3 status-change-5">
+
+                                    </div>
+                                    <div class="circle-status  status-change-5">
+
+                                        <!--<div class="circle centered-text middle-circle">-->
+                                        <!--<i class="fa fa-car"></i>-->
+                                        <!--</div>-->
+                                        <div class="centered-text content-status">
+                                            Estimate Shared
+                                        </div>
+                                    </div>
+                                    <div class="square3 status-change-6">
+
+                                    </div>
+                                    <div class="circle-status  status-change-6">
+                                        <!--<div class="circle centered-text middle-circle">-->
+                                        <!--<i class="fa fa-car"></i>-->
+                                        <!--</div>-->
+                                        <div class="centered-text content-status">
+                                            Job Completed
+                                        </div>
+                                    </div>
+                                    <div class="square3 status-change-7">
+
+                                    </div>
+                                    <div class="circle-status  status-change-7">
+                                        <!--<div class="circle centered-text middle-circle">-->
+                                        <!--<i class="fa fa-car"></i>-->
+                                        <!--</div>-->
+                                        <div class="centered-text content-status">
+                                            Feedback Taken
+                                        </div>
+                                    </div>
+                                    <div class="square3 status-change-8">
+
+                                    </div>
+                                    <div class="circle-status status-change-8">
+
+                                        <!--<div class="circle centered-text middle-circle">-->
+                                        <!--<i class="fa fa-car"></i>-->
+                                        <!--</div>-->
+                                        <div class="centered-text content-status">
+                                            Cancelled
+                                        </div>
+                                    </div>
+                                    <div class="square3 status-change-9">
+
+                                    </div>
+                                    <div class="circle-status status-change-9">
+
+                                        <!--<div class="circle centered-text middle-circle">-->
+                                        <!--<i class="fa fa-car"></i>-->
+                                        <!--</div>-->
+                                        <div class="centered-text content-status">
+                                            Escalation
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--New Status Change End-->
+
+
+                            <!--Old Status Change Start-->
+
+
+                            <!--<div class="col l2 s12 m12">-->
+                            <!--<b>Change Status</b>-->
+                            <!--</div>-->
+                            <!--<div class="col l6 s12 m12">-->
+                            <!--<div class="input-field" id="status-select">-->
+                            <!--<select class="status-list browser-default">-->
+                            <!--<option value="" disabled selected>Select Status</option>-->
+                            <!--<option value="Lead" disabled >Lead</option>-->
+                            <!--<option value="Confirmed">Confirmed</option>-->
+                            <!--<option value="Assigned">Assigned</option>-->
+                            <!--<option value="Engineer Left">Engineer Left</option>-->
+                            <!--<option value="Reached Workshop" >Reached Workshop</option>-->
+                            <!--<option value="Estimate Shared" >Estimate Shared</option>-->
+                            <!--<option value="Job Completed">Job Completed</option>-->
+                            <!--<option value="Feedback Taken" >Feedback Taken</option>-->
+                            <!--<option value="Cancelled" >Cancelled</option>-->
+                            <!--<option value="Escalation" >Escalation</option>-->
+                            <!--</select>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="col l4 s12 m12 centered-text">-->
+                            <!--<button class="waves-effect waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action">Update Status-->
+                            <!--<i class="material-icons right">send</i>-->
+                            <!--</button>-->
+                            <!--</div>-->
+
+
+                            <!--Old Status Change End-->
+
+                        </div>
+                        <div class="lead-row invisible">
+                            <!--New Status Change Start-->
+                            <div class="status-bar-block">
+                                <div class="status-row-inline">
+
+                                    <div class="circle-status offset-l2 status-change-1" data-class="Lead">
+                                        <div class="circle centered-text middle-circle">
+                                            <i class="fa fa-drivers-license-o"></i>
+                                        </div>
+                                    </div>
+                                    <div class="square status-change-2">
+
+                                    </div>
+                                    <div class="circle-status status-change-2" data-class="Follow Up">
+                                        <div class="circle centered-text middle-circle">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                    </div>
+                                    <div class="square status-change-3 ">
+
+                                    </div>
+                                    <div class="circle-status  status-change-3 " data-class="Confirmed">
+
+                                        <div class="circle centered-text middle-circle ">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                        <!--<div class="centered-text content-status">-->
+                                        <!--Engineer Left-->
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="square status-change-4 ">
+
+                                    </div>
+                                    <div class="circle-status  status-change-4 " data-class="Cancelled">
+                                        <div class="circle centered-text middle-circle ">
+                                            <i class="fa fa-ban"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="status-row-inline">
+
+                                    <div class="circle-status offset-l2  status-change-1 selected">
+                                        <!--<div class="circle centered-text middle-circle">-->
+                                        <!--<i class="fa fa-car"></i>-->
+                                        <!--</div>-->
+                                        <div class="centered-text content-status">
+                                            Lead
+                                        </div>
+                                    </div>
+                                    <div class="square3  status-change-2 selected">
+
+                                    </div>
+                                    <div class="circle-status   status-change-2 selected ">
+                                        <!--<div class="circle centered-text middle-circle">-->
+                                        <!--<i class="fa fa-car"></i>-->
+                                        <!--</div>-->
+                                        <div class="centered-text content-status">
+                                            Follow Up
+                                        </div>
+                                    </div>
+                                    <div class="square3 status-change-3">
+
+                                    </div>
+                                    <div class="circle-status  status-change-3">
+
+                                        <!--<div class="circle centered-text middle-circle ">-->
+                                        <!--<i class="fa fa-car"></i>-->
+                                        <!--</div>-->
+                                        <div class="centered-text content-status">
+                                            Confirmed
+                                        </div>
+                                    </div>
+                                    <div class="square3 status-change-4">
+
+                                    </div>
+                                    <div class="circle-status  status-change-4">
+
+                                        <!--<div class="circle centered-text middle-circle ">-->
+                                        <!--<i class="fa fa-car"></i>-->
+                                        <!--</div>-->
+                                        <div class="centered-text content-status">
+                                            Cancelled
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!--<div class="square status-change-4 ">-->
+                                <!--</div>-->
+                                <!--<div class="circle-status  status-change-4 " data-class="Reached Workshop">-->
+
+                                <!--<div class="circle centered-text middle-circle ">-->
+                                <!--<i class="fa fa-home"></i>-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;<div class="centered-textc ontent-status">&ndash;&gt;-->
+                                <!--&lt;!&ndash;Reached Workshop&ndash;&gt;-->
+                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                <!--</div>-->
+
+
+
+                                <!--<div class="col l12 s12 m12">-->
+                                <!--<button status_next="Confirmed" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action"><span class="change-status">Confirm Booking</span>-->
+                                <!--<i class="material-icons right">send</i>-->
+                                <!--</button>-->
+                                <!--</div>-->
+                            </div>
+
+
+
+
+
+                        </div>
+
                     </div>
                     <div class="row b2b-button-row-1 button-row-booking  card invisible">
                         <div class="row">
@@ -919,8 +1286,6 @@
                             <!--Old Status Change End-->
 
                         </div>
-
-
                         <div class="lead-row invisible">
                             <!--New Status Change Start-->
                             <div class="status-bar-block">
@@ -1316,7 +1681,7 @@
                             </form>
                         </div>
                         <br>
-                        <div class="question">Q4) How likely will you recommend ClickGarage to others?</div>
+                        <div class="question">Q4) How likely will you recommend us to others?</div>
                         <div class="answer">
                             <form action="">
                             <p>
