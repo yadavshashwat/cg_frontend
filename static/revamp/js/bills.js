@@ -280,9 +280,10 @@ var Global = {
             Commons.ajaxData('generate_bill', params, "get", _this, _this.loadBillGenerate,null, '.loading-pane');
 
             var url = Commons.getOrigin()+Commons.URLFromName['generate_bill']+'?'+jQuery.param( params )
-            var url1 = 'http://local.clickgarage.in/api/generate_bill/?data_id=58d243f1c8ece6270d6e9304&bill_owner=ClickGarage&total_amount=800&part_amount=0&lube_amount=0&consumable_amount=0&labour_amount=695.6521739130435&vat_part=0&vat_lube=0&vat_consumable=0&service_tax=104.34782608695652&payment_mode=Cash&agent_vat_no=06301844038&agent_cin=U72200DL2015PTC278194&agent_stax=AAVCS6335ESD001&full_agent_name=Sui+Generis+Innovations+Private+Limited&agent_address=2401%2C+Basement&agent_locality=DLF+Phase+4%2C+Opp.+Galleria+Market&agent_city=Gurgaon&bill_type=CG+Haryana&state=Haryana&vat_part_percent=13.125&vat_lube_percent=13.125&vat_consumable_percent=13.125&service_tax_percent=15'
+
+            // var url1 = 'http://local.clickgarage.in/api/generate_bill/?data_id=58d243f1c8ece6270d6e9304&bill_owner=ClickGarage&total_amount=800&part_amount=0&lube_amount=0&consumable_amount=0&labour_amount=695.6521739130435&vat_part=0&vat_lube=0&vat_consumable=0&service_tax=104.34782608695652&payment_mode=Cash&agent_vat_no=06301844038&agent_cin=U72200DL2015PTC278194&agent_stax=AAVCS6335ESD001&full_agent_name=Sui+Generis+Innovations+Private+Limited&agent_address=2401%2C+Basement&agent_locality=DLF+Phase+4%2C+Opp.+Galleria+Market&agent_city=Gurgaon&bill_type=CG+Haryana&state=Haryana&vat_part_percent=13.125&vat_lube_percent=13.125&vat_consumable_percent=13.125&service_tax_percent=15'
             console.log(url)
-            console.log(url1)
+            // console.log(url1)
             $('#download').find('iframe').attr('src',url)
 
             // Comm
