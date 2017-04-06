@@ -21,8 +21,14 @@
     <link rel="stylesheet" href="/../../static/revamp/css/materialize.min.css">
     <link rel="stylesheet" href="/../../static/revamp/css/main.css">
     <link rel="stylesheet" href="/../../static/revamp/css/custom-styles.css">
+
+    <!--<link rel="stylesheet" href="/../../static/revamp/css/materialize.clockpicker.css">-->
+    <!--<link rel="stylesheet" href="/../../static/revamp/css/jquery.ui.timepicker.css">-->
+    <!--<link rel="stylesheet" href="/../../static/revamp/css/wickedpicker.css">-->
+    <link rel="stylesheet" href="/../../static/revamp/css/jquery.timepicker.css">
     <!--<link href="/../../static/revamp/css/paper-bootstrap-wizard.css" rel="stylesheet" />-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800italic,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300,300italic,400italic,600,600italic,700,700italic,800italic,800' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
@@ -37,7 +43,7 @@
 <body class="admin-page">
 <div id="admin-page-state" class="admin-page-html invisible" sub-page-1 ="{{cat_type}}" sub-page-2="{{all_single}}" data-id="{{data_id}}">
     <div class="navbar navbar-fixed visible">
-        <nav class="nav2">
+        <nav class="nav2 nav-admin">
             <div class="nav-wrapper navbar-custom">
 
                 <div class="logo-cg logo-color visible" itemscope itemtype="http://schema.org/Organization">
@@ -50,7 +56,7 @@
                     <li class ="new-lead-button"><a>New Lead</a></li>
                     <li class ="coupon-button"><a>Coupon Management</a></li>
                     <li class ="users-button"><a>User Management</a></li>
-                    <!--<li class ="analytics-button"><a>Analytics</a></li>-->
+                    <li class ="analytics-button invisible"><a>Analytics</a></li>
                     <li class ="campaign-button"><a>Campaign</a></li>
                     <li class ="subscription-button"><a>Subscriptions</a></li>
                     <li class ="lead-button"><a>Leads</a></li>
@@ -63,7 +69,7 @@
                     <li class ="new-lead-button"><a>New Lead</a></li>
                     <li class ="coupon-button"><a>Coupon Management</a></li>
                     <li class ="users-button"><a>User Management</a></li>
-                    <!--<li class ="analytics-button"><a>Analytics</a></li>-->
+                    <li class ="analytics-button invisible"><a>Analytics</a></li>
                     <li class ="campaign-button"><a>Campaign</a></li>
                     <li class ="subscription-button"><a>Subscriptions</a></li>
                     <li class ="lead-button"><a>Leads</a></li>
@@ -74,25 +80,376 @@
         </nav>
     </div>
 
+    <section id="analytics" class="invisible">
+            <div class="row header-analytics">
+                <!--<div class="col l12 m12 s12 vehicle-filter">-->
+                    <div class="col l4 m4 s4 date-box  btn waves-effect waves-light card All cardhover selected" data-class="Overall">
+                        Overall
+                    </div>
+                    <div class="col l4 m4 s4 card cardhover Car date-box  btn waves-effect waves-light " data-class="Monthly">
+                        Monthly
+                    </div>
+                    <div class="col l4 m4 s4 card cardhover Bike date-box  btn waves-effect waves-light " data-class="Daily">
+                        Daily
+                    </div>
+                <!--</div>-->
+            </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <h3><span id="summ_type">Overall</span> Summary</h3>
+            </div>
+            <div class="row">
+                <div class="col l2 s12">
+                    <div class="card">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col s5">
+                                    <div class="icon-big green-icon centered-text">
+                                        <i class="fa fa-money"></i>
+                                    </div>
+                                </div>
+                                <div class="col s7">
+                                    <div class="numbers">
+                                        <p>Volume</p>
+                                        <span class="vol-all">30,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer">
+                                <hr/>
+                                <div class="stats row">
+                                    <div class="col l4 s4 m4">
+                                        <i class="fa fa-car"></i>&nbsp; &nbsp;
+                                    </div>
+                                    <div class="col l8 s8 m8">
+                                        <span class="vol-car">30,000</span>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="stats row">
+                                    <div class="col l4 s4 m4">
+                                        <i class="fa fa-motorcycle"></i>&nbsp; &nbsp;
+                                    </div>
+                                    <div class="col l8 s8 m8">
+                                          <span class="vol-bike">30,000</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col l2 s12">
+                    <div class="card">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col s5">
+                                    <div class="icon-big orange-icon centered-text">
+                                        <i class="fa fa-cubes"></i>
+                                    </div>
+                                </div>
+                                <div class="col s7">
+                                    <div class="numbers">
+                                        <p>Transactions</p>
+                                       <span class="tran-all">30,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="footer">
+                                <hr/>
+                                <div class="stats row">
+                                    <div class="col l4 s4 m4">
+                                        <i class="fa fa-car"></i>&nbsp; &nbsp;
+                                    </div>
+                                    <div class="col l8 s8 m8">
+                                       <span class="tran-car">30,000</span>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="stats row">
+                                    <div class="col l4 s4 m4">
+                                        <i class="fa fa-motorcycle"></i>&nbsp; &nbsp;
+                                    </div>
+                                    <div class="col l8 s8 m8">
+                                       <span class="tran-bike">30,000</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col l2 s12">
+                    <div class="card">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col s5">
+                                    <div class="icon-big green-icon centered-text">
+                                        <i class="fa fa-inr"></i>
+                                    </div>
+                                </div>
+                                <div class="col s7">
+                                    <div class="numbers">
+                                        <p>Profit</p>
+                                        <span class="profit-all">NA</span>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="footer">
+                                <hr/>
+                                <div class="stats row">
+                                    <div class="col l4 s4 m4">
+                                        <i class="fa fa-car"></i>&nbsp; &nbsp;
+                                    </div>
+                                    <div class="col l8 s8 m8">
+                                        <span class="profit-car">NA</span>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="stats row">
+                                    <div class="col l4 s4 m4">
+                                        <i class="fa fa-motorcycle"></i>&nbsp; &nbsp;
+                                    </div>
+                                    <div class="col l8 s8 m8">
+                                      <span class="profit-bike">NA</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col l2 s12">
+                    <div class="card">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col s5">
+                                    <div class="icon-big purple-icon centered-text">
+                                        <i class="fa fa-leaf"></i>
+                                    </div>
+                                </div>
+                                <div class="col s7">
+                                    <div class="numbers">
+                                        <p>Leads</p>
+                                      <span class="lead-all">30,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="footer">
+                                <hr/>
+                                <div class="stats row">
+                                    <div class="col l4 s4 m4">
+                                        <i class="fa fa-car"></i>&nbsp; &nbsp;
+                                    </div>
+                                    <div class="col l8 s8 m8">
+                                      <span class="lead-car">30,000</span>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="stats row">
+                                    <div class="col l4 s4 m4">
+                                        <i class="fa fa-motorcycle"></i>&nbsp; &nbsp;
+                                    </div>
+                                    <div class="col l8 s8 m8">
+                                         <span class="lead-bike">30,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col l2 s12">
+                    <div class="card">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col s5">
+                                    <div class="icon-big purple-icon centered-text">
+                                        <i class="fa fa-users"></i>
+                                    </div>
+                                </div>
+                                <div class="col s7">
+                                    <div class="numbers">
+                                        <p>Users</p>
+                                         <span class="users-all">30,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="footer">
+                                <hr/>
+                                <div class="stats row">
+                                    <div class="col l4 s4 m4">
+                                        <i class="fa fa-car"></i>&nbsp; &nbsp;
+                                    </div>
+                                    <div class="col l8 s8 m8">
+                                        NA
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="stats row">
+                                    <div class="col l4 s4 m4">
+                                        <i class="fa fa-motorcycle"></i>&nbsp; &nbsp;
+                                    </div>
+                                    <div class="col l8 s8 m8">
+                                        NA
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col l2 s12">
+                    <div class="card">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col s5">
+                                    <div class="icon-big blue-icon centered-text">
+                                        <i class="fa fa-thumbs-up"></i>
+                                    </div>
+                                </div>
+                                <div class="col s7">
+                                    <div class="numbers">
+                                        <p>NPS</p>
+                                        <span class="nps-all">30,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="footer">
+                                <hr/>
+                                <div class="stats row">
+                                    <div class="col l4 s4 m4">
+                                        <i class="fa fa-car"></i>&nbsp; &nbsp;
+                                    </div>
+                                    <div class="col l8 s8 m8">
+                                        <span class="nps-car">30,000</span>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="stats row">
+                                    <div class="col l4 s4 m4">
+                                        <i class="fa fa-motorcycle"></i>&nbsp; &nbsp;
+                                    </div>
+                                    <div class="col l8 s8 m8">
+                                        <span class="nps-bike">30,000</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col l12 m12 s12 vehicle-filter">
+                    <div class="col l4 m4 s4 date-box  btn waves-effect waves-light card All cardhover selected" data-class="All">
+                        All
+                    </div>
+                    <div class="col l4 m4 s4 card cardhover Car date-box  btn waves-effect waves-light " data-class="Car">
+                        Car
+                    </div>
+                    <div class="col l4 m4 s4 card cardhover Bike date-box  btn waves-effect waves-light " data-class="Bike">
+                        Bike
+                    </div>
+                </div>
+            </div>
+            <!--<hr/>-->
+            <div class="row btn-expand-row">
+                <div class="col l10 s10 m10"><h3>Month-on-Month Summary</h3></div><div class="col l2 m2 s2">
+                                    <div class="closed   btn waves-effect waves-light  btn-expand card cardhover btn-month-expand unselected no-border-radius">
+                                        <i class="fa fa-caret-down"></i>
+                                    </div>
+                <!--<a class="btn-floating btn-large waves-effect btn-month-expand waves-light red unselected"><i class="material-icons">add</i></a>-->
+            </div>
+            </div>
+            <div class="row month-data-row invisible">
+                <div class="col l12 s12 m12">
+                    <table class="striped card centered-text">
+                        <thead>
+                            <th>Month</th>
+                            <th>Volume</th>
+                            <th>Transactions</th>
+                            <th>Profits</th>
+                            <th>Leads</th>
+                            <th>NPS</th>
+                        </thead>
+                        <tbody>
+                            <tr><td>July'17</td><td>20000</td><td>300</td><td>300</td><td>200</td><td>30%</td></tr>
+                            <tr><td>June'17</td><td>20000</td><td>300</td><td>200</td><td>300</td><td>30%</td></tr>
+                            <tr><td>Aug'17</td><td>20000</td><td>300</td><td>200</td><td>300</td><td>30%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+           <hr/>
+            <div class="row btn-expand-row">
+                <div class="col l10 s10 m10"><h3>Source Summary</h3></div><div class="col l2 m2 s2">
+                                    <div class="closed   btn waves-effect waves-light  btn-expand card cardhover btn-source-expand unselected no-border-radius">
+                                        <i class="fa fa-caret-down"></i>
+                                    </div></div>
+            <div class="row source-data-row invisible">
+                <div class="col l12 s12 m12">
+                    <table class="striped card centered-text">
+                        <thead>
+                            <th>Source</th>
+                            <th>Volume</th>
+                            <th>Transactions</th>
+                            <th>Profits</th>
+                            <th>Leads</th>
+                            <th>NPS</th>
+                        </thead>
+                        <tbody>
+                            <tr><td>Google</td><td>20000</td><td>300</td><td>300</td><td>200</td><td>30%</td></tr>
+                            <tr><td>Facebook</td><td>20000</td><td>300</td><td>200</td><td>300</td><td>30%</td></tr>
+                            <tr><td>B2B</td><td>20000</td><td>300</td><td>200</td><td>300</td><td>30%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <hr/>
+            <div class="row btn-expand-row">
+                <div class="col l10 s10 m10"><h3>Status Summary</h3></div><div class="col l2 m2 s2">
+                                    <div class="closed  btn waves-effect waves-light  btn-expand card cardhover btn-status-expand unselected no-border-radius">
+                                        <i class="fa fa-caret-down"></i>
+                                    </div></div></div>
+            <div class="row status-data-row invisible">
+                <div class="col l12 s12 m12">
+                    <table class="striped card centered-text">
+                        <thead>
+                            <th>Status</th>
+                            <th>Transactions</th>
+                        </thead>
+                        <tbody>
+                            <tr><td>Lead</td><td>20000</tr>
+                            <tr><td>Follow Up</td><td>20000</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
     <section id="new-booking" class="invisible">
         <!--<div class="row header-booking staff-button-row">-->
-        <!--<div class="col s6 m6 l6 date-box card cardhover book-btn selected">-->
+        <!--<div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover book-btn selected">-->
         <!--Booking-->
         <!--</div>-->
-        <!--<div class="col s6 m6 l6 date-box card cardhover lead-btn">-->
+        <!--<div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover lead-btn">-->
         <!--Lead-->
         <!--</div>-->
         <!--</div>-->
         <!--<div class="row header-booking agent-button-row">-->
-        <!--<div class="col s6 m6 l6 date-box card cardhover book-btn selected">-->
+        <!--<div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover book-btn selected">-->
         <!--Booking-->
         <!--</div>-->
-        <!--<div class="col s6 m6 l6 date-box card cardhover lead-btn">-->
+        <!--<div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover lead-btn">-->
         <!--Lead-->
         <!--</div>-->
         <!--</div>-->
-
-        <div class="row">
+        <div class="container-fluid">
+            <div class="row">
             <div class="row booking-add visible">
                 <div class="row centered-text">
                     <h3><span class="booking-lead">Booking</span> Details</h3>
@@ -330,8 +687,10 @@
                                         <input id="date" type="date" class="datepicker">
                                         <label for="date" data-error="required">Date</label>
                                     </div>
-
-                                    <div class="input-field col s12 m12 l6" id ="time-slot">
+                                    <div class="input-field col s12 m12 l6 lead-time invisible">
+                                       <i class="material-icons prefix">today</i><label for="time_follow_lead">Time</label><input id="time_follow_lead" type="text" name="timepicker" class="time ui-timepicker-input"/>
+                                    </div>
+                                    <div class="input-field col s12 m12 l6 booking-time invisible" id ="time-slot">
                                         <select class="browser-default">
                                             <option value="" disabled selected>Time-Slot</option>
                                             <option value="09:30AM - 11:30AM">09:30AM - 11:30AM </option>
@@ -347,6 +706,11 @@
                     </div>
                 </div>
                 <div class="staff-button-row card ">
+                    <div class="row">
+                        <div class="col l12 m12 s12 box-header">
+                            <h3>Source and Confimation</h3>
+                        </div>
+                    </div>
                     <!--<div class="row">-->
                     <!--<div class="col l12 m12 s12 box-header">-->
                     <!--<h3>Additional Details:</h3>-->
@@ -370,7 +734,7 @@
                     <!--<br>-->
                     <br>
                 </div>
-                <div class="row confirm-details card">
+                <div class="row confirm-details">
                     <div class="col s12 m12 l12 centered-text">
                         <button class="waves-effect waves-light btn cg-primary btn-service btn-send-booking" type="submit" name="action">Confirm
                             <i class="material-icons right">send</i>
@@ -382,13 +746,14 @@
 
         </div>
         <!--</div>-->
+        </div>
     </section>
 
     <section id="bookings" class="invisible">
         <div class="booking-select-section card">
             <!--<div class="container-fluid services">-->
             <div class="row ">
-                <div class="filter-sort closed  date-box card cardhover selected col l3 m6 s6">
+                <div class="filter-sort closed  date-box  btn waves-effect waves-light card cardhover selected col l3 m6 s6">
                     Filter&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
                 </div>
                 <div class="col s6 m6 l2 centered-text">
@@ -398,13 +763,13 @@
                 </div>
 
                 <div class="col l7 m12 s12 date-filter">
-                    <div class="col l4 m4 s4 date-box card today cardhover selected" data-class="Today">
+                    <div class="col l4 m4 s4 date-box  btn waves-effect waves-light card today cardhover selected" data-class="Today">
                         Today
                     </div>
-                    <div class="col l4 m4 s4 card cardhover tomorrow date-box" data-class="Tomorrow">
+                    <div class="col l4 m4 s4 card cardhover tomorrow date-box  btn waves-effect waves-light " data-class="Tomorrow">
                         Tomorrow
                     </div>
-                    <div class="col l4 m4 s4 card cardhover all date-box" data-class="All">
+                    <div class="col l4 m4 s4 card cardhover all date-box  btn waves-effect waves-light " data-class="All">
                         All
                     </div>
                 </div>
@@ -497,10 +862,10 @@
                         </div>
                     </div>
                     <div class="col s8 m8 l7 centered-text booking-filter">
-                        <div class="col l6 m6 s6 date-box card bookings-filter cardhover selected" data-class="Bookings">
+                        <div class="col l6 m6 s6 date-box  btn waves-effect waves-light card bookings-filter cardhover selected" data-class="Bookings">
                             Bookings
                         </div>
-                        <div class="col l6 m6 s6 card cardhover delivery date-box" data-class="Delivery">
+                        <div class="col l6 m6 s6 card cardhover delivery date-box  btn waves-effect waves-light " data-class="Delivery">
                             Delivery
                         </div>
 
@@ -532,7 +897,7 @@
                             <span class="status"><b>Status</b></span>
                         </div>
                         <!--<div class="col l2 hide-on-med-and-down status-bar">-->
-                            <!--<span class="status"><b>Buttons</b></span>-->
+                        <!--<span class="status"><b>Buttons</b></span>-->
                         <!--</div>-->
 
                     </div>
@@ -575,14 +940,24 @@
     <section id="booking-details" class="invisible">
         <div id="customer-detail">
             <div class="row header-booking agent-button-row">
-                <div class="col s4 m4 l4 cust-detail service-box card cardhover selected">
-                    Cust. Details
+                <div class="booking invisible">
+                    <div class="col s4 m4 l4 cust-detail service-box card cardhover selected">
+                        Cust. Details
+                    </div>
+                    <div class="col s4 m4 l4 service-detail service-box card cardhover">
+                        Service Desc.
+                    </div>
+                    <div class="col s4 m4 l4 feedback-detail service-box card cardhover">
+                        Feedback
+                    </div>
                 </div>
-                <div class="col s4 m4 l4 service-detail service-box card cardhover">
-                    Service Desc.
-                </div>
-                <div class="col s4 m4 l4 feedback-detail service-box card cardhover">
-                    Feedback
+                <div class="lead invisible">
+                    <div class="col s6 m6 l6 cust-detail service-box card cardhover selected">
+                        Cust. Details
+                    </div>
+                    <div class="col s6 m6 l6 service-detail service-box card cardhover">
+                        Service Desc.
+                    </div>
                 </div>
             </div>
             <div class="row header-booking b2b-button-row">
@@ -594,14 +969,24 @@
                 </div>
             </div>
             <div class="row header-booking staff-button-row">
-                <div class="col s4 m4 l4 cust-detail service-box card cardhover selected">
-                    Cust. Details
+                <div class="booking invisible">
+                    <div class="col s4 m4 l4 cust-detail service-box card cardhover selected">
+                        Cust. Details
+                    </div>
+                    <div class="col s4 m4 l4 service-detail service-box card cardhover">
+                        Service Desc.
+                    </div>
+                    <div class="col s4 m4 l4 feedback-detail service-box card cardhover">
+                        Feedback
+                    </div>
                 </div>
-                <div class="col s4 m4 l4 service-detail service-box card cardhover">
-                    Service Desc.
-                </div>
-                <div class="col s4 m4 l4 feedback-detail service-box card cardhover">
-                    Feedback
+                <div class="lead invisible">
+                    <div class="col s6 m6 l6 cust-detail service-box card cardhover selected">
+                        Cust. Details
+                    </div>
+                    <div class="col s6 m6 l6 service-detail service-box card cardhover">
+                        Service Desc.
+                    </div>
                 </div>
             </div>
 
@@ -622,18 +1007,18 @@
                         </div>
                         <!--<div class="row">-->
                         <!--<div class="row">-->
-                            <!--<div class="col l12 s12 m12">-->
-                                <!--<button status_next="" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action"><span class="change-status"><span id="status_change-1"></span></span>-->
-                                    <!--<i class="material-icons right">send</i>-->
-                                <!--</button>-->
-                            <!--</div>-->
+                        <!--<div class="col l12 s12 m12">-->
+                        <!--<button status_next="" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action"><span class="change-status"><span id="status_change-1"></span></span>-->
+                        <!--<i class="material-icons right">send</i>-->
+                        <!--</button>-->
+                        <!--</div>-->
                         <!--</div>-->
                         <!--<div class="row">-->
-                            <!--<div class="col l12 s12 m12">-->
-                                <!--<button status_next="" class="waves-effect status-btn-2 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action"><span class="change-status"><span id="status_change-2"></span></span>-->
-                                    <!--<i class="material-icons right">send</i>-->
-                                <!--</button>-->
-                            <!--</div>-->
+                        <!--<div class="col l12 s12 m12">-->
+                        <!--<button status_next="" class="waves-effect status-btn-2 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action"><span class="change-status"><span id="status_change-2"></span></span>-->
+                        <!--<i class="material-icons right">send</i>-->
+                        <!--</button>-->
+                        <!--</div>-->
                         <!--</div>-->
                         <!--</div>-->
                         <div class="confirm-row row invisible">
@@ -643,23 +1028,23 @@
                                 <div class="status-row-inline">
 
                                     <!--<div class="circle-status offset-l2 status-change-1" data-class="Confirmed">-->
-                                        <!--<div class="circle centered-text middle-circle">-->
-                                            <!--<i class="fa fa-drivers-license-o"></i>-->
-                                        <!--</div>-->
-                                        <!--&lt;!&ndash;<div class="centered-text content-status">&ndash;&gt;-->
-                                        <!--&lt;!&ndash;Confirmed&ndash;&gt;-->
-                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                    <!--<div class="circle centered-text middle-circle">-->
+                                    <!--<i class="fa fa-drivers-license-o"></i>-->
+                                    <!--</div>-->
+                                    <!--&lt;!&ndash;<div class="centered-text content-status">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;Confirmed&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
                                     <!--</div>-->
                                     <!--<div class="square status-change-2">-->
 
                                     <!--</div>-->
                                     <!--<div class="circle-status status-change-2" data-class="Assigned">-->
-                                        <!--<div class="circle centered-text middle-circle">-->
-                                            <!--<i class="fa fa-user"></i>-->
-                                        <!--</div>-->
-                                        <!--&lt;!&ndash;<div class="centered-text content-status">&ndash;&gt;-->
-                                        <!--&lt;!&ndash;Assigned&ndash;&gt;-->
-                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                    <!--<div class="circle centered-text middle-circle">-->
+                                    <!--<i class="fa fa-user"></i>-->
+                                    <!--</div>-->
+                                    <!--&lt;!&ndash;<div class="centered-text content-status">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;Assigned&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
                                     <!--</div>-->
                                     <!--<div class="square status-change-3 ">-->
 
@@ -719,7 +1104,7 @@
                                         <!--Feedback Taken-->
                                         <!--</div>-->
                                     </div>
-                                    <div class="square status-change-8 ">
+                                    <div class="square status-change ">
 
                                     </div>
                                     <div class="circle-status  status-change-8 " data-class="Cancelled">
@@ -731,7 +1116,7 @@
                                         <!--Cancelled-->
                                         <!--</div>-->
                                     </div>
-                                    <div class="square status-change-9">
+                                    <div class="square status-change">
 
                                     </div>
                                     <div class="circle-status status-change-9" data-class="Escalation">
@@ -747,23 +1132,23 @@
                                 <div class="status-row-inline">
 
                                     <!--<div class="circle-status offset-l2  status-change-1 selected">-->
-                                        <!--&lt;!&ndash;<div class="circle centered-text middle-circle">&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<i class="fa fa-car"></i>&ndash;&gt;-->
-                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                        <!--<div class="centered-text content-status">-->
-                                            <!--Confirmed-->
-                                        <!--</div>-->
+                                    <!--&lt;!&ndash;<div class="circle centered-text middle-circle">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<i class="fa fa-car"></i>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                    <!--<div class="centered-text content-status">-->
+                                    <!--Confirmed-->
+                                    <!--</div>-->
                                     <!--</div>-->
                                     <!--<div class="square3  status-change-2 selected">-->
 
                                     <!--</div>-->
                                     <!--<div class="circle-status   status-change-2 selected ">-->
-                                        <!--&lt;!&ndash;<div class="circle centered-text middle-circle">&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<i class="fa fa-car"></i>&ndash;&gt;-->
-                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                        <!--<div class="centered-text content-status">-->
-                                            <!--Assigned-->
-                                        <!--</div>-->
+                                    <!--&lt;!&ndash;<div class="circle centered-text middle-circle">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<i class="fa fa-car"></i>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                    <!--<div class="centered-text content-status">-->
+                                    <!--Assigned-->
+                                    <!--</div>-->
                                     <!--</div>-->
                                     <!--<div class="square3 status-change-3">-->
 
@@ -898,15 +1283,23 @@
                                     <div class="square status-change-2">
 
                                     </div>
-                                    <div class="circle-status status-change-2" data-class="Follow Up">
+                                   <div class="circle-status status-change-2" data-class="Cold">
                                         <div class="circle centered-text middle-circle">
-                                            <i class="fa fa-clock-o"></i>
+                                            <i class="fa fa-snowflake-o"></i>
                                         </div>
                                     </div>
                                     <div class="square status-change-3 ">
 
                                     </div>
-                                    <div class="circle-status  status-change-3 " data-class="Confirmed">
+                                    <div class="circle-status status-change-3" data-class="Warm">
+                                        <div class="circle centered-text middle-circle">
+                                            <i class="fa fa-bolt"></i>
+                                        </div>
+                                    </div>
+                                    <div class="square status-change-4 ">
+
+                                    </div>
+                                    <div class="circle-status  status-change-4 " data-class="Confirmed">
 
                                         <div class="circle centered-text middle-circle ">
                                             <i class="fa fa-check"></i>
@@ -915,10 +1308,10 @@
                                         <!--Engineer Left-->
                                         <!--</div>-->
                                     </div>
-                                    <div class="square status-change-4 ">
+                                    <div class="square status-change">
 
                                     </div>
-                                    <div class="circle-status  status-change-4 " data-class="Cancelled">
+                                    <div class="circle-status  status-change-5 " data-class="Cancelled">
                                         <div class="circle centered-text middle-circle ">
                                             <i class="fa fa-ban"></i>
                                         </div>
@@ -943,25 +1336,30 @@
                                         <!--<i class="fa fa-car"></i>-->
                                         <!--</div>-->
                                         <div class="centered-text content-status">
-                                            Follow Up
+                                            Cold
                                         </div>
                                     </div>
                                     <div class="square3 status-change-3">
 
                                     </div>
                                     <div class="circle-status  status-change-3">
-
-                                        <!--<div class="circle centered-text middle-circle ">-->
-                                        <!--<i class="fa fa-car"></i>-->
-                                        <!--</div>-->
-                                        <div class="centered-text content-status">
-                                            Confirmed
+                                         <div class="centered-text content-status">
+                                            Warm
                                         </div>
                                     </div>
+
                                     <div class="square3 status-change-4">
 
                                     </div>
                                     <div class="circle-status  status-change-4">
+                                         <div class="centered-text content-status">
+                                            Confirmed
+                                        </div>
+                                    </div>
+                                    <div class="square3 status-change">
+
+                                    </div>
+                                    <div class="circle-status  status-change-5">
 
                                         <!--<div class="circle centered-text middle-circle ">-->
                                         <!--<i class="fa fa-car"></i>-->
@@ -1120,7 +1518,7 @@
                                         <!--Feedback Taken-->
                                         <!--</div>-->
                                     </div>
-                                    <div class="square status-change-8 ">
+                                    <div class="square status-change ">
 
                                     </div>
                                     <div class="circle-status  status-change-8 " data-class="Cancelled">
@@ -1132,7 +1530,7 @@
                                         <!--Cancelled-->
                                         <!--</div>-->
                                     </div>
-                                    <div class="square status-change-9">
+                                    <div class="square status-change">
 
                                     </div>
                                     <div class="circle-status status-change-9" data-class="Escalation">
@@ -1224,7 +1622,7 @@
                                             Feedback Taken
                                         </div>
                                     </div>
-                                    <div class="square3 status-change-8">
+                                    <div class="square3 status-change">
 
                                     </div>
                                     <div class="circle-status status-change-8">
@@ -1236,7 +1634,7 @@
                                             Cancelled
                                         </div>
                                     </div>
-                                    <div class="square3 status-change-9">
+                                    <div class="square3 status-change">
 
                                     </div>
                                     <div class="circle-status status-change-9">
@@ -1289,7 +1687,7 @@
                         <div class="lead-row invisible">
                             <!--New Status Change Start-->
                             <div class="status-bar-block">
-                                <div class="status-row-inline">
+                               <div class="status-row-inline">
 
                                     <div class="circle-status offset-l2 status-change-1" data-class="Lead">
                                         <div class="circle centered-text middle-circle">
@@ -1299,15 +1697,23 @@
                                     <div class="square status-change-2">
 
                                     </div>
-                                    <div class="circle-status status-change-2" data-class="Follow Up">
+                                    <div class="circle-status status-change-2" data-class="Cold">
                                         <div class="circle centered-text middle-circle">
-                                            <i class="fa fa-clock-o"></i>
+                                            <i class="fa fa-snowflake-o"></i>
                                         </div>
                                     </div>
                                     <div class="square status-change-3 ">
 
                                     </div>
-                                    <div class="circle-status  status-change-3 " data-class="Confirmed">
+                                    <div class="circle-status status-change-3" data-class="Warm">
+                                        <div class="circle centered-text middle-circle">
+                                            <i class="fa fa-bolt"></i>
+                                        </div>
+                                    </div>
+                                    <div class="square status-change-4 ">
+
+                                    </div>
+                                    <div class="circle-status  status-change-4 " data-class="Confirmed">
 
                                         <div class="circle centered-text middle-circle ">
                                             <i class="fa fa-check"></i>
@@ -1316,10 +1722,10 @@
                                         <!--Engineer Left-->
                                         <!--</div>-->
                                     </div>
-                                    <div class="square status-change-4 ">
+                                    <div class="square status-change">
 
                                     </div>
-                                    <div class="circle-status  status-change-4 " data-class="Cancelled">
+                                    <div class="circle-status  status-change-5 " data-class="Cancelled">
                                         <div class="circle centered-text middle-circle ">
                                             <i class="fa fa-ban"></i>
                                         </div>
@@ -1344,25 +1750,30 @@
                                         <!--<i class="fa fa-car"></i>-->
                                         <!--</div>-->
                                         <div class="centered-text content-status">
-                                            Follow Up
+                                            Cold
                                         </div>
                                     </div>
                                     <div class="square3 status-change-3">
 
                                     </div>
                                     <div class="circle-status  status-change-3">
-
-                                        <!--<div class="circle centered-text middle-circle ">-->
-                                        <!--<i class="fa fa-car"></i>-->
-                                        <!--</div>-->
-                                        <div class="centered-text content-status">
-                                            Confirmed
+                                         <div class="centered-text content-status">
+                                            Warm
                                         </div>
                                     </div>
+
                                     <div class="square3 status-change-4">
 
                                     </div>
                                     <div class="circle-status  status-change-4">
+                                         <div class="centered-text content-status">
+                                            Confirmed
+                                        </div>
+                                    </div>
+                                    <div class="square3 status-change">
+
+                                    </div>
+                                    <div class="circle-status  status-change-5">
 
                                         <!--<div class="circle centered-text middle-circle ">-->
                                         <!--<i class="fa fa-car"></i>-->
@@ -1546,198 +1957,199 @@
                         <div class="question">Q1) Was the pickup done on time?</div>
                         <div class="answer">
                             <form action="">
-                            <p>
-                              <input name="question-1" type="radio" id="pick_on_time_yes" />
-                              <label for="pick_on_time_yes">Yes</label>
-                              <input name="question-1" type="radio" id="pick_on_time_no" />
-                              <label for="pick_on_time_no">No</label>
-                            </p>
-                          </form>
+                                <p>
+                                    <input name="question-1" type="radio" id="pick_on_time_yes" />
+                                    <label for="pick_on_time_yes">Yes</label>
+                                    <input name="question-1" type="radio" id="pick_on_time_no" />
+                                    <label for="pick_on_time_no">No</label>
+                                </p>
+                            </form>
                         </div>
                         <br>
                         <div class="question">Q2) Was the delivery on time?</div>
                         <div class="answer">
                             <form action="">
-                            <p>
-                              <input name="question-2" type="radio" id="delivery_on_time_yes" />
-                              <label for="delivery_on_time_yes">Yes</label>
-                              <input name="question-2" type="radio" id="delivery_on_time_no" />
-                              <label for="delivery_on_time_no">No</label>
-                            </p>
-                          </form>
+                                <p>
+                                    <input name="question-2" type="radio" id="delivery_on_time_yes" />
+                                    <label for="delivery_on_time_yes">Yes</label>
+                                    <input name="question-2" type="radio" id="delivery_on_time_no" />
+                                    <label for="delivery_on_time_no">No</label>
+                                </p>
+                            </form>
                         </div>
                         <br>
                         <div class="question">Q3) Was the service engineer courteous? Did he explain the problems to you in detail?</div>
                         <div class="answer">
                             <form action="">
-                            <p>
-                              <input name="question-3" type="radio" id="courteous_yes" />
-                              <label for="courteous_yes">Yes</label>
-                              <input name="question-3" type="radio" id="courteous_no" />
-                              <label for="courteous_no">No</label>
-                            </p>
-                          </form>
+                                <p>
+                                    <input name="question-3" type="radio" id="courteous_yes" />
+                                    <label for="courteous_yes">Yes</label>
+                                    <input name="question-3" type="radio" id="courteous_no" />
+                                    <label for="courteous_no">No</label>
+                                </p>
+                            </form>
                         </div>
                         <br>
                         <div class="question">Q4) How do you rate the quality of washing and cleaning of the vehicle?</div>
                         <div class="answer">
                             <form action="">
-                            <p>
-                              <input name="question-4" type="radio" id="washing_1" />
-                              <label for="washing_1">1</label>
-                              <input name="question-4" type="radio" id="washing_2" />
-                              <label for="washing_2">2</label>
-                              <input name="question-4" type="radio" id="washing_3" />
-                              <label for="washing_3">3</label>
-                              <input name="question-4" type="radio" id="washing_4" />
-                              <label for="washing_4">4</label>
-                              <input name="question-4" type="radio" id="washing_5" />
-                              <label for="washing_5">5</label>
-                              <input name="question-4" type="radio" id="washing_6" />
-                              <label for="washing_6">6</label>
-                              <input name="question-4" type="radio" id="washing_7" />
-                              <label for="washing_7">7</label>
-                              <input name="question-4" type="radio" id="washing_8" />
-                              <label for="washing_8">8</label>
-                              <input name="question-4" type="radio" id="washing_9" />
-                              <label for="washing_9">9</label>
-                              <input name="question-4" type="radio" id="washing_10" />
-                              <label for="washing_10">10</label>
-                            </p>
-                          </form>
+                                <p>
+                                    <input name="question-4" type="radio" id="washing_1" />
+                                    <label for="washing_1">1</label>
+                                    <input name="question-4" type="radio" id="washing_2" />
+                                    <label for="washing_2">2</label>
+                                    <input name="question-4" type="radio" id="washing_3" />
+                                    <label for="washing_3">3</label>
+                                    <input name="question-4" type="radio" id="washing_4" />
+                                    <label for="washing_4">4</label>
+                                    <input name="question-4" type="radio" id="washing_5" />
+                                    <label for="washing_5">5</label>
+                                    <input name="question-4" type="radio" id="washing_6" />
+                                    <label for="washing_6">6</label>
+                                    <input name="question-4" type="radio" id="washing_7" />
+                                    <label for="washing_7">7</label>
+                                    <input name="question-4" type="radio" id="washing_8" />
+                                    <label for="washing_8">8</label>
+                                    <input name="question-4" type="radio" id="washing_9" />
+                                    <label for="washing_9">9</label>
+                                    <input name="question-4" type="radio" id="washing_10" />
+                                    <label for="washing_10">10</label>
+                                </p>
+                            </form>
                         </div>
                         <div class="row centered-text update-feed-row">
                             <button status_next="" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-feedback-1" type="submit" name="action">Update
-                                 <i class="material-icons right">send</i>
+                                <i class="material-icons right">send</i>
                             </button>
                         </div>
 
-                        </div>
-                        <div class="feedback-2 card">
+                    </div>
+                    <div class="feedback-2 card">
                         <h3 class="centered-text">Post Service Feedback</h3>
                         <div class="question">Q1) How has the car been running? How was the quality of service?</div>
                         <div class="answer">
                             <form action="">
-                            <p>
-                              <input name="question-5" type="radio" id="quality_of_service_1" />
-                              <label for="quality_of_service_1">1</label>
-                              <input name="question-5" type="radio" id="quality_of_service_2" />
-                              <label for="quality_of_service_2">2</label>
-                              <input name="question-5" type="radio" id="quality_of_service_3" />
-                              <label for="quality_of_service_3">3</label>
-                              <input name="question-5" type="radio" id="quality_of_service_4" />
-                              <label for="quality_of_service_4">4</label>
-                              <input name="question-5" type="radio" id="quality_of_service_5" />
-                              <label for="quality_of_service_5">5</label>
-                              <input name="question-5" type="radio" id="quality_of_service_6" />
-                              <label for="quality_of_service_6">6</label>
-                              <input name="question-5" type="radio" id="quality_of_service_7" />
-                              <label for="quality_of_service_7">7</label>
-                              <input name="question-5" type="radio" id="quality_of_service_8" />
-                              <label for="quality_of_service_8">8</label>
-                              <input name="question-5" type="radio" id="quality_of_service_9" />
-                              <label for="quality_of_service_9">9</label>
-                              <input name="question-5" type="radio" id="quality_of_service_10" />
-                              <label for="quality_of_service_10">10</label>
-                            </p>
-                          </form>
+                                <p>
+                                    <input name="question-5" type="radio" id="quality_of_service_1" />
+                                    <label for="quality_of_service_1">1</label>
+                                    <input name="question-5" type="radio" id="quality_of_service_2" />
+                                    <label for="quality_of_service_2">2</label>
+                                    <input name="question-5" type="radio" id="quality_of_service_3" />
+                                    <label for="quality_of_service_3">3</label>
+                                    <input name="question-5" type="radio" id="quality_of_service_4" />
+                                    <label for="quality_of_service_4">4</label>
+                                    <input name="question-5" type="radio" id="quality_of_service_5" />
+                                    <label for="quality_of_service_5">5</label>
+                                    <input name="question-5" type="radio" id="quality_of_service_6" />
+                                    <label for="quality_of_service_6">6</label>
+                                    <input name="question-5" type="radio" id="quality_of_service_7" />
+                                    <label for="quality_of_service_7">7</label>
+                                    <input name="question-5" type="radio" id="quality_of_service_8" />
+                                    <label for="quality_of_service_8">8</label>
+                                    <input name="question-5" type="radio" id="quality_of_service_9" />
+                                    <label for="quality_of_service_9">9</label>
+                                    <input name="question-5" type="radio" id="quality_of_service_10" />
+                                    <label for="quality_of_service_10">10</label>
+                                </p>
+                            </form>
                         </div>
                         <br>
                         <div class="question">Q2) How do you rate the overall quality and experience?</div>
                         <div class="answer">
                             <form action="">
-                            <p>
-                              <input name="question-6" type="radio" id="experience_1" />
-                              <label for="experience_1">1</label>
-                              <input name="question-6" type="radio" id="experience_2" />
-                              <label for="experience_2">2</label>
-                              <input name="question-6" type="radio" id="experience_3" />
-                              <label for="experience_3">3</label>
-                              <input name="question-6" type="radio" id="experience_4" />
-                              <label for="experience_4">4</label>
-                              <input name="question-6" type="radio" id="experience_5" />
-                              <label for="experience_5">5</label>
-                              <input name="question-6" type="radio" id="experience_6" />
-                              <label for="experience_6">6</label>
-                              <input name="question-6" type="radio" id="experience_7" />
-                              <label for="experience_7">7</label>
-                              <input name="question-6" type="radio" id="experience_8" />
-                              <label for="experience_8">8</label>
-                              <input name="question-6" type="radio" id="experience_9" />
-                              <label for="experience_9">9</label>
-                              <input name="question-6" type="radio" id="experience_10" />
-                              <label for="experience_10">10</label>
-                            </p>
-                          </form>
+                                <p>
+                                    <input name="question-6" type="radio" id="experience_1" />
+                                    <label for="experience_1">1</label>
+                                    <input name="question-6" type="radio" id="experience_2" />
+                                    <label for="experience_2">2</label>
+                                    <input name="question-6" type="radio" id="experience_3" />
+                                    <label for="experience_3">3</label>
+                                    <input name="question-6" type="radio" id="experience_4" />
+                                    <label for="experience_4">4</label>
+                                    <input name="question-6" type="radio" id="experience_5" />
+                                    <label for="experience_5">5</label>
+                                    <input name="question-6" type="radio" id="experience_6" />
+                                    <label for="experience_6">6</label>
+                                    <input name="question-6" type="radio" id="experience_7" />
+                                    <label for="experience_7">7</label>
+                                    <input name="question-6" type="radio" id="experience_8" />
+                                    <label for="experience_8">8</label>
+                                    <input name="question-6" type="radio" id="experience_9" />
+                                    <label for="experience_9">9</label>
+                                    <input name="question-6" type="radio" id="experience_10" />
+                                    <label for="experience_10">10</label>
+                                </p>
+                            </form>
                         </div>
                         <br>
                         <div class="question">Q3) Any additional feedback/ideas for us?</div>
                         <div class="answer">
                             <form action="">
-                            <div class="input-field col s12">
-                                <textarea id="additional" class="materialize-textarea" data-length="400"></textarea>
-                                <label for="additional"></label>
-                            </div>
+                                <div class="input-field col s12">
+                                    <textarea id="additional" class="materialize-textarea" data-length="400"></textarea>
+                                    <label for="additional"></label>
+                                </div>
                             </form>
                         </div>
                         <br>
                         <div class="question">Q4) How likely will you recommend us to others?</div>
                         <div class="answer">
                             <form action="">
-                            <p>
-                              <input name="question-8" type="radio" id="recommend_factor_1" />
-                              <label for="recommend_factor_1">1</label>
-                              <input name="question-8" type="radio" id="recommend_factor_2" />
-                              <label for="recommend_factor_2">2</label>
-                              <input name="question-8" type="radio" id="recommend_factor_3" />
-                              <label for="recommend_factor_3">3</label>
-                              <input name="question-8" type="radio" id="recommend_factor_4" />
-                              <label for="recommend_factor_4">4</label>
-                              <input name="question-8" type="radio" id="recommend_factor_5" />
-                              <label for="recommend_factor_5">5</label>
-                              <input name="question-8" type="radio" id="recommend_factor_6" />
-                              <label for="recommend_factor_6">6</label>
-                              <input name="question-8" type="radio" id="recommend_factor_7" />
-                              <label for="recommend_factor_7">7</label>
-                              <input name="question-8" type="radio" id="recommend_factor_8" />
-                              <label for="recommend_factor_8">8</label>
-                              <input name="question-8" type="radio" id="recommend_factor_9" />
-                              <label for="recommend_factor_9">9</label>
-                              <input name="question-8" type="radio" id="recommend_factor_10" />
-                              <label for="recommend_factor_10">10</label>
-                            </p>
-                          </form>
+                                <p>
+                                    <input name="question-8" type="radio" id="recommend_factor_1" />
+                                    <label for="recommend_factor_1">1</label>
+                                    <input name="question-8" type="radio" id="recommend_factor_2" />
+                                    <label for="recommend_factor_2">2</label>
+                                    <input name="question-8" type="radio" id="recommend_factor_3" />
+                                    <label for="recommend_factor_3">3</label>
+                                    <input name="question-8" type="radio" id="recommend_factor_4" />
+                                    <label for="recommend_factor_4">4</label>
+                                    <input name="question-8" type="radio" id="recommend_factor_5" />
+                                    <label for="recommend_factor_5">5</label>
+                                    <input name="question-8" type="radio" id="recommend_factor_6" />
+                                    <label for="recommend_factor_6">6</label>
+                                    <input name="question-8" type="radio" id="recommend_factor_7" />
+                                    <label for="recommend_factor_7">7</label>
+                                    <input name="question-8" type="radio" id="recommend_factor_8" />
+                                    <label for="recommend_factor_8">8</label>
+                                    <input name="question-8" type="radio" id="recommend_factor_9" />
+                                    <label for="recommend_factor_9">9</label>
+                                    <input name="question-8" type="radio" id="recommend_factor_10" />
+                                    <label for="recommend_factor_10">10</label>
+                                </p>
+                            </form>
 
                         </div>
                         <div class="row centered-text update-feed-row">
                             <button status_next="" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-feedback-2" type="submit" name="action">Update
-                                 <i class="material-icons right">send</i>
+                                <i class="material-icons right">send</i>
                             </button>
                         </div>
 
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </section>
 
     <section id="user-details" class="invisible">
         <div id="user-detail">
             <div class="row header-coupon">
-                <div class="col s6 m6 l6 date-box card cardhover all-user selected">
+                <div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover all-user selected">
                     All Users
                 </div>
-                <div class="col s6 m6 l6 date-box card cardhover single-user">
+                <div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover single-user">
                     Add/Modify User
                 </div>
             </div>
-            <div class="row card">
+            <div class="container-fluid">
+            <div class="row">
                 <div class="row user-list visible">
                     <div class="row pre-data">
                     </div>
                 </div>
-                <div class="row user-add-mod invisible">
+                <div class="row user-add-mod card invisible">
                     <div class="row centered-text">
                         <h3>User Details</h3>
                     </div>
@@ -1930,20 +2342,22 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
     </section>
 
     <section id="subscription-details" class="invisible">
         <div id="subscription-detail">
             <div class="row header-subscription">
-                <div class="col s6 m6 l6 date-box card cardhover all-subscription selected">
+                <div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover all-subscription selected">
                     All Subscription
                 </div>
-                <div class="col s6 m6 l6 date-box card cardhover single-subscription">
+                <div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover single-subscription">
                     Add/Edit Subscription
                 </div>
             </div>
-            <div class="row card">
+            <div class="container-fluid">
+            <div class="row">
                 <div class="row subscription-list visible">
                     <div class="row pre-data">
 
@@ -2209,19 +2623,21 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
     </section>
     <section id="coupon-details" class="invisible">
         <div id="coupon-detail">
             <div class="row header-coupon">
-                <div class="col s6 m6 l6 date-box card cardhover all-coupon selected">
+                <div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover all-coupon selected">
                     All Coupons
                 </div>
-                <div class="col s6 m6 l6 date-box card cardhover single-coupon">
+                <div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover single-coupon">
                     Add/Edit Coupon
                 </div>
             </div>
-            <div class="row card">
+            <div class="container-fluid">
+            <div class="row">
                 <div class="row coupon-list visible">
                     <div class="row pre-data">
                     </div>
@@ -2332,14 +2748,23 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
     </section>
     <section id="campaign-details" class="invisible">
-        <div  class="centered-text card x23">
-            <b>SMS Credits Availaible : <span id="sms-credits">0</span></b>
-        </div>
+        <div class="container-fluid">
+        <div class="row">
+        <div  class="card ">
+            <div class="col l12 m12 s12 header-sms centered-text x23">
+                <b>SMS Campaigns</b></br>
+                SMS Credits Availaible : <span id="sms-credits">0</span>
+            </div>
+            <!--<div>-->
+                <!--<input type="text"  name="timepicker" class="timepicker" />-->
+            <!--</div>-->
+        <!--</div>-->
 
-        <div id="sms-campaign" class="card">
+        <!--<div id="sms-campaign" class="card">-->
 
             <br>
             <br>
@@ -2362,6 +2787,8 @@
             <br>
             <br>
 
+        </div>
+        </div>
         </div>
     </section>
 
@@ -2513,6 +2940,9 @@
 <!--<script src="/../../static/revamp/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>-->
 <!--<script src="/../../static/revamp/js/bootstrap.min.js" type="text/javascript"></script>-->
 <!--<script src="/../../static/revamp/js/jquery.validate.min.js" type="text/javascript"></script>-->
+<!--<script src="/../../static/revamp/js/materialize.clockpicker.js" ></script>-->
+<!--<script src="/../../static/revamp/js/wickedpicker.js" ></script>-->
+<script src="/../../static/revamp/js/jquery.timepicker.min.js" ></script>
 <script src="/../../static/revamp/js/materialize.min.js" ></script>
 <script src="/../../static/revamp/js/admin.js" ></script>
 <script src="/../../static/revamp/js/login.js" ></script>
