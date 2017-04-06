@@ -7,12 +7,22 @@ document.onreadystatechange = function () {
 $(document).ready(function() {
     $('select').material_select();
     var a = $(window).height();
+
     // var b = $('.home-form').height();
     // console.log(a)
     alfa = parseInt('80px')
     // console.log(a-alfa)
+    sourcelen = SOURCES.length;
 
+    container = $('#bookings #Source').find('select')
+    container.html('')
+    html = '<option value="" disabled selected>Select Source</option>'
 
+    for (i = 0; i < sourcelen; i++) {
+        html += '<option value="'+SOURCES[i] +'">'+SOURCES[i]+'</option>'
+    }
+
+    container.html(html)
     var viewportWidth = $(window).width();
     if (viewportWidth <= 600) {
         // $("#bookings .pre-data").height(a/1.5 - alfa)
@@ -74,6 +84,10 @@ var STATUS_TYPE = "";
 var SORT_TYPE = "";
 var BOOKING_ID = "";
 var VEH_TYPE = "";
+var PHONE_NUMBER = "";
+var SOURCE_BOOK = "";
+var DATE_TYPE_END = "";
+
 
 var MONTH_TABLE = ""
 var SOURCES = ['Google Adwords',
@@ -123,10 +137,13 @@ var Global = {
 // =====================================================================================
 
         $(document).ready(function() {
+
             url_list = window.location.pathname.split('/')
             var sub_page_1      = $('#admin-page-state').attr('sub-page-1')
             var sub_page_2      = $('#admin-page-state').attr('sub-page-2')
             var data_id         = $('#admin-page-state').attr('data-id')
+            checkfilters()
+
             // console.log(sub_page_1)
             // console.log(sub_page_2)
             // console.log(data_id)
@@ -199,18 +216,89 @@ var Global = {
 // =====================================================================================
 //     Booking/ Lead Management
 // =====================================================================================
-
+        var checkfilters = function(){
+            remove = 0
+            if (REG_NUMBER != ""){
+                $('#bookings .filter-remove[data-class="registration"]').show()
+                remove = 1
+            }else{
+                $('#bookings .filter-remove[data-class="registration"]').hide()
+            }
+            if (CUST_NAME != ""){
+                $('#bookings .filter-remove[data-class="name"]').show()
+                remove = 1
+            }else{
+                $('#bookings .filter-remove[data-class="name"]').hide()
+            }
+            if (STATUS_TYPE != "" && STATUS_TYPE != null){
+                $('#bookings .filter-remove[data-class="status"]').show()
+                remove = 1
+            }else{
+                $('#bookings .filter-remove[data-class="status"]').hide()
+            }
+            if (BOOKING_ID != ""){
+                $('#bookings .filter-remove[data-class="id"]').show()
+                remove = 1
+            }else{
+                $('#bookings .filter-remove[data-class="id"]').hide()
+            }
+            if (VEH_TYPE != "" && VEH_TYPE != null){
+                $('#bookings .filter-remove[data-class="carbike"]').show()
+                remove = 1
+            }else{
+                $('#bookings .filter-remove[data-class="carbike"]').hide()
+            }
+            if (PHONE_NUMBER != ""){
+                $('#bookings .filter-remove[data-class="phone"]').show()
+                remove = 1
+            }else{
+                $('#bookings .filter-remove[data-class="phone"]').hide()
+            }
+            if (SOURCE_BOOK != "" && SOURCE_BOOK != null){
+                $('#bookings .filter-remove[data-class="source"]').show()
+                remove = 1
+            }else{
+                $('#bookings .filter-remove[data-class="source"]').hide()
+            }
+                date_str_1 = new Date();
+                date_today = _this.date_format(date_str_1);
+                date_str_2 = new Date((new Date()).valueOf() + 1000*3600*24);
+                date_tomorrow = _this.date_format(date_str_2);
+                // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
+                // $('#bookings #delivery-list').show()
+            if (DATE_TYPE != "" && DATE_TYPE != date_today && DATE_TYPE != date_tomorrow){
+                $('#bookings .filter-remove[data-class="date_start"]').show()
+                remove = 1
+            }else{
+                $('#bookings .filter-remove[data-class="date_start"]').hide()
+            }
+            if (DATE_TYPE_END != ""){
+                $('#bookings .filter-remove[data-class="date_end"]').show()
+                remove = 1
+            }else{
+                $('#bookings .filter-remove[data-class="date_end"]').hide()
+            }
+            if (remove == 1){
+                $('#bookings .if-filter-selected').show()
+            }else{
+                $('#bookings .if-filter-selected').hide()
+            }
+        }
         // Open Bookings
         $('.navbar .booking-button').click(function(event,data){
             // DATE_TYPE = "";
-            REG_NUMBER = "";
-            CUST_NAME = "";
-            STATUS_TYPE = "";
-            SORT_TYPE = "";
-            BOOKING_ID = "";
-            VEH_TYPE = "";
+            // REG_NUMBER = "";
+            // CUST_NAME = "";
+            // STATUS_TYPE = "";
+            // SORT_TYPE = "";
+            // BOOKING_ID = "";
+            // VEH_TYPE = "";
+            // PHONE_NUMBER = "";
+            // SOURCE_BOOK = "";
+            // DATE_TYPE_END = "";
+            //
 
-
+            checkfilters()
             $('#booking-details').hide();
             $('#bookings').show()
             $('#user-details').hide()
@@ -219,6 +307,9 @@ var Global = {
             $('#subscription-details').hide()
             $('#campaign-details').hide()
             $('#analytics').hide()
+
+            $('#bookings .lead-filter').hide()
+
 
             // $('#bookings .delivery-list').show()
             $('#bookings .booking-filter').show();
@@ -241,7 +332,21 @@ var Global = {
                 status:STATUS_TYPE,
                 name:CUST_NAME,
                 reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                del_date:DATE_TYPE,
+                status:STATUS_TYPE,
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
+                veh_type:VEH_TYPE}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
 
             var path = window.location.pathname.split('/')
@@ -252,12 +357,17 @@ var Global = {
         // Open Lead
         $('.navbar .lead-button').click(function(event,data){
             // DATE_TYPE = "";
-            REG_NUMBER = "";
-            CUST_NAME = "";
-            STATUS_TYPE = "";
-            SORT_TYPE = "";
-            BOOKING_ID = "";
-            VEH_TYPE = "";
+            // REG_NUMBER = "";
+            // CUST_NAME = "";
+            // STATUS_TYPE = "";
+            // SORT_TYPE = "";
+            // BOOKING_ID = "";
+            // VEH_TYPE = "";
+            // PHONE_NUMBER = "";
+            // SOURCE_BOOK = "";
+            // DATE_TYPE_END = "";
+
+            checkfilters()
             $('#booking-details').hide();
             $('#bookings').show()
             $('#user-details').hide()
@@ -276,6 +386,7 @@ var Global = {
             $('#bookings .booking-filter .bookings-filter').addClass('selected');
             $('#bookings #bookings-list .booking-bar-2 .agent').text('Source')
             $('#bookings .booking-filter').hide();
+            $('#bookings .lead-filter').show()
             $('#customer-detail .bill-row').hide();
 
             // type = "Lead"
@@ -286,6 +397,9 @@ var Global = {
                 status:STATUS_TYPE,
                 name:CUST_NAME,
                 reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
 
             var path = window.location.pathname.split('/')
@@ -356,8 +470,10 @@ var Global = {
                 status:STATUS_TYPE,
                 name:CUST_NAME,
                 reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
-
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -365,6 +481,9 @@ var Global = {
                 status:STATUS_TYPE,
                 name:CUST_NAME,
                 reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
         })
@@ -387,11 +506,20 @@ var Global = {
 
         $('#bookings  .btn-apply-filter').click(function(){
             date_selected = $('#bookings #filterdate').val();
-            status_selected = $('#bookings  #Status').find('select').val();
+            if (LEAD_TYPE == "Lead") {
+                status_selected = $('#bookings  #Status').find('.lead-filter').val();
+            }else{
+                status_selected = $('#bookings  #Status').find('.booking-filter').val();
+            }
             veh_type_selected = $('#bookings  #Vehicle_type').find('select').val();;
             name_selected =  $('#bookings  #custname').val();
             id_selected =  $('#bookings  #booking_id').val();
             reg_selected =  $('#bookings  #regnumber').val();
+
+            phone_selected = $('#bookings #book_number').val();
+            source_selected = $('#bookings #Source').find('select').val()
+            end_date = $('#bookings #filterdate_end').val()
+
             console.log(date_selected);
             console.log(status_selected);
             console.log(veh_type_selected);
@@ -417,6 +545,17 @@ var Global = {
             if (reg_selected != ""){
                 REG_NUMBER = reg_selected
             }
+            if (phone_selected != ""){
+                PHONE_NUMBER = phone_selected
+            }
+            if (source_selected != ""){
+                SOURCE_BOOK = source_selected
+            }
+
+            if (end_date != ""){
+                DATE_TYPE_END = end_date
+            }
+            checkfilters()
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -424,8 +563,10 @@ var Global = {
                 status:STATUS_TYPE,
                 name:CUST_NAME,
                 reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
-
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -433,6 +574,9 @@ var Global = {
                 status:STATUS_TYPE,
                 name:CUST_NAME,
                 reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
             $('#bookings .filter-option').hide();
@@ -447,6 +591,10 @@ var Global = {
             $('#bookings  #custname').val('');
             $('#bookings  #booking_id').val('');
             $('#bookings  #regnumber').val('');
+            $('#bookings #book_number').val('');
+            $('#bookings #Source').find('select').val('')
+            $('#bookings #filterdate_end').val('')
+
             DATE_TYPE = _this.date_format( new Date());
             REG_NUMBER = "";
             CUST_NAME = "";
@@ -454,6 +602,10 @@ var Global = {
             SORT_TYPE = "";
             BOOKING_ID = "";
             VEH_TYPE = "";
+            PHONE_NUMBER = "";
+            SOURCE_BOOK = "";
+            DATE_TYPE_END = "";
+            checkfilters()
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -461,9 +613,89 @@ var Global = {
                 status:STATUS_TYPE,
                 name:CUST_NAME,
                 reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                del_date:DATE_TYPE,
+                status:STATUS_TYPE,
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
+                veh_type:VEH_TYPE}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+
             $('#bookings .date-filter .date-box').removeClass('selected');
             $('#bookings .date-filter .date-box.today').addClass('selected');
+        });
+
+        $('#bookings .filter-remove').click(function(){
+
+            if ($(this).attr('data-class')== "registration"){
+                 $('#bookings  #regnumber').val('');
+                REG_NUMBER = "";
+
+            }else if($(this).attr('data-class')== "name"){
+                $('#bookings  #custname').val('');
+                CUST_NAME = "";
+
+            }else if($(this).attr('data-class')== "status"){
+                $('#bookings  #Status').find('select').val('');
+                STATUS_TYPE = "";
+
+            }else if($(this).attr('data-class')== "id"){
+                $('#bookings  #booking_id').val('');
+                BOOKING_ID = "";
+
+            }else if($(this).attr('data-class')== "carbike"){
+                $('#bookings  #Vehicle_type').find('select').val('');
+                VEH_TYPE = "";
+
+            }else if($(this).attr('data-class')== "phone"){
+                 $('#bookings #book_number').val('');
+                PHONE_NUMBER = "";
+
+            }else if($(this).attr('data-class')== "source"){
+                $('#bookings #Source').find('select').val('')
+                 SOURCE_BOOK = "";
+            }else if($(this).attr('data-class')== "date_start"){
+                 $('#bookings #filterdate').val('');
+                DATE_TYPE = _this.date_format( new Date());
+                 $('#bookings .date-filter .date-box').removeClass('selected');
+                 $('#bookings .date-filter .date-box.today').addClass('selected');
+
+            }else if($(this).attr('data-class')== "date_end"){
+                $('#bookings #filterdate_end').val('')
+                DATE_TYPE_END = "";
+
+            }
+             checkfilters()
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                date:DATE_TYPE,
+                status:STATUS_TYPE,
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
+                veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                del_date:DATE_TYPE,
+                status:STATUS_TYPE,
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
+                veh_type:VEH_TYPE}, "get", _this, _this.loadDelivery,null, '.loading-pane');
         })
 
         $('#bookings #sort').change(function(){
@@ -476,7 +708,21 @@ var Global = {
                 status:STATUS_TYPE,
                 name:CUST_NAME,
                 reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE}, "get", _this, _this.loadBookings,null, '.loading-pane');
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                del_date:DATE_TYPE,
+                status:STATUS_TYPE,
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
+                veh_type:VEH_TYPE}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
         })
 

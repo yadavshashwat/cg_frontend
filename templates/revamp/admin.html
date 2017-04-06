@@ -756,11 +756,25 @@
                 <div class="filter-sort closed  date-box  btn waves-effect waves-light card cardhover selected col l3 m6 s6">
                     Filter&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
                 </div>
-                <div class="col s6 m6 l2 centered-text">
-                    <button class="waves-effect waves-light btn cg-primary btn-remove-filter" type="submit" name="action">Filters
-                        <i class="material-icons right">not_interested</i>
-                    </button>
+                 <div class="col s6 m6 l2">
+                        <div class="input-field sort" id ="sort">
+                            <select class="browser-default">
+                                <option value="Booking ID" disabled selected>Sort By</option>
+                                <option value="Booking ID">Booking ID</option>
+                                <option value="Name">Name</option>
+                                <option value="Status">Status</option>
+                                <option value="Generation Date">Generation Date</option>
+                                <option value="Follow Time">Follow Time</option>
+                                <option value="Source">Source</option>
+                                <option value="Date">Date</option>
+                            </select>
+                        </div>
                 </div>
+                <!--<div class="col s6 m6 l2 centered-text">-->
+                    <!--<button class="waves-effect waves-light btn cg-primary btn-remove-filter" type="submit" name="action">Filters-->
+                        <!--<i class="material-icons right">not_interested</i>-->
+                    <!--</button>-->
+                <!--</div>-->
 
                 <div class="col l7 m12 s12 date-filter">
                     <div class="col l4 m4 s4 date-box  btn waves-effect waves-light card today cardhover selected" data-class="Today">
@@ -781,15 +795,42 @@
                             <div class="input-field">
                                 <i class="material-icons prefix">today</i>
                                 <input id="filterdate" type="date" class="datepicker">
-                                <label for="filterdate" data-error="required">Date</label>
+                                <label for="filterdate" data-error="required">Date Start</label>
                             </div>
                         </div>
                         <div class="col l4 s12 m12">
+                            <div class="input-field">
+                                <i class="material-icons prefix">today</i>
+                                <input id="filterdate_end" type="date" class="datepicker">
+                                <label for="filterdate_end" data-error="required">Date End</label>
+                            </div>
+                        </div>
+                        <div class="col l4 s12 m12">
+                            <div class="input-field" id ="Vehicle_type">
+                                <select class="browser-default">
+                                    <option value="" disabled selected>Vehicle Type</option>
+                                    <option value="">All</option>
+                                    <option value="Car">Car</option>
+                                    <option value="Bike">Bike</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col l4 s12 m12">
                             <div class="input-field" id ="Status">
-                                <select class="status-list browser-default">
+                                <select class="status-list browser-default lead-filter">
                                     <option value="" disabled selected>Select Status</option>
-                                    <!--<option value="Lead">Lead</option>-->
-                                    <!--<option value="Confirmed">Confirmed</option>-->
+                                    <option value="Lead">Lead</option>
+                                    <option value="Warm">Warm</option>
+                                    <option value="Cold">Cold</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                </select>
+                                <select class="status-list browser-default booking-filter">
+                                    <option value="" disabled selected>Select Status</option>
+                                    <option value="Confirmed">Confirmed</option>
                                     <option value="Assigned">Assigned</option>
                                     <option value="Engineer Left">Engineer Left</option>
                                     <option value="Reached Workshop" >Reached Workshop</option>
@@ -802,12 +843,18 @@
                             </div>
                         </div>
                         <div class="col l4 s12 m12">
-                            <div class="input-field" id ="Vehicle_type">
-                                <select class="browser-default">
-                                    <option value="" disabled selected>Vehicle Type</option>
-                                    <option value="Car">Car</option>
-                                    <option value="Bike">Bike</option>
+                            <div class="input-field" id ="Source">
+                                <select class="status-list browser-default">
+                                    <option value="" disabled selected>Select Source</option>
+                                    <option value="Google Adwords">Google Adwords</option>
                                 </select>
+                            </div>
+                        </div>
+                         <div class="col l4 s12 m12">
+                            <div class="input-field">
+                                <i class="material-icons prefix">receipt</i>
+                                <input id="book_number" type="number" class="validate">
+                                <label for="book_number">Phone #</label>
                             </div>
                         </div>
                     </div>
@@ -852,28 +899,47 @@
                     <!--<div class="col l2 m2 s2 sort-booking">-->
                     <!--<span class="">Sort :</span>-->
                     <!--</div>-->
-                    <div class="col l5 m4 s4">
-                        <div class="input-field sort" id ="sort">
-                            <select class="browser-default">
-                                <option value="Booking ID">Booking ID</option>
-                                <option value="Name">Name</option>
-                                <option value="Status">Status</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col s8 m8 l7 centered-text booking-filter">
+                    <!--<div class="col l5 m4 s4">-->
+                        <!--<div class="input-field sort" id ="sort">-->
+                            <!--<select class="browser-default">-->
+                                <!--<option value="Booking ID" disabled selected>Sort By</option>-->
+                                <!--<option value="Booking ID">Booking ID</option>-->
+                                <!--<option value="Name">Name</option>-->
+                                <!--<option value="Status">Status</option>-->
+                                <!--<option value="Generation Date">Generation Date</option>-->
+                                <!--<option value="Follow Time">Follow Time</option>-->
+                                <!--<option value="Source">Source</option>-->
+                                <!--<option value="Date">Date</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="col s12 m12 l12 centered-text booking-filter">
                         <div class="col l6 m6 s6 date-box  btn waves-effect waves-light card bookings-filter cardhover selected" data-class="Bookings">
                             Bookings
                         </div>
                         <div class="col l6 m6 s6 card cardhover delivery date-box  btn waves-effect waves-light " data-class="Delivery">
                             Delivery
                         </div>
-
-                        <!--<button class="waves-effect waves-light btn cg-primary btn-remove-filter" type="submit" name="action">Filters-->
-                        <!--<i class="material-icons right">not_interested</i>-->
-                        <!--</button>-->
                     </div>
                 </div>
+            </div>
+
+        </div>
+        <div class="row selected-filters-row">
+            <div class="col l2 s4 m4 selected-filter-header if-filter-selected" data-class="date_start">&nbsp;Selected Filters : &nbsp;&nbsp;</div>
+            <div class="col l2 s4 m4 invisible filter-remove" data-class="date_start">&nbsp;Date Start&nbsp;&nbsp;<i class="fa fa-times"></i>&nbsp;&nbsp;</div>
+            <div class="col l2 s4 m4 invisible filter-remove" data-class="date_end">&nbsp;Date End&nbsp;&nbsp;<i class="fa fa-times"></i>&nbsp;&nbsp;</div>
+            <div class="col l2 s4 m4 invisible filter-remove" data-class="phone">&nbsp;Phone #&nbsp;&nbsp;<i class="fa fa-times"></i>&nbsp;&nbsp;</div>
+            <div class="col l2 s4 m4 invisible filter-remove" data-class="registration">&nbsp;Reg #&nbsp;&nbsp;<i class="fa fa-times"></i>&nbsp;&nbsp;</div>
+            <div class="col l2 s4 m4 invisible filter-remove" data-class="carbike">&nbsp;Car/Bike&nbsp;&nbsp;<i class="fa fa-times"></i>&nbsp;&nbsp;</div>
+            <div class="col l2 s4 m4 invisible filter-remove" data-class="status">&nbsp;Status&nbsp;&nbsp;<i class="fa fa-times"></i>&nbsp;&nbsp;</div>
+            <div class="col l2 s4 m4 invisible filter-remove" data-class="source">&nbsp;Source&nbsp;&nbsp;<i class="fa fa-times"></i>&nbsp;&nbsp;</div>
+            <div class="col l2 s4 m4 invisible filter-remove" data-class="name">&nbsp;Name&nbsp;&nbsp;<i class="fa fa-times"></i>&nbsp;&nbsp;</div>
+            <div class="col l2 s4 m4 invisible filter-remove" data-class="id">&nbsp;Booking ID&nbsp;&nbsp;<i class="fa fa-times"></i>&nbsp;&nbsp;</div>
+            <div class="col s12 m12 l2 centered-text if-filter-selected">
+                <button class="waves-effect waves-light btn cg-primary btn-remove-filter" type="submit" name="action">Remove All
+                    <i class="material-icons right">not_interested</i>
+                </button>
             </div>
 
         </div>
