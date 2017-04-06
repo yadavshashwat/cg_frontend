@@ -2707,7 +2707,7 @@ var Global = {
             html += '                        <b>Follow Up Time : </b><span class="time">' + val.follow_up_time + '</span>'
             html += '                    </div>'
             html += '                    <div class="col l12 s12 m12">'
-            html += '                        <b>Generation Date : </b><span class="time">' + val.date_generated + '</span>'
+            html += '                        <b>Generation Date & Time: </b><span class="time">' + val.date_generated +' '+ val.time_generated + '</span>'
             html += '                    </div>'
 
 
@@ -2771,13 +2771,13 @@ var Global = {
         container.html('');
         html = ''
 
-        $.each(data, function(ix, val) {
+          $.each(data, function(ix, val) {
             html += '        <div class="row card cardhover no-border-radius booking" data-class="' + val.id + '">'
-            html += '            <div class="row">'
+            html += '            <div class="row"><div class="booking-open-btn">'
             html += '                <div class="col l1 s2 m2 booking-id-bar">'
             html += '                    <b>#<span class="id">' + val.booking_id + '</span></b>'
             html += '                </div>'
-            html += '                <div class="col l5 s7 m7">'
+            html += '                <div class="col l6 s7 m7">'
             html += '                    <div class="col l12 s12 m12">'
             // if (val.booking_user_name == ""){
             html += '                        <b>Name : </b><span class="custname">' + val.cust_name + '</span>'
@@ -2800,25 +2800,77 @@ var Global = {
             html += '                    <div class="col l12 s12 m12">'
             html += '                        <b><span class="custvehicletype">' + val.cust_vehicle_type + '</span>&nbsp;:&nbsp;</b><span class="vehiclename">' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + '</span>'
             html += '                    </div>'
-            html += '                    <div class="col l12 hide-on-med-and-down">'
-            html += '                        <b>Date & Time : </b><span class="time">' + val.time_booking + '</span> on <span class="date">' + val.date_booking + '</span>'
+            if (LEAD_TYPE == "Lead"){
+            // html += '                    <div class="col l12 hide-on-med-and-down">'
+            // html += '                        <b>Date & Time : </b><span class="time">' + val.follow_up_time + '</span> on <span class="date">' + val.follow_up_date + '</span>'
+            // html += '                    </div>'
+            // html += '                    <div class="col l12 hide-on-large-only">'
+            // html += '                        <b>Date : </b><span class="date">' + val.follow_up_date + '</span>'
+            // html += '                    </div>'
+            // html += '                    <div class="col l12 s12 m12 hide-on-large-only">'
+            // html += '                        <b>Time : </b><span class="time">' + val.follow_up_time + '</span>'
+            // html += '                    </div>'
+
+            html += '                    <div class="col l12">'
+            html += '                        <b>Follow Up Date : </b><span class="date">' + val.follow_up_date + '</span>'
             html += '                    </div>'
-            html += '                    <div class="col l12 hide-on-large-only">'
-            html += '                        <b>Date : </b><span class="date">' + val.date_booking + '</span>'
+            html += '                    <div class="col l12 s12 m12">'
+            html += '                        <b>Follow Up Time : </b><span class="time">' + val.follow_up_time + '</span>'
             html += '                    </div>'
-            html += '                    <div class="col l12 s12 m12 hide-on-large-only">'
-            html += '                        <b>Time : </b><span class="time">' + val.time_booking + '</span>'
+            html += '                    <div class="col l12 s12 m12">'
+            html += '                        <b>Generation Date : </b><span class="time">' + val.date_generated + '</span>'
             html += '                    </div>'
+
+
+            }else{
+            // html += '                    <div class="col l12 hide-on-med-and-down">'
+            // html += '                        <b>Date & Time : </b><span class="time">' + val.time_booking + '</span> on <span class="date">' + val.date_booking + '</span>'
+            // html += '                    </div>'
+            html += '                    <div class="col l12">'
+            html += '                        <b>Booking Date : </b><span class="date">' + val.date_booking + '</span>'
+            html += '                    </div>'
+            html += '                    <div class="col l12 s12 m12">'
+            html += '                        <b>Booking Time : </b><span class="time">' + val.time_booking + '</span>'
+            html += '                    </div>'
+
+            }
+            if (LEAD_TYPE == "Lead"){
+
+                }else{
             html += '                    <div class="col l12 s12 m12">'
             html += '                        <b>Address : </b><span class="address">' + val.cust_address + ' ' + val.cust_locality + ' ' + val.cust_city + '</span>'
             html += '                    </div>'
+            }
             html += '                </div>'
             html += '                <div class="col l3 s3 m3 centered-text hide-on-med-and-down">'
-            html += '                    <b><span class="agent-details">'+val.agent_details+'</span></b>'
+            if (LEAD_TYPE == "Booking"){
+                html += '                    <b><span class="agent-details">'+val.agent_details+'</span></b>'
+            }else{
+                html += '                    <b><span class="status-details">'+val.source+'</span></b>'
+            }
             html += '                </div>'
-            html += '                <div class="col l3 s3 m3 status-bar">'
+            if (LEAD_TYPE == "Booking"){
+            html += '                <div class="col l2 s3 m3 status-bar">'
             html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
-            html += '                </div>'
+            html += '                </div></div>'
+            }else{
+            html += '                <div class="col l2 s3 m3 status-bar-2">'
+            html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
+            html += '                </div></div>'
+
+            }
+
+            // html += '<div class="col l2 hide-on-med-and-down feedback-btn-col">'
+            // // html += '<div class="row">'
+            // // html += '<button status_next="" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action">Feedback 1'
+            // // html += '<i class="material-icons right">send</i>'
+            // // html += '</button>'
+            // // html += '</div>'
+            // html += '<div class="row">'
+            // html += '<button status_next="" class="waves-effect status-btn-1 waves-light btn cg-primary btn-update-status page-wide" type="submit" name="action">Feedback'
+            // html += '<i class="material-icons right">send</i>'
+            // html += '</button>'
+            // html += '</div></div>'
             html += '            </div>'
             html += '        </div>'
         })
