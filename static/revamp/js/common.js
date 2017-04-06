@@ -68,6 +68,7 @@ var Commons = {
         'send_sms_campaign':'/api/send_sms_campaign/',
         'send_feedback':'/api/send_feedback/',
         'get_all_feedback':'/api/get_all_feedback/',
+        'analyse_bookings':'/api/analyse_bookings/',
 
 
     },

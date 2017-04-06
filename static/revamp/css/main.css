@@ -1,9 +1,42 @@
 body{background:#FFFFFF;padding-left:0px;padding-right:0px;font-family:Roboto;}
 .order-page{}
-.admin-page{zoom:0.85;zoom:85%;}
+.admin-page{zoom:0.85;zoom:85%; font-family: Muli}
 .btn-small{height:25px;line-height:25px;padding:0 1.0rem;font-size:16px}
 .navbar-fixed{z-index:95 !important}
 .navbar-fixed.nav-services{z-index:94 !important}
+/*.nav-admin{*/
+    /*width: 20%;*/
+    /*height: 100%;*/
+/*}*/
+
+.btn-expand-row{
+        /*line-height: 78px;*/
+}
+.btn-expand{
+    line-height: 40px;
+     width: 100%;
+    margin-top: 21px;
+    height: 40px;
+   background-color:#4a148c!important;
+    color:#FFF;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+/*.admin-page .navbar{*/
+      /*width: 20%;*/
+      /*height: 100%;*/
+
+/*}*/
+/*.admin-page section{*/
+    /*width: 100%;*/
+    /*float: right;*/
+    /*height: 100%;*/
+/*}*/
+/*.navbar .vertical-navbar{*/
+    /*display: block!important;*/
+/*}*/
 .loading-pane-2{z-index:99;position:fixed;top:50% !important;left:50%;margin-top:-58px;margin-left:-138px;}
 .loading-pane-2 .image-centre{text-align:center;position:fixed;top:50% !important;left:50%;}
 .loading-pane{z-index:96!important;}
@@ -406,14 +439,18 @@ footer a:hover{color:#979797;text-decoration:none;}
 .Cancelled{background:indianred!important;color:white!important;}
 .Escalation{background:red!important;color:white!important;}
 .Follow-Up{background:orangered!important;color:white!important;}
+.Warm{background:orangered!important;color:white!important;}
+.Cold{background:lightblue!important;color:black!important;}
+
 #bookings .btn-remove-filter{margin-top:5px;width:100%}
 #bookings .box{margin:0px!important;}
 #bookings .box .sort-booking{line-height:50px;text-align:right;font-weight:700;}
 #bookings .input-field.sort{padding:0px 0px 0px 0px;font-size:12px;margin:0px;}
 #bookings .input-field.sort input{margin:1px!important;}
-#bookings .date-box,#booking-details .service-box ,#coupon-details .date-box, #new-booking .date-box, #user-details .date-box, #subscription-details .date-box{height:45px;text-align:center;line-height:45px;margin:0px;border-radius:0px;font-size:20px;}
-#bookings .date-box.selected, #booking-details .service-box.selected, #coupon-details .date-box.selected, #new-booking .date-box.selected, #user-details .date-box.selected, #subscription-details .date-box.selected{z-index:10;color:#FFFFFF!important;background:#4a148c !important;}
-#bookings .date-box:hover, #booking-details .service-box:hover,#coupon-details .date-box:hover, #new-booking .date-box:hover, #user-details .date-box:hover, #subscription-details .date-box:hover{z-index:200;color:#4a148c;cursor:pointer;}
+#bookings .date-box,#booking-details .service-box ,#coupon-details .date-box, #new-booking .date-box, #user-details .date-box, #subscription-details .date-box, #analytics .date-box{height:45px;text-align:center;line-height:45px;margin:0px;border-radius:0px;font-size:20px;    background-color: #FFF;
+    color: black;}
+#bookings .date-box.selected, #booking-details .service-box.selected, #coupon-details .date-box.selected, #new-booking .date-box.selected, #user-details .date-box.selected, #subscription-details .date-box.selected, #analytics .date-box.selected{z-index:10;color:#FFFFFF!important;background:#4a148c !important;}
+#bookings .date-box:hover, #booking-details .service-box:hover,#coupon-details .date-box:hover, #new-booking .date-box:hover, #user-details .date-box:hover, #subscription-details .date-box:hover, #analytics .date-box:hover{z-index:200;color:#4a148c;cursor:pointer;}
 #bookings .booking-select-section{z-index:34;}
 #bookings .booking-select-section input{z-index:99;}
 #bookings .booking-select-section .sort input{z-index:12;}
@@ -426,7 +463,8 @@ footer a:hover{color:#979797;text-decoration:none;}
 #bookings .booking-list .pre-data{}
 #bookings .delivery-list .pre-data{}
 #bookings .booking .status{background-color:#eaeaea;padding:20px 5px 20px 5px;border-radius:5px;}
-#bookings .booking .agent-details{line-height:125px;}
+#bookings .booking .agent-details{line-height:105px;}
+#bookings .booking .status-details{line-height:90px;}
 #bookings .booking .feedback-btn-col{margin-top:42px}
 
 #booking-details .status-2{width:100%;padding:10px;border-radius:10px;text-align:center;margin:0px 0px 15px 0px;}
@@ -440,6 +478,7 @@ footer a:hover{color:#979797;text-decoration:none;}
 }
 #bookings .booking .booking-id-bar{margin-top:45px;text-align:center;}
 #bookings .booking .status-bar{margin-top:30px;text-align:center;}
+#bookings .booking .status-bar-2{margin-top:15px;text-align:center;}
 #bookings .booking.card{margin:5px!important;}
 .admin-page #booking-details input{}
 .admin-page .picker--opened .picker__frame{top:70px;}
@@ -457,92 +496,163 @@ footer a:hover{color:#979797;text-decoration:none;}
 .static-page .list-cars li, .static-page .list-bikes li{display:inline;padding:0px 15px 0px 15px;}
 .select-width{width:100%;}
 .thanks-note{padding:80px 20px 80px 20px;}
+.header-sms{
+    background: #F85D5D;
+    color: #FFF;
+}
+.ui-timepicker-wrapper{
+    width: 100%!important;
+}
+.ui-timepicker-am,.ui-timepicker-pm{
+    font-size:16px!important;color:#26a69a!important;display:block!important;line-height:22px!important;padding:14px 16px!important;background-color:#fff!important;margin:0!important;max-height:650px!important;overflow-y:auto!important;z-index:999!important;
+}
+.ui-timepicker-am:hover,.ui-timepicker-pm:hover{
+    font-size:16px!important;color:#26a69a!important;display:block!important;line-height:22px!important;padding:14px 16px!important;background-color:lightblue!important;margin:0!important;max-height:650px!important;overflow-y:auto!important;z-index:999!important;
+}
+.icon-big {
+    font-size: 3.5em;
+    min-height: 64px;
 
+}
+.follow-time-stamp{
+    text-align: right;
+    line-height: 30px;
+}
+.card .numbers {
+    padding: 5%;
+    font-size: 2rem;
+    text-align: right; }
+
+.card .numbers p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.green-icon{
+    color:green;
+}
+
+.purple-icon{
+    color : #4a148c;
+}
+.orange-icon{
+    color:peru;
+}
+
+.blue-icon{
+    color:olivedrab;
+}
+
+
+.card .footer {
+    text-align: right;
+    padding: 5px 15px 10px;
+}
+.card .stats {
+    color: #a9a9a9;
+    font-weight: 300;
+}
+
+#analytics th, #analytics td{
+    text-align: center;
+
+}
+/*.anal-image{*/
+/*!*padding: 5%;*!*/
+/*width: 20%;*/
+/*color : #4a148c;*/
+/*}*/
+
+/*.icon-anal{*/
+/*margin-top: 20%;*/
+/*margin-left: 50%;*/
+
+/*}*/
 .circle-status{
     cursor: pointer;
 }
 .circle{
     -moz-border-radius: 50px/50px;
-  -webkit-border-radius: 50px 50px;
-  border-radius: 50px/50px;
-  border: solid 7px #eaeaea;
-  width: 8.4444%;
-  /*height: 9.875*/
-        margin-left: auto;
+    -webkit-border-radius: 50px 50px;
+    border-radius: 50px/50px;
+    border: solid 7px #eaeaea;
+    width: 8.4444%;
+    /*height: 9.875*/
+    margin-left: auto;
     margin-right: auto;
     color:dimgray;
 
 }
 .selected .circle{
-  /*border: solid 7px #41148c;*/
+    /*border: solid 7px #41148c;*/
     /*background: #41148c;*/
-  border: solid 7px green;
+    border: solid 7px green;
     background: green;
 
     color: #fff;
 }
 
 .square {
-  border: solid 2px #eaeaea;
-  background: #eaeaea;
+    border: solid 2px #eaeaea;
+    background: #eaeaea;
     width: 3%;
-  height: 2px;
-     margin-left: auto;
+    height: 2px;
+    margin-left: auto;
     margin-right: auto;
-     margin-top: auto;
+    margin-top: auto;
     margin-bottom: auto;
 }
 
 .square2{
-     border: solid 2px #eaeaea;
-  background: #eaeaea;
+    border: solid 2px #eaeaea;
+    background: #eaeaea;
     width: 3px;
-  /*height: 2px;*/
-        height: 20px;
-     margin-left: 50%;
+    /*height: 2px;*/
+    height: 20px;
+    margin-left: 50%;
     /*margin-right: auto;*/
-     /*margin-top: auto;*/
+    /*margin-top: auto;*/
     /*margin-bottom: auto;*/
 }
 
 
 .selected.square {
-  /*border: solid 2px #4a148c;*/
-  /*background: #4a148c;*/
-  border: solid 2px green;
-  background: green;
+    /*border: solid 2px #4a148c;*/
+    /*background: #4a148c;*/
+    border: solid 2px green;
+    background: green;
 
     width: 3%;
     height: 2px;
-     margin-left: auto;
+    margin-left: auto;
     margin-right: auto;
-     margin-top: auto;
+    margin-top: auto;
     margin-bottom: auto;
 }
 
 .selected.square2{
-     /*border: solid 2px #4a148c!important;*/
-  /*background: #4a148c!important;;*/
-     border: solid 2px green!important;
-  background: green!important;;
+    /*border: solid 2px #4a148c!important;*/
+    /*background: #4a148c!important;;*/
+    border: solid 2px green!important;
+    background: green!important;;
 
     width: 3px;
-  /*height: 2px;*/
-        height: 20px;
-     margin-left: 50%;
+    /*height: 2px;*/
+    height: 20px;
+    margin-left: 50%;
     /*margin-right: auto;*/
-     /*margin-top: auto;*/
+    /*margin-top: auto;*/
     /*margin-bottom: auto;*/
 }
 
 .square3 {
-  border: solid 2px #FFF;
-  background: #FFF;
+    border: solid 2px #FFF;
+    background: #FFF;
     width: 3%;
-  height: 2px;
-     margin-left: auto;
+    height: 2px;
+    margin-left: auto;
     margin-right: auto;
-     margin-top: auto;
+    margin-top: auto;
     margin-bottom: auto;
 }
 
@@ -610,14 +720,14 @@ footer a:hover{color:#979797;text-decoration:none;}
 
 
 .square4{
-     border: solid 2px #FFF;
-  background: #FFF;
+    border: solid 2px #FFF;
+    background: #FFF;
     width: 3px;
-  /*height: 2px;*/
-        height: 20px;
-     margin-left: 50%;
+    /*height: 2px;*/
+    height: 20px;
+    margin-left: 50%;
     /*margin-right: auto;*/
-     /*margin-top: auto;*/
+    /*margin-top: auto;*/
     /*margin-bottom: auto;*/
 }
 .status-vertical{
@@ -629,12 +739,12 @@ footer a:hover{color:#979797;text-decoration:none;}
 
 
 @media (max-width:480px){.hero-text h1{font-size:40px;letter-spacing:0px;line-height:50px;margin-bottom:20px;}
-.row-fluid, .section-title{text-align:center;}
-#contact{padding-bottom:30px;}
+    .row-fluid, .section-title{text-align:center;}
+    #contact{padding-bottom:30px;}
 }
 @media (min-width:481px) and (max-width:767px){.hero-text h1{font-size:40px;letter-spacing:0px;line-height:50px;margin-bottom:20px;}
-.row-fluid, .section-title{text-align:center;}
-#contact{padding-bottom:30px;}
+    .row-fluid, .section-title{text-align:center;}
+    #contact{padding-bottom:30px;}
 }
 @media (min-width:768px) and (max-width:979px){}
 @media (min-width:980px) and (max-width:1699px){}

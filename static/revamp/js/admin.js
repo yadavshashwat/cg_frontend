@@ -30,8 +30,10 @@ $('.datepicker').pickadate({
     format: 'dd-mm-yyyy',
     closeOnSelect: true,
 });
-
-
+$('#time_follow_lead').timepicker({
+                 timeFormat: "h:i A"
+ });
+// $('.timepicker').wickedpicker();
 $(window).ready(function() {
     setTimeout(function() {
         $('.loading-pane-2').hide();
@@ -73,6 +75,7 @@ var SORT_TYPE = "";
 var BOOKING_ID = "";
 var VEH_TYPE = "";
 
+var MONTH_TABLE = ""
 var SOURCES = ['Google Adwords',
     'Repeat Customer',
     'Employee Referral',
@@ -96,7 +99,8 @@ var SOURCES = ['Google Adwords',
     'Check up camps',
     'Sign up lead',
     'Facebook Ad',
-    'Mahindra Authorized']
+    'Mahindra Authorized',
+    'Exotel']
 // DATE_TYPE =
 
 var Global = {
@@ -123,9 +127,9 @@ var Global = {
             var sub_page_1      = $('#admin-page-state').attr('sub-page-1')
             var sub_page_2      = $('#admin-page-state').attr('sub-page-2')
             var data_id         = $('#admin-page-state').attr('data-id')
-            console.log(sub_page_1)
-            console.log(sub_page_2)
-            console.log(data_id)
+            // console.log(sub_page_1)
+            // console.log(sub_page_2)
+            // console.log(data_id)
 
 
             if (sub_page_1 == "bookings" || typeof(sub_page_1)=="undefined" || sub_page_1 == null || sub_page_1 =="" ){
@@ -186,10 +190,10 @@ var Global = {
                 $('.navbar .new-lead-button').click()
             }else if (sub_page_1 == "campaign") {
                 $('.navbar .campaign-button').click()
+            }else if (sub_page_1 == "analytics") {
+                $('.navbar .analytics-button').click()
             }
         });
-
-
 
 
 // =====================================================================================
@@ -214,6 +218,7 @@ var Global = {
             $('#new-booking').hide()
             $('#subscription-details').hide()
             $('#campaign-details').hide()
+            $('#analytics').hide()
 
             // $('#bookings .delivery-list').show()
             $('#bookings .booking-filter').show();
@@ -259,14 +264,17 @@ var Global = {
             $('#coupon-details').hide()
             $('#new-booking').hide()
             $('#subscription-details').hide()
+            $('#analytics').hide()
+
             LEAD_TYPE = "Lead"
+
             $('#bookings #bookings-list .header-id-bar.bookings').text('Leads')
             // $('#bookings #bookings-list').show().removeClass('l6').addClass('l12')
             $('#bookings #bookings-list').show()
             $('#bookings #delivery-list').hide()
             $('#bookings .booking-filter .date-box').removeClass('selected');
             $('#bookings .booking-filter .bookings-filter').addClass('selected');
-            $('#bookings #bookings-list .booking-bar-2 .agent').text('')
+            $('#bookings #bookings-list .booking-bar-2 .agent').text('Source')
             $('#bookings .booking-filter').hide();
             $('#customer-detail .bill-row').hide();
 
@@ -655,7 +663,8 @@ var Global = {
         });
 
         // - update-customer-booking
-        $('#customer-detail .btn-update-cust').click(function(){
+
+        var update_cust = function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             email_n = $('#customer-detail #email').val();
             reg_n = $('#customer-detail #cust_regnumber').val();
@@ -671,6 +680,11 @@ var Global = {
             cust_city = $('#customer-detail #cust_city').val()
             source = $('#customer-detail #source').val()
             date_del = $('#customer-detail #date_delivery').val()
+            date_follow = $('#customer-detail #date_follow').val()
+            time_follow = $('#customer-detail #time_follow').val()
+            follow_status = $('#customer-detail #status_details_new').val()
+
+
 
             ALL_JOBS_ADMIN = comment_n
             Commons.ajaxData('update_booking', {b_id: bid,
@@ -688,8 +702,13 @@ var Global = {
                 city : cust_city,
                 source : source,
                 date_del : date_del,
+                date_follow:date_follow,
+                time_follow:time_follow,
+                follow_status:follow_status
             }, "post", _this, _this.loadCustomerupdate,null, '.loading-pane');
-        });
+
+        }
+        $('#customer-detail .btn-update-cust').click(update_cust);
 
         // - update-estimate
         $('#customer-detail .btn-update-estimate').click(function(){
@@ -839,28 +858,35 @@ var Global = {
                 for (i = 1; i < 2; i++) {
                     $('.status-change-'+i ).addClass('selected')
                 }
-                for (i = 2; i < 5; i++) {
+                for (i = 2; i < 6; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
-            }else if(status_n == "Follow Up"){
+            }else if(status_n == "Cold"){
                 for (i = 1; i < 3; i++) {
                     $('.status-change-'+i ).addClass('selected')
                 }
-                for (i = 3; i < 5; i++) {
+                for (i = 3; i < 6; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
-            }else if(status_n == "Confirmed"){
+            }else if(status_n == "Warm"){
                 for (i = 1; i < 4; i++) {
                     $('.status-change-'+i ).addClass('selected')
                 }
-                for (i = 4; i < 5; i++) {
+                for (i = 4; i < 6; i++) {
+                    $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(status_n == "Confirmed"){
+                for (i = 1; i < 5; i++) {
+                    $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 5; i < 6; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Cancelled"){
-                for (i = 1; i < 4; i++) {
+                for (i = 1; i < 6; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
-                $('.status-change-4').addClass('selected')
+                $('.status-change-5').addClass('selected')
 
             }
             // data_id = $('#customer-detail #booking_id').attr('booking_data_id')
@@ -1203,6 +1229,8 @@ var Global = {
             $('#subscription-details').show()
             $('#new-booking').hide()
             $('#campaign-details').hide()
+            $('#analytics').hide()
+
 
             $('#subscription-detail .subscription-list').show()
             $('#subscription-detail .subscription-add-mod').hide()
@@ -1460,6 +1488,7 @@ var Global = {
             $('#new-booking').hide()
             $('#subscription-details').hide()
             $('#campaign-details').hide()
+            $('#analytics').hide()
 
             $('#coupon-detail  .all-coupon').click()
             Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
@@ -1614,6 +1643,7 @@ var Global = {
             $('#new-booking').hide()
             $('#subscription-details').hide()
             $('#campaign-details').show()
+            $('#analytics').hide()
 
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,2).join('/')+'/campaign/'
@@ -1642,6 +1672,8 @@ var Global = {
             $('#new-booking').show()
             $('#subscription-details').hide()
             $('#campaign-details').hide()
+            $('#analytics').hide()
+
             container = $('#new-booking .source-list')
             container.html('')
             html = ""
@@ -1664,6 +1696,8 @@ var Global = {
             // Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
             $('#new-booking  .booking-lead').text("Booking")
             $('#new-booking  .booking-lead-2').text("Booking")
+            $('#new-booking  .lead-time').hide()
+            $('#new-booking  .booking-time').show()
 
             $('#new-booking  .send-reminder').show()
             document.getElementById("send_details").checked = true;
@@ -1682,6 +1716,7 @@ var Global = {
             $('#new-booking').show()
             $('#subscription-details').hide()
             $('#campaign-details').hide()
+            $('#analytics').hide()
 
             container = $('#new-booking .source-list')
             container.html('')
@@ -1693,19 +1728,14 @@ var Global = {
             html += '<option value="" selected disabled>Source</option>'
             sourcelen = SOURCES.length;
             for (i = 0; i < sourcelen; i++) {
-                // if (val.source == SOURCES[i]){
-                //     html += '<option value="'+SOURCES[i]+'" selected>'+SOURCES[i]+'</option>'
-                // }else{
                 html += '<option value="'+SOURCES[i]+'">'+SOURCES[i]+'</option>'
-                // }
             }
             html +='</select>'
-            // console.log(html)
             container.html(html)
             $('#new-booking  .booking-lead').text("Lead")
             $('#new-booking  .booking-lead-2').text("Lead Follow Up")
-
-            // Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
+            $('#new-booking  .lead-time').show()
+            $('#new-booking  .booking-time').hide()
             $('#new-booking  .send-reminder').hide()
             document.getElementById("send_details").checked = false;
             var path = window.location.pathname.split('/')
@@ -1764,6 +1794,7 @@ var Global = {
         }
         $('#new-booking .vehicle-select .veh-type-select').click(callbrands);
         $('.navbar .new-booking-button').click(callbrands);
+        $('.navbar .new-lead-button').click(callbrands);
         // -- Load Model
         $('#select-make').change(function(event,data){
             car_box =  document.getElementById('Carnew');
@@ -1806,6 +1837,7 @@ var Global = {
         }
         $('#new-booking .vehicle-select .veh-type-select').click(call_category);
         $('.navbar .new-booking-button').click(call_category);
+        $('.navbar .new-lead-button').click(call_category);
         $('#new-booking .service-select').on('change ','.category-select',function(){
             car_box =  document.getElementById('Carnew');
             bike_box =  document.getElementById('Bikenew');
@@ -1871,6 +1903,8 @@ var Global = {
             var date = $('#date').val();
             // var otp = $('#otp').val();
             var comment = $('#comment').val();
+            var time_follow = $('#time_follow_lead').val()
+            console.log(time_follow)
             // cookie = local.load();
             // var fuel = $('#select-fuel').find('select').val();
             var veh_type = vehicle;
@@ -1941,12 +1975,24 @@ var Global = {
                 $('#date').addClass("invalid");
                 error = 1;
             }
-            if(time=="" || time==null){
+            if (flag == "True"){
+                if(time=="" || time==null){
+                time_follow = "09:30 AM"
                 console.log(time)
                 error = 1;
                 $('#new-booking #time-slot').find('select').addClass('invalid-select-box')
                 // $('#choose-time-slot').text('Choose Time Slot');
+                }
+            }else{
+                time = "9:30AM - 11:30AM"
+                if(time_follow == "" || time_follow == null){
+                console.log(time)
+                error = 1;
+                $('#new-booking #time_follow_lead').addClass("invalid");
+                // $('#choose-time-slot').text('Choose Time Slot');
+                }
             }
+
             if(error==1){
                 // console.log("didnt work")
                 return;
@@ -1978,6 +2024,7 @@ var Global = {
                     ,booking_user_name: pocname
                     ,booking_user_number: pocnumber
                     ,source : source
+                    ,follow_time : time_follow
                 }, "post", _this, _this.loadSendbookingAdmin, null, '.loading-pane');
             }
 
@@ -2004,6 +2051,184 @@ var Global = {
 
         });
 
+// =====================================================================================
+//     Analytics
+// =====================================================================================
+        var monthNames = [ "01", "02", "03", "04", "05", "06",
+        "07", "08", "09", "10", "11", "12" ];
+
+        function diff(from, to) {
+            var arr = [];
+            var datFrom = new Date('1 ' + from);
+            var datTo = new Date('1 ' + to);
+            var fromYear =  datFrom.getFullYear();
+            var toYear =  datTo.getFullYear();
+            var diffYear = (12 * (toYear - fromYear)) + datTo.getMonth();
+
+            for (var i = datFrom.getMonth(); i <= diffYear; i++) {
+                arr.push( Math.floor(fromYear+(i/12))+monthNames[i%12]);
+            }
+
+            return arr;
+        }
+        today = new Date
+        var month = new Array();
+        month[0] = "January";
+        month[1] = "February";
+        month[2] = "March";
+        month[3] = "April";
+        month[4] = "May";
+        month[5] = "June";
+        month[6] = "July";
+        month[7] = "August";
+        month[8] = "September";
+        month[9] = "October";
+        month[10] = "November";
+        month[11] = "December";
+        var n = month[today.getMonth()];
+        to_month = n +" " + today.getFullYear()
+        list_months = diff('January 2017', to_month)
+
+
+        $('.navbar .analytics-button').click(function(event,data){
+            // DATE_TYPE = "";
+            REG_NUMBER = "";
+            CUST_NAME = "";
+            STATUS_TYPE = "";
+            SORT_TYPE = "";
+            BOOKING_ID = "";
+            VEH_TYPE = "";
+
+            anal_time_cat = $('#analytics .header-analytics .selected').attr('data-class')
+            anal_veh_cat = $('#analytics .vehicle-filter .date-box.selected').attr('data-class')
+            console.log(anal_time_cat)
+            console.log(anal_veh_cat)
+
+            $('#booking-details').hide();
+            $('#bookings').hide()
+            $('#user-details').hide()
+            $('#coupon-details').hide()
+            $('#new-booking').hide()
+            $('#subscription-details').hide()
+            $('#campaign-details').hide()
+            $('#analytics').show()
+
+
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/analytics/'
+            history.pushState({},'',new_path)
+
+
+            if (anal_time_cat == "Overall"){
+                // to populate overall summary
+                Commons.ajaxData('analyse_bookings', {}, "get", _this, _this.loadAnalysis_all,null, '.loading-pane');
+                Commons.ajaxData('analyse_bookings', {car_bike : "Car"}, "get", _this, _this.loadAnalysis_car,null, '.loading-pane');
+                Commons.ajaxData('analyse_bookings', {car_bike : "Bike"}, "get", _this, _this.loadAnalysis_bike,null, '.loading-pane');
+
+                if (anal_veh_cat == "All"){
+                    Commons.ajaxData('analyse_bookings', {}, "get", _this, _this.loadAnalysis_veh_filter,null, '.loading-pane');
+                    monLen = list_months.length;
+                    MONTH_TABLE = ""
+                    for (i = 0; i < monLen; i++) {
+                        Commons.ajaxData('analyse_bookings', {monthyear:list_months[i]}, "get", _this, _this.loadAnalysis_veh_filter_month,null, '.loading-pane');
+                    }
+                }else if(anal_veh_cat == "Car"){
+
+
+                }else if(anal_veh_cat == "Bike"){
+
+
+                }
+            }else if (anal_time_cat == "Monthly"){
+                if (anal_veh_cat == "All"){
+
+
+                }else if(anal_veh_cat == "Car"){
+
+
+                }else if(anal_veh_cat == "Bike"){
+
+
+                }
+
+
+            }else if (anal_time_cat == "Daily"){
+                if (anal_veh_cat == "All"){
+
+
+                }else if(anal_veh_cat == "Car"){
+
+
+                }else if(anal_veh_cat == "Bike"){
+
+
+                }
+            }
+
+        });
+
+
+        $('#analytics').on('click','.btn-month-expand.unselected',function(){
+            // console.log("1")
+            $('#analytics .month-data-row').show()
+            $(this).addClass('selected').removeClass('unselected')
+            $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-up')
+        });
+        $('#analytics').on('click','.btn-month-expand.selected',function(){
+             // console.log("2")
+            $('#analytics .month-data-row').hide()
+            $(this).find('i').removeClass('fa-caret-up').addClass('fa-caret-down')
+            $(this).addClass('unselected').removeClass('selected')
+        });
+
+        $('#analytics').on('click','.btn-status-expand.unselected',function(){
+            // console.log("1")
+            $('#analytics .status-data-row').show()
+            $(this).addClass('selected').removeClass('unselected')
+            $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-up')
+        });
+        $('#analytics').on('click','.btn-status-expand.selected',function(){
+             // console.log("2")
+            $('#analytics .status-data-row').hide()
+            $(this).find('i').removeClass('fa-caret-up').addClass('fa-caret-down')
+            $(this).addClass('unselected').removeClass('selected')
+        });
+
+        $('#analytics').on('click','.btn-source-expand.unselected',function(){
+            // console.log("1")
+            $('#analytics .source-data-row').show()
+            $(this).addClass('selected').removeClass('unselected')
+            $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-up')
+        });
+        $('#analytics').on('click','.btn-source-expand.selected',function(){
+             // console.log("2")
+            $('#analytics .source-data-row').hide()
+            $(this).find('i').removeClass('fa-caret-up').addClass('fa-caret-down')
+            $(this).addClass('unselected').removeClass('selected')
+        });
+        $('#analytics .header-analytics .date-box').click(function(){
+            $('#analytics .header-analytics .date-box').removeClass('selected');
+            $(this).addClass('selected');
+            summ_type = $(this).attr('data-class')
+            // console.log(summ_type)
+            $('#summ_type').text(summ_type)
+            anal_time_cat = $('#analytics .header-analytics .selected').attr('data-class')
+            anal_veh_cat = $('#analytics .vehicle-filter .date-box.selected').attr('data-class')
+            console.log(anal_time_cat)
+            console.log(anal_veh_cat)
+        })
+
+        $('#analytics .vehicle-filter .date-box').click(function(){
+            $('#analytics .vehicle-filter .date-box').removeClass('selected');
+            $(this).addClass('selected');
+            veh_type = $(this).attr('data-class')
+            // console.log(veh_type)
+            anal_time_cat = $('#analytics .header-analytics .selected').attr('data-class')
+            anal_veh_cat = $('#analytics .vehicle-filter .date-box.selected').attr('data-class')
+            console.log(anal_time_cat)
+            console.log(anal_veh_cat)
+        })
+
 
 
 // =====================================================================================
@@ -2019,7 +2244,7 @@ var Global = {
             $('#new-booking').hide()
             $('#subscription-details').hide()
             $('#campaign-details').hide()
-
+            $('#analytics').hide()
             $('#user-detail .all-user').click()
 
             Commons.ajaxData('fetch_all_users', {}, "get", _this, _this.loadUsers,null, '.loading-pane');
@@ -2218,27 +2443,65 @@ var Global = {
             html += '                    <div class="col l12 s12 m12">'
             html += '                        <b><span class="custvehicletype">' + val.cust_vehicle_type + '</span>&nbsp;:&nbsp;</b><span class="vehiclename">' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + '</span>'
             html += '                    </div>'
-            html += '                    <div class="col l12 hide-on-med-and-down">'
-            html += '                        <b>Date & Time : </b><span class="time">' + val.time_booking + '</span> on <span class="date">' + val.date_booking + '</span>'
+            if (LEAD_TYPE == "Lead"){
+            // html += '                    <div class="col l12 hide-on-med-and-down">'
+            // html += '                        <b>Date & Time : </b><span class="time">' + val.follow_up_time + '</span> on <span class="date">' + val.follow_up_date + '</span>'
+            // html += '                    </div>'
+            // html += '                    <div class="col l12 hide-on-large-only">'
+            // html += '                        <b>Date : </b><span class="date">' + val.follow_up_date + '</span>'
+            // html += '                    </div>'
+            // html += '                    <div class="col l12 s12 m12 hide-on-large-only">'
+            // html += '                        <b>Time : </b><span class="time">' + val.follow_up_time + '</span>'
+            // html += '                    </div>'
+
+            html += '                    <div class="col l12">'
+            html += '                        <b>Follow Up Date : </b><span class="date">' + val.follow_up_date + '</span>'
             html += '                    </div>'
-            html += '                    <div class="col l12 hide-on-large-only">'
-            html += '                        <b>Date : </b><span class="date">' + val.date_booking + '</span>'
+            html += '                    <div class="col l12 s12 m12">'
+            html += '                        <b>Follow Up Time : </b><span class="time">' + val.follow_up_time + '</span>'
             html += '                    </div>'
-            html += '                    <div class="col l12 s12 m12 hide-on-large-only">'
-            html += '                        <b>Time : </b><span class="time">' + val.time_booking + '</span>'
+            html += '                    <div class="col l12 s12 m12">'
+            html += '                        <b>Generation Date : </b><span class="time">' + val.date_generated + '</span>'
             html += '                    </div>'
+
+
+            }else{
+            // html += '                    <div class="col l12 hide-on-med-and-down">'
+            // html += '                        <b>Date & Time : </b><span class="time">' + val.time_booking + '</span> on <span class="date">' + val.date_booking + '</span>'
+            // html += '                    </div>'
+            html += '                    <div class="col l12">'
+            html += '                        <b>Booking Date : </b><span class="date">' + val.date_booking + '</span>'
+            html += '                    </div>'
+            html += '                    <div class="col l12 s12 m12">'
+            html += '                        <b>Booking Time : </b><span class="time">' + val.time_booking + '</span>'
+            html += '                    </div>'
+
+            }
+            if (LEAD_TYPE == "Lead"){
+
+                }else{
             html += '                    <div class="col l12 s12 m12">'
             html += '                        <b>Address : </b><span class="address">' + val.cust_address + ' ' + val.cust_locality + ' ' + val.cust_city + '</span>'
             html += '                    </div>'
+            }
             html += '                </div>'
             html += '                <div class="col l3 s3 m3 centered-text hide-on-med-and-down">'
             if (LEAD_TYPE == "Booking"){
                 html += '                    <b><span class="agent-details">'+val.agent_details+'</span></b>'
+            }else{
+                html += '                    <b><span class="status-details">'+val.source+'</span></b>'
             }
             html += '                </div>'
+            if (LEAD_TYPE == "Booking"){
             html += '                <div class="col l2 s3 m3 status-bar">'
             html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
             html += '                </div></div>'
+            }else{
+            html += '                <div class="col l2 s3 m3 status-bar-2">'
+            html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
+            html += '                </div></div>'
+
+            }
 
             // html += '<div class="col l2 hide-on-med-and-down feedback-btn-col">'
             // // html += '<div class="row">'
@@ -2341,7 +2604,7 @@ var Global = {
         $.each(data, function(ix, val) {
             html2 = ""
             html2 += '								<div class="desc-content col s12 m12 l12">';
-            html2 += '									<table class="striped">';
+            html2 += '									<table class="card striped">';
             html2 += '										<thead>';
             html2 += '										<tr>';
             html2 += '											<th data-field="id">S.No.</th>';
@@ -2479,6 +2742,13 @@ var Global = {
         var container = $('#customer-detail .booking-data .pre-data');
         container.html('');
         html = ''
+        if (LEAD_TYPE == "Lead"){
+            $('#customer-detail .header-booking .lead').show()
+            $('#customer-detail .header-booking .booking').hide()
+        }else{
+            $('#customer-detail .header-booking .booking').show()
+            $('#customer-detail .header-booking .lead').hide()
+        }
         $.each(data, function(ix, val) {
             html += '<div class="row">'
             html += '<div id="booking_id" class="col s12 m12 l12 book_id" booking_data_id="'+val.id +'" booking_id="'+val.booking_id+'"><h4><b>#'+val.booking_id+'</h4></b></div>'
@@ -2598,24 +2868,68 @@ var Global = {
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_regnumber" type="text" value ="' + val.cust_regnumber + '"class="validate" style="text-transform: uppercase;"><label for="cust_regnumber">#Registration</label></div>'
                 html += '</div>'
+                if (!val.booking_flag){
+                     html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_follow" type="date" class="datepicker"><label for="date_follow">Date Follow</label></div>'
+                html += '</div>'
+                // html += '<div class="row">'
                 html += '<div class="col s12 m12 l12">'
-                // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
-                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" class="datepicker"><label for="date">Date</label></div>'
+                // html += '<div class="input-field"><i class="material-icons prefix">today</i><label for="time_follow">Time Follow</label><input id="time_follow" type="time" class="timepicker"></div>'
+                //     time ui-timepicker-input
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><label for="time_follow">Time Follow</label><input id="time_follow" type="text" name="timepicker" class="time ui-timepicker-input"/></div>'
+
+                html += '</div>'
+
+                }
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" class="datepicker"><label for="date">Date Booking</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time Booking</label></div>'
                 html += '</div>'
+                if (val.booking_flag){
                 html += '<div class="col s12 m12 l12">'
                 // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
                 html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" class="datepicker"><label for="date">Date Delivery</label></div>'
                 html += '</div>'
 
+                }
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
                 html += '</div>'
+                if (!val.booking_flag){
+                    html += '<div class="col s12 m12 l12">'
+                    html += '<b>FOLLOW UP SUMMARY</b><br><br>'
+
+                    fsLen = val.follow_up_status.length;
+
+                    for (i = 0; i < fsLen; i++) {
+                    // for (i = 0; i < 2; i++) {
+                    html += '<div class="row">'
+                    html += '<div class="col s12 m12 l2  follow-time-stamp">'
+                    html += val.follow_up_status[i]['Date']+' '+val.follow_up_status[i]['Time']
+                    html += '</div>'
+                    html += '<div class="col s12 m12 l10">'
+                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="status_details" type="text" disabled value ="'+ val.follow_up_status[i]['Status'] +'" class="validate"><label for="agent_details">Status - '+ (i+1) +'</label></div>'
+                    html += '</div>'
+                    html += '</div>'
+                    }
+
+                    html += '<div class="row">'
+                    html += '<div class="col s12 m12 l2  follow-time-stamp">'
+                    html += ''
+                    html += '</div>'
+                    html += '<div class="col s12 m12 l10">'
+                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="status_details_new" type="text" value ="" class="validate"><label for="agent_details">Status - '+ (i+1) +'</label></div>'
+                    html += '</div>'
+                    html += '</div>'
+
+
+                    html += '</div>'
+                }
             }else{
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">email</i><input id="email" disabled type="email" value ="' + val.cust_email + '"class="validate"><label for="email">Email</label></div>'
@@ -2630,10 +2944,14 @@ var Global = {
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" disabled  value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
                 html += '</div>'
+                if (val.booking_flag){
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" disabled class="datepicker"><label for="date">Date Delivery</label></div>'
                 // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
                 html += '</div>'
+                }else{
+
+                }
 
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" disabled class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
@@ -2709,33 +3027,40 @@ var Global = {
                 }
             }else{
                 if (val.status == "Lead"){
-                    for (i = 1; i < 2; i++) {
-                        $('.status-change-'+i ).addClass('selected')
-                    }
-                    for (i = 2; i < 5; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
-                    }
-                }else if(val.status == "Follow Up"){
-                    for (i = 1; i < 3; i++) {
-                        $('.status-change-'+i ).addClass('selected')
-                    }
-                    for (i = 3; i < 5; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
-                    }
-                }else if(val.status == "Confirmed"){
-                    for (i = 1; i < 4; i++) {
-                        $('.status-change-'+i ).addClass('selected')
-                    }
-                    for (i = 4; i < 5; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
-                    }
-                }else if(val.status == "Cancelled"){
-                    for (i = 1; i < 4; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
-                    }
-                    $('.status-change-4').addClass('selected')
-
+                for (i = 1; i < 2; i++) {
+                    $('.status-change-'+i ).addClass('selected')
                 }
+                for (i = 2; i < 6; i++) {
+                    $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(val.status == "Cold"){
+                for (i = 1; i < 3; i++) {
+                    $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 3; i < 6; i++) {
+                    $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(val.status == "Warm"){
+                for (i = 1; i < 4; i++) {
+                    $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 4; i < 6; i++) {
+                    $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(val.status == "Confirmed"){
+                for (i = 1; i < 5; i++) {
+                    $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 5; i < 6; i++) {
+                    $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(val.status == "Cancelled"){
+                for (i = 1; i < 6; i++) {
+                    $('.status-change-'+i ).removeClass('selected')
+                }
+                $('.status-change-5').addClass('selected')
+
+            }
             }
             // <----- New Booking Data---->>
 
@@ -2878,37 +3203,79 @@ var Global = {
 
 
             date_string = val.date_booking
+
             if (val.delivery_date==null){
                 // console.log("1")
                 // console.log(val.delivery_date)
                 date_delivery_string = val.date_booking
             } else{
-                console.log(val.delivery_date)
+                // console.log(val.delivery_date)
 
                 // console.log("2")
                 date_delivery_string = val.delivery_date
             }
 
-
+            date_follow_up = val.follow_up_date
+            time_follow_up = val.follow_up_time
         })
         container.html(html);
+        try{
+
         var $input = $('#customer-detail #date.datepicker').pickadate({
             format: 'dd-mm-yyyy',
-            // min: new Date(),
-        })
-
-        // console.log(date_de)
-
-        var $input2 = $('#customer-detail #date_delivery.datepicker').pickadate({
-            format: 'dd-mm-yyyy',
-            // min: new Date(),
         })
 
         var picker = $input.pickadate('picker')
         picker.set('select', date_string, { format: 'dd-mm-yyyy' })
 
+        }catch(e){
+
+        }
+
+        try{
+        var $input2 = $('#customer-detail #date_delivery.datepicker').pickadate({
+            format: 'dd-mm-yyyy',
+            // min: new Date(),
+        })
+
         var picker2 = $input2.pickadate('picker')
         picker2.set('select', date_delivery_string, { format: 'dd-mm-yyyy' })
+
+        }catch(e){
+
+
+        }
+
+
+
+
+        try{
+
+        var $input3 = $('#customer-detail #date_follow.datepicker').pickadate({
+            format: 'dd-mm-yyyy',
+            // min: new Date(),
+        })
+
+        var picker3 = $input3.pickadate('picker')
+        picker3.set('select', date_follow_up, { format: 'dd-mm-yyyy' })
+
+        }catch(e){
+
+
+        }
+
+
+        $('#customer-detail #time_follow').timepicker({
+                 timeFormat: "h:i A"
+             });
+
+        try {
+
+             $('#customer-detail #time_follow').timepicker('setTime', time_follow_up);
+             // console.log(date_de)
+         }catch(e){
+
+         }
 
         TOTAL_ITEM_ESTIMATE = 0;
         var container2 = $('#customer-detail .booking-job-data .pre-data');
@@ -2918,7 +3285,7 @@ var Global = {
         // Service Table Start
         $.each(data, function(ix, val) {
             html += '                               <div class="desc-content col s12 m12 l10 offset-l1">';
-            html += '                                   <table class="striped" id="estimate-table">';
+            html += '                                   <table class="striped card" id="estimate-table">';
             html += '                                       <thead>';
             html += '                                       <tr>';
             html += '                                           <th data-field="id">S.No.</th>';
@@ -3337,7 +3704,8 @@ var Global = {
         }
     },
     loadCustomerupdate:function(){
-        alert('Updated!')
+        data_id = $('#customer-detail #booking_id').attr('booking_data_id')
+        Global.openbooking_new(data_id)
     },
     loadAddCoupon:function(){
         alert('Coupon Added!')
@@ -3368,7 +3736,7 @@ var Global = {
         html=''
         i=1
         html += '								<div class="desc-content col s12 m12 l12">';
-        html += '									<table class="striped">';
+        html += '									<table class=" card striped">';
         html += '										<thead>';
         html += '										<tr>';
         html += '											<th data-field="id">S.No.</th>';
@@ -3560,8 +3928,9 @@ var Global = {
         alert('Order Placed!')
     },
     loadCustomerStatus:function(data){
-        data_id = $('#customer-detail #booking_id').attr('booking_data_id')
-        Global.openbooking_new(data_id)
+        Global.updateCust_new()
+        // data_id = $('#customer-detail #booking_id').attr('booking_data_id')
+        // Global.openbooking_new(data_id)
         // setTimeout(function(){
         //           openbooking(data_id)
         //         }, 1000);
@@ -3595,7 +3964,7 @@ var Global = {
         html=''
         i=1
         html += '								<div class="desc-content col s12 m12 l12">';
-        html += '									<table class="striped">';
+        html += '									<table class="card striped">';
         html += '										<thead>';
         html += '										<tr>';
         html += '											<th data-field="id">S.No.</th>';
@@ -3804,6 +4173,50 @@ var Global = {
     loadCustomerFeedback:function(data){
         alert('Feedback Updated!')
     },
+    updateCust_new:function(){
+            bid = $('#customer-detail #booking_id').attr('booking_id');
+            email_n = $('#customer-detail #email').val();
+            reg_n = $('#customer-detail #cust_regnumber').val();
+            date_n = $('#customer-detail #date').val();
+            time_n = $('#customer-detail #time_booking').val();
+            comment_n = $('#customer-detail #comments').val();
+            notes_n = $('#customer-detail #notes').val();
+            amount_paid_n = $('#customer-detail #cust_amount_paid').val()
+            cust_name = $('#customer-detail #cust_name').val()
+            cust_number = $('#customer-detail #cust_number').val()
+            cust_address = $('#customer-detail #cust_address').val()
+            cust_locality = $('#customer-detail #cust_locality').val()
+            cust_city = $('#customer-detail #cust_city').val()
+            source = $('#customer-detail #source').val()
+            date_del = $('#customer-detail #date_delivery').val()
+            date_follow = $('#customer-detail #date_follow').val()
+            time_follow = $('#customer-detail #time_follow').val()
+            follow_status = $('#customer-detail #status_details_new').val()
+
+
+
+            ALL_JOBS_ADMIN = comment_n
+            Commons.ajaxData('update_booking', {b_id: bid,
+                email: email_n,
+                reg_number: reg_n,
+                comment: comment_n,
+                time: time_n,
+                date: date_n,
+                note:notes_n,
+                name : cust_name,
+                number : cust_number,
+                amount_paid : amount_paid_n,
+                address : cust_address,
+                locality : cust_locality,
+                city : cust_city,
+                source : source,
+                date_del : date_del,
+                date_follow:date_follow,
+                time_follow:time_follow,
+                follow_status:follow_status
+            }, "post", Global, Global.loadCustomerupdate,null, '.loading-pane');
+
+        },
     openbooking_new:function(data_id){
             $('#bookings').hide()
             $('#booking-details').show()
@@ -3819,10 +4232,41 @@ var Global = {
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/single/' + data_id
             history.pushState({},'',new_path)
+    },
+    loadAnalysis_all:function(data){
+        $('#analytics .vol-all').text(data['vol_completed'])
+        $('#analytics .tran-all').text(data['num_completed'])
+        $('#analytics .lead-all').text(data['num_lead']+data['num_fu'])
+        $('#analytics .users-all').text(data['num_users'])
+        $('#analytics .nps-all').text(data['nps'])
+
+        // nps-all
+    },
+    loadAnalysis_car:function(data){
+        $('#analytics .vol-car').text(data['vol_completed'])
+        $('#analytics .tran-car').text(data['num_completed'])
+        $('#analytics .lead-car').text(data['num_lead']+data['num_fu'])
+        $('#analytics .users-car').text(data['num_users'])
+        $('#analytics .nps-car').text(data['nps'])
+
+    },
+    loadAnalysis_bike:function(data){
+        $('#analytics .vol-bike').text(data['vol_completed'])
+        $('#analytics .tran-bike').text(data['num_completed'])
+        $('#analytics .lead-bike').text(data['num_lead']+data['num_fu'])
+        $('#analytics .users-bike').text(data['num_users'])
+        $('#analytics .nps-bike').text(data['nps'])
+    },
+    loadAnalysis_veh_filter:function(data){
+    },
+    loadAnalysis_veh_filter_month:function(data){
+        container = $('#analytics .month-data-row').find('tbody')
+        container.html('')
+        num_leads = parseInt(data['num_lead'])+parseInt(data['num_fu'])
+        MONTH_TABLE += '<tr><td>'+data['monthyear']+'</td><td>'+data['vol_completed']+'</td><td>'+data['num_completed']+'</td><td>NA</td><td>'+num_leads+'</td><td>'+data['nps']+'</td></tr>'
+        container.html(MONTH_TABLE)
+
     }
 };
-
-
-
 
 
