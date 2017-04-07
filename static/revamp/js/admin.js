@@ -2687,7 +2687,7 @@ var Global = {
             }
             html += '                    </div>'
             html += '                    <div class="col l12 s12 m12">'
-            html += '                        <b><span class="custvehicletype">' + val.cust_vehicle_type + '</span>&nbsp;:&nbsp;</b><span class="vehiclename">' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + '</span>'
+            html += '                        <b><span class="custvehicletype">' + val.cust_vehicle_type + '</span>&nbsp;:&nbsp;</b><span class="vehiclename">' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + ' ('+val.cust_regnumber+')</span>'
             html += '                    </div>'
             if (LEAD_TYPE == "Lead"){
             // html += '                    <div class="col l12 hide-on-med-and-down">'
@@ -2798,7 +2798,7 @@ var Global = {
             }
             html += '                    </div>'
             html += '                    <div class="col l12 s12 m12">'
-            html += '                        <b><span class="custvehicletype">' + val.cust_vehicle_type + '</span>&nbsp;:&nbsp;</b><span class="vehiclename">' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + '</span>'
+            html += '                        <b><span class="custvehicletype">' + val.cust_vehicle_type + '</span>&nbsp;:&nbsp;</b><span class="vehiclename">' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + ' ('+val.cust_regnumber+')</span>'
             html += '                    </div>'
             if (LEAD_TYPE == "Lead"){
             // html += '                    <div class="col l12 hide-on-med-and-down">'
@@ -4170,10 +4170,13 @@ var Global = {
         // CURRENT_CART =[];
         // JOBS_SUMMARY=[]
         $.each(data['cart_details'], function(ix, val) {
+
+
             jsLen = val.default_comp.length;
             for (i = 0; i < jsLen; i++) {
                 CURRENT_CART_NEW_BOOKING.push(val.default_comp[i])
             }
+
             if (ALL_JOBS_NEW_BOOKING ==''){
                 ALL_JOBS_NEW_BOOKING = val.job_name;
             }else{
@@ -4183,11 +4186,42 @@ var Global = {
         });
 
         $.each(data['cart_summary'], function(ix, val) {
+            if (val.car_bike=="Car"){
+                if (val.cg_amount_workshop <= 1800 && val.cg_amount_workshop > 0){
+                    PICK_DROP = 150
+                }else{
+                    PICK_DROP = 0
+                }
+            }else if (val.car_bike =="Bike"){
+                if (val.cg_amount <200 && val.cg_amount >0){
+                    PICK_DROP = 200
+                }else{
+                    PICK_DROP = 0
+                }
+            }else{
+                PICK_DROP=0
+            }
+
+            if (PICK_DROP >0 ){
+                console.log(PICK_DROP)
+                // JOBS_SUMMARY_TOTAL
+                pick_drop_val = {"category": "Labour",
+                    "job_name": "Visiting/Pick Drop",
+                    "price": PICK_DROP,
+                    "price_comp": PICK_DROP,
+                    "unit_price": PICK_DROP,
+                    "action": "Labour",
+                    "type":"Labour",
+                    "quantity": "1"};
+
+                JOBS_SUMMARY_NEW_BOOKING.push({'category':'Labour','job_name':'Visiting/Pick Drop','price_total':PICK_DROP,'price_part':'0','price_labour':PICK_DROP,'price_discount':'0','doorstep':'0'});
+                CURRENT_CART_NEW_BOOKING.push(pick_drop_val)
+            }
 
             // TOTAL_PRICE Change
-            TOTAL_PRICE_NEW_BOOKING = parseFloat(val.cg_amount) - parseFloat(COUP_DISCOUNT_NEW_BOOKING);
+            TOTAL_PRICE_NEW_BOOKING = parseFloat(val.cg_amount) - parseFloat(COUP_DISCOUNT_NEW_BOOKING) + PICK_DROP;
             TOTAL_JOBS_NEW_BOOKING = val.total_jobs;
-            TOTAL_LABOUR_NEW_BOOKING = val.total_labour_cg;
+            TOTAL_LABOUR_NEW_BOOKING = val.total_labour_cg + PICK_DROP;
             TOTAL_PARTS_NEW_BOOKING = val.total_part_cg;
             TOTAL_DISCOUNT_NEW_BOOKING = val.total_discount_cg
             ADD_DISCOUNT = parseFloat(val.diff_amount) + parseFloat(COUP_DISCOUNT_NEW_BOOKING);

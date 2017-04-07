@@ -512,6 +512,7 @@ var Global = {
                         "price_comp": 0,
                         "unit_price": 0,
                         "action": "Labour",
+                        "type":"Labour",
                         "quantity": "1"}]
 
             var is_paid = false;

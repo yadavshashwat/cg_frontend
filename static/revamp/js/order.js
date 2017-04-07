@@ -1059,9 +1059,10 @@ var Global = {
                     "price_comp": PICK_DROP,
                     "unit_price": PICK_DROP,
                     "action": "Labour",
+                    "type":"Labour",
                     "quantity": "1"};
 
-                JOBS_SUMMARY_TOTAL.push(pick_drop_val);
+                JOBS_SUMMARY_TOTAL.push({'category':'Labour','job_name':'Visiting/Pick Drop','price_total':PICK_DROP,'price_part':'0','price_labour':PICK_DROP,'price_discount':'0','doorstep':'0'});
                 CURRENT_CART.push(pick_drop_val)
             }
 
