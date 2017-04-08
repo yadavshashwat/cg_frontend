@@ -4636,7 +4636,7 @@ var Global = {
             history.pushState({},'',new_path)
     },
     loadAnalysis_all:function(data){
-        $('#analytics .vol-all').text(data['vol_completed'])
+        $('#analytics .vol-all').text(Math.round(parseFloat(data['vol_completed'])))
         $('#analytics .tran-all').text(data['num_completed'])
         $('#analytics .lead-all').text(data['num_total_lead'])
         $('#analytics .users-all').text(data['num_users'])
@@ -4645,7 +4645,7 @@ var Global = {
         // nps-all
     },
     loadAnalysis_car:function(data){
-        $('#analytics .vol-car').text(data['vol_completed'])
+        $('#analytics .vol-car').text(Math.round(parseFloat(data['vol_completed'])))
         $('#analytics .tran-car').text(data['num_completed'])
         $('#analytics .lead-car').text(data['num_total_lead'])
         $('#analytics .users-car').text(data['num_users'])
@@ -4653,7 +4653,7 @@ var Global = {
 
     },
     loadAnalysis_bike:function(data){
-        $('#analytics .vol-bike').text(data['vol_completed'])
+        $('#analytics .vol-bike').text(Math.round(parseFloat(data['vol_completed'])))
         $('#analytics .tran-bike').text(data['num_completed'])
         $('#analytics .lead-bike').text(data['num_total_lead'])
         $('#analytics .users-bike').text(data['num_users'])
@@ -4674,7 +4674,7 @@ var Global = {
             source_name = source_name.replace(/-/g,'')
 
             SOURCE_TABLE += '<tr><td>'+SOURCES[i]+'</td><td>'
-            SOURCE_TABLE += data["vol_"+source_name+"_completed"]
+            SOURCE_TABLE += Math.round(parseFloat(data["vol_"+source_name+"_completed"]))
             // console.log(source_name)
             SOURCE_TABLE +='</td><td>'
             SOURCE_TABLE += data["num_"+source_name+"_completed"]
@@ -4689,7 +4689,7 @@ var Global = {
             SOURCE_TABLE += '</td></tr>'
         }
         SOURCE_TABLE += '<tr><td>Other</td><td>'
-            SOURCE_TABLE += data["vol_other_completed"]
+            SOURCE_TABLE += Math.round(parseFloat(data["vol_other_completed"]))
             // console.log(source_name)
             SOURCE_TABLE +='</td><td>'
             SOURCE_TABLE += data["num_other_completed"]
@@ -4710,9 +4710,9 @@ var Global = {
         container2.html('')
         SOURCE_TABLE_2 = ''
         SOURCE_TABLE_2 += '<tr><td>B2B</td><td>'
-        SOURCE_TABLE_2 += data["vol_b2b_total_completed"]
+        SOURCE_TABLE_2 += Math.round(parseFloat(data["vol_b2b_total_completed"]))
         SOURCE_TABLE_2 +='</td><td>'
-        SOURCE_TABLE_2 += data["num_b2b_total_completed"]
+        SOURCE_TABLE_2 += Math.round(parseFloat(data["num_b2b_total_completed"]))
         SOURCE_TABLE_2 +='</td><td>'
         SOURCE_TABLE_2 += "NA"
         SOURCE_TABLE_2 += '</td><td>'
@@ -4723,9 +4723,9 @@ var Global = {
         SOURCE_TABLE_2 += '142'
         SOURCE_TABLE_2 += '</td></tr>'
          SOURCE_TABLE_2 += '<tr><td>B2C</td><td>'
-        SOURCE_TABLE_2 += data["vol_b2c_total_completed"]
+        SOURCE_TABLE_2 += Math.round(parseFloat(data["vol_b2c_total_completed"]))
         SOURCE_TABLE_2 +='</td><td>'
-        SOURCE_TABLE_2 += data["num_b2c_total_completed"]
+        SOURCE_TABLE_2 += Math.round(parseFloat(data["num_b2c_total_completed"]))
         SOURCE_TABLE_2 +='</td><td>'
         SOURCE_TABLE_2 += "NA"
         SOURCE_TABLE_2 += '</td><td>'
@@ -4778,7 +4778,7 @@ var Global = {
         container = $('#analytics .month-data-row').find('tbody')
         container.html('')
         num_leads = parseInt(data['num_lead'])+parseInt(data['num_warm'])
-        MONTH_TABLE += '<tr><td>'+data['monthyear']+'</td><td>'+data['vol_completed']+'</td><td>'+data['num_completed']+'</td><td>NA</td><td>'+data['num_total_lead']+'</td><td>'+data['nps']+'</td></tr>'
+        MONTH_TABLE += '<tr><td>'+data['monthyear']+'</td><td>'+Math.round(parseFloat(data['vol_completed']))+'</td><td>'+data['num_completed']+'</td><td>NA</td><td>'+data['num_total_lead']+'</td><td>'+data['nps']+'</td></tr>'
         container.html(MONTH_TABLE)
         MONTH_NUMBER = MONTH_NUMBER + 1
         // console.log(MONTH_NUMBER)
