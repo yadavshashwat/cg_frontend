@@ -22,7 +22,9 @@ $(document).ready(function() {
         html += '<option value="'+SOURCES[i] +'">'+SOURCES[i]+'</option>'
     }
 
+
     container.html(html)
+
     var viewportWidth = $(window).width();
     if (viewportWidth <= 600) {
         // $("#bookings .pre-data").height(a/1.5 - alfa)
@@ -106,12 +108,12 @@ var SOURCES = ['Google Adwords',
     'Partner - Wishup',
     'Partner - Housejoy',
     'Walk in',
-    'Partner - Mr. Right',
+    'Partner - Mr Right',
     'Web Search',
     'Unknown',
-    'Society camps',
-    'Check up camps',
-    'Sign up lead',
+    'Society Camps',
+    'Check Up Camps',
+    'Sign Up Lead',
     'Facebook Ad',
     'Mahindra Authorized',
     'Exotel']
@@ -132,13 +134,32 @@ var Global = {
         _this.eventsAdded = true;
         console.log('adding hanlder');
 
+        $(document).ready(function(){
+            date_str = new Date();
+            DATE_TYPE2 = _this.date_format(date_str);
+            $('#analytics .daily-row #date_summary').val(DATE_TYPE2)
+
+                monLen2 = list_months.length;
+            container2 = $('#analytics .month-row #months-list')
+            container2.html('')
+            html2 = '<option value="" disabled selected>Select Month</option>'
+
+            for (i = 0; i < monLen2; i++) {
+                html2 += '<option value="'+list_months[i]+'">'+list_months[i]+'</option>'
+            }
+            container2.html(html2)
+            $('#analytics .month-row #months-list').val(list_months[monLen2-1])
+
+
+        })
+
 // =====================================================================================
 //     Url State Management
 // =====================================================================================
 
         $(document).ready(function() {
 
-            url_list = window.location.pathname.split('/')
+            // url_list = window.location.pathname.split('/')
             var sub_page_1      = $('#admin-page-state').attr('sub-page-1')
             var sub_page_2      = $('#admin-page-state').attr('sub-page-2')
             var data_id         = $('#admin-page-state').attr('data-id')
@@ -150,7 +171,8 @@ var Global = {
 
 
             if (sub_page_1 == "bookings" || typeof(sub_page_1)=="undefined" || sub_page_1 == null || sub_page_1 =="" ){
-                $('.navbar .booking-button').click()
+                // $('.navbar .booking-button').click()
+                allbookingsopen()
                 if (sub_page_2 == "single"){
                     openbooking(data_id)
                 }else{
@@ -158,7 +180,8 @@ var Global = {
                 }
 
             }else if(sub_page_1 == "leads"){
-                $('.navbar .lead-button').click()
+                // $('.navbar .lead-button').click()
+                allleadsopen()
                 if (sub_page_2 == "single"){
                     try {
                         openbooking(data_id)
@@ -169,7 +192,8 @@ var Global = {
 
                 }
             }else if(sub_page_1 == "subscriptions"){
-                $('.navbar .subscription-button').click()
+                // $('.navbar .subscription-button').click()
+                allsubscriptionopen()
                 if (sub_page_2 == "single"){
                     $('#subscription-detail .single-subscription').click()
                     if (data_id != ""){
@@ -181,7 +205,8 @@ var Global = {
                 }
 
             }else if(sub_page_1 == "users"){
-                $('.navbar .users-button').click()
+                allusersopen()
+                // $('.navbar .users-button').click()
                 if (sub_page_2 == "single"){
                     $('#user-detail .single-user').click()
                     if (data_id != ""){
@@ -191,7 +216,8 @@ var Global = {
 
                 }
             }else if (sub_page_1 == "coupons"){
-                $('.navbar .coupon-button').click()
+                allcouponsopen()
+                // $('.navbar .coupon-button').click()
                 if (sub_page_2 == "single"){
                     $('#coupon-detail  .single-coupon').click()
                     if (data_id != ""){
@@ -202,13 +228,17 @@ var Global = {
                 }
 
             }else if (sub_page_1 == "newbooking"){
-                $('.navbar .new-booking-button').click()
+                opennewbookings()
+                // $('.navbar .new-booking-button').click()
             }else if (sub_page_1 == "newlead"){
-                $('.navbar .new-lead-button').click()
+                opennewlead()
+                // $('.navbar .new-lead-button').click()
             }else if (sub_page_1 == "campaign") {
-                $('.navbar .campaign-button').click()
+                opencampaign()
+                // $('.navbar .campaign-button').click()
             }else if (sub_page_1 == "analytics") {
-                $('.navbar .analytics-button').click()
+                openanalytics()
+                // $('.navbar .analytics-button').click()
             }
         });
 
@@ -285,7 +315,8 @@ var Global = {
             }
         }
         // Open Bookings
-        $('.navbar .booking-button').click(function(event,data){
+
+        var allbookingsopen = function(){
             // DATE_TYPE = "";
             // REG_NUMBER = "";
             // CUST_NAME = "";
@@ -353,9 +384,11 @@ var Global = {
             var new_path = path.slice(0,2).join('/')+'/bookings/all'
             history.pushState({},'',new_path)
 
-        });
+        }
+
+        $('.navbar .booking-button').click(allbookingsopen);
         // Open Lead
-        $('.navbar .lead-button').click(function(event,data){
+        var allleadsopen = function(){
             // DATE_TYPE = "";
             // REG_NUMBER = "";
             // CUST_NAME = "";
@@ -405,7 +438,8 @@ var Global = {
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,2).join('/')+'/leads/all'
             history.pushState({},'',new_path)
-        });
+        }
+        $('.navbar .lead-button').click(allleadsopen);
 
         $('#bookings').on('click','.filter-sort.closed',function () {
             $('#bookings .filter-option').show();
@@ -929,9 +963,7 @@ var Global = {
             date_follow = $('#customer-detail #date_follow').val()
             time_follow = $('#customer-detail #time_follow').val()
             follow_status = $('#customer-detail #status_details_new').val()
-
-
-
+            odometer = $('#customer-detail #cust_odometer').val()
             ALL_JOBS_ADMIN = comment_n
             Commons.ajaxData('update_booking', {b_id: bid,
                 email: email_n,
@@ -950,7 +982,8 @@ var Global = {
                 date_del : date_del,
                 date_follow:date_follow,
                 time_follow:time_follow,
-                follow_status:follow_status
+                follow_status:follow_status,
+                odometer:odometer
             }, "post", _this, _this.loadCustomerupdate,null, '.loading-pane');
 
         }
@@ -1466,7 +1499,7 @@ var Global = {
 
 
         // -- Load Subscription
-        $('.navbar .subscription-button').click(function(){
+        var allsubscriptionopen = function(){
             // console.log('check')
             $('#booking-details').hide()
             $('#bookings').hide()
@@ -1485,7 +1518,8 @@ var Global = {
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,2).join('/')+'/subscriptions/all'
             history.pushState({},'',new_path)
-        });
+        };
+        $('.navbar .subscription-button').click(allsubscriptionopen);
         // -- Load Make
         var callBrands2 = function(){
             veh_type                = $('#sub_veh_type').find('select').val()
@@ -1664,7 +1698,7 @@ var Global = {
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/single/' + data_id
             history.pushState({},'',new_path)
-        }
+        };
 
         $('#subscription-detail .subscription-list').on('click','.modify-btn',function(){
             subscription_id = $(this).closest('tr').attr('data-class')
@@ -1725,7 +1759,7 @@ var Global = {
 //    Coupon Management
 // =====================================================================================
         // -- Load Coupon
-        $('.navbar .coupon-button').click(function(){
+        var allcouponsopen = function(){
             // console.log('check')
             $('#booking-details').hide()
             $('#bookings').hide()
@@ -1741,7 +1775,8 @@ var Global = {
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,2).join('/')+'/coupons/all'
             history.pushState({},'',new_path)
-        });
+        };
+        $('.navbar .coupon-button').click(allcouponsopen);
         //     - ADD Coupon
         $('#coupon-detail .add-coupon').click(function(){
             coupon_code = $('#coupon-detail #coup_name').val()
@@ -1878,8 +1913,7 @@ var Global = {
 // =====================================================================================
 //    SMS Management
 // =====================================================================================
-
-        $('.navbar .campaign-button').click(function(){
+        var opencampaign = function(){
 
             // console.log('check')
             $('#booking-details').hide()
@@ -1895,7 +1929,8 @@ var Global = {
             var new_path = path.slice(0,2).join('/')+'/campaign/'
             history.pushState({},'',new_path)
 
-        });
+        };
+        $('.navbar .campaign-button').click(opencampaign);
         $('#campaign-details .send-sms-campaign').click(function() {
             message =     $('#sms_campaign_message').val()
             Commons.ajaxData('send_sms_campaign',  {message: message}, "get", _this, _this.loadCampaign,null, '.loading-pane');
@@ -1906,9 +1941,7 @@ var Global = {
 // =====================================================================================
 //    New Booking
 // =====================================================================================
-
-
-        $('.navbar .new-booking-button').click(function(){
+        var opennewbookings = function(){
 
             // console.log('check')
             $('#booking-details').hide()
@@ -1951,9 +1984,11 @@ var Global = {
             var new_path = path.slice(0,2).join('/')+'/newbooking/'
             history.pushState({},'',new_path)
 
-        });
+        };
 
-        $('.navbar .new-lead-button').click(function(){
+        $('.navbar .new-booking-button').click(opennewbookings);
+
+        var opennewlead = function(){
             // console.log('check')
             $('#booking-details').hide()
             $('#bookings').hide()
@@ -1988,7 +2023,8 @@ var Global = {
             var new_path = path.slice(0,2).join('/')+'/newlead/'
             history.pushState({},'',new_path)
 
-        });
+        };
+        $('.navbar .new-lead-button').click(opennewlead);
 
         $('#new-booking .header-booking .book-btn').click(function(){
             $('#new-booking  .lead-btn').removeClass('selected')
@@ -2147,6 +2183,7 @@ var Global = {
             var locality =  $('#locality').val();
             var city =  $('#city').val();
             var date = $('#date').val();
+            var odo = $('#odo_number').val()
             // var otp = $('#otp').val();
             var comment = $('#comment').val();
             var time_follow = $('#time_follow_lead').val()
@@ -2271,6 +2308,7 @@ var Global = {
                     ,booking_user_number: pocnumber
                     ,source : source
                     ,follow_time : time_follow
+                    ,odometer: odo
                 }, "post", _this, _this.loadSendbookingAdmin, null, '.loading-pane');
             }
 
@@ -2335,8 +2373,7 @@ var Global = {
         to_month = n +" " + today.getFullYear()
         list_months = diff('January 2017', to_month)
 
-
-        $('.navbar .analytics-button').click(function(event,data){
+        var openanalytics = function(){
             // DATE_TYPE = "";
             REG_NUMBER = "";
             CUST_NAME = "";
@@ -2344,9 +2381,11 @@ var Global = {
             SORT_TYPE = "";
             BOOKING_ID = "";
             VEH_TYPE = "";
+            MONTH_TABLE = "";
 
             anal_time_cat = $('#analytics .header-analytics .selected').attr('data-class')
             anal_veh_cat = $('#analytics .vehicle-filter .date-box.selected').attr('data-class')
+
             console.log(anal_time_cat)
             console.log(anal_veh_cat)
 
@@ -2359,11 +2398,10 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').show()
 
+            month_selected = $('#analytics .month-row').find('select').val()
+            // console.log(month_selected)
 
-            var path = window.location.pathname.split('/')
-            var new_path = path.slice(0,2).join('/')+'/analytics/'
-            history.pushState({},'',new_path)
-
+            date_selected = $('#analytics .daily-row #date_summary').val()
 
             if (anal_time_cat == "Overall"){
                 // to populate overall summary
@@ -2374,44 +2412,47 @@ var Global = {
                 if (anal_veh_cat == "All"){
                     Commons.ajaxData('analyse_bookings', {}, "get", _this, _this.loadAnalysis_veh_filter,null, '.loading-pane');
                     monLen = list_months.length;
-                    MONTH_TABLE = ""
-                    for (i = 0; i < monLen; i++) {
-                        Commons.ajaxData('analyse_bookings', {monthyear:list_months[i]}, "get", _this, _this.loadAnalysis_veh_filter_month,null, '.loading-pane');
-                    }
-                }else if(anal_veh_cat == "Car"){
-
-
-                }else if(anal_veh_cat == "Bike"){
-
-
+                    MONTH_NUMBER = 0
+                    Commons.ajaxData('analyse_bookings', {monthyear:list_months[MONTH_NUMBER]}, "get", _this, _this.loadAnalysis_veh_filter_month,null, '.loading-pane');
+                }else{
+                    Commons.ajaxData('analyse_bookings', {car_bike:anal_veh_cat}, "get", _this, _this.loadAnalysis_veh_filter,null, '.loading-pane');
+                    monLen = list_months.length;
+                    MONTH_NUMBER = 0
+                    Commons.ajaxData('analyse_bookings', {monthyear:list_months[MONTH_NUMBER],car_bike:anal_veh_cat}, "get", _this, _this.loadAnalysis_veh_filter_month,null, '.loading-pane');
                 }
             }else if (anal_time_cat == "Monthly"){
+                console.log(month_selected)
+                Commons.ajaxData('analyse_bookings', {monthyear:month_selected}, "get", _this, _this.loadAnalysis_all,null, '.loading-pane');
+                Commons.ajaxData('analyse_bookings', {monthyear:month_selected,car_bike : "Car"}, "get", _this, _this.loadAnalysis_car,null, '.loading-pane');
+                Commons.ajaxData('analyse_bookings', {monthyear:month_selected,car_bike : "Bike"}, "get", _this, _this.loadAnalysis_bike,null, '.loading-pane');
+
                 if (anal_veh_cat == "All"){
-
-
-                }else if(anal_veh_cat == "Car"){
-
-
-                }else if(anal_veh_cat == "Bike"){
-
-
+                    Commons.ajaxData('analyse_bookings', {monthyear:month_selected}, "get", _this, _this.loadAnalysis_veh_filter,null, '.loading-pane');
+                }else{
+                    Commons.ajaxData('analyse_bookings', {monthyear:month_selected,car_bike:anal_veh_cat}, "get", _this, _this.loadAnalysis_veh_filter,null, '.loading-pane');
                 }
 
 
             }else if (anal_time_cat == "Daily"){
+                Commons.ajaxData('analyse_bookings', {date:date_selected}, "get", _this, _this.loadAnalysis_all,null, '.loading-pane');
+                Commons.ajaxData('analyse_bookings', {date:date_selected,car_bike : "Car"}, "get", _this, _this.loadAnalysis_car,null, '.loading-pane');
+                Commons.ajaxData('analyse_bookings', {date:date_selected,car_bike : "Bike"}, "get", _this, _this.loadAnalysis_bike,null, '.loading-pane');
+
                 if (anal_veh_cat == "All"){
-
-
-                }else if(anal_veh_cat == "Car"){
-
-
-                }else if(anal_veh_cat == "Bike"){
-
+                    Commons.ajaxData('analyse_bookings', {date:date_selected}, "get", _this, _this.loadAnalysis_veh_filter,null, '.loading-pane');
+                }else{
+                    Commons.ajaxData('analyse_bookings', {date:date_selected,car_bike:anal_veh_cat}, "get", _this, _this.loadAnalysis_veh_filter,null, '.loading-pane');
 
                 }
             }
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/analytics/'
+            history.pushState({},'',new_path)
 
-        });
+        };
+        $('.navbar .analytics-button').click(openanalytics);
+        $('#analytics .month-row #months-list').change(openanalytics)
+        $('#analytics .daily-row #date_summary').change(openanalytics)
 
 
         $('#analytics').on('click','.btn-month-expand.unselected',function(){
@@ -2458,10 +2499,26 @@ var Global = {
             summ_type = $(this).attr('data-class')
             // console.log(summ_type)
             $('#summ_type').text(summ_type)
+            if (summ_type == "Overall"){
+                $('#analytics .month-row').hide()
+                $('#analytics .daily-row').hide()
+                $('#analytics .month-on-month-row').show()
+            }else if(summ_type == "Monthly"){
+                $('#analytics .month-row').show()
+                $('#analytics .daily-row').hide()
+                $('#analytics .month-on-month-row').hide()
+                $('#analytics .month-data-row').hide()
+            }else{
+                $('#analytics .month-row').hide()
+                $('#analytics .daily-row').show()
+                $('#analytics .month-on-month-row').hide()
+                $('#analytics .month-data-row').hide()
+            }
             anal_time_cat = $('#analytics .header-analytics .selected').attr('data-class')
             anal_veh_cat = $('#analytics .vehicle-filter .date-box.selected').attr('data-class')
             console.log(anal_time_cat)
             console.log(anal_veh_cat)
+            openanalytics()
         })
 
         $('#analytics .vehicle-filter .date-box').click(function(){
@@ -2473,6 +2530,7 @@ var Global = {
             anal_veh_cat = $('#analytics .vehicle-filter .date-box.selected').attr('data-class')
             console.log(anal_time_cat)
             console.log(anal_veh_cat)
+            openanalytics()
         })
 
 
@@ -2482,7 +2540,7 @@ var Global = {
 // =====================================================================================
 
         // --Get all user
-        $('.navbar .users-button').click(function(event,data){
+        var allusersopen = function(){
             $('#booking-details').hide()
             $('#bookings').hide()
             $('#user-details').show()
@@ -2498,7 +2556,8 @@ var Global = {
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,2).join('/')+'/users/'
             history.pushState({},'',new_path)
-        });
+        };
+        $('.navbar .users-button').click(allusersopen);
         //     - ADD User
         $('#user-detail .add-user').click(function(){
             user_id = $('#user-detail #user_id').attr('data-class')
@@ -3166,6 +3225,9 @@ var Global = {
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_regnumber" type="text" value ="' + val.cust_regnumber + '"class="validate" style="text-transform: uppercase;"><label for="cust_regnumber">#Registration</label></div>'
                 html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">av_timer</i><input id="cust_odometer" type="number" value ="' + val.odometer + '"class="validate"><label for="cust_odometer">#Odometer</label></div>'
+                html += '</div>'
                 if (!val.booking_flag){
                      html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_follow" type="date" class="datepicker"><label for="date_follow">Date Follow</label></div>'
@@ -3235,6 +3297,10 @@ var Global = {
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_regnumber" disabled  type="text" value ="' + val.cust_regnumber + '"class="validate" style="text-transform: uppercase;"><label for="cust_regnumber">#Registration</label></div>'
                 html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">av_timer</i><input id="cust_odometer" disabled type="number" value ="' + val.odometer + '"class="validate" ><label for="cust_odometer">#Odometer</label></div>'
+                html += '</div>'
+
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled class="datepicker"><label for="date">Date</label></div>'
                 // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
@@ -4246,17 +4312,18 @@ var Global = {
         // console.log(date)
     },
     loadSendbookingAdmin:function(data){
-        var pocname = $('#new-booking #namepoc').val('');
-        var pocnumber = $('#new-booking #telephonepoc').val('');
-        var date = $('#date').val('');
+        $('#new-booking #namepoc').val('');
+        $('#new-booking #telephonepoc').val('');
+        $('#new-booking #odo_number').val('');
+        $('#date').val('');
         // var otp = $('#otp').val();
-        var comment = $('#comment').val('');
+        $('#comment').val('');
         // cookie = local.load();
         // var fuel = $('#select-fuel').find('select').val();
         // console.log()
-        var reg_num = $('#reg_number').val('');
+        $('#reg_number').val('');
         // var coupon = cookie['coupon']
-        var time = $('#time-slot').find('select').val('');
+        $('#time-slot').find('select').val('');
         alert('Order Placed!')
     },
     loadCustomerStatus:function(data){
@@ -4524,7 +4591,9 @@ var Global = {
             date_follow = $('#customer-detail #date_follow').val()
             time_follow = $('#customer-detail #time_follow').val()
             follow_status = $('#customer-detail #status_details_new').val()
+            odometer = $('#customer-detail #cust_odometer').val()
 
+            
 
 
             ALL_JOBS_ADMIN = comment_n
@@ -4545,7 +4614,8 @@ var Global = {
                 date_del : date_del,
                 date_follow:date_follow,
                 time_follow:time_follow,
-                follow_status:follow_status
+                follow_status:follow_status,
+                odometer:odometer
             }, "post", Global, Global.loadCustomerupdate,null, '.loading-pane');
 
         },
@@ -4568,7 +4638,7 @@ var Global = {
     loadAnalysis_all:function(data){
         $('#analytics .vol-all').text(data['vol_completed'])
         $('#analytics .tran-all').text(data['num_completed'])
-        $('#analytics .lead-all').text(data['num_lead']+data['num_fu'])
+        $('#analytics .lead-all').text(data['num_total_lead'])
         $('#analytics .users-all').text(data['num_users'])
         $('#analytics .nps-all').text(data['nps'])
 
@@ -4577,7 +4647,7 @@ var Global = {
     loadAnalysis_car:function(data){
         $('#analytics .vol-car').text(data['vol_completed'])
         $('#analytics .tran-car').text(data['num_completed'])
-        $('#analytics .lead-car').text(data['num_lead']+data['num_fu'])
+        $('#analytics .lead-car').text(data['num_total_lead'])
         $('#analytics .users-car').text(data['num_users'])
         $('#analytics .nps-car').text(data['nps'])
 
@@ -4585,19 +4655,147 @@ var Global = {
     loadAnalysis_bike:function(data){
         $('#analytics .vol-bike').text(data['vol_completed'])
         $('#analytics .tran-bike').text(data['num_completed'])
-        $('#analytics .lead-bike').text(data['num_lead']+data['num_fu'])
+        $('#analytics .lead-bike').text(data['num_total_lead'])
         $('#analytics .users-bike').text(data['num_users'])
         $('#analytics .nps-bike').text(data['nps'])
     },
     loadAnalysis_veh_filter:function(data){
+        sourcelen = SOURCES.length;
+
+        // B2C Source Populate
+
+        container = $('#analytics .source-data-row').find('tbody.sources-all')
+        container.html('')
+        SOURCE_TABLE = ''
+        for (i = 0; i < sourcelen; i++) {
+
+            source_name = SOURCES[i].toLowerCase()
+            source_name = source_name.replace(/ /g,'')
+            source_name = source_name.replace(/-/g,'')
+
+            SOURCE_TABLE += '<tr><td>'+SOURCES[i]+'</td><td>'
+            SOURCE_TABLE += data["vol_"+source_name+"_completed"]
+            // console.log(source_name)
+            SOURCE_TABLE +='</td><td>'
+            SOURCE_TABLE += data["num_"+source_name+"_completed"]
+            SOURCE_TABLE +='</td><td>'
+            SOURCE_TABLE += "NA"
+            SOURCE_TABLE += '</td><td>'
+            SOURCE_TABLE += data["num_"+source_name+"_lead"]
+            SOURCE_TABLE += '</td><td>'
+            SOURCE_TABLE += '123'
+            SOURCE_TABLE += '</td><td>'
+            SOURCE_TABLE += '142'
+            SOURCE_TABLE += '</td></tr>'
+        }
+        SOURCE_TABLE += '<tr><td>Other</td><td>'
+            SOURCE_TABLE += data["vol_other_completed"]
+            // console.log(source_name)
+            SOURCE_TABLE +='</td><td>'
+            SOURCE_TABLE += data["num_other_completed"]
+            SOURCE_TABLE +='</td><td>'
+            SOURCE_TABLE += "NA"
+            SOURCE_TABLE += '</td><td>'
+            SOURCE_TABLE += data["num_other_lead"]
+            SOURCE_TABLE += '</td><td>'
+            SOURCE_TABLE += '123'
+            SOURCE_TABLE += '</td><td>'
+            SOURCE_TABLE += '142'
+            SOURCE_TABLE += '</td></tr>'
+        container.html(SOURCE_TABLE)
+
+        // B2C/B2C Source Populate
+
+        container2 = $('#analytics .source-data-row').find('tbody.sources-b2b-b2c')
+        container2.html('')
+        SOURCE_TABLE_2 = ''
+        SOURCE_TABLE_2 += '<tr><td>B2B</td><td>'
+        SOURCE_TABLE_2 += data["vol_b2b_total_completed"]
+        SOURCE_TABLE_2 +='</td><td>'
+        SOURCE_TABLE_2 += data["num_b2b_total_completed"]
+        SOURCE_TABLE_2 +='</td><td>'
+        SOURCE_TABLE_2 += "NA"
+        SOURCE_TABLE_2 += '</td><td>'
+        SOURCE_TABLE_2 += data["num_b2b_total_lead"]
+        SOURCE_TABLE_2 += '</td><td>'
+        SOURCE_TABLE_2 += '123'
+        SOURCE_TABLE_2 += '</td><td>'
+        SOURCE_TABLE_2 += '142'
+        SOURCE_TABLE_2 += '</td></tr>'
+         SOURCE_TABLE_2 += '<tr><td>B2C</td><td>'
+        SOURCE_TABLE_2 += data["vol_b2c_total_completed"]
+        SOURCE_TABLE_2 +='</td><td>'
+        SOURCE_TABLE_2 += data["num_b2c_total_completed"]
+        SOURCE_TABLE_2 +='</td><td>'
+        SOURCE_TABLE_2 += "NA"
+        SOURCE_TABLE_2 += '</td><td>'
+        SOURCE_TABLE_2 += data["num_b2c_total_lead"]
+        SOURCE_TABLE_2 += '</td><td>'
+        SOURCE_TABLE_2 += '123'
+        SOURCE_TABLE_2 += '</td><td>'
+        SOURCE_TABLE_2 += '142'
+        SOURCE_TABLE_2 += '</td></tr>'
+        container2.html(SOURCE_TABLE_2)
+
+        STATUS_LEADS = ["Lead","Cold","Warm","Cancelled"]
+        STATUS_BOOKINGS = ["Confirmed","Assigned","Engineer Left","Reached Workshop","Estimate Shared","Job Completed","Feedback Taken","Cancelled","Escalation"]
+
+        container3 = $('#analytics .status-data-row').find('tbody.status-leads')
+        container3.html('')
+
+        statuslen1 = STATUS_LEADS.length
+        STATUS_TABLE_LEADS = '<tr><td style="text-align: left"><b>Leads</b></td><td></td></tr>'
+        for (i = 0; i < statuslen1; i++) {
+            status_name = STATUS_LEADS[i].toLowerCase()
+            status_name = status_name.replace(/ /g,'')
+            status_name = status_name.replace(/-/g,'')
+            STATUS_TABLE_LEADS += '<tr><td>'+STATUS_LEADS[i]+'</td><td>'
+            STATUS_TABLE_LEADS += data["num_"+status_name+"_lead"]
+            STATUS_TABLE_LEADS += '</td></tr>'
+        }
+        container3.html(STATUS_TABLE_LEADS)
+
+
+        container4 = $('#analytics .status-data-row').find('tbody.status-bookings')
+        container4.html('')
+
+        statuslen2 = STATUS_BOOKINGS.length
+        STATUS_TABLE_BOOKINGS = '<tr><td style="text-align: left"><b>Bookings</b></td><td></td></tr>'
+        for (i = 0; i < statuslen2; i++) {
+            status_name = STATUS_BOOKINGS[i].toLowerCase()
+            status_name = status_name.replace(/ /g,'')
+            status_name = status_name.replace(/-/g,'')
+            STATUS_TABLE_BOOKINGS += '<tr><td>'+STATUS_BOOKINGS[i]+'</td><td>'
+            STATUS_TABLE_BOOKINGS += data["num_"+status_name+"_booking"]
+            STATUS_TABLE_BOOKINGS += '</td></tr>'
+        }
+        container4.html(STATUS_TABLE_BOOKINGS)
+
+
+
     },
     loadAnalysis_veh_filter_month:function(data){
         container = $('#analytics .month-data-row').find('tbody')
         container.html('')
-        num_leads = parseInt(data['num_lead'])+parseInt(data['num_fu'])
-        MONTH_TABLE += '<tr><td>'+data['monthyear']+'</td><td>'+data['vol_completed']+'</td><td>'+data['num_completed']+'</td><td>NA</td><td>'+num_leads+'</td><td>'+data['nps']+'</td></tr>'
+        num_leads = parseInt(data['num_lead'])+parseInt(data['num_warm'])
+        MONTH_TABLE += '<tr><td>'+data['monthyear']+'</td><td>'+data['vol_completed']+'</td><td>'+data['num_completed']+'</td><td>NA</td><td>'+data['num_total_lead']+'</td><td>'+data['nps']+'</td></tr>'
         container.html(MONTH_TABLE)
-
+        MONTH_NUMBER = MONTH_NUMBER + 1
+        // console.log(MONTH_NUMBER)
+        if (MONTH_NUMBER < monLen){
+            Global.analyse_month(list_months[MONTH_NUMBER])
+        }
+    },
+    analyse_month:function(month){
+        // console.log(month)
+        anal_veh_cat = $('#analytics .vehicle-filter .date-box.selected').attr('data-class')
+        if (anal_veh_cat == "All"){
+           Commons.ajaxData('analyse_bookings', {monthyear:month}, "get", Global, Global.loadAnalysis_veh_filter_month,null, '.loading-pane');
+        }else if (anal_veh_cat == "Car"){
+           Commons.ajaxData('analyse_bookings', {monthyear:month, car_bike : anal_veh_cat}, "get", Global, Global.loadAnalysis_veh_filter_month,null, '.loading-pane');
+        }else if (anal_veh_cat == "Bike"){
+           Commons.ajaxData('analyse_bookings', {monthyear:month, car_bike : anal_veh_cat}, "get", Global, Global.loadAnalysis_veh_filter_month,null, '.loading-pane');
+        }
     }
 };
 

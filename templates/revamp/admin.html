@@ -80,7 +80,7 @@
         </nav>
     </div>
 
-    <section id="analytics" class="invisible">
+    <section id="analytics" class="invisible page-section">
             <div class="row header-analytics">
                 <!--<div class="col l12 m12 s12 vehicle-filter">-->
                     <div class="col l4 m4 s4 date-box  btn waves-effect waves-light card All cardhover selected" data-class="Overall">
@@ -99,6 +99,19 @@
             <div class="row">
                 <h3><span id="summ_type">Overall</span> Summary</h3>
             </div>
+            <div class="row month-row invisible">
+                <select class="browser-default" id="months-list">
+                    <option value="" disabled selected>Select Month</option>
+                </select>
+            </div>
+            <div class="row daily-row invisible">
+                <div class="input-field col s12 m12 l6">
+                    <i class="material-icons prefix">today</i>
+                    <input id="date_summary" type="date" class="datepicker">
+                    <label for="date_summary" data-error="required">Date</label>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col l2 s12">
                     <div class="card">
@@ -354,7 +367,7 @@
                 </div>
             </div>
             <!--<hr/>-->
-            <div class="row btn-expand-row">
+            <div class="row btn-expand-row month-on-month-row">
                 <div class="col l10 s10 m10"><h3>Month-on-Month Summary</h3></div><div class="col l2 m2 s2">
                                     <div class="closed   btn waves-effect waves-light  btn-expand card cardhover btn-month-expand unselected no-border-radius">
                                         <i class="fa fa-caret-down"></i>
@@ -381,14 +394,30 @@
                     </table>
                 </div>
             </div>
-           <hr/>
+           <hr class="month-on-month-row"/>
             <div class="row btn-expand-row">
+
                 <div class="col l10 s10 m10"><h3>Source Summary</h3></div><div class="col l2 m2 s2">
                                     <div class="closed   btn waves-effect waves-light  btn-expand card cardhover btn-source-expand unselected no-border-radius">
                                         <i class="fa fa-caret-down"></i>
                                     </div></div>
             <div class="row source-data-row invisible">
                 <div class="col l12 s12 m12">
+                     <table class="striped card centered-text">
+                        <thead>
+                            <th>Source</th>
+                            <th>Volume</th>
+                            <th>Transactions</th>
+                            <th>Profits</th>
+                            <th>Leads</th>
+                            <th>Cost/Lead</th>
+                            <th>Cost/Booking</th>
+                        </thead>
+                        <tbody class="sources-b2b-b2c">
+                            <tr><td>B2B</td><td>20000</td><td>300</td><td>300</td><td>200</td><td>30%</td><td>30%</td></tr>
+                            <tr><td>B2C</td><td>20000</td><td>300</td><td>200</td><td>300</td><td>30%</td><td>30%</td></tr>
+                        </tbody>
+                    </table>
                     <table class="striped card centered-text">
                         <thead>
                             <th>Source</th>
@@ -396,14 +425,17 @@
                             <th>Transactions</th>
                             <th>Profits</th>
                             <th>Leads</th>
-                            <th>NPS</th>
+                            <th>Cost/Lead</th>
+                            <th>Cost/Booking</th>
                         </thead>
-                        <tbody>
+                        <tbody class="sources-all">
                             <tr><td>Google</td><td>20000</td><td>300</td><td>300</td><td>200</td><td>30%</td></tr>
                             <tr><td>Facebook</td><td>20000</td><td>300</td><td>200</td><td>300</td><td>30%</td></tr>
                             <tr><td>B2B</td><td>20000</td><td>300</td><td>200</td><td>300</td><td>30%</td></tr>
                         </tbody>
                     </table>
+
+
                 </div>
             </div>
             <hr/>
@@ -419,10 +451,21 @@
                             <th>Status</th>
                             <th>Transactions</th>
                         </thead>
-                        <tbody>
-                            <tr><td>Lead</td><td>20000</tr>
+                        <tbody class="status-leads">
+                            <tr><td style="text-align: left"><b>Leads</b></td><td></td></tr>
                             <tr><td>Follow Up</td><td>20000</td></tr>
+                            <tr><td>Follow Up</td><td>20000</td></tr>
+                            <tr><td>Follow Up</td><td>20000</td></tr>
+
                         </tbody>
+                        <tbody class="status-bookings">
+                            <tr><td style="text-align: left"><b>Bookings</b></td><td></td></tr>
+                            <tr><td>Follow Up</td><td>20000</td></tr>
+                            <tr><td>Follow Up</td><td>20000</td></tr>
+                            <tr><td>Follow Up</td><td>20000</td></tr>
+
+                        </tbody>
+
                     </table>
                 </div>
             </div>
@@ -430,8 +473,7 @@
         </div>
 
     </section>
-
-    <section id="new-booking" class="invisible">
+    <section id="new-booking" class="invisible page-section">
         <!--<div class="row header-booking staff-button-row">-->
         <!--<div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover book-btn selected">-->
         <!--Booking-->
@@ -496,11 +538,19 @@
                             <!--</select>-->
                             <!--</div>-->
                             <!--</div>-->
+                            <br>
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">receipt</i>
                                     <input id="reg_number" type="text" class="validate" style="text-transform:uppercase" required="" aria-required="true">
                                     <label for="reg_number" data-error="Required">Registration Numbers</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">av_timer</i>
+                                    <input id="odo_number" type="number" class="validate" style="text-transform:uppercase" required="" aria-required="true">
+                                    <label for="odo_number" data-error="Required">Odometer Reading</label>
                                 </div>
                             </div>
                             <!-- </form> -->
@@ -564,6 +614,7 @@
                                     </button>
                                 </div>
                             </div>
+                            <br>
                             <div class="row">
                                 <div class="input-field col s12" >
                                     <i class="material-icons prefix">report_problem</i>
@@ -748,8 +799,7 @@
         <!--</div>-->
         </div>
     </section>
-
-    <section id="bookings" class="invisible">
+    <section id="bookings" class="invisible page-section">
         <div class="booking-select-section card">
             <!--<div class="container-fluid services">-->
             <div class="row ">
@@ -983,13 +1033,13 @@
                         <div class="col l1 s2 m2 booking-id-bar">
                             <b><span class="id">ID</span></b>
                         </div>
-                        <div class="col l5 s7 m7">
+                        <div class="col l6 s7 m7">
                             <b>Details</b>
                         </div>
                         <div class="col l3 hide-on-med-and-down">
-                            <b>Engineer Details</b>
+                            <b><span class="agent">Engineer Details</span></b>
                         </div>
-                        <div class="col l3 s3 m3 status-bar">
+                        <div class="col l2 s3 m3 status-bar">
                             <span class="status"><b>Status</b></span>
                         </div>
                     </div>
@@ -1002,8 +1052,7 @@
             </div>
         </div>
     </section>
-
-    <section id="booking-details" class="invisible">
+    <section id="booking-details" class="invisible page-section">
         <div id="customer-detail">
             <div class="row header-booking agent-button-row">
                 <div class="booking invisible">
@@ -2198,8 +2247,219 @@
         </div>
 
     </section>
+    <section id="expense-details" class="invisible page-section">
+        <div id="expense-detail">
+            <div class="row header-coupon">
+                <div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover all-expense selected">
+                    All Expenses
+                </div>
+                <div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover single-expense">
+                    Add/Modify Expense
+                </div>
+            </div>
+            <div class="container-fluid">
+            <div class="row">
+                <div class="row user-list visible">
+                    <div class="row pre-data">
+                    </div>
+                </div>
+                <div class="row user-add-mod card invisible">
+                    <div class="row centered-text">
+                        <h3>Expense Details</h3>
+                    </div>
+                    <!--<div class="row">-->
+                    <!--<div class="col l12 s12 m12 centered-text">-->
+                    <!--<input type="checkbox" class="filled-in" id="coupon_active"/><label for="coupon_active">Activation Status</label>'-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <div class="row">
+                        <div class="col l12 s12 m12">
+                            <span id="user_id" data-class=""></span>
+                            <!--</div>-->
+                        </div>
+                    </div>
 
-    <section id="user-details" class="invisible">
+
+                    <div class="row">
+                        <div class="col l12 s12 m12">
+                            <div class="input-field">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="user_name" type="text" class="validate" required="" aria-required="true">
+                                <label for="user_name" data-error="Required">User Name</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col l12 s12 m12">
+                            <div class="input-field">
+                                <i class="material-icons prefix">phone</i>
+                                <input id="user_number" type="number" class="validate" required="" aria-required="true">
+                                <label for="user_number" data-error="Required">10 Digit Phone Number</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col l12 s12 m12">
+                            <div class="input-field">
+                                <i class="material-icons prefix">email</i>
+                                <input id="user_email" type="email" class="validate" required="" aria-required="true">
+                                <label for="user_email" data-error="Required">User Email</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row staff-button-row">
+                        <div class="col l10 s12 m12 offset-l2">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox"  id="agent_box"/>
+                                        <label for="agent_box">Engineer</label>'
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" id="b2b_box"/>
+                                        <label for="b2b_box">B2B</label>'
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"  id="staff_box"/>
+                                        <label for="staff_box">Staff</label>'
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"  id="admin_box"/>
+                                        <label for="admin_box">Admin</label>'
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col l12 s12 m12">
+                            <div class="input-field">
+                                <i class="material-icons prefix">my_location</i>
+                                <input id="user_address" type="text" class="validate" required="" aria-required="true">
+                                <label for="user_address" data-error="Required">User Address</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col l12 s12 m12">
+                            <div class="input-field">
+                                <i class="material-icons prefix">location_on</i>
+                                <input id="user_locality" type="text" class="validate" required="" aria-required="true">
+                                <label for="user_locality" data-error="Required">User Locality</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col l12 s12 m12">
+                            <div class="input-field">
+                                <i class="material-icons prefix">business</i>
+                                <input id="user_city" type="text" class="validate" required="" aria-required="true">
+                                <label for="user_city" data-error="Required">User City</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="staff-button-row">
+                        <div class="row">
+                            <h3>Additional Engineer Details</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col l12 s12 m12">
+                                <div class="input-field">
+                                    <select id="user_state" class="browser-default">
+                                        <option value='' selected disabled>Select User State</option>
+                                        <option value='Andaman and Nicobar Islands'>Andaman and Nicobar Islands</option>
+                                        <option value='Andhra Pradesh'>Andhra Pradesh</option>
+                                        <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
+                                        <option value='Assam'>Assam</option>
+                                        <option value='Bihar'>Bihar</option>
+                                        <option value='Chandigarh'>Chandigarh</option>
+                                        <option value='Chhattisgarh'>Chhattisgarh</option>
+                                        <option value='Dadra and Nagar Haveli'>Dadra and Nagar Haveli</option>
+                                        <option value='Daman and Diu'>Daman and Diu</option>
+                                        <option value='Delhi' >Delhi</option>
+                                        <option value='Goa'>Goa</option>
+                                        <option value='Gujarat'>Gujarat</option>
+                                        <option value='Haryana'>Haryana</option>
+                                        <option value='Himachal Pradesh'>Himachal Pradesh</option>
+                                        <option value='Jammu and Kashmir'>Jammu and Kashmir</option>
+                                        <option value='Jharkhand'>Jharkhand</option>
+                                        <option value='Karnataka'>Karnataka</option>
+                                        <option value='Kerala'>Kerala</option>
+                                        <option value='Lakshadweep'>Lakshadweep</option>
+                                        <option value='Madhya Pradesh'>Madhya Pradesh</option>
+                                        <option value='Maharashtra'>Maharashtra</option>
+                                        <option value='Manipur'>Manipur</option>
+                                        <option value='Meghalaya'>Meghalaya</option>
+                                        <option value='Mizoram'>Mizoram</option>
+                                        <option value='Nagaland'>Nagaland</option>
+                                        <option value='Odisha'>Odisha</option>
+                                        <option value='Puducherry'>Puducherry</option>
+                                        <option value='Punjab'>Punjab</option>
+                                        <option value='Rajasthan'>Rajasthan</option>
+                                        <option value='Sikkim'>Sikkim</option>
+                                        <option value='Tamil Nadu'>Tamil Nadu</option>
+                                        <option value='Telangana'>Telangana</option>
+                                        <option value='Tripura'>Tripura</option>
+                                        <option value='Uttar Pradesh'>Uttar Pradesh</option>
+                                        <option value='Uttarakhand'>Uttarakhand</option>
+                                        <option value='West Bengal'>West Bengal</option>
+                                    </select>
+                                    <!--<i class="material-icons prefix">business</i>-->
+                                    <!--<input id="user_state" type="text" class="validate" required="" aria-required="true">-->
+                                    <!--<label for="user_state" data-error="Required">Agent State</label>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col l12 s12 m12">
+                                <div class="input-field">
+                                    <i class="material-icons prefix">receipt</i>
+                                    <input id="agent_vat" type="text" class="validate" required="" aria-required="true">
+                                    <label for="agent_vat" data-error="Required">VAT Number</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col l12 s12 m12">
+                                <div class="input-field">
+                                    <i class="material-icons prefix">receipt</i>
+                                    <input id="agent_stax" type="text" class="validate" required="" aria-required="true">
+                                    <label for="agent_stax" data-error="Required">Service Tax Number</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col l12 s12 m12">
+                                <div class="input-field">
+                                    <i class="material-icons prefix">receipt</i>
+                                    <input id="agent_cin" type="text" class="validate" required="" aria-required="true">
+                                    <label for="agent_cin" data-error="Required">CIN Number</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col l12 s12 m12">
+                                <div class="input-field">
+                                    <i class="material-icons prefix">message</i>
+                                    <input id="agent_sms_credits" type="number" class="validate" required="" aria-required="true">
+                                    <label for="agent_sms_credits" data-error="Required">Number of Message Credits</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col l12 s12 m12 centered-text">
+                            <button class="waves-effect waves-light btn-large cg-primary add-user" type="submit" name="action">Add/ Modify User
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+    <section id="user-details" class="invisible page-section">
         <div id="user-detail">
             <div class="row header-coupon">
                 <div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover all-user selected">
@@ -2411,8 +2671,7 @@
             </div>
         </div>
     </section>
-
-    <section id="subscription-details" class="invisible">
+    <section id="subscription-details" class="invisible page-section">
         <div id="subscription-detail">
             <div class="row header-subscription">
                 <div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover all-subscription selected">
@@ -2692,7 +2951,7 @@
             </div>
         </div>
     </section>
-    <section id="coupon-details" class="invisible">
+    <section id="coupon-details" class="invisible page-section">
         <div id="coupon-detail">
             <div class="row header-coupon">
                 <div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover all-coupon selected">
@@ -2817,7 +3076,7 @@
             </div>
         </div>
     </section>
-    <section id="campaign-details" class="invisible">
+    <section id="campaign-details" class="invisible page-section">
         <div class="container-fluid">
         <div class="row">
         <div  class="card ">
