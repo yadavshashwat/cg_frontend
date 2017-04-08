@@ -334,7 +334,6 @@ var Login = {
             $('.admin-page .agent-button-row').hide()
             $('.admin-page .b2b-button-row').hide()
             $('#sms-credits').text('Not Applicable')
-            $('.admin-page .items-list li.analytics-button').hide()
         }else if(data['auth_rights']['agent']){
             $('.admin-page .admin-page-html').show()
             $('.admin-page .login').hide()
