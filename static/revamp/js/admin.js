@@ -355,6 +355,8 @@ var Global = {
             }
             $('#bookings #bookings-list .header-id-bar.bookings').text('Bookings')
             $('#bookings #bookings-list .booking-bar-2 .agent').text('Engineer Details')
+            $('#bookings #bookings-list .booking-bar-2 .booking-source').show()
+
 
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
@@ -418,6 +420,8 @@ var Global = {
             $('#bookings .booking-filter .date-box').removeClass('selected');
             $('#bookings .booking-filter .bookings-filter').addClass('selected');
             $('#bookings #bookings-list .booking-bar-2 .agent').text('Source')
+            $('#bookings #bookings-list .booking-bar-2 .booking-source').hide()
+
             $('#bookings .booking-filter').hide();
             $('#bookings .lead-filter').show()
             $('#customer-detail .bill-row').hide();
@@ -2725,7 +2729,11 @@ var Global = {
             html += '                <div class="col l1 s2 m2 booking-id-bar">'
             html += '                    <b>#<span class="id">' + val.booking_id + '</span></b>'
             html += '                </div>'
-            html += '                <div class="col l6 s7 m7">'
+            if (LEAD_TYPE == "Lead"){
+                html += '                <div class="col l6 s7 m7">'
+            }else{
+                html += '                <div class="col l4 s7 m7">'
+            }
             html += '                    <div class="col l12 s12 m12">'
             // if (val.booking_user_name == ""){
             html += '                        <b>Name : </b><span class="custname">' + val.cust_name + '</span>'
@@ -2790,10 +2798,15 @@ var Global = {
             html += '                    </div>'
             }
             html += '                </div>'
-            html += '                <div class="col l3 s3 m3 centered-text hide-on-med-and-down">'
+
             if (LEAD_TYPE == "Booking"){
+                html += '                <div class="col l2 centered-text hide-on-med-and-down">'
+                html += '                    <b><span class="status-details">'+val.source+'</span></b>'
+                html += '</div>'
+                html += '                <div class="col l3 s3 m3 centered-text hide-on-med-and-down">'
                 html += '                    <b><span class="agent-details">'+val.agent_details+'</span></b>'
             }else{
+                html += '                <div class="col l3 s3 m3 centered-text hide-on-med-and-down">'
                 html += '                    <b><span class="status-details">'+val.source+'</span></b>'
             }
             html += '                </div>'
