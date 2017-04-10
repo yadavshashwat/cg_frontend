@@ -3,6 +3,9 @@ document.onreadystatechange = function () {
     Login.init();
 };
 
+window.onpopstate = function(event) {
+    location.reload()
+};
 // materialize css
 $(document).ready(function() {
     $('select').material_select();
@@ -215,6 +218,17 @@ var Global = {
                 }else{
 
                 }
+            }else if(sub_page_1 == "expense"){
+                allexpenseopen()
+                // $('.navbar .users-button').click()
+                if (sub_page_2 == "single"){
+                    $('#expense-detail .single-expense').click()
+                    if (data_id != ""){
+                        openexpense(data_id)
+                    }
+                }else{
+
+                }
             }else if (sub_page_1 == "coupons"){
                 allcouponsopen()
                 // $('.navbar .coupon-button').click()
@@ -338,6 +352,7 @@ var Global = {
             $('#subscription-details').hide()
             $('#campaign-details').hide()
             $('#analytics').hide()
+            $('#expense-details').hide()
 
             $('#bookings .lead-filter').hide()
 
@@ -387,8 +402,38 @@ var Global = {
             history.pushState({},'',new_path)
 
         }
-
         $('.navbar .booking-button').click(allbookingsopen);
+        $('#bookings .booking-bar-1 .downloadcsv').click(function(){
+            params = {b_id:BOOKING_ID,
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                date:DATE_TYPE,
+                status:STATUS_TYPE,
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
+                veh_type:VEH_TYPE,
+                getcsv:"True"}
+            var url = Commons.getOrigin()+Commons.URLFromName['view_all_bookings']+'?'+jQuery.param( params )
+            $('#download').find('iframe').attr('src',url)
+
+            // console.log('download')
+            //     Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+            //     lead_booking:LEAD_TYPE,
+            //     sort:SORT_TYPE,
+            //     date:DATE_TYPE,
+            //     status:STATUS_TYPE,
+            //     name:CUST_NAME,
+            //     reg:REG_NUMBER,
+            //     date_end:DATE_TYPE_END,
+            //     source_id:SOURCE_BOOK,
+            //     phone_num:PHONE_NUMBER,
+            //     veh_type:VEH_TYPE,
+            //     getcsv:"True"}, "get", _this, _this.loaddownloadbookings,null, '.loading-pane');
+
+        })
         // Open Lead
         var allleadsopen = function(){
             // DATE_TYPE = "";
@@ -410,6 +455,8 @@ var Global = {
             $('#new-booking').hide()
             $('#subscription-details').hide()
             $('#analytics').hide()
+            $('#expense-details').hide()
+
 
             LEAD_TYPE = "Lead"
 
@@ -1513,6 +1560,8 @@ var Global = {
             $('#new-booking').hide()
             $('#campaign-details').hide()
             $('#analytics').hide()
+            $('#expense-details').hide()
+
 
 
             $('#subscription-detail .subscription-list').show()
@@ -1773,6 +1822,7 @@ var Global = {
             $('#subscription-details').hide()
             $('#campaign-details').hide()
             $('#analytics').hide()
+            $('#expense-details').hide()
 
             $('#coupon-detail  .all-coupon').click()
             Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
@@ -1915,6 +1965,160 @@ var Global = {
         });
 
 // =====================================================================================
+//    Expense Management
+// =====================================================================================
+        // -- Load Coupon
+        var allexpenseopen = function(){
+            // console.log('check')
+            $('#booking-details').hide()
+            $('#bookings').hide()
+            $('#user-details').hide()
+            $('#coupon-details').hide()
+            $('#new-booking').hide()
+            $('#subscription-details').hide()
+            $('#campaign-details').hide()
+            $('#analytics').hide()
+            $('#expense-details').show()
+            $('#expense-detail  .all-expense').click()
+            Commons.ajaxData('view_all_expense', {}, "get", _this, _this.loadExpenseAll,null, '.loading-pane');
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/expense/all'
+            history.pushState({},'',new_path)
+        };
+
+        $('.navbar .expenses-button').click(allexpenseopen);
+        //     - ADD Coupon
+        $('#expense-detail .add-expense').click(function(){
+            expense_id = $('#expense-detail #expense_id').attr('data-class')
+            expense_date = $('#expense-detail #expense_date').val()
+            expense_cat = $('#expense-detail #expense_cat').val()
+            expense_subcat = $('#expense-detail #expense_subcat').val()
+            expense_comment = $('#expense-detail #expense_comment').val()
+            expense_reason = $('#expense-detail #expense_reason').val()
+            expense_amount = $('#expense-detail #expense_amount').val()
+            expense_owner = $('#expense-detail #expense_owner').val()
+            error =0
+            if(expense_date==""){
+                $('#expense-detail #expense_date').addClass("invalid");
+                error = 1;
+            }
+            if(expense_cat==""){
+                $('#expense-detail #expense_cat').addClass("invalid-select-box");
+                error = 1;
+            }
+            if(expense_subcat==""){
+                $('#expense-detail #expense_subcat').addClass("invalid-select-box");
+                error = 1;
+            }
+            if(expense_comment==""){
+                $('#expense-detail #expense_comment').addClass("invalid");
+                error = 1;
+            }
+            if(expense_reason==""){
+                $('#expense-detail #expense_reason').addClass("invalid");
+                error = 1;
+            }
+            if(expense_amount==""){
+                $('#expense-detail #expense_amount').addClass("invalid");
+                error = 1;
+            }
+            if(expense_owner==""){
+                $('#expense-detail #expense_owner').addClass("invalid-select-box");
+                error = 1;
+            }
+
+            if(error==1){
+                // console.log("didnt work")
+                return;
+            }else{
+
+
+                Commons.ajaxData('update_delete_expense', {expense_id: expense_id  ,
+                    expense_date: expense_date ,
+                    expense_cat: expense_cat,
+                    expense_subcat: expense_subcat,
+                    expense_comment: expense_comment    ,
+                    expense_reason: expense_reason     ,
+                    expense_amount: expense_amount     ,
+                    expense_owner: expense_owner}, "get", _this, _this.loadAddexpense,null, '.loading-pane');
+            }
+        });
+        // -- Modify Coupon
+
+        var openexpense = function(data_id){
+
+            $('#expense-detail .expense-list').hide()
+            $('#expense-detail .expense-add-mod').show()
+            $('#expense-detail  .all-expense').removeClass('selected')
+            $('#expense-detail  .single-expense').addClass('selected')
+            Commons.ajaxData('view_all_expense', {expense_id:data_id}, "get", _this, _this.loadExpense,null, '.loading-pane');
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/single/' + data_id
+            history.pushState({},'',new_path)
+        };
+
+        $('#expense-detail .expense-list').on('click','.modify-btn',function(){
+            expense_id = $(this).closest('tr').attr('data-class')
+            openexpense(expense_id)
+        });
+
+        $('#expense-detail #expense_cat').change(function(){
+            category = $('#expense-detail #expense_cat').val()
+            container = $('#expense-detail #expense_subcat')
+            html = ''
+            html += '<option value="" disabled selected>Select Sub-Category</option>'
+
+
+            if (category == "Marketing"){
+                 sourcelen = SOURCES.length;
+                for (i = 0; i < sourcelen; i++) {
+                    html += '<option value="'+SOURCES[i]+'">'+SOURCES[i]+'</option>'
+                }
+            }else{
+                    html += '<option value="'+category+'">'+category+'</option>'
+            }
+            container.html(html)
+
+        });
+
+        $('#expense-detail .expense-list').on('click','.delete-btn',function(){
+            expense_id = $(this).closest('tr').attr('data-class')
+            Commons.ajaxData('update_delete_expense', {expense_id:expense_id, delete:"True"}, "get", _this, _this.loadExpenseDelete,null, '.loading-pane');
+        });
+
+        // -- Switch between list and add/modify in a coupon
+        $('#expense-detail .all-expense').click(function(){
+            $('#expense-detail .expense-list').show();
+            $('#expense-detail  .expense-add-mod').hide();
+            $('#expense-detail  .single-expense').removeClass('selected')
+            $('#expense-detail  .all-expense').addClass('selected')
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/all/'
+            history.pushState({},'',new_path)
+        });
+
+        $('#expense-detail .single-expense').click(function(){
+            $('#expense-detail .expense-list').hide();
+            $('#expense-detail .expense-add-mod').show();
+            $('#expense-detail .all-expense').removeClass('selected');
+            $('#expense-detail .single-expense').addClass('selected');
+
+            $('#expense-detail #expense_id').attr('')
+            $('#expense-detail #expense_date').val('')
+            $('#expense-detail #expense_cat').val('')
+            $('#expense-detail #expense_subcat').val('')
+            $('#expense-detail #expense_comment').val('')
+            $('#expense-detail #expense_reason').val('')
+            $('#expense-detail #expense_amount').val('')
+            $('#expense-detail #expense_owner').val('')
+
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/single/'
+            history.pushState({},'',new_path)
+
+        });
+
+// =====================================================================================
 //    SMS Management
 // =====================================================================================
         var opencampaign = function(){
@@ -1928,6 +2132,7 @@ var Global = {
             $('#subscription-details').hide()
             $('#campaign-details').show()
             $('#analytics').hide()
+            $('#expense-details').hide()
 
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,2).join('/')+'/campaign/'
@@ -1956,6 +2161,7 @@ var Global = {
             $('#subscription-details').hide()
             $('#campaign-details').hide()
             $('#analytics').hide()
+            $('#expense-details').hide()
 
             container = $('#new-booking .source-list')
             container.html('')
@@ -2002,6 +2208,7 @@ var Global = {
             $('#subscription-details').hide()
             $('#campaign-details').hide()
             $('#analytics').hide()
+            $('#expense-details').hide()
 
             container = $('#new-booking .source-list')
             container.html('')
@@ -2401,6 +2608,7 @@ var Global = {
             $('#subscription-details').hide()
             $('#campaign-details').hide()
             $('#analytics').show()
+            $('#expense-details').hide()
 
             month_selected = $('#analytics .month-row').find('select').val()
             // console.log(month_selected)
@@ -2554,6 +2762,7 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').hide()
             $('#user-detail .all-user').click()
+            $('#expense-details').hide()
 
             Commons.ajaxData('fetch_all_users', {}, "get", _this, _this.loadUsers,null, '.loading-pane');
 
@@ -4577,10 +4786,7 @@ var Global = {
              else if(val.recommend_factor =="10"){document.getElementById("recommend_factor_10").checked = true;}else{}
 
              $('#additional').val(val.additional)
-
-
         });
-
     },
     loadCustomerFeedback:function(data){
         alert('Feedback Updated!')
@@ -4673,19 +4879,18 @@ var Global = {
         $('#analytics .nps-bike').text(data['nps'])
     },
     loadAnalysis_veh_filter:function(data){
+        anal_time_cat = $('#analytics .header-analytics .selected').attr('data-class')
+        anal_veh_cat = $('#analytics .vehicle-filter .date-box.selected').attr('data-class')
         sourcelen = SOURCES.length;
-
-        // B2C Source Populate
-
         container = $('#analytics .source-data-row').find('tbody.sources-all')
         container.html('')
         SOURCE_TABLE = ''
         for (i = 0; i < sourcelen; i++) {
-
+            cpb = 0
+            cpl = 0
             source_name = SOURCES[i].toLowerCase()
             source_name = source_name.replace(/ /g,'')
             source_name = source_name.replace(/-/g,'')
-
             SOURCE_TABLE += '<tr><td>'+SOURCES[i]+'</td><td>'
             SOURCE_TABLE += Math.round(parseFloat(data["vol_"+source_name+"_completed"]))
             // console.log(source_name)
@@ -4696,14 +4901,22 @@ var Global = {
             SOURCE_TABLE += '</td><td>'
             SOURCE_TABLE += data["num_"+source_name+"_lead"]
             SOURCE_TABLE += '</td><td>'
-            SOURCE_TABLE += '123'
+            if (anal_time_cat == "Overall" && anal_veh_cat == "All"){
+            cpl = Math.round(parseFloat(data["vol_"+source_name+"_expense"])/parseFloat(data["num_"+source_name+"_lead"]))
+            cpb = Math.round(parseFloat(data["vol_"+source_name+"_expense"])/parseFloat(data["num_"+source_name+"_completed"]))
+            SOURCE_TABLE += cpl
             SOURCE_TABLE += '</td><td>'
-            SOURCE_TABLE += '142'
+            SOURCE_TABLE += cpb
             SOURCE_TABLE += '</td></tr>'
+            }else{
+            SOURCE_TABLE += 'NA'
+            SOURCE_TABLE += '</td><td>'
+            SOURCE_TABLE += 'NA'
+            SOURCE_TABLE += '</td></tr>'
+            }
         }
         SOURCE_TABLE += '<tr><td>Other</td><td>'
             SOURCE_TABLE += Math.round(parseFloat(data["vol_other_completed"]))
-            // console.log(source_name)
             SOURCE_TABLE +='</td><td>'
             SOURCE_TABLE += data["num_other_completed"]
             SOURCE_TABLE +='</td><td>'
@@ -4711,9 +4924,9 @@ var Global = {
             SOURCE_TABLE += '</td><td>'
             SOURCE_TABLE += data["num_other_lead"]
             SOURCE_TABLE += '</td><td>'
-            SOURCE_TABLE += '123'
+            SOURCE_TABLE += 'NA'
             SOURCE_TABLE += '</td><td>'
-            SOURCE_TABLE += '142'
+            SOURCE_TABLE += 'NA'
             SOURCE_TABLE += '</td></tr>'
         container.html(SOURCE_TABLE)
 
@@ -4809,6 +5022,67 @@ var Global = {
         }else if (anal_veh_cat == "Bike"){
            Commons.ajaxData('analyse_bookings', {monthyear:month, car_bike : anal_veh_cat}, "get", Global, Global.loadAnalysis_veh_filter_month,null, '.loading-pane');
         }
+    },
+    loadExpenseAll:function(data){
+        container = $('#expense-details .expense-list .pre-data')
+        container.html('')
+        html=''
+        i=1
+        html += '								<div class="desc-content col s12 m12 l12">';
+        html += '									<table class=" card striped">';
+        html += '										<thead>';
+        html += '										<tr>';
+        html += '											<th data-field="id">S.No.</th>';
+        html += '											<th data-field="code">Date Expense</th>';
+        html += '											<th data-field="category">Category</th>';
+        html += '											<th data-field="sub_category">Sub Category</th>';
+        html += '											<th data-field="amount">Amount</th>';
+        html += '											<th data-field="reason">Reason</th>';
+        html += '											<th data-field="owner">Owner</th>';
+        html += '											<th data-field="delete"></th>';
+        html += '											<th data-field="modify"></th>';
+        html += '										</tr>';
+        html += '										</thead>';
+        html += '										<tbody>';
+        $.each(data, function(ix, val) {
+            html += '<tr class="expense-row" data-class="'+val.id+'">'
+            html += '											<td>'+i+'</td>';
+            html += '											<td>'+val.date_expense+'</td>';
+            html += '											<td>'+val.category+'</td>';
+            html += '											<td>'+val.sub_category+'</td>';
+            html += '											<td>'+val.amount+'</td>';
+            html += '											<td>'+val.reason+'</td>';
+            html += '											<td>'+val.expense_owner+'</td>';
+            html += '											<td style="color:purple; cursor:pointer" class="delete-btn"><i class="fa fa-trash"></i></td>';
+            html += '											<td style="color:purple; cursor:pointer" class="modify-btn"><i class="fa fa-pencil"></i></td>';
+            html += '										</tr>';
+            i=i+1
+        })
+
+        html += '										</tbody>';
+        html += '									</table>';
+        html += '								</div>';
+
+        container.html(html);
+    },
+    loadExpense:function(data){
+         $.each(data, function(ix, val) {
+            $('#expense-detail #expense_id').attr(val.id)
+            $('#expense-detail #expense_date').val(val.date_expense)
+            $('#expense-detail #expense_cat').val(val.category)
+            $('#expense-detail #expense_subcat').val(val.sub_category)
+            $('#expense-detail #expense_comment').val(val.reason)
+            $('#expense-detail #expense_reason').val(val.comment)
+            $('#expense-detail #expense_amount').val(val.amount)
+            $('#expense-detail #expense_owner').val(val.expense_owner)
+        });
+        Materialize.updateTextFields();
+    },
+    loadAddexpense:function(data){
+        alert('Expense Added')
+    },
+    loadExpenseDelete:function(data){
+        $('.navbar .expenses-button').click()
     }
 };
 

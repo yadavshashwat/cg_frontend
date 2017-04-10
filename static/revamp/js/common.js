@@ -69,6 +69,8 @@ var Commons = {
         'send_feedback':'/api/send_feedback/',
         'get_all_feedback':'/api/get_all_feedback/',
         'analyse_bookings':'/api/analyse_bookings/',
+        'update_delete_expense':'/api/update_delete_expense/',
+        'view_all_expense':'/api/view_all_expense/',
 
 
     },

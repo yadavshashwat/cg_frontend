@@ -20,6 +20,10 @@ $(window).ready(function() {
     }, 1000);
 });
 
+window.onpopstate = function(event) {
+    location.reload()
+};
+
 
 
 $('.datepicker').pickadate({
