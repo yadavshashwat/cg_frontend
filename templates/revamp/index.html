@@ -40,9 +40,9 @@
     }
 //             path: '/static/revamp/js/'
         }]);
-        OneSignal.push(
-        OneSignal.showHttpPrompt()
-        )
+        OneSignal.push(function() {
+  OneSignal.showHttpPrompt();
+});
       </script>
 
     <!-- Styles -->
