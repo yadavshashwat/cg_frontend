@@ -46,8 +46,8 @@ $('.datepicker').pickadate({
     closeOnSelect: true,
 });
 $('#time_follow_lead').timepicker({
-                 timeFormat: "h:i A"
- });
+    timeFormat: "h:i A"
+});
 // $('.timepicker').wickedpicker();
 $(window).ready(function() {
     setTimeout(function() {
@@ -72,6 +72,7 @@ var JOBS_SUMMARY_NEW_BOOKING = [];
 var CURRENT_CART_NEW_BOOKING = [];
 var TOTAL_PRICE_NEW_BOOKING = 0;
 var ALL_JOBS_NEW_BOOKING = "";
+var ALL_JOBS_NEW_BOOKING_LIST = [];
 var TOTAL_ITEMS_NEW_BOOKING = 0 ;
 var TOTAL_LABOUR_NEW_BOOKING= 0;
 var TOTAL_PARTS_NEW_BOOKING = 0;
@@ -92,6 +93,45 @@ var VEH_TYPE = "";
 var PHONE_NUMBER = "";
 var SOURCE_BOOK = "";
 var DATE_TYPE_END = "";
+
+
+var CGHARYANA_VAT_NO = "06301844038"
+var CGHARYANA_STAX_NO = "AAVCS6335ESD001"
+var CGHARYANA_PAN_NO = "AAVCS6335E"
+var CGHARYANA_CIN_NO = "U72200DL2015PTC278194"
+var CGHARYANA_NAME = "Sui Generis Innovations Private Limited"
+var CGHARYANA_ADDRESS = "2401, Basement"
+var CGHARYANA_LOCALITY = "DLF Phase 4, Opp. Galleria Market"
+var CGHARYANA_CITY = "Gurgaon"
+var CGHARYANA_STATE = "Haryana"
+
+var CGDELHI_VAT_NO = "07146991638"
+var CGDELHI_STAX_NO = "AAVCS6335ESD001"
+var CGDELHI_PAN_NO = "AAVCS6335E"
+var CGDELHI_CIN_NO = "U72200DL2015PTC278194"
+var CGDELHI_NAME = "Sui Generis Innovations Private Limited"
+var CGDELHI_ADDRESS = "W22, 2nd Floor"
+var CGDELHI_LOCALITY = "Green Park Main"
+var CGDELHI_CITY = "New Delhi"
+var CGDELHI_STATE = "Delhi"
+
+var STATE_BILL = ""
+
+var AGENT_VAT_NO = ""
+var AGENT_STAX_NO = ""
+var AGENT_CIN_NO = ""
+var AGENT_NAME = ""
+var AGENT_ADDRESS = ""
+var AGENT_LOCALITY = ""
+var AGENT_CITY = ""
+var AGENT_STATE = ""
+
+var VAT_CONSUMABLE_PERCENT = 0
+var VAT_LUBE_PERCENT = 0
+var VAT_PART_PERCENT = 0
+var SERVICE_TAX_PERCENT = 0
+
+
 
 
 var MONTH_TABLE = ""
@@ -142,7 +182,7 @@ var Global = {
             DATE_TYPE2 = _this.date_format(date_str);
             $('#analytics .daily-row #date_summary').val(DATE_TYPE2)
 
-                monLen2 = list_months.length;
+            monLen2 = list_months.length;
             container2 = $('#analytics .month-row #months-list')
             container2.html('')
             html2 = '<option value="" disabled selected>Select Month</option>'
@@ -165,6 +205,7 @@ var Global = {
             // url_list = window.location.pathname.split('/')
             var sub_page_1      = $('#admin-page-state').attr('sub-page-1')
             var sub_page_2      = $('#admin-page-state').attr('sub-page-2')
+            var sub_page_3      = $('#admin-page-state').attr('sub-page-3')
             var data_id         = $('#admin-page-state').attr('data-id')
             checkfilters()
 
@@ -241,6 +282,22 @@ var Global = {
 
                 }
 
+            }else if (sub_page_1 == "bills"){
+                allbillsopen()
+                // $('.navbar .coupon-button').click()
+                if (sub_page_2 == "newbill"){
+                    $('#bill-detail  .single-bill').click()
+                    if (data_id != ""){
+                        if(sub_page_3 == "pre"){
+                            openbillpre(data_id)
+                        }else{
+                            openbill(data_id)
+                        }
+                    }
+                }else{
+
+                }
+
             }else if (sub_page_1 == "newbooking"){
                 opennewbookings()
                 // $('.navbar .new-booking-button').click()
@@ -304,12 +361,12 @@ var Global = {
             }else{
                 $('#bookings .filter-remove[data-class="source"]').hide()
             }
-                date_str_1 = new Date();
-                date_today = _this.date_format(date_str_1);
-                date_str_2 = new Date((new Date()).valueOf() + 1000*3600*24);
-                date_tomorrow = _this.date_format(date_str_2);
-                // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
-                // $('#bookings #delivery-list').show()
+            date_str_1 = new Date();
+            date_today = _this.date_format(date_str_1);
+            date_str_2 = new Date((new Date()).valueOf() + 1000*3600*24);
+            date_tomorrow = _this.date_format(date_str_2);
+            // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
+            // $('#bookings #delivery-list').show()
             if (DATE_TYPE != "" && DATE_TYPE != date_today && DATE_TYPE != date_tomorrow){
                 $('#bookings .filter-remove[data-class="date_start"]').show()
                 remove = 1
@@ -352,7 +409,8 @@ var Global = {
             $('#subscription-details').hide()
             $('#campaign-details').hide()
             $('#analytics').hide()
-            $('#expense-details').hide()
+            $('#expense-details').hide();
+            $('#bill-details').hide()
 
             $('#bookings .lead-filter').hide()
 
@@ -455,7 +513,8 @@ var Global = {
             $('#new-booking').hide()
             $('#subscription-details').hide()
             $('#analytics').hide()
-            $('#expense-details').hide()
+            $('#expense-details').hide();
+            $('#bill-details').hide()
 
 
             LEAD_TYPE = "Lead"
@@ -721,7 +780,7 @@ var Global = {
         $('#bookings .filter-remove').click(function(){
 
             if ($(this).attr('data-class')== "registration"){
-                 $('#bookings  #regnumber').val('');
+                $('#bookings  #regnumber').val('');
                 REG_NUMBER = "";
 
             }else if($(this).attr('data-class')== "name"){
@@ -741,24 +800,24 @@ var Global = {
                 VEH_TYPE = "";
 
             }else if($(this).attr('data-class')== "phone"){
-                 $('#bookings #book_number').val('');
+                $('#bookings #book_number').val('');
                 PHONE_NUMBER = "";
 
             }else if($(this).attr('data-class')== "source"){
                 $('#bookings #Source').find('select').val('')
-                 SOURCE_BOOK = "";
+                SOURCE_BOOK = "";
             }else if($(this).attr('data-class')== "date_start"){
-                 $('#bookings #filterdate').val('');
+                $('#bookings #filterdate').val('');
                 DATE_TYPE = _this.date_format( new Date());
-                 $('#bookings .date-filter .date-box').removeClass('selected');
-                 $('#bookings .date-filter .date-box.today').addClass('selected');
+                $('#bookings .date-filter .date-box').removeClass('selected');
+                $('#bookings .date-filter .date-box.today').addClass('selected');
 
             }else if($(this).attr('data-class')== "date_end"){
                 $('#bookings #filterdate_end').val('')
                 DATE_TYPE_END = "";
 
             }
-             checkfilters()
+            checkfilters()
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -837,6 +896,7 @@ var Global = {
             bid =$(this).attr('data-class')
             openbooking(bid)
         });
+
         // Switch between estimate and details in a booking
         $('#customer-detail .cust-detail').click(function(){
             $('#customer-detail .booking-data').show();
@@ -863,6 +923,20 @@ var Global = {
             $('#customer-detail .service-detail').removeClass('selected')
         });
 
+        $('#customer-detail').on('click','.btn-addjob',function(){
+            container_parent = $('#customer-detail .jobs-list')
+            var row = $('#customer-detail .job-row.to-copy').clone()
+            row.removeClass('invisible').removeClass('to-copy')
+            container_parent.append(row)
+        })
+
+        $('#customer-detail').on('click','.delete-job',function(){
+            container = $(this).closest('.job-row').remove()
+            // var row = $('#customer-detail .job-row.to-copy').clone()
+            // row.removeClass('invisible').removeClass('to-copy')
+            // container_parent.append(row)
+        })
+
         $('#customer-detail .add-item .btn-additem-est').click(function(){
             container_parent = $('#customer-detail #estimate-table').find('tbody')
             var row = container_parent.find('tr').eq(0).clone();
@@ -886,6 +960,8 @@ var Global = {
             TOTAL_LABOUR_ADMIN = 0;
             TOTAL_PARTS_ADMIN = 0;
             TOTAL_DISCOUNT_ADMIN = 0;
+
+
             var table = document.getElementById('estimate-table');
             // units = $(this).closest('tr').find('#part_units').eq(0).val()
             // unit_price = $(this).closest('tr').find('#part_unitprice').eq(0).val()
@@ -941,6 +1017,7 @@ var Global = {
                     TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN
                 }
                 $('#customer-detail .total-amount').text(TOTAL_PRICE_ADMIN)
+
             }
         });
 
@@ -1001,7 +1078,7 @@ var Global = {
             reg_n = $('#customer-detail #cust_regnumber').val();
             date_n = $('#customer-detail #date').val();
             time_n = $('#customer-detail #time_booking').val();
-            comment_n = $('#customer-detail #comments').val();
+            // comment_n = $('#customer-detail #comments').val();
             notes_n = $('#customer-detail #notes').val();
             amount_paid_n = $('#customer-detail #cust_amount_paid').val()
             cust_name = $('#customer-detail #cust_name').val()
@@ -1015,11 +1092,22 @@ var Global = {
             time_follow = $('#customer-detail #time_follow').val()
             follow_status = $('#customer-detail #status_details_new').val()
             odometer = $('#customer-detail #cust_odometer').val()
-            ALL_JOBS_ADMIN = comment_n
+            // ALL_JOBS_ADMIN = comment_n
+            jobs_summary_list = []
+            $('#customer-detail .jobs-list .job-row').each(function(){
+                name = $(this).find('.job-summary-name input').val()
+                price = $(this).find('.job-summary-price input').val()
+                if (name != "" && name != " "){
+                    obj = {"Job":name,"Price":price}
+                    jobs_summary_list.push(obj)
+
+                }
+            });
+
             Commons.ajaxData('update_booking', {b_id: bid,
                 email: email_n,
                 reg_number: reg_n,
-                comment: comment_n,
+                // comment: comment_n,
                 time: time_n,
                 date: date_n,
                 note:notes_n,
@@ -1034,7 +1122,8 @@ var Global = {
                 date_follow:date_follow,
                 time_follow:time_follow,
                 follow_status:follow_status,
-                odometer:odometer
+                odometer:odometer,
+                job_summary:JSON.stringify(jobs_summary_list)
             }, "post", _this, _this.loadCustomerupdate,null, '.loading-pane');
 
         }
@@ -1062,16 +1151,16 @@ var Global = {
                 estimate: estimate,
             }, "post", _this, _this.loadCustomerestimate,null, '.loading-pane');
             window.open(
-                window.location.pathname.split('/')[0] + '/bills/new/' + b_data_id
+                window.location.pathname.split('/')[0] +'/' + window.location.pathname.split('/')[1] + '/bills/newbill/' + b_data_id
             );
         });
 
         $('#customer-detail .btn-view-bill').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             b_data_id = $('#customer-detail #booking_id').attr('booking_data_id');
-            window.open(
-                window.location.pathname.split('/')[0] + '/bills/old/' + b_data_id + '#print'
-            );
+            // window.open(
+            //     window.location.pathname.split('/')[0] + '/bills/old/' + b_data_id + '#print'
+            // );
         });
 
         // Update-Agent
@@ -1110,49 +1199,49 @@ var Global = {
                 for (i = 1; i < 2; i++) {
                     $('.status-change-'+i ).addClass('selected')
                 }
-                for (i = 2; i < 10; i++) {
+                for (i = 2; i < 11; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Assigned"){
                 for (i = 1; i < 3; i++) {
                     $('.status-change-'+i ).addClass('selected')
                 }
-                for (i = 3; i < 10; i++) {
+                for (i = 3; i < 11; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Engineer Left"){
                 for (i = 1; i < 4; i++) {
                     $('.status-change-'+i ).addClass('selected')
                 }
-                for (i = 4; i < 10; i++) {
+                for (i = 4; i < 11; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Reached Workshop"){
                 for (i = 1; i < 5; i++) {
                     $('.status-change-'+i ).addClass('selected')
                 }
-                for (i = 5; i < 10; i++) {
+                for (i = 5; i < 11; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Estimate Shared"){
                 for (i = 1; i < 6; i++) {
                     $('.status-change-'+i ).addClass('selected')
                 }
-                for (i = 6; i < 10; i++) {
+                for (i = 6; i < 11; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Job Completed"){
                 for (i = 1; i < 7; i++) {
                     $('.status-change-'+i ).addClass('selected')
                 }
-                for (i = 7; i < 10; i++) {
+                for (i = 7; i < 11; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Feedback Taken"){
                 for (i = 1; i < 8; i++) {
                     $('.status-change-'+i ).addClass('selected')
                 }
-                for (i = 8; i < 10; i++) {
+                for (i = 8; i < 11; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Cancelled"){
@@ -1161,12 +1250,20 @@ var Global = {
                 }
                 $('.status-change-8').addClass('selected')
                 $('.status-change-9').removeClass('selected')
+                $('.status-change-10').removeClass('selected')
+
 
             }else if(status_n == "Escalation"){
                 for (i = 1; i < 9; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
                 $('.status-change-9').addClass('selected')
+                $('.status-change-10').removeClass('selected')
+            }else if(status_n == "Lead"){
+                for (i = 1; i < 10; i++) {
+                    $('.status-change-'+i ).removeClass('selected')
+                }
+                $('.status-change-10').addClass('selected')
             }
             // data_id = $('#customer-detail #booking_id').attr('booking_data_id')
 
@@ -1188,37 +1285,45 @@ var Global = {
                 for (i = 1; i < 2; i++) {
                     $('.status-change-'+i ).addClass('selected')
                 }
-                for (i = 2; i < 6; i++) {
+                for (i = 2; i < 7; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Cold"){
                 for (i = 1; i < 3; i++) {
                     $('.status-change-'+i ).addClass('selected')
                 }
-                for (i = 3; i < 6; i++) {
+                for (i = 3; i < 7; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
-            }else if(status_n == "Warm"){
+            }else if(status_n == "Estimate Required"){
                 for (i = 1; i < 4; i++) {
                     $('.status-change-'+i ).addClass('selected')
                 }
-                for (i = 4; i < 6; i++) {
+                for (i = 4; i < 7; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
-            }else if(status_n == "Confirmed"){
+            }else if(status_n == "Warm"){
                 for (i = 1; i < 5; i++) {
                     $('.status-change-'+i ).addClass('selected')
                 }
-                for (i = 5; i < 6; i++) {
+                for (i = 5; i < 7; i++) {
+                    $('.status-change-'+i ).removeClass('selected')
+                }
+            }else if(status_n == "Confirmed"){
+                for (i = 1; i < 6; i++) {
+                    $('.status-change-'+i ).addClass('selected')
+                }
+                for (i = 6; i < 7; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
             }else if(status_n == "Cancelled"){
-                for (i = 1; i < 6; i++) {
+                for (i = 1; i < 7; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
                 $('.status-change-5').addClass('selected')
-
             }
+
+
             // data_id = $('#customer-detail #booking_id').attr('booking_data_id')
 
             // setTimeout(function(){
@@ -1400,7 +1505,7 @@ var Global = {
             if (pick_on_time_yes == true){
                 pick_on_time = "Yes"
             }else if(pick_on_time_no == true){
-                    pick_on_time = "No"
+                pick_on_time = "No"
             }else{
                 pick_on_time = "Unanswered"
             }
@@ -1411,7 +1516,7 @@ var Global = {
             if (delivery_on_time_yes ==true){
                 delivery_on_time = "Yes"
             }else if(delivery_on_time_no == true){
-                    delivery_on_time = "No"
+                delivery_on_time = "No"
             }else{
                 delivery_on_time = "Unanswered"
             }
@@ -1421,7 +1526,7 @@ var Global = {
             if (courteous_yes ==true){
                 courteous = "Yes"
             }else if(courteous_no == true){
-                    courteous = "No"
+                courteous = "No"
             }else{
                 courteous = "Unanswered"
             }
@@ -1451,8 +1556,8 @@ var Global = {
 
             Commons.ajaxData('send_feedback', {booking_data_id: bid,
                 pick_on_time: pick_on_time,
-                 delivery_on_time: delivery_on_time,
-                 courteous: courteous,
+                delivery_on_time: delivery_on_time,
+                courteous: courteous,
                 washing:washing,
                 feedback_type:"1"
             }, "post", _this, _this.loadCustomerFeedback,null, '.loading-pane');
@@ -1460,7 +1565,7 @@ var Global = {
 
         })
 
-            $('#customer-detail .btn-update-feedback-2').click(function(){
+        $('#customer-detail .btn-update-feedback-2').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_data_id');
 
             quality_of_service_1 =  document.getElementById('quality_of_service_1').checked;
@@ -1485,8 +1590,8 @@ var Global = {
             else if(quality_of_service_9==true){quality_of_service =9}
             else if(quality_of_service_10==true){quality_of_service =10}
             else{quality_of_service = "Unanswered"}
-             
-             experience_1 =  document.getElementById('experience_1').checked;
+
+            experience_1 =  document.getElementById('experience_1').checked;
             experience_2 =  document.getElementById('experience_2').checked;
             experience_3 =  document.getElementById('experience_3').checked;
             experience_4 =  document.getElementById('experience_4').checked;
@@ -1509,7 +1614,7 @@ var Global = {
             else if(experience_10==true){experience =10}
             else{experience = "Unanswered"}
 
-             recommend_factor_1 =  document.getElementById('recommend_factor_1').checked;
+            recommend_factor_1 =  document.getElementById('recommend_factor_1').checked;
             recommend_factor_2 =  document.getElementById('recommend_factor_2').checked;
             recommend_factor_3 =  document.getElementById('recommend_factor_3').checked;
             recommend_factor_4 =  document.getElementById('recommend_factor_4').checked;
@@ -1536,8 +1641,8 @@ var Global = {
 
             Commons.ajaxData('send_feedback', {booking_data_id: bid,
                 additional: additional,
-                 quality_of_service: quality_of_service,
-                 experience: experience,
+                quality_of_service: quality_of_service,
+                experience: experience,
                 recommend_factor:recommend_factor,
                 feedback_type:"2"
             }, "post", _this, _this.loadCustomerFeedback,null, '.loading-pane');
@@ -1560,7 +1665,8 @@ var Global = {
             $('#new-booking').hide()
             $('#campaign-details').hide()
             $('#analytics').hide()
-            $('#expense-details').hide()
+            $('#expense-details').hide();
+            $('#bill-details').hide()
 
 
 
@@ -1611,7 +1717,6 @@ var Global = {
             make                    = $('#sub_veh_make').find('select').val()
             veh_type                = $('#sub_veh_type').find('select').val()
             model                   = $('#sub_veh_model').find('select').val()
-
 
             fuel_start              = model.indexOf("(")
             fuel_end                = model.indexOf(")")
@@ -1823,6 +1928,8 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide()
+            $('#bill-details').hide()
+
 
             $('#coupon-detail  .all-coupon').click()
             Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
@@ -1965,6 +2072,402 @@ var Global = {
         });
 
 // =====================================================================================
+//    Bill Management
+// =====================================================================================
+        // -- Load Coupon
+        var allbillsopen = function(){
+            // console.log('check')
+            $('#booking-details').hide()
+            $('#bookings').hide()
+            $('#user-details').hide()
+            $('#new-booking').hide()
+            $('#subscription-details').hide()
+            $('#campaign-details').hide()
+            $('#analytics').hide()
+            $('#expense-details').hide();
+            $('#bill-details').show()
+
+            $('#bill-detail  .all-bill').click()
+            Commons.ajaxData('view_all_bills', {bill_type : "Invoice"}, "get", _this, _this.loadbillAll,null, '.loading-pane');
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/bills/all'
+            history.pushState({},'',new_path)
+        };
+        $('.navbar .bill-button').click(allbillsopen);
+        //     - ADD bill
+        $('#bill-detail .add-bill').click(function(){
+
+
+        });
+        // -- Modify bill
+
+        var openbill = function(data_id){
+
+            $('#bill-detail .bill-list').hide()
+            $('#bill-detail .bill-add-mod').show()
+            $('#bill-detail  .all-bill').removeClass('selected')
+            $('#bill-detail  .single-bill').addClass('selected')
+            Commons.ajaxData('view_all_bookings', {data_id:data_id}, "get", _this, _this.loadbillbookingdata,null, '.loading-pane');
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/newbill/' + data_id +'/new'
+            history.pushState({},'',new_path)
+
+        };
+
+        var openbillpre = function(data_id){
+            $('#bill-detail .bill-list').hide()
+            $('#bill-detail .bill-add-mod').show()
+            $('#bill-detail  .all-bill').removeClass('selected')
+            $('#bill-detail  .single-bill').addClass('selected')
+            Commons.ajaxData('view_all_bookings', {data_id:data_id}, "get", _this, _this.loadbillbookingdatapre,null, '.loading-pane');
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/newbill/' + data_id +'/pre'
+            history.pushState({},'',new_path)
+
+        };
+
+
+
+
+        $('#bill-detail .btn-getjobdata').click(function(){
+            booking_id = $('#bill-detail #cust_bill_bookingid').val()
+            if (booking_id != ""){
+                Commons.ajaxData('view_all_bookings', {b_id:booking_id}, "get", _this, _this.loadbillbookingdata,null, '.loading-pane');
+            }
+        })
+        $('#bill-detail .btn-getpreinvoicedata').click(function(){
+            booking_id = $('#bill-detail #cust_bill_bookingid').val()
+            if (booking_id != ""){
+                Commons.ajaxData('view_all_bookings', {b_id:booking_id}, "get", _this, _this.loadbillbookingdatapre,null, '.loading-pane');
+            }
+        })
+
+
+        // -- Switch between list and add/modify in a bill
+        $('#bill-detail .all-bill').click(function(){
+            $('#bill-detail .bill-list').show();
+            $('#bill-detail  .bill-add-mod').hide();
+            $('#bill-detail  .single-bill').removeClass('selected')
+            $('#bill-detail  .all-bill').addClass('selected')
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/all/'
+            history.pushState({},'',new_path)
+        });
+
+        $('#bill-detail .single-bill').click(function(){
+            $('#bill-detail .bill-list').hide();
+            $('#bill-detail  .bill-add-mod').show();
+            $('#bill-detail  .all-bill').removeClass('selected')
+            $('#bill-detail  .single-bill').addClass('selected')
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/newbill/'
+            history.pushState({},'',new_path)
+
+        });
+
+
+        $('#bill-detail #bill_type').change(function(){
+            bill_type = $('#bill_type').find('select').val()
+            // console.log(bill_type)
+            if (bill_type == "CG Haryana"){
+                $('#agent_bill_name').val(CGDELHI_NAME)
+                $('#agent_bill_address').val(CGHARYANA_ADDRESS +', '+CGHARYANA_LOCALITY+', '+CGHARYANA_CITY)
+                $('#agent_bill_vat').val(CGHARYANA_VAT_NO)
+                $('#agent_bill_stax').val(CGHARYANA_STAX_NO)
+                $('#agent_bill_cin').val(CGHARYANA_CIN_NO)
+                STATE_BILL = CGHARYANA_STATE
+                Commons.ajaxData('get_all_taxes', {state:STATE_BILL}, "get", _this, _this.loadTaxUpdate,null, '.loading-pane');
+
+            }else if (bill_type == "CG Delhi"){
+                $('#agent_bill_name').val(CGDELHI_NAME)
+                $('#agent_bill_address').val(CGDELHI_ADDRESS +', '+CGDELHI_LOCALITY+', '+CGDELHI_CITY)
+                $('#agent_bill_vat').val(CGDELHI_VAT_NO)
+                $('#agent_bill_stax').val(CGDELHI_STAX_NO)
+                $('#agent_bill_cin').val(CGDELHI_CIN_NO)
+                STATE_BILL = CGDELHI_STATE
+                Commons.ajaxData('get_all_taxes', {state:STATE_BILL}, "get", _this, _this.loadTaxUpdate,null, '.loading-pane');
+
+            }else if(bill_type == "CG Receipt"){
+                $('#agent_bill_name').val(CGDELHI_NAME)
+                $('#agent_bill_address').val(CGHARYANA_ADDRESS +', '+CGHARYANA_LOCALITY+', '+CGHARYANA_CITY)
+                $('#agent_bill_vat').val('')
+                $('#agent_bill_stax').val('')
+                $('#agent_bill_cin').val('')
+                VAT_CONSUMABLE_PERCENT = 0
+                VAT_LUBE_PERCENT = 0
+                VAT_PART_PERCENT = 0
+                SERVICE_TAX_PERCENT = 0
+                STATE_BILL = CGDELHI_STATE
+                $('#bill-detail table').click()
+
+            }else if(bill_type == "Agent Bill"){
+                $('#agent_bill_name').val(AGENT_NAME)
+                $('#agent_bill_address').val(AGENT_ADDRESS +', '+AGENT_LOCALITY+', '+AGENT_CITY)
+                $('#agent_bill_vat').val(AGENT_VAT_NO)
+                $('#agent_bill_stax').val(AGENT_STAX_NO)
+                $('#agent_bill_cin').val(AGENT_CIN_NO)
+                STATE_BILL = AGENT_STATE
+                Commons.ajaxData('get_all_taxes', {state:STATE_BILL}, "get", _this, _this.loadTaxUpdateAgent,null, '.loading-pane');
+
+            }else{
+
+
+            }
+            Materialize.updateTextFields();
+
+
+
+
+        })
+
+        $('#bill-detail .btn-addbillitem').click(function(){
+            var row_to_copy = $('#bill-detail .items-list .to-copy').find('tr').clone()
+            container_parent = $('#bill-detail .items-list #bill-table').find('tbody')
+            row_to_copy.appendTo(container_parent)
+        })
+
+        $('#bill-detail #bill-table').on('click','.delete-bill-item' ,function(){
+            $(this).closest('tr').remove()
+            TOTAL_PRICE_BILL_ADMIN = 0
+            VAT_PART_BILL_ADMIN = 0
+            VAT_LUBE_BILL_ADMIN = 0
+            VAT_CONSUMABLE_BILL_ADMIN = 0
+            SERVICE_TAX_BILL_ADMIN = 0
+            $('#bill-detail .total-amount-row-bill .total-amount').text(TOTAL_PRICE_BILL_ADMIN)
+            $('#bill-detail .vat-part-amount').text(VAT_PART_BILL_ADMIN)
+            $('#bill-detail .vat-lube-amount').text(VAT_LUBE_BILL_ADMIN)
+            $('#bill-detail .vat-consumable-amount').text(VAT_CONSUMABLE_BILL_ADMIN)
+            $('#bill-detail .stax-amount').text(SERVICE_TAX_BILL_ADMIN)
+            $('#bill-detail table').click()
+
+        })
+
+        $('#bill-detail').on('keyup click','table',function(e,event,data){
+            TOTAL_PRICE_BILL_ADMIN = 0;
+            TOTAL_LABOUR_BILL_ADMIN = 0;
+            TOTAL_PARTS_BILL_ADMIN = 0;
+            TOTAL_CONSUMABLES_BILL_ADMIN= 0;
+            TOTAL_LUBES_BILL_ADMIN= 0;
+
+            TOTAL_DISCOUNT_BILL_ADMIN = 0;
+            VAT_PART_BILL_ADMIN = 0;
+            VAT_LUBE_BILL_ADMIN = 0;
+            VAT_CONSUMABLE_BILL_ADMIN = 0;
+            SERVICE_TAX_BILL_ADMIN = 0;
+            CURRENT_BILL_CART = [];
+
+            var table = document.getElementById('bill-table');
+            // console.log(table)
+            // units = $(this).closest('tr').find('#part_units').eq(0).val()
+            // unit_price = $(this).closest('tr').find('#part_unitprice').eq(0).val()
+            // console.log(units)
+            // console.log(unit_price)
+            // part_total_price = $(this).closest('tr').find('#part_units').val() * $(this).closest('tr').find('#part_unitprice').val();
+
+            // $(this).closest('tr').find('#part_price').val(part_total_price)
+            for (var i = 1, row; row = table.rows[i]; i++) {
+                for (var j = 0, col; col = row.cells[j]; j++) {
+                    if (j == 0) {
+                        name_item = $(row.cells[j]).find('input,select').eq(0).val()
+                        // console.log(name_item)
+                    }else if (j == 1) {
+                        type_item = $(row.cells[j]).find('input,select').eq(0).val()
+                        // console.log(type_item)
+                    } else if (j == 2) {
+                        quantity = $(row.cells[j]).find('input,select').eq(0).val()
+                        // console.log(type_item)
+                    }else if (j == 3) {
+                        unit_price = $(row.cells[j]).find('input,select').eq(0).val()
+                        // console.log(type_item)
+                    }else if (j == 4) {
+                        price_item = unit_price * quantity;
+                        $(row.cells[j]).find('input,select').eq(0).val(price_item)
+                        // console.log(price_item)
+                    }else if (j == 5) {
+                        if (type_item == "Labour") {
+                            applicable_tax = SERVICE_TAX_PERCENT
+                            SERVICE_TAX_BILL_ADMIN = SERVICE_TAX_BILL_ADMIN+ (price_item * applicable_tax/100)
+                        } else if (type_item == "Part") {
+                            applicable_tax = VAT_PART_PERCENT
+                            VAT_PART_BILL_ADMIN = VAT_PART_BILL_ADMIN + (price_item * applicable_tax/100)
+                        }else if(type_item == "Lube"){
+                            applicable_tax = VAT_LUBE_PERCENT
+                            VAT_LUBE_BILL_ADMIN = VAT_LUBE_BILL_ADMIN + (price_item * applicable_tax/100)
+                        }else if(type_item == "Consumable"){
+                            applicable_tax = VAT_CONSUMABLE_PERCENT
+                            VAT_CONSUMABLE_BILL_ADMIN= VAT_CONSUMABLE_BILL_ADMIN+ (price_item * applicable_tax/100)
+                        }else if (type_item == "Discount") {
+                            applicable_tax = 0
+                        } else {
+                            applicable_tax = 0
+                        }
+
+
+                        price_item_pre_tax = (price_item)/(1+applicable_tax/100);
+                        price_item_pre_tax = Math.ceil(price_item_pre_tax)
+                        $(row.cells[j]).find('input,select').eq(0).val(price_item_pre_tax)
+                        if (type_item == "Labour") {
+                            TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN + parseFloat(price_item)
+                            TOTAL_LABOUR_BILL_ADMIN = TOTAL_LABOUR_BILL_ADMIN + parseFloat(price_item)
+                        } else if (type_item == "Part") {
+                            TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN + parseFloat(price_item)
+                            TOTAL_PARTS_BILL_ADMIN = TOTAL_PARTS_BILL_ADMIN + parseFloat(price_item)
+                        }else if(type_item == "Lube"){
+                            TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN + parseFloat(price_item)
+                            TOTAL_LUBES_BILL_ADMIN = TOTAL_LUBES_BILL_ADMIN + parseFloat(price_item)
+
+                        }else if(type_item == "Consumable"){
+                            TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN + parseFloat(price_item)
+                            TOTAL_CONSUMABLES_BILL_ADMIN = TOTAL_CONSUMABLES_BILL_ADMIN + parseFloat(price_item)
+                        }else if (type_item == "Discount") {
+                            TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN - parseFloat(price_item)
+                            TOTAL_DISCOUNT_BILL_ADMIN = TOTAL_DISCOUNT_BILL_ADMIN + parseFloat(price_item)
+                        } else {
+                            TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN
+                        }
+                        // console.log(price_item)
+
+                        cart_item = {
+                            "name": name_item,
+                            "price": price_item,
+                            "pre_tax_price":price_item_pre_tax,
+                            "type": type_item,
+                            "settlement_cat":type_item,
+                            "comment": "",
+                            "quantity":quantity,
+                            "unit_price":unit_price,
+                            "approved":"Approved"
+                        }
+
+                        if (name_item != ""){
+                            CURRENT_BILL_CART.push(cart_item)
+                        }else{
+
+                        }
+
+
+                    }
+
+
+
+
+
+                }
+
+
+                TOTAL_PRICE_BILL_ADMIN = Math.ceil(TOTAL_PRICE_BILL_ADMIN)
+                VAT_PART_BILL_ADMIN = Math.ceil(VAT_PART_BILL_ADMIN)
+                VAT_LUBE_BILL_ADMIN = Math.ceil(VAT_LUBE_BILL_ADMIN)
+                VAT_CONSUMABLE_BILL_ADMIN = Math.ceil(VAT_CONSUMABLE_BILL_ADMIN)
+                SERVICE_TAX_BILL_ADMIN = Math.ceil(SERVICE_TAX_BILL_ADMIN)
+
+                $('#bill-detail .total-amount-row-bill .total-amount').text(TOTAL_PRICE_BILL_ADMIN)
+                $('#bill-detail .vat-part-amount').text(VAT_PART_BILL_ADMIN)
+                $('#bill-detail .vat-lube-amount').text(VAT_LUBE_BILL_ADMIN)
+                $('#bill-detail .vat-consumable-amount').text(VAT_CONSUMABLE_BILL_ADMIN)
+                $('#bill-detail .stax-amount').text(SERVICE_TAX_BILL_ADMIN)
+
+            }
+        });
+
+        $('#bill-detail .btn-generateinvoice').click(function () {
+                booking_data_id         = $('#bill-detail .booking-id').attr('data-class')
+                bill_owner              = $('#bill_type').find('select').val()
+                total_amount            = TOTAL_PRICE_BILL_ADMIN
+                part_amount             = TOTAL_PARTS_BILL_ADMIN
+                lube_amount             = TOTAL_LUBES_BILL_ADMIN
+                consumable_amount       = TOTAL_CONSUMABLES_BILL_ADMIN
+                labour_amount           = TOTAL_LABOUR_BILL_ADMIN
+                vat_part                = VAT_PART_BILL_ADMIN
+                vat_lube                = VAT_LUBE_BILL_ADMIN
+                vat_consumable          = VAT_CONSUMABLE_BILL_ADMIN
+                service_tax             = SERVICE_TAX_BILL_ADMIN
+                payment_mode            = ""
+                agent_name              = $('#agent_bill_name').val()
+                agent_address           = $('#agent_bill_address').val()
+                agent_vat               = $('#agent_bill_vat').val()
+                agent_stax              = $('#agent_bill_stax').val()
+                agent_cin               = $('#agent_bill_cin').val()
+                state                   = STATE_BILL
+                vat_part_percent        = VAT_PART_PERCENT
+                vat_lube_percent        = VAT_LUBE_PERCENT
+                vat_consumable_percent  = VAT_CONSUMABLE_PERCENT
+                service_tax_percent     = SERVICE_TAX_PERCENT
+                cust_veh_notes          = $('#bill-detail #cust_bill_reco').val()
+                cust_name               = $('#bill-detail #cust_bill_name').val()
+                cust_address            = $('#bill-detail #cust_bill_address').val()
+                cust_locality           = $('#bill-detail #cust_bill_locality').val()
+                cust_city               = $('#bill-detail #cust_bill_city').val()
+                cust_veh_reg            = $('#bill-detail #cust_bill_reg').val()
+                cust_vehicle            = $('#bill-detail #cust_bill_vehicle').val()
+                service_items           = JSON.stringify(CURRENT_BILL_CART)
+                invoice_number          = $('#bill-detail #agent_invoice_number').val()
+
+            bill_type = $(this).attr('data-class')
+            if (bill_type == "Pre-Invoice"){
+                invoice_number = "Pre-Invoice"
+            }else{
+                invoice_number = invoice_number
+            }
+
+
+            params =    {data_id: booking_data_id,
+                    bill_owner: bill_owner,
+                    total_amount: total_amount,
+                    part_amount: part_amount,
+                    lube_amount: lube_amount,
+                    consumable_amount: consumable_amount,
+                    labour_amount: labour_amount,
+                    vat_part: vat_part,
+                    vat_lube: vat_lube,
+                    vat_consumable: vat_consumable,
+                    service_tax: service_tax,
+                    payment_mode: payment_mode,
+                    full_agent_name: agent_name,
+                    agent_address: agent_address,
+                    agent_vat_no: agent_vat,
+                    agent_cin: agent_cin,
+                    agent_stax: agent_stax,
+                    state: state,
+                    vat_part_percent: vat_part_percent,
+                    vat_lube_percent: vat_lube_percent,
+                    vat_consumable_percent: vat_consumable_percent,
+                    service_tax_percent: service_tax_percent,
+                    notes: cust_veh_notes,
+                    cust_name: cust_name,
+                    cust_address: cust_address,
+                    cust_locality: cust_locality,
+                    cust_city: cust_city,
+                    reg_number: cust_veh_reg,
+                    vehicle: cust_vehicle,
+                    service_items: service_items,
+                    invoice_number: invoice_number
+            }
+            // Commons.ajaxData('generate_bill', params, "get", _this, _this.loadBillGenerated,null, '.loading-pane');
+            error = 0
+            if (bill_owner = ""){
+                error = 1
+                $('#bill_type').find('select').addClass('invalid-select-box')
+            }
+            if(cust_name = ""){
+                error = 1
+               $('#bill-detail #cust_bill_name').addClass("invalid");
+            }
+            if(error == 1){
+                alert('Invalid Data')
+            }else{
+            var url = Commons.getOrigin()+Commons.URLFromName['generate_bill']+'?'+jQuery.param( params )
+            $('#download').find('iframe').attr('src',url)
+                alert('Bill Generated')
+            }
+
+
+
+
+
+
+        })
+// =====================================================================================
 //    Expense Management
 // =====================================================================================
         // -- Load Coupon
@@ -2070,12 +2573,12 @@ var Global = {
 
 
             if (category == "Marketing"){
-                 sourcelen = SOURCES.length;
+                sourcelen = SOURCES.length;
                 for (i = 0; i < sourcelen; i++) {
                     html += '<option value="'+SOURCES[i]+'">'+SOURCES[i]+'</option>'
                 }
             }else{
-                    html += '<option value="'+category+'">'+category+'</option>'
+                html += '<option value="'+category+'">'+category+'</option>'
             }
             container.html(html)
 
@@ -2133,6 +2636,7 @@ var Global = {
             $('#campaign-details').show()
             $('#analytics').hide()
             $('#expense-details').hide()
+            $('#bill-details').hide()
 
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,2).join('/')+'/campaign/'
@@ -2161,7 +2665,8 @@ var Global = {
             $('#subscription-details').hide()
             $('#campaign-details').hide()
             $('#analytics').hide()
-            $('#expense-details').hide()
+            $('#expense-details').hide();
+            $('#bill-details').hide()
 
             container = $('#new-booking .source-list')
             container.html('')
@@ -2209,6 +2714,7 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide()
+            $('#bill-details').hide()
 
             container = $('#new-booking .source-list')
             container.html('')
@@ -2255,9 +2761,19 @@ var Global = {
             document.getElementById("send_details").checked = false;
             // document.getElementById('send_details').removeAttribute("checked", "");
             $('#new-booking  .send-reminder').hide()
-
-
         });
+
+        $('#new-booking .btn-addadditional').click(function(){
+            var row_to_copy = $('#new-booking .job-row.to-copy').clone().removeClass('to-copy').removeClass('invisible');
+            container_parent = $('#new-booking .add-jobs-list')
+            row_to_copy.appendTo(container_parent);
+        });
+
+        $('#new-booking .add-jobs-list').on('click','.delete-job',function(){
+            $(this).closest('.job-row').remove()
+        });
+
+
 
         // -- Locality Search
         $('#locality').on('keyup',function(e,event,data){
@@ -2471,21 +2987,31 @@ var Global = {
             }
             if (flag == "True"){
                 if(time=="" || time==null){
-                time_follow = "09:30 AM"
-                console.log(time)
-                error = 1;
-                $('#new-booking #time-slot').find('select').addClass('invalid-select-box')
-                // $('#choose-time-slot').text('Choose Time Slot');
+                    time_follow = "09:30 AM"
+                    console.log(time)
+                    error = 1;
+                    $('#new-booking #time-slot').find('select').addClass('invalid-select-box')
+                    // $('#choose-time-slot').text('Choose Time Slot');
                 }
             }else{
                 time = "9:30AM - 11:30AM"
                 if(time_follow == "" || time_follow == null){
-                console.log(time)
-                error = 1;
-                $('#new-booking #time_follow_lead').addClass("invalid");
-                // $('#choose-time-slot').text('Choose Time Slot');
+                    console.log(time)
+                    error = 1;
+                    $('#new-booking #time_follow_lead').addClass("invalid");
+                    // $('#choose-time-slot').text('Choose Time Slot');
                 }
             }
+
+            $('#new-booking .add-jobs-list .job-row').each(function(){
+                name_job = $(this).find('.job-summary-name input').val()
+                // console.log(name_job)
+                price = 0
+                if (name_job != "" && name_job != " "){
+                    obj = {"Job":name_job,"Price":price}
+                    ALL_JOBS_NEW_BOOKING_LIST.push(obj)
+                }
+            });
 
             if(error==1){
                 // console.log("didnt work")
@@ -2507,7 +3033,8 @@ var Global = {
                     ,veh_type   : veh_type
                     ,date       : date
                     ,time       : time
-                    ,comment    : ALL_JOBS_NEW_BOOKING + ', '+ comment
+                    ,jobsummary_list : JSON.stringify(ALL_JOBS_NEW_BOOKING_LIST)
+                    // ,comment    : ALL_JOBS_NEW_BOOKING + ', '+ comment
                     ,is_paid    : is_paid
                     ,paid_amt   : paid_amt
                     // ,coupon     : coupon
@@ -2550,7 +3077,7 @@ var Global = {
 //     Analytics
 // =====================================================================================
         var monthNames = [ "01", "02", "03", "04", "05", "06",
-        "07", "08", "09", "10", "11", "12" ];
+            "07", "08", "09", "10", "11", "12" ];
 
         function diff(from, to) {
             var arr = [];
@@ -2608,7 +3135,8 @@ var Global = {
             $('#subscription-details').hide()
             $('#campaign-details').hide()
             $('#analytics').show()
-            $('#expense-details').hide()
+            $('#expense-details').hide();
+            $('#bill-details').hide()
 
             month_selected = $('#analytics .month-row').find('select').val()
             // console.log(month_selected)
@@ -2674,7 +3202,7 @@ var Global = {
             $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-up')
         });
         $('#analytics').on('click','.btn-month-expand.selected',function(){
-             // console.log("2")
+            // console.log("2")
             $('#analytics .month-data-row').hide()
             $(this).find('i').removeClass('fa-caret-up').addClass('fa-caret-down')
             $(this).addClass('unselected').removeClass('selected')
@@ -2687,7 +3215,7 @@ var Global = {
             $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-up')
         });
         $('#analytics').on('click','.btn-status-expand.selected',function(){
-             // console.log("2")
+            // console.log("2")
             $('#analytics .status-data-row').hide()
             $(this).find('i').removeClass('fa-caret-up').addClass('fa-caret-down')
             $(this).addClass('unselected').removeClass('selected')
@@ -2700,7 +3228,7 @@ var Global = {
             $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-up')
         });
         $('#analytics').on('click','.btn-source-expand.selected',function(){
-             // console.log("2")
+            // console.log("2")
             $('#analytics .source-data-row').hide()
             $(this).find('i').removeClass('fa-caret-up').addClass('fa-caret-down')
             $(this).addClass('unselected').removeClass('selected')
@@ -2762,7 +3290,8 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').hide()
             $('#user-detail .all-user').click()
-            $('#expense-details').hide()
+            $('#expense-details').hide();
+            $('#bill-details').hide()
 
             Commons.ajaxData('fetch_all_users', {}, "get", _this, _this.loadUsers,null, '.loading-pane');
 
@@ -2966,45 +3495,45 @@ var Global = {
             html += '                        <b><span class="custvehicletype">' + val.cust_vehicle_type + '</span>&nbsp;:&nbsp;</b><span class="vehiclename">' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + ' ('+val.cust_regnumber+')</span>'
             html += '                    </div>'
             if (LEAD_TYPE == "Lead"){
-            // html += '                    <div class="col l12 hide-on-med-and-down">'
-            // html += '                        <b>Date & Time : </b><span class="time">' + val.follow_up_time + '</span> on <span class="date">' + val.follow_up_date + '</span>'
-            // html += '                    </div>'
-            // html += '                    <div class="col l12 hide-on-large-only">'
-            // html += '                        <b>Date : </b><span class="date">' + val.follow_up_date + '</span>'
-            // html += '                    </div>'
-            // html += '                    <div class="col l12 s12 m12 hide-on-large-only">'
-            // html += '                        <b>Time : </b><span class="time">' + val.follow_up_time + '</span>'
-            // html += '                    </div>'
+                // html += '                    <div class="col l12 hide-on-med-and-down">'
+                // html += '                        <b>Date & Time : </b><span class="time">' + val.follow_up_time + '</span> on <span class="date">' + val.follow_up_date + '</span>'
+                // html += '                    </div>'
+                // html += '                    <div class="col l12 hide-on-large-only">'
+                // html += '                        <b>Date : </b><span class="date">' + val.follow_up_date + '</span>'
+                // html += '                    </div>'
+                // html += '                    <div class="col l12 s12 m12 hide-on-large-only">'
+                // html += '                        <b>Time : </b><span class="time">' + val.follow_up_time + '</span>'
+                // html += '                    </div>'
 
-            html += '                    <div class="col l12">'
-            html += '                        <b>Follow Up Date : </b><span class="date">' + val.follow_up_date + '</span>'
-            html += '                    </div>'
-            html += '                    <div class="col l12 s12 m12">'
-            html += '                        <b>Follow Up Time : </b><span class="time">' + val.follow_up_time + '</span>'
-            html += '                    </div>'
-            html += '                    <div class="col l12 s12 m12">'
-            html += '                        <b>Generation Date & Time: </b><span class="time">' + val.date_generated +' '+ val.time_generated + '</span>'
-            html += '                    </div>'
+                html += '                    <div class="col l12">'
+                html += '                        <b>Follow Up Date : </b><span class="date">' + val.follow_up_date + '</span>'
+                html += '                    </div>'
+                html += '                    <div class="col l12 s12 m12">'
+                html += '                        <b>Follow Up Time : </b><span class="time">' + val.follow_up_time + '</span>'
+                html += '                    </div>'
+                html += '                    <div class="col l12 s12 m12">'
+                html += '                        <b>Generation Date & Time: </b><span class="time">' + val.date_generated +' '+ val.time_generated + '</span>'
+                html += '                    </div>'
 
 
             }else{
-            // html += '                    <div class="col l12 hide-on-med-and-down">'
-            // html += '                        <b>Date & Time : </b><span class="time">' + val.time_booking + '</span> on <span class="date">' + val.date_booking + '</span>'
-            // html += '                    </div>'
-            html += '                    <div class="col l12">'
-            html += '                        <b>Booking Date : </b><span class="date">' + val.date_booking + '</span>'
-            html += '                    </div>'
-            html += '                    <div class="col l12 s12 m12">'
-            html += '                        <b>Booking Time : </b><span class="time">' + val.time_booking + '</span>'
-            html += '                    </div>'
+                // html += '                    <div class="col l12 hide-on-med-and-down">'
+                // html += '                        <b>Date & Time : </b><span class="time">' + val.time_booking + '</span> on <span class="date">' + val.date_booking + '</span>'
+                // html += '                    </div>'
+                html += '                    <div class="col l12">'
+                html += '                        <b>Booking Date : </b><span class="date">' + val.date_booking + '</span>'
+                html += '                    </div>'
+                html += '                    <div class="col l12 s12 m12">'
+                html += '                        <b>Booking Time : </b><span class="time">' + val.time_booking + '</span>'
+                html += '                    </div>'
 
             }
             if (LEAD_TYPE == "Lead"){
 
-                }else{
-            html += '                    <div class="col l12 s12 m12">'
-            html += '                        <b>Address : </b><span class="address">' + val.cust_address + ' ' + val.cust_locality + ' ' + val.cust_city + '</span>'
-            html += '                    </div>'
+            }else{
+                html += '                    <div class="col l12 s12 m12">'
+                html += '                        <b>Address : </b><span class="address">' + val.cust_address + ' ' + val.cust_locality + ' ' + val.cust_city + '</span>'
+                html += '                    </div>'
             }
             html += '                </div>'
 
@@ -3020,13 +3549,13 @@ var Global = {
             }
             html += '                </div>'
             if (LEAD_TYPE == "Booking"){
-            html += '                <div class="col l2 s3 m3 status-bar">'
-            html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
-            html += '                </div></div>'
+                html += '                <div class="col l2 s3 m3 status-bar">'
+                html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
+                html += '                </div></div>'
             }else{
-            html += '                <div class="col l2 s3 m3 status-bar-2">'
-            html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
-            html += '                </div></div>'
+                html += '                <div class="col l2 s3 m3 status-bar-2">'
+                html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
+                html += '                </div></div>'
 
             }
 
@@ -3052,7 +3581,7 @@ var Global = {
         container.html('');
         html = ''
 
-          $.each(data, function(ix, val) {
+        $.each(data, function(ix, val) {
             html += '        <div class="row card cardhover no-border-radius booking" data-class="' + val.id + '">'
             html += '            <div class="row"><div class="booking-open-btn">'
             html += '                <div class="col l1 s2 m2 booking-id-bar">'
@@ -3082,45 +3611,45 @@ var Global = {
             html += '                        <b><span class="custvehicletype">' + val.cust_vehicle_type + '</span>&nbsp;:&nbsp;</b><span class="vehiclename">' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + ' ('+val.cust_regnumber+')</span>'
             html += '                    </div>'
             if (LEAD_TYPE == "Lead"){
-            // html += '                    <div class="col l12 hide-on-med-and-down">'
-            // html += '                        <b>Date & Time : </b><span class="time">' + val.follow_up_time + '</span> on <span class="date">' + val.follow_up_date + '</span>'
-            // html += '                    </div>'
-            // html += '                    <div class="col l12 hide-on-large-only">'
-            // html += '                        <b>Date : </b><span class="date">' + val.follow_up_date + '</span>'
-            // html += '                    </div>'
-            // html += '                    <div class="col l12 s12 m12 hide-on-large-only">'
-            // html += '                        <b>Time : </b><span class="time">' + val.follow_up_time + '</span>'
-            // html += '                    </div>'
+                // html += '                    <div class="col l12 hide-on-med-and-down">'
+                // html += '                        <b>Date & Time : </b><span class="time">' + val.follow_up_time + '</span> on <span class="date">' + val.follow_up_date + '</span>'
+                // html += '                    </div>'
+                // html += '                    <div class="col l12 hide-on-large-only">'
+                // html += '                        <b>Date : </b><span class="date">' + val.follow_up_date + '</span>'
+                // html += '                    </div>'
+                // html += '                    <div class="col l12 s12 m12 hide-on-large-only">'
+                // html += '                        <b>Time : </b><span class="time">' + val.follow_up_time + '</span>'
+                // html += '                    </div>'
 
-            html += '                    <div class="col l12">'
-            html += '                        <b>Follow Up Date : </b><span class="date">' + val.follow_up_date + '</span>'
-            html += '                    </div>'
-            html += '                    <div class="col l12 s12 m12">'
-            html += '                        <b>Follow Up Time : </b><span class="time">' + val.follow_up_time + '</span>'
-            html += '                    </div>'
-            html += '                    <div class="col l12 s12 m12">'
-            html += '                        <b>Generation Date : </b><span class="time">' + val.date_generated + '</span>'
-            html += '                    </div>'
+                html += '                    <div class="col l12">'
+                html += '                        <b>Follow Up Date : </b><span class="date">' + val.follow_up_date + '</span>'
+                html += '                    </div>'
+                html += '                    <div class="col l12 s12 m12">'
+                html += '                        <b>Follow Up Time : </b><span class="time">' + val.follow_up_time + '</span>'
+                html += '                    </div>'
+                html += '                    <div class="col l12 s12 m12">'
+                html += '                        <b>Generation Date : </b><span class="time">' + val.date_generated + '</span>'
+                html += '                    </div>'
 
 
             }else{
-            // html += '                    <div class="col l12 hide-on-med-and-down">'
-            // html += '                        <b>Date & Time : </b><span class="time">' + val.time_booking + '</span> on <span class="date">' + val.date_booking + '</span>'
-            // html += '                    </div>'
-            html += '                    <div class="col l12">'
-            html += '                        <b>Booking Date : </b><span class="date">' + val.date_booking + '</span>'
-            html += '                    </div>'
-            html += '                    <div class="col l12 s12 m12">'
-            html += '                        <b>Booking Time : </b><span class="time">' + val.time_booking + '</span>'
-            html += '                    </div>'
+                // html += '                    <div class="col l12 hide-on-med-and-down">'
+                // html += '                        <b>Date & Time : </b><span class="time">' + val.time_booking + '</span> on <span class="date">' + val.date_booking + '</span>'
+                // html += '                    </div>'
+                html += '                    <div class="col l12">'
+                html += '                        <b>Booking Date : </b><span class="date">' + val.date_booking + '</span>'
+                html += '                    </div>'
+                html += '                    <div class="col l12 s12 m12">'
+                html += '                        <b>Booking Time : </b><span class="time">' + val.time_booking + '</span>'
+                html += '                    </div>'
 
             }
             if (LEAD_TYPE == "Lead"){
 
-                }else{
-            html += '                    <div class="col l12 s12 m12">'
-            html += '                        <b>Address : </b><span class="address">' + val.cust_address + ' ' + val.cust_locality + ' ' + val.cust_city + '</span>'
-            html += '                    </div>'
+            }else{
+                html += '                    <div class="col l12 s12 m12">'
+                html += '                        <b>Address : </b><span class="address">' + val.cust_address + ' ' + val.cust_locality + ' ' + val.cust_city + '</span>'
+                html += '                    </div>'
             }
             html += '                </div>'
             html += '                <div class="col l3 s3 m3 centered-text hide-on-med-and-down">'
@@ -3131,13 +3660,13 @@ var Global = {
             }
             html += '                </div>'
             if (LEAD_TYPE == "Booking"){
-            html += '                <div class="col l2 s3 m3 status-bar">'
-            html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
-            html += '                </div></div>'
+                html += '                <div class="col l2 s3 m3 status-bar">'
+                html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
+                html += '                </div></div>'
             }else{
-            html += '                <div class="col l2 s3 m3 status-bar-2">'
-            html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
-            html += '                </div></div>'
+                html += '                <div class="col l2 s3 m3 status-bar-2">'
+                html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
+                html += '                </div></div>'
 
             }
 
@@ -3451,16 +3980,16 @@ var Global = {
                 html += '<div class="input-field"><i class="material-icons prefix">av_timer</i><input id="cust_odometer" type="number" value ="' + val.odometer + '"class="validate"><label for="cust_odometer">#Odometer</label></div>'
                 html += '</div>'
                 if (!val.booking_flag){
-                     html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_follow" type="date" class="datepicker"><label for="date_follow">Date Follow</label></div>'
-                html += '</div>'
-                // html += '<div class="row">'
-                html += '<div class="col s12 m12 l12">'
-                // html += '<div class="input-field"><i class="material-icons prefix">today</i><label for="time_follow">Time Follow</label><input id="time_follow" type="time" class="timepicker"></div>'
-                //     time ui-timepicker-input
-                html += '<div class="input-field"><i class="material-icons prefix">today</i><label for="time_follow">Time Follow</label><input id="time_follow" type="text" name="timepicker" class="time ui-timepicker-input"/></div>'
+                    html += '<div class="col s12 m12 l12">'
+                    html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_follow" type="date" class="datepicker"><label for="date_follow">Date Follow</label></div>'
+                    html += '</div>'
+                    // html += '<div class="row">'
+                    html += '<div class="col s12 m12 l12">'
+                    // html += '<div class="input-field"><i class="material-icons prefix">today</i><label for="time_follow">Time Follow</label><input id="time_follow" type="time" class="timepicker"></div>'
+                    //     time ui-timepicker-input
+                    html += '<div class="input-field"><i class="material-icons prefix">today</i><label for="time_follow">Time Follow</label><input id="time_follow" type="text" name="timepicker" class="time ui-timepicker-input"/></div>'
 
-                html += '</div>'
+                    html += '</div>'
 
                 }
                 html += '<div class="col s12 m12 l12">'
@@ -3470,18 +3999,61 @@ var Global = {
                 html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time Booking</label></div>'
                 html += '</div>'
                 if (val.booking_flag){
-                html += '<div class="col s12 m12 l12">'
-                // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
-                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" class="datepicker"><label for="date">Date Delivery</label></div>'
-                html += '</div>'
+                    html += '<div class="col s12 m12 l12">'
+                    // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+                    html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" class="datepicker"><label for="date">Date Delivery</label></div>'
+                    html += '</div>'
 
                 }
-                html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
-                html += '</div>'
+                // html += '<div class="col s12 m12 l12">'
+                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
+                // html += '</div>'
+
+                // Job Summary
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
                 html += '</div>'
+
+                html += '<div class="col s12 m12 l12">'
+                html += '<b>JOBS SUMMARY</b><br><br>'
+
+                jobLen = val.job_summary.length;
+                html += '<div class="jobs-list">'
+                for (i = 0; i < jobLen; i++) {
+                    // for (i = 0; i < 2; i++) {
+                    html += '<div class="row job-row">'
+                    html += '<div class="col s9 m9 l9 job-summary-name">'
+                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name'+i+'"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'" >Job - ' + (i+1) +'</label></div>'
+
+                    // html += val.job_summary[i]['Job']
+                    html += '</div>'
+                    html += '<div class="col s2 m2 l2 job-summary-price">'
+                    html += '<div class="input-field"><input id="job_price'+i+'"  type="number" value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'" >Price - ' + (i+1) +'</label></div>'
+                    html += '</div>'
+                    html += '<div class="col s1 m1 l1 centered-text x20">'
+                    html += '<i class="fa fa-trash-o delete-job"></i>'
+                    html += '</div>'
+                    html += '</div>'
+                }
+                html += '</div>'
+
+                html += '<div class="row job-row to-copy invisible">'
+                html += '<div class="col s9 m9 l9 job-summary-name">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name" type="text"><label for="job_name">Job</label></div>'
+                html += '</div>'
+                html += '<div class="col s2 m2 l2 job-summary-price">'
+                html += '<div class="input-field"><input id="job_price" type="number" ><label for="job_price">Price</label></div>'
+                html += '</div>'
+                html += '<div class="col s1 m1 l1 centered-text x20">'
+                html += '<i class="fa fa-trash-o delete-job"></i>'
+                html += '</div>'
+                html += '</div>'
+
+                html+='<div class="col l12 s12 m12 centered-text">'
+                html +='<button class="waves-effect waves-light btn cg-primary btn-addjob" type="submit" name="action">Add Jobs'
+                html +='<i class="material-icons right">add</i></button></div><br><br>'
+
+
                 if (!val.booking_flag){
                     html += '<div class="col s12 m12 l12">'
                     html += '<b>FOLLOW UP SUMMARY</b><br><br>'
@@ -3489,15 +4061,15 @@ var Global = {
                     fsLen = val.follow_up_status.length;
 
                     for (i = 0; i < fsLen; i++) {
-                    // for (i = 0; i < 2; i++) {
-                    html += '<div class="row">'
-                    html += '<div class="col s12 m12 l2  follow-time-stamp">'
-                    html += val.follow_up_status[i]['Date']+' '+val.follow_up_status[i]['Time']
-                    html += '</div>'
-                    html += '<div class="col s12 m12 l10">'
-                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="status_details" type="text" disabled value ="'+ val.follow_up_status[i]['Status'] +'" class="validate"><label for="agent_details">Status - '+ (i+1) +'</label></div>'
-                    html += '</div>'
-                    html += '</div>'
+                        // for (i = 0; i < 2; i++) {
+                        html += '<div class="row">'
+                        html += '<div class="col s12 m12 l2  follow-time-stamp">'
+                        html += val.follow_up_status[i]['Date']+' '+val.follow_up_status[i]['Time']
+                        html += '</div>'
+                        html += '<div class="col s12 m12 l10">'
+                        html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="status_details" type="text" disabled value ="'+ val.follow_up_status[i]['Status'] +'" class="validate"><label for="agent_details">Status - '+ (i+1) +'</label></div>'
+                        html += '</div>'
+                        html += '</div>'
                     }
 
                     html += '<div class="row">'
@@ -3508,8 +4080,6 @@ var Global = {
                     html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="status_details_new" type="text" value ="" class="validate"><label for="agent_details">Status - '+ (i+1) +'</label></div>'
                     html += '</div>'
                     html += '</div>'
-
-
                     html += '</div>'
                 }
             }else{
@@ -3531,20 +4101,41 @@ var Global = {
                 html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" disabled  value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
                 html += '</div>'
                 if (val.booking_flag){
-                html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" disabled class="datepicker"><label for="date">Date Delivery</label></div>'
-                // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
-                html += '</div>'
+                    html += '<div class="col s12 m12 l12">'
+                    html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" disabled class="datepicker"><label for="date">Date Delivery</label></div>'
+                    // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+                    html += '</div>'
                 }else{
 
                 }
 
-                html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" disabled class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
-                html += '</div>'
+                // html += '<div class="col s12 m12 l12">'
+                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" disabled class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
+                // html += '</div>'
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
                 html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<b>JOBS SUMMARY</b><br><br>'
+
+                jobLen = val.job_summary.length;
+                html += '<div class="jobs-list">'
+                for (i = 0; i < jobLen; i++) {
+                    // for (i = 0; i < 2; i++) {
+                    html += '<div class="row job-row">'
+                    html += '<div class="col s9 m9 l9 job-summary-name">'
+                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name'+i+'" disabled type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'">Job - ' + (i+1) +'</label></div>'
+
+                    // html += val.job_summary[i]['Job']
+                    html += '</div>'
+                    html += '<div class="col s3 m3 l3 job-summary-price">'
+                    html += '<div class="input-field"><input id="job_price'+i+'" type="number" disabled value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'">Price - ' + (i+1) +'</label></div>'
+                    html += '</div>'
+                    // html += '<div class="col s1 m1 l1 centered-text x20">'
+                    // html += '<i class="fa fa-trash-o delete-job"></i>'
+                    // html += '</div>'
+                    html += '</div>'
+                }
             }
             html += '</div>'
 
@@ -3553,49 +4144,49 @@ var Global = {
                     for (i = 1; i < 2; i++) {
                         $('.status-change-'+i ).addClass('selected')
                     }
-                    for (i = 2; i < 10; i++) {
+                    for (i = 2; i < 11; i++) {
                         $('.status-change-'+i ).removeClass('selected')
                     }
                 }else if(val.status == "Assigned"){
                     for (i = 1; i < 3; i++) {
                         $('.status-change-'+i ).addClass('selected')
                     }
-                    for (i = 3; i < 10; i++) {
+                    for (i = 3; i < 11; i++) {
                         $('.status-change-'+i ).removeClass('selected')
                     }
                 }else if(val.status == "Engineer Left"){
                     for (i = 1; i < 4; i++) {
                         $('.status-change-'+i ).addClass('selected')
                     }
-                    for (i = 4; i < 10; i++) {
+                    for (i = 4; i < 11; i++) {
                         $('.status-change-'+i ).removeClass('selected')
                     }
                 }else if(val.status == "Reached Workshop"){
                     for (i = 1; i < 5; i++) {
                         $('.status-change-'+i ).addClass('selected')
                     }
-                    for (i = 5; i < 10; i++) {
+                    for (i = 5; i < 11; i++) {
                         $('.status-change-'+i ).removeClass('selected')
                     }
                 }else if(val.status == "Estimate Shared"){
                     for (i = 1; i < 6; i++) {
                         $('.status-change-'+i ).addClass('selected')
                     }
-                    for (i = 6; i < 10; i++) {
+                    for (i = 6; i < 11; i++) {
                         $('.status-change-'+i ).removeClass('selected')
                     }
                 }else if(val.status == "Job Completed"){
                     for (i = 1; i < 7; i++) {
                         $('.status-change-'+i ).addClass('selected')
                     }
-                    for (i = 7; i < 10; i++) {
+                    for (i = 7; i < 11; i++) {
                         $('.status-change-'+i ).removeClass('selected')
                     }
                 }else if(val.status == "Feedback Taken"){
                     for (i = 1; i < 8; i++) {
                         $('.status-change-'+i ).addClass('selected')
                     }
-                    for (i = 8; i < 10; i++) {
+                    for (i = 8; i < 11; i++) {
                         $('.status-change-'+i ).removeClass('selected')
                     }
                 }else if(val.status == "Cancelled"){
@@ -3604,55 +4195,59 @@ var Global = {
                     }
                     $('.status-change-8').addClass('selected')
                     $('.status-change-9').removeClass('selected')
+                    $('.status-change-10').removeClass('selected')
 
                 }else if(val.status == "Escalation"){
-                    for (i = 1; i < 9; i++) {
+                    for (i = 1; i < 10; i++) {
                         $('.status-change-'+i ).removeClass('selected')
                     }
-                    $('.status-change-9').addClass('selected')
+                    $('.status-change-10').addClass('selected')
                 }
             }else{
                 if (val.status == "Lead"){
-                for (i = 1; i < 2; i++) {
-                    $('.status-change-'+i ).addClass('selected')
+                    for (i = 1; i < 2; i++) {
+                        $('.status-change-'+i ).addClass('selected')
+                    }
+                    for (i = 2; i < 7; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                }else if(val.status == "Cold"){
+                    for (i = 1; i < 3; i++) {
+                        $('.status-change-'+i ).addClass('selected')
+                    }
+                    for (i = 3; i < 7; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                }else if(val.status == "Estimate Required"){
+                    for (i = 1; i < 4; i++) {
+                        $('.status-change-'+i ).addClass('selected')
+                    }
+                    for (i = 4; i < 7; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                }else if(val.status == "Warm"){
+                    for (i = 1; i < 5; i++) {
+                        $('.status-change-'+i ).addClass('selected')
+                    }
+                    for (i = 5; i < 7; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                }else if(val.status == "Confirmed"){
+                    for (i = 1; i < 6; i++) {
+                        $('.status-change-'+i ).addClass('selected')
+                    }
+                    for (i = 5; i < 7; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                }else if(val.status == "Cancelled"){
+                    for (i = 1; i < 7; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
+                    $('.status-change-5').addClass('selected')
                 }
-                for (i = 2; i < 6; i++) {
-                    $('.status-change-'+i ).removeClass('selected')
-                }
-            }else if(val.status == "Cold"){
-                for (i = 1; i < 3; i++) {
-                    $('.status-change-'+i ).addClass('selected')
-                }
-                for (i = 3; i < 6; i++) {
-                    $('.status-change-'+i ).removeClass('selected')
-                }
-            }else if(val.status == "Warm"){
-                for (i = 1; i < 4; i++) {
-                    $('.status-change-'+i ).addClass('selected')
-                }
-                for (i = 4; i < 6; i++) {
-                    $('.status-change-'+i ).removeClass('selected')
-                }
-            }else if(val.status == "Confirmed"){
-                for (i = 1; i < 5; i++) {
-                    $('.status-change-'+i ).addClass('selected')
-                }
-                for (i = 5; i < 6; i++) {
-                    $('.status-change-'+i ).removeClass('selected')
-                }
-            }else if(val.status == "Cancelled"){
-                for (i = 1; i < 6; i++) {
-                    $('.status-change-'+i ).removeClass('selected')
-                }
-                $('.status-change-5').addClass('selected')
 
-            }
             }
             // <----- New Booking Data---->>
-
-
-
-
 
 
 
@@ -3672,13 +4267,13 @@ var Global = {
                 if (val.agent_details=="Not Assigned"){
                     $('.bill-row').hide()
                 }else if (val.bill_generation_flag){
-                      $('#customer-detail .non-generated-bill').hide()
+                    $('#customer-detail .non-generated-bill').hide()
                     $('#customer-detail .generated-bill').show()
 
                 }else{
                     $('#customer-detail .non-generated-bill').show()
                     $('#customer-detail .generated-bill').hide()
-                               }
+                }
 
 
 
@@ -3753,7 +4348,7 @@ var Global = {
                     $('.bill-row').hide()
                 }else if (val.bill_generation_flag){
 
-                 $('#customer-detail .non-generated-bill').hide()
+                    $('#customer-detail .non-generated-bill').hide()
                     $('#customer-detail .generated-bill').show()
 
                 }else{
@@ -3807,25 +4402,25 @@ var Global = {
         container.html(html);
         try{
 
-        var $input = $('#customer-detail #date.datepicker').pickadate({
-            format: 'dd-mm-yyyy',
-        })
+            var $input = $('#customer-detail #date.datepicker').pickadate({
+                format: 'dd-mm-yyyy',
+            })
 
-        var picker = $input.pickadate('picker')
-        picker.set('select', date_string, { format: 'dd-mm-yyyy' })
+            var picker = $input.pickadate('picker')
+            picker.set('select', date_string, { format: 'dd-mm-yyyy' })
 
         }catch(e){
 
         }
 
         try{
-        var $input2 = $('#customer-detail #date_delivery.datepicker').pickadate({
-            format: 'dd-mm-yyyy',
-            // min: new Date(),
-        })
+            var $input2 = $('#customer-detail #date_delivery.datepicker').pickadate({
+                format: 'dd-mm-yyyy',
+                // min: new Date(),
+            })
 
-        var picker2 = $input2.pickadate('picker')
-        picker2.set('select', date_delivery_string, { format: 'dd-mm-yyyy' })
+            var picker2 = $input2.pickadate('picker')
+            picker2.set('select', date_delivery_string, { format: 'dd-mm-yyyy' })
 
         }catch(e){
 
@@ -3837,13 +4432,13 @@ var Global = {
 
         try{
 
-        var $input3 = $('#customer-detail #date_follow.datepicker').pickadate({
-            format: 'dd-mm-yyyy',
-            // min: new Date(),
-        })
+            var $input3 = $('#customer-detail #date_follow.datepicker').pickadate({
+                format: 'dd-mm-yyyy',
+                // min: new Date(),
+            })
 
-        var picker3 = $input3.pickadate('picker')
-        picker3.set('select', date_follow_up, { format: 'dd-mm-yyyy' })
+            var picker3 = $input3.pickadate('picker')
+            picker3.set('select', date_follow_up, { format: 'dd-mm-yyyy' })
 
         }catch(e){
 
@@ -3852,16 +4447,16 @@ var Global = {
 
 
         $('#customer-detail #time_follow').timepicker({
-                 timeFormat: "h:i A"
-             });
+            timeFormat: "h:i A"
+        });
 
         try {
 
-             $('#customer-detail #time_follow').timepicker('setTime', time_follow_up);
-             // console.log(date_de)
-         }catch(e){
+            $('#customer-detail #time_follow').timepicker('setTime', time_follow_up);
+            // console.log(date_de)
+        }catch(e){
 
-         }
+        }
 
         TOTAL_ITEM_ESTIMATE = 0;
         var container2 = $('#customer-detail .booking-job-data .pre-data');
@@ -3947,52 +4542,71 @@ var Global = {
                 html += '<td class="centered-text">' + item_no + '</td>';
                 // Part Name
                 if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-                    html += '<td>' + '<input id="part_name" type="text" class="browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
+                    if (val.bill_generation_flag){
+                        html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
+                    }else{
+                        html += '<td>' + '<input id="part_name" type="text" class="browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
+                    }
                 }else{
                     html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
                 }
                 // Part Type
                 if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-                    html += '<td>' + '<div class="input-field sort" id ="part_type"><select  class="browser-default">'
-                    if (val.service_items[i].type == "Part") {
-                        html += '<option value="Part" selected>Part</option>'
-                    } else {
-                        html += '<option value="Part">Part</option>'
-                    }
-                    if (val.service_items[i].type == "Lube") {
-                        html += '<option value="Lube" selected>Lube</option>'
-                    } else {
-                        html += '<option value="Lube">Lube</option>'
-                    }
-                    if (val.service_items[i].type == "Consumable") {
-                        html += '<option value="Consumable" selected>Consumable</option>'
-                    } else {
-                        html += '<option value="Consumable">Consumable</option>'
-                    }
+                    if(val.bill_generation_flag){
+                        html += '<td>' + '<input id="part_type" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].type + '" aria-required="true">' + '</td>';
+                    }else{
+                        html += '<td>' + '<div class="input-field sort" id ="part_type"><select  class="browser-default">'
+                        if (val.service_items[i].type == "Part") {
+                            html += '<option value="Part" selected>Part</option>'
+                        } else {
+                            html += '<option value="Part">Part</option>'
+                        }
+                        if (val.service_items[i].type == "Lube") {
+                            html += '<option value="Lube" selected>Lube</option>'
+                        } else {
+                            html += '<option value="Lube">Lube</option>'
+                        }
+                        if (val.service_items[i].type == "Consumable") {
+                            html += '<option value="Consumable" selected>Consumable</option>'
+                        } else {
+                            html += '<option value="Consumable">Consumable</option>'
+                        }
 
-                    if (val.service_items[i].type == "Labour") {
-                        html += '<option value="Labour" selected>Labour</option>'
-                    } else {
-                        html += '<option value="Labour">Labour</option>'
-                    }
-                    if (val.service_items[i].type == "Discount") {
-                        html += '<option value="Discount" selected>Discount</option>'
-                    } else {
-                        html += '<option value="Discount">Discount</option>'
-                    }
-                    if (val.service_items[i].type == "Total") {
-                        html += '<option value="Total" selected>Total</option>'
-                    } else {
-                        html += '<option value="Total">Total</option>'
-                    }
-                    html += '</select></div>' + '</td>';
-                }else{
+                        if (val.service_items[i].type == "Labour") {
+                            html += '<option value="Labour" selected>Labour</option>'
+                        } else {
+                            html += '<option value="Labour">Labour</option>'
+                        }
+                        if (val.service_items[i].type == "Discount") {
+                            html += '<option value="Discount" selected>Discount</option>'
+                        } else {
+                            html += '<option value="Discount">Discount</option>'
+                        }
+                        if (val.service_items[i].type == "Total") {
+                            html += '<option value="Total" selected>Total</option>'
+                        } else {
+                            html += '<option value="Total">Total</option>'
+                        }
+                        html += '</select></div>' + '</td>';
+                        }
+                    }else{
                     html += '<td>' + '<input id="part_type" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].type + '" aria-required="true">' + '</td>';
                 }
 
                 // Price
                 if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff || val.req_user_agent ) {
                     if (val.req_user_admin || val.req_user_staff || val.req_user_agent ) {
+                        if (val.bill_generation_flag){
+                        if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
+                            html += '<td>' + '<input id="part_units" type="number" class="browser-default" disabled value ="1" aria-required="true">' + '</td>';
+                            html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" disabled  value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
+                            html += '<td>' + '<input id="part_price" type="number" class="browser-default" disabled value ="' + val.service_items[i].price  + '" aria-required="true">' + '</td>';
+                        }else{
+                            html += '<td>' + '<input id="part_units" type="number" class="browser-default noborder" disabled  value ="' + val.service_items[i].quantity + '" aria-required="true">' + '</td>';
+                            html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default noborder" disabled  value ="' + val.service_items[i].unit_price + '" aria-required="true">' + '</td>';
+                            html += '<td>' + '<input id="part_price" type="number" class="browser-default noborder" disabled value ="' + parseFloat(String(parseFloat(val.service_items[i].quantity) * parseFloat(val.service_items[i].unit_price)))  + '" aria-required="true">' + '</td>';
+                        }
+                        }else{
                         if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
                             html += '<td>' + '<input id="part_units" type="number" class="browser-default" value ="1" aria-required="true">' + '</td>';
                             html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
@@ -4002,6 +4616,7 @@ var Global = {
                             html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" value ="' + val.service_items[i].unit_price + '" aria-required="true">' + '</td>';
                             html += '<td>' + '<input id="part_price" type="number" class="browser-default " disabled value ="' + parseFloat(String(parseFloat(val.service_items[i].quantity) * parseFloat(val.service_items[i].unit_price)))  + '" aria-required="true">' + '</td>';
 
+                        }
                         }
                     }else{
                         if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
@@ -4189,7 +4804,7 @@ var Global = {
         if (TO_SHOW_TOTAL == 1){
             $('#customer-detail .total-amount').text(TOTAL_PRICE_ADMIN)
         }else{
-             $('#customer-detail .total-amount').text("TBD")
+            $('#customer-detail .total-amount').text("TBD")
 
         }
         // container2.find('select').material_select();
@@ -4443,6 +5058,7 @@ var Global = {
         CURRENT_CART_NEW_BOOKING = [];
         TOTAL_PRICE_NEW_BOOKING = 0;
         ALL_JOBS_NEW_BOOKING = "";
+        ALL_JOBS_NEW_BOOKING_LIST = [];
         TOTAL_ITEMS_NEW_BOOKING = 0 ;
         TOTAL_LABOUR_NEW_BOOKING= 0;
         TOTAL_PARTS_NEW_BOOKING = 0;
@@ -4467,8 +5083,12 @@ var Global = {
 
             if (ALL_JOBS_NEW_BOOKING ==''){
                 ALL_JOBS_NEW_BOOKING = val.job_name;
+                job_obj = {"Job":val.job_name,"Price":val.total_price}
+                ALL_JOBS_NEW_BOOKING_LIST.push(job_obj)
             }else{
                 ALL_JOBS_NEW_BOOKING = ALL_JOBS_NEW_BOOKING +', '+val.job_name;
+                job_obj = {"Job":val.job_name,"Price":val.total_price}
+                ALL_JOBS_NEW_BOOKING_LIST.push(job_obj)
             }
             JOBS_SUMMARY_NEW_BOOKING.push({'category':val.service_cat,'job_name':val.job_name,'price_total':val.total_price,'price_part':val.total_part,'price_labour':val.total_labour,'price_discount':val.total_discount,"doorstep":val.doorstep})
         });
@@ -4494,7 +5114,7 @@ var Global = {
                 console.log(PICK_DROP)
                 // JOBS_SUMMARY_TOTAL
                 pick_drop_val = {"category": "Labour",
-                    "job_name": "Visiting/Pick Drop",
+                    "name": "Visiting/Pick Drop",
                     "price": PICK_DROP,
                     "price_comp": PICK_DROP,
                     "unit_price": PICK_DROP,
@@ -4714,7 +5334,7 @@ var Global = {
 
     },
     loadFeedback:function(data){
-         $.each(data, function(ix, val) {
+        $.each(data, function(ix, val) {
             if (val.pick_on_time=="Yes"){
                 document.getElementById("pick_on_time_yes").checked = true;
             }else if(val.pick_on_time == "No"){
@@ -4722,7 +5342,7 @@ var Global = {
             }else{
 
             }
-             if (val.delivery_on_time=="Yes"){
+            if (val.delivery_on_time=="Yes"){
                 document.getElementById("delivery_on_time_yes").checked = true;
             }else if(val.delivery_on_time == "No"){
                 document.getElementById("delivery_on_time_no").checked = true;
@@ -4730,7 +5350,7 @@ var Global = {
 
             }
 
-             if (val.courteous=="Yes"){
+            if (val.courteous=="Yes"){
                 document.getElementById("courteous_yes").checked = true;
             }else if(val.courteous == "No"){
                 document.getElementById("courteous_no").checked = true;
@@ -4738,121 +5358,129 @@ var Global = {
 
             }
 
-             if(val.washing == "1"){document.getElementById("washing_1").checked = true;}
-             else if(val.washing =="2"){document.getElementById("washing_2").checked = true;}
-             else if(val.washing =="3"){document.getElementById("washing_3").checked = true;}
-             else if(val.washing =="4"){document.getElementById("washing_4").checked = true;}
-             else if(val.washing =="5"){document.getElementById("washing_5").checked = true;}
-             else if(val.washing =="6"){document.getElementById("washing_6").checked = true;}
-             else if(val.washing =="7"){document.getElementById("washing_7").checked = true;}
-             else if(val.washing =="8"){document.getElementById("washing_8").checked = true;}
-             else if(val.washing =="9"){document.getElementById("washing_9").checked = true;}
-             else if(val.washing =="10"){document.getElementById("washing_10").checked = true;}else{}
+            if(val.washing == "1"){document.getElementById("washing_1").checked = true;}
+            else if(val.washing =="2"){document.getElementById("washing_2").checked = true;}
+            else if(val.washing =="3"){document.getElementById("washing_3").checked = true;}
+            else if(val.washing =="4"){document.getElementById("washing_4").checked = true;}
+            else if(val.washing =="5"){document.getElementById("washing_5").checked = true;}
+            else if(val.washing =="6"){document.getElementById("washing_6").checked = true;}
+            else if(val.washing =="7"){document.getElementById("washing_7").checked = true;}
+            else if(val.washing =="8"){document.getElementById("washing_8").checked = true;}
+            else if(val.washing =="9"){document.getElementById("washing_9").checked = true;}
+            else if(val.washing =="10"){document.getElementById("washing_10").checked = true;}else{}
 
-             
-             
-                          if(val.quality_of_service == "1"){document.getElementById("quality_of_service_1").checked = true;}
-             else if(val.quality_of_service =="2"){document.getElementById("quality_of_service_2").checked = true;}
-             else if(val.quality_of_service =="3"){document.getElementById("quality_of_service_3").checked = true;}
-             else if(val.quality_of_service =="4"){document.getElementById("quality_of_service_4").checked = true;}
-             else if(val.quality_of_service =="5"){document.getElementById("quality_of_service_5").checked = true;}
-             else if(val.quality_of_service =="6"){document.getElementById("quality_of_service_6").checked = true;}
-             else if(val.quality_of_service =="7"){document.getElementById("quality_of_service_7").checked = true;}
-             else if(val.quality_of_service =="8"){document.getElementById("quality_of_service_8").checked = true;}
-             else if(val.quality_of_service =="9"){document.getElementById("quality_of_service_9").checked = true;}
-             else if(val.quality_of_service =="10"){document.getElementById("quality_of_service_10").checked = true;}else{}
 
-                                       if(val.experience == "1"){document.getElementById("experience_1").checked = true;}
-             else if(val.experience =="2"){document.getElementById("experience_2").checked = true;}
-             else if(val.experience =="3"){document.getElementById("experience_3").checked = true;}
-             else if(val.experience =="4"){document.getElementById("experience_4").checked = true;}
-             else if(val.experience =="5"){document.getElementById("experience_5").checked = true;}
-             else if(val.experience =="6"){document.getElementById("experience_6").checked = true;}
-             else if(val.experience =="7"){document.getElementById("experience_7").checked = true;}
-             else if(val.experience =="8"){document.getElementById("experience_8").checked = true;}
-             else if(val.experience =="9"){document.getElementById("experience_9").checked = true;}
-             else if(val.experience =="10"){document.getElementById("experience_10").checked = true;}else{}
 
-             
-                          if(val.recommend_factor == "1"){document.getElementById("recommend_factor_1").checked = true;}
-             else if(val.recommend_factor =="2"){document.getElementById("recommend_factor_2").checked = true;}
-             else if(val.recommend_factor =="3"){document.getElementById("recommend_factor_3").checked = true;}
-             else if(val.recommend_factor =="4"){document.getElementById("recommend_factor_4").checked = true;}
-             else if(val.recommend_factor =="5"){document.getElementById("recommend_factor_5").checked = true;}
-             else if(val.recommend_factor =="6"){document.getElementById("recommend_factor_6").checked = true;}
-             else if(val.recommend_factor =="7"){document.getElementById("recommend_factor_7").checked = true;}
-             else if(val.recommend_factor =="8"){document.getElementById("recommend_factor_8").checked = true;}
-             else if(val.recommend_factor =="9"){document.getElementById("recommend_factor_9").checked = true;}
-             else if(val.recommend_factor =="10"){document.getElementById("recommend_factor_10").checked = true;}else{}
+            if(val.quality_of_service == "1"){document.getElementById("quality_of_service_1").checked = true;}
+            else if(val.quality_of_service =="2"){document.getElementById("quality_of_service_2").checked = true;}
+            else if(val.quality_of_service =="3"){document.getElementById("quality_of_service_3").checked = true;}
+            else if(val.quality_of_service =="4"){document.getElementById("quality_of_service_4").checked = true;}
+            else if(val.quality_of_service =="5"){document.getElementById("quality_of_service_5").checked = true;}
+            else if(val.quality_of_service =="6"){document.getElementById("quality_of_service_6").checked = true;}
+            else if(val.quality_of_service =="7"){document.getElementById("quality_of_service_7").checked = true;}
+            else if(val.quality_of_service =="8"){document.getElementById("quality_of_service_8").checked = true;}
+            else if(val.quality_of_service =="9"){document.getElementById("quality_of_service_9").checked = true;}
+            else if(val.quality_of_service =="10"){document.getElementById("quality_of_service_10").checked = true;}else{}
 
-             $('#additional').val(val.additional)
+            if(val.experience == "1"){document.getElementById("experience_1").checked = true;}
+            else if(val.experience =="2"){document.getElementById("experience_2").checked = true;}
+            else if(val.experience =="3"){document.getElementById("experience_3").checked = true;}
+            else if(val.experience =="4"){document.getElementById("experience_4").checked = true;}
+            else if(val.experience =="5"){document.getElementById("experience_5").checked = true;}
+            else if(val.experience =="6"){document.getElementById("experience_6").checked = true;}
+            else if(val.experience =="7"){document.getElementById("experience_7").checked = true;}
+            else if(val.experience =="8"){document.getElementById("experience_8").checked = true;}
+            else if(val.experience =="9"){document.getElementById("experience_9").checked = true;}
+            else if(val.experience =="10"){document.getElementById("experience_10").checked = true;}else{}
+
+
+            if(val.recommend_factor == "1"){document.getElementById("recommend_factor_1").checked = true;}
+            else if(val.recommend_factor =="2"){document.getElementById("recommend_factor_2").checked = true;}
+            else if(val.recommend_factor =="3"){document.getElementById("recommend_factor_3").checked = true;}
+            else if(val.recommend_factor =="4"){document.getElementById("recommend_factor_4").checked = true;}
+            else if(val.recommend_factor =="5"){document.getElementById("recommend_factor_5").checked = true;}
+            else if(val.recommend_factor =="6"){document.getElementById("recommend_factor_6").checked = true;}
+            else if(val.recommend_factor =="7"){document.getElementById("recommend_factor_7").checked = true;}
+            else if(val.recommend_factor =="8"){document.getElementById("recommend_factor_8").checked = true;}
+            else if(val.recommend_factor =="9"){document.getElementById("recommend_factor_9").checked = true;}
+            else if(val.recommend_factor =="10"){document.getElementById("recommend_factor_10").checked = true;}else{}
+
+            $('#additional').val(val.additional)
         });
     },
     loadCustomerFeedback:function(data){
         alert('Feedback Updated!')
     },
     updateCust_new:function(){
-            bid = $('#customer-detail #booking_id').attr('booking_id');
-            email_n = $('#customer-detail #email').val();
-            reg_n = $('#customer-detail #cust_regnumber').val();
-            date_n = $('#customer-detail #date').val();
-            time_n = $('#customer-detail #time_booking').val();
-            comment_n = $('#customer-detail #comments').val();
-            notes_n = $('#customer-detail #notes').val();
-            amount_paid_n = $('#customer-detail #cust_amount_paid').val()
-            cust_name = $('#customer-detail #cust_name').val()
-            cust_number = $('#customer-detail #cust_number').val()
-            cust_address = $('#customer-detail #cust_address').val()
-            cust_locality = $('#customer-detail #cust_locality').val()
-            cust_city = $('#customer-detail #cust_city').val()
-            source = $('#customer-detail #source').val()
-            date_del = $('#customer-detail #date_delivery').val()
-            date_follow = $('#customer-detail #date_follow').val()
-            time_follow = $('#customer-detail #time_follow').val()
-            follow_status = $('#customer-detail #status_details_new').val()
-            odometer = $('#customer-detail #cust_odometer').val()
+        bid = $('#customer-detail #booking_id').attr('booking_id');
+        email_n = $('#customer-detail #email').val();
+        reg_n = $('#customer-detail #cust_regnumber').val();
+        date_n = $('#customer-detail #date').val();
+        time_n = $('#customer-detail #time_booking').val();
+        // comment_n = $('#customer-detail #comments').val();
+        notes_n = $('#customer-detail #notes').val();
+        amount_paid_n = $('#customer-detail #cust_amount_paid').val()
+        cust_name = $('#customer-detail #cust_name').val()
+        cust_number = $('#customer-detail #cust_number').val()
+        cust_address = $('#customer-detail #cust_address').val()
+        cust_locality = $('#customer-detail #cust_locality').val()
+        cust_city = $('#customer-detail #cust_city').val()
+        source = $('#customer-detail #source').val()
+        date_del = $('#customer-detail #date_delivery').val()
+        date_follow = $('#customer-detail #date_follow').val()
+        time_follow = $('#customer-detail #time_follow').val()
+        follow_status = $('#customer-detail #status_details_new').val()
+        odometer = $('#customer-detail #cust_odometer').val()
+        jobs_summary_list = []
+        $('#customer-detail .jobs-list .job-row').each(function(){
+            name = $(this).find('.job-summary-name input').val()
+            price = $(this).find('.job-summary-price input').val()
+            if (name != "" && name != " "){
+                obj = {"Job":name,"Price":price}
+                jobs_summary_list.push(obj)
+            }
+        });
 
-            
 
+        // ALL_JOBS_ADMIN = comment_n
+        Commons.ajaxData('update_booking', {b_id: bid,
+            email: email_n,
+            reg_number: reg_n,
+            // comment: comment_n,
+            time: time_n,
+            date: date_n,
+            note:notes_n,
+            name : cust_name,
+            number : cust_number,
+            amount_paid : amount_paid_n,
+            address : cust_address,
+            locality : cust_locality,
+            city : cust_city,
+            source : source,
+            date_del : date_del,
+            date_follow:date_follow,
+            time_follow:time_follow,
+            follow_status:follow_status,
+            odometer:odometer,
+            job_summary : JSON.stringify(jobs_summary_list)
+        }, "post", Global, Global.loadCustomerupdate,null, '.loading-pane');
 
-            ALL_JOBS_ADMIN = comment_n
-            Commons.ajaxData('update_booking', {b_id: bid,
-                email: email_n,
-                reg_number: reg_n,
-                comment: comment_n,
-                time: time_n,
-                date: date_n,
-                note:notes_n,
-                name : cust_name,
-                number : cust_number,
-                amount_paid : amount_paid_n,
-                address : cust_address,
-                locality : cust_locality,
-                city : cust_city,
-                source : source,
-                date_del : date_del,
-                date_follow:date_follow,
-                time_follow:time_follow,
-                follow_status:follow_status,
-                odometer:odometer
-            }, "post", Global, Global.loadCustomerupdate,null, '.loading-pane');
-
-        },
+    },
     openbooking_new:function(data_id){
-            $('#bookings').hide()
-            $('#booking-details').show()
-            $('#customer-detail .booking-data').show();
-            $('#customer-detail .booking-job-data').hide();
-            $('#customer-detail .feedback-data').hide();
-            $('#customer-detail .feedback-detail').removeClass('selected')
-            $('#customer-detail .service-detail').removeClass('selected')
-            $('#customer-detail .cust-detail').addClass('selected')
-            Commons.ajaxData('view_all_bookings', {data_id:data_id}, "get", Global, Global.loadBookingData,null, '.loading-pane');
-            Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", Global, Global.loadAgentdata,null, '.loading-pane');
-            Commons.ajaxData('get_all_feedback', {booking_data_id:data_id}, "get", Global, Global.loadFeedback,null, '.loading-pane');
-            var path = window.location.pathname.split('/')
-            var new_path = path.slice(0,3).join('/')+'/single/' + data_id
-            history.pushState({},'',new_path)
+        $('#bookings').hide()
+        $('#booking-details').show()
+        $('#customer-detail .booking-data').show();
+        $('#customer-detail .booking-job-data').hide();
+        $('#customer-detail .feedback-data').hide();
+        $('#customer-detail .feedback-detail').removeClass('selected')
+        $('#customer-detail .service-detail').removeClass('selected')
+        $('#customer-detail .cust-detail').addClass('selected')
+        Commons.ajaxData('view_all_bookings', {data_id:data_id}, "get", Global, Global.loadBookingData,null, '.loading-pane');
+        Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", Global, Global.loadAgentdata,null, '.loading-pane');
+        Commons.ajaxData('get_all_feedback', {booking_data_id:data_id}, "get", Global, Global.loadFeedback,null, '.loading-pane');
+        var path = window.location.pathname.split('/')
+        var new_path = path.slice(0,3).join('/')+'/single/' + data_id
+        history.pushState({},'',new_path)
     },
     loadAnalysis_all:function(data){
         $('#analytics .vol-all').text(Math.round(parseFloat(data['vol_completed'])))
@@ -4902,32 +5530,32 @@ var Global = {
             SOURCE_TABLE += data["num_"+source_name+"_lead"]
             SOURCE_TABLE += '</td><td>'
             if (anal_time_cat == "Overall" && anal_veh_cat == "All"){
-            cpl = Math.round(parseFloat(data["vol_"+source_name+"_expense"])/parseFloat(data["num_"+source_name+"_lead"]))
-            cpb = Math.round(parseFloat(data["vol_"+source_name+"_expense"])/parseFloat(data["num_"+source_name+"_completed"]))
-            SOURCE_TABLE += cpl
-            SOURCE_TABLE += '</td><td>'
-            SOURCE_TABLE += cpb
-            SOURCE_TABLE += '</td></tr>'
+                cpl = Math.round(parseFloat(data["vol_"+source_name+"_expense"])/parseFloat(data["num_"+source_name+"_lead"]))
+                cpb = Math.round(parseFloat(data["vol_"+source_name+"_expense"])/parseFloat(data["num_"+source_name+"_completed"]))
+                SOURCE_TABLE += cpl
+                SOURCE_TABLE += '</td><td>'
+                SOURCE_TABLE += cpb
+                SOURCE_TABLE += '</td></tr>'
             }else{
-            SOURCE_TABLE += 'NA'
-            SOURCE_TABLE += '</td><td>'
-            SOURCE_TABLE += 'NA'
-            SOURCE_TABLE += '</td></tr>'
+                SOURCE_TABLE += 'NA'
+                SOURCE_TABLE += '</td><td>'
+                SOURCE_TABLE += 'NA'
+                SOURCE_TABLE += '</td></tr>'
             }
         }
         SOURCE_TABLE += '<tr><td>Other</td><td>'
-            SOURCE_TABLE += Math.round(parseFloat(data["vol_other_completed"]))
-            SOURCE_TABLE +='</td><td>'
-            SOURCE_TABLE += data["num_other_completed"]
-            SOURCE_TABLE +='</td><td>'
-            SOURCE_TABLE += "NA"
-            SOURCE_TABLE += '</td><td>'
-            SOURCE_TABLE += data["num_other_lead"]
-            SOURCE_TABLE += '</td><td>'
-            SOURCE_TABLE += 'NA'
-            SOURCE_TABLE += '</td><td>'
-            SOURCE_TABLE += 'NA'
-            SOURCE_TABLE += '</td></tr>'
+        SOURCE_TABLE += Math.round(parseFloat(data["vol_other_completed"]))
+        SOURCE_TABLE +='</td><td>'
+        SOURCE_TABLE += data["num_other_completed"]
+        SOURCE_TABLE +='</td><td>'
+        SOURCE_TABLE += "NA"
+        SOURCE_TABLE += '</td><td>'
+        SOURCE_TABLE += data["num_other_lead"]
+        SOURCE_TABLE += '</td><td>'
+        SOURCE_TABLE += 'NA'
+        SOURCE_TABLE += '</td><td>'
+        SOURCE_TABLE += 'NA'
+        SOURCE_TABLE += '</td></tr>'
         container.html(SOURCE_TABLE)
 
         // B2C/B2C Source Populate
@@ -4948,7 +5576,7 @@ var Global = {
         SOURCE_TABLE_2 += '</td><td>'
         SOURCE_TABLE_2 += '142'
         SOURCE_TABLE_2 += '</td></tr>'
-         SOURCE_TABLE_2 += '<tr><td>B2C</td><td>'
+        SOURCE_TABLE_2 += '<tr><td>B2C</td><td>'
         SOURCE_TABLE_2 += Math.round(parseFloat(data["vol_b2c_total_completed"]))
         SOURCE_TABLE_2 +='</td><td>'
         SOURCE_TABLE_2 += Math.round(parseFloat(data["num_b2c_total_completed"]))
@@ -5016,11 +5644,11 @@ var Global = {
         // console.log(month)
         anal_veh_cat = $('#analytics .vehicle-filter .date-box.selected').attr('data-class')
         if (anal_veh_cat == "All"){
-           Commons.ajaxData('analyse_bookings', {monthyear:month}, "get", Global, Global.loadAnalysis_veh_filter_month,null, '.loading-pane');
+            Commons.ajaxData('analyse_bookings', {monthyear:month}, "get", Global, Global.loadAnalysis_veh_filter_month,null, '.loading-pane');
         }else if (anal_veh_cat == "Car"){
-           Commons.ajaxData('analyse_bookings', {monthyear:month, car_bike : anal_veh_cat}, "get", Global, Global.loadAnalysis_veh_filter_month,null, '.loading-pane');
+            Commons.ajaxData('analyse_bookings', {monthyear:month, car_bike : anal_veh_cat}, "get", Global, Global.loadAnalysis_veh_filter_month,null, '.loading-pane');
         }else if (anal_veh_cat == "Bike"){
-           Commons.ajaxData('analyse_bookings', {monthyear:month, car_bike : anal_veh_cat}, "get", Global, Global.loadAnalysis_veh_filter_month,null, '.loading-pane');
+            Commons.ajaxData('analyse_bookings', {monthyear:month, car_bike : anal_veh_cat}, "get", Global, Global.loadAnalysis_veh_filter_month,null, '.loading-pane');
         }
     },
     loadExpenseAll:function(data){
@@ -5066,7 +5694,7 @@ var Global = {
         container.html(html);
     },
     loadExpense:function(data){
-         $.each(data, function(ix, val) {
+        $.each(data, function(ix, val) {
             $('#expense-detail #expense_id').attr(val.id)
             $('#expense-detail #expense_date').val(val.date_expense)
             $('#expense-detail #expense_cat').val(val.category)
@@ -5083,7 +5711,329 @@ var Global = {
     },
     loadExpenseDelete:function(data){
         $('.navbar .expenses-button').click()
-    }
+    },
+    loadbillAll:function(data){
+        container =        $('#bill-details .bill-list .pre-data')
+        container.html('')
+        html=''
+        i=1
+        html += '								<div class="desc-content col s12 m12 l12">';
+        html += '									<table class=" card striped">';
+        html += '										<thead>';
+        html += '										<tr>';
+        html += '											<th data-field="id">Invoice No.</th>';
+        html += '											<th data-field="code">Owner</th>';
+        html += '											<th data-field="code">Date Created</th>';
+        html += '											<th data-field="veh_type">Customer Name</th>';
+        html += '											<th data-field="category">Total Amount</th>';
+        html += '											<th data-field="end_date">Bill Status</th>';
+        html += '											<th data-field="start_date">Payment Status</th>';
+        html += '											<th data-field="end_date">Payment Mode</th>';
+        html += '											<th data-field="open">Download</th>';
+        html += '										</tr>';
+        html += '										</thead>';
+        html += '										<tbody>';
+        $.each(data, function(ix, val) {
+            html += '<tr class="bill-row" data-class="'+val.id+'">'
+            html += '											<td>'+val.invoice_number+'</td>';
+            html += '											<td>'+val.agent_name+', '+val.agent_city+'</td>';
+            html += '											<td>'+val.date_created+'</td>';
+            html += '											<td>'+val.cust_name+'</td>';
+            html += '											<td>'+val.total_amount+'</td>';
+            html += '											<td>'+val.status+'</td>';
+            html += '											<td>'+val.payment_status+'</td>';
+            html += '											<td>'+val.payment_mode+'</td>';
+            html += '											<td style="color:purple; cursor:pointer" class="download-btn"><i class="fa fa-download"></i></td>';
+            html += '										</tr>';
+            i=i+1
+        })
+
+        html += '										</tbody>';
+        html += '									</table>';
+        html += '								</div>';
+        container.html(html);
+    },
+    loadbillbookingdata:function(data){
+        container = $('#bill-table').find('tbody')
+        html = ''
+        $.each(data, function(ix, val) {
+            container.html('')
+            html = ''
+            $('#bill-detail #cust_bill_bookingid').val(val.booking_id)
+            $('#bill-detail #cust_bill_name').val(val.cust_name)
+            $('#bill-detail #cust_bill_address').val(val.cust_address)
+            $('#bill-detail #cust_bill_locality').val(val.cust_locality)
+            $('#bill-detail #cust_bill_city').val(val.cust_city)
+            $('#bill-detail #cust_bill_vehicle').val(val.cust_make + ' ' + val.cust_model)
+            $('#bill-detail #cust_bill_reg').val(val.cust_regnumber)
+            $('#bill-detail #cust_bill_reco').val(val.customer_notes)
+
+            data_id = val.id
+
+            VAT_PART_BILL_ADMIN = 0;
+            VAT_CONSUMABLE_BILL_ADMIN = 0;
+            VAT_LUBE_BILL_ADMIN = 0;
+            SERVICE_TAX_BILL_ADMIN = 0;
+
+            AGENT_VAT_NO = val.agent_vat
+            AGENT_STAX_NO = val.agent_stax
+            AGENT_CIN_NO = val.agent_cin
+            AGENT_NAME = val.agent_name
+            AGENT_ADDRESS = val.agent_address
+            AGENT_LOCALITY = val.agent_locality
+            AGENT_CITY = val.agent_city
+            AGENT_STATE = val.agent_state
+            service_items = val.service_items
+            itemlist = service_items.length;
+            console.log(itemlist)
+            for (i = 0; i < itemlist; i++) {
+                html += '<tr>'
+                html += '    <td><input id="part_name" type="text" class="browser-default" value="'+ val.service_items[i]['name'] +'" aria-required="true"></td>'
+                html += '    <td><div class="input-field sort" id ="part_type"><select  class="browser-default">'
+                if(val.service_items[i]['type'] == "Part"){
+                    html += '        <option value="Part" selected>Part</option>'
+                }else{
+                    html += '        <option value="Part">Part</option>'
+                }
+                if(val.service_items[i]['type'] == "Lube"){
+                    html += '        <option value="Lube" selected>Lube</option>'
+                }else{
+                    html += '        <option value="Lube">Lube</option>'
+                }
+                if(val.service_items[i]['type'] == "Consumable"){
+                    html += '        <option value="Consumable" selected>Consumable</option>'
+                }else{
+                    html += '        <option value="Consumable">Consumable</option>'
+                }
+                if(val.service_items[i]['type'] == "Labour"){
+                    html += '        <option value="Labour" selected>Labour</option>'
+                }else{
+                    html += '        <option value="Labour">Labour</option>'
+                }
+                if(val.service_items[i]['type'] == "Discount"){
+                    html += '        <option value="Discount" selected>Discount</option>'
+                }else{
+                    html += '        <option value="Discount">Discount</option>'
+                }
+                html += '    </select></div></td>'
+                if (val.service_items[i]['quantity'] == "NA"){
+                    html += '    <td><input id="part_unit" type="number" class="browser-default"  value="1" aria-required="true"></td>'
+                    html += '    <td><input id="part_unit_price" type="number"  value="'+ val.service_items[i]['price']+'"  class="browser-default" aria-required="true"></td>'
+                    html += '    <td><input id="total_price" disabled type="number"  value="'+ val.service_items[i]['price']+'" class="browser-default" aria-required="true"></td>'
+                    if (val.service_items[i]['type']=="Part"){
+                        html += '    <td><input id="total_price_pretax" disabled type="number"  value="'+ (parseFloat(val.service_items[i]['price'])/(VAT_PART_PERCENT/100+1))+'" class="browser-default" aria-required="true"></td>'
+                        VAT_PART_BILL_ADMIN = VAT_PART_BILL_ADMIN + (parseFloat(val.service_items[i]['price'])*(VAT_PART_PERCENT/100))
+                    }else if(val.service_items[i]['type']=="Labour") {
+                        html += '    <td><input id="total_price_pretax" disabled type="number"  value="'+ (parseFloat(val.service_items[i]['price'])/(SERVICE_TAX_PERCENT/100+1))+'" class="browser-default" aria-required="true"></td>'
+                        SERVICE_TAX_BILL_ADMIN = SERVICE_TAX_BILL_ADMIN + (parseFloat(val.service_items[i]['price'])*(SERVICE_TAX_PERCENT/100))
+                    }else if(val.service_items[i]['type']=="Consumable") {
+                        html += '    <td><input id="total_price_pretax" disabled type="number"  value="'+ (parseFloat(val.service_items[i]['price'])/(VAT_CONSUMABLE_PERCENT/100+1))+'" class="browser-default" aria-required="true"></td>'
+                        VAT_CONSUMABLE_BILL_ADMIN = VAT_CONSUMABLE_BILL_ADMIN + (parseFloat(val.service_items[i]['price'])*(VAT_CONSUMABLE_PERCENT/100))
+                    }else if(val.service_items[i]['type']=="Lube") {
+                        html += '    <td><input id="total_price_pretax" disabled type="number"  value="'+ (parseFloat(val.service_items[i]['price'])/(VAT_LUBE_PERCENT/100+1))+'" class="browser-default" aria-required="true"></td>'
+                        VAT_LUBE_BILL_ADMIN = VAT_LUBE_BILL_ADMIN + (parseFloat(val.service_items[i]['price'])*(VAT_LUBE_PERCENT/100))
+                    }else if(val.service_items[i]['type']=="Discount") {
+                        html += '    <td><input id="total_price_pretax" disabled type="number"  value="'+ (parseFloat(val.service_items[i]['price']))+'" class="browser-default" aria-required="true"></td>'
+                    }else{
+                        html += '    <td><input id="total_price_pretax" disabled type="number"  value="'+ (parseFloat(val.service_items[i]['price']))+'" class="browser-default" aria-required="true"></td>'
+                    }
+                }else{
+                    html += '    <td><input id="part_unit" type="number" class="browser-default"  value="'+ val.service_items[i]['quantity']+'" aria-required="true"></td>'
+                    html += '    <td><input id="part_unit_price" type="number"  value="'+ val.service_items[i]['unit_price']+'"  class="browser-default" aria-required="true"></td>'
+                    html += '    <td><input id="total_price" disabled type="number"  value="'+ val.service_items[i]['price']+'" class="browser-default" aria-required="true"></td>'
+                    if (val.service_items[i]['type']=="Part"){
+                        html += '    <td><input id="total_price_pretax" disabled type="number"  value="'+ (parseFloat(val.service_items[i]['price'])/(VAT_PART_PERCENT/100+1))+'" class="browser-default" aria-required="true"></td>'
+                        VAT_PART_BILL_ADMIN = VAT_PART_BILL_ADMIN + (parseFloat(val.service_items[i]['price'])*(VAT_PART_PERCENT/100))
+                    }else if(val.service_items[i]['type']=="Labour") {
+                        html += '    <td><input id="total_price_pretax" disabled type="number"  value="'+ (parseFloat(val.service_items[i]['price'])/(SERVICE_TAX_PERCENT/100+1))+'" class="browser-default" aria-required="true"></td>'
+                        SERVICE_TAX_BILL_ADMIN = SERVICE_TAX_BILL_ADMIN + (parseFloat(val.service_items[i]['price'])*(SERVICE_TAX_PERCENT/100))
+                    }else if(val.service_items[i]['type']=="Consumable") {
+                        html += '    <td><input id="total_price_pretax" disabled type="number"  value="'+ (parseFloat(val.service_items[i]['price'])/(VAT_CONSUMABLE_PERCENT/100+1))+'" class="browser-default" aria-required="true"></td>'
+                        VAT_CONSUMABLE_BILL_ADMIN = VAT_CONSUMABLE_BILL_ADMIN + (parseFloat(val.service_items[i]['price'])*(VAT_CONSUMABLE_PERCENT/100))
+                    }else if(val.service_items[i]['type']=="Lube") {
+                        html += '    <td><input id="total_price_pretax" disabled type="number"  value="'+ (parseFloat(val.service_items[i]['price'])/(VAT_LUBE_PERCENT/100+1))+'" class="browser-default" aria-required="true"></td>'
+                        VAT_LUBE_BILL_ADMIN = VAT_LUBE_BILL_ADMIN + (parseFloat(val.service_items[i]['price'])*(VAT_LUBE_PERCENT/100))
+                    }else if(val.service_items[i]['type']=="Discount") {
+                        html += '    <td><input id="total_price_pretax" disabled type="number"  value="'+ (parseFloat(val.service_items[i]['price']))+'" class="browser-default" aria-required="true"></td>'
+                    }else{
+                        html += '    <td><input id="total_price_pretax" disabled type="number"  value="'+ (parseFloat(val.service_items[i]['price']))+'" class="browser-default" aria-required="true"></td>'
+                    }
+                }
+
+                html += '    <td data-field="delete"><i class="x25 delete-bill-item fa fa-trash-o"></i></td>'
+                html += '</tr>'
+            }
+
+        })
+        container.html(html)
+        $('#bill-detail table').click()
+        Materialize.updateTextFields()
+        $('#bill-detail .booking-id').attr('data-class',data_id)
+        var path = window.location.pathname.split('/')
+        var new_path = path.slice(0,3).join('/')+'/newbill/' + data_id + '/new'
+        history.pushState({},'',new_path)
+    },
+    loadTaxUpdateAgent:function(data){
+        $.each(data, function(ix, val) {
+            if (AGENT_VAT_NO != ""){
+                VAT_CONSUMABLE_PERCENT = parseFloat(val.vat_consumables)
+                VAT_LUBE_PERCENT = parseFloat(val.vat_lube)
+                VAT_PART_PERCENT = parseFloat(val.vat_parts)
+
+            }else{
+                VAT_CONSUMABLE_PERCENT = 0
+                VAT_LUBE_PERCENT = 0
+                VAT_PART_PERCENT = 0
+            }
+            if(AGENT_STAX_NO != ""){
+                SERVICE_TAX_PERCENT = parseFloat(val.service_tax)
+            }else{
+                SERVICE_TAX_PERCENT = 0
+            }
+        });
+        $('#bill-detail table').click()
+
+    },
+    loadTaxUpdate:function(data){
+        $.each(data, function(ix, val) {
+            VAT_CONSUMABLE_PERCENT = parseFloat(val.vat_consumables)
+            VAT_LUBE_PERCENT = parseFloat(val.vat_lube)
+            VAT_PART_PERCENT = parseFloat(val.vat_parts)
+            SERVICE_TAX_PERCENT = parseFloat(val.service_tax)
+        });
+        $('#bill-detail table').click()
+
+    },
+    loadbillbookingdatapre:function(data) {
+        container = $('#bill-table').find('tbody')
+        html = ''
+
+            container.html('')
+            html = ''
+
+        $.each(data, function (ix, val) {
+             if (!val.bill_genereration_flag) {
+                 $('#bill-detail #cust_bill_bookingid').val(val.booking_id)
+                 $('#bill-detail #cust_bill_name').val(val.bill_cust_name)
+                 $('#bill-detail #cust_bill_address').val(val.bill_cust_address)
+                 $('#bill-detail #cust_bill_locality').val(val.bill_cust_locality)
+                 $('#bill-detail #cust_bill_city').val(val.bill_cust_city)
+                 $('#bill-detail #cust_bill_vehicle').val(val.bill_vehicle)
+                 $('#bill-detail #cust_bill_reg').val(val.bill_reg_number)
+                 $('#bill-detail #cust_bill_reco').val(val.bill_notes)
+
+                 data_id = val.id
+
+                 VAT_PART_BILL_ADMIN = 0;
+                 VAT_CONSUMABLE_BILL_ADMIN = 0;
+                 VAT_LUBE_BILL_ADMIN = 0;
+                 SERVICE_TAX_BILL_ADMIN = 0;
+
+                 AGENT_STATE = val.bill_state
+                 $('#agent_bill_name').val(val.bill_agent_name)
+                 $('#agent_bill_address').val(val.bill_agent_address)
+                 $('#agent_bill_vat').val(val.bill_agent_vat_no)
+                 $('#agent_bill_stax').val(val.bill_agent_stax)
+                 $('#agent_bill_cin').val(val.bill_agent_cin)
+
+                 VAT_CONSUMABLE_PERCENT = parseFloat(val.bill_vat_consumable_percent)
+                 VAT_LUBE_PERCENT = parseFloat(val.bill_vat_lube_percent)
+                 VAT_PART_PERCENT = parseFloat(val.bill_vat_part_percent)
+                 SERVICE_TAX_PERCENT = parseFloat(val.bill_service_tax_percent)
+
+                 service_items = val.bill_components
+
+                 itemlist = service_items.length;
+                 console.log(itemlist)
+                 for (i = 0; i < itemlist; i++) {
+                     html += '<tr>'
+                     html += '    <td><input id="part_name" type="text" class="browser-default" value="' + val.bill_components[i]['name'] + '" aria-required="true"></td>'
+                     html += '    <td><div class="input-field sort" id ="part_type"><select  class="browser-default">'
+                     if (val.bill_components[i]['type'] == "Part") {
+                         html += '        <option value="Part" selected>Part</option>'
+                     } else {
+                         html += '        <option value="Part">Part</option>'
+                     }
+                     if (val.bill_components[i]['type'] == "Lube") {
+                         html += '        <option value="Lube" selected>Lube</option>'
+                     } else {
+                         html += '        <option value="Lube">Lube</option>'
+                     }
+                     if (val.bill_components[i]['type'] == "Consumable") {
+                         html += '        <option value="Consumable" selected>Consumable</option>'
+                     } else {
+                         html += '        <option value="Consumable">Consumable</option>'
+                     }
+                     if (val.bill_components[i]['type'] == "Labour") {
+                         html += '        <option value="Labour" selected>Labour</option>'
+                     } else {
+                         html += '        <option value="Labour">Labour</option>'
+                     }
+                     if (val.bill_components[i]['type'] == "Discount") {
+                         html += '        <option value="Discount" selected>Discount</option>'
+                     } else {
+                         html += '        <option value="Discount">Discount</option>'
+                     }
+                     html += '    </select></div></td>'
+                     if (val.bill_components[i]['quantity'] == "NA") {
+                         html += '    <td><input id="part_unit" type="number" class="browser-default"  value="1" aria-required="true"></td>'
+                         html += '    <td><input id="part_unit_price" type="number"  value="' + val.bill_components[i]['price'] + '"  class="browser-default" aria-required="true"></td>'
+                         html += '    <td><input id="total_price" disabled type="number"  value="' + val.bill_components[i]['price'] + '" class="browser-default" aria-required="true"></td>'
+                         if (val.bill_components[i]['type'] == "Part") {
+                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price']) / (VAT_PART_PERCENT / 100 + 1)) + '" class="browser-default" aria-required="true"></td>'
+                             VAT_PART_BILL_ADMIN = VAT_PART_BILL_ADMIN + (parseFloat(val.bill_components[i]['price']) * (VAT_PART_PERCENT / 100))
+                         } else if (val.bill_components[i]['type'] == "Labour") {
+                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price']) / (SERVICE_TAX_PERCENT / 100 + 1)) + '" class="browser-default" aria-required="true"></td>'
+                             SERVICE_TAX_BILL_ADMIN = SERVICE_TAX_BILL_ADMIN + (parseFloat(val.bill_components[i]['price']) * (SERVICE_TAX_PERCENT / 100))
+                         } else if (val.bill_components[i]['type'] == "Consumable") {
+                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price']) / (VAT_CONSUMABLE_PERCENT / 100 + 1)) + '" class="browser-default" aria-required="true"></td>'
+                             VAT_CONSUMABLE_BILL_ADMIN = VAT_CONSUMABLE_BILL_ADMIN + (parseFloat(val.bill_components[i]['price']) * (VAT_CONSUMABLE_PERCENT / 100))
+                         } else if (val.bill_components[i]['type'] == "Lube") {
+                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price']) / (VAT_LUBE_PERCENT / 100 + 1)) + '" class="browser-default" aria-required="true"></td>'
+                             VAT_LUBE_BILL_ADMIN = VAT_LUBE_BILL_ADMIN + (parseFloat(val.bill_components[i]['price']) * (VAT_LUBE_PERCENT / 100))
+                         } else if (val.bill_components[i]['type'] == "Discount") {
+                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price'])) + '" class="browser-default" aria-required="true"></td>'
+                         } else {
+                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price'])) + '" class="browser-default" aria-required="true"></td>'
+                         }
+                     } else {
+                         html += '    <td><input id="part_unit" type="number" class="browser-default"  value="' + val.bill_components[i]['quantity'] + '" aria-required="true"></td>'
+                         html += '    <td><input id="part_unit_price" type="number"  value="' + val.bill_components[i]['unit_price'] + '"  class="browser-default" aria-required="true"></td>'
+                         html += '    <td><input id="total_price" disabled type="number"  value="' + val.bill_components[i]['price'] + '" class="browser-default" aria-required="true"></td>'
+                         if (val.bill_components[i]['type'] == "Part") {
+                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price']) / (VAT_PART_PERCENT / 100 + 1)) + '" class="browser-default" aria-required="true"></td>'
+                             VAT_PART_BILL_ADMIN = VAT_PART_BILL_ADMIN + (parseFloat(val.bill_components[i]['price']) * (VAT_PART_PERCENT / 100))
+                         } else if (val.bill_components[i]['type'] == "Labour") {
+                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price']) / (SERVICE_TAX_PERCENT / 100 + 1)) + '" class="browser-default" aria-required="true"></td>'
+                             SERVICE_TAX_BILL_ADMIN = SERVICE_TAX_BILL_ADMIN + (parseFloat(val.bill_components[i]['price']) * (SERVICE_TAX_PERCENT / 100))
+                         } else if (val.bill_components[i]['type'] == "Consumable") {
+                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price']) / (VAT_CONSUMABLE_PERCENT / 100 + 1)) + '" class="browser-default" aria-required="true"></td>'
+                             VAT_CONSUMABLE_BILL_ADMIN = VAT_CONSUMABLE_BILL_ADMIN + (parseFloat(val.bill_components[i]['price']) * (VAT_CONSUMABLE_PERCENT / 100))
+                         } else if (val.bill_components[i]['type'] == "Lube") {
+                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price']) / (VAT_LUBE_PERCENT / 100 + 1)) + '" class="browser-default" aria-required="true"></td>'
+                             VAT_LUBE_BILL_ADMIN = VAT_LUBE_BILL_ADMIN + (parseFloat(val.bill_components[i]['price']) * (VAT_LUBE_PERCENT / 100))
+                         } else if (val.bill_components[i]['type'] == "Discount") {
+                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price'])) + '" class="browser-default" aria-required="true"></td>'
+                         } else {
+                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price'])) + '" class="browser-default" aria-required="true"></td>'
+                         }
+                     }
+
+                     html += '    <td data-field="delete"><i class="x25 delete-bill-item fa fa-trash-o"></i></td>'
+                     html += '</tr>'
+                 }
+             }
+        });
+       container.html(html)
+        $('#bill-detail table').click()
+        Materialize.updateTextFields()
+        $('#bill-detail .booking-id').attr('data-class',data_id)
+        var path = window.location.pathname.split('/')
+        var new_path = path.slice(0,3).join('/')+'/newbill/' + data_id +'/pre'
+        history.pushState({},'',new_path)
+
+
+    },
 };
 
 

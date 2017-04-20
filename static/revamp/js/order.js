@@ -45,6 +45,7 @@ var CURRENT_CART_COUP = [];
 var TOTAL_PRICE = 0;
 var TOTAL_JOBS = 0;
 var ALL_JOBS = "";
+var ALL_JOBS_LIST = [];
 var JOBS_SUMMARY = [];
 var JOBS_SUMMARY_TOTAL = [];
 var JOBS_SUMMARY_COUP = [];
@@ -836,6 +837,9 @@ var Global = {
             var is_paid = false;
             var paid_amt = "0";
             var price_total = $('#total-price').text();
+            if (comment!= "" && comment != " "){
+                ALL_JOBS_LIST.push({"Job":comment,"Price":"0"})
+            }
             var time = $('#time-slot').find('.selectize-input').find('div').attr('data-value');
             Commons.ajaxData('send_booking', {otp:otp
                 ,name       : name
@@ -852,6 +856,7 @@ var Global = {
                 ,veh_type   : veh_type
                 ,date       : date
                 ,time       : time
+                ,jobsummary_list : JSON.stringify(ALL_JOBS_LIST)
                 ,comment    : ALL_JOBS + ', '+ comment
                 ,is_paid    : is_paid
                 ,paid_amt   : paid_amt
@@ -977,6 +982,7 @@ var Global = {
         container.html('');
         var html ='';
         ALL_JOBS = '';
+        ALL_JOBS_LIST = [];
         CURRENT_CART =[];
 
 
@@ -987,11 +993,15 @@ var Global = {
             for (i = 0; i < jsLen; i++) {
                 CURRENT_CART.push(val.default_comp[i])
             }
-
+            obj = {}
             if (ALL_JOBS ==''){
                 ALL_JOBS = val.job_name;
+                obj = {'Job':val.job_name,'Price':val.total_price}
+                ALL_JOBS_LIST.push(obj)
             }else{
                 ALL_JOBS = ALL_JOBS +', '+val.job_name;
+                obj = {'Job':val.job_name,'Price':val.total_price}
+                ALL_JOBS_LIST.push(obj)
             }
 
             JOBS_SUMMARY.push({'category':val.service_cat,'job_name':val.job_name,'price_total':val.total_price,'price_part':val.total_part,'price_labour':val.total_labour,'price_discount':val.total_discount,"doorstep":val.doorstep})
@@ -1058,7 +1068,7 @@ var Global = {
             if (PICK_DROP >0 ){
                 // JOBS_SUMMARY_TOTAL
                 pick_drop_val = {"category": "Labour",
-                    "job_name": "Visiting/Pick Drop",
+                    "name": "Visiting/Pick Drop",
                     "price": PICK_DROP,
                     "price_comp": PICK_DROP,
                     "unit_price": PICK_DROP,

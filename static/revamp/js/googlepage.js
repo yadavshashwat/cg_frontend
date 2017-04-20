@@ -538,6 +538,7 @@ var Global = {
 
             JOBS_SUMMARY_TOTAL = [{'category':service,'job_name':service,'price_total':"TBD",'price_part':"TBD",'price_labour':"TBD",'price_discount':"TBD","doorstep":doorstep}];
             //
+            ALL_JOBS_LIST = [{"Job":service,"Price":"0"},{"Job":additional,"Price":"0"}]
 
            // console.log("worked");
             timestamp =  Date.now();
@@ -556,7 +557,8 @@ var Global = {
                 ,veh_type   : veh_type
                 ,date       : date
                 ,time       : "--"
-                ,comment    : service + ', '+ additional
+                // ,comment    : service + ', '+ additional
+                ,jobsummary_list : JSON.stringify(ALL_JOBS_LIST)
                 ,is_paid    : is_paid
                 ,paid_amt   : paid_amt
                 ,coupon     : coupon

@@ -441,16 +441,18 @@ footer a:hover{color:#979797;text-decoration:none;}
 .Follow-Up{background:orangered!important;color:white!important;}
 .Warm{background:orangered!important;color:white!important;}
 .Cold{background:lightblue!important;color:black!important;}
+.Estimate-Required{background:lightgreen!important;color:black!important;}
+
 
 #bookings .btn-remove-filter{margin-top:5px;width:100%}
 #bookings .box{margin:0px!important;}
 #bookings .box .sort-booking{line-height:50px;text-align:right;font-weight:700;}
 #bookings .input-field.sort{padding:0px 0px 0px 0px;font-size:12px;margin:0px;}
 #bookings .input-field.sort input{margin:1px!important;}
-#bookings .date-box,#booking-details .service-box ,#coupon-details .date-box, #new-booking .date-box, #user-details .date-box, #subscription-details .date-box, #analytics .date-box, #expense-details .date-box{height:45px;text-align:center;line-height:45px;margin:0px;border-radius:0px;font-size:20px; z-index: 29;   background-color: #FFF;
+#bookings .date-box,#booking-details .service-box ,#coupon-details .date-box, #new-booking .date-box, #user-details .date-box, #subscription-details .date-box, #analytics .date-box, #expense-details .date-box, #bill-details .date-box{height:45px;text-align:center;line-height:45px;margin:0px;border-radius:0px;font-size:20px; z-index: 29;   background-color: #FFF;
     color: black;}
-#bookings .date-box.selected, #booking-details .service-box.selected, #coupon-details .date-box.selected, #new-booking .date-box.selected, #user-details .date-box.selected, #subscription-details .date-box.selected, #analytics .date-box.selected,#expense-details .date-box.selected{z-index:10;color:#FFFFFF!important;background:#4a148c !important;}
-#bookings .date-box:hover, #booking-details .service-box:hover,#coupon-details .date-box:hover, #new-booking .date-box:hover, #user-details .date-box:hover, #subscription-details .date-box:hover, #analytics .date-box:hover, #expense-details .date-box:hover{z-index:200;color:#4a148c;cursor:pointer;}
+#bookings .date-box.selected, #booking-details .service-box.selected, #coupon-details .date-box.selected, #new-booking .date-box.selected, #user-details .date-box.selected, #subscription-details .date-box.selected, #analytics .date-box.selected,#expense-details .date-box.selected,#bill-details .date-box.selected{z-index:10;color:#FFFFFF!important;background:#4a148c !important;}
+#bookings .date-box:hover, #booking-details .service-box:hover,#coupon-details .date-box:hover, #new-booking .date-box:hover, #user-details .date-box:hover, #subscription-details .date-box:hover, #analytics .date-box:hover, #expense-details .date-box:hover, #bill-details .date-box:hover{z-index:200;color:#4a148c;cursor:pointer;}
 #bookings .booking-select-section{z-index:34;}
 #bookings .booking-select-section input{z-index:99;}
 #bookings .booking-select-section .sort input{z-index:12;}
@@ -476,6 +478,13 @@ footer a:hover{color:#979797;text-decoration:none;}
 #customer-detail .answer{font-size: 20px;font-weight: 300;margin: 0% 0% 0% 6%;}
 #customer-detail .update-feed-row{padding: 30px;
 }
+#customer-detail .delete-job{
+    cursor: pointer;
+    line-height: 40px;
+    color:grey;
+}
+
+
 #bookings .booking .booking-id-bar{margin-top:45px;text-align:center;}
 #bookings .booking .status-bar{margin-top:30px;text-align:center;}
 #bookings .booking .status-bar-2{margin-top:15px;text-align:center;}
@@ -487,6 +496,23 @@ footer a:hover{color:#979797;text-decoration:none;}
 #booking-details .header-var{color:black;line-height:40px;}
 #new-booking .services-list .delete-item{color:grey;cursor:pointer;line-height:60px;margin-top:5px;}
 #new-booking .btn-copy-poc{margin:1.46rem 0 1.168rem 0;}
+#new-booking .delete-job{
+    cursor: pointer;
+    line-height: 40px;
+    color: grey;
+}
+#bill-details .delete-bill-item{
+    cursor: pointer;
+    line-height: 40px;
+    color: grey;
+}
+#bill-details .bill-summ-row{
+    text-align: right;
+    margin-right: 3%;
+}
+
+
+
 .prefix-select{width:3.3rem;padding:5px 0px 0px 0px;}
 .static-page .list-links{margin-left:30px;}
 .select-div{display:inline-flex;width:100%;padding:0 0.75rem;}

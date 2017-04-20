@@ -71,6 +71,8 @@ var Commons = {
         'analyse_bookings':'/api/analyse_bookings/',
         'update_delete_expense':'/api/update_delete_expense/',
         'view_all_expense':'/api/view_all_expense/',
+        'view_all_bills':'/api/view_all_bills/',
+        'get_all_taxes':'/api/get_all_taxes/',
 
 
     },

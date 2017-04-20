@@ -343,6 +343,7 @@ var Login = {
             $('.bill-page .staff-button-row').hide()
             $('.admin-page .staff-button-row').hide()
             $('.admin-page .b2b-button-row').hide()
+            $('.admin-page .items-list li.bill-button').hide()
             $('#sms-credits').text(data['agent_sms_credits'])
         }else if(data['auth_rights']['b2b']){
             $('.admin-page-html').show()
@@ -354,6 +355,7 @@ var Login = {
             $('.admin-page .items-list li.campaign-button').hide()
             $('.admin-page .items-list li.new-lead-button').hide()
             $('.admin-page .items-list li.analytics-button').hide()
+            $('.admin-page .items-list li.bill-button').hide()
             $('.admin-page .agent-button-row').hide()
             $('.admin-page .staff-button-row').hide()
             $('.bill-page .staff-button-row').hide()

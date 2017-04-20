@@ -340,7 +340,7 @@ var Global = {
                     $('#bill-logo').attr('src',src)
                 }
 
-
+            
 
             mode = $('.bill-page #payment-mode').val()
             $('#bill-type').text(mode)
@@ -421,6 +421,7 @@ var Global = {
                 $('.invoice-box #veh-reg').text(val.cust_regnumber);
                 $('.invoice-box #veh-name').text(val.cust_make +' '+ val.cust_model);
                 $('.invoice-box .agent-details').attr('agent-id',val.agent)
+                
                 var cartLen = val.service_items.length;
                 part_container = $('.invoice-box .parts-table .parts-list');
                 part_container.html('');
