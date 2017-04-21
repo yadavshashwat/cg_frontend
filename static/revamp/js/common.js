@@ -73,6 +73,9 @@ var Commons = {
         'view_all_expense':'/api/view_all_expense/',
         'view_all_bills':'/api/view_all_bills/',
         'get_all_taxes':'/api/get_all_taxes/',
+        'download_pdf':'/api/download_pdf/',
+        'update_bill':'/api/update_bill/',
+        'send_bill':'/api/send_bill/',
 
 
     },
