@@ -1,3 +1,9 @@
+var VAT_CONSUMABLE_PERCENT = 0
+var VAT_LUBE_PERCENT = 0
+var VAT_PART_PERCENT = 0
+var SERVICE_TAX_PERCENT = 0
+
+
 $(function () {
     $(".button").click(function (e) {
         var pX = e.pageX,
@@ -327,6 +333,12 @@ var Login = {
             $('.admin-page .agent-button-row').hide()
             $('.admin-page .b2b-button-row').hide()
             $('#sms-credits').text('Not Applicable')
+            VAT_CONSUMABLE_PERCENT = 0
+            VAT_LUBE_PERCENT = 0
+            VAT_PART_PERCENT = 0
+            SERVICE_TAX_PERCENT = 0
+
+
             // $('.admin-page .items-list li.analytics-button').hide()
         }else if(data['auth_rights']['staff']){
             $('.admin-page .admin-page-html').show()
@@ -334,6 +346,12 @@ var Login = {
             $('.admin-page .agent-button-row').hide()
             $('.admin-page .b2b-button-row').hide()
             $('#sms-credits').text('Not Applicable')
+            VAT_CONSUMABLE_PERCENT = 0
+            VATUBE_PERCENT = 0
+            VAT_PART_PERCENT = 0
+            SERVICE_TAX_PERCENT = 0
+
+
         }else if(data['auth_rights']['agent']){
             $('.admin-page .admin-page-html').show()
             $('.admin-page .login').hide()
@@ -341,10 +359,37 @@ var Login = {
             $('.admin-page .items-list li.subscription-button').hide()
             $('.admin-page .items-list li.analytics-button').hide()
             $('.bill-page .staff-button-row').hide()
+            $('.admin-page .items-list li.expenses-button').hide()
             $('.admin-page .staff-button-row').hide()
             $('.admin-page .b2b-button-row').hide()
-            $('.admin-page .items-list li.bill-button').hide()
+
+            $('#agent_bill_name').val(data['first_name'] +' '+data['last_name'])
+            $('#agent_bill_address').val(data['user_address'] +', '+data['userocality']+', '+data['user_city'])
+            $('#agent_bill_vat').val(data['agent_vat'])
+            $('#agent_bill_stax').val(data['agent_stax'])
+            $('#agent_bill_cin').val(data['agent_cin'])
+            if (data['agent_vat'] != ""){
+                VAT_CONSUMABLE_PERCENT = parseFloat(data['vat_consumables'])
+                VAT_LUBE_PERCENT = parseFloat(data['vat_lube'])
+                VAT_PART_PERCENT = parseFloat(data['vat_parts'])
+
+            }else{
+                VAT_CONSUMABLE_PERCENT = 0
+                VAT_LUBE_PERCENT = 0
+                VAT_PART_PERCENT = 0
+            }
+            if(data['agent_stax'] != ""){
+                SERVICE_TAX_PERCENT = parseFloat(data['service_tax'])
+            }else{
+                SERVICE_TAX_PERCENT_L = 0
+            }
+
+            Materialize.updateTextFields();
+            // STATE_BILL = data['user_state']
+            // AGENT_STATE = STATE_BILL
+            // $('#bill-details #bill_type').find('select').val('Agent Bill').change()
             $('#sms-credits').text(data['agent_sms_credits'])
+
         }else if(data['auth_rights']['b2b']){
             $('.admin-page-html').show()
             $('.admin-page .login').hide()
@@ -353,6 +398,7 @@ var Login = {
             $('.admin-page .items-list li.lead-button').hide()
             $('.admin-page .items-list li.subscription-button').hide()
             $('.admin-page .items-list li.campaign-button').hide()
+            $('.admin-page .items-list li.expenses-button').hide()
             $('.admin-page .items-list li.new-lead-button').hide()
             $('.admin-page .items-list li.analytics-button').hide()
             $('.admin-page .items-list li.bill-button').hide()

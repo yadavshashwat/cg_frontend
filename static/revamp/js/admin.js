@@ -129,11 +129,6 @@ var AGENT_LOCALITY = ""
 var AGENT_CITY = ""
 var AGENT_STATE = ""
 
-var VAT_CONSUMABLE_PERCENT = 0
-var VAT_LUBE_PERCENT = 0
-var VAT_PART_PERCENT = 0
-var SERVICE_TAX_PERCENT = 0
-
 
 
 
@@ -1159,8 +1154,13 @@ var Global = {
         });
 
         $('#customer-detail .btn-view-bill').click(function(){
-            bid = $('#customer-detail #booking_id').attr('booking_id');
-            b_data_id = $('#customer-detail #booking_id').attr('booking_data_id');
+             console.log('Downloaded')
+            file_name = $(this).attr('data-class')
+            params = {file_name: file_name}
+            var url = Commons.getOrigin()+Commons.URLFromName['download_pdf']+'?'+jQuery.param( params )
+            $('#download').find('iframe').attr('src',url)
+            // bid = $('#customer-detail #booking_id').attr('booking_id');
+            // b_data_id = $('#customer-detail #booking_id').attr('booking_data_id');
             // window.open(
             //     window.location.pathname.split('/')[0] + '/bills/old/' + b_data_id + '#print'
             // );
@@ -2287,68 +2287,69 @@ var Global = {
                         $(row.cells[j]).find('input,select').eq(0).val(price_item)
                         // console.log(price_item)
                     }else if (j == 5) {
-                        if (type_item == "Labour") {
-                            applicable_tax = SERVICE_TAX_PERCENT
-                            SERVICE_TAX_BILL_ADMIN = SERVICE_TAX_BILL_ADMIN+ (price_item - (price_item /(1+(applicable_tax/100))))
-                        } else if (type_item == "Part") {
-                            applicable_tax = VAT_PART_PERCENT
-                            VAT_PART_BILL_ADMIN = VAT_PART_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
-                        }else if(type_item == "Lube"){
-                            applicable_tax = VAT_LUBE_PERCENT
-                            VAT_LUBE_BILL_ADMIN = VAT_LUBE_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
-                        }else if(type_item == "Consumable"){
-                            applicable_tax = VAT_CONSUMABLE_PERCENT
-                            VAT_CONSUMABLE_BILL_ADMIN= VAT_CONSUMABLE_BILL_ADMIN+ (price_item - (price_item /(1+(applicable_tax/100))))
-                        }else if (type_item == "Discount") {
-                            applicable_tax = 0
-                        } else {
-                            applicable_tax = 0
-                        }
+                        if (name_item !=""){
+                            if (type_item == "Labour") {
+                                applicable_tax = SERVICE_TAX_PERCENT
+                                SERVICE_TAX_BILL_ADMIN = SERVICE_TAX_BILL_ADMIN+ (price_item - (price_item /(1+(applicable_tax/100))))
+                            } else if (type_item == "Part") {
+                                applicable_tax = VAT_PART_PERCENT
+                                VAT_PART_BILL_ADMIN = VAT_PART_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+                            }else if(type_item == "Lube"){
+                                applicable_tax = VAT_LUBE_PERCENT
+                                VAT_LUBE_BILL_ADMIN = VAT_LUBE_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+                            }else if(type_item == "Consumable"){
+                                applicable_tax = VAT_CONSUMABLE_PERCENT
+                                VAT_CONSUMABLE_BILL_ADMIN= VAT_CONSUMABLE_BILL_ADMIN+ (price_item - (price_item /(1+(applicable_tax/100))))
+                            }else if (type_item == "Discount") {
+                                applicable_tax = 0
+                            } else {
+                                applicable_tax = 0
+                            }
 
+                            price_item_pre_tax = (price_item)/(1+applicable_tax/100);
+                            price_item_pre_tax = +(price_item_pre_tax.toFixed(2))
+                            $(row.cells[j]).find('input,select').eq(0).val(price_item_pre_tax)
+                            if (type_item == "Labour") {
+                                TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN + parseFloat(price_item)
+                                TOTAL_LABOUR_BILL_ADMIN = TOTAL_LABOUR_BILL_ADMIN + parseFloat(price_item)
+                            } else if (type_item == "Part") {
+                                TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN + parseFloat(price_item)
+                                TOTAL_PARTS_BILL_ADMIN = TOTAL_PARTS_BILL_ADMIN + parseFloat(price_item)
+                            }else if(type_item == "Lube"){
+                                TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN + parseFloat(price_item)
+                                TOTAL_LUBES_BILL_ADMIN = TOTAL_LUBES_BILL_ADMIN + parseFloat(price_item)
 
-                        price_item_pre_tax = (price_item)/(1+applicable_tax/100);
-                        price_item_pre_tax = +(price_item_pre_tax.toFixed(2))
-                        $(row.cells[j]).find('input,select').eq(0).val(price_item_pre_tax)
-                        if (type_item == "Labour") {
-                            TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN + parseFloat(price_item)
-                            TOTAL_LABOUR_BILL_ADMIN = TOTAL_LABOUR_BILL_ADMIN + parseFloat(price_item)
-                        } else if (type_item == "Part") {
-                            TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN + parseFloat(price_item)
-                            TOTAL_PARTS_BILL_ADMIN = TOTAL_PARTS_BILL_ADMIN + parseFloat(price_item)
-                        }else if(type_item == "Lube"){
-                            TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN + parseFloat(price_item)
-                            TOTAL_LUBES_BILL_ADMIN = TOTAL_LUBES_BILL_ADMIN + parseFloat(price_item)
+                            }else if(type_item == "Consumable"){
+                                TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN + parseFloat(price_item)
+                                TOTAL_CONSUMABLES_BILL_ADMIN = TOTAL_CONSUMABLES_BILL_ADMIN + parseFloat(price_item)
+                            }else if (type_item == "Discount") {
+                                TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN - parseFloat(price_item)
+                                TOTAL_DISCOUNT_BILL_ADMIN = TOTAL_DISCOUNT_BILL_ADMIN + parseFloat(price_item)
+                            } else {
+                                TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN
+                            }
 
-                        }else if(type_item == "Consumable"){
-                            TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN + parseFloat(price_item)
-                            TOTAL_CONSUMABLES_BILL_ADMIN = TOTAL_CONSUMABLES_BILL_ADMIN + parseFloat(price_item)
-                        }else if (type_item == "Discount") {
-                            TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN - parseFloat(price_item)
-                            TOTAL_DISCOUNT_BILL_ADMIN = TOTAL_DISCOUNT_BILL_ADMIN + parseFloat(price_item)
-                        } else {
-                            TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN
-                        }
-                        // console.log(price_item)
+                            // console.log(price_item)
 
-                        cart_item = {
-                            "name": name_item,
-                            "price": price_item,
-                            "pre_tax_price":price_item_pre_tax,
-                            "type": type_item,
-                            "settlement_cat":type_item,
-                            "comment": "",
-                            "quantity":quantity,
-                            "unit_price":unit_price,
-                            "approved":"Yes"
-                        }
+                            cart_item = {
+                                "name": name_item,
+                                "price": price_item,
+                                "pre_tax_price":price_item_pre_tax,
+                                "type": type_item,
+                                "settlement_cat":type_item,
+                                "comment": "",
+                                "quantity":quantity,
+                                "unit_price":unit_price,
+                                "approved":"Yes"
+                            }
 
-                        if (name_item != ""){
+                            // if (name_item != ""){
                             CURRENT_BILL_CART.push(cart_item)
-                        }else{
+                            // }else{
+                            //
+                            // }
 
                         }
-
-
                     }
 
 
@@ -2448,13 +2449,16 @@ var Global = {
             }
             // Commons.ajaxData('generate_bill', params, "get", _this, _this.loadBillGenerated,null, '.loading-pane');
             error = 0
-            if (bill_owner = ""){
+            if (bill_owner == ""){
                 error = 1
                 $('#bill_type').find('select').addClass('invalid-select-box')
             }
-            if(cust_name = ""){
+            if(cust_name == ""){
                 error = 1
                 $('#bill-detail #cust_bill_name').addClass("invalid");
+            }
+            if(CURRENT_BILL_CART.length == 0){
+                error = 1
             }
             if(error == 1){
                 alert('Invalid Data')
@@ -2484,7 +2488,7 @@ var Global = {
         })
 
         $('#bill-details').on('click','.updatebill',function () {
-             $('#bill-details .bill-modify-card').show()
+            $('#bill-details .bill-modify-card').show()
             data_id = $(this).closest('tr').attr('data-class')
             $('#cover2').show()
             Commons.ajaxData('view_all_bills', {data_id : data_id}, "get", _this, _this.loadModifyBill,null, '.loading-pane');
@@ -2501,10 +2505,10 @@ var Global = {
             Commons.ajaxData('update_bill', {data_id : data_id, cust_number:cust_number, cust_email : cust_email, payment_mode : payment_mode, amount_paid : amount_paid}, "get", _this, _this.loadUpdateBill,null, '.loading-pane');
         })
 
-         $('#bill-details .bill-modify-card .btn-cancelbill').click(function () {
+        $('#bill-details .bill-modify-card .btn-cancelbill').click(function () {
             data_id = $(this).closest('.bill-modify-card').attr('data-class')
             status = "Cancelled"
-             Commons.ajaxData('update_bill', {data_id : data_id, status: status}, "get", _this, _this.loadCancelBill,null, '.loading-pane');
+            Commons.ajaxData('update_bill', {data_id : data_id, status: status}, "get", _this, _this.loadCancelBill,null, '.loading-pane');
         })
 
         $('#bill-details .bill-modify-card .btn-sendbill').click(function () {
@@ -4548,7 +4552,12 @@ var Global = {
 
             // }
             if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-                html += '                                           <th data-field="delete"></th>';
+                if (val.bill_generation_flag){
+
+                }else{
+                    html += '                                           <th data-field="delete"></th>';
+
+                }
             }
             html += '                                       </tr>';
             html += '                                       </thead>';
@@ -4697,14 +4706,24 @@ var Global = {
 
                 // Part Comment
                 if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-                    if ( val.service_items[i].comment==null ||  val.service_items[i].comment===false) {
-                        html += '<td>' + '<input id="part_comment" type="text" class="browser-default" aria-required="true">' + '</td>';
+                    if (val.bill_generation_flag){
+                        if ( val.service_items[i].comment==null ||  val.service_items[i].comment===false) {
+                            html += '<td>' + '<input id="part_comment" type="text" class="browser-default" disabeld aria-required="true">' + '</td>';
+                        }else{
+                            html += '<td>' + '<input id="part_comment" type="text" class="browser-default" value ="' + val.service_items[i].comment + '" disabled aria-required="true">' + '</td>';
+                        }
+
                     }else{
-                        html += '<td>' + '<input id="part_comment" type="text" class="browser-default" value ="' + val.service_items[i].comment + '" aria-required="true">' + '</td>';
+                        if ( val.service_items[i].comment==null ||  val.service_items[i].comment===false) {
+                            html += '<td>' + '<input id="part_comment" type="text" class="browser-default" aria-required="true">' + '</td>';
+                        }else{
+                            html += '<td>' + '<input id="part_comment" type="text" class="browser-default" value ="' + val.service_items[i].comment + '" aria-required="true">' + '</td>';
+                        }
                     }
+
                 }else{
-                    if ( val.service_items[i].comment==null ||  val.service_items[i].comment===false) {
-                        html += '<td>' + '<input id="part_comment" type="text" class="browser-default noborder" aria-required="true">' + '</td>';
+                    if (val.service_items[i].comment==null ||  val.service_items[i].comment===false) {
+                        html += '<td>' + '<input id="part_comment" type="text" class="browser-default noborder" disabled aria-required="true">' + '</td>';
                     }else{
                         html += '<td>' + '<input id="part_comment" type="text" class="browser-default noborder" disabled value ="' + val.service_items[i].comment + '" aria-required="true">' + '</td>';
                     }
@@ -4712,46 +4731,98 @@ var Global = {
 
                 // approval status
                 if (val.req_user_admin || val.req_user_staff ){
+                    if (val.bill_generation_flag){
+                        if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
+                            html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
+                            html += '<td><input type="checkbox" class="filled-in approve-item tochange" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
 
-                    if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
-                        html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
-                        html += '<td><input type="checkbox" class="filled-in approve-item tochange"  id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
-
-                    }else{
-                        if (val.service_items[i].approved == "Yes"){
-                            html += '<td class="centered-text"><span class="approved">Approved</span></td>'
-                            html += '<td><input type="checkbox" class="filled-in approve-item tochange" checked="checked" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
                         }else{
-                            html += '<td class="centered-text"><span class="denied">TBD</span></td>'
-                            html += '<td><input type="checkbox" class="filled-in approve-item tochange" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                            if (val.service_items[i].approved == "Yes"){
+                                html += '<td class="centered-text"><span class="approved">Approved</span></td>'
+                                html += '<td><input type="checkbox" class="filled-in approve-item tochange" disabled checked="checked" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                            }else{
+                                html += '<td class="centered-text"><span class="denied">TBD</span></td>'
+                                html += '<td><input type="checkbox" class="filled-in approve-item tochange" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                            }
                         }
+                    }else{
+                        if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
+                            html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
+                            html += '<td><input type="checkbox" class="filled-in approve-item tochange"  id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+
+                        }else{
+                            if (val.service_items[i].approved == "Yes"){
+                                html += '<td class="centered-text"><span class="approved">Approved</span></td>'
+                                html += '<td><input type="checkbox" class="filled-in approve-item tochange" checked="checked" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                            }else{
+                                html += '<td class="centered-text"><span class="denied">TBD</span></td>'
+                                html += '<td><input type="checkbox" class="filled-in approve-item tochange" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                            }
+                        }
+
                     }
                 }else if(val.req_user_agent){
-                    if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
-                        html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
-                        html += '<td><input type="checkbox" class="filled-in approve-item" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                    if (val.bill_generation_flag){
+                        if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
+                            html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
+                            html += '<td><input type="checkbox" class="filled-in approve-item" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+
+                        }else{
+                            if (val.service_items[i].approved == "Yes"){
+                                html += '<td class="centered-text"><span class="approved">Approved</span></td>'
+                                html += '<td><input type="checkbox" class="filled-in approve-item" disabled checked="checked" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                            }else{
+                                html += '<td class="centered-text"><span class="denied">TBD</span></td>'
+                                html += '<td><input type="checkbox" class="filled-in approve-item" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                            }
+                        }
 
                     }else{
-                        if (val.service_items[i].approved == "Yes"){
-                            html += '<td class="centered-text"><span class="approved">Approved</span></td>'
-                            html += '<td><input type="checkbox" class="filled-in approve-item" disabled checked="checked" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
-                        }else{
-                            html += '<td class="centered-text"><span class="denied">TBD</span></td>'
+                        if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
+                            html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
                             html += '<td><input type="checkbox" class="filled-in approve-item" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+
+                        }else{
+                            if (val.service_items[i].approved == "Yes"){
+                                html += '<td class="centered-text"><span class="approved">Approved</span></td>'
+                                html += '<td><input type="checkbox" class="filled-in approve-item" disabled checked="checked" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                            }else{
+                                html += '<td class="centered-text"><span class="denied">TBD</span></td>'
+                                html += '<td><input type="checkbox" class="filled-in approve-item" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                            }
                         }
+
+
                     }
                 }else{
-                    if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
-                        html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
-                        html += '<td><input type="checkbox" class="filled-in approve-item tochange"  id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
-                    }else{
-                        if (val.service_items[i].approved == "Yes"){
-                            html += '<td class="centered-text"><span class="approved">Approved</span></td>'
-                            html += '<td><input type="checkbox" class="filled-in approve-item" disabled checked="checked" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                    if(val.bill_generation_flag){
+                        if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
+                            html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
+                            html += '<td><input type="checkbox" class="filled-in approve-item tochange" disabled  id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
                         }else{
-                            html += '<td class="centered-text"><span class="denied">TBD</span></td>'
-                            html += '<td><input type="checkbox" class="filled-in approve-item tochange" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                            if (val.service_items[i].approved == "Yes"){
+                                html += '<td class="centered-text"><span class="approved">Approved</span></td>'
+                                html += '<td><input type="checkbox" class="filled-in approve-item" disabled checked="checked" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                            }else{
+                                html += '<td class="centered-text"><span class="denied">TBD</span></td>'
+                                html += '<td><input type="checkbox" class="filled-in approve-item tochange" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                            }
                         }
+
+                    }else{
+                        if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
+                            html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
+                            html += '<td><input type="checkbox" class="filled-in approve-item tochange"  id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                        }else{
+                            if (val.service_items[i].approved == "Yes"){
+                                html += '<td class="centered-text"><span class="approved">Approved</span></td>'
+                                html += '<td><input type="checkbox" class="filled-in approve-item" disabled checked="checked" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                            }else{
+                                html += '<td class="centered-text"><span class="denied">TBD</span></td>'
+                                html += '<td><input type="checkbox" class="filled-in approve-item tochange" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                            }
+                        }
+
                     }
                 }
 
@@ -4837,16 +4908,31 @@ var Global = {
                 }
                 // Row Deletion
                 if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-                    html +='                                    <td><div class="delete x25">';
-                    html +='                                        <i class="fa fa-trash-o"></i>';
-                    html +='                                    </div></td>';
+                    if (val.bill_generation_flag){
+                    }else{
+                        html +='                                    <td><div class="delete x25">';
+                        html +='                                        <i class="fa fa-trash-o"></i>';
+                        html +='                                    </div></td>';
+                    }
                 }else{
-                    html +='                                    <td><div class="delete x25">';
-                    html +='                                    </div></td>';
+
                 }
                 html += '                                       </tr>';
             }
-
+            if (val.bill_generation_flag){
+                $('#customer-detail .btn-view-bill').attr('data-class',val.bill_file_name)
+                $('#customer-detail .btn-additem-est').hide()
+                $('#comp_all_select').attr('disabled','')
+            }else{
+                $('#customer-detail .btn-view-bill').attr('data-class','')
+                $('#customer-detail .btn-additem-est').show()
+                $('#comp_all_select').removeAttr('disabled')
+            }
+            if ((val.bill_generation_flag && val.req_user_b2b) || (val.bill_generation_flag && val.req_user_agent)){
+                $('#customer-detail .btn-update-estimate').hide()
+            }else{
+                $('#customer-detail .btn-update-estimate').show()
+            }
 
         })
 
@@ -5810,9 +5896,9 @@ var Global = {
             html += '											<td class="centered-text" >'+val.total_amount+'</td>';
             // html += '											<td>'+val.status+'</td>';
             if (val.amount_paid){
-            html += '											<td class="centered-text" >Paid</td>';
+                html += '											<td class="centered-text" >Paid</td>';
             }else{
-            html += '											<td class="centered-text" >Due</td>';
+                html += '											<td class="centered-text" >Due</td>';
             }
             html += '											<td class="centered-text" >'+val.payment_mode+'</td>';
             html += '											<td class="centered-text" style="color:purple; cursor:pointer" class="download-btn centered-text"><i data-class='+ val.file_name +' class="fa fa-download downloadbill"></i></td>';
@@ -6108,31 +6194,31 @@ var Global = {
 
     },
     loadModifyBill:function (data) {
-         $.each(data, function (ix, val) {
+        $.each(data, function (ix, val) {
             $('#bill-details .bill-modify-card').attr('data-class',val.id)
             $('#bill-details #bill_email').val(val.cust_email)
             $('#bill-details #bill_number').val(val.cust_number)
             $('#bill-details #bill_payment_mode').find('select').val(val.payment_mode)
             $('#bill-details #bill_due_date').val(val.date_due)
-             if (val.amount_paid){
-                 document.getElementById("bill_amount_paid").checked = true;
-             }else{
-                 document.getElementById("bill_amount_paid").checked = false;
-             }
-         })
+            if (val.amount_paid){
+                document.getElementById("bill_amount_paid").checked = true;
+            }else{
+                document.getElementById("bill_amount_paid").checked = false;
+            }
+        })
         Materialize.updateTextFields()
 
     },
     loadUpdateBill:function(data){
         alert('Bill Updated')
-         $('#bill-details .bill-modify-card').hide()
-         $('#cover2').hide()
+        $('#bill-details .bill-modify-card').hide()
+        $('#cover2').hide()
         Commons.ajaxData('view_all_bills', {bill_type : "Invoice"}, "get", Global, Global.loadbillAll,null, '.loading-pane');
     },
     loadCancelBill:function(data){
         alert('Bill Cancelled')
-         $('#bill-details .bill-modify-card').hide()
-         $('#cover2').hide()
+        $('#bill-details .bill-modify-card').hide()
+        $('#cover2').hide()
         Commons.ajaxData('view_all_bills', {bill_type : "Invoice"}, "get", Global, Global.loadbillAll,null, '.loading-pane');
     },
 
