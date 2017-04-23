@@ -513,7 +513,7 @@ footer a:hover{color:#979797;text-decoration:none;}
 
 #bill-details .bill-modify-card{
     position: fixed;
-    top:20%;
+    top:5%;
     left:2%;
     width:96%;
     z-index: 99;
