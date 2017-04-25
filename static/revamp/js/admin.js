@@ -2091,7 +2091,7 @@ var Global = {
             $('#bill-details').show()
 
             $('#bill-detail  .all-bill').click()
-            Commons.ajaxData('view_all_bills', {bill_type : "Invoice"}, "get", _this, _this.loadbillAll,null, '.loading-pane');
+            Commons.ajaxData('view_all_bills', {}, "get", _this, _this.loadbillAll,null, '.loading-pane');
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,2).join('/')+'/bills/all'
             history.pushState({},'',new_path)
@@ -2463,9 +2463,10 @@ var Global = {
             if(error == 1){
                 alert('Invalid Data')
             }else{
-                var url = Commons.getOrigin()+Commons.URLFromName['generate_bill']+'?'+jQuery.param( params )
+                $('html, body').animate({scrollTop : 0},800);
+                // $('.loading-pane').show();
+                var url = Commons.getOrigin()+Commons.URLFromName['generate_bill']+'?'+jQuery.param( params );
                 $('#download').find('iframe').attr('src',url)
-                // alert('Bill Generated')
             }
         })
 
@@ -2475,6 +2476,8 @@ var Global = {
             params = {file_name: file_name}
             var url = Commons.getOrigin()+Commons.URLFromName['download_pdf']+'?'+jQuery.param( params )
             $('#download').find('iframe').attr('src',url)
+            
+            // $('.loading-pane').show()
         })
 
 
@@ -2518,6 +2521,12 @@ var Global = {
             Commons.ajaxData('send_bill', {data_id : data_id,  cust_number:cust_number, cust_email : cust_email}, "get", _this, _this.loadSendBill,null, '.loading-pane');
         })
 
+        // document.getElementById('downloadiframe').onload = function() {
+        //     $('.loading-pane').hide();
+        // };
+        // $('#download iframe').load(function() {
+        //     console.log('1')
+        // });
 // =====================================================================================
 //    Expense Management
 // =====================================================================================
@@ -4952,7 +4961,7 @@ var Global = {
         container3 = $('#agent-select')
         container3.html('');
         html = '';
-        html = '<select class="agent-list browser-default""><option value="" selected disabled>Select Agent</option>'
+        html = '<select class="agent-list browser-default""><option value="" selected disabled>Select Engineer</option>'
         // html += '<option value="" disabled>Select Agent</option>'
         $.each(data, function(ix, val) {
             html += '<option value="'+val.id+'">'+val.first_name +' '+ val.last_name+' - '+val.phone +'</option>'
@@ -6213,13 +6222,13 @@ var Global = {
         alert('Bill Updated')
         $('#bill-details .bill-modify-card').hide()
         $('#cover2').hide()
-        Commons.ajaxData('view_all_bills', {bill_type : "Invoice"}, "get", Global, Global.loadbillAll,null, '.loading-pane');
+        Commons.ajaxData('view_all_bills', {}, "get", Global, Global.loadbillAll,null, '.loading-pane');
     },
     loadCancelBill:function(data){
         alert('Bill Cancelled')
         $('#bill-details .bill-modify-card').hide()
         $('#cover2').hide()
-        Commons.ajaxData('view_all_bills', {bill_type : "Invoice"}, "get", Global, Global.loadbillAll,null, '.loading-pane');
+        Commons.ajaxData('view_all_bills', {}, "get", Global, Global.loadbillAll,null, '.loading-pane');
     },
 
 };

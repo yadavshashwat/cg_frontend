@@ -3008,7 +3008,7 @@
                                     <option value="CG Haryana">CG Haryana</option>
                                     <option value="CG Delhi">CG Delhi</option>
                                     <option value="CG Receipt">CG Receipt</option>
-                                    <option value="Agent Bill" >Agent Bill</option>
+                                    <option value="Agent Bill" >Workshop/Engineer Bill</option>
                                 </select>
                             </div>
                         </div>
@@ -3017,15 +3017,15 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">account_circle</i>
-                                <input id="agent_bill_name" type="text" class="validate" required="" aria-required="true">
-                                <label for="agent_bill_name" data-error="Required">Agent Name</label>
+                                <input id="agent_bill_name" type="text" class="validate" disabled required="" aria-required="true">
+                                <label for="agent_bill_name" data-error="Required">Workshop Name</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">business</i>
-                                <input id="agent_bill_address" type="text" class="validate" required="" aria-required="true">
-                                <label for="agent_bill_address" disabled data-error="Required">Agent Address</label>
+                                <input id="agent_bill_address" type="text" class="validate" disabled required="" aria-required="true">
+                                <label for="agent_bill_address" disabled data-error="Required">Workshop Address</label>
                             </div>
                         </div>
                         <div class="row">
@@ -3450,7 +3450,7 @@
 
 
 <div id="download" class="invisible">
-    <iframe></iframe>
+    <iframe id="downloadiframe"></iframe>
 </div>
 
 <section id="login" class="login visible" style="">
