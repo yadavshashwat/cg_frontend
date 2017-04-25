@@ -4395,8 +4395,8 @@ var Global = {
                     //     $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').hide()
                     //     $('#customer-detail .booking-data .agent-button-row .btn-update-status.status-btn-2').hide()
                 }else  if (val.status == "Job Completed" || val.status == "Feedback Taken") {
-                    $('#customer-detail.agent-button-row').hide()
-                    $('#customer-detail .agent-button-row').hide()
+                    // $('#customer-detail.agent-button-row').hide()
+                    // $('#customer-detail .agent-button-row').hide()
 
                 }else{
                     $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').attr("status_next", val.status_next)
