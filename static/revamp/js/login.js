@@ -330,6 +330,7 @@ var Login = {
         if (data['auth_rights']['admin']){
             $('.admin-page .admin-page-html').show()
             $('.admin-page .login').hide()
+            $('.admin-page .staff-button-row').show()
             $('.admin-page .agent-button-row').hide()
             $('.admin-page .b2b-button-row').hide()
             $('#sms-credits').text('Not Applicable')
@@ -337,12 +338,11 @@ var Login = {
             VAT_LUBE_PERCENT = 0
             VAT_PART_PERCENT = 0
             SERVICE_TAX_PERCENT = 0
-
-
             // $('.admin-page .items-list li.analytics-button').hide()
         }else if(data['auth_rights']['staff']){
             $('.admin-page .admin-page-html').show()
             $('.admin-page .login').hide()
+            $('.admin-page .staff-button-row').show()
             $('.admin-page .agent-button-row').hide()
             $('.admin-page .b2b-button-row').hide()
             $('#sms-credits').text('Not Applicable')
@@ -358,7 +358,7 @@ var Login = {
             $('.admin-page .items-list li.coupon-button').hide()
             $('.admin-page .items-list li.subscription-button').hide()
             $('.admin-page .items-list li.analytics-button').hide()
-            $('.bill-page .staff-button-row').hide()
+            // $('.bill-page .staff-button-row').hide()
             $('.admin-page .items-list li.expenses-button').hide()
             $('.admin-page .staff-button-row').hide()
             $('.admin-page .b2b-button-row').hide()
