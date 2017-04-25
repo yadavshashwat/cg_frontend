@@ -362,7 +362,7 @@ var Login = {
             $('.admin-page .items-list li.expenses-button').hide()
             $('.admin-page .staff-button-row').hide()
             $('.admin-page .b2b-button-row').hide()
-
+            $('.admin-page .agent-button-row').show()
             $('#agent_bill_name').val(data['first_name'] +' '+data['last_name'])
             $('#agent_bill_address').val(data['user_address'] +', '+data['userocality']+', '+data['user_city'])
             $('#agent_bill_vat').val(data['agent_vat'])
