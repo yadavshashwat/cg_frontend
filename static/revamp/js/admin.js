@@ -949,7 +949,7 @@ var Global = {
             row.find('td:eq(6) input').val('')
             row.find('td:eq(7)').html('')
             row.find('td:eq(8) input').removeAttr('checked', this.checked)
-
+            row.find('td:eq(9) input').val('')
             return
         });
 
@@ -1127,6 +1127,55 @@ var Global = {
         }
         $('#customer-detail .btn-update-cust').click(update_cust);
 
+        $('#customer-detail').on('click','.btn-modifypayement',function(){
+            $('#customer-detail .booking-payment-card').show()
+            $('#cover2').show()
+            $('#payment_amount').val('')
+            $('#payment_collector').val('')
+        });
+
+        $('#customer-detail .btn-closebillmod').click(function(){
+            $('#customer-detail .booking-payment-card').hide()
+            $('#cover2').hide()
+        });
+
+        $('#customer-detail .btn-addpayment').click(function(){
+            amount = $('#payment_amount').val()
+            col_by = $('#payment_collector').val()
+            bid =$('#customer-detail #booking_id').attr('booking_data_id')
+            error = 0
+            if (amount <= 0 ){
+                error = 1;
+                $('#payment_amount').addClass("invalid");
+            }
+            if (col_by == "" || col_by == null){
+                error =1;
+                $('#payment_collector').addClass('invalid-select-box')
+            }
+            if (error == 1){
+                return
+            }else{
+                Commons.ajaxData('add_delete_payment', {
+                    data_id : bid,
+                    col_by : col_by,
+                    amount : amount,
+                    add_del : "Add"
+                }, "get", _this, _this.loadCustomerAgent,null, '.loading-pane');
+
+            }
+        });
+        $('#customer-detail .payment-history').on('click','.payment-card .delete-transaction',function(){
+            bid =$('#customer-detail #booking_id').attr('booking_data_id')
+            payment_id = $(this).closest('.payment-card').attr('data-class')
+                Commons.ajaxData('add_delete_payment', {
+                    data_id : bid,
+                    payment_id : payment_id,
+                    add_del : "Delete"
+                }, "get", _this, _this.loadCustomerAgent,null, '.loading-pane');
+        })
+        
+
+
         // - update-estimate
         $('#customer-detail .btn-update-estimate').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
@@ -1137,6 +1186,7 @@ var Global = {
                 estimate: estimate,
             }, "post", _this, _this.loadCustomerestimate,null, '.loading-pane');
         });
+
 
         $('#customer-detail .btn-view-generate-bill').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
@@ -1154,7 +1204,7 @@ var Global = {
         });
 
         $('#customer-detail .btn-view-bill').click(function(){
-             console.log('Downloaded')
+            console.log('Downloaded')
             file_name = $(this).attr('data-class')
             params = {file_name: file_name}
             var url = Commons.getOrigin()+Commons.URLFromName['download_pdf']+'?'+jQuery.param( params )
@@ -1323,15 +1373,8 @@ var Global = {
                 for (i = 1; i < 7; i++) {
                     $('.status-change-'+i ).removeClass('selected')
                 }
-                $('.status-change-5').addClass('selected')
+                $('.status-change-6').addClass('selected')
             }
-
-
-            // data_id = $('#customer-detail #booking_id').attr('booking_data_id')
-
-            // setTimeout(function(){
-            //           openbooking(data_id)
-            //         }, 1000);
 
         }
 
@@ -2340,7 +2383,9 @@ var Global = {
                                 "comment": "",
                                 "quantity":quantity,
                                 "unit_price":unit_price,
-                                "approved":"Yes"
+                                "approved":"Yes",
+                                "purchase_price": price_item,
+                                "purchase_price_pretax":price_item_pre_tax
                             }
 
                             // if (name_item != ""){
@@ -2457,6 +2502,10 @@ var Global = {
                 error = 1
                 $('#bill-detail #cust_bill_name').addClass("invalid");
             }
+            if(agent_name == ""){
+                error = 1
+                $('#bill-detail #agent_bill_name').addClass("invalid");
+            }
             if(CURRENT_BILL_CART.length == 0){
                 error = 1
             }
@@ -2476,7 +2525,7 @@ var Global = {
             params = {file_name: file_name}
             var url = Commons.getOrigin()+Commons.URLFromName['download_pdf']+'?'+jQuery.param( params )
             $('#download').find('iframe').attr('src',url)
-            
+
             // $('.loading-pane').show()
         })
 
@@ -3381,6 +3430,13 @@ var Global = {
             agent_cin = $('#user-detail #agent_cin').val()
             sms_credits = $('#user-detail #agent_sms_credits').val()
 
+            agent_part_share = $('#user-detail #agent_part_share').val()
+            agent_lube_share = $('#user-detail #agent_lube_share').val()
+            agent_consumable_share = $('#user-detail #agent_consumable_share').val()
+            agent_labour_share = $('#user-detail #agent_labour_share').val()
+            agent_vas_share = $('#user-detail #agent_vas_share').val()
+            agent_denting_share = $('#user-detail #agent_denting_share').val()
+
             agent = agent_box.checked
             b2b = b2b_box.checked
             admin= admin_box.checked
@@ -3439,7 +3495,29 @@ var Global = {
                 return;
             }else{
                 Commons.ajaxData('update_user',
-                    {user_id:user_id, user_num: user_number, user_name : user_name, user_email: user_email, user_add: user_address, user_loc: user_locality, user_city:user_city,user_state :user_state, agent_vat:agent_vat, agent_cin:agent_cin, agent_stax:agent_stax,b2b_st:b2b, admin_st:admin, staff_st:staff,agent_st:agent,sms_credits:sms_credits}
+                    {user_id:user_id,
+                        user_num: user_number,
+                        user_name : user_name,
+                        user_email: user_email,
+                        user_add: user_address,
+                        user_loc: user_locality,
+                        user_city:user_city,
+                        user_state :user_state,
+                        agent_vat:agent_vat,
+                        agent_cin:agent_cin,
+                        agent_stax:agent_stax,
+                        b2b_st:b2b,
+                        admin_st:admin,
+                        staff_st:staff,
+                        agent_st:agent,
+                        sms_credits:sms_credits,
+                        agent_part_share : agent_part_share,
+                        agent_lube_share : agent_lube_share,
+                        agent_consumable_share : agent_consumable_share,
+                        agent_labour_share : agent_labour_share,
+                        agent_vas_share : agent_vas_share,
+                        agent_denting_share : agent_denting_share
+                    }
                     // {
                     // c_id: coupon_code  ,
                     //     d_start: coupon_start ,
@@ -3510,6 +3588,12 @@ var Global = {
             $('#user-detail #agent_cin').val('')
             $('#user-detail #agent_stax').val('')
             $('#user-detail #agent_sms_credits').val('')
+            $('#user-detail #agent_part_share').val('')
+            $('#user-detail #agent_lube_share').val('')
+            $('#user-detail #agent_consumable_share').val('')
+            $('#user-detail #agent_labour_share').val('')
+            $('#user-detail #agent_vas_share').val('')
+            $('#user-detail #agent_denting_share').val('')
 
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/single/'
@@ -3880,13 +3964,49 @@ var Global = {
             } catch (e) {
 
             }
+
             try {
                 $('#user-detail #agent_stax').val(val.agent_stax);
             } catch (e) {
 
             }
+
             try {
                 $('#user-detail #agent_sms_credits').val(val.agent_sms_credits);
+            } catch (e){
+
+            }
+
+
+
+            try {
+                $('#user-detail #agent_part_share').val(val.agent_part_share);
+            } catch (e){
+
+            }
+            try {
+                $('#user-detail #agent_lube_share').val(val.agent_lube_share);
+            } catch (e){
+
+            }
+
+            try {
+                $('#user-detail #agent_consumable_share').val(val.agent_consumable_share);
+            } catch (e){
+
+            }
+            try {
+                $('#user-detail #agent_labour_share').val(val.agent_labour_share);
+            } catch (e){
+
+            }
+            try {
+                $('#user-detail #agent_vas_share').val(val.agent_vas_share);
+            } catch (e){
+
+            }
+            try {
+                $('#user-detail #agent_denting_share').val(val.agent_denting_share);
             } catch (e){
 
             }
@@ -3930,6 +4050,7 @@ var Global = {
 
             html += '<div class="row card">'
             if (val.req_user_staff || val.req_user_admin) {
+                html += '<div class="row">'
                 if (val.booking_user_name != val.cust_name) {
                     html += '<div class="col s12 m12 l12">'
                     html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="b2b_name" disabled type="text"  value ="' + val.cust_name + '"class="validate"><label for="cust_name">Company Name</label></div>'
@@ -3965,9 +4086,15 @@ var Global = {
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_coupon" type="text"  disabled   value ="' + val.coupon + '"class="validate"><label for="cust_coupon">Coupon</label></div>'
                 html += '</div>'
-                html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid"   type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
+                // html += '<div class="col s12 m12 l6">'
+                html += '<div class="col s8 m8 l4">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
                 html += '</div>'
+                html += '<div class="col s4 m4 l2">'
+                html += '<button class="waves-effect waves-light btn cg-primary btn-modifypayement page-wide" type="submit" name="action">Modify<i class="material-icons right">mode_edit</i></button>'
+                html += '</div>'
+                html += '</div>'
+                html += '<div class="row">'
                 html += '<div class="col s12 m12 l1 header">'
                 html += '<b>Source:</b>'
                 html += '</div>'
@@ -3990,7 +4117,9 @@ var Global = {
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Engineer Details</label></div>'
                 html += '</div>'
+                html += '</div>'
             }else{
+                html += '<div class="row">'
                 if (val.booking_user_name != val.cust_name) {
                     html += '<div class="col s12 m12 l12">'
                     html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="' + val.cust_name + '"class="validate"><label for="cust_name">Company Name</label></div>'
@@ -4019,14 +4148,26 @@ var Global = {
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_coupon" type="text" disabled  value ="' + val.coupon + '"class="validate"><label for="cust_coupon">Coupon</label></div>'
                 html += '</div>'
-                html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
+                if (val.req_user_agent){
+                    html += '<div class="col s8 m8 l4">'
+                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
+                    html += '</div>'
+                    html += '<div class="col s4 m4 l2">'
+                    html += '<button class="waves-effect waves-light btn cg-primary btn-modifypayement page-wide" type="submit" name="action">Modify<i class="material-icons right">mode_edit</i></button>'
+                    html += '</div>'
+                }else{
+                    html += '<div class="col s12 m12 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
+                    html += '</div>'
+                }
                 html += '</div>'
+                html += '<div class="row">'
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text" disabled  value ="' + val.source + '"class="validate"><label for="source">Source</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Engineer Details</label></div>'
+                html += '</div>'
                 html += '</div>'
             }
             // if (is_agent)
@@ -4297,14 +4438,14 @@ var Global = {
                     for (i = 1; i < 6; i++) {
                         $('.status-change-'+i ).addClass('selected')
                     }
-                    for (i = 5; i < 7; i++) {
+                    for (i = 6; i < 7; i++) {
                         $('.status-change-'+i ).removeClass('selected')
                     }
                 }else if(val.status == "Cancelled"){
                     for (i = 1; i < 7; i++) {
                         $('.status-change-'+i ).removeClass('selected')
                     }
-                    $('.status-change-5').addClass('selected')
+                    $('.status-change-6').addClass('selected')
                 }
 
             }
@@ -4462,65 +4603,44 @@ var Global = {
         })
         container.html(html);
         try{
-
             var $input = $('#customer-detail #date.datepicker').pickadate({
                 format: 'dd-mm-yyyy',
             })
-
             var picker = $input.pickadate('picker')
             picker.set('select', date_string, { format: 'dd-mm-yyyy' })
-
         }catch(e){
-
         }
-
         try{
             var $input2 = $('#customer-detail #date_delivery.datepicker').pickadate({
                 format: 'dd-mm-yyyy',
                 // min: new Date(),
             })
-
             var picker2 = $input2.pickadate('picker')
             picker2.set('select', date_delivery_string, { format: 'dd-mm-yyyy' })
-
         }catch(e){
-
-
         }
-
-
-
-
         try{
-
             var $input3 = $('#customer-detail #date_follow.datepicker').pickadate({
                 format: 'dd-mm-yyyy',
                 // min: new Date(),
             })
-
             var picker3 = $input3.pickadate('picker')
             picker3.set('select', date_follow_up, { format: 'dd-mm-yyyy' })
-
         }catch(e){
-
-
         }
-
-
         $('#customer-detail #time_follow').timepicker({
             // timeFormat: "h:i A"
             timeFormat: "h:i A",
             minTime: '09:30:00', // 11:45:00 AM,
             maxTime: '20:00:00'
         });
-
         try {
-
             $('#customer-detail #time_follow').timepicker('setTime', time_follow_up);
             // console.log(date_de)
         }catch(e){
 
         }
+        // Service Description Data
 
         TOTAL_ITEM_ESTIMATE = 0;
         var container2 = $('#customer-detail .booking-job-data .pre-data');
@@ -4537,7 +4657,7 @@ var Global = {
             html += '                                           <th data-field="part">Name</th>';
             html += '                                           <th data-field="action">Type</th>';
             // html += '                                            <th data-field="part">Type</th>';
-            if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff || val.req_user_agent){
+            if (val.estimate_history_len > 1 || val.req_user_admin || val.req_user_staff || val.req_user_agent){
                 TO_SHOW_TOTAL = 1
                 html += '                                           <th data-field="unit">Units</th>';
                 html += '                                           <th data-field="unit_price">Unit Price (Rs.)</th>';
@@ -4554,8 +4674,10 @@ var Global = {
 
 
             if (val.req_user_admin || val.req_user_staff){
+                html += '                                           <th data-field="cat-settle">Purchase Price</th>';
                 html += '                                           <th data-field="cat-settle">Settlement</th>';
             }else{
+                html += '                                           <th data-field="cat-settle" class="invisible">Purchase Price</th>';
                 html += '                                           <th data-field="cat-settle" class="invisible">Settlement</th>';
             }
 
@@ -4663,7 +4785,7 @@ var Global = {
                 }
 
                 // Price
-                if (val.estimate_history.length > 1 || val.req_user_admin || val.req_user_staff || val.req_user_agent ) {
+                if (val.estimate_history_len > 1 || val.req_user_admin || val.req_user_staff || val.req_user_agent ) {
                     if (val.req_user_admin || val.req_user_staff || val.req_user_agent ) {
                         if (val.bill_generation_flag){
                             if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
@@ -4717,7 +4839,7 @@ var Global = {
                 if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
                     if (val.bill_generation_flag){
                         if ( val.service_items[i].comment==null ||  val.service_items[i].comment===false) {
-                            html += '<td>' + '<input id="part_comment" type="text" class="browser-default" disabeld aria-required="true">' + '</td>';
+                            html += '<td>' + '<input id="part_comment" type="text" class="browser-default" disabled aria-required="true">' + '</td>';
                         }else{
                             html += '<td>' + '<input id="part_comment" type="text" class="browser-default" value ="' + val.service_items[i].comment + '" disabled aria-required="true">' + '</td>';
                         }
@@ -4837,6 +4959,13 @@ var Global = {
 
                 // Settlemet Status
                 if (val.req_user_admin || val.req_user_staff) {
+
+                    if (val.service_items[i].purchase_price==null || val.service_items[i].purchase_price===false) {
+                        html += '<td><input id="purchase_price" type="number"  class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true"></td>'
+                    }else{
+                        html += '<td><input id="purchase_price" type="number"  class="browser-default" value ="' + val.service_items[i].purchase_price + '" aria-required="true"></td>'
+                    }
+
                     html += '<td>' + '<div class="input-field sort" id ="settle_type"><select  class="browser-default">'
                     if (val.service_items[i].settlement_cat==null || val.service_items[i].settlement_cat===false){
                         if (val.service_items[i].type == "Part") {
@@ -4912,8 +5041,12 @@ var Global = {
                         }
                     }
                 }else{
+                    if (val.service_items[i].purchase_price==null || val.service_items[i].purchase_price===false) {
+                        html += '<td class="invisible"><input id="purchase_price" type="number"  class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true"></td>'
+                    }else{
+                        html += '<td class="invisible"><input id="purchase_price" type="number"  class="browser-default" value ="' + val.service_items[i].purchase_price + '" aria-required="true"></td>'
+                    }
                     html += '<td class="invisible">' + '<input id="settle_type" type="text" disabled class="browser-default" value ="' + val.service_items[i].settlement_cat + '" aria-required="true">' + '</td>';
-
                 }
                 // Row Deletion
                 if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
@@ -4944,7 +5077,6 @@ var Global = {
             }
 
         })
-
         // Service Table End
         container2.html(html);
         if (TO_SHOW_TOTAL == 1){
@@ -4956,6 +5088,35 @@ var Global = {
         // container2.find('select').material_select();
         Materialize.updateTextFields();
         // <div class="id_100">
+        container3 = $('#customer-detail .payment-history')
+        // container3.html('')
+        html4 = ''
+        $.each(data,function(ix,val){
+            payLen = val.payment_booking.length;
+            for (i = 0; i < payLen; i++) {
+                html4 += '<div class="card payment-card" data-class="'+val.payment_booking[i]['payment_id']+'">'
+                html4 += '<div class="col l8 s8 m8">'
+                html4 += '<div class="row">'
+                html4 += val.payment_booking[i]['date_collected']
+                html4 += '</div>'
+                html4 += '<div class="row">'
+                html4 += 'Recieved by <b>' +val.payment_booking[i]['collected_by'] +'</b>'
+                html4 += '</div></div><div class="col l2 s2 m2 centered-text">'
+                html4 += 'Rs. ' + val.payment_booking[i]['amount']
+                html4 += '</div>'
+                html4 += '<div class="col l2 s2 m2 centered-text">'
+                html4 += '<i class="fa fa-trash-o x25 delete-transaction"></i>'
+                html4 += '</div></div>'
+            }
+
+            container3.html(html4)
+
+            $('#customer-detail .payment-summary .total_amount').text(val.price_total)
+            $('#customer-detail .payment-summary .total_paid_amount').text(val.amount_paid)
+            $('#customer-detail .payment-summary .total_due_amount').text(parseFloat(val.price_total) - parseFloat(val.amount_paid))
+
+        });
+
     },
     loadAgentdata:function(data){
         container3 = $('#agent-select')
@@ -5017,6 +5178,8 @@ var Global = {
                         console.log(approved)
                     }
                 }else if (j == 9){
+                    purchase_price =  $(row.cells[j]).find('input,select').eq(0).val()
+                }else if (j == 10){
                     settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
                 }
             }
@@ -5041,7 +5204,8 @@ var Global = {
                 "comment":comment,
                 "quantity":quantity,
                 "unit_price":unit_price,
-                "approved":approved
+                "approved":approved,
+                "purchase_price":purchase_price
             }
             if (name_item != ""){
                 CURRENT_CART_ADMIN.push(cart_item)
@@ -5884,10 +6048,14 @@ var Global = {
         html += '										<tbody>';
         $.each(data, function(ix, val) {
             html += '<tr class="bill-row" data-class="'+val.id+'">'
-            if (val.status == "Cancelled"){
-                html += '											<td class="centered-text" >'+val.invoice_number+' (Cancelled)</td>';
+            if(val.bill_type == "Invoice"){
+                if (val.status == "Cancelled"){
+                    html += '											<td class="centered-text" >'+val.invoice_number+' (Cancelled)</td>';
+                }else{
+                    html += '											<td class="centered-text" >'+val.invoice_number+'</td>';
+                }
             }else{
-                html += '											<td class="centered-text" >'+val.invoice_number+'</td>';
+                html += '											<td class="centered-text" >Pre-Invoice</td>';
             }
             html += '											<td class="centered-text" >'+val.agent_name+', '+val.state+'</td>';
             if (val.booking_data_id == ""){

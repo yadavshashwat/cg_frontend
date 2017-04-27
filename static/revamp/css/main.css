@@ -261,6 +261,9 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 #home .home-form .button-row{text-align:center;margin-bottom:2rem!important;}
 #home .home-form-2 .button-row, #vehicle-select-form .home-form-2 .button-row{text-align:center;margin-bottom:2rem!important;}
 #home .order-confirm{text-align:center;font-size:24px;line-height:100%;padding:5%;}
+.startup-partners{
+        line-height: 70px;
+}
 #features{background:#FAFBFC;}
 #features .feature-section{background-color:#F7F7F7;}
 #features .feature-section .icon{padding-bottom:20px;max-height:72px;}
@@ -483,7 +486,27 @@ footer a:hover{color:#979797;text-decoration:none;}
     line-height: 40px;
     color:grey;
 }
+#customer-detail .modify-payment{
+    height: 650px;
+    overflow: scroll;
+}
 
+#customer-detail .payment-history .card{
+    height: 70px;
+    margin: 5px 10px;
+    padding: 12px 15px;
+    font-weight:600;
+    font-size: 16px;
+
+}
+#customer-detail .payment-summary{
+    font-weight:600;
+    font-size: 16px;
+}
+#customer-detail .delete-transaction{
+    cursor: pointer;
+    color: grey;
+}
 
 #bookings .booking .booking-id-bar{margin-top:45px;text-align:center;}
 #bookings .booking .status-bar{margin-top:30px;text-align:center;}
@@ -494,6 +517,14 @@ footer a:hover{color:#979797;text-decoration:none;}
 #booking-details .header{color:black;font-size:14px;text-transform:uppercase;font-weight:600;}
 #booking-details .book_id h4{margin:0px 0px 5px 0px;}
 #booking-details .header-var{color:black;line-height:40px;}
+#booking-details .booking-payment-card{
+    position: fixed;
+    top:10%;
+    left:2%;
+    width:96%;
+    z-index: 99;
+    /*left:50%;*/
+}
 #new-booking .services-list .delete-item{color:grey;cursor:pointer;line-height:60px;margin-top:5px;}
 #new-booking .btn-copy-poc{margin:1.46rem 0 1.168rem 0;}
 #new-booking .delete-job{
