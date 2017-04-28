@@ -246,6 +246,9 @@ var Global = {
 
                 }
 
+            }else if(sub_page_1 == "settlement"){
+                allsettleopen()
+
             }else if(sub_page_1 == "users"){
                 allusersopen()
                 // $('.navbar .users-button').click()
@@ -408,7 +411,9 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide();
-            $('#bill-details').hide()
+                        $('#bill-details').hide() 
+            $('#settlement-details').hide() 
+
 
             $('#bookings .lead-filter').hide()
 
@@ -512,7 +517,9 @@ var Global = {
             $('#subscription-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide();
-            $('#bill-details').hide()
+                        $('#bill-details').hide() 
+            $('#settlement-details').hide() 
+
 
 
             LEAD_TYPE = "Lead"
@@ -1712,7 +1719,9 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide();
-            $('#bill-details').hide()
+                        $('#bill-details').hide() 
+            $('#settlement-details').hide() 
+
 
 
 
@@ -1955,6 +1964,39 @@ var Global = {
             history.pushState({},'',new_path)
         });
 
+// =====================================================================================
+//    Settlement Management
+// =====================================================================================
+        // -- Load Coupon
+        var allsettleopen = function(){
+            // console.log('check')
+            $('#booking-details').hide()
+            $('#bookings').hide()
+            $('#user-details').hide()
+            $('#coupon-details').hide()
+            $('#new-booking').hide()
+            $('#subscription-details').hide()
+            $('#campaign-details').hide()
+            $('#analytics').hide()
+            $('#expense-details').hide()
+            $('#bill-details').hide()
+            $('#settlement-details').show()
+            Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", _this, _this.loadAgentdata2,null, '.loading-pane');
+            Commons.ajaxData('view_all_bookings', {cg_book:"True",complete_flag:"True"}, "get", _this, _this.loadSettle,null, '.loading-pane');
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/settlement'
+            history.pushState({},'',new_path)
+        };
+        $('.navbar .settlement-button').click(allsettleopen);
+
+        $('#settlement-detail .btn-selectengineer').click(function(){
+            agent = $('#settlement-detail #agent-list-settle').val();
+            console.log(agent);
+            Commons.ajaxData('view_all_bookings', {agent_id : agent,cg_book:"True",complete_flag:"True"}, "get", _this, _this.loadSettle,null, '.loading-pane');
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/settlement'
+            history.pushState({},'',new_path)
+        })
 
 
 
@@ -1974,7 +2016,9 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide()
-            $('#bill-details').hide()
+                        $('#bill-details').hide() 
+            $('#settlement-details').hide() 
+
 
 
             $('#coupon-detail  .all-coupon').click()
@@ -2131,7 +2175,9 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide();
-            $('#bill-details').show()
+                $('#bill-details').show()
+            $('#settlement-details').hide()
+
 
             $('#bill-detail  .all-bill').click()
             Commons.ajaxData('view_all_bills', {}, "get", _this, _this.loadbillAll,null, '.loading-pane');
@@ -2590,7 +2636,9 @@ var Global = {
             $('#subscription-details').hide()
             $('#campaign-details').hide()
             $('#analytics').hide()
-            $('#bill-details').hide()
+                        $('#bill-details').hide() 
+            $('#settlement-details').hide() 
+
             $('#expense-details').show()
             $('#expense-detail  .all-expense').click()
             Commons.ajaxData('view_all_expense', {}, "get", _this, _this.loadExpenseAll,null, '.loading-pane');
@@ -2746,7 +2794,9 @@ var Global = {
             $('#campaign-details').show()
             $('#analytics').hide()
             $('#expense-details').hide()
-            $('#bill-details').hide()
+                        $('#bill-details').hide() 
+            $('#settlement-details').hide() 
+
 
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,2).join('/')+'/campaign/'
@@ -2776,7 +2826,9 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide();
-            $('#bill-details').hide()
+                        $('#bill-details').hide() 
+            $('#settlement-details').hide() 
+
 
             container = $('#new-booking .source-list')
             container.html('')
@@ -2824,7 +2876,9 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide()
-            $('#bill-details').hide()
+                        $('#bill-details').hide() 
+            $('#settlement-details').hide() 
+
 
             container = $('#new-booking .source-list')
             container.html('')
@@ -3246,7 +3300,9 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').show()
             $('#expense-details').hide();
-            $('#bill-details').hide()
+                        $('#bill-details').hide() 
+            $('#settlement-details').hide() 
+
 
             month_selected = $('#analytics .month-row').find('select').val()
             // console.log(month_selected)
@@ -3401,7 +3457,9 @@ var Global = {
             $('#analytics').hide()
             $('#user-detail .all-user').click()
             $('#expense-details').hide();
-            $('#bill-details').hide()
+                        $('#bill-details').hide() 
+            $('#settlement-details').hide() 
+
 
             Commons.ajaxData('fetch_all_users', {}, "get", _this, _this.loadUsers,null, '.loading-pane');
 
@@ -4468,7 +4526,7 @@ var Global = {
 
                 if (val.agent_details=="Not Assigned"){
                     $('.bill-row').hide()
-                }else if (val.bill_generation_flag){
+                }else if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
                     $('#customer-detail .non-generated-bill').hide()
                     $('#customer-detail .generated-bill').show()
 
@@ -4500,7 +4558,7 @@ var Global = {
                 if (val.agent_details=="Not Assigned" || val.clickgarage_flag != true){
                     $('.bill-row').hide()
 
-                }else if (val.bill_generation_flag){
+                }else if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
                     $('#customer-detail .non-generated-bill').hide()
                     $('#customer-detail .generated-bill').show()
 
@@ -4548,7 +4606,7 @@ var Global = {
 
                 if (val.clickgarage_flag == true){
                     $('.bill-row').hide()
-                }else if (val.bill_generation_flag){
+                }else if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
 
                     $('#customer-detail .non-generated-bill').hide()
                     $('#customer-detail .generated-bill').show()
@@ -4571,7 +4629,7 @@ var Global = {
                     $('#customer-detail .b2b-button-row-2').show()
                 }
 
-                if (val.bill_generation_flag){
+                if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
                     $('#customer-detail .generated-bill').show()
 
                 }else{
@@ -4683,7 +4741,7 @@ var Global = {
 
             // }
             if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-                if (val.bill_generation_flag){
+                if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
 
                 }else{
                     html += '                                           <th data-field="delete"></th>';
@@ -4733,7 +4791,7 @@ var Global = {
                 html += '<td class="centered-text">' + item_no + '</td>';
                 // Part Name
                 if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-                    if (val.bill_generation_flag){
+                    if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
                         html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
                     }else{
                         html += '<td>' + '<input id="part_name" type="text" class="browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
@@ -4743,7 +4801,7 @@ var Global = {
                 }
                 // Part Type
                 if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-                    if(val.bill_generation_flag){
+                    if(val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
                         html += '<td>' + '<input id="part_type" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].type + '" aria-required="true">' + '</td>';
                     }else{
                         html += '<td>' + '<div class="input-field sort" id ="part_type"><select  class="browser-default">'
@@ -4787,7 +4845,7 @@ var Global = {
                 // Price
                 if (val.estimate_history_len > 1 || val.req_user_admin || val.req_user_staff || val.req_user_agent ) {
                     if (val.req_user_admin || val.req_user_staff || val.req_user_agent ) {
-                        if (val.bill_generation_flag){
+                        if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
                             if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
                                 html += '<td>' + '<input id="part_units" type="number" class="browser-default" disabled value ="1" aria-required="true">' + '</td>';
                                 html += '<td>' + '<input id="part_unitprice" type="number" class="browser-default" disabled  value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
@@ -4837,7 +4895,7 @@ var Global = {
 
                 // Part Comment
                 if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-                    if (val.bill_generation_flag){
+                    if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
                         if ( val.service_items[i].comment==null ||  val.service_items[i].comment===false) {
                             html += '<td>' + '<input id="part_comment" type="text" class="browser-default" disabled aria-required="true">' + '</td>';
                         }else{
@@ -4862,7 +4920,7 @@ var Global = {
 
                 // approval status
                 if (val.req_user_admin || val.req_user_staff ){
-                    if (val.bill_generation_flag){
+                    if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
                         if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
                             html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
                             html += '<td><input type="checkbox" class="filled-in approve-item tochange" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
@@ -4893,7 +4951,7 @@ var Global = {
 
                     }
                 }else if(val.req_user_agent){
-                    if (val.bill_generation_flag){
+                    if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
                         if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
                             html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
                             html += '<td><input type="checkbox" class="filled-in approve-item" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
@@ -4926,7 +4984,7 @@ var Global = {
 
                     }
                 }else{
-                    if(val.bill_generation_flag){
+                    if(val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
                         if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
                             html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
                             html += '<td><input type="checkbox" class="filled-in approve-item tochange" disabled  id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
@@ -4959,14 +5017,22 @@ var Global = {
 
                 // Settlemet Status
                 if (val.req_user_admin || val.req_user_staff) {
+                    if (val.settlement_flag || val.frozen_flag){
+                        if (val.service_items[i].purchase_price==null || val.service_items[i].purchase_price===false) {
+                            html += '<td><input id="purchase_price" type="number"  disabled class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true"></td>'
+                        }else{
+                            html += '<td><input id="purchase_price" type="number"  disabled  class="browser-default" value ="' + val.service_items[i].purchase_price + '" aria-required="true"></td>'
+                        }
+                            html += '<td >' + '<input id="settle_type" type="text" disabled class="browser-default" value ="' + val.service_items[i].settlement_cat + '" aria-required="true">' + '</td>';
 
-                    if (val.service_items[i].purchase_price==null || val.service_items[i].purchase_price===false) {
-                        html += '<td><input id="purchase_price" type="number"  class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true"></td>'
                     }else{
-                        html += '<td><input id="purchase_price" type="number"  class="browser-default" value ="' + val.service_items[i].purchase_price + '" aria-required="true"></td>'
-                    }
 
-                    html += '<td>' + '<div class="input-field sort" id ="settle_type"><select  class="browser-default">'
+                        if (val.service_items[i].purchase_price==null || val.service_items[i].purchase_price===false) {
+                            html += '<td><input id="purchase_price" type="number"  class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true"></td>'
+                        }else{
+                            html += '<td><input id="purchase_price" type="number"   class="browser-default" value ="' + val.service_items[i].purchase_price + '" aria-required="true"></td>'
+                        }
+                        html += '<td>' + '<div class="input-field sort" id ="settle_type"><select  class="browser-default">'
                     if (val.service_items[i].settlement_cat==null || val.service_items[i].settlement_cat===false){
                         if (val.service_items[i].type == "Part") {
                             html += '<option value="Part" selected>Part</option>'
@@ -5040,17 +5106,21 @@ var Global = {
                             html += '<option value="Denting">Denting</option>'
                         }
                     }
+
+                    }
+
+
                 }else{
                     if (val.service_items[i].purchase_price==null || val.service_items[i].purchase_price===false) {
-                        html += '<td class="invisible"><input id="purchase_price" type="number"  class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true"></td>'
+                        html += '<td class="invisible"><input id="purchase_price" type="number"  disabled class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true"></td>'
                     }else{
-                        html += '<td class="invisible"><input id="purchase_price" type="number"  class="browser-default" value ="' + val.service_items[i].purchase_price + '" aria-required="true"></td>'
+                        html += '<td class="invisible"><input id="purchase_price" type="number" disabled  class="browser-default" value ="' + val.service_items[i].purchase_price + '" aria-required="true"></td>'
                     }
                     html += '<td class="invisible">' + '<input id="settle_type" type="text" disabled class="browser-default" value ="' + val.service_items[i].settlement_cat + '" aria-required="true">' + '</td>';
                 }
                 // Row Deletion
                 if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-                    if (val.bill_generation_flag){
+                    if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
                     }else{
                         html +='                                    <td><div class="delete x25">';
                         html +='                                        <i class="fa fa-trash-o"></i>';
@@ -5061,7 +5131,7 @@ var Global = {
                 }
                 html += '                                       </tr>';
             }
-            if (val.bill_generation_flag){
+            if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
                 $('#customer-detail .btn-view-bill').attr('data-class',val.bill_file_name)
                 $('#customer-detail .btn-additem-est').hide()
                 $('#comp_all_select').attr('disabled','')
@@ -5070,7 +5140,7 @@ var Global = {
                 $('#customer-detail .btn-additem-est').show()
                 $('#comp_all_select').removeAttr('disabled')
             }
-            if ((val.bill_generation_flag && val.req_user_b2b) || (val.bill_generation_flag && val.req_user_agent)){
+            if ((val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag && val.req_user_b2b) || (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag && val.req_user_agent)){
                 $('#customer-detail .btn-update-estimate').hide()
             }else{
                 $('#customer-detail .btn-update-estimate').show()
@@ -5128,6 +5198,19 @@ var Global = {
             html += '<option value="'+val.id+'">'+val.first_name +' '+ val.last_name+' - '+val.phone +'</option>'
         });
         html += '<select>'
+        container3.html(html);
+        // console.log(container3);
+        // container3.find('select').material_select();
+
+    },
+    loadAgentdata2:function(data){
+        container3 = $('#agent-list-settle')
+        container3.html('');
+        html = '<option value="" selected>All</option>'
+        // html += '<option value="" disabled>Select Agent</option>'
+        $.each(data, function(ix, val) {
+            html += '<option value="'+val.id+'">'+val.first_name +' '+ val.last_name+' - '+val.phone +'</option>'
+        });
         container3.html(html);
         // console.log(container3);
         // container3.find('select').material_select();
@@ -6398,6 +6481,73 @@ var Global = {
         $('#cover2').hide()
         Commons.ajaxData('view_all_bills', {}, "get", Global, Global.loadbillAll,null, '.loading-pane');
     },
+    loadSettle:function(data){
+        container = $('#settlement-detail .pre-data')
+        html = ''
+        container.html('')
+        html +="<table class='card striped'><tr><th colspan='5' class='centered-text'>Booking Details</th><th colspan='7' class='centered-text'>Commission Details</th><th></th><th></th></tr>"
+        html +="<tr><th>Booking ID</th><th>Date</th><th>Customer Name</th><th>Vehicle</th><th>Bill Amount</th><th>Part</th><th>Labour</th><th>Lube</th><th>Consumables</th><th>VAS</th><th>Denting</th><th>Total</th><th>Freeze</th><th>Settle</th></tr>"
+        j = 0
+        $.each(data, function(ix, val) {
+            html +='<tr data-class="'+val.id +'">'
+            html +='<td>'+val.booking_id +'</td>'
+            html +='<td>'+val.date_booking +'</td>'
+            html +='<td>'+val.cust_name +'</td>'
+            html +='<td>'+val.cust_make+' '+val.cust_model+' ('+val.cust_regnumber +')</td>'
+            html +='<td>'+val.price_total +'</td>'
+            comm = val.commission_items
+            sourcelen = comm.length;
+            for (i = 0; i < sourcelen; i++) {
+                if (comm[i]['type'] == "Part"){
+                    part_html ='<td><input id="part_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="validate"></td>'
+                }
+                if (comm[i]['type'] == "Labour"){
+                    labour_html ='<td><input id="labour_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="validate"></td>'
+                }
+                if (comm[i]['type'] == "Lube"){
+                    lube_html ='<td><input id="part_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="validate"></td>'
+                }
+                if (comm[i]['type'] == "Consumable"){
+                    consumable_html ='<td><input id="part_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="validate"></td>'
+                }
+                if (comm[i]['type'] == "VAS"){
+                    vas_html ='<td><input id="part_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="validate"></td>'
+                }
+                if (comm[i]['type'] == "Denting"){
+                    denting_html ='<td><input id="part_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="validate"></td>'
+                }
+            }
+            html += part_html
+            html += labour_html
+            html += lube_html
+            html += consumable_html
+            html += vas_html
+            html += denting_html
+            html +='<td><input id="part_comm" disabled type="number" value ="' + val.total_commission + '"class="validate"></td>'
+            // if (val.frozen_flag){
+            //     html +='<td>Manual</td>'
+            // }else{
+            //     html +='<td>Auto</td>'
+            // }
+            if (val.frozen_flag){
+                html +='<td><input type="checkbox" class="filled-in freeze tochange" checked  id="freeze-booking-' + j+'"/><label for="freeze-booking-' +j +'"></label></td>'
+            }else{
+                html +='<td><input type="checkbox" class="filled-in freeze tochange"  id="freeze-booking-' + j+'"/><label for="freeze-booking-' +j +'"></label></td>'
+            }
+            if (val.settlement_flag){
+                html +='<td><input type="checkbox" class="filled-in settle tochange" checked  id="settle-booking-' + j +'"/><label for="settle-booking-' +j +'"></label></td>'
+            }else{
+                html +='<td><input type="checkbox" class="filled-in settle tochange"  id="settle-booking-' + j+'"/><label for="settle-booking-' +j +'"></label></td>'
+
+            }
+
+            html +='</tr>'
+            j = j + 1
+        });
+        html+="</table>"
+        container.html(html)
+    }
+
 
 };
 

@@ -232,11 +232,13 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 #home .hero-text h1{font-size:40px;letter-spacing:2px;line-height:40px;margin-bottom:7px;color:#FFFFFF;text-transform:uppercase;}
 #home .hero-text h4{color:#FFFFFF;text-transform:uppercase;}
 #home .hero-text h3{font-size:15px;letter-spacing:2px;line-height:10px;margin-bottom:5px;color:#FFFFFF;text-transform:uppercase;}
-#home .home-form{height:100%;line-height:100%;margin-top:2%!important;}
+#home .home-form{height:100%;line-height:100%;margin-top:5%!important;padding:2%;}
 #vehicle-select-form{position:fixed;top:10%;width:100%;z-index:98;height:50%;height:100%;}
 .row-zero-margin{margin:0px!important;}
 #home .home-form-2,#vehicle-select-form .home-form-2{height:100%;line-height:100%;padding:2%;border-top-left-radius:0px;border-top-right-radius:0px;z-index:60;}
-#home .home-form-2 .vehicle-details,#vehicle-select-form .home-form-2 .vehicle-details, .home-form .vehicle-details{padding:5%;}
+#home .home-form-2 .vehicle-details,#vehicle-select-form .home-form-2 .vehicle-details, .home-form .vehicle-details{
+    /*padding:5%;*/
+}
 #home .vehicle-select-form, #vehicle-select-form .vehicle-select-form{margin-top:5%;}
 #home .veh-cat-card, #vehicle-select-form .veh-cat-card{height:60px;text-align:center;line-height:60px;margin:0px!important;border-radius:0px;font-size:20px;}
 #home .veh-cat-card.selected, #vehicle-select-form .veh-cat-card.selected{z-index:50;color:#4a148c;font-weight:700;border-bottom:2px solid #4a148c;}
@@ -252,7 +254,13 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 :-ms-input-placeholder{color:#9e9e9e;left:0;font-size:1rem;padding-left:5px;}
 :-moz-placeholder{color:#9e9e9e;left:0;font-size:1rem;padding-left:5px;}
 #home .service-card{text-align:center;vertical-align:middle;font-size:12px;}
-#home .form-row{padding:5% 1%;}
+#home .form-row{
+    /*padding:5% 1%;*/
+}
+
+#home .ad-page-car{
+    line-height: 50px;
+}
 #home .service-card .service-name{padding:15px!important;}
 #home .header-website{text-align:center;}
 #home .header-btn{margin:5% 0%!important;}

@@ -400,6 +400,7 @@ var Login = {
             $('.admin-page .items-list li.campaign-button').hide()
             $('.admin-page .items-list li.expenses-button').hide()
             $('.admin-page .items-list li.new-lead-button').hide()
+            $('.admin-page .items-list li.settlement-button').hide()
             $('.admin-page .items-list li.analytics-button').hide()
             $('.admin-page .items-list li.bill-button').hide()
             $('.admin-page .agent-button-row').hide()

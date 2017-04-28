@@ -147,6 +147,11 @@ $(document).ready(function(){
      var vehtype = $('#home').attr('data-vehicle-type')
      var service = $('#home').attr('data-service-type')
      var source_type = $('#home').attr('source-type')
+    if (vehtype == "Car"){
+    $('#home .ad-page-car').addClass('fa-car')
+    }else{
+    $('#home .ad-page-car').addClass('fa-motorcycle')
+    }
 
     if (vehtype == "Car" && service == "CarCare"){
         var PAGEHEADER = "BEST CAR CLEANING SERVICES IN GURUGRAM"
@@ -449,7 +454,19 @@ var Global = {
            // var locality = $('#locality').val();
            var number = $('#telephone').val();
            // var email = $('#email').val();
-           var date = $('#date').val();
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+
+            var yyyy = today.getFullYear();
+            if(dd<10){
+                dd='0'+dd;
+            }
+            if(mm<10){
+                mm='0'+mm;
+            }
+            var today = dd+'-'+mm+'-'+yyyy;
+           var date = today;
            var time = $('#time-slot').find('.selectize-input').find('div').attr('data-value');
            // var city = $('#city').find('.selectize-input').find('div').attr('data-value');
 
@@ -491,10 +508,10 @@ var Global = {
            //     $('#email').addClass("invalid");
            //     error =1;
            // }
-           if(date==""){
-               $('#date').addClass("invalid");
-               error = 1;
-           }
+           // if(date==""){
+           //     $('#date').addClass("invalid");
+           //     error = 1;
+           // }
            // if(time==""){
            //     $('#time').addClass("invalid");
            //     $('#choose-time-slot').text('Choose Time Slot');
