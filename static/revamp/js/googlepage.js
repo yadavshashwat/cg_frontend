@@ -154,16 +154,16 @@ $(document).ready(function(){
     }
 
     if (vehtype == "Car" && service == "CarCare"){
-        var PAGEHEADER = "BEST CAR CLEANING SERVICES IN GURUGRAM"
+        var PAGEHEADER = "BEST CAR CLEANING SERVICES IN  DELHI NCR"
         var FEATURES = "3M/Meguiar products&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Expert cleaners&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;doorstep service"
     }else if(vehtype =="Car" && service == "Servicing"){
-        var PAGEHEADER = "BEST CAR SERVICING WORKSHOP IN GURUGRAM"
+        var PAGEHEADER = "BEST CAR SERVICING WORKSHOP IN DELHI NCR"
         var FEATURES = "Lowest price - Upfront estimate&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics"
     }else if(vehtype =="Car" && service == "Repairing"){
-        var PAGEHEADER = " TOP QUALITY CAR REPAIRS IN GURUGRAM"
+        var PAGEHEADER = " TOP QUALITY CAR REPAIRS IN DELHI NCR"
         var FEATURES = "OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop"
     }else if(vehtype =="Car" && service == "Denting"){
-        var PAGEHEADER = "BEST IN CLASS DENTING/ PAINTING FACILITY IN GURUGRAM"
+        var PAGEHEADER = "BEST IN CLASS DENTING/ PAINTING FACILITY IN DELHI NCR"
         var FEATURES = "Upto 60% less than market&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;No paint mismatch with 1 year warranty&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Dust free paint booths"
     }else if(vehtype =="Bike" && service == "Repairing"){
         var PAGEHEADER = "DOORSTEP BIKE REPAIRS. NOW IN GURUGRAM"
