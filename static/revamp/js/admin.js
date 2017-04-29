@@ -129,8 +129,21 @@ var AGENT_LOCALITY = ""
 var AGENT_CITY = ""
 var AGENT_STATE = ""
 
+var TOTAL_SETTLED_COMMISSION = 0 ;
+var TOTAL_UNSETTLED_COMMISSION = 0 ;
+var TOTAL_SETTLED_PAY_COLLECT = 0;
+var TOTAL_UNSETTLED_PAY_COLLECT = 0;
+var TOTAL_SETTLED_BUSINESS = 0;
+var TOTAL_UNSETTLED_BUSINESS = 0;
+var TOTAL_AMOUNT_FROM_CG_TO_VENDOR = 0;
 
-
+var TOTAL_BUSINESS_VENDOR = 0;
+var TOTAL_SETTLED_BUSINESS = 0;
+var TOTAL_UNSETTLED_BUSINESS = 0;
+var TOTAL_UNSETTLED_PAY_COLLECT = 0;
+var TOTAL_UNSETTLED_COMMISSION = 0 ;
+var TOTAL_SERVICE_TAX_COMMISSION = 0;
+var TOTAL_AMOUNT_FROM_CG_TO_VENDOR = 0;
 
 var MONTH_TABLE = ""
 var SOURCES = ['Google Adwords',
@@ -411,8 +424,8 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide();
-                        $('#bill-details').hide() 
-            $('#settlement-details').hide() 
+            $('#bill-details').hide()
+            $('#settlement-details').hide()
 
 
             $('#bookings .lead-filter').hide()
@@ -517,8 +530,8 @@ var Global = {
             $('#subscription-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide();
-                        $('#bill-details').hide() 
-            $('#settlement-details').hide() 
+            $('#bill-details').hide()
+            $('#settlement-details').hide()
 
 
 
@@ -1174,13 +1187,13 @@ var Global = {
         $('#customer-detail .payment-history').on('click','.payment-card .delete-transaction',function(){
             bid =$('#customer-detail #booking_id').attr('booking_data_id')
             payment_id = $(this).closest('.payment-card').attr('data-class')
-                Commons.ajaxData('add_delete_payment', {
-                    data_id : bid,
-                    payment_id : payment_id,
-                    add_del : "Delete"
-                }, "get", _this, _this.loadCustomerAgent,null, '.loading-pane');
+            Commons.ajaxData('add_delete_payment', {
+                data_id : bid,
+                payment_id : payment_id,
+                add_del : "Delete"
+            }, "get", _this, _this.loadCustomerAgent,null, '.loading-pane');
         })
-        
+
 
 
         // - update-estimate
@@ -1206,7 +1219,7 @@ var Global = {
                 estimate: estimate,
             }, "post", _this, _this.loadCustomerestimate,null, '.loading-pane');
             window.open(
-                window.location.pathname.split('/')[0] +'/' + window.location.pathname.split('/')[1] + '/bills/newbill/' + b_data_id
+                window.location.pathname.split('/')[0] +'/' + window.location.pathname.split('/')[1] + '/bills/newbill/' + b_data_id +'/new'
             );
         });
 
@@ -1719,8 +1732,8 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide();
-                        $('#bill-details').hide() 
-            $('#settlement-details').hide() 
+            $('#bill-details').hide()
+            $('#settlement-details').hide()
 
 
 
@@ -1981,6 +1994,7 @@ var Global = {
             $('#expense-details').hide()
             $('#bill-details').hide()
             $('#settlement-details').show()
+            $('#settlement-detail  .summary-settle').click()
             Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", _this, _this.loadAgentdata2,null, '.loading-pane');
             Commons.ajaxData('view_all_bookings', {cg_book:"True",complete_flag:"True"}, "get", _this, _this.loadSettle,null, '.loading-pane');
             var path = window.location.pathname.split('/')
@@ -1998,9 +2012,141 @@ var Global = {
             history.pushState({},'',new_path)
         })
 
+         $('#settlement-detail .summary-settle').click(function(){
+            $('#settlement-detail .summary-settle-div').show();
+            $('#settlement-detail  .list-settle-div').hide();
+            $('#settlement-detail  .all-settle').removeClass('selected')
+            $('#settlement-detail  .summary-settle').addClass('selected')
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/summary/'
+            history.pushState({},'',new_path)
+        });
+
+        $('#settlement-detail .all-settle').click(function(){
+            $('#settlement-detail .summary-settle-div').hide();
+            $('#settlement-detail  .list-settle-div').show();
+            $('#settlement-detail  .all-settle').addClass('selected')
+            $('#settlement-detail  .summary-settle').removeClass('selected')
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/all/'
+            history.pushState({},'',new_path)
+        });
+
+        $('#settlement-detail .btn-downloadsummary').click(function(){
+            agent = $('#settlement-detail #agent-list-settle').val();
+            params = {agent_id : agent,
+                cg_book:"True",
+                complete_flag:"True",
+                getcsv2:"True"}
+            var url = Commons.getOrigin()+Commons.URLFromName['view_all_bookings']+'?'+jQuery.param( params )
+            $('#download').find('iframe').attr('src',url)
+        })
+
+        $('#settlement-detail').on('click','table input.freeze',function(){
+            data_id = $(this).closest('tr').attr('data-class')
+            part_comm = $(this).closest('tr').find('.part-comm').val()
+            labour_comm = $(this).closest('tr').find('.labour-comm').val()
+            lube_comm = $(this).closest('tr').find('.lube-comm').val()
+            consumable_comm = $(this).closest('tr').find('.consumable-comm').val()
+            vas_comm = $(this).closest('tr').find('.vas-comm').val()
+            denting_comm = $(this).closest('tr').find('.denting-comm').val()
+            freeze_status = this.checked
+            if (freeze_status){
+                $(this).closest('tr').find('.part-comm').attr('disabled','')
+                $(this).closest('tr').find('.labour-comm').attr('disabled','')
+                $(this).closest('tr').find('.lube-comm').attr('disabled','')
+                $(this).closest('tr').find('.consumable-comm').attr('disabled','')
+                $(this).closest('tr').find('.vas-comm').attr('disabled','')
+                $(this).closest('tr').find('.denting-comm').attr('disabled','')
+                Commons.ajaxData('settle_freeze_booking', {data_id : data_id,
+                    part_share:part_comm,
+                    labour_share:labour_comm,
+                    vas_share:vas_comm,
+                    lube_share:lube_comm,
+                    consumable_share:consumable_comm,
+                    denting_share:denting_comm,
+                    to_do:"Freeze"}, "get", _this, _this.loadfreezesettleclick,null, '.loading-pane');
 
 
+            }else{
+                Commons.ajaxData('settle_freeze_booking', {data_id : data_id,
+                    // part_share:part_comm,
+                    // labour_share:labour_comm,
+                    // vas_share:vas_comm,
+                    // lube_share:lube_comm,
+                    // consumable_share:consumable_comm,
+                    // denting_share:denting_comm,
+                    to_do:"Unfreeze"}, "get", _this, _this.loadfreezesettleclick,null, '.loading-pane');
 
+                $(this).closest('tr').find('.part-comm').removeAttr('disabled','')
+                $(this).closest('tr').find('.labour-comm').removeAttr('disabled','')
+                $(this).closest('tr').find('.lube-comm').removeAttr('disabled','')
+                $(this).closest('tr').find('.consumable-comm').removeAttr('disabled','')
+                $(this).closest('tr').find('.vas-comm').removeAttr('disabled','')
+                $(this).closest('tr').find('.denting-comm').removeAttr('disabled','')
+            }
+
+
+        })
+
+        $('#settlement-detail').on('click','table input.settle',function(){
+            data_id = $(this).closest('tr').attr('data-class')
+            part_comm = $(this).closest('tr').find('.part-comm').val()
+            labour_comm = $(this).closest('tr').find('.labour-comm').val()
+            lube_comm = $(this).closest('tr').find('.lube-comm').val()
+            consumable_comm = $(this).closest('tr').find('.consumable-comm').val()
+            vas_comm = $(this).closest('tr').find('.vas-comm').val()
+            denting_comm = $(this).closest('tr').find('.denting-comm').val()
+            settle_status = this.checked
+            if (settle_status){
+                $(this).closest('tr').find('.part-comm').attr('disabled','')
+                $(this).closest('tr').find('.labour-comm').attr('disabled','')
+                $(this).closest('tr').find('.lube-comm').attr('disabled','')
+                $(this).closest('tr').find('.consumable-comm').attr('disabled','')
+                $(this).closest('tr').find('.vas-comm').attr('disabled','')
+                $(this).closest('tr').find('.denting-comm').attr('disabled','')
+                freeze_id = $(this).attr('data-class')
+                console.log(freeze_id)
+                document.getElementById(freeze_id).checked = true;
+                Commons.ajaxData('settle_freeze_booking', {data_id : data_id,
+                    part_share:part_comm,
+                    labour_share:labour_comm,
+                    vas_share:vas_comm,
+                    lube_share:lube_comm,
+                    consumable_share:consumable_comm,
+                    denting_share:denting_comm,
+                    to_do:"Settle"}, "get", _this, _this.loadfreezesettleclick,null, '.loading-pane');
+
+            }else{
+                Commons.ajaxData('settle_freeze_booking', {data_id : data_id,
+                    // part_share:part_comm,
+                    // labour_share:labour_comm,
+                    // vas_share:vas_comm,
+                    // lube_share:lube_comm,
+                    // consumable_share:consumable_comm,
+                    // denting_share:denting_comm,
+                    to_do:"Unsettle"}, "get", _this, _this.loadfreezesettleclick,null, '.loading-pane');
+
+                // $(this).closest('tr').find('.part-comm').removeAttr('disabled','')
+                // $(this).closest('tr').find('.labour-comm').removeAttr('disabled','')
+                // $(this).closest('tr').find('.lube-comm').removeAttr('disabled','')
+                // $(this).closest('tr').find('.consumable-comm').removeAttr('disabled','')
+                // $(this).closest('tr').find('.vas-comm').removeAttr('disabled','')
+                // $(this).closest('tr').find('.denting-comm').removeAttr('disabled','')
+            }
+
+        })
+
+        $('#settlement-detail').on('keyup click','input',function(){
+            part_comm = $(this).closest('tr').find('.part-comm').val()
+            labour_comm = $(this).closest('tr').find('.labour-comm').val()
+            lube_comm = $(this).closest('tr').find('.lube-comm').val()
+            consumable_comm = $(this).closest('tr').find('.consumable-comm').val()
+            vas_comm = $(this).closest('tr').find('.vas-comm').val()
+            denting_comm = $(this).closest('tr').find('.denting-comm').val()
+            total = parseFloat(part_comm) + parseFloat(labour_comm) + parseFloat(lube_comm) + parseFloat(consumable_comm) + parseFloat(vas_comm) + parseFloat(denting_comm)
+            $(this).closest('tr').find('.total-comm').val(total)
+        })
 // =====================================================================================
 //    Coupon Management
 // =====================================================================================
@@ -2016,8 +2162,8 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide()
-                        $('#bill-details').hide() 
-            $('#settlement-details').hide() 
+            $('#bill-details').hide()
+            $('#settlement-details').hide()
 
 
 
@@ -2175,7 +2321,7 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide();
-                $('#bill-details').show()
+            $('#bill-details').show()
             $('#settlement-details').hide()
 
 
@@ -2203,6 +2349,7 @@ var Global = {
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/newbill/' + data_id +'/new'
             history.pushState({},'',new_path)
+            // $('#bill-detail table').click()
 
         };
 
@@ -2215,6 +2362,7 @@ var Global = {
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/newbill/' + data_id +'/pre'
             history.pushState({},'',new_path)
+            // $('#bill-detail table').click()
 
         };
 
@@ -2269,6 +2417,7 @@ var Global = {
                 $('#agent_bill_cin').val(CGHARYANA_CIN_NO)
                 STATE_BILL = CGHARYANA_STATE
                 Commons.ajaxData('get_all_taxes', {state:STATE_BILL}, "get", _this, _this.loadTaxUpdate,null, '.loading-pane');
+                setTimeout(function() {             $('#bill-table').click()       }, 1000);
 
             }else if (bill_type == "CG Delhi"){
                 $('#agent_bill_name').val(CGDELHI_NAME)
@@ -2278,6 +2427,7 @@ var Global = {
                 $('#agent_bill_cin').val(CGDELHI_CIN_NO)
                 STATE_BILL = CGDELHI_STATE
                 Commons.ajaxData('get_all_taxes', {state:STATE_BILL}, "get", _this, _this.loadTaxUpdate,null, '.loading-pane');
+                setTimeout(function() {             $('#bill-table').click()       }, 1000);
 
             }else if(bill_type == "CG Receipt"){
                 $('#agent_bill_name').val(CGDELHI_NAME)
@@ -2290,7 +2440,9 @@ var Global = {
                 VAT_PART_PERCENT = 0
                 SERVICE_TAX_PERCENT = 0
                 STATE_BILL = CGDELHI_STATE
-                $('#bill-detail table').click()
+                setTimeout(function() {             $('#bill-table').click()       }, 1000);
+
+                // $('#bill-detail table').click()
 
             }else if(bill_type == "Agent Bill"){
                 $('#agent_bill_name').val(AGENT_NAME)
@@ -2636,8 +2788,8 @@ var Global = {
             $('#subscription-details').hide()
             $('#campaign-details').hide()
             $('#analytics').hide()
-                        $('#bill-details').hide() 
-            $('#settlement-details').hide() 
+            $('#bill-details').hide()
+            $('#settlement-details').hide()
 
             $('#expense-details').show()
             $('#expense-detail  .all-expense').click()
@@ -2794,8 +2946,8 @@ var Global = {
             $('#campaign-details').show()
             $('#analytics').hide()
             $('#expense-details').hide()
-                        $('#bill-details').hide() 
-            $('#settlement-details').hide() 
+            $('#bill-details').hide()
+            $('#settlement-details').hide()
 
 
             var path = window.location.pathname.split('/')
@@ -2826,8 +2978,8 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide();
-                        $('#bill-details').hide() 
-            $('#settlement-details').hide() 
+            $('#bill-details').hide()
+            $('#settlement-details').hide()
 
 
             container = $('#new-booking .source-list')
@@ -2876,8 +3028,8 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide()
-                        $('#bill-details').hide() 
-            $('#settlement-details').hide() 
+            $('#bill-details').hide()
+            $('#settlement-details').hide()
 
 
             container = $('#new-booking .source-list')
@@ -3300,8 +3452,8 @@ var Global = {
             $('#campaign-details').hide()
             $('#analytics').show()
             $('#expense-details').hide();
-                        $('#bill-details').hide() 
-            $('#settlement-details').hide() 
+            $('#bill-details').hide()
+            $('#settlement-details').hide()
 
 
             month_selected = $('#analytics .month-row').find('select').val()
@@ -3457,8 +3609,8 @@ var Global = {
             $('#analytics').hide()
             $('#user-detail .all-user').click()
             $('#expense-details').hide();
-                        $('#bill-details').hide() 
-            $('#settlement-details').hide() 
+            $('#bill-details').hide()
+            $('#settlement-details').hide()
 
 
             Commons.ajaxData('fetch_all_users', {}, "get", _this, _this.loadUsers,null, '.loading-pane');
@@ -3668,7 +3820,11 @@ var Global = {
             html += '        <div class="row card cardhover no-border-radius booking" data-class="' + val.id + '">'
             html += '            <div class="row"><div class="booking-open-btn">'
             html += '                <div class="col l1 s2 m2 booking-id-bar">'
-            html += '                    <b>#<span class="id">' + val.booking_id + '</span></b>'
+            if (val.clickgarage_flag){
+                html += '                    <b>CG #<span class="id">' + val.booking_id + '</span></b>'
+            }else{
+                html += '                    <b>#<span class="id">' + val.booking_id + '</span></b>'
+            }
             html += '                </div>'
             if (LEAD_TYPE == "Lead"){
                 html += '                <div class="col l6 s7 m7">'
@@ -4526,7 +4682,7 @@ var Global = {
 
                 if (val.agent_details=="Not Assigned"){
                     $('.bill-row').hide()
-                }else if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
+                }else if (val.bill_generation_flag){
                     $('#customer-detail .non-generated-bill').hide()
                     $('#customer-detail .generated-bill').show()
 
@@ -4558,7 +4714,7 @@ var Global = {
                 if (val.agent_details=="Not Assigned" || val.clickgarage_flag != true){
                     $('.bill-row').hide()
 
-                }else if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
+                }else if (val.bill_generation_flag){
                     $('#customer-detail .non-generated-bill').hide()
                     $('#customer-detail .generated-bill').show()
 
@@ -4582,31 +4738,9 @@ var Global = {
 
                 }
 
-
-                if (val.status == "Engineer Left") {
-                    $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1').show()
-                    $('#customer-detail .booking-data .agent-button-row .btn-update-status.status-btn-1').attr("status_next", "Job Completed")
-                    $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1 #status_change-1').text("Job Completed")
-                    $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-2').attr("status_next", "Reached Workshop")
-                    $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-2').show()
-                    $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-2 #status_change-2').text("Reached Workshop")
-                    // } else if (val.status == "Reached Workshop") {
-                    //     $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').hide()
-                    //     $('#customer-detail .booking-data .agent-button-row .btn-update-status.status-btn-2').hide()
-                }else  if (val.status == "Job Completed" || val.status == "Feedback Taken") {
-                    // $('#customer-detail.agent-button-row').hide()
-                    // $('#customer-detail .agent-button-row').hide()
-
-                }else{
-                    $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').attr("status_next", val.status_next)
-                    $('#customer-detail .booking-data .agent-button-row  .btn-update-status.status-btn-1 #status_change-1').text(val.status_next)
-                    $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-2').hide()
-                    $('#customer-detail .booking-data  .agent-button-row .btn-update-status.status-btn-1').show()
-                }
-
                 if (val.clickgarage_flag == true){
                     $('.bill-row').hide()
-                }else if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
+                }else if (val.bill_generation_flag){
 
                     $('#customer-detail .non-generated-bill').hide()
                     $('#customer-detail .generated-bill').show()
@@ -4629,7 +4763,7 @@ var Global = {
                     $('#customer-detail .b2b-button-row-2').show()
                 }
 
-                if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
+                if (val.bill_generation_flag){
                     $('#customer-detail .generated-bill').show()
 
                 }else{
@@ -4707,6 +4841,11 @@ var Global = {
         TO_SHOW_TOTAL = 0
         // Service Table Start
         $.each(data, function(ix, val) {
+            console.log("Job :" + val.job_completion_flag)
+            console.log("Bill :" + val.bill_generation_flag)
+            console.log("Frozen :" + val.frozen_flag)
+            console.log("Settle :" + val.settlement_flag)
+
             html += '                               <div class="desc-content col s12 m12 l10 offset-l1">';
             html += '                                   <table class="striped card" id="estimate-table">';
             html += '                                       <thead>';
@@ -5023,7 +5162,7 @@ var Global = {
                         }else{
                             html += '<td><input id="purchase_price" type="number"  disabled  class="browser-default" value ="' + val.service_items[i].purchase_price + '" aria-required="true"></td>'
                         }
-                            html += '<td >' + '<input id="settle_type" type="text" disabled class="browser-default" value ="' + val.service_items[i].settlement_cat + '" aria-required="true">' + '</td>';
+                        html += '<td >' + '<input id="settle_type" type="text" disabled class="browser-default" value ="' + val.service_items[i].settlement_cat + '" aria-required="true">' + '</td>';
 
                     }else{
 
@@ -5033,79 +5172,79 @@ var Global = {
                             html += '<td><input id="purchase_price" type="number"   class="browser-default" value ="' + val.service_items[i].purchase_price + '" aria-required="true"></td>'
                         }
                         html += '<td>' + '<div class="input-field sort" id ="settle_type"><select  class="browser-default">'
-                    if (val.service_items[i].settlement_cat==null || val.service_items[i].settlement_cat===false){
-                        if (val.service_items[i].type == "Part") {
-                            html += '<option value="Part" selected>Part</option>'
-                        } else {
-                            html += '<option value="Part">Part</option>'
+                        if (val.service_items[i].settlement_cat==null || val.service_items[i].settlement_cat===false){
+                            if (val.service_items[i].type == "Part") {
+                                html += '<option value="Part" selected>Part</option>'
+                            } else {
+                                html += '<option value="Part">Part</option>'
+                            }
+                            if (val.service_items[i].type == "Lube") {
+                                html += '<option value="Lube" selected>Lube</option>'
+                            } else {
+                                html += '<option value="Lube">Lube</option>'
+                            }
+                            if (val.service_items[i].type == "Consumable") {
+                                html += '<option value="Consumable" selected>Consumable</option>'
+                            } else {
+                                html += '<option value="Consumable">Consumable</option>'
+                            }
+                            if (val.service_items[i].type == "Labour") {
+                                html += '<option value="Labour" selected>Labour</option>'
+                            } else {
+                                html += '<option value="Labour">Labour</option>'
+                            }
+                            if (val.service_items[i].type == "Discount") {
+                                html += '<option value="Discount" selected>Discount</option>'
+                            } else {
+                                html += '<option value="Discount">Discount</option>'
+                            }
+                            if (val.service_items[i].type == "VAS") {
+                                html += '<option value="VAS" selected>VAS</option>'
+                            } else {
+                                html += '<option value="VAS">VAS</option>'
+                            }
+                            if (val.service_items[i].type == "Denting") {
+                                html += '<option value="Denting" selected>Denting</option>'
+                            } else {
+                                html += '<option value="Denting">Denting</option>'
+                            }
+                        }else{
+                            if (val.service_items[i].settlement_cat == "Part") {
+                                html += '<option value="Part" selected>Part</option>'
+                            } else {
+                                html += '<option value="Part">Part</option>'
+                            }
+                            if (val.service_items[i].type == "Lube") {
+                                html += '<option value="Lube" selected>Lube</option>'
+                            } else {
+                                html += '<option value="Lube">Lube</option>'
+                            }
+                            if (val.service_items[i].type == "Consumable") {
+                                html += '<option value="Consumable" selected>Consumable</option>'
+                            } else {
+                                html += '<option value="Consumable">Consumable</option>'
+                            }
+                            if (val.service_items[i].settlement_cat == "Labour") {
+                                html += '<option value="Labour" selected>Labour</option>'
+                            } else {
+                                html += '<option value="Labour">Labour</option>'
+                            }
+                            if (val.service_items[i].settlement_cat == "Discount") {
+                                html += '<option value="Discount" selected>Discount</option>'
+                            } else {
+                                html += '<option value="Discount">Discount</option>'
+                            }
+                            if (val.service_items[i].settlement_cat == "VAS") {
+                                html += '<option value="VAS" selected>VAS</option>'
+                            } else {
+                                html += '<option value="VAS">VAS</option>'
+                            }
+                            if (val.service_items[i].settlement_cat == "Denting") {
+                                html += '<option value="Denting" selected>Denting</option>'
+                            } else {
+                                html += '<option value="Denting">Denting</option>'
+                            }
                         }
-                        if (val.service_items[i].type == "Lube") {
-                            html += '<option value="Lube" selected>Lube</option>'
-                        } else {
-                            html += '<option value="Lube">Lube</option>'
-                        }
-                        if (val.service_items[i].type == "Consumable") {
-                            html += '<option value="Consumable" selected>Consumable</option>'
-                        } else {
-                            html += '<option value="Consumable">Consumable</option>'
-                        }
-                        if (val.service_items[i].type == "Labour") {
-                            html += '<option value="Labour" selected>Labour</option>'
-                        } else {
-                            html += '<option value="Labour">Labour</option>'
-                        }
-                        if (val.service_items[i].type == "Discount") {
-                            html += '<option value="Discount" selected>Discount</option>'
-                        } else {
-                            html += '<option value="Discount">Discount</option>'
-                        }
-                        if (val.service_items[i].type == "VAS") {
-                            html += '<option value="VAS" selected>VAS</option>'
-                        } else {
-                            html += '<option value="VAS">VAS</option>'
-                        }
-                        if (val.service_items[i].type == "Denting") {
-                            html += '<option value="Denting" selected>Denting</option>'
-                        } else {
-                            html += '<option value="Denting">Denting</option>'
-                        }
-                    }else{
-                        if (val.service_items[i].settlement_cat == "Part") {
-                            html += '<option value="Part" selected>Part</option>'
-                        } else {
-                            html += '<option value="Part">Part</option>'
-                        }
-                        if (val.service_items[i].type == "Lube") {
-                            html += '<option value="Lube" selected>Lube</option>'
-                        } else {
-                            html += '<option value="Lube">Lube</option>'
-                        }
-                        if (val.service_items[i].type == "Consumable") {
-                            html += '<option value="Consumable" selected>Consumable</option>'
-                        } else {
-                            html += '<option value="Consumable">Consumable</option>'
-                        }
-                        if (val.service_items[i].settlement_cat == "Labour") {
-                            html += '<option value="Labour" selected>Labour</option>'
-                        } else {
-                            html += '<option value="Labour">Labour</option>'
-                        }
-                        if (val.service_items[i].settlement_cat == "Discount") {
-                            html += '<option value="Discount" selected>Discount</option>'
-                        } else {
-                            html += '<option value="Discount">Discount</option>'
-                        }
-                        if (val.service_items[i].settlement_cat == "VAS") {
-                            html += '<option value="VAS" selected>VAS</option>'
-                        } else {
-                            html += '<option value="VAS">VAS</option>'
-                        }
-                        if (val.service_items[i].settlement_cat == "Denting") {
-                            html += '<option value="Denting" selected>Denting</option>'
-                        } else {
-                            html += '<option value="Denting">Denting</option>'
-                        }
-                    }
 
                     }
 
@@ -5131,16 +5270,23 @@ var Global = {
                 }
                 html += '                                       </tr>';
             }
-            if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
+            if (val.bill_generation_flag){
                 $('#customer-detail .btn-view-bill').attr('data-class',val.bill_file_name)
+            }else{
+                $('#customer-detail .btn-view-bill').attr('data-class','')
+            }
+
+            if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
                 $('#customer-detail .btn-additem-est').hide()
                 $('#comp_all_select').attr('disabled','')
             }else{
-                $('#customer-detail .btn-view-bill').attr('data-class','')
                 $('#customer-detail .btn-additem-est').show()
                 $('#comp_all_select').removeAttr('disabled')
             }
-            if ((val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag && val.req_user_b2b) || (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag && val.req_user_agent)){
+
+
+
+            if (((val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag) && val.req_user_b2b) || ((val.settlement_flag || val.frozen_flag || val.job_completion_flag) && val.req_user_agent) || ((val.settlement_flag || val.frozen_flag) && val.req_user_admin) || ((val.settlement_flag || val.frozen_flag) && val.req_user_staff)){
                 $('#customer-detail .btn-update-estimate').hide()
             }else{
                 $('#customer-detail .btn-update-estimate').show()
@@ -6025,7 +6171,13 @@ var Global = {
         container = $('#analytics .month-data-row').find('tbody')
         container.html('')
         num_leads = parseInt(data['num_lead'])+parseInt(data['num_warm'])
+        if (data['req_user_admin']){
         MONTH_TABLE += '<tr><td>'+data['monthyear']+'</td><td>'+Math.round(parseFloat(data['vol_completed']))+'</td><td>'+data['num_completed']+'</td><td>NA</td><td>'+data['num_total_lead']+'</td><td>'+data['nps']+'</td></tr>'
+        }else if(data['req_user_agent']){
+        MONTH_TABLE += '<tr><td>'+data['monthyear']+'</td><td>'+Math.round(parseFloat(data['vol_completed']))+'</td><td>'+data['num_completed']+'</td><td>'+data['num_total_lead']+'</td><td>'+data['nps']+'</td></tr>'
+        }else{
+        MONTH_TABLE += '<tr><td>'+data['monthyear']+'</td><td>'+Math.round(parseFloat(data['vol_completed']))+'</td><td>'+data['num_completed']+'</td><td>'+data['num_total_lead']+'</td></tr>'
+        }
         container.html(MONTH_TABLE)
         MONTH_NUMBER = MONTH_NUMBER + 1
         // console.log(MONTH_NUMBER)
@@ -6285,12 +6437,13 @@ var Global = {
 
         })
         container.html(html)
-        $('#bill-detail table').click()
         Materialize.updateTextFields()
         $('#bill-detail .booking-id').attr('data-class',data_id)
         var path = window.location.pathname.split('/')
         var new_path = path.slice(0,3).join('/')+'/newbill/' + data_id + '/new'
         history.pushState({},'',new_path)
+        setTimeout(function() {             $('#bill-table').click()       }, 1000);
+
     },
     loadTaxUpdateAgent:function(data){
         $.each(data, function(ix, val) {
@@ -6310,7 +6463,7 @@ var Global = {
                 SERVICE_TAX_PERCENT = 0
             }
         });
-        $('#bill-detail table').click()
+        setTimeout(function() {             $('#bill-table').click()       }, 1000);
 
     },
     loadTaxUpdate:function(data){
@@ -6320,7 +6473,7 @@ var Global = {
             VAT_PART_PERCENT = parseFloat(val.vat_parts)
             SERVICE_TAX_PERCENT = parseFloat(val.service_tax)
         });
-        $('#bill-detail table').click()
+        setTimeout(function() {             $('#bill-table').click()       }, 1000);
 
     },
     loadbillbookingdatapre:function(data) {
@@ -6443,13 +6596,13 @@ var Global = {
                 }
             }
         });
-        container.html(html)
-        $('#bill-detail table').click()
         Materialize.updateTextFields()
         $('#bill-detail .booking-id').attr('data-class',data_id)
         var path = window.location.pathname.split('/')
         var new_path = path.slice(0,3).join('/')+'/newbill/' + data_id +'/pre'
         history.pushState({},'',new_path)
+        container.html(html)
+        setTimeout(function() {             $('#bill-table').click()       }, 1000);
 
 
     },
@@ -6482,39 +6635,87 @@ var Global = {
         Commons.ajaxData('view_all_bills', {}, "get", Global, Global.loadbillAll,null, '.loading-pane');
     },
     loadSettle:function(data){
+        TOTAL_BUSINESS_VENDOR = 0;
+        TOTAL_SETTLED_BUSINESS = 0;
+        TOTAL_UNSETTLED_BUSINESS = 0;
+        TOTAL_UNSETTLED_PAY_COLLECT = 0;
+        TOTAL_UNSETTLED_COMMISSION = 0 ;
+        TOTAL_SERVICE_TAX_COMMISSION = 0;
+        TOTAL_AMOUNT_FROM_CG_TO_VENDOR = 0;
+
         container = $('#settlement-detail .pre-data')
         html = ''
         container.html('')
-        html +="<table class='card striped'><tr><th colspan='5' class='centered-text'>Booking Details</th><th colspan='7' class='centered-text'>Commission Details</th><th></th><th></th></tr>"
-        html +="<tr><th>Booking ID</th><th>Date</th><th>Customer Name</th><th>Vehicle</th><th>Bill Amount</th><th>Part</th><th>Labour</th><th>Lube</th><th>Consumables</th><th>VAS</th><th>Denting</th><th>Total</th><th>Freeze</th><th>Settle</th></tr>"
+        html +="<table class='card striped'><tr><th colspan='5' class='centered-text'>Booking Details</th><th></th><th colspan='7' class='centered-text'>Commission Details</th><th></th><th></th></tr>"
+        html +="<tr><th>Booking ID</th><th>Date</th><th>Customer Name</th><th>Vehicle</th><th>Bill Amount</th><th>CG Collected</th><th>Part</th><th>Labour</th><th>Lube</th><th>Consumables</th><th>VAS</th><th>Denting</th><th>Total</th><th>Freeze</th><th>Settle</th></tr>"
         j = 0
         $.each(data, function(ix, val) {
+            total_collected=0
             html +='<tr data-class="'+val.id +'">'
             html +='<td>'+val.booking_id +'</td>'
             html +='<td>'+val.date_booking +'</td>'
             html +='<td>'+val.cust_name +'</td>'
             html +='<td>'+val.cust_make+' '+val.cust_model+' ('+val.cust_regnumber +')</td>'
-            html +='<td>'+val.price_total +'</td>'
+            html +='<td>'+val.purchase_price_total +'</td>'
+            TOTAL_BUSINESS_VENDOR = TOTAL_BUSINESS_VENDOR + parseFloat(val.purchase_price_total)
+            pay = val.payment_booking
+            paylen = pay.length;
+            for (k = 0; k < paylen; k++) {
+                if (pay[k]['collected_by'] == "ClickGarage"){
+                    total_collected = total_collected + parseFloat(pay[k]['amount'])
+                }
+            }
+            html +='<td>'+total_collected +'</td>'
             comm = val.commission_items
             sourcelen = comm.length;
-            for (i = 0; i < sourcelen; i++) {
-                if (comm[i]['type'] == "Part"){
-                    part_html ='<td><input id="part_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="validate"></td>'
+                        part_html = '<td><input id="part_comm" type="number"  value ="0" class="part-comm validate"></td>'
+                        labour_html = '<td><input id="labour_comm" type="number"    value ="0" class="labour-comm validate"></td>'
+                        lube_html = '<td><input id="part_comm" type="number"   value ="0" class="lube-comm validate"></td>'
+                        consumable_html = '<td><input id="part_comm" type="number"   value ="0" class="consumable-comm validate"></td>'
+                        vas_html = '<td><input id="part_comm" type="number"   value ="0" class="vas-comm validate"></td>'
+                        denting_html = '<td><input id="part_comm" type="number"   value ="0" class="denting-comm validate"></td>'
+
+            if (val.frozen_flag || val.req_user_agent) {
+                for (i = 0; i < sourcelen; i++) {
+                    if (comm[i]['type'] == "Part") {
+                        part_html = '<td><input id="part_comm" type="number" disabled value ="' + comm[i]['clickgarage_share'] + '" class="part-comm validate"></td>'
+                    }
+                    if (comm[i]['type'] == "Labour") {
+                        labour_html = '<td><input id="labour_comm" type="number"  disabled  value ="' + comm[i]['clickgarage_share'] + '" class="labour-comm validate"></td>'
+                    }
+                    if (comm[i]['type'] == "Lube") {
+                        lube_html = '<td><input id="part_comm" type="number" disabled  value ="' + comm[i]['clickgarage_share'] + '" class="lube-comm validate"></td>'
+                    }
+                    if (comm[i]['type'] == "Consumable") {
+                        consumable_html = '<td><input id="part_comm" type="number" disabled  value ="' + comm[i]['clickgarage_share'] + '" class="consumable-comm validate"></td>'
+                    }
+                    if (comm[i]['type'] == "VAS") {
+                        vas_html = '<td><input id="part_comm" type="number" disabled  value ="' + comm[i]['clickgarage_share'] + '" class="vas-comm validate"></td>'
+                    }
+                    if (comm[i]['type'] == "Denting") {
+                        denting_html = '<td><input id="part_comm" type="number" disabled  value ="' + comm[i]['clickgarage_share'] + '" class="denting-comm validate"></td>'
+                    }
                 }
-                if (comm[i]['type'] == "Labour"){
-                    labour_html ='<td><input id="labour_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="validate"></td>'
-                }
-                if (comm[i]['type'] == "Lube"){
-                    lube_html ='<td><input id="part_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="validate"></td>'
-                }
-                if (comm[i]['type'] == "Consumable"){
-                    consumable_html ='<td><input id="part_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="validate"></td>'
-                }
-                if (comm[i]['type'] == "VAS"){
-                    vas_html ='<td><input id="part_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="validate"></td>'
-                }
-                if (comm[i]['type'] == "Denting"){
-                    denting_html ='<td><input id="part_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="validate"></td>'
+            }else{
+                for (i = 0; i < sourcelen; i++) {
+                    if (comm[i]['type'] == "Part") {
+                        part_html = '<td><input id="part_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="part-comm validate"></td>'
+                    }
+                    if (comm[i]['type'] == "Labour") {
+                        labour_html = '<td><input id="labour_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="labour-comm validate"></td>'
+                    }
+                    if (comm[i]['type'] == "Lube") {
+                        lube_html = '<td><input id="part_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="lube-comm validate"></td>'
+                    }
+                    if (comm[i]['type'] == "Consumable") {
+                        consumable_html = '<td><input id="part_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="consumable-comm validate"></td>'
+                    }
+                    if (comm[i]['type'] == "VAS") {
+                        vas_html = '<td><input id="part_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="vas-comm validate"></td>'
+                    }
+                    if (comm[i]['type'] == "Denting") {
+                        denting_html = '<td><input id="part_comm" type="number" value ="' + comm[i]['clickgarage_share'] + '" class="denting-comm validate"></td>'
+                    }
                 }
             }
             html += part_html
@@ -6523,28 +6724,64 @@ var Global = {
             html += consumable_html
             html += vas_html
             html += denting_html
-            html +='<td><input id="part_comm" disabled type="number" value ="' + val.total_commission + '"class="validate"></td>'
+            html +='<td><input id="part_comm" disabled type="number" value ="' + val.total_commission + '"class="total-comm validate"></td>'
             // if (val.frozen_flag){
             //     html +='<td>Manual</td>'
             // }else{
             //     html +='<td>Auto</td>'
             // }
-            if (val.frozen_flag){
-                html +='<td><input type="checkbox" class="filled-in freeze tochange" checked  id="freeze-booking-' + j+'"/><label for="freeze-booking-' +j +'"></label></td>'
+            if (val.req_user_admin){
+                if (val.frozen_flag){
+                    html +='<td><input type="checkbox" class="filled-in freeze tochange" checked  id="freeze-booking-' + j+'"/><label for="freeze-booking-' +j +'"></label></td>'
+                }else{
+                    html +='<td><input type="checkbox" class="filled-in freeze tochange"  id="freeze-booking-' + j+'"/><label for="freeze-booking-' +j +'"></label></td>'
+                }
+                if (val.settlement_flag){
+                    html +='<td><input type="checkbox" class="filled-in settle tochange" checked data-class="freeze-booking-'+ j +'"  id="settle-booking-' + j +'"/><label for="settle-booking-' +j +'"></label></td>'
+                    TOTAL_SETTLED_BUSINESS = TOTAL_SETTLED_BUSINESS + parseFloat(val.price_total)
+                }else{
+                    TOTAL_UNSETTLED_BUSINESS = TOTAL_UNSETTLED_BUSINESS + parseFloat(val.price_total)
+                    TOTAL_UNSETTLED_PAY_COLLECT = TOTAL_UNSETTLED_PAY_COLLECT + parseFloat(total_collected)
+                    TOTAL_UNSETTLED_COMMISSION = TOTAL_UNSETTLED_COMMISSION + parseFloat(val.total_commission)
+                    html +='<td><input type="checkbox" class="filled-in settle tochange" data-class="freeze-booking-'+ j +'"    id="settle-booking-' + j+'"/><label for="settle-booking-' +j +'"></label></td>'
+                }
+
             }else{
-                html +='<td><input type="checkbox" class="filled-in freeze tochange"  id="freeze-booking-' + j+'"/><label for="freeze-booking-' +j +'"></label></td>'
-            }
-            if (val.settlement_flag){
-                html +='<td><input type="checkbox" class="filled-in settle tochange" checked  id="settle-booking-' + j +'"/><label for="settle-booking-' +j +'"></label></td>'
-            }else{
-                html +='<td><input type="checkbox" class="filled-in settle tochange"  id="settle-booking-' + j+'"/><label for="settle-booking-' +j +'"></label></td>'
+               if (val.frozen_flag){
+                    html +='<td><input type="checkbox" class="filled-in freeze tochange" disabled checked  id="freeze-booking-' + j+'"/><label for="freeze-booking-' +j +'"></label></td>'
+                }else{
+                    html +='<td><input type="checkbox" class="filled-in freeze tochange" disabled   id="freeze-booking-' + j+'"/><label for="freeze-booking-' +j +'"></label></td>'
+                }
+                if (val.settlement_flag){
+                    html +='<td><input type="checkbox" class="filled-in settle tochange" checked  disabled data-class="freeze-booking-'+ j +'"  id="settle-booking-' + j +'"/><label for="settle-booking-' +j +'"></label></td>'
+                    TOTAL_SETTLED_BUSINESS = TOTAL_SETTLED_BUSINESS + parseFloat(val.price_total)
+                }else{
+                    TOTAL_UNSETTLED_BUSINESS = TOTAL_UNSETTLED_BUSINESS + parseFloat(val.price_total)
+                    TOTAL_UNSETTLED_PAY_COLLECT = TOTAL_UNSETTLED_PAY_COLLECT + parseFloat(total_collected)
+                    TOTAL_UNSETTLED_COMMISSION = TOTAL_UNSETTLED_COMMISSION + parseFloat(val.total_commission)
+                    html +='<td><input type="checkbox" class="filled-in settle tochange"  disabled data-class="freeze-booking-'+ j +'"    id="settle-booking-' + j+'"/><label for="settle-booking-' +j +'"></label></td>'
+                }
 
             }
 
             html +='</tr>'
             j = j + 1
+
         });
         html+="</table>"
+        TOTAL_SERVICE_TAX_COMMISSION = TOTAL_UNSETTLED_COMMISSION * 0.15;
+        TOTAL_AMOUNT_FROM_CG_TO_VENDOR = TOTAL_UNSETTLED_PAY_COLLECT - TOTAL_SERVICE_TAX_COMMISSION - TOTAL_UNSETTLED_COMMISSION
+        TOTAL_RECIEVED_PAYMENT_VENDOR = TOTAL_UNSETTLED_BUSINESS - TOTAL_UNSETTLED_PAY_COLLECT
+
+        $('#settlement-detail #total-business-vendor').text(TOTAL_BUSINESS_VENDOR)
+        $('#settlement-detail #total-settled-business-vendor').text(TOTAL_SETTLED_BUSINESS)
+        $('#settlement-detail #total-unsettled-business-vendor').text(TOTAL_UNSETTLED_BUSINESS)
+        $('#settlement-detail #total-recieved-payment-cg').text(TOTAL_UNSETTLED_PAY_COLLECT)
+        $('#settlement-detail #total-recieved-payment-vendor').text(TOTAL_RECIEVED_PAYMENT_VENDOR)
+        $('#settlement-detail #total-commission-cg').text(TOTAL_UNSETTLED_COMMISSION)
+        $('#settlement-detail #total-tax-commission').text(TOTAL_SERVICE_TAX_COMMISSION)
+        $('#settlement-detail #total-payment-cg-vendor').text(Math.ceil(TOTAL_AMOUNT_FROM_CG_TO_VENDOR))
+
         container.html(html)
     }
 

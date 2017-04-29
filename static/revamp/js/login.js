@@ -323,8 +323,10 @@ var Login = {
     loadCookieLogin:function (data){
         c_uname = local.load()
          uname = c_uname['c_user_first_name']
+         lname = c_uname['c_user_last_name']
           $('.navbar .log-in').text("Logout")
-          $('.navbar .uname').text("Hi "+uname+",")
+          $('.navbar .uname').text("Hi "+uname)
+          $('.admin-page .navbar .uname').text("Hi "+uname+" "+lname)
           $('.navbar .log-in-button').addClass('log-out-button').removeClass('log-in-button')
         // console.log(data['auth_rights']['admin'])
         if (data['auth_rights']['admin']){
@@ -357,7 +359,7 @@ var Login = {
             $('.admin-page .login').hide()
             $('.admin-page .items-list li.coupon-button').hide()
             $('.admin-page .items-list li.subscription-button').hide()
-            $('.admin-page .items-list li.analytics-button').hide()
+            $('.admin-page .items-list li.analytics-button').show()
             // $('.bill-page .staff-button-row').hide()
             $('.admin-page .items-list li.expenses-button').hide()
             $('.admin-page .staff-button-row').hide()
@@ -401,7 +403,7 @@ var Login = {
             $('.admin-page .items-list li.expenses-button').hide()
             $('.admin-page .items-list li.new-lead-button').hide()
             $('.admin-page .items-list li.settlement-button').hide()
-            $('.admin-page .items-list li.analytics-button').hide()
+            $('.admin-page .items-list li.analytics-button').show()
             $('.admin-page .items-list li.bill-button').hide()
             $('.admin-page .agent-button-row').hide()
             $('.admin-page .staff-button-row').hide()
