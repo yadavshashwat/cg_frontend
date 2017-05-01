@@ -485,7 +485,8 @@ var Global = {
             // SOURCE_BOOK = "";
             // DATE_TYPE_END = "";
             //
-
+            $('.navbar li').removeClass('selected')
+            $('.navbar .booking-button').addClass('selected')
             checkfilters()
             $('#booking-details').hide();
             $('#bookings').show()
@@ -592,7 +593,8 @@ var Global = {
             // PHONE_NUMBER = "";
             // SOURCE_BOOK = "";
             // DATE_TYPE_END = "";
-
+            $('.navbar li').removeClass('selected')
+            $('.navbar .lead-button').addClass('selected')
             checkfilters()
             $('#booking-details').hide();
             $('#bookings').show()
@@ -1795,6 +1797,8 @@ var Global = {
         // -- Load Subscription
         var allsubscriptionopen = function(){
             // console.log('check')
+            $('.navbar li').removeClass('selected')
+            $('.navbar .subscription-button').addClass('selected')
             $('#booking-details').hide()
             $('#bookings').hide()
             $('#user-details').hide()
@@ -2054,6 +2058,8 @@ var Global = {
 // =====================================================================================
         // -- Load Coupon
         var allsettleopen = function(){
+             $('.navbar li').removeClass('selected')
+            $('.navbar .settlement-button').addClass('selected')
             // console.log('check')
             $('#booking-details').hide()
             $('#bookings').hide()
@@ -2224,6 +2230,8 @@ var Global = {
 // =====================================================================================
         // -- Load Coupon
         var allcouponsopen = function(){
+             $('.navbar li').removeClass('selected')
+            $('.navbar .coupon-button').addClass('selected')
             // console.log('check')
             $('#booking-details').hide()
             $('#bookings').hide()
@@ -2385,6 +2393,8 @@ var Global = {
         // -- Load Coupon
         var allbillsopen = function(){
             // console.log('check')
+             $('.navbar li').removeClass('selected')
+            $('.navbar .bill-button').addClass('selected')
             $('#booking-details').hide()
             $('#bookings').hide()
             $('#user-details').hide()
@@ -2851,6 +2861,8 @@ var Global = {
 // =====================================================================================
         // -- Load Coupon
         var allexpenseopen = function(){
+             $('.navbar li').removeClass('selected')
+            $('.navbar .expenses-button').addClass('selected')
             // console.log('check')
             $('#booking-details').hide()
             $('#bookings').hide()
@@ -3007,7 +3019,8 @@ var Global = {
 //    SMS Management
 // =====================================================================================
         var opencampaign = function(){
-
+            $('.navbar li').removeClass('selected')
+            $('.navbar .campaign-button').addClass('selected')
             // console.log('check')
             $('#booking-details').hide()
             $('#bookings').hide()
@@ -3039,7 +3052,8 @@ var Global = {
 //    New Booking
 // =====================================================================================
         var opennewbookings = function(){
-
+ $('.navbar li').removeClass('selected')
+            $('.navbar .new-booking-button').addClass('selected')
             // console.log('check')
             $('#booking-details').hide()
             $('#bookings').hide()
@@ -3090,6 +3104,8 @@ var Global = {
         $('.navbar .new-booking-button').click(opennewbookings);
 
         var opennewlead = function(){
+             $('.navbar li').removeClass('selected')
+            $('.navbar .new-lead-button').addClass('selected')
             // console.log('check')
             $('#booking-details').hide()
             $('#bookings').hide()
@@ -3500,6 +3516,8 @@ var Global = {
         list_months = diff('January 2017', to_month)
 
         var openanalytics = function(){
+             $('.navbar li').removeClass('selected')
+            $('.navbar .analytics-button').addClass('selected')
             // DATE_TYPE = "";
             REG_NUMBER = "";
             CUST_NAME = "";
@@ -3671,6 +3689,8 @@ var Global = {
 
         // --Get all user
         var allusersopen = function(){
+             $('.navbar li').removeClass('selected')
+            $('.navbar .users-button').addClass('selected')
             $('#booking-details').hide()
             $('#bookings').hide()
             $('#user-details').show()
