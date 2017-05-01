@@ -323,10 +323,11 @@ var Login = {
     loadCookieLogin:function (data){
         c_uname = local.load()
          uname = c_uname['c_user_first_name']
-         lname = c_uname['c_user_last_name']
+         // lname = c_uname['c_user_last_name']
           $('.navbar .log-in').text("Logout")
           $('.navbar .uname').text("Hi "+uname)
-          $('.admin-page .navbar .uname').text("Hi "+uname+" "+lname)
+          // $('.admin-page .navbar .uname').text("Hi "+uname+" "+lname)
+          $('.admin-page .navbar .uname').text("Hi "+uname)
           $('.navbar .log-in-button').addClass('log-out-button').removeClass('log-in-button')
         // console.log(data['auth_rights']['admin'])
         if (data['auth_rights']['admin']){
