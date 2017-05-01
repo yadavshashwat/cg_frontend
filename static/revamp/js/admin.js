@@ -26,20 +26,87 @@ $(document).ready(function() {
     }
 
 
+
     container.html(html)
 
     var viewportWidth = $(window).width();
     if (viewportWidth <= 600) {
+         $('.admin-page .navbar').removeClass('vertical-navbar')
+        $('.admin-page .navbar li').removeClass('list-modify')
+        $('.admin-page .navbar ul').removeClass('list-start')
+        $('.admin-page .nav-admin').removeClass('vertical-navbar')
+        $('.admin-page section').removeClass('section-vertical-width')
+        $('.admin-page .navbar .nav-wrapper').addClass('navbar-custom').removeClass('navbar-custom2')
         // $("#bookings .pre-data").height(a/1.5 - alfa)
+         $('.admin-page .navbar .logo-color').show()
+         $('.admin-page .navbar .logo-white').hide()
 
     }else if (viewportWidth <= 992){
+         $('.admin-page .navbar').removeClass('vertical-navbar')
+        $('.admin-page .navbar li').removeClass('list-modify')
+        $('.admin-page .navbar ul').removeClass('list-start')
+        $('.admin-page .nav-admin').removeClass('vertical-navbar')
+        $('.admin-page section').removeClass('section-vertical-width')
+         $('.admin-page .navbar .nav-wrapper').addClass('navbar-custom').removeClass('navbar-custom2')
+         $('.admin-page .navbar .logo-color').show()
+         $('.admin-page .navbar .logo-white').hide()
+
         // $("#bookings .pre-data").height(a/1.5 - alfa)
     }else{
+        $('.admin-page .navbar').addClass('vertical-navbar')
+        $('.admin-page .navbar li').addClass('list-modify')
+        $('.admin-page .navbar ul').addClass('list-start')
+        $('.admin-page .nav-admin').addClass('vertical-navbar')
+        $('.admin-page section').addClass('section-vertical-width')
+         $('.admin-page .navbar .nav-wrapper').removeClass('navbar-custom').addClass('navbar-custom2')
         $("#bookings .pre-data").height(a - alfa)
+         $('.admin-page .navbar .logo-color').hide()
+         $('.admin-page .navbar .logo-white').show()
+
     }
 
 
 });
+
+$(window).resize(function() {
+    var viewportWidth = $(window).width();
+    if (viewportWidth <= 600) {
+       $('.admin-page .navbar').removeClass('vertical-navbar')
+        $('.admin-page .navbar li').removeClass('list-modify')
+        $('.admin-page .navbar ul').removeClass('list-start')
+        $('.admin-page .nav-admin').removeClass('vertical-navbar')
+        $('.admin-page section').removeClass('section-vertical-width')
+        $('.admin-page .navbar .nav-wrapper').addClass('navbar-custom').removeClass('navbar-custom2')
+       $('.admin-page .navbar .logo-color').show()
+         $('.admin-page .navbar .logo-white').hide()
+
+    }else if (viewportWidth <= 992){
+         $('.admin-page .navbar').removeClass('vertical-navbar')
+        $('.admin-page .navbar li').removeClass('list-modify')
+        $('.admin-page .navbar ul').removeClass('list-start')
+        $('.admin-page .nav-admin').removeClass('vertical-navbar')
+        $('.admin-page section').removeClass('section-vertical-width')
+        $('.admin-page .navbar .nav-wrapper').addClass('navbar-custom').removeClass('navbar-custom2')
+         $('.admin-page .navbar .logo-color').show()
+         $('.admin-page .navbar .logo-white').hide()
+
+
+    }else{
+         $('.admin-page .navbar').addClass('vertical-navbar')
+        $('.admin-page .navbar li').addClass('list-modify')
+        $('.admin-page .navbar ul').addClass('list-start')
+        $('.admin-page .nav-admin').addClass('vertical-navbar')
+        $('.admin-page section').addClass('section-vertical-width')
+         $('.admin-page .navbar .nav-wrapper').removeClass('navbar-custom').addClass('navbar-custom2')
+         $('.admin-page .navbar .logo-color').hide()
+         $('.admin-page .navbar .logo-white').show()
+
+
+        // $("#bookings .pre-data").height(a - alfa)
+
+    }
+});
+
 
 $('.datepicker').pickadate({
     format: 'dd-mm-yyyy',

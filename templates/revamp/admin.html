@@ -46,40 +46,43 @@
         <nav class="nav2 nav-admin">
             <div class="nav-wrapper navbar-custom">
 
-                <div class="logo-cg logo-color visible" itemscope itemtype="http://schema.org/Organization">
+                <div class="logo-cg logo-white invisible" itemscope itemtype="http://schema.org/Organization">
+                    <a itemprop="url" href="/adminpanel" class="brand-logo"><img itemprop="logo" class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-white-small1.png"></a>
+                </div>
+                <div class="logo-cg logo-color invisible" itemscope itemtype="http://schema.org/Organization">
                     <a itemprop="url" href="/adminpanel" class="brand-logo"><img itemprop="logo" class="logo-img" src="/../../static/revamp/img/ClickGarage/logo-color-small1.png"></a>
                 </div>
                 <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down items-list">
                     <li class ="name"><a><span class="uname"></span></a></li>
-                    <li class ="new-booking-button"><a>New Booking</a></li>
-                    <li class ="new-lead-button"><a>New Lead</a></li>
-                    <li class ="coupon-button"><a>Coupon Management</a></li>
-                    <li class ="users-button"><a>User Management</a></li>
-                    <li class ="analytics-button"><a>Analytics</a></li>
-                    <li class ="expenses-button"><a>Expenses</a></li>
-                    <li class ="bill-button"><a>Bills</a></li>
-                    <li class ="campaign-button"><a>Campaign</a></li>
-                    <li class ="settlement-button"><a>Settlement</a></li>
-                    <li class ="subscription-button"><a>Subscriptions</a></li>
-                    <li class ="lead-button"><a>Leads</a></li>
-                    <li class ="booking-button"><a>Bookings</a></li>
+                    <li class ="new-booking-button"><a><i class="fa fa-car"></i>&nbsp;/&nbsp;<i class="fa fa-motorcycle"></i>&nbsp;&nbsp;New Booking</a></li>
+                    <li class ="new-lead-button"><a><i class="fa fa-leaf"></i>&nbsp;&nbsp;New Lead</a></li>
+                    <li class ="coupon-button"><a><i class="fa fa-codepen"></i>&nbsp;&nbsp;Coupon Management</a></li>
+                    <li class ="users-button"><a><i class="fa fa-user"></i>&nbsp;&nbsp;User Management</a></li>
+                    <li class ="analytics-button"><a><i class="fa fa-pie-chart"></i>&nbsp;&nbsp;Analytics</a></li>
+                    <li class ="expenses-button"><a><i class="fa fa-credit-card"></i>&nbsp;&nbsp;Expenses</a></li>
+                    <li class ="bill-button"><a><i class="fa fa-list-alt"></i>&nbsp;&nbsp;Bills</a></li>
+                    <li class ="campaign-button"><a><i class="fa fa-comments"></i>&nbsp;&nbsp;Campaign</a></li>
+                    <li class ="settlement-button"><a><i class="fa fa-money"></i>&nbsp;&nbsp;Settlement</a></li>
+                    <li class ="subscription-button"><a><i class="fa fa-repeat"></i>&nbsp;&nbsp;Subscriptions</a></li>
+                    <li class ="lead-button"><a><i class="fa fa-pagelines "></i>&nbsp;&nbsp;Leads</a></li>
+                    <li class ="booking-button"><a><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;Bookings</a></li>
                     <li class ="log-in-button"><a><span class="log-in"></span></a></li>
                 </ul>
                 <ul class="side-nav items-list" id="mobile">
                     <li class ="name"><a><span class="uname"></span></a></li>
-                    <li class ="new-booking-button"><a>New Booking</a></li>
-                    <li class ="new-lead-button"><a>New Lead</a></li>
-                    <li class ="coupon-button"><a>Coupon Management</a></li>
-                    <li class ="users-button"><a>User Management</a></li>
-                    <li class ="analytics-button invisible"><a>Analytics</a></li>
-                    <li class ="expenses-button"><a>Expenses</a></li>
-                    <li class ="bill-button"><a>Bills</a></li>
-                    <li class ="campaign-button"><a>Campaign</a></li>
-                    <li class ="settlement-button"><a>Settlement</a></li>
-                    <li class ="subscription-button"><a>Subscriptions</a></li>
-                    <li class ="lead-button"><a>Leads</a></li>
-                    <li class ="booking-button"><a>Bookings</a></li>
+                    <li class ="new-booking-button"><a><i class="fa fa-car"></i>&nbsp;&nbsp;<i class="fa fa-motorcycle"></i>&nbsp;&nbsp;New Booking</a></li>
+                    <li class ="new-lead-button"><a><i class="fa fa-leaf"></i>&nbsp;&nbsp;New Lead</a></li>
+                    <li class ="coupon-button"><a><i class="fa fa-codepen"></i>&nbsp;&nbsp;Coupon Management</a></li>
+                    <li class ="users-button"><a><i class="fa fa-user"></i>&nbsp;&nbsp;User Management</a></li>
+                    <li class ="analytics-button"><a><i class="fa fa-pie-chart"></i>&nbsp;&nbsp;Analytics</a></li>
+                    <li class ="expenses-button"><a><i class="fa fa-credit-card"></i>&nbsp;&nbsp;Expenses</a></li>
+                    <li class ="bill-button"><a><i class="fa fa-list-alt"></i>&nbsp;&nbsp;Bills</a></li>
+                    <li class ="campaign-button"><a><i class="fa fa-comments"></i>&nbsp;&nbsp;Campaign</a></li>
+                    <li class ="settlement-button"><a><i class="fa fa-money"></i>&nbsp;&nbsp;Settlement</a></li>
+                    <li class ="subscription-button"><a><i class="fa fa-repeat"></i>&nbsp;&nbsp;Subscriptions</a></li>
+                    <li class ="lead-button"><a><i class="fa fa-pagelines "></i>&nbsp;&nbsp;Leads</a></li>
+                    <li class ="booking-button"><a><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;Bookings</a></li>
                     <li class ="log-in-button"><a><span class="log-in"></span></a></li>
                 </ul>
             </div>
@@ -962,7 +965,7 @@
         </div>
     </section>
     <section id="bookings" class="invisible page-section">
-        <div class="booking-select-section card">
+        <div class="booking-select-section">
             <!--<div class="container-fluid services">-->
             <div class="row ">
                 <div class="filter-sort closed  date-box  btn waves-effect waves-light card cardhover selected col l3 m6 s6">
@@ -3497,6 +3500,7 @@
                                         <option value='Card'>Card</option>
                                         <option value='Online'>Online</option>
                                         <option value='Credit'>Credit</option>
+                                        <option value='Cash'>Cash</option>
                                     </select>
                                 </div>
                             </div>
