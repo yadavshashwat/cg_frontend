@@ -3320,6 +3320,7 @@ var Global = {
         $('#new-booking .btn-send-booking').click(function () {
             car_box =  document.getElementById('Carnew');
             bike_box =  document.getElementById('Bikenew');
+            // console.log('1')
             if (car_box.checked){
                 vehicle =    "Car"
             }else{
@@ -3388,7 +3389,7 @@ var Global = {
                 $('#locality').addClass("invalid");
                 error = 1;
             }if(city==""){
-                $('#city').addClass("invalid");
+                $('#city').addClass("invalid-select-box");
                 error = 1;
             }
             if(number <= 100000000 || number >= 9999999999){
@@ -3401,7 +3402,8 @@ var Global = {
             }else{
                 $('#email').addClass("invalid");
                 error =1;
-            }if(reg_num==""){
+            }
+            if(reg_num==""){
                 // $('#reg_number').addClass("invalid");
                 // error = 1;
                 reg_num = "--"
@@ -3421,7 +3423,7 @@ var Global = {
             }else{
                 time = "9:30AM - 11:30AM"
                 if(time_follow == "" || time_follow == null){
-                    console.log(time)
+                    // console.log(time)
                     error = 1;
                     $('#new-booking #time_follow_lead').addClass("invalid");
                     // $('#choose-time-slot').text('Choose Time Slot');
@@ -3439,7 +3441,7 @@ var Global = {
             });
 
             if(error==1){
-                // console.log("didnt work")
+                console.log("didnt work")
                 return;
             }else{
                 $('html, body').animate({scrollTop : 0},800);
@@ -5521,6 +5523,9 @@ var Global = {
                     }
                 }else if (j == 9){
                     purchase_price =  $(row.cells[j]).find('input,select').eq(0).val()
+                    if (purchase_price == ""){
+                        purchase_price = price_item
+                    }
                 }else if (j == 10){
                     settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
                 }
