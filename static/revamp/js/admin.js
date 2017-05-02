@@ -108,10 +108,23 @@ $(window).resize(function() {
 });
 
 
+
 $('.datepicker').pickadate({
     format: 'dd-mm-yyyy',
     closeOnSelect: true,
+    // min: new Date() + 1,
+    onSet: function( arg ){
+        if ( 'select' in arg ){ //prevent closing on selecting month/year
+            this.close();
+            // $('#time-slot').click()
+        }
+    }
 });
+
+// $('.datepicker').pickadate({
+//     format: 'dd-mm-yyyy',
+//     closeOnSelect: true,
+// });
 $('#time_follow_lead').timepicker({
     timeFormat: "h:i A",
     minTime: '09:30:00', // 11:45:00 AM,
@@ -515,7 +528,7 @@ var Global = {
                 // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
                 // $('#bookings #delivery-list').show()
             }
-            $('#bookings #bookings-list .header-id-bar.bookings').text('Bookings')
+            $('#bookings #bookings-list .header-id-bar.bookings').text('Jobs')
             $('#bookings #bookings-list .booking-bar-2 .agent').text('Engineer Details')
             $('#bookings #bookings-list .booking-bar-2 .booking-source').show()
 
@@ -2732,13 +2745,17 @@ var Global = {
             service_items           = JSON.stringify(CURRENT_BILL_CART)
             invoice_number          = $('#bill-detail #agent_invoice_number').val()
 
+            console.log(vat_part)
+            console.log(service_tax)
+
             bill_type = $(this).attr('data-class')
             if (bill_type == "Pre-Invoice"){
                 invoice_number = "Pre-Invoice"
+
+
             }else{
                 invoice_number = invoice_number
             }
-
 
             params =    {data_id: booking_data_id,
                 bill_owner: bill_owner,
@@ -3088,8 +3105,8 @@ var Global = {
             // console.log(html)
             container.html(html)
             // Commons.ajaxData('view_all_coupons', {}, "get", _this, _this.loadCouponAll,null, '.loading-pane');
-            $('#new-booking  .booking-lead').text("Booking")
-            $('#new-booking  .booking-lead-2').text("Booking")
+            $('#new-booking  .booking-lead').text("Job")
+            $('#new-booking  .booking-lead-2').text("Job")
             $('#new-booking  .lead-time').hide()
             $('#new-booking  .booking-time').show()
 
@@ -3203,7 +3220,8 @@ var Global = {
             console.log(vehicle)
             Commons.ajaxData('get_type_make', {vehicle_type: vehicle}, "get", _this, _this.loadBrands);
             $('#select-fuel').hide()
-            $('#select-model').hide()
+            html = '<select class="browser-default"><option value="" disabled selected>Select Model</option></select>'
+            $('#select-model').html(html)
         }
         $('#new-booking .vehicle-select .veh-type-select').click(callbrands);
         $('.navbar .new-booking-button').click(callbrands);
@@ -3261,6 +3279,7 @@ var Global = {
             }
             var make = $('#select-make').find('select').val();
             var model = $('#select-model').find('select').val();
+
             fuel_start = model.indexOf("(")
             fuel_end = model.indexOf(")")
             var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
@@ -3382,8 +3401,9 @@ var Global = {
                 $('#email').addClass("invalid");
                 error =1;
             }if(reg_num==""){
-                $('#reg_number').addClass("invalid");
-                error = 1;
+                // $('#reg_number').addClass("invalid");
+                // error = 1;
+                reg_num = "--"
             }
             if(date==""){
                 $('#date').addClass("invalid");
@@ -6667,18 +6687,18 @@ var Global = {
                         if (val.bill_components[i]['type'] == "Part") {
                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price']) / (VAT_PART_PERCENT / 100 + 1)) + '" class="browser-default" aria-required="true"></td>'
                             VAT_PART_BILL_ADMIN = VAT_PART_BILL_ADMIN + (parseFloat(val.bill_components[i]['price']) * (VAT_PART_PERCENT / 100))
-                        } else if (val.bill_components[i]['type'] == "Labour") {
+                        }else if (val.bill_components[i]['type'] == "Labour") {
                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price']) / (SERVICE_TAX_PERCENT / 100 + 1)) + '" class="browser-default" aria-required="true"></td>'
                             SERVICE_TAX_BILL_ADMIN = SERVICE_TAX_BILL_ADMIN + (parseFloat(val.bill_components[i]['price']) * (SERVICE_TAX_PERCENT / 100))
-                        } else if (val.bill_components[i]['type'] == "Consumable") {
+                        }else if (val.bill_components[i]['type'] == "Consumable") {
                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price']) / (VAT_CONSUMABLE_PERCENT / 100 + 1)) + '" class="browser-default" aria-required="true"></td>'
                             VAT_CONSUMABLE_BILL_ADMIN = VAT_CONSUMABLE_BILL_ADMIN + (parseFloat(val.bill_components[i]['price']) * (VAT_CONSUMABLE_PERCENT / 100))
-                        } else if (val.bill_components[i]['type'] == "Lube") {
+                        }else if (val.bill_components[i]['type'] == "Lube") {
                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price']) / (VAT_LUBE_PERCENT / 100 + 1)) + '" class="browser-default" aria-required="true"></td>'
                             VAT_LUBE_BILL_ADMIN = VAT_LUBE_BILL_ADMIN + (parseFloat(val.bill_components[i]['price']) * (VAT_LUBE_PERCENT / 100))
-                        } else if (val.bill_components[i]['type'] == "Discount") {
+                        }else if (val.bill_components[i]['type'] == "Discount") {
                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price'])) + '" class="browser-default" aria-required="true"></td>'
-                        } else {
+                        }else{
                             html += '    <td><input id="total_price_pretax" disabled type="number"  value="' + (parseFloat(val.bill_components[i]['price'])) + '" class="browser-default" aria-required="true"></td>'
                         }
                     }
@@ -6738,8 +6758,8 @@ var Global = {
         container = $('#settlement-detail .pre-data')
         html = ''
         container.html('')
-        html +="<table class='card striped'><tr><th colspan='5' class='centered-text'>Booking Details</th><th></th><th colspan='7' class='centered-text'>Commission Details</th><th></th><th></th></tr>"
-        html +="<tr><th>Booking ID</th><th>Date</th><th>Customer Name</th><th>Vehicle</th><th>Bill Amount</th><th>CG Collected</th><th>Part</th><th>Labour</th><th>Lube</th><th>Consumables</th><th>VAS</th><th>Denting</th><th>Total</th><th>Freeze</th><th>Settle</th></tr>"
+        html +="<table class='card striped'><tr><th colspan='5' class='centered-text'>Job Details</th><th></th><th colspan='7' class='centered-text'>Commission Details</th><th></th><th></th></tr>"
+        html +="<tr><th>Job ID</th><th>Date</th><th>Customer Name</th><th>Vehicle</th><th>Bill Amount</th><th>CG Collected</th><th>Part</th><th>Labour</th><th>Lube</th><th>Consumables</th><th>VAS</th><th>Denting</th><th>Total</th><th>Freeze</th><th>Settle</th></tr>"
         j = 0
         $.each(data, function(ix, val) {
             total_collected=0

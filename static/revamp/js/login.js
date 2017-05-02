@@ -334,8 +334,8 @@ var Login = {
             $('.admin-page .admin-page-html').show()
             $('.admin-page .login').hide()
             $('.admin-page .staff-button-row').show()
-            $('.admin-page .agent-button-row').hide()
-            $('.admin-page .b2b-button-row').hide()
+            $('.admin-page .agent-button-row').html('')
+            $('.admin-page .b2b-button-row').html('')
             $('#sms-credits').text('Not Applicable')
             VAT_CONSUMABLE_PERCENT = 0
             VAT_LUBE_PERCENT = 0
@@ -346,8 +346,8 @@ var Login = {
             $('.admin-page .admin-page-html').show()
             $('.admin-page .login').hide()
             $('.admin-page .staff-button-row').show()
-            $('.admin-page .agent-button-row').hide()
-            $('.admin-page .b2b-button-row').hide()
+            $('.admin-page .agent-button-row').html('')
+            $('.admin-page .b2b-button-row').html('')
             $('#sms-credits').text('Not Applicable')
             VAT_CONSUMABLE_PERCENT = 0
             VATUBE_PERCENT = 0
@@ -363,8 +363,8 @@ var Login = {
             $('.admin-page .items-list li.analytics-button').show()
             // $('.bill-page .staff-button-row').hide()
             $('.admin-page .items-list li.expenses-button').hide()
-            $('.admin-page .staff-button-row').hide()
-            $('.admin-page .b2b-button-row').hide()
+            $('.admin-page .staff-button-row').html('')
+            $('.admin-page .b2b-button-row').html('')
             $('.admin-page .agent-button-row').show()
             $('#agent_bill_name').val(data['first_name'] +' '+data['last_name'])
             $('#agent_bill_address').val(data['user_address'] +', '+data['userocality']+', '+data['user_city'])
@@ -406,9 +406,9 @@ var Login = {
             $('.admin-page .items-list li.settlement-button').hide()
             $('.admin-page .items-list li.analytics-button').show()
             $('.admin-page .items-list li.bill-button').hide()
-            $('.admin-page .agent-button-row').hide()
-            $('.admin-page .staff-button-row').hide()
-            $('.bill-page .staff-button-row').hide()
+            $('.admin-page .agent-button-row').html('')
+            $('.admin-page .staff-button-row').html('')
+            $('.bill-page .staff-button-row').html('')
             $('.admin-page .b2b-button-row').show()
             cookie = local.load();
             console.log('b2b')
