@@ -615,6 +615,7 @@ var Global = {
             $('#coupon-details').hide()
             $('#new-booking').hide()
             $('#subscription-details').hide()
+            $('#campaign-details').hide()
             $('#analytics').hide()
             $('#expense-details').hide();
             $('#bill-details').hide()
