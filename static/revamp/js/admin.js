@@ -3365,7 +3365,7 @@ var Global = {
             var paid_amt = "0"
             var price_total = TOTAL_PRICE_NEW_BOOKING;
             var time = $('#time-slot').find('select').val();
-            if ($('#new-booking .booking-lead').text() =="Booking" ){
+            if ($('#new-booking .booking-lead').text() =="Job" ){
                 var flag = "True"
             }else{
                 var flag= "False"
@@ -3382,25 +3382,36 @@ var Global = {
                 error = 1
                 $('#new-booking .category-select').find('select').addClass('invalid-select-box')
                 $('#new-booking .service-select').find('select').addClass('invalid-select-box')
+                console.log('1')
             }
             if(name==""){
                 $('#name').addClass("invalid");
                 error = 1;
+                console.log('2')
+
             }
             if(address==""){
                 $('#address').addClass("invalid");
                 error = 1;
+                console.log('3')
+
             }
             if(locality==""){
                 $('#locality').addClass("invalid");
                 error = 1;
+                console.log('4')
+
             }if(city==""){
                 $('#city').addClass("invalid-select-box");
                 error = 1;
+                console.log('5')
+
             }
             if(number <= 100000000 || number >= 9999999999){
                 $('#telephone').addClass("invalid");
                 error = 1;
+                console.log('6')
+
             }
             if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
                 $('#email').addClass("valid");
@@ -3408,15 +3419,21 @@ var Global = {
             }else{
                 $('#email').addClass("invalid");
                 error =1;
+                console.log('7')
+
             }
             if(reg_num==""){
                 // $('#reg_number').addClass("invalid");
                 // error = 1;
                 reg_num = "--"
+                console.log('8')
+
             }
             if(date==""){
                 $('#date').addClass("invalid");
                 error = 1;
+                console.log('9')
+
             }
             if (flag == "True"){
                 if(time=="" || time==null){
@@ -3425,6 +3442,8 @@ var Global = {
                     error = 1;
                     $('#new-booking #time-slot').find('select').addClass('invalid-select-box')
                     // $('#choose-time-slot').text('Choose Time Slot');
+                    console.log('10')
+
                 }
             }else{
                 time = "9:30AM - 11:30AM"
@@ -3433,6 +3452,8 @@ var Global = {
                     error = 1;
                     $('#new-booking #time_follow_lead').addClass("invalid");
                     // $('#choose-time-slot').text('Choose Time Slot');
+                    console.log('11')
+
                 }
             }
 
