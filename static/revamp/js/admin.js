@@ -6790,6 +6790,7 @@ var Global = {
             total_collected_cg =0
             total_collected_uc=0
             total_collected_hj =0
+            total_collected_credit =0
 
             html +='<tr data-class="'+val.id +'">'
             html +='<td>'+val.booking_id +'</td>'
@@ -6810,6 +6811,9 @@ var Global = {
                  if (pay[k]['collected_by'] == "ClickGarage HJ"){
                     total_collected_hj = total_collected_hj + parseFloat(pay[k]['amount'])
                 }
+                if (pay[k]['collected_by'] == "ClickGarage Credit"){
+                    total_collected_credit = total_collected_credit + parseFloat(pay[k]['amount'])
+                }
             }
             html += '<td>'
             if(total_collected_cg >0){
@@ -6820,6 +6824,9 @@ var Global = {
             }
             if(total_collected_hj >0){
                 html += 'CGHJ:  Rs.' + total_collected_hj + '</br>'
+            }
+            if(total_collected_credit >0){
+                html += 'Credit:  Rs.' + total_collected_credit + '</br>'
             }
             html+='</td>'
             // html +='<td> CG: '+total_collected +'</td>'
@@ -6898,7 +6905,7 @@ var Global = {
                     TOTAL_SETTLED_BUSINESS = TOTAL_SETTLED_BUSINESS + parseFloat(val.price_total)
                 }else{
                     TOTAL_UNSETTLED_BUSINESS = TOTAL_UNSETTLED_BUSINESS + parseFloat(val.price_total)
-                    TOTAL_UNSETTLED_PAY_COLLECT = TOTAL_UNSETTLED_PAY_COLLECT + parseFloat(total_collected)
+                    TOTAL_UNSETTLED_PAY_COLLECT = TOTAL_UNSETTLED_PAY_COLLECT + parseFloat(total_collected_cg) + parseFloat(total_collected_uc)+ parseFloat(total_collected_hj)+ parseFloat(total_collected_credit)
                     TOTAL_UNSETTLED_COMMISSION = TOTAL_UNSETTLED_COMMISSION + parseFloat(val.total_commission)
                     html +='<td><input type="checkbox" class="filled-in settle tochange" data-class="freeze-booking-'+ j +'"    id="settle-booking-' + j+'"/><label for="settle-booking-' +j +'"></label></td>'
                 }
@@ -6914,7 +6921,7 @@ var Global = {
                     TOTAL_SETTLED_BUSINESS = TOTAL_SETTLED_BUSINESS + parseFloat(val.price_total)
                 }else{
                     TOTAL_UNSETTLED_BUSINESS = TOTAL_UNSETTLED_BUSINESS + parseFloat(val.price_total)
-                    TOTAL_UNSETTLED_PAY_COLLECT = TOTAL_UNSETTLED_PAY_COLLECT + parseFloat(total_collected)
+                    TOTAL_UNSETTLED_PAY_COLLECT = TOTAL_UNSETTLED_PAY_COLLECT + parseFloat(total_collected_cg) + parseFloat(total_collected_uc)+ parseFloat(total_collected_hj)+ parseFloat(total_collected_credit)
                     TOTAL_UNSETTLED_COMMISSION = TOTAL_UNSETTLED_COMMISSION + parseFloat(val.total_commission)
                     html +='<td><input type="checkbox" class="filled-in settle tochange"  disabled data-class="freeze-booking-'+ j +'"    id="settle-booking-' + j+'"/><label for="settle-booking-' +j +'"></label></td>'
                 }
