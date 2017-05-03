@@ -3382,35 +3382,35 @@ var Global = {
                 error = 1
                 $('#new-booking .category-select').find('select').addClass('invalid-select-box')
                 $('#new-booking .service-select').find('select').addClass('invalid-select-box')
-                console.log('1')
+                // console.log('1')
             }
             if(name==""){
                 $('#name').addClass("invalid");
                 error = 1;
-                console.log('2')
+                // console.log('2')
 
             }
             if(address==""){
                 $('#address').addClass("invalid");
                 error = 1;
-                console.log('3')
+                // console.log('3')
 
             }
             if(locality==""){
                 $('#locality').addClass("invalid");
                 error = 1;
-                console.log('4')
+                // console.log('4')
 
             }if(city==""){
                 $('#city').addClass("invalid-select-box");
                 error = 1;
-                console.log('5')
+                // console.log('5')
 
             }
             if(number <= 100000000 || number >= 9999999999){
                 $('#telephone').addClass("invalid");
                 error = 1;
-                console.log('6')
+                // console.log('6')
 
             }
             if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
@@ -3419,20 +3419,20 @@ var Global = {
             }else{
                 $('#email').addClass("invalid");
                 error =1;
-                console.log('7')
+                // console.log('7')
 
             }
             if(reg_num==""){
                 // $('#reg_number').addClass("invalid");
                 // error = 1;
                 reg_num = "--"
-                console.log('8')
+                // console.log('8')
 
             }
             if(date==""){
                 $('#date').addClass("invalid");
                 error = 1;
-                console.log('9')
+                // console.log('9')
 
             }
             if (flag == "True"){
@@ -3442,7 +3442,7 @@ var Global = {
                     error = 1;
                     $('#new-booking #time-slot').find('select').addClass('invalid-select-box')
                     // $('#choose-time-slot').text('Choose Time Slot');
-                    console.log('10')
+                    // console.log('10')
 
                 }
             }else{
@@ -3452,7 +3452,7 @@ var Global = {
                     error = 1;
                     $('#new-booking #time_follow_lead').addClass("invalid");
                     // $('#choose-time-slot').text('Choose Time Slot');
-                    console.log('11')
+                    // console.log('11')
 
                 }
             }
@@ -3468,7 +3468,7 @@ var Global = {
             });
 
             if(error==1){
-                console.log("didnt work")
+                // console.log("didnt work")
                 return;
             }else{
                 $('html, body').animate({scrollTop : 0},800);
@@ -6814,7 +6814,7 @@ var Global = {
             total_collected_credit =0
 
             html +='<tr data-class="'+val.id +'">'
-            html +='<td>'+val.booking_id +'</td>'
+            html +='<td><a target="_blank" href="/adminpanel/bookings/single/'+val.id+'">'+val.booking_id +'</a></td>'
             html +='<td>'+val.date_booking +'</td>'
             html +='<td>'+val.cust_name +'</td>'
             html +='<td>'+val.cust_make+' '+val.cust_model+' ('+val.cust_regnumber +')</td>'
