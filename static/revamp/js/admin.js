@@ -1250,6 +1250,7 @@ var Global = {
         $('#customer-detail .btn-addpayment').click(function(){
             amount = $('#payment_amount').val()
             col_by = $('#payment_collector').val()
+            medium = $('#payment_medium').val()
             bid =$('#customer-detail #booking_id').attr('booking_data_id')
             error = 0
             if (amount <= 0 ){
@@ -1260,6 +1261,10 @@ var Global = {
                 error =1;
                 $('#payment_collector').addClass('invalid-select-box')
             }
+            if (medium == "" || medium == null){
+                error =1;
+                $('#payment_medium').addClass('invalid-select-box')
+            }
             if (error == 1){
                 return
             }else{
@@ -1267,6 +1272,7 @@ var Global = {
                     data_id : bid,
                     col_by : col_by,
                     amount : amount,
+                    medium : medium,
                     add_del : "Add"
                 }, "get", _this, _this.loadCustomerAgent,null, '.loading-pane');
 
@@ -5441,7 +5447,11 @@ var Global = {
                 html4 += '</div>'
                 html4 += '<div class="row">'
                 html4 += 'Recieved by <b>' +val.payment_booking[i]['collected_by'] +'</b>'
-                html4 += '</div></div><div class="col l2 s2 m2 centered-text">'
+                html4 += '</div>'
+                html4 += '<div class="row">'
+                html4 += 'Payment Medium :' + val.payment_booking[i]['medium']
+                html4 +='</div>'
+                html4 +='</div><div class="col l2 s2 m2 centered-text">'
                 html4 += 'Rs. ' + val.payment_booking[i]['amount']
                 html4 += '</div>'
                 html4 += '<div class="col l2 s2 m2 centered-text">'
@@ -6777,7 +6787,10 @@ var Global = {
         html +="<tr><th>Job ID</th><th>Date</th><th>Customer Name</th><th>Vehicle</th><th>Bill Amount</th><th>CG Collected</th><th>Part</th><th>Labour</th><th>Lube</th><th>Consumables</th><th>VAS</th><th>Denting</th><th>Total</th><th>Freeze</th><th>Settle</th></tr>"
         j = 0
         $.each(data, function(ix, val) {
-            total_collected=0
+            total_collected_cg =0
+            total_collected_uc=0
+            total_collected_hj =0
+
             html +='<tr data-class="'+val.id +'">'
             html +='<td>'+val.booking_id +'</td>'
             html +='<td>'+val.date_booking +'</td>'
@@ -6789,10 +6802,27 @@ var Global = {
             paylen = pay.length;
             for (k = 0; k < paylen; k++) {
                 if (pay[k]['collected_by'] == "ClickGarage"){
-                    total_collected = total_collected + parseFloat(pay[k]['amount'])
+                    total_collected_cg = total_collected_cg + parseFloat(pay[k]['amount'])
+                }
+                if (pay[k]['collected_by'] == "ClickGarage UC"){
+                    total_collected_uc = total_collected_uc + parseFloat(pay[k]['amount'])
+                }
+                 if (pay[k]['collected_by'] == "ClickGarage HJ"){
+                    total_collected_hj = total_collected_hj + parseFloat(pay[k]['amount'])
                 }
             }
-            html +='<td>'+total_collected +'</td>'
+            html += '<td>'
+            if(total_collected_cg >0){
+                html += 'CG : Rs.' + total_collected_cg + '</br>'
+            }
+            if(total_collected_uc >0){
+                html += 'CGUC :  Rs.' + total_collected_uc +  '</br>'
+            }
+            if(total_collected_hj >0){
+                html += 'CGHJ:  Rs.' + total_collected_hj + '</br>'
+            }
+            html+='</td>'
+            // html +='<td> CG: '+total_collected +'</td>'
             comm = val.commission_items
             sourcelen = comm.length;
                         part_html = '<td><input id="part_comm" type="number"  value ="0" class="part-comm validate"></td>'

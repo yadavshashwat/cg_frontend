@@ -500,7 +500,7 @@ footer a:hover{color:#979797;text-decoration:none;}
 }
 
 #customer-detail .payment-history .card{
-    height: 70px;
+    height: 100px;
     margin: 5px 10px;
     padding: 12px 15px;
     font-weight:600;
@@ -952,6 +952,14 @@ width: 100%;
 .navbar-custom2 a{color:#FFF!important; font-size: 12px;}
 .navbar-custom2 .logo-img{vertical-align:middle;height:60px;margin-left:5%;}
 
+
+.static-page .header-page{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: white;
+    z-index: 99;
+}
 
 
 
