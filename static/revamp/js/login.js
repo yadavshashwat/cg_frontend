@@ -364,6 +364,7 @@ var Login = {
             // $('.bill-page .staff-button-row').hide()
             $('.admin-page .items-list li.expenses-button').hide()
             $('.admin-page .staff-button-row').html('')
+            $('.admin-page .staff-button-row-hide').hide()
             $('.admin-page .b2b-button-row').html('')
             $('.admin-page .agent-button-row').show()
             $('#agent_bill_name').val(data['first_name'] +' '+data['last_name'])
@@ -408,6 +409,7 @@ var Login = {
             $('.admin-page .items-list li.bill-button').hide()
             $('.admin-page .agent-button-row').html('')
             $('.admin-page .staff-button-row').html('')
+            $('.admin-page .staff-button-row-hide').hide()
             $('.bill-page .staff-button-row').html('')
             $('.admin-page .b2b-button-row').show()
             cookie = local.load();

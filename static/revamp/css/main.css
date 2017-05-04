@@ -961,10 +961,11 @@ width: 100%;
 }
 
 .static-page #banner img{
-    width: 100%;
-    position: fixed;
+    /*width: 100%;*/
+    /*position: fixed;*/
     top: 0px;
     left: 0px;
+    margin-top: -64px;
 }
 .static-page .header-page{
    position: absolute;
@@ -972,6 +973,15 @@ width: 100%;
    /*left: 0;*/
    color: white;
    width: 100%;
+}
+.static-page .how-it-works{
+    font-size: 18px;
+}
+
+.static-page .howlist li{
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
 }
 
 
