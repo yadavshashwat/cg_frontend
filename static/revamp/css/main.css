@@ -486,6 +486,13 @@ footer a:hover{color:#979797;text-decoration:none;}
 #bookings .booking .status-details{line-height:90px;}
 #bookings .booking .feedback-btn-col{margin-top:42px}
 
+#bookings img{
+    position: relative;
+    width: 200px;
+    left:50%;
+    margin-left: -100px;
+}
+
 #booking-details .status-2{width:100%;padding:10px;border-radius:10px;text-align:center;margin:0px 0px 15px 0px;}
 #customer-detail .source-admin{margin-bottom:20px;}
 #customer-detail .header{line-height:50px;}

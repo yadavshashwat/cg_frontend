@@ -486,6 +486,7 @@ var Global = {
         }
         // Open Bookings
         document.addEventListener('scroll', function (event) {
+            $('#bookings .loading-page').show()
             if (document.body.scrollHeight ==
                 document.body.scrollTop +
                 window.innerHeight) {
@@ -500,7 +501,7 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadBookings2,null, '.loading-pane');
+                page_num : PAGE_NUM}, "get", _this, _this.loadBookings2,null);
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -512,7 +513,7 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadDelivery2,null, '.loading-pane');
+                page_num : PAGE_NUM}, "get", _this, _this.loadDelivery2,null);
             }
         });
         var allbookingsopen = function(){
@@ -4360,6 +4361,7 @@ var Global = {
             html += '        </div>'
         })
         container.html(html);
+         $('#bookings .loading-page').hide()
         // container.find('select').material_select();
     },
     loadDelivery2:function(data){
@@ -4472,6 +4474,8 @@ var Global = {
             html += '        </div>'
         })
         container.html(html);
+                 $('#bookings .loading-page').hide()
+
         // container.find('select').material_select();
     },
     loadUsers:function(data){
