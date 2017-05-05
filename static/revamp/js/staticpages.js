@@ -27,6 +27,23 @@ $('.datepicker').pickadate({
 });
 
 
+$(document).ready(function(){
+    var viewportWidth = $(window).width();
+	//Check to see if the window is top if not then display button
+	$(window).scroll(function(){
+		if ($(this).scrollTop() > 20) {
+        $('.navbar .nav-wrapper').removeClass('navbar-trans').addClass('navbar-custom');
+        $('.navbar .nav-wrapper .logo-trans').removeClass('visible').addClass('invisible');
+        $('.navbar .nav-wrapper .logo-color').removeClass('invisible').addClass('visible');
+        } else {
+            // if (viewportWidth > 992){
+            $('.navbar .nav-wrapper').addClass('navbar-trans').removeClass('navbar-custom');
+            $('.navbar .nav-wrapper .logo-trans').addClass('visible').removeClass('invisible');
+            $('.navbar .nav-wrapper .logo-color').addClass('invisible').removeClass('visible');
+            // }}
+        }});
+});
+
 
 // Scroll To Top
 $(document).ready(function(){
@@ -107,6 +124,41 @@ var Global = {
         console.log('adding hanlder')
 
 
+
+        // How it works Static page
+
+        $('.static-page .howlist li').click(function(){
+            page = $(this).attr('data-class')
+            $('.static-page .howlist li').removeClass('selected')
+            $(this).addClass('selected')
+            if (page=="bookservice"){
+            $('.static-page #how-it-works .howitworks').show()
+            $('.static-page #how-it-works .bookwithconfidence').hide()
+            $('.static-page #how-it-works .fairpricing').hide()
+            $('.static-page #how-it-works .peaceofmind').hide()
+
+            }else if(page == "bookconfidence"){
+            $('.static-page #how-it-works .bookwithconfidence').show()
+            $('.static-page #how-it-works .howitworks').hide()
+            $('.static-page #how-it-works .fairpricing').hide()
+            $('.static-page #how-it-works .peaceofmind').hide()
+
+            }else if(page =="fairpricing"){
+            $('.static-page #how-it-works .fairpricing').show()
+            $('.static-page #how-it-works .howitworks').hide()
+            $('.static-page #how-it-works .bookwithconfidence').hide()
+            $('.static-page #how-it-works .peaceofmind').hide()
+
+            }else if(page =="peace"){
+            $('.static-page #how-it-works .peaceofmind').show()
+            $('.static-page #how-it-works .howitworks').hide()
+            $('.static-page #how-it-works .fairpricing').hide()
+            $('.static-page #how-it-works .bookwithconfidence').hide()
+
+            }
+        })
+
+        
         $(document).ready(function(){
             vehtype = $('#veh_make').attr('veh-type')
             if (vehtype == "Car"){
@@ -177,6 +229,8 @@ var Global = {
             $('#vehicle-select-form .home-form-2 .vehicle-type').text(vehicle);
 
         });
+
+
       $('#vehicle-select-form .home-form-2 .form-proceed').click(function(event){
             var make = $('#brand-select').find('.selectize-input').find('div').attr('data-value');
             var model = $('#vehicle-select').find('.selectize-input').find('div').attr('data-value');

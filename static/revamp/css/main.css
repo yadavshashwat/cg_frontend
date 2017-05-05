@@ -221,6 +221,12 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 .nav2{background-color:transparent!important;box-shadow:none;}
 .navbar-trans-ad{background:rgba(74,20,140,0.50)!important;}
 .navbar-trans{background:rgba(74,20,140,0.65);}
+
+.static-page .navbar-trans{
+    background: transparent!important;
+}
+/*.navbar-trans2{background:transparent;}*/
+/*.navbar-trans2{background:none}*/
 .navbar-trans a{padding:0px 7px!important;}
 .items-list{font-family:'Open Sans', sans-serif;font-weight:600;font-size:12px;letter-spacing:0px;text-transform:uppercase;text-shadow:none;padding:0px 2px;}
 .navbar-trans .logo-img{vertical-align:middle;height:60px;margin-left:5%;}
@@ -974,16 +980,90 @@ width: 100%;
    color: white;
    width: 100%;
 }
-.static-page .how-it-works{
-    font-size: 18px;
+
+.static-page .header-tagline{
+    padding:5% 5%;
+    font-size: 20px;
+}
+
+.static-page #how-it-works{
+    font-size: 20px!important;
+}
+
+.static-page #faq{
+    font-size: 20px!important;
+}
+
+.static-page #whycg{
+    font-size: 20px!important;
 }
 
 .static-page .howlist li{
     height: 50px;
     line-height: 50px;
     font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+}
+.static-page .howlist li.selected{
+    color: #4a148c!important;
+    font-weight: 600;
 }
 
+@media(max-width: 992px){
+
+.static-page #banner{
+    margin-top: -56px;
+}
+
+    #banner #color-overlay {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+    height: 341px!important;
+   background-color: black;
+   opacity: 0.6;
+}
+}
+
+.static-page .card{
+    /*margin: 10px;*/
+}
+.static-page .iconwhy{
+    padding: 10px;
+    color:grey!important;
+}
+
+.static-page .card:hover .iconwhy{
+    padding: 10px;
+    color:#4a148c!important;
+
+}
+.static-page .contentwhy{
+    padding: 10px 20px 5px 20px;
+    color: grey;
+}
+.static-page #banner{
+    margin-top: -64px;
+}
+.static-page #banner .howitworks{
+    height: 350px;
+    background: url('../img/Backgrounds/howitworks.jpg');
+    background-position: center bottom;
+    /*background: ;*/
+
+}
+#banner #color-overlay {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+    height: 350px;
+   background-color: black;
+   opacity: 0.6;
+}
 
 
 @media (max-width:480px){.hero-text h1{font-size:40px;letter-spacing:0px;line-height:50px;margin-bottom:20px;}
