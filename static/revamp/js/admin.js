@@ -489,7 +489,7 @@ var Global = {
 
             if (document.body.scrollHeight ==
                 document.body.scrollTop +
-                window.innerHeight + 100) {
+                window.innerHeight) {
                  Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
