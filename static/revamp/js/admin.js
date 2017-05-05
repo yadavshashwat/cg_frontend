@@ -486,10 +486,10 @@ var Global = {
         }
         // Open Bookings
         document.addEventListener('scroll', function (event) {
-            $('#bookings .loading-page').show()
+
             if (document.body.scrollHeight ==
                 document.body.scrollTop +
-                window.innerHeight) {
+                window.innerHeight - 100) {
                  Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -501,7 +501,8 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadBookings2,null);
+                page_num : PAGE_NUM}, "get", _this, _this.loadBookings2,null, '.loading-pane3');
+            if (LEAD_TYPE == "Booking"){
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -513,7 +514,9 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadDelivery2,null);
+                page_num : PAGE_NUM}, "get", _this, _this.loadDelivery2,null, '.loading-pane3');
+            }
+
             }
         });
         var allbookingsopen = function(){
@@ -4239,6 +4242,7 @@ var Global = {
         // container.find('select').material_select();
     },
     loadBookings2:function(data){
+        // $('#bookings .loading-page').show()
         PAGE_NUM = PAGE_NUM + 1;
         var container = $('#bookings-list .booking-list .pre-data');
         // container.html('');
@@ -4361,10 +4365,11 @@ var Global = {
             html += '        </div>'
         })
         container.html(html);
-         $('#bookings .loading-page').hide()
+         // $('#bookings .loading-page').hide()
         // container.find('select').material_select();
     },
     loadDelivery2:function(data){
+        // $('#bookings .loading-page').show()
         PAGE_NUM = PAGE_NUM + 1
         var container = $('#delivery-list .delivery-list .pre-data');
         // container.html('');
@@ -4474,7 +4479,7 @@ var Global = {
             html += '        </div>'
         })
         container.html(html);
-                 $('#bookings .loading-page').hide()
+         // $('#bookings .loading-page').hide();
 
         // container.find('select').material_select();
     },
