@@ -59,7 +59,7 @@ $(document).ready(function() {
         $('.admin-page .nav-admin').addClass('vertical-navbar')
         $('.admin-page section').addClass('section-vertical-width')
         $('.admin-page .navbar .nav-wrapper').removeClass('navbar-custom').addClass('navbar-custom2')
-        $("#bookings .pre-data").height(a - alfa)
+        // $("#bookings .pre-data").height(a - alfa)
         $('.admin-page .navbar .logo-color').hide()
         $('.admin-page .navbar .logo-white').show()
 
@@ -485,7 +485,7 @@ var Global = {
             }
         }
         // Open Bookings
-        document.addEventListener('scroll', function (event) {
+        $('#bookings .btn-loadmorebooking').click(function(){
 
             if (document.body.scrollHeight ==
                 document.body.scrollTop +
