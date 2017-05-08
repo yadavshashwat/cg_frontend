@@ -331,6 +331,18 @@ var Global = {
                 }else{
 
                 }
+            }else if(sub_page_1 == "escalations"){
+                // $('.navbar .lead-button').click()
+                allescalationopen()
+                if (sub_page_2 == "single"){
+                    try {
+                        openbooking(data_id)
+                    }
+                    catch(err){
+                    }
+                }else{
+
+                }
             }else if(sub_page_1 == "subscriptions"){
                 // $('.navbar .subscription-button').click()
                 allsubscriptionopen()
@@ -382,7 +394,7 @@ var Global = {
                 }
 
             }else if (sub_page_1 == "bills"){
-                allbillsopen()
+                // allbillsopen()
                 // $('.navbar .coupon-button').click()
                 if (sub_page_2 == "newbill"){
                     $('#bill-detail  .single-bill').click()
@@ -393,6 +405,12 @@ var Global = {
                             openbill(data_id)
                         }
                     }
+                }else if(sub_page_2=="all"){
+                    allbillsopen()
+
+                }else if(sub_page_2 == "pre"){
+                    allprebillsopen()
+
                 }else{
 
                 }
@@ -546,6 +564,7 @@ var Global = {
             $('#expense-details').hide();
             $('#bill-details').hide()
             $('#settlement-details').hide()
+            $('#Status').find('select').removeAttr('disabled','')
 
 
             $('#bookings .lead-filter').hide()
@@ -598,7 +617,91 @@ var Global = {
             history.pushState({},'',new_path)
 
         }
+
         $('.navbar .booking-button').click(allbookingsopen);
+
+
+
+        var allescalationsopen = function(){
+            PAGE_NUM = 0
+            // DATE_TYPE = "";
+            // REG_NUMBER = "";
+            // CUST_NAME = "";
+            // STATUS_TYPE = "";
+            // SORT_TYPE = "";
+            // BOOKING_ID = "";
+            // VEH_TYPE = "";
+            // PHONE_NUMBER = "";
+            // SOURCE_BOOK = "";
+            // DATE_TYPE_END = "";
+            //
+            $('.navbar li').removeClass('selected')
+            $('.navbar .escalation-button').addClass('selected')
+            checkfilters()
+            $('#booking-details').hide();
+            $('#bookings').show()
+            $('#user-details').hide()
+            $('#coupon-details').hide()
+            $('#new-booking').hide()
+            $('#subscription-details').hide()
+            $('#campaign-details').hide()
+            $('#analytics').hide()
+            $('#expense-details').hide();
+            $('#bill-details').hide()
+            $('#settlement-details').hide()
+            $('#Status').find('select').attr('disabled','')
+
+            $('#bookings .lead-filter').hide()
+
+
+            // $('#bookings .delivery-list').show()
+            $('#bookings .booking-filter').show();
+            $('#customer-detail .bill-row').show();
+
+
+            LEAD_TYPE = "Booking"
+            if (DATE_TYPE != ""){
+                // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
+                // $('#bookings #bookings-list').show().removeClass('l12').addClass('l6')
+                // $('#bookings #delivery-list').show()
+            }
+            $('#bookings #bookings-list .header-id-bar.bookings').text('Jobs')
+            $('#bookings #bookings-list .booking-bar-2 .agent').text('Engineer Details')
+            $('#bookings #bookings-list .booking-bar-2 .booking-source').show()
+
+
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                date:DATE_TYPE,
+                status:"Escalation",
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
+                veh_type:VEH_TYPE,
+                page_num : PAGE_NUM}, "get", _this, _this.loadBookings,null, '.loading-pane');
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                del_date:DATE_TYPE,
+                status:"Escalation",
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
+                veh_type:VEH_TYPE,
+                page_num : PAGE_NUM}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+
+
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/escalation/all'
+            history.pushState({},'',new_path)
+
+        }
+        $('.navbar .escalation-button').click(allescalationsopen);
         $('#bookings .booking-bar-1 .downloadcsv').click(function(){
             params = {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
@@ -657,6 +760,7 @@ var Global = {
             $('#expense-details').hide();
             $('#bill-details').hide()
             $('#settlement-details').hide()
+            $('#Status').find('select').removeAttr('disabled','')
 
 
 
@@ -2480,17 +2584,37 @@ var Global = {
 
 
             $('#bill-detail  .all-bill').click()
-            Commons.ajaxData('view_all_bills', {}, "get", _this, _this.loadbillAll,null, '.loading-pane');
+            Commons.ajaxData('view_all_bills', {bill_type:"Invoice"}, "get", _this, _this.loadbillAll,null, '.loading-pane');
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,2).join('/')+'/bills/all'
             history.pushState({},'',new_path)
         };
+
+        //
+        var allprebillsopen = function(){
+            // console.log('check')
+            $('.navbar li').removeClass('selected')
+            $('.navbar .bill-button').addClass('selected')
+            $('#booking-details').hide()
+            $('#bookings').hide()
+            $('#user-details').hide()
+            $('#new-booking').hide()
+            $('#subscription-details').hide()
+            $('#campaign-details').hide()
+            $('#analytics').hide()
+            $('#expense-details').hide();
+            $('#bill-details').show()
+            $('#settlement-details').hide()
+            $('#bill-detail  .all-pre-bill').click()
+            Commons.ajaxData('view_all_bills', {bill_type:"Pre-Invoice"}, "get", _this, _this.loadprebillAll,null, '.loading-pane');
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/bills/all'
+            history.pushState({},'',new_path)
+        };
+
         $('.navbar .bill-button').click(allbillsopen);
         //     - ADD bill
-        $('#bill-detail .add-bill').click(function(){
 
-
-        });
         // -- Modify bill
 
         var openbill = function(data_id){
@@ -2529,6 +2653,7 @@ var Global = {
                 Commons.ajaxData('view_all_bookings', {b_id:booking_id}, "get", _this, _this.loadbillbookingdata,null, '.loading-pane');
             }
         })
+
         $('#bill-detail .btn-getpreinvoicedata').click(function(){
             booking_id = $('#bill-detail #cust_bill_bookingid').val()
             if (booking_id != ""){
@@ -2543,16 +2668,33 @@ var Global = {
             $('#bill-detail  .bill-add-mod').hide();
             $('#bill-detail  .single-bill').removeClass('selected')
             $('#bill-detail  .all-bill').addClass('selected')
+            $('#bill-detail  .all-pre-bill').removeClass('selected')
+
+            Commons.ajaxData('view_all_bills', {bill_type:"Invoice"}, "get", _this, _this.loadbillAll,null, '.loading-pane');
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/all/'
             history.pushState({},'',new_path)
         });
+
+        $('#bill-detail .all-pre-bill').click(function(){
+            $('#bill-detail .bill-list').show();
+            $('#bill-detail  .bill-add-mod').hide();
+            $('#bill-detail  .single-bill').removeClass('selected')
+            $('#bill-detail  .all-bill').removeClass('selected')
+            $('#bill-detail  .all-pre-bill').addClass('selected')
+            Commons.ajaxData('view_all_bills', {bill_type:"Pre-Invoice"}, "get", _this, _this.loadprebillAll,null, '.loading-pane');
+             var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/pre/'
+            history.pushState({},'',new_path)
+        });
+
 
         $('#bill-detail .single-bill').click(function(){
             $('#bill-detail .bill-list').hide();
             $('#bill-detail  .bill-add-mod').show();
             $('#bill-detail  .all-bill').removeClass('selected')
             $('#bill-detail  .single-bill').addClass('selected')
+            $('#bill-detail  .all-pre-bill').removeClass('selected')
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/newbill/'
             history.pushState({},'',new_path)
@@ -3221,7 +3363,9 @@ var Global = {
             history.pushState({},'',new_path)
 
         };
+
         $('.navbar .new-lead-button').click(opennewlead);
+
 
         $('#new-booking .header-booking .book-btn').click(function(){
             $('#new-booking  .lead-btn').removeClass('selected')
@@ -4006,7 +4150,7 @@ var Global = {
 
     },
     loadBookings:function(data){
-        // PAGE_NUM = PAGE_NUM + 1;
+        PAGE_NUM = PAGE_NUM + 1;
         var container = $('#bookings-list .booking-list .pre-data');
         container.html('');
         html = ''
@@ -4068,6 +4212,11 @@ var Global = {
                 html += '                    <div class="col l12 s12 m12">'
                 html += '                        <b>Generation Date & Time: </b><span class="time">' + val.date_generated +' '+ val.time_generated + '</span>'
                 html += '                    </div>'
+                if (val.lead_delay_count > 0 ){
+                    html += '                    <div class="col l12 s12 m12">'
+                    html += '                        <b>Delay Count: </b>' + val.lead_delay_count+ '</span>'
+                    html += '                    </div>'
+                }
 
 
             }else{
@@ -4131,6 +4280,7 @@ var Global = {
         // container.find('select').material_select();
     },
     loadDelivery:function(data){
+        PAGE_NUM = PAGE_NUM + 1;
         var container = $('#delivery-list .delivery-list .pre-data');
         container.html('');
         html = ''
@@ -4305,7 +4455,11 @@ var Global = {
                 html += '                    <div class="col l12 s12 m12">'
                 html += '                        <b>Generation Date & Time: </b><span class="time">' + val.date_generated +' '+ val.time_generated + '</span>'
                 html += '                    </div>'
-
+                if (val.lead_delay_count > 0 ){
+                    html += '                    <div class="col l12 s12 m12">'
+                    html += '                        <b>Delay Count: </b>' + val.lead_delay_count+ '</span>'
+                    html += '                    </div>'
+                }
 
             }else{
                 // html += '                    <div class="col l12 hide-on-med-and-down">'
@@ -5063,7 +5217,8 @@ var Global = {
                     for (i = 1; i < 10; i++) {
                         $('.status-change-'+i ).removeClass('selected')
                     }
-                    $('.status-change-10').addClass('selected')
+                    $('.status-change-9').addClass('selected')
+                    $('.status-change-10').removeClass('selected')
                 }
             }else{
                 if (val.status == "Lead"){
@@ -6777,6 +6932,75 @@ var Global = {
         html += '								</div>';
         container.html(html);
     },
+    loadprebillAll:function(data){
+        container =        $('#bill-details .bill-list .pre-data')
+        container.html('')
+        html=''
+        i=1
+        html += '								<div class="desc-content col s12 m12 l12">';
+        html += '									<table class=" card striped">';
+        html += '										<thead>';
+        html += '										<tr>';
+        html += '											<th class="centered-text" data-field="id">Invoice No.</th>';
+        html += '											<th class="centered-text" data-field="code">Owner</th>';
+        html += '											<th class="centered-text" data-field="code">Job Info</th>';
+        html += '											<th class="centered-text"  data-field="code">Date Job Card</th>';
+        html += '											<th class="centered-text" data-field="code">Date Created</th>';
+        html += '											<th class="centered-text" data-field="veh_type">Customer Name</th>';
+        html += '											<th class="centered-text"  data-field="category">Total Amount</th>';
+        // html += '											<th data-field="end_date">Bill Status</th>';
+        // html += '											<th class="centered-text" data-field="start_date">Payment Status</th>';
+        // html += '											<th class="centered-text" data-field="end_date">Payment Mode</th>';
+        html += '											<th class="centered-text" data-field="download-bill" >Download</th>';
+        html += '											<th class="centered-text" data-field="modify">Modify</th>';
+        html += '										</tr>';
+        html += '										</thead>';
+        html += '										<tbody>';
+        $.each(data, function(ix, val) {
+            html += '<tr class="bill-row" data-class="'+val.id+'">'
+            if(val.bill_type == "Invoice"){
+                if (val.status == "Cancelled"){
+                    html += '											<td class="centered-text" >'+val.invoice_number+' (Cancelled)</td>';
+                }else{
+                    html += '											<td class="centered-text" >'+val.invoice_number+'</td>';
+                }
+            }else{
+                html += '											<td class="centered-text" >Pre-Invoice</td>';
+            }
+            html += '											<td class="centered-text" >'+val.agent_name+', '+val.state+'</td>';
+            if (val.booking_data_id == ""){
+                html += '											<td class="" >#Job: NA <br> '+'#Reg: '+val.reg_number+'</td>';
+            }else{
+                html += '											<td class="" >#Job: '+val.booking_id +'<br>#Reg: '+val.reg_number+'</td>';
+            }
+            if (val.date_job_created == ""){
+                html += '											<td class="centered-text" >NA</td>';
+            }else{
+                html += '											<td class="centered-text" >'+val.date_job_created+'</td>';
+            }
+            html += '											<td class="centered-text" >'+val.date_created+'</td>';
+            html += '											<td class="centered-text" >'+val.cust_name+'</td>';
+            html += '											<td class="centered-text" >'+val.total_amount+'</td>';
+            // html += '											<td>'+val.status+'</td>';
+            // if (val.amount_paid){
+                // html += '											<td class="centered-text" >Paid</td>';
+            // }else{
+            //     html += '											<td class="centered-text" >Due</td>';
+            // }
+            // html += '											<td class="centered-text" >'+val.payment_mode+'</td>';
+            html += '											<td class="centered-text" style="color:purple; cursor:pointer" class="download-btn centered-text"><i data-class='+ val.file_name +' class="fa fa-download downloadbill"></i></td>';
+            html += '											<td class="centered-text" style="color:purple; cursor:pointer" class="modify-btn centered-text"><i class="fa fa-pencil updatebill"></i></td>';
+            html += '										</tr>';
+            i=i+1
+        })
+
+        html += '										</tbody>';
+        html += '									</table>';
+        html += '								</div>';
+        container.html(html);
+    },
+
+
     loadbillbookingdata:function(data){
         container = $('#bill-table').find('tbody')
         html = ''

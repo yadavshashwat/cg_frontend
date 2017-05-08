@@ -574,7 +574,11 @@ footer a:hover{color:#979797;text-decoration:none;}
     z-index: 99;
     /*left:50%;*/
 }
-
+@media(max-width: 992px) {
+    .pre-data {
+        overflow: scroll;
+    }
+}
 input:not([type]):focus:not([readonly]),
 input[type=text]:focus:not([readonly]),
 input[type=password]:focus:not([readonly]),
