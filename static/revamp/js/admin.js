@@ -859,7 +859,7 @@ var Global = {
 
             }
             // console.log(DATE_TYPE)
-            if ESCALATION_FLAG{
+            if (ESCALATION_FLAG){
                 status_marker = "Escalation"
             }else{
                 status_marker = STATUS_TYPE
