@@ -504,6 +504,11 @@ var Global = {
         }
         // Open Bookings
         $('#bookings .btn-loadmorebooking').click(function(){
+             if (ESCALATION_FLAG){
+                status_marker = "Escalation"
+            }else{
+                status_marker = STATUS_TYPE
+            }
 
             if (document.body.scrollHeight ==
                 document.body.scrollTop +
@@ -512,7 +517,7 @@ var Global = {
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
                 date:DATE_TYPE,
-                status:STATUS_TYPE,
+                status:status_marker,
                 name:CUST_NAME,
                 reg:REG_NUMBER,
                 date_end:DATE_TYPE_END,
@@ -525,7 +530,7 @@ var Global = {
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
                 del_date:DATE_TYPE,
-                status:STATUS_TYPE,
+                status:status_marker,
                 name:CUST_NAME,
                 reg:REG_NUMBER,
                 date_end:DATE_TYPE_END,
