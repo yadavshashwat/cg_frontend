@@ -148,7 +148,7 @@ var TOTAL_PARTS_ADMIN = 0;
 var TOTAL_DISCOUNT_ADMIN = 0;
 var TOTAL_ITEMS_ADMIN = 0;
 var ALL_JOBS_ADMIN = "";
-
+var ESCALATION_FLAG = false
 var CART_IDS_NEW_BOOKING = [];
 
 var JOBS_SUMMARY_NEW_BOOKING = [];
@@ -550,6 +550,7 @@ var Global = {
             // SOURCE_BOOK = "";
             // DATE_TYPE_END = "";
             //
+            ESCALATION_FLAG = false
             $('.navbar li').removeClass('selected')
             $('.navbar .booking-button').addClass('selected')
             checkfilters()
@@ -635,6 +636,8 @@ var Global = {
             // SOURCE_BOOK = "";
             // DATE_TYPE_END = "";
             //
+            ESCALATION_FLAG = true
+
             $('.navbar li').removeClass('selected')
             $('.navbar .escalation-button').addClass('selected')
             checkfilters()
@@ -746,6 +749,7 @@ var Global = {
             // PHONE_NUMBER = "";
             // SOURCE_BOOK = "";
             // DATE_TYPE_END = "";
+            ESCALATION_FLAG = false
             $('.navbar li').removeClass('selected')
             $('.navbar .lead-button').addClass('selected')
             checkfilters()
@@ -855,12 +859,16 @@ var Global = {
 
             }
             // console.log(DATE_TYPE)
-
+            if ESCALATION_FLAG{
+                status_marker = "Escalation"
+            }else{
+                status_marker = STATUS_TYPE
+            }
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
                 date:DATE_TYPE,
-                status:STATUS_TYPE,
+                status:status_marker,
                 name:CUST_NAME,
                 reg:REG_NUMBER,
                 date_end:DATE_TYPE_END,
@@ -872,7 +880,7 @@ var Global = {
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
                 del_date:DATE_TYPE,
-                status:STATUS_TYPE,
+                status:status_marker,
                 name:CUST_NAME,
                 reg:REG_NUMBER,
                 date_end:DATE_TYPE_END,
