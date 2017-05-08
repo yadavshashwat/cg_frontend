@@ -333,7 +333,7 @@ var Global = {
                 }
             }else if(sub_page_1 == "escalations"){
                 // $('.navbar .lead-button').click()
-                allescalationopen()
+                allescalationsopen()
                 if (sub_page_2 == "single"){
                     try {
                         openbooking(data_id)
@@ -700,7 +700,7 @@ var Global = {
 
 
             var path = window.location.pathname.split('/')
-            var new_path = path.slice(0,2).join('/')+'/escalation/all'
+            var new_path = path.slice(0,2).join('/')+'/escalations/all'
             history.pushState({},'',new_path)
 
         }
