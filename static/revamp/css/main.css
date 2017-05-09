@@ -643,6 +643,10 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
     /*margin: 10px;*/
 }
 
+#bookings .switch{
+    line-height: 50px;
+}
+
 #bookings .selected-filters-row .filter-remove{
     display: inline;
     background-color: #D81B60;

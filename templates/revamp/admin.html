@@ -1019,20 +1019,65 @@
                 <div class="filter-sort closed  date-box  btn waves-effect waves-light card cardhover selected col l3 m6 s6">
                     Filter&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
                 </div>
-                <div class="col s6 m6 l2">
-                    <div class="input-field sort" id ="sort">
-                        <select class="browser-default">
-                            <option value="Booking ID" disabled selected>Sort By</option>
-                            <option value="Booking ID">Job ID</option>
-                            <option value="Name">Name</option>
-                            <option value="Status">Status</option>
-                            <option value="Generation Date">Generation Date</option>
-                            <option value="Follow Time">Follow Time</option>
-                            <option value="Source">Source</option>
-                            <option value="Date">Date</option>
-                        </select>
+                <div class="staff-button-row">
+                    <div class="col s6 m6 l1">
+                        <div class="input-field sort" id ="sort">
+                            <select class="browser-default">
+                                <option value="Booking ID" disabled selected>Sort By</option>
+                                <option value="Booking ID">Job ID</option>
+                                <option value="Name">Name</option>
+                                <option value="Status">Status</option>
+                                <option value="Generation Date">Generation Date</option>
+                                <option value="Follow Time">Follow Time</option>
+                                <option value="Source">Source</option>
+                                <option value="Date">Date</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col s6 m6 l1">
+                        <div class="switch">
+                            <label>
+                                <input id="send_sms" checked type="checkbox">
+                                <span class="lever"></span>
+                                SMS ON
+                            </label>
+                        </div>
+
                     </div>
                 </div>
+                <div class="agent-button-row">
+                    <div class="col s6 m6 l2">
+                        <div class="input-field sort" id ="sort">
+                            <select class="browser-default">
+                                <option value="Booking ID" disabled selected>Sort By</option>
+                                <option value="Booking ID">Job ID</option>
+                                <option value="Name">Name</option>
+                                <option value="Status">Status</option>
+                                <option value="Generation Date">Generation Date</option>
+                                <option value="Follow Time">Follow Time</option>
+                                <option value="Source">Source</option>
+                                <option value="Date">Date</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="b2b-button-row">
+                    <div class="col s6 m6 l2">
+                        <div class="input-field sort" id ="sort">
+                            <select class="browser-default">
+                                <option value="Booking ID" disabled selected>Sort By</option>
+                                <option value="Booking ID">Job ID</option>
+                                <option value="Name">Name</option>
+                                <option value="Status">Status</option>
+                                <option value="Generation Date">Generation Date</option>
+                                <option value="Follow Time">Follow Time</option>
+                                <option value="Source">Source</option>
+                                <option value="Date">Date</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <!--<div class="col s6 m6 l2 centered-text">-->
                 <!--<button class="waves-effect waves-light btn cg-primary btn-remove-filter" type="submit" name="action">Filters-->
                 <!--<i class="material-icons right">not_interested</i>-->
@@ -1491,12 +1536,12 @@
                                     <!--</div>-->
                                     <!--<div class="circle-status status-change-10" data-class="Lead">-->
 
-                                        <!--<div class="circle centered-text middle-circle">-->
-                                            <!--<i class="fa fa-drivers-license-o"></i>-->
-                                        <!--</div>-->
-                                        <!--&lt;!&ndash;<div class="centered-text content-status">&ndash;&gt;-->
-                                        <!--&lt;!&ndash;Escalation&ndash;&gt;-->
-                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                    <!--<div class="circle centered-text middle-circle">-->
+                                    <!--<i class="fa fa-drivers-license-o"></i>-->
+                                    <!--</div>-->
+                                    <!--&lt;!&ndash;<div class="centered-text content-status">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;Escalation&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
                                     <!--</div>-->
                                 </div>
                                 <div class="status-row-inline">
@@ -1607,12 +1652,12 @@
                                     <!--</div>-->
                                     <!--<div class="circle-status status-change-10">-->
 
-                                        <!--&lt;!&ndash;<div class="circle centered-text middle-circle">&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<i class="fa fa-car"></i>&ndash;&gt;-->
-                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                        <!--<div class="centered-text content-status">-->
-                                            <!--Lead-->
-                                        <!--</div>-->
+                                    <!--&lt;!&ndash;<div class="circle centered-text middle-circle">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<i class="fa fa-car"></i>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                    <!--<div class="centered-text content-status">-->
+                                    <!--Lead-->
+                                    <!--</div>-->
                                     <!--</div>-->
                                 </div>
                             </div>
@@ -3339,7 +3384,7 @@
                             &nbsp;&nbsp;<h3>&nbsp;&nbsp;Bill Details</h3>
                         </div>
                         <div class="row booking-id" data-class="" >
-                            <div class="input-field col s4">
+                            <div class="input-field col s12 l4 m12">
                                 <i class="material-icons prefix">account_circle</i>
                                 <input id="cust_bill_bookingid" type="number" class="validate" required="" aria-required="true">
                                 <label for="cust_bill_bookingid" data-error="Required">Job ID</label>
@@ -3349,6 +3394,7 @@
                                     <i class="material-icons right">input</i>
                                 </button>
                             </div>
+                            <!--<br>-->
                             <div class="col l4 s12 m12 centered-text">
                                 <button class="waves-effect waves-light btn cg-primary btn-getpreinvoicedata  page-wide" type="submit" name="action">Get Pre Invoice
                                     <i class="material-icons right">input</i>

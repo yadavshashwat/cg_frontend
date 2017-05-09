@@ -176,7 +176,7 @@ var VEH_TYPE = "";
 var PHONE_NUMBER = "";
 var SOURCE_BOOK = "";
 var DATE_TYPE_END = "";
-
+var SEND_SMS = "1";
 
 var CGHARYANA_VAT_NO = "06301844038"
 var CGHARYANA_STAX_NO = "AAVCS6335ESD001"
@@ -434,6 +434,16 @@ var Global = {
 // =====================================================================================
 //     Booking/ Lead Management
 // =====================================================================================
+
+        $('#bookings #send_sms').change(function () {
+            send_conf =  document.getElementById('send_sms');
+            if (send_conf.checked){
+                SEND_SMS =    "1"
+            }else{
+                SEND_SMS ="0"
+            }
+            console.log(SEND_SMS)
+        })
         var checkfilters = function(){
             remove = 0
             if (REG_NUMBER != ""){
@@ -1519,7 +1529,7 @@ var Global = {
             status_n = $('#status-select').find('option:selected').val()
             console.log("Status Update")
             Commons.ajaxData('change_status', {b_id: bid,
-                status_id: status_n,
+                status_id: status_n, send_sms : SEND_SMS
             }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
         });
 
@@ -1528,7 +1538,7 @@ var Global = {
         var changestatus_booking = function(bid,status_n){
             data_id = $('#customer-detail #booking_id').attr('booking_data_id')
             Commons.ajaxData('change_status', {b_id: bid,
-                status_id: status_n,
+                status_id: status_n, send_sms : SEND_SMS
             }, "get", _this, _this.loadCustomerStatus,null, '.loading-pane');
 
             if (status_n == "Confirmed"){
@@ -1614,7 +1624,7 @@ var Global = {
             data_id = $('#customer-detail #booking_id').attr('booking_data_id')
             variable_pass = _this
             Commons.ajaxData('change_status', {b_id: bid,
-                status_id: status_n,
+                status_id: status_n, send_sms : SEND_SMS
             }, "get", _this, _this.loadCustomerStatus,null, '.loading-pane');
 
             if (status_n == "Lead"){
@@ -1698,7 +1708,7 @@ var Global = {
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $(this).attr('status_next')
             Commons.ajaxData('change_status', {b_id: bid,
-                status_id: status_n,
+                status_id: status_n, send_sms : SEND_SMS
             }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
         });
 
@@ -1706,7 +1716,7 @@ var Global = {
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $(this).attr('status_next')
             Commons.ajaxData('change_status', {b_id: bid,
-                status_id: status_n,
+                status_id: status_n, send_sms : SEND_SMS
             }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
         });
 
@@ -1820,7 +1830,7 @@ var Global = {
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $(this).attr('status_next')
             Commons.ajaxData('change_status', {b_id: bid,
-                status_id: status_n,
+                status_id: status_n,  send_sms : SEND_SMS
             }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
         });
 
