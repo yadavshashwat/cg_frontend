@@ -4019,10 +4019,10 @@ var Global = {
                     $('#user-detail #user_state').addClass("invalid");
                     error =1 ;
                 }
-                if(agent_vat==""){
-                    $('#user-detail #agent_vat').addClass("invalid");
-                    error =1 ;
-                }
+                // if(agent_vat==""){
+                //     $('#user-detail #agent_vat').addClass("invalid");
+                //     error =1 ;
+                // }
                 // if(agent_stax==""){
                 //     $('#user-detail #agent_stax').addClass("invalid");
                 //     error =1 ;
