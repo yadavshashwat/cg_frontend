@@ -4308,7 +4308,7 @@ var Global = {
         // container.find('select').material_select();
     },
     loadDelivery:function(data){
-        PAGE_NUM = PAGE_NUM + 1;
+        // PAGE_NUM = PAGE_NUM + 1;
         var container = $('#delivery-list .delivery-list .pre-data');
         container.html('');
         html = ''
@@ -4552,7 +4552,7 @@ var Global = {
     },
     loadDelivery2:function(data){
         // $('#bookings .loading-page').show()
-        PAGE_NUM = PAGE_NUM + 1
+        // PAGE_NUM = PAGE_NUM + 1
         var container = $('#delivery-list .delivery-list .pre-data');
         // container.html('');
         html = container.html()

@@ -888,6 +888,7 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
     width: 85%;
     float: right;
 }
+
 .list-modify{
     height: 40px;
     line-height: 40px;
