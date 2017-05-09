@@ -394,14 +394,19 @@ var Global = {
                 }
 
             }else if (sub_page_1 == "bills"){
-                // allbillsopen()
+                console.log('1')
+                allbillsopen()
                 // $('.navbar .coupon-button').click()
                 if (sub_page_2 == "newbill"){
+                console.log('2')
                     $('#bill-detail  .single-bill').click()
                     if (data_id != ""){
                         if(sub_page_3 == "pre"){
+                    console.log('3')
+
                             openbillpre(data_id)
                         }else{
+                    console.log('4')
                             openbill(data_id)
                         }
                     }
@@ -2607,7 +2612,7 @@ var Global = {
 
 
             $('#bill-detail  .all-bill').click()
-            Commons.ajaxData('view_all_bills', {bill_type:"Invoice"}, "get", _this, _this.loadbillAll,null, '.loading-pane');
+            // Commons.ajaxData('view_all_bills', {bill_type:"Invoice"}, "get", _this, _this.loadbillAll,null, '.loading-pane');
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,2).join('/')+'/bills/all'
             history.pushState({},'',new_path)
@@ -2629,9 +2634,9 @@ var Global = {
             $('#bill-details').show()
             $('#settlement-details').hide()
             $('#bill-detail  .all-pre-bill').click()
-            Commons.ajaxData('view_all_bills', {bill_type:"Pre-Invoice"}, "get", _this, _this.loadprebillAll,null, '.loading-pane');
+            // Commons.ajaxData('view_all_bills', {bill_type:"Pre-Invoice"}, "get", _this, _this.loadprebillAll,null, '.loading-pane');
             var path = window.location.pathname.split('/')
-            var new_path = path.slice(0,2).join('/')+'/bills/all'
+            var new_path = path.slice(0,2).join('/')+'/bills/pre'
             history.pushState({},'',new_path)
         };
 
