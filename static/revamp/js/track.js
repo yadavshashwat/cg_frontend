@@ -197,8 +197,17 @@ var Global = {
 // =====================================================================================
         $(window).ready(function(){
             dataid = $('#booking-details').attr('data-id')
+            page = $('#booking-details').attr('page')
             console.log(dataid)
             openbooking(dataid)
+            if (page == "details"){
+                $('#customer-detail .cust-detail').click();
+            }else if(page =="estimate"){
+                $('#customer-detail .service-detail').click();
+            }else{
+                $('#customer-detail .cust-detail').click();
+
+            }
         });
         // Open Individual Booking
 
@@ -223,6 +232,9 @@ var Global = {
             $('#customer-detail .service-detail').removeClass('selected')
             $('#customer-detail .feedback-detail').removeClass('selected')
             $('#customer-detail .cust-detail').addClass('selected')
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/details/'
+            history.pushState({},'',new_path)
         });
         $('#customer-detail .service-detail').click(function(){
             $('#customer-detail .booking-data').hide();
@@ -231,15 +243,19 @@ var Global = {
             $('#customer-detail .feedback-detail').removeClass('selected')
             $('#customer-detail .cust-detail').removeClass('selected')
             $('#customer-detail .service-detail').addClass('selected')
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,3).join('/')+'/estimate/'
+            history.pushState({},'',new_path)
+
         });
-        $('#customer-detail .feedback-detail').click(function(){
-            $('#customer-detail .booking-data').hide();
-            $('#customer-detail .booking-job-data').hide();
-            $('#customer-detail .feedback-data').show();
-            $('#customer-detail .feedback-detail').addClass('selected')
-            $('#customer-detail .cust-detail').removeClass('selected')
-            $('#customer-detail .service-detail').removeClass('selected')
-        });
+        // $('#customer-detail .feedback-detail').click(function(){
+        //     $('#customer-detail .booking-data').hide();
+        //     $('#customer-detail .booking-job-data').hide();
+        //     $('#customer-detail .feedback-data').show();
+        //     $('#customer-detail .feedback-detail').addClass('selected')
+        //     $('#customer-detail .cust-detail').removeClass('selected')
+        //     $('#customer-detail .service-detail').removeClass('selected')
+        // });
 
 
         $('#customer-detail #comp_all_select').click(function(){
@@ -263,7 +279,7 @@ var Global = {
             estimate = JSON.stringify(CURRENT_CART_ADMIN)
             Commons.ajaxData('update_estimate', {b_id: bid,
                 estimate: estimate,
-            }, "post", _this, _this.loadCustomerestimate,null, '.loading-pane');
+            }, "post", _this, _this.loadCustomerupdate,null, '.loading-pane');
         });
 
 
@@ -380,7 +396,13 @@ var Global = {
             }
         });
 
-
+        $('#customer-detail .btn-update-status').click(function(){
+            bid = $('#customer-detail #booking_id').attr('booking_id');
+            status_n = $(this).attr('status_next')
+            Commons.ajaxData('change_status', {b_id: bid,
+                status_id: status_n
+            }, "post", _this, _this.loadCustomerStatus,null, '.loading-pane');
+        });
     },
     loadBookingData:function(data){
         var container = $('#customer-detail .booking-data .pre-data');
@@ -418,108 +440,96 @@ var Global = {
                     html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="' + val.booking_user_name + '"class="validate"><label for="cust_name">Name</label></div>'
                 }
                 html += '</div>'
+                // html += '<div class="col s12 m12 l6">'
+                // if (val.booking_user_number == "") {
+                //     html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="' + val.cust_number + '"class="validate"><label for="cust_number">Number</label></div>'
+                // } else {
+                //     html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="' + val.booking_user_number + '"class="validate"><label for="cust_number">Number</label></div>'
+                // }
+                // html += '</div>'
                 html += '<div class="col s12 m12 l6">'
-                if (val.booking_user_number == "") {
-                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="' + val.cust_number + '"class="validate"><label for="cust_number">Number</label></div>'
-                } else {
-                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="' + val.booking_user_number + '"class="validate"><label for="cust_number">Number</label></div>'
-                }
+                html += '<div class="input-field"><i class="material-icons prefix">my_location</i><input id="cust_address" disabled type="text"   value ="' + val.cust_address +', '+val.cust_locality+', '+val.cust_city+ '"class="validate"><label for="cust_address">Address</label></div>'
                 html += '</div>'
-                html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">my_location</i><input id="cust_address" disabled type="text"   value ="' + val.cust_address + '"class="validate"><label for="cust_address">Address</label></div>'
-                html += '</div>'
-                html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">location_on</i><input id="cust_locality" disabled  type="text"   value ="' +  val.cust_locality + '"class="validate"><label for="cust_address">Locality</label></div>'
-                html += '</div>'
-                html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">business</i><input id="cust_city" type="text" disabled    value ="'  + val.cust_city + '"class="validate"><label for="cust_address">City</label></div>'
-                html += '</div>'
+                // html += '<div class="col s12 m12 l6">'
+                // html += '<div class="input-field"><i class="material-icons prefix">location_on</i><input id="cust_locality" disabled  type="text"   value ="' +  val.cust_locality + '"class="validate"><label for="cust_address">Locality</label></div>'
+                // html += '</div>'
+                // html += '<div class="col s12 m12 l6">'
+                // html += '<div class="input-field"><i class="material-icons prefix">business</i><input id="cust_city" type="text" disabled    value ="'  + val.cust_city + '"class="validate"><label for="cust_address">City</label></div>'
+                // html += '</div>'
                 // html += '<div class="col s12 m12 l6">'
                 // html += '<div class="input-field"><i class="material-icons prefix">my_location</i><input id="cust_address" type="text"  disabled value ="' + val.cust_address + ', ' + val.cust_locality + ', ' + val.cust_city + '"class="validate"><label for="cust_address">Address</label></div>'
                 // html += '</div>'
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_vehicle" type="text" disabled  value ="' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + '"class="validate"><label for="cust_vehicle">' + val.cust_vehicle_type + '</label></div>'
                 html += '</div>'
+                // html += '<div class="col s12 m12 l6">'
+                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_coupon" type="text" disabled  value ="' + val.coupon + '"class="validate"><label for="cust_coupon">Coupon</label></div>'
+                // html += '</div>'
                 html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_coupon" type="text" disabled  value ="' + val.coupon + '"class="validate"><label for="cust_coupon">Coupon</label></div>'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
                 html += '</div>'
-                if (val.req_user_agent){
-                    html += '<div class="col s8 m8 l4">'
-                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
-                    html += '</div>'
-                    html += '<div class="col s4 m4 l2">'
-                    html += '<button class="waves-effect waves-light btn cg-primary btn-modifypayement page-wide" type="submit" name="action">Modify<i class="material-icons right">mode_edit</i></button>'
-                    html += '</div>'
-                }else{
-                    html += '<div class="col s12 m12 l6">'
-                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
-                    html += '</div>'
-                }
                 html += '</div>'
-                html += '<div class="row">'
-                html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text" disabled  value ="' + val.source + '"class="validate"><label for="source">Source</label></div>'
-                html += '</div>'
+                // html += '<div class="row">'
+                // html += '<div class="col s12 m12 l6">'
+                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text" disabled  value ="' + val.source + '"class="validate"><label for="source">Source</label></div>'
+                // html += '</div>'
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Engineer Details</label></div>'
                 html += '</div>'
-                html += '</div>'
+                // html += '</div>'
 
             // if (is_agent)
 
-                html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">email</i><input id="email" disabled type="email" value ="' + val.cust_email + '"class="validate"><label for="email">Email</label></div>'
-                html += '</div>'
-                html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_regnumber" disabled  type="text" value ="' + val.cust_regnumber + '"class="validate" style="text-transform: uppercase;"><label for="cust_regnumber">#Registration</label></div>'
-                html += '</div>'
-                html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">av_timer</i><input id="cust_odometer" disabled type="number" value ="' + val.odometer + '"class="validate" ><label for="cust_odometer">#Odometer</label></div>'
-                html += '</div>'
+                // html += '<div class="col s12 m12 l12">'
+                // html += '<div class="input-field"><i class="material-icons prefix">email</i><input id="email" disabled type="email" value ="' + val.cust_email + '"class="validate"><label for="email">Email</label></div>'
+                // html += '</div>'
+                // html += '<div class="col s12 m12 l12">'
+                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_regnumber" disabled  type="text" value ="' + val.cust_regnumber + '"class="validate" style="text-transform: uppercase;"><label for="cust_regnumber">#Registration</label></div>'
+                // html += '</div>'
+                // html += '<div class="col s12 m12 l12">'
+                // html += '<div class="input-field"><i class="material-icons prefix">av_timer</i><input id="cust_odometer" disabled type="number" value ="' + val.odometer + '"class="validate" ><label for="cust_odometer">#Odometer</label></div>'
+                // html += '</div>'
 
-                html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled class="datepicker"><label for="date">Date</label></div>'
+                html += '<div class="col s6 m6 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled class="datepicker"><label for="date">Date Booking</label></div>'
                 // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
                 html += '</div>'
-                html += '<div class="col s12 m12 l12">'
+                html += '<div class="col s6 m6 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" disabled  value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
                 html += '</div>'
-                if (val.booking_flag){
-                    html += '<div class="col s12 m12 l12">'
-                    html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" disabled class="datepicker"><label for="date">Date Delivery</label></div>'
-                    // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
-                    html += '</div>'
-                }else{
-
-                }
+                // if (val.booking_flag){
+                html += '<div class="col s6 m6 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" disabled class="datepicker"><label for="date">Date Delivery</label></div>'
+                // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+                html += '</div>'
 
                 // html += '<div class="col s12 m12 l12">'
                 // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" disabled class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
                 // html += '</div>'
-                html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
-                html += '</div>'
-                html += '<div class="col s12 m12 l12">'
-                html += '<b>JOBS SUMMARY</b><br><br>'
-
-                jobLen = val.job_summary.length;
-                html += '<div class="jobs-list">'
-                for (i = 0; i < jobLen; i++) {
-                    // for (i = 0; i < 2; i++) {
-                    html += '<div class="row job-row">'
-                    html += '<div class="col s12 m12 l12 job-summary-name">'
-                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name'+i+'" disabled type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'">Job - ' + (i+1) +'</label></div>'
-
-                    // html += val.job_summary[i]['Job']
-                    html += '</div>'
-                    // html += '<div class="col s3 m3 l3 job-summary-price">'
-                    // html += '<div class="input-field"><input id="job_price'+i+'" type="number" disabled value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'">Price - ' + (i+1) +'</label></div>'
-                    // html += '</div>'
-                    // html += '<div class="col s1 m1 l1 centered-text x20">'
-                    // html += '<i class="fa fa-trash-o delete-job"></i>'
-                    // html += '</div>'
-                    html += '</div>'
-                }
+                // html += '<div class="col s12 m12 l12">'
+                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
+                // html += '</div>'
+                // html += '<div class="col s12 m12 l12">'
+                // html += '<b>JOBS SUMMARY</b><br><br>'
+                //
+                // jobLen = val.job_summary.length;
+                // html += '<div class="jobs-list">'
+                // for (i = 0; i < jobLen; i++) {
+                //     // for (i = 0; i < 2; i++) {
+                //     html += '<div class="row job-row">'
+                //     html += '<div class="col s12 m12 l12 job-summary-name">'
+                //     html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name'+i+'" disabled type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'">Job - ' + (i+1) +'</label></div>'
+                //
+                //     // html += val.job_summary[i]['Job']
+                //     html += '</div>'
+                //     // html += '<div class="col s3 m3 l3 job-summary-price">'
+                //     // html += '<div class="input-field"><input id="job_price'+i+'" type="number" disabled value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'">Price - ' + (i+1) +'</label></div>'
+                //     // html += '</div>'
+                //     // html += '<div class="col s1 m1 l1 centered-text x20">'
+                //     // html += '<i class="fa fa-trash-o delete-job"></i>'
+                //     // html += '</div>'
+                //     html += '</div>'
+                // }
 
             html += '</div>'
 
@@ -738,9 +748,16 @@ var Global = {
             html += '                                           <th data-field="part">Name</th>';
             html += '                                           <th data-field="action">Type</th>';
             // html += '                                            <th data-field="part">Type</th>';
-                html += '                                           <th data-field="unit" class="invisible">Units</th>';
+            if (val.estimate_history_len > 1){
+                TO_SHOW_TOTAL = 1
+                html += '                                           <th data-field="unit" class="">Units</th>';
+                html += '                                           <th data-field="unit_price" class="">Unit Price (Rs.)</th>';
+                html += '                                           <th data-field="price" class="">Item Price (Rs.)</th>';
+            }else{
+                 html += '                                           <th data-field="unit" class="invisible">Units</th>';
                 html += '                                           <th data-field="unit_price" class="invisible">Unit Price (Rs.)</th>';
                 html += '                                           <th data-field="price" class="invisible">Item Price (Rs.)</th>';
+            }
 
             // if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
             html += '                                           <th data-field="part-comment">Comment</th>';
@@ -796,61 +813,24 @@ var Global = {
                 // Cell item no.
                 html += '<td class="centered-text">' + item_no + '</td>';
                 // Part Name
-                if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-                    if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
-                        html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
-                    }else{
-                        html += '<td>' + '<input id="part_name" type="text" class="browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
-                    }
-                }else{
                     html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
-                }
                 // Part Type
-                if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-                    if(val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
-                        html += '<td>' + '<input id="part_type" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].type + '" aria-required="true">' + '</td>';
-                    }else{
-                        html += '<td>' + '<div class="input-field sort" id ="part_type"><select  class="browser-default">'
-                        if (val.service_items[i].type == "Part") {
-                            html += '<option value="Part" selected>Part</option>'
-                        } else {
-                            html += '<option value="Part">Part</option>'
-                        }
-                        if (val.service_items[i].type == "Lube") {
-                            html += '<option value="Lube" selected>Lube</option>'
-                        } else {
-                            html += '<option value="Lube">Lube</option>'
-                        }
-                        if (val.service_items[i].type == "Consumable") {
-                            html += '<option value="Consumable" selected>Consumable</option>'
-                        } else {
-                            html += '<option value="Consumable">Consumable</option>'
-                        }
-
-                        if (val.service_items[i].type == "Labour") {
-                            html += '<option value="Labour" selected>Labour</option>'
-                        } else {
-                            html += '<option value="Labour">Labour</option>'
-                        }
-                        if (val.service_items[i].type == "Discount") {
-                            html += '<option value="Discount" selected>Discount</option>'
-                        } else {
-                            html += '<option value="Discount">Discount</option>'
-                        }
-                        if (val.service_items[i].type == "Total") {
-                            html += '<option value="Total" selected>Total</option>'
-                        } else {
-                            html += '<option value="Total">Total</option>'
-                        }
-                        html += '</select></div>' + '</td>';
-                    }
-                }else{
                     html += '<td>' + '<input id="part_type" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].type + '" aria-required="true">' + '</td>';
-                }
 
                 // Price
-
+                   if (val.estimate_history_len > 1){
                     if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
+                        html += '<td class="">' + '<input id="part_units" type="number" class="browser-default noborder " disabled  value ="1" aria-required="true">' + '</td>';
+                        html += '<td class="">' + '<input id="part_unitprice" type="number" class="browser-default noborder " disabled  value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
+                        html += '<td class="">' + '<input id="part_price" type="number" class="browser-default noborder " disabled value ="' + val.service_items[i].price  + '" aria-required="true">' + '</td>';
+
+                    }else{
+                        html += '<td class="">' + '<input id="part_units" type="number" class="browser-default noborder " disabled  value ="' + val.service_items[i].quantity + '" aria-required="true">' + '</td>';
+                        html += '<td class="">' + '<input id="part_unitprice" type="number" class="browser-default noborder " disabled  value ="' + val.service_items[i].unit_price + '" aria-required="true">' + '</td>';
+                        html += '<td class="">' + '<input id="part_price" type="number" class="browser-default noborder " disabled value ="' + parseFloat(String(parseFloat(val.service_items[i].quantity) * parseFloat(val.service_items[i].unit_price)))  + '" aria-required="true">' + '</td>';
+
+                    }}else{
+                        if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
                         html += '<td class="invisible">' + '<input id="part_units" type="number" class="browser-default noborder " disabled  value ="1" aria-required="true">' + '</td>';
                         html += '<td class="invisible">' + '<input id="part_unitprice" type="number" class="browser-default noborder " disabled  value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
                         html += '<td class="invisible">' + '<input id="part_price" type="number" class="browser-default noborder " disabled value ="' + val.service_items[i].price  + '" aria-required="true">' + '</td>';
@@ -861,6 +841,7 @@ var Global = {
                         html += '<td class="invisible">' + '<input id="part_price" type="number" class="browser-default noborder " disabled value ="' + parseFloat(String(parseFloat(val.service_items[i].quantity) * parseFloat(val.service_items[i].unit_price)))  + '" aria-required="true">' + '</td>';
 
                     }
+                   }
 
 
                 // Part Comment
@@ -985,6 +966,10 @@ var Global = {
         });
 
     },
+    loadCustomerStatus:function(data){
+        data_id = $('#customer-detail #booking_id').attr('booking_data_id')
+        Global.openbooking_new(data_id)
+    },
     updateCart:function(){
         TOTAL_PRICE_ADMIN = 0;
         TOTAL_LABOUR_ADMIN = 0;
@@ -1095,61 +1080,61 @@ var Global = {
         $('#time-slot').find('select').val('');
         alert('Order Placed!')
     },
-    updateCust_new:function(){
-        bid = $('#customer-detail #booking_id').attr('booking_id');
-        email_n = $('#customer-detail #email').val();
-        reg_n = $('#customer-detail #cust_regnumber').val();
-        date_n = $('#customer-detail #date').val();
-        time_n = $('#customer-detail #time_booking').val();
-        // comment_n = $('#customer-detail #comments').val();
-        notes_n = $('#customer-detail #notes').val();
-        amount_paid_n = $('#customer-detail #cust_amount_paid').val()
-        cust_name = $('#customer-detail #cust_name').val()
-        cust_number = $('#customer-detail #cust_number').val()
-        cust_address = $('#customer-detail #cust_address').val()
-        cust_locality = $('#customer-detail #cust_locality').val()
-        cust_city = $('#customer-detail #cust_city').val()
-        source = $('#customer-detail #source').val()
-        date_del = $('#customer-detail #date_delivery').val()
-        date_follow = $('#customer-detail #date_follow').val()
-        time_follow = $('#customer-detail #time_follow').val()
-        follow_status = $('#customer-detail #status_details_new').val()
-        odometer = $('#customer-detail #cust_odometer').val()
-        jobs_summary_list = []
-        $('#customer-detail .jobs-list .job-row').each(function(){
-            name = $(this).find('.job-summary-name input').val()
-            price = $(this).find('.job-summary-price input').val()
-            if (name != "" && name != " "){
-                obj = {"Job":name,"Price":price}
-                jobs_summary_list.push(obj)
-            }
-        });
-
-
-        // ALL_JOBS_ADMIN = comment_n
-        Commons.ajaxData('update_booking', {b_id: bid,
-            email: email_n,
-            reg_number: reg_n,
-            // comment: comment_n,
-            time: time_n,
-            date: date_n,
-            note:notes_n,
-            name : cust_name,
-            number : cust_number,
-            amount_paid : amount_paid_n,
-            address : cust_address,
-            locality : cust_locality,
-            city : cust_city,
-            source : source,
-            date_del : date_del,
-            date_follow:date_follow,
-            time_follow:time_follow,
-            follow_status:follow_status,
-            odometer:odometer,
-            job_summary : JSON.stringify(jobs_summary_list)
-        }, "post", Global, Global.loadCustomerupdate,null, '.loading-pane');
-
-    },
+    // updateCust_new:function(){
+    //     bid = $('#customer-detail #booking_id').attr('booking_id');
+    //     email_n = $('#customer-detail #email').val();
+    //     reg_n = $('#customer-detail #cust_regnumber').val();
+    //     date_n = $('#customer-detail #date').val();
+    //     time_n = $('#customer-detail #time_booking').val();
+    //     // comment_n = $('#customer-detail #comments').val();
+    //     notes_n = $('#customer-detail #notes').val();
+    //     amount_paid_n = $('#customer-detail #cust_amount_paid').val()
+    //     cust_name = $('#customer-detail #cust_name').val()
+    //     cust_number = $('#customer-detail #cust_number').val()
+    //     cust_address = $('#customer-detail #cust_address').val()
+    //     cust_locality = $('#customer-detail #cust_locality').val()
+    //     cust_city = $('#customer-detail #cust_city').val()
+    //     source = $('#customer-detail #source').val()
+    //     date_del = $('#customer-detail #date_delivery').val()
+    //     date_follow = $('#customer-detail #date_follow').val()
+    //     time_follow = $('#customer-detail #time_follow').val()
+    //     follow_status = $('#customer-detail #status_details_new').val()
+    //     odometer = $('#customer-detail #cust_odometer').val()
+    //     jobs_summary_list = []
+    //     $('#customer-detail .jobs-list .job-row').each(function(){
+    //         name = $(this).find('.job-summary-name input').val()
+    //         price = $(this).find('.job-summary-price input').val()
+    //         if (name != "" && name != " "){
+    //             obj = {"Job":name,"Price":price}
+    //             jobs_summary_list.push(obj)
+    //         }
+    //     });
+    //
+    //
+    //     // ALL_JOBS_ADMIN = comment_n
+    //     Commons.ajaxData('update_booking', {b_id: bid,
+    //         email: email_n,
+    //         reg_number: reg_n,
+    //         // comment: comment_n,
+    //         time: time_n,
+    //         date: date_n,
+    //         note:notes_n,
+    //         name : cust_name,
+    //         number : cust_number,
+    //         amount_paid : amount_paid_n,
+    //         address : cust_address,
+    //         locality : cust_locality,
+    //         city : cust_city,
+    //         source : source,
+    //         date_del : date_del,
+    //         date_follow:date_follow,
+    //         time_follow:time_follow,
+    //         follow_status:follow_status,
+    //         odometer:odometer,
+    //         job_summary : JSON.stringify(jobs_summary_list)
+    //     }, "post", Global, Global.loadCustomerupdate,null, '.loading-pane');
+    //
+    // },
     openbooking_new:function(data_id){
         $('#bookings').hide()
         $('#booking-details').show()
@@ -1160,11 +1145,11 @@ var Global = {
         $('#customer-detail .service-detail').removeClass('selected')
         $('#customer-detail .cust-detail').addClass('selected')
         Commons.ajaxData('view_all_bookings', {data_id:data_id}, "get", Global, Global.loadBookingData,null, '.loading-pane');
-        Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", Global, Global.loadAgentdata,null, '.loading-pane');
-        Commons.ajaxData('get_all_feedback', {booking_data_id:data_id}, "get", Global, Global.loadFeedback,null, '.loading-pane');
-        var path = window.location.pathname.split('/')
-        var new_path = path.slice(0,3).join('/')+'/single/' + data_id
-        history.pushState({},'',new_path)
+        // Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", Global, Global.loadAgentdata,null, '.loading-pane');
+        // Commons.ajaxData('get_all_feedback', {booking_data_id:data_id}, "get", Global, Global.loadFeedback,null, '.loading-pane');
+        // var path = window.location.pathname.split('/')
+        // var new_path = path.slice(0,3).join('/')+'/single/' + data_id
+        // history.pushState({},'',new_path)
     },
 
 
