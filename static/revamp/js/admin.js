@@ -1431,6 +1431,8 @@ var Global = {
             $('#cover2').hide()
         });
 
+
+
         $('#customer-detail .btn-addpayment').click(function(){
             amount = $('#payment_amount').val()
             col_by = $('#payment_collector').val()
@@ -1472,6 +1474,25 @@ var Global = {
             }, "get", _this, _this.loadCustomerAgent,null, '.loading-pane');
         })
 
+        $('#customer-detail').on('click','.btn-send-sms',function(){
+            $('#customer-detail .sms-card').show()
+            $('#cover2').show()
+        });
+
+        $('#customer-detail .btn-closesms').click(function(){
+            $('#customer-detail .sms-card').hide()
+            $('#cover2').hide()
+        });
+
+        $('#customer-detail .btn-sendsms').click(function () {
+             bid =$('#customer-detail #booking_id').attr('booking_data_id')
+            message = $('#customer-detail #sms_text').val()
+            Commons.ajaxData('send_sms_customer', {
+                data_id : bid,
+                message : message
+            }, "get", _this, _this.loadSMSSent,null, '.loading-pane');
+
+        })
 
 
         // - update-estimate
@@ -5293,8 +5314,12 @@ var Global = {
 
             }
             // <----- New Booking Data---->>
-
-
+            $('#customer-detail .sms-card #sms_cust_name').text(val.booking_user_name)
+            if (val.clickgarage_flag){
+                $('#customer-detail .sms-card .agent-details').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Happy Motoring,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Team ClickGarage!')
+            }else{
+                $('#customer-detail .sms-card .agent-details').text('')
+            }
 
             if (val.req_user_admin){
                 // Lead/ Booking Diff
@@ -7515,7 +7540,11 @@ var Global = {
         $('#settlement-detail #total-payment-cg-vendor').text(Math.ceil(TOTAL_AMOUNT_FROM_CG_TO_VENDOR))
 
         container.html(html)
-    }
+    },
+    loadSMSSent:function(data){
+        console.log('sms')
+        alert(data['message']);
+    },
 
 
 };

@@ -1408,6 +1408,13 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col l12 s12 m12 centered-text">
+                                <button class="waves-effect waves-light btn cg-primary btn-send-sms page-wide" type="submit" name="action">SMS Customer
+                                    <i class="material-icons right">message</i>
+                                </button>
+                            </div>
+                        </div>
                         <!--<div class="row">-->
                         <!--<div class="row">-->
                         <!--<div class="col l12 s12 m12">-->
@@ -1856,6 +1863,14 @@
                             <div class="col l12 s12 m12 centered-text">
                                 <button class="waves-effect waves-light btn cg-primary btn-update-cust page-wide" type="submit" name="action">Update Details
                                     <i class="material-icons right">send</i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--<br>-->
+                         <div class="row">
+                            <div class="col l12 s12 m12 centered-text">
+                                <button class="waves-effect waves-light btn cg-primary btn-send-sms page-wide" type="submit" name="action">SMS Customer
+                                    <i class="material-icons right">message</i>
                                 </button>
                             </div>
                         </div>
@@ -2722,7 +2737,40 @@
                         <br>
                     </div>
                 </div>
+                <div class="sms-card invisible">
+                    <div class="card sms-customer">
+                        <div class="row button-header">
+                            <button class="waves-effect waves-light btn cg-primary btn-closesms " type="submit" name="action"><i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                        <br>
+                        <div class="row">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hello <span id="sms_cust_name"></span>,
+                        </div>
+                        <div class="row">
+                             <div class="input-field col s12">
+                                <i class="material-icons prefix">receipt</i>
+                                <textarea class="materialize-textarea" id="sms_text"></textarea>
+                                <label for="sms_text" data-error="Required">Message Content</label>
+                            </div>
+                        </div>
 
+                         <div class="row agent-details">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Happy Motoring,
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Team ClickGarage!
+                         </div>
+                        <br>
+                        <div class="row">
+                            <div class="col l12 s12 m12 centered-text">
+                                <button class="waves-effect waves-light btn-large cg-primary btn-sendsms page-wide" type="submit" name="action">Send SMS
+                                    <i class="material-icons right">message</i>
+                                </button>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
             </div>
 
         </div>
