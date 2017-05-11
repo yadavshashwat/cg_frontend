@@ -7568,6 +7568,8 @@ var Global = {
          Commons.ajaxData('send_booking_bill_estimate', {data_id:bid,bill_estimate:"Estimate"}, "get", Global, Global.loadestimateshare,null, '.loading-pane');
     },
     loadestimateshare:function(data){
+        bid =$('#customer-detail #booking_id').attr('booking_data_id')
+        Global.openbooking_new(bid)
         alert("Estimate updated and shared!")
     },
     loadBillSent:function(data){
