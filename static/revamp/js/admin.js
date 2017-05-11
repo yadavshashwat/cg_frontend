@@ -1244,6 +1244,21 @@ var Global = {
             row.find('td:eq(9) input').val('')
             return
         });
+        $('#customer-detail .btn-update-send-estimate').click(function(){
+           bid = $('#customer-detail #booking_id').attr('booking_id');
+            _this.updateCart()
+            console.log(CURRENT_CART_ADMIN)
+            estimate = JSON.stringify(CURRENT_CART_ADMIN)
+            Commons.ajaxData('update_estimate', {b_id: bid,
+                estimate: estimate,
+            }, "post", _this, _this.loadCustomershareestimate,null, '.loading-pane');
+        });
+        $('#customer-detail .btn-send-bill').click(function(){
+            bid =$('#customer-detail #booking_id').attr('booking_data_id')
+          Commons.ajaxData('send_booking_bill_estimate', {data_id:bid,bill_estimate:"Bill"}, "get", _this, _this.loadBillSent,null, '.loading-pane');
+        });
+
+
 
         $('#customer-detail').on('keyup click','table',function(e,event,data){
             TOTAL_PRICE_ADMIN = 0;
@@ -1699,7 +1714,7 @@ var Global = {
 
 
 
-        $('#customer-detail .confirm-row .circle-status').click(function(){
+        $('#customer-detail .confirm-row .circle-status.changestatus').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $(this).attr('data-class')
             // $(this).addClass('selected')
@@ -1707,14 +1722,14 @@ var Global = {
 
         });
 
-        $('#customer-detail .confirm-row .circle-status2').click(function(){
+        $('#customer-detail .confirm-row .circle-status2.changestatus').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $(this).attr('data-class')
             $(this).addClass('selected')
             changestatus_booking(bid,status_n)
         });
 
-        $('#customer-detail .lead-row .circle-status').click(function(){
+        $('#customer-detail .lead-row .circle-status.changestatus').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $(this).attr('data-class')
             // $(this).addClass('selected')
@@ -1722,7 +1737,7 @@ var Global = {
 
         });
 
-        $('#customer-detail .lead-row .circle-status2').click(function(){
+        $('#customer-detail .lead-row .circle-status2.changestatus').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             status_n = $(this).attr('data-class')
             $(this).addClass('selected')
@@ -5932,9 +5947,12 @@ var Global = {
 
             if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
                 $('#customer-detail .btn-additem-est').hide()
+                $('#customer-detail .btn-update-send-estimate').hide()
                 $('#comp_all_select').attr('disabled','')
             }else{
                 $('#customer-detail .btn-additem-est').show()
+                $('#customer-detail .btn-update-send-estimate').show()
+
                 $('#comp_all_select').removeAttr('disabled')
             }
 
@@ -7545,6 +7563,16 @@ var Global = {
         console.log('sms')
         alert(data['message']);
     },
+    loadCustomershareestimate:function(data){
+        bid =$('#customer-detail #booking_id').attr('booking_data_id')
+         Commons.ajaxData('send_booking_bill_estimate', {data_id:bid,bill_estimate:"Estimate"}, "get", Global, Global.loadestimateshare,null, '.loading-pane');
+    },
+    loadestimateshare:function(data){
+        alert("Estimate updated and shared!")
+    },
+    loadBillSent:function(data){
+        alert('Bill Sent')
+    }
 
 
 };

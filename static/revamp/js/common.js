@@ -79,6 +79,7 @@ var Commons = {
         'add_delete_payment':'/api/add_delete_payment/',
         'settle_freeze_booking':'/api/settle_freeze_booking/',
         'send_sms_customer':'/api/send_sms_customer/',
+        'send_booking_bill_estimate':'/api/send_booking_bill_estimate/',
 
 
     },
