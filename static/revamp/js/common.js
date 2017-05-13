@@ -25,7 +25,7 @@ var Commons = {
                     if(loadingSelector){
                         $(loadingSelector).hide();
                     }
-                    // console.log(res)
+                    console.log(res)
                     if(res && res.status){
                         bind(success_cb, bindObj, [res.result])
                     }else{
@@ -80,6 +80,7 @@ var Commons = {
         'settle_freeze_booking':'/api/settle_freeze_booking/',
         'send_sms_customer':'/api/send_sms_customer/',
         'send_booking_bill_estimate':'/api/send_booking_bill_estimate/',
+        'add_delete_payment_bill':'/api/add_delete_payment_bill/',
 
 
     },

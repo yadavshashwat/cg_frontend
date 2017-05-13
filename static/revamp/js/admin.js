@@ -258,6 +258,25 @@ var SOURCES = ['Google Adwords',
     'Exotel']
 // DATE_TYPE =
 
+// Super Admin Code Start
+$('#god-view .view-change').click(function(){
+    view_type = $(this).attr('data-class')
+    if (view_type == "admin"){
+        local.save("view_type","Admin")
+    }else if(view_type == "staff"){
+        local.save("view_type","Staff")
+    }else if(view_type == "engineer"){
+        local.save("view_type","Engineer")
+    }else if(view_type == "b2b"){
+        local.save("view_type","B2B")
+    }
+    location.reload()
+})
+
+
+// Super Admin Code End
+
+
 var Global = {
     init:function() {
         var _this = this;
@@ -398,15 +417,15 @@ var Global = {
                 allbillsopen()
                 // $('.navbar .coupon-button').click()
                 if (sub_page_2 == "newbill"){
-                console.log('2')
+                    console.log('2')
                     $('#bill-detail  .single-bill').click()
                     if (data_id != ""){
                         if(sub_page_3 == "pre"){
-                    console.log('3')
+                            console.log('3')
 
                             openbillpre(data_id)
                         }else{
-                    console.log('4')
+                            console.log('4')
                             openbill(data_id)
                         }
                     }
@@ -519,7 +538,7 @@ var Global = {
         }
         // Open Bookings
         $('#bookings .btn-loadmorebooking').click(function(){
-             if (ESCALATION_FLAG){
+            if (ESCALATION_FLAG){
                 status_marker = "Escalation"
             }else{
                 status_marker = STATUS_TYPE
@@ -528,32 +547,32 @@ var Global = {
             if (document.body.scrollHeight ==
                 document.body.scrollTop +
                 window.innerHeight) {
-                 Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
-                lead_booking:LEAD_TYPE,
-                sort:SORT_TYPE,
-                date:DATE_TYPE,
-                status:status_marker,
-                name:CUST_NAME,
-                reg:REG_NUMBER,
-                date_end:DATE_TYPE_END,
-                source_id:SOURCE_BOOK,
-                phone_num:PHONE_NUMBER,
-                veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadBookings2,null, '.loading-pane3');
-            if (LEAD_TYPE == "Booking"){
-            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
-                lead_booking:LEAD_TYPE,
-                sort:SORT_TYPE,
-                del_date:DATE_TYPE,
-                status:status_marker,
-                name:CUST_NAME,
-                reg:REG_NUMBER,
-                date_end:DATE_TYPE_END,
-                source_id:SOURCE_BOOK,
-                phone_num:PHONE_NUMBER,
-                veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadDelivery2,null, '.loading-pane3');
-            }
+                Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                    lead_booking:LEAD_TYPE,
+                    sort:SORT_TYPE,
+                    date:DATE_TYPE,
+                    status:status_marker,
+                    name:CUST_NAME,
+                    reg:REG_NUMBER,
+                    date_end:DATE_TYPE_END,
+                    source_id:SOURCE_BOOK,
+                    phone_num:PHONE_NUMBER,
+                    veh_type:VEH_TYPE,
+                    page_num : PAGE_NUM}, "get", _this, _this.loadBookings2,null, '.loading-pane3');
+                if (LEAD_TYPE == "Booking"){
+                    Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                        lead_booking:LEAD_TYPE,
+                        sort:SORT_TYPE,
+                        del_date:DATE_TYPE,
+                        status:status_marker,
+                        name:CUST_NAME,
+                        reg:REG_NUMBER,
+                        date_end:DATE_TYPE_END,
+                        source_id:SOURCE_BOOK,
+                        phone_num:PHONE_NUMBER,
+                        veh_type:VEH_TYPE,
+                        page_num : PAGE_NUM}, "get", _this, _this.loadDelivery2,null, '.loading-pane3');
+                }
 
             }
         });
@@ -1245,7 +1264,7 @@ var Global = {
             return
         });
         $('#customer-detail .btn-update-send-estimate').click(function(){
-           bid = $('#customer-detail #booking_id').attr('booking_id');
+            bid = $('#customer-detail #booking_id').attr('booking_id');
             _this.updateCart()
             console.log(CURRENT_CART_ADMIN)
             estimate = JSON.stringify(CURRENT_CART_ADMIN)
@@ -1255,7 +1274,7 @@ var Global = {
         });
         $('#customer-detail .btn-send-bill').click(function(){
             bid =$('#customer-detail #booking_id').attr('booking_data_id')
-          Commons.ajaxData('send_booking_bill_estimate', {data_id:bid,bill_estimate:"Bill"}, "get", _this, _this.loadBillSent,null, '.loading-pane');
+            Commons.ajaxData('send_booking_bill_estimate', {data_id:bid,bill_estimate:"Bill"}, "get", _this, _this.loadBillSent,null, '.loading-pane');
         });
 
 
@@ -1447,7 +1466,21 @@ var Global = {
         });
 
 
-
+        $('#booking_amount_pending').change(function (){
+            console.log('1')
+            pending_amt =  document.getElementById('booking_amount_pending');
+            amount = $('#customer-detail .total_due_amount').text()
+            if (pending_amt.checked){
+                $('#payment_amount').val(parseFloat(amount))
+                document.getElementById("payment_amount").disabled = true;
+                // $('#').attr('disabled')
+            }else{
+                $('#payment_amount').val(0)
+                document.getElementById("payment_amount").disabled = false;
+            }
+            Materialize.updateTextFields();
+            // console.log(pending_amt)
+        })
         $('#customer-detail .btn-addpayment').click(function(){
             amount = $('#payment_amount').val()
             col_by = $('#payment_collector').val()
@@ -1500,7 +1533,7 @@ var Global = {
         });
 
         $('#customer-detail .btn-sendsms').click(function () {
-             bid =$('#customer-detail #booking_id').attr('booking_data_id')
+            bid =$('#customer-detail #booking_id').attr('booking_data_id')
             message = $('#customer-detail #sms_text').val()
             Commons.ajaxData('send_sms_customer', {
                 data_id : bid,
@@ -2747,7 +2780,7 @@ var Global = {
             $('#bill-detail  .all-bill').removeClass('selected')
             $('#bill-detail  .all-pre-bill').addClass('selected')
             Commons.ajaxData('view_all_bills', {bill_type:"Pre-Invoice"}, "get", _this, _this.loadprebillAll,null, '.loading-pane');
-             var path = window.location.pathname.split('/')
+            var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/pre/'
             history.pushState({},'',new_path)
         });
@@ -2972,6 +3005,7 @@ var Global = {
                 $('#bill-detail .vat-part-amount').text(VAT_PART_BILL_ADMIN)
                 $('#bill-detail .vat-lube-amount').text(VAT_LUBE_BILL_ADMIN)
                 $('#bill-detail .vat-consumable-amount').text(VAT_CONSUMABLE_BILL_ADMIN)
+                $('#bill-detail .discount-amount').text(TOTAL_DISCOUNT_BILL_ADMIN)
                 $('#bill-detail .stax-amount').text(SERVICE_TAX_BILL_ADMIN)
 
             }
@@ -3002,6 +3036,7 @@ var Global = {
             service_tax_percent     = SERVICE_TAX_PERCENT
             cust_veh_notes          = $('#bill-detail #cust_bill_reco').val()
             cust_name               = $('#bill-detail #cust_bill_name').val()
+            cust_number               = $('#bill-detail #cust_bill_number').val()
             cust_address            = $('#bill-detail #cust_bill_address').val()
             cust_locality           = $('#bill-detail #cust_bill_locality').val()
             cust_city               = $('#bill-detail #cust_bill_city').val()
@@ -3052,7 +3087,8 @@ var Global = {
                 reg_number: cust_veh_reg,
                 vehicle: cust_vehicle,
                 service_items: service_items,
-                invoice_number: invoice_number
+                invoice_number: invoice_number,
+                cust_number : cust_number
             }
             // Commons.ajaxData('generate_bill', params, "get", _this, _this.loadBillGenerated,null, '.loading-pane');
             error = 0
@@ -3063,6 +3099,10 @@ var Global = {
             if(cust_name == ""){
                 error = 1
                 $('#bill-detail #cust_bill_name').addClass("invalid");
+            }
+            if(cust_number != "" && (cust_number > 9999999999 || cust_number < 1000000000 )){
+                error = 1
+                $('#bill-detail #cust_bill_number').addClass("invalid");
             }
             if(agent_name == ""){
                 error = 1
@@ -3105,18 +3145,84 @@ var Global = {
             $('#bill-details .bill-modify-card').show()
             data_id = $(this).closest('tr').attr('data-class')
             $('#cover2').show()
+
             Commons.ajaxData('view_all_bills', {data_id : data_id}, "get", _this, _this.loadModifyBill,null, '.loading-pane');
+        })
+
+        $('#bill-details .bill-modify-card .btn-addpayment').click(function () {
+            bid = $(this).closest('.bill-modify-card').attr('data-class')
+            amount = $('#payment_amount_bill').val()
+            add_del = "Add"
+            col_by = $('#payment_collector_bill').val()
+            medium = $('#payment_medium_bill').val()
+            error = 0
+            if (amount <= 0 ){
+                error = 1;
+                $('#payment_amount_bill').addClass("invalid");
+            }
+            if (col_by == "" || col_by == null){
+                error =1;
+                $('#payment_collector_bill').addClass('invalid-select-box')
+            }
+            if (medium == "" || medium == null){
+                error =1;
+                $('#payment_medium_bill').addClass('invalid-select-box')
+            }
+            if (error == 1){
+                return
+            }else{
+                Commons.ajaxData('add_delete_payment_bill', {
+                    data_id : bid,
+                    col_by : col_by,
+                    amount : amount,
+                    medium : medium,
+                    add_del : "Add"
+                }, "get", _this, _this.loadUpdateBill,null, '.loading-pane');
+            }
+        })
+
+        $('#bill-detail .payment-history').on('click','.payment-card .delete-transaction',function(){
+            bid = $(this).closest('.bill-modify-card').attr('data-class')
+            payment_id = $(this).closest('.payment-card').attr('data-class')
+            Commons.ajaxData('add_delete_payment_bill', {
+                data_id : bid,
+                payment_id : payment_id,
+                add_del : "Delete"
+            }, "get", _this, _this.loadUpdateBill,null, '.loading-pane');
+        })
+
+        $('#bill_amount_pending').change(function (){
+            console.log('1')
+            pending_amt =  document.getElementById('bill_amount_pending');
+            amount = $('#bill-detail .total_due_amount').text()
+            if (pending_amt.checked){
+                $('#payment_amount_bill').val(parseFloat(amount))
+                document.getElementById("payment_amount_bill").disabled = true;
+                // $('#').attr('disabled')
+            }else{
+                $('#payment_amount_bill').val(0)
+                document.getElementById("payment_amount_bill").disabled = false;
+            }
+            Materialize.updateTextFields();
+            // console.log(pending_amt)
+        })
+
+        $('#payment_medium_bill').change(function (){
+            console.log('1')
+            // pending = $(this).checked
+            // console.log(pending)
         })
 
         $('#bill-details .bill-modify-card .btn-updatebill').click(function () {
             data_id = $(this).closest('.bill-modify-card').attr('data-class')
             due_date = $('#bill_due_date').val()
-            payment_mode = $('#bill_payment_mode').find('select').val()
+            // payment_mode = $('#bill_payment_mode').find('select').val()
             cust_number = $('#bill_number').val()
             cust_email = $('#bill_email').val()
-            active_box              =  document.getElementById('bill_amount_paid');
-            amount_paid              = active_box.checked
-            Commons.ajaxData('update_bill', {data_id : data_id, cust_number:cust_number, cust_email : cust_email, payment_mode : payment_mode, amount_paid : amount_paid}, "get", _this, _this.loadUpdateBill,null, '.loading-pane');
+            console.log(due_date)
+            // active_box              =  document.getElementById('bill_amount_paid');
+            // amount_paid              = active_box.checked
+            Commons.ajaxData('update_bill', {data_id : data_id, cust_number:cust_number, cust_email : cust_email, due_date : due_date}, "get", _this, _this.loadUpdateBill,null, '.loading-pane');
         })
 
         $('#bill-details .bill-modify-card .btn-cancelbill').click(function () {
@@ -3526,6 +3632,7 @@ var Global = {
             html +=  '<option value="Servicing">Servicing</option>'
             html +=  '<option value="Repairing">Repairing</option>'
             html +=  '<option value="Subscription">Subscription</option>'
+            html +=  '<option value="Emergency">Emergency</option>'
             if(vehicle=='Car'){
                 html +=  '<option value="Denting">Denting/ Painting</option>'
                 html +=  '<option value="Cleaning">Car Care</option>'
@@ -4583,7 +4690,7 @@ var Global = {
             html += '        </div>'
         })
         container.html(html);
-         // $('#bookings .loading-page').hide()
+        // $('#bookings .loading-page').hide()
         // container.find('select').material_select();
     },
     loadDelivery2:function(data){
@@ -4697,7 +4804,7 @@ var Global = {
             html += '        </div>'
         })
         container.html(html);
-         // $('#bookings .loading-page').hide();
+        // $('#bookings .loading-page').hide();
 
         // container.find('select').material_select();
     },
@@ -4960,7 +5067,11 @@ var Global = {
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
                 html += '</div>'
                 html += '<div class="col s4 m4 l2">'
-                html += '<button class="waves-effect waves-light btn cg-primary btn-modifypayement page-wide" type="submit" name="action">Modify<i class="material-icons right">mode_edit</i></button>'
+                if (val.bill_generation_flag){
+                    html += '<button class="waves-effect waves-light btn cg-primary btn-modifypayement page-wide" disabled type="submit" name="action">Modify<i class="material-icons right">mode_edit</i></button>'
+                }else{
+                    html += '<button class="waves-effect waves-light btn cg-primary btn-modifypayement page-wide" type="submit" name="action">Modify<i class="material-icons right">mode_edit</i></button>'
+                }
                 html += '</div>'
                 html += '</div>'
                 html += '<div class="row">'
@@ -5031,8 +5142,11 @@ var Global = {
                     html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
                     html += '</div>'
                     html += '<div class="col s4 m4 l2">'
-                    html += '<button class="waves-effect waves-light btn cg-primary btn-modifypayement page-wide" type="submit" name="action">Modify<i class="material-icons right">mode_edit</i></button>'
-                    html += '</div>'
+                    if (val.bill_generation_flag){
+                        html += '<button class="waves-effect waves-light btn cg-primary btn-modifypayement page-wide" disabled type="submit" name="action">Modify<i class="material-icons right">mode_edit</i></button>'
+                    }else{
+                        html += '<button class="waves-effect waves-light btn cg-primary btn-modifypayement page-wide" type="submit" name="action">Modify<i class="material-icons right">mode_edit</i></button>'
+                    }                    html += '</div>'
                 }else{
                     html += '<div class="col s12 m12 l6">'
                     html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
@@ -5218,7 +5332,10 @@ var Global = {
                 }
             }
             html += '</div>'
-
+             if (val.req_user_agent){
+                $('#bill-details #payment_collector_bill').val("Workshop")
+                document.getElementById("payment_collector_bill").disabled = true;
+            }
             if (val.booking_flag){
                 if (val.status == "Confirmed"){
                     for (i = 1; i < 2; i++) {
@@ -6954,7 +7071,7 @@ var Global = {
         html += '											<th class="centered-text"  data-field="category">Total Amount</th>';
         // html += '											<th data-field="end_date">Bill Status</th>';
         html += '											<th class="centered-text" data-field="start_date">Payment Status</th>';
-        html += '											<th class="centered-text" data-field="end_date">Payment Mode</th>';
+        html += '											<th class="centered-text" data-field="end_date">Due Amount</th>';
         html += '											<th class="centered-text" data-field="download-bill" >Download</th>';
         html += '											<th class="centered-text" data-field="modify">Modify</th>';
         html += '										</tr>';
@@ -6986,12 +7103,18 @@ var Global = {
             html += '											<td class="centered-text" >'+val.cust_name+'</td>';
             html += '											<td class="centered-text" >'+val.total_amount+'</td>';
             // html += '											<td>'+val.status+'</td>';
-            if (val.amount_paid){
-                html += '											<td class="centered-text" >Paid</td>';
+            if (val.status == "Cancelled"){
+                html += '											<td class="centered-text" >NA</td>';
+                html += '											<td class="centered-text" >NA</td>';
             }else{
-                html += '											<td class="centered-text" >Due</td>';
+                if (val.amount_paid){
+                    html += '											<td class="centered-text" >Paid</td>';
+                }else{
+                    html += '											<td class="centered-text" >Due</td>';
+                }
+                html += '											<td class="centered-text" >'+String(parseFloat(val.total_amount)-parseFloat(val.total_recieved_amount))+'</td>';
+
             }
-            html += '											<td class="centered-text" >'+val.payment_mode+'</td>';
             html += '											<td class="centered-text" style="color:purple; cursor:pointer" class="download-btn centered-text"><i data-class='+ val.file_name +' class="fa fa-download downloadbill"></i></td>';
             html += '											<td class="centered-text" style="color:purple; cursor:pointer" class="modify-btn centered-text"><i class="fa fa-pencil updatebill"></i></td>';
             html += '										</tr>';
@@ -7054,7 +7177,7 @@ var Global = {
             html += '											<td class="centered-text" >'+val.total_amount+'</td>';
             // html += '											<td>'+val.status+'</td>';
             // if (val.amount_paid){
-                // html += '											<td class="centered-text" >Paid</td>';
+            // html += '											<td class="centered-text" >Paid</td>';
             // }else{
             //     html += '											<td class="centered-text" >Due</td>';
             // }
@@ -7080,6 +7203,7 @@ var Global = {
             html = ''
             $('#bill-detail #cust_bill_bookingid').val(val.booking_id)
             $('#bill-detail #cust_bill_name').val(val.cust_name)
+            $('#bill-detail #cust_bill_number').val(val.cust_number)
             $('#bill-detail #cust_bill_address').val(val.cust_address)
             $('#bill-detail #cust_bill_locality').val(val.cust_locality)
             $('#bill-detail #cust_bill_city').val(val.cust_city)
@@ -7235,20 +7359,25 @@ var Global = {
             if (!val.bill_genereration_flag) {
                 $('#bill-detail #cust_bill_bookingid').val(val.booking_id)
                 $('#bill-detail #cust_bill_name').val(val.bill_cust_name)
+                $('#bill-detail #cust_bill_number').val(val.bill_cust_number)
                 $('#bill-detail #cust_bill_address').val(val.bill_cust_address)
                 $('#bill-detail #cust_bill_locality').val(val.bill_cust_locality)
                 $('#bill-detail #cust_bill_city').val(val.bill_cust_city)
                 $('#bill-detail #cust_bill_vehicle').val(val.bill_vehicle)
                 $('#bill-detail #cust_bill_reg').val(val.bill_reg_number)
                 $('#bill-detail #cust_bill_reco').val(val.bill_notes)
-
+                if (val.bill_clickgarage){
+                    $('#bill_type').find('select').val(val.bill_owner)
+                }else{
+                    $('#bill_type').find('select').val("Agent Bill")
+                }
                 data_id = val.id
 
                 VAT_PART_BILL_ADMIN = 0;
                 VAT_CONSUMABLE_BILL_ADMIN = 0;
                 VAT_LUBE_BILL_ADMIN = 0;
                 SERVICE_TAX_BILL_ADMIN = 0;
-
+                STATE_BILL = val.bill_state
                 AGENT_STATE = val.bill_state
                 $('#agent_bill_name').val(val.bill_agent_name)
                 $('#agent_bill_address').val(val.bill_agent_address)
@@ -7359,22 +7488,58 @@ var Global = {
             $('#bill-details .bill-modify-card').attr('data-class',val.id)
             $('#bill-details #bill_email').val(val.cust_email)
             $('#bill-details #bill_number').val(val.cust_number)
-            $('#bill-details #bill_payment_mode').find('select').val(val.payment_mode)
+            // $('#bill-details #bill_payment_mode').find('select').val(val.payment_mode)
             $('#bill-details #bill_due_date').val(val.date_due)
-            if (val.amount_paid){
-                document.getElementById("bill_amount_paid").checked = true;
-            }else{
-                document.getElementById("bill_amount_paid").checked = false;
+            container3 = $('#bill-detail .payment-history')
+            // container3.html('')
+            html4 = ''
+            payLen = val.payment_bill.length;
+            for (i = 0; i < payLen; i++) {
+                html4 += '<div class="card payment-card" data-class="' + val.payment_bill[i]['payment_id'] + '">'
+                html4 += '<div class="col l8 s8 m8">'
+                html4 += '<div class="row">'
+                html4 += val.payment_bill[i]['date_collected']
+                html4 += '</div>'
+                html4 += '<div class="row">'
+                html4 += 'Recieved by <b>' + val.payment_bill[i]['collected_by'] + '</b>'
+                html4 += '</div>'
+                html4 += '<div class="row">'
+                html4 += 'Payment Medium :' + val.payment_bill[i]['medium']
+                html4 += '</div>'
+                html4 += '</div><div class="col l2 s2 m2 centered-text">'
+                html4 += 'Rs. ' + val.payment_bill[i]['amount']
+                html4 += '</div>'
+                html4 += '<div class="col l2 s2 m2 centered-text">'
+                html4 += '<i class="fa fa-trash-o x25 delete-transaction"></i>'
+                html4 += '</div></div>'
             }
+            container3.html(html4)
+            if (val.req_user_agent){
+                $('#bill-details #payment_collector_bill').val("Workshop")
+                document.getElementById("payment_collector_bill").disabled = true;
+            }
+            $('#bill-detail .payment-summary .total_amount').text(val.total_amount)
+            $('#bill-detail .payment-summary .total_paid_amount').text(val.total_recieved_amount)
+            $('#bill-detail .payment-summary .total_due_amount').text(parseFloat(val.total_amount) - parseFloat(val.total_recieved_amount))
+
+            // if (val.amount_paid){
+            //     document.getElementById("bill_amount_paid").checked = true;
+            //     $('#bill-detail .payment-summary .total_paid_amount').text(val.total_amount)
+            //     $('#bill-detail .payment-summary .total_due_amount').text("0")
+            //
+            // }else{
+            //     // document.getElementById("bill_amount_paid").checked = false;
+            // }
         })
         Materialize.updateTextFields()
 
     },
     loadUpdateBill:function(data){
         alert('Bill Updated')
-        $('#bill-details .bill-modify-card').hide()
-        $('#cover2').hide()
-        Commons.ajaxData('view_all_bills', {}, "get", Global, Global.loadbillAll,null, '.loading-pane');
+
+        // $('#bill-details .bill-modify-card').hide()
+        // $('#cover2').hide()
+        Commons.ajaxData('view_all_bills', {data_id : data['billid']}, "get", Global, Global.loadModifyBill,null, '.loading-pane');
     },
     loadCancelBill:function(data){
         alert('Bill Cancelled')
@@ -7565,7 +7730,7 @@ var Global = {
     },
     loadCustomershareestimate:function(data){
         bid =$('#customer-detail #booking_id').attr('booking_data_id')
-         Commons.ajaxData('send_booking_bill_estimate', {data_id:bid,bill_estimate:"Estimate"}, "get", Global, Global.loadestimateshare,null, '.loading-pane');
+        Commons.ajaxData('send_booking_bill_estimate', {data_id:bid,bill_estimate:"Estimate"}, "get", Global, Global.loadestimateshare,null, '.loading-pane');
     },
     loadestimateshare:function(data){
         bid =$('#customer-detail #booking_id').attr('booking_data_id')
@@ -7574,7 +7739,10 @@ var Global = {
     },
     loadBillSent:function(data){
         alert('Bill Sent')
-    }
+    },
+    loadSendBill:function(data){
+        alert('Bill Sent')
+    },
 
 
 };

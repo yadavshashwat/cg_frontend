@@ -329,6 +329,11 @@ var Login = {
           // $('.admin-page .navbar .uname').text("Hi "+uname+" "+lname)
           $('.admin-page .navbar .uname').text("Hi "+uname)
           $('.navbar .log-in-button').addClass('log-out-button').removeClass('log-in-button')
+        if (data['god']){
+            $('#god-view').show()
+        }else{
+            $('#god-view').html('')
+        }
         // console.log(data['auth_rights']['admin'])
         if (data['auth_rights']['admin']){
             $('.admin-page .admin-page-html').show()

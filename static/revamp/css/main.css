@@ -515,7 +515,7 @@ footer a:hover{color:#979797;text-decoration:none;}
     overflow: scroll;
 }
 
-#customer-detail .payment-history .card{
+#customer-detail .payment-history .card, #bill-detail .payment-card{
     height: 100px;
     margin: 5px 10px;
     padding: 12px 15px;
@@ -527,9 +527,16 @@ footer a:hover{color:#979797;text-decoration:none;}
     font-weight:600;
     font-size: 16px;
 }
-#customer-detail .delete-transaction{
+#customer-detail .delete-transaction, #bill-detail .delete-transaction{
     cursor: pointer;
     color: grey;
+}
+
+#bill-detail .pending-btn{
+    line-height: 50px;
+}
+#customer-detail .pending-btn{
+    line-height: 50px;
 }
 
 #bookings .booking .booking-id-bar{margin-top:45px;text-align:center;}
@@ -577,10 +584,12 @@ footer a:hover{color:#979797;text-decoration:none;}
 
 #bill-details .bill-modify-card{
     position: fixed;
+    height: 800px;
     top:5%;
     left:2%;
     width:96%;
     z-index: 99;
+    overflow: scroll;
     /*left:50%;*/
 }
 @media(max-width: 992px) {

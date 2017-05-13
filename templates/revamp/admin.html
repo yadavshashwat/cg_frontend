@@ -2357,7 +2357,7 @@
                                     </button>
                                 </div>
                             </div>
-                                                        <div class="row">
+                            <div class="row">
                                 <div class="col l12 s12 m12 centered-text">
                                     <button class="waves-effect waves-light btn cg-primary btn-send-bill page-wide generated-bill invisible" booking="" type="submit" name="action">Send Bill
                                         <i class="material-icons right">send</i>
@@ -2673,22 +2673,6 @@
                             <h3>Payment History</h3>
                         </div>
                         <div class="row payment-history">
-                            <!--<div class="card" data-class="">-->
-                            <!--<div class="col l8 s8 m8">-->
-                            <!--<div class="row">-->
-                            <!--21-04-2016-->
-                            <!--</div>-->
-                            <!--<div class="row">-->
-                            <!--Recieved by <b>ClickGarage</b>-->
-                            <!--</div>-->
-                            <!--</div>-->
-                            <!--<div class="col l2 s2 m2 centered-text">-->
-                            <!--Rs. 500-->
-                            <!--</div>-->
-                            <!--<div class="col l2 s2 m2 centered-text">-->
-                            <!--<i class="fa fa-trash-o x25 delte-transaction"></i>-->
-                            <!--</div>-->
-                            <!--</div>-->
                         </div>
                         <br>
                         <hr>
@@ -2732,16 +2716,22 @@
                         <div class="row centered-text">
                             <h3>Add Payment</h3>
                         </div>
+
+
                         <div class="row">
-                            <div class="input-field col s4">
+                            <div class="input-field col s6 m6 l3">
                                 <i class="material-icons prefix">credit_card</i>
                                 <input id="payment_amount" type="number" class="validate" required="" aria-required="true">
                                 <label for="payment_amount" data-error="Required">Amount</label>
                             </div>
-                            <div class="input-field col s4">
+                            <div class="col l2 s6 m6 centered-text pending-btn">
+                                <input type="checkbox" id="booking_amount_pending"/><label for="booking_amount_pending">Pending Amount</label>'
+                            </div>
+                            <div class="input-field col s12 m12 l2">
                                 <select id="payment_medium" class="browser-default">
                                     <option value="" disabled selected>Payment Medium</option>
                                     <option value="Cash">Cash</option>
+                                    <option value="Card">Card</option>
                                     <option value="Cheque">Cheque</option>
                                     <option value="Online">Online</option>
                                     <option value="PayTM">PayTM</option>
@@ -2750,7 +2740,7 @@
                                     <option value="Credit">Credit</option>
                                 </select>
                             </div>
-                            <div class="input-field col s4">
+                            <div class="input-field col s12 m12 l3">
                                 <select id="payment_collector" class="browser-default">
                                     <option value="" disabled selected>Payment Collected By</option>
                                     <option value="ClickGarage">ClickGarage</option>
@@ -2760,14 +2750,15 @@
                                     <option value="Workshop">Workshop</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col l12 s12 m12 centered-text">
-                                <button class="waves-effect waves-light btn-large cg-primary btn-addpayment page-wide" type="submit" name="action">Add Payment
-                                    <i class="material-icons right">send</i>
+
+                            <!--<div class="row">-->
+                            <div class="col l2 s12 m12 centered-text">
+                                <button class="waves-effect waves-light btn-large cg-primary btn-addpayment page-wide" type="submit" name="action">Add
+                                    <i class="material-icons right">add</i>
                                 </button>
                             </div>
                         </div>
+                        <!--</div>-->
                         <br>
                     </div>
                 </div>
@@ -3555,6 +3546,13 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
+                                <i class="material-icons prefix">phone</i>
+                                <input id="cust_bill_number" type="number" class="validate" required="" aria-required="true">
+                                <label for="cust_bill_number" data-error="Required">Customer Number</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
                                 <i class="material-icons prefix">my_location</i>
                                 <input type="text" id="cust_bill_address" required="" aria-required="true">
                                 <label for="cust_bill_address" data-error="Required">Street Name</label>
@@ -3649,6 +3647,10 @@
                                     <b>Service Tax : Rs. <span class="stax-amount"></span></b>
                                 </div>
                                 <hr>
+                                <div class="row total-discount-row-bill  bill-summ-row x16">
+                                    <b>Discount : Rs. <span class="discount-amount"></span></b>
+                                </div>
+                                <hr>
                                 <div class="row total-amount-row-bill bill-summ-row x16">
                                     <b>Total Amount : Rs. <span class="total-amount"></span></b>
                                 </div>
@@ -3709,18 +3711,101 @@
                                     <label for="bill_number" data-error="Required">Number</label>
                                 </div>
                             </div>
-                            <div class="row">
-                                &nbsp;&nbsp;&nbsp;<b>Payment Mode :</b>
-                                <div class="input-field select-width" id="bill_payment_mode">
-                                    <select  class="browser-default">
-                                        <option value='' disabled selected>Select Payment Mode</option>
-                                        <option value='PayTM'>PayTM</option>
-                                        <option value='Card'>Card</option>
-                                        <option value='Online'>Online</option>
-                                        <option value='Credit'>Credit</option>
-                                        <option value='Cash'>Cash</option>
-                                    </select>
+                            <div class="row modify-payment-row">
+                                <div class="modify-payment">
+                                    <!--<div class="row button-header">-->
+                                    <!--<button class="waves-effect waves-light btn cg-primary  btn-closebillmod " type="submit" name="action"><i class="fa fa-times"></i>-->
+                                    <!--</button>-->
+                                    <!--</div>-->
+                                    <!--<br>-->
+                                    <div class="row centered-text">
+                                        <h3>Payment History</h3>
+                                    </div>
+                                    <div class="row payment-history">
+                                    </div>
+                                    <br>
+                                    <hr>
+                                    <div class="row centered-text">
+                                        <h3>Payment Summary</h3>
+                                    </div>
+                                    <br>
+                                    <div class="row payment-summary">
+                                        <table class="striped" >
+                                            <tr>
+                                                <td class="centered-text">Total</td><td  class="centered-text">₹&nbsp;&nbsp;<span class="total_amount">0</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="centered-text">Paid</td><td  class="centered-text">₹&nbsp;&nbsp;<span class="total_paid_amount">0</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="centered-text">Pending</td><td  class="centered-text">₹&nbsp;&nbsp;<span class="total_due_amount">0</span></td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                    <br>
+                                    <hr>
+                                    <div class="row centered-text">
+                                        <h3>Add Payment</h3>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6 m6 l3">
+                                            <i class="material-icons prefix">credit_card</i>
+                                            <input id="payment_amount_bill" type="number" class="validate" required="" aria-required="true">
+                                            <label for="payment_amount_bill" data-error="Required">Amount</label>
+                                        </div>
+                                        <div class="col l2 s6 m6 centered-text pending-btn">
+                                            <input type="checkbox" id="bill_amount_pending"/><label for="bill_amount_pending">Pending Amount</label>'
+                                        </div>
+                                        <div class="input-field col s12 m12 l2">
+                                            <select id="payment_medium_bill" class="browser-default">
+                                                <option value="" disabled selected>Payment Medium</option>
+                                                <option value="Cash">Cash</option>
+                                                <option value="Card">Card</option>
+                                                <option value="Cheque">Cheque</option>
+                                                <option value="Online">Online</option>
+                                                <option value="PayTM">PayTM</option>
+                                                <option value="Razorpay">Razorpay</option>
+                                                <option value="Instamojo">Instamojo</option>
+                                                <option value="Credit">Credit</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-field col s12 m12 l3">
+                                            <select id="payment_collector_bill" class="browser-default">
+                                                <option value="" disabled selected>Payment Collected By</option>
+                                                <option value="ClickGarage">ClickGarage</option>
+                                                <option value="ClickGarage Credit">ClickGarage Credit</option>
+                                                <option value="ClickGarage UC">ClickGarage (UC)</option>
+                                                <option value="ClickGarage HJ">ClickGarage (HJ)</option>
+                                                <option value="Workshop">Workshop</option>
+                                            </select>
+                                        </div>
+                                        <div class="col l2 s12 m12 centered-text">
+                                            <button class=" centered-text waves-effect waves-light btn-large cg-primary btn-addpayment page-wide" type="submit" name="action">Add
+                                                <i class="material-icons right">add</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!--<div class="row">-->
+                                    <!--<div class="col l12 s12 m12 centered-text">-->
+                                    <!--<button class="waves-effect waves-light btn-large cg-primary btn-addpayment page-wide" type="submit" name="action">Add Payment-->
+                                    <!--<i class="material-icons right">send</i>-->
+                                    <!--</button>-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                    <br>
                                 </div>
+                                <!--&nbsp;&nbsp;&nbsp;<b>Payment Mode :</b>-->
+                                <!--<div class="input-field select-width" id="bill_payment_mode">-->
+                                <!--<select  class="browser-default">-->
+                                <!--<option value='' disabled selected>Select Payment Mode</option>-->
+                                <!--<option value='PayTM'>PayTM</option>-->
+                                <!--<option value='Card'>Card</option>-->
+                                <!--<option value='Online'>Online</option>-->
+                                <!--<option value='Credit'>Credit</option>-->
+                                <!--<option value='Cash'>Cash</option>-->
+                                <!--</select>-->
+                                <!--</div>-->
                             </div>
                             <br>
                             <div class="row">
@@ -3730,11 +3815,11 @@
                                     <label for="bill_due_date" data-error="required">Due Date</label>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col l12 s12 m12 centered-text">
-                                    <input type="checkbox" id="bill_amount_paid"/><label for="bill_amount_paid">Amount Paid</label>'
-                                </div>
-                            </div>
+                            <!--<div class="row">-->
+                            <!--<div class="col l12 s12 m12 centered-text">-->
+                            <!--<input type="checkbox" id="bill_amount_paid"/><label for="bill_amount_paid">Amount Paid</label>'-->
+                            <!--</div>-->
+                            <!--</div>-->
                             <br>
                             <div class="row">
                                 <div class="col l12 s12 m12 centered-text">
@@ -4162,6 +4247,18 @@
         </div>
     </div>
 </section>
+
+ <div class="fixed-action-btn horizontal click-to-toggle invisible" id="god-view">
+    <a class="btn-floating btn-large red">
+      <i class="material-icons">menu</i>
+    </a>
+    <ul>
+      <li><a class="btn-floating red view-change" data-class="admin"><i class="material-icons">account_circle</i></a>&nbsp;&nbsp;Admin</li>
+      <li><a class="btn-floating yellow darken-1 view-change"  data-class="staff"><i class="material-icons">account_circle</i></a>&nbsp;&nbsp;Staff</li>
+      <li><a class="btn-floating green view-change" data-class="b2b"><i class="material-icons">account_circle</i></a>&nbsp;&nbsp;B2B</li>
+      <li><a class="btn-floating blue view-change" data-class="engineer"><i class="material-icons">account_circle</i></a>&nbsp;&nbsp;Engineer</li>
+    </ul>
+  </div>
 
 <section id="cover" class="invisible"></section>
 <section id="cover2" class="invisible"></section>
