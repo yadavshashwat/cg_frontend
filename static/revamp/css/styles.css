@@ -59,9 +59,6 @@
 .icon-cg-exterior:before {
   content: "\64";
 }
-.icon-cg-battery:before {
-  content: "\65";
-}
 .icon-cg-car-standard:before {
   content: "\66";
 }
@@ -217,4 +214,10 @@
 }
 .icon-cg-driver2:before {
   content: "\37";
+}
+.icon-battery:before {
+  content: "\65";
+}
+.icon-credit-card:before {
+  content: "\38";
 }

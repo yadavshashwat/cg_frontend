@@ -35,44 +35,50 @@ $(document).ready(function(){
 
 // Navbar Colour - white transition
 
-// $(window).load(function() {
-//     var viewportWidth = $(window).width();
-//     if (viewportWidth <= 600) {
-//         $('.navbar .nav-wrapper').removeClass('navbar-trans').addClass('navbar-custom');
-//         $('.navbar .nav-wrapper .logo-trans').removeClass('visible').addClass('invisible');
-//         $('.navbar .nav-wrapper .logo-color').removeClass('invisible').addClass('visible');
-//
-//     }else if (viewportWidth <= 992){
-//         $('.navbar .nav-wrapper').removeClass('navbar-trans').addClass('navbar-custom');
-//         $('.navbar .nav-wrapper .logo-trans').removeClass('visible').addClass('invisible');
-//         $('.navbar .nav-wrapper .logo-color').removeClass('invisible').addClass('visible');
-//     }else{
-//         $('.navbar .nav-wrapper').addClass('navbar-trans').removeClass('navbar-custom');
-//         $('.navbar .nav-wrapper .logo-trans').addClass('visible').removeClass('invisible');
-//         $('.navbar .nav-wrapper .logo-color').addClass('invisible').removeClass('visible');
-//
-//     }
-//
-// });
-//
-// $(window).resize(function() {
-//     var viewportWidth = $(window).width();
-//     if (viewportWidth <= 600) {
-//         $('.navbar .nav-wrapper').removeClass('navbar-trans').addClass('navbar-custom');
-//         $('.navbar .nav-wrapper .logo-trans').removeClass('visible').addClass('invisible');
-//         $('.navbar .nav-wrapper .logo-color').removeClass('invisible').addClass('visible');
-//     }else if (viewportWidth <= 992){
-//         $('.navbar .nav-wrapper').removeClass('navbar-trans').addClass('navbar-custom');
-//         $('.navbar .nav-wrapper .logo-trans').removeClass('visible').addClass('invisible');
-//         $('.navbar .nav-wrapper .logo-color').removeClass('invisible').addClass('visible');
-//
-//     }else{
-//         $('.navbar .nav-wrapper').addClass('navbar-trans').removeClass('navbar-custom');
-//         $('.navbar .nav-wrapper .logo-trans').addClass('visible').removeClass('invisible');
-//         $('.navbar .nav-wrapper .logo-color').addClass('invisible').removeClass('visible');
-//
-//     }
-// });
+$(window).load(function() {
+    var viewportWidth = $(window).width();
+    if (viewportWidth <= 600) {
+        $('#howitworks .display-block').removeClass('display-block').addClass('display-inline-flex')
+        $('#howitworks .line-horizontal').removeClass('line-horizontal').addClass('line-vertical')
+        $('#howitworks .fa-chevron-right').removeClass('fa-chevron-right').addClass('fa-chevron-down')
+        $('#howitworks .horizontal_dotted_line').removeClass('horizontal_dotted_line').addClass('vertical_dotted_line')
+
+    }else if (viewportWidth <= 992){
+        $('#howitworks .display-block').removeClass('display-block').addClass('display-inline-flex')
+        $('#howitworks .line-horizontal').removeClass('line-horizontal').addClass('line-vertical')
+        $('#howitworks .fa-chevron-right').removeClass('fa-chevron-right').addClass('fa-chevron-down')
+        $('#howitworks .horizontal_dotted_line').removeClass('horizontal_dotted_line').addClass('vertical_dotted_line')
+    }else{
+        $('#howitworks .display-inline-flex').removeClass('display-inline-flex').addClass('display-block')
+        $('#howitworks .line-vertical').removeClass('line-vertical').addClass('line-horizontal')
+        $('#howitworks .fa-chevron-down').removeClass('fa-chevron-down').addClass('fa-chevron-right')
+        $('#howitworks .vertical_dotted_line').removeClass('vertical_dotted_line').addClass('horizontal_dotted_line')
+
+    }
+
+});
+
+$(window).resize(function() {
+    var viewportWidth = $(window).width();
+   if (viewportWidth <= 600) {
+        $('#howitworks .display-block').removeClass('display-block').addClass('display-inline-flex')
+        $('#howitworks .line-horizontal').removeClass('line-horizontal').addClass('line-vertical')
+        $('#howitworks .fa-chevron-right').removeClass('fa-chevron-right').addClass('fa-chevron-down')
+        $('#howitworks .horizontal_dotted_line').removeClass('horizontal_dotted_line').addClass('vertical_dotted_line')
+
+    }else if (viewportWidth <= 992){
+        $('#howitworks .display-block').removeClass('display-block').addClass('display-inline-flex')
+        $('#howitworks .line-horizontal').removeClass('line-horizontal').addClass('line-vertical')
+        $('#howitworks .fa-chevron-right').removeClass('fa-chevron-right').addClass('fa-chevron-down')
+        $('#howitworks .horizontal_dotted_line').removeClass('horizontal_dotted_line').addClass('vertical_dotted_line')
+    }else{
+        $('#howitworks .display-inline-flex').removeClass('display-inline-flex').addClass('display-block')
+        $('#howitworks .line-vertical').removeClass('line-vertical').addClass('line-horizontal')
+        $('#howitworks .fa-chevron-down').removeClass('fa-chevron-down').addClass('fa-chevron-right')
+        $('#howitworks .vertical_dotted_line').removeClass('vertical_dotted_line').addClass('horizontal_dotted_line')
+
+    }
+});
 
 $(document).ready(function(){
     var viewportWidth = $(window).width();
@@ -155,31 +161,57 @@ $(document).ready(function(){
 
     if (vehtype == "Car" && service == "CarCare"){
         var PAGEHEADER = "BEST CAR CLEANING SERVICES IN  DELHI NCR"
-        var FEATURES = "3M/Meguiar products&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Expert cleaners&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;doorstep service"
+        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Interior & Boot Vaccuming</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Seats Dusting</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Exterior Shampoo</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;3M/Meguiar Products used</li></ul></div></div>"
+
+        // var FEATURES = "3M/Meguiar products&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Expert cleaners&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;doorstep service"
+        $('.car-service').show()
     }else if(vehtype =="Car" && service == "Servicing"){
         var PAGEHEADER = "BEST CAR SERVICING WORKSHOP IN DELHI NCR"
-        var FEATURES = "Lowest price - Upfront estimate&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics"
+        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;40 point check-up</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Spares replacement</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Pick-up & drop</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Free washing</li></ul></div></div>"
+        $('.car-service').show()
+
+        // var FEATURES = "Lowest price - Upfront estimate&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics"
     }else if(vehtype =="Car" && service == "Repairing"){
         var PAGEHEADER = " TOP QUALITY CAR REPAIRS IN DELHI NCR"
-        var FEATURES = "OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop"
+        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;40 point check-up</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Expert mechanics</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Upfront estimates </li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Pick-up & drop</li></ul></div></div>"
+        // var FEATURES = "OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop"
+        $('.car-service').show()
+
     }else if(vehtype =="Car" && service == "Denting"){
         var PAGEHEADER = "BEST IN CLASS DENTING/ PAINTING FACILITY IN DELHI NCR"
-        var FEATURES = "Upto 60% less than market&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;No paint mismatch with 1 year warranty&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Dust free paint booths"
+        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;High Quality paint only!</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Lowest prices</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;1 year warranty </li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Pick-up & drop</li></ul></div></div>"
+
+        // var FEATURES = "Upto 60% less than market&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;No paint mismatch with 1 year warranty&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Dust free paint booths"
+        $('.car-service').show()
+
     }else if(vehtype =="Bike" && service == "Repairing"){
         var PAGEHEADER = "DOORSTEP BIKE REPAIRS. NOW IN GURUGRAM"
-        var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Top quality repairs"
-    }else if(vehtype =="Bike" && service == "Servicing"){
+        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Doorstep service</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;40 point check-up</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Spares replacement</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Expert mechanics</li></ul></div></div>"
 
+        // var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Top quality repairs"
+        $('.bike-service').show()
+
+    }else if(vehtype =="Bike" && service == "Servicing"){
+        $('.bike-service').show()
         if(source_type == "Mahindra"){
+        $('.bike-service').show()
             var PAGEHEADER = "MAHINDRA AUTHORIZED DOORSTEP BIKE SERVICING. NOW IN GURUGRAM"
-            var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Mahindra Authorized Service"
+            // var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Mahindra Authorized Service"
+        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Doorstep service</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;40 point check-up</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Spares replacement</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Expert mechanics</li></ul></div></div>"
+
         }else{
             var PAGEHEADER = "DOORSTEP BIKE SERVICING. NOW IN GURUGRAM"
-            var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;From Rs. 249 only!"
+            // var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;From Rs. 249 only!"
+           var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Doorstep service</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;40 point check-up</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Spares replacement</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Expert mechanics</li></ul></div></div>"
+
         }
+
     }else{
+        $('.car-service').show()
         var PAGEHEADER = "CAR & BIKE CARE <br> MADE EASY"
-        var FEATURES = "One Stop Shop&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Doorstep Service&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Instant Cost Estimate"
+        // var FEATURES = "One Stop Shop&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Doorstep Service&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Instant Cost Estimate"
+           var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;One Stop Shop</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Doorstep Service</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Instant Cost Estimate</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Expert mechanics</li></ul></div></div>"
+
     }
     $('#home span.header').html(PAGEHEADER);
     $('#home span.features').html(FEATURES);
@@ -236,31 +268,31 @@ var Global = {
         
         $('.learn-more-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()},
                 500
             );
         });
          $('.partners-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#features').outerHeight()},
                 500
             );
         });
         $('.testi-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()},
                 500
             );
         });
         $('.brands-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()},
                 500
             );
         });
         $('.contact-us-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()+$('#brands').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()+$('#brands').outerHeight()},
                 500
             );
         });
@@ -381,6 +413,8 @@ var Global = {
             // $('#locality').removeClass('invalid')
         // });
 
+
+
        $('#home .home-form .proceed button').click(function(event){
            // var make = $('#brand-select').find('.active span').text();
            // var model = $('#vehicle-select').find('.active span').text();
@@ -430,6 +464,47 @@ var Global = {
 
 
        });
+
+
+        $('#testimonials .image-testi').click(function(){
+            $('#testimonials .image-testi img').removeClass('selected')
+            // $(this).find('img').animate({top:'100px',left:'50px'}, 500);
+            $(this).find('img').addClass('selected')
+
+            testi = $(this).attr('data-class')
+            // console.log(testi)
+            $('#testimonials .testes').hide()
+           alfa =  $('#testimonials .testis').find("[data-class='" + testi + "']")
+            // console.log(alfa)
+            alfa.show()
+        });
+        TESTI_COUNTER = 2
+        window.onload = function start_testi() {
+            testi();
+        }
+        function testi() {
+            window.setInterval(function () {
+
+                $('#testimonials .image-testi img').removeClass('selected')
+                // $(this).find('img').animate({top:'100px',left:'50px'}, 500);
+                $('#testimonials .image-testi .testiimage-'+TESTI_COUNTER).addClass('selected')
+
+                testi =$('#testimonials .image-testi .testiimage-'+TESTI_COUNTER).closest('.image-testi').attr('data-class')
+                // console.log(testi)
+                $('#testimonials .testes').hide()
+               alfa =  $('#testimonials .testis').find("[data-class='" + testi + "']")
+                // console.log(alfa)
+                alfa.show()
+                if (TESTI_COUNTER == 3){
+                    TESTI_COUNTER = 1
+                }else{
+                    TESTI_COUNTER = TESTI_COUNTER + 1
+                }
+                    // console.log(TESTI_COUNTER)
+                }, 3000); // repeat forever, polling every 3 seconds
+        }
+
+
 
         $('#home .home-form .submit button').click(function(event){
           var make = $('#brand-select').find('.selectize-input').find('div').attr('data-value');

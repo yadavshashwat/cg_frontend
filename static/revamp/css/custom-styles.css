@@ -116,3 +116,12 @@
 .autocomplete-content{position:absolute;}
 input:not([type])+label:after,input[type=text]+label:after,input[type=password]+label:after,input[type=email]+label:after,input[type=url]+label:after,input[type=time]+label:after,input[type=date]+label:after,input[type=datetime]+label:after,input[type=datetime-local]+label:after,input[type=tel]+label:after,input[type=number]+label:after,input[type=search]+label:after,textarea.materialize-textarea+label:after{display:block;content:"";position:absolute;top:0px!important;right:1px!important;opacity:0;transition:.2s opacity ease-out, .2s color ease-out}
 #sidenav-overlay{position:fixed;top:0;left:0;right:0;height:120vh;background-color:rgba(0,0,0,0.5);z-index:40;will-change:opacity;}
+.display-block{
+    display: block;
+}
+.display-inline{
+    display: inline;
+}
+.display-inline-flex{
+    display: inline-flex;
+}
