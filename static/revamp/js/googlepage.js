@@ -268,7 +268,7 @@ var Global = {
         
         $('.learn-more-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()},
                 500
             );
         });
@@ -286,13 +286,13 @@ var Global = {
         });
         $('.brands-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#howitworks').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()},
                 500
             );
         });
         $('.contact-us-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()+$('#brands').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#howitworks').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()+$('#brands').outerHeight()},
                 500
             );
         });

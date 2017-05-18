@@ -234,7 +234,16 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 #background img{width:100%;}
 #home.background-color-home{background:rgba(74,20,140,0.50)!important;}
 #home{background:rgba(74,20,140,0.65);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5F85C5C,endColorstr=#E5F85C5C)";filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5F85C5C,endColorstr=#E5F85C5C);zoom:1;min-height:inherit;}
+
 #home .hero-text{padding-top:25%;}
+
+@media(max-width: 992px) {
+    #home .hero-text h1{font-size:30px;letter-spacing:2px;line-height:40px;margin-bottom:7px;color:#FFFFFF;text-transform:uppercase;}
+    #home .hero-text{padding-top:10%;}
+}
+
+
+
 #home .hero-text h1{font-size:40px;letter-spacing:2px;line-height:40px;margin-bottom:7px;color:#FFFFFF;text-transform:uppercase;}
 #home .hero-text h4{color:#FFFFFF;text-transform:uppercase;}
 #home .hero-text h3{font-size:15px;letter-spacing:2px;line-height:10px;margin-bottom:5px;color:#FFFFFF;text-transform:uppercase;}
@@ -286,14 +295,18 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 
 #home .list-features-header .lists li{text-transform: None!important; margin-bottom: 15px;}
 
+@media (max-width: 992px){
+    #home .list-features-header .lists{text-align:left; font-size:16px}
+    #home .list-features-header .lists li{text-transform: None!important; margin-bottom: 5px;}
+}
 #home .car-image-header img{
     height:150px;
     /*width: 60%;*/
-    margin: 25px;
+    margin: 10px;
 }
 #home .bike-image-header img{
     height:150px;
-    margin: 25px;
+    margin: 10px;
 }
 
 
@@ -509,6 +522,33 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
     width: 10%;
     text-align: center;
 }
+#contact-bar{
+    background: url('../img/Backgrounds/motorrepair.jpg');
+
+    /*opacity: 0.5;*/
+}
+#contact-bar .purple-overlay{background:rgba(74,20,140,0.80);padding:2% 0%;-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7)";filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7);zoom:1;}
+
+
+#contact-bar .header-row{
+    /*font-size: 26px;*/
+    color:#FFF;
+    opacity: 1;
+}
+#contact-bar .time-details{
+    /*font-size: 26px;*/
+    color:#FFF;
+    font-size: 20px;
+    opacity: 1;
+
+}
+#contact-bar .contact-details{
+    /*font-size: 26px;*/
+    color:grey;
+    opacity: 1;
+
+}
+
 
 #brands{background:#FFF;}
 #brands .brand-section{background-color:#FFF;}
@@ -1319,6 +1359,11 @@ width: 100%;
 
 
 .static-page #faq{
+    font-size: 20px!important;
+}
+
+.static-page #faq p{
+     color:black;
     font-size: 20px!important;
 }
 
