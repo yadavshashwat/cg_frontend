@@ -292,7 +292,7 @@ var Global = {
         });
         $('.contact-us-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#howitworks').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()+$('#brands').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#numbers-section').outerHeight()+$('#howitworks').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()+$('#brands').outerHeight()},
                 500
             );
         });
