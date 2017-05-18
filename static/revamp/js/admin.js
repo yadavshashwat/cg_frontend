@@ -2863,6 +2863,78 @@ var Global = {
             row_to_copy.appendTo(container_parent)
         })
 
+        $('#bill-detail #cust_bill_locality').on('keyup',function(e,event,data){
+            var code = (e.keyCode || e.which);
+            // do nothing if it's an arrow key
+            // if (code ==13 || code==0){
+            //     $(this).blur();
+            //     return;
+            // }else
+            if(code == 37 || code == 38 || code == 39 || code == 40 || code == 13) {
+                return;
+            }
+            var locality = $(this).val();
+            Commons.ajaxData('get_location', {location_id: locality}, "get", _this, _this.loadLocation);
+            $('#locality').removeClass('invalid')
+        });
+        // cust_bill_locality
+        // $('#cust_bill_locality').blur(function(){
+        //      $(this).closest('.input-field').find('ul').hide()
+        // });
+        $('#bill-detail #cust_bill_number').on('keyup',function(e,event,data){
+            // cust_number = $('#bill-detail #cust_bill_number').val()
+            var cust_number = $(this).val();
+            var code = (e.keyCode || e.which);
+            // do nothing if it's an arrow key
+            $('#cust_bill_name').val('')
+            $('#cust_bill_address').val('')
+            $('#cust_bill_locality').val('')
+            $('#cust_bill_city').val('')
+            if(code == 37 || code == 38 || code == 39 || code == 40 || code == 13) {
+                return;
+            }
+            Commons.ajaxData('fetch_all_users', {number: cust_number}, "get", _this, _this.loadSearchUser);
+            $('#cust_bill_number').removeClass('invalid')
+
+        });
+
+        $('#bill-detail #cust_bill_number').change(function() {
+            // $('#bill-detail #cust_bill_number').blur(function () {
+            console.log("Triggerred")
+            setTimeout(function(){
+                var cust_number = $('#bill-detail #cust_bill_number').val();
+                // var cust_number = $(this).val();
+                console.log(cust_number)
+                Commons.ajaxData('fetch_all_users', {number2: cust_number}, "get", _this, _this.loadUserBilldata);
+
+            },1000);
+                //      // $('#cust_bill_number').removeClass('invalid')
+            });
+        // });                // console.log(cust_number)
+
+
+        $('#bill-detail #cust_bill_number').on('keyup',function(e,event,data){
+            var code = (e.keyCode || e.which);
+            // console.log(code)
+            // alfa = $(this).find('li:hover')
+            // do nothing if it's an arrow key
+            if(code == 13) {
+                var cust_number = $(this).val();
+                // console.log('Enter')
+                Commons.ajaxData('fetch_all_users', {number2: cust_number}, "get", _this, _this.loadUserBilldata);
+                $('#cust_bill_number').removeClass('invalid')
+                $('#bill-detail #cust_bill_number').blur()
+                 $(this).closest('.input-field').find('ul').hide()
+            }else if(code == 37 || code == 38 || code == 39 || code == 40){
+                var cust_number = $(this).closest('.input-field').find('li.active').text();
+                Commons.ajaxData('fetch_all_users', {number2: cust_number}, "get", _this, _this.loadUserBilldata);
+                $('#cust_bill_number').removeClass('invalid')
+            }else{
+                return;
+            }
+        });
+
+
         $('#bill-detail #bill-table').on('click','.delete-bill-item' ,function(){
             $(this).closest('tr').remove()
             TOTAL_PRICE_BILL_ADMIN = 0
@@ -3573,7 +3645,11 @@ var Global = {
         $('#locality').on('keyup',function(e,event,data){
             var code = (e.keyCode || e.which);
             // do nothing if it's an arrow key
-            if(code == 37 || code == 38 || code == 39 || code == 40) {
+            // if(code==13){
+            //     $(this).blur;
+            //     return;
+            // }else
+            if(code == 37 || code == 38 || code == 39 || code == 40 || code == 13) {
                 return;
             }
             var locality = $(this).val();
@@ -3581,6 +3657,11 @@ var Global = {
             $('#locality').removeClass('invalid')
         });
 
+        // $('#locality').focusout(function(){
+        //      $(this).closest('.input-field').find('ul').hide()
+        // });
+
+        // cust_bill_locality
         // -- Load Make
         var callbrands =function(){
             car_box =  document.getElementById('Carnew');
@@ -7743,6 +7824,34 @@ var Global = {
     loadSendBill:function(data){
         alert('Bill Sent')
     },
+    loadSearchUser:function(data){
+        var container = $('input.autocomplete');
+        var users = {};
+        container.autocomplete({
+            data : users
+        })
+        // var locations = {};
+
+        $.each(data, function(ix, val){
+            users[val.phone] = null
+        });
+        // console.log(locations)
+        container.autocomplete({
+            data : users
+        })
+        Materialize.updateTextFields();
+
+    },
+    loadUserBilldata:function(data){
+
+        $.each(data, function(ix, val){
+            $('#cust_bill_name').val(val.first_name + ' '+ val.last_name)
+            $('#cust_bill_address').val(val.user_address)
+            $('#cust_bill_locality').val(val.user_locality)
+            $('#cust_bill_city').val(val.user_city)
+        });
+        Materialize.updateTextFields();
+    }
 
 
 };

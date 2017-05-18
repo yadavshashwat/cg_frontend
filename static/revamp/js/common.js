@@ -9,7 +9,7 @@ var Commons = {
             callType = type
         }
 
-        console.log(name)
+        // console.log(name)
         if(name){
             if(loadingSelector){
                 $(loadingSelector).show();
@@ -25,7 +25,7 @@ var Commons = {
                     if(loadingSelector){
                         $(loadingSelector).hide();
                     }
-                    console.log(res)
+                    // console.log(res)
                     if(res && res.status){
                         bind(success_cb, bindObj, [res.result])
                     }else{

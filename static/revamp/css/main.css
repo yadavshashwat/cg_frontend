@@ -549,6 +549,25 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 
 }
 
+#numbers{
+    background:transparent;
+}
+#numbers .number-section{
+    /*padding:5%;*/
+}
+
+#numbers .number-section .number{
+    font-size: 50px;
+    font-weight: 700;
+    color: #FFF;
+}
+#numbers .number-section .text{
+    font-size: 35px;
+    font-weight: 500;
+    color: black;
+}
+
+#numbers .red-overlay{background:rgba(248, 93, 93,0.70);padding:2% 0% 2% 0%;-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7)";filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7);zoom:1;}
 
 #brands{background:#FFF;}
 #brands .brand-section{background-color:#FFF;}
