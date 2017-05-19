@@ -996,11 +996,11 @@ var Global = {
             obj = {}
             if (ALL_JOBS ==''){
                 ALL_JOBS = val.job_name;
-                obj = {'Job':val.job_name,'Price':val.total_price}
+                obj = {'Job':val.job_name,'Price':val.total_price ,"Category":val.service_cat}
                 ALL_JOBS_LIST.push(obj)
             }else{
                 ALL_JOBS = ALL_JOBS +', '+val.job_name;
-                obj = {'Job':val.job_name,'Price':val.total_price}
+                obj = {'Job':val.job_name,'Price':val.total_price,"Category":val.service_cat}
                 ALL_JOBS_LIST.push(obj)
             }
 

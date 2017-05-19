@@ -1615,7 +1615,7 @@ var Global = {
                 status_id: status_n, send_sms : SEND_SMS
             }, "get", _this, _this.loadCustomerStatus,null, '.loading-pane');
 
-            if (status_n == "Confirmed"){
+            if (status_n == "Acknowledged"){
                 for (i = 1; i < 2; i++) {
                     $('.status-change-'+i ).addClass('selected')
                 }
@@ -1684,6 +1684,10 @@ var Global = {
                     $('.status-change-'+i ).removeClass('selected')
                 }
                 $('.status-change-10').addClass('selected')
+            }else if(status_n == "Confirmed"){
+                for (i = 1; i < 11; i++) {
+                    $('.status-change-'+i ).removeClass('selected')
+                }
             }
             // data_id = $('#customer-detail #booking_id').attr('booking_data_id')
 
@@ -3513,6 +3517,7 @@ var Global = {
 //    New Booking
 // =====================================================================================
         var opennewbookings = function(){
+
             $('.navbar li').removeClass('selected')
             $('.navbar .new-booking-button').addClass('selected')
             // console.log('check')
@@ -3527,6 +3532,7 @@ var Global = {
             $('#expense-details').hide();
             $('#bill-details').hide()
             $('#settlement-details').hide()
+            callbrands()
 
 
             container = $('#new-booking .source-list')
@@ -3579,7 +3585,7 @@ var Global = {
             $('#expense-details').hide()
             $('#bill-details').hide()
             $('#settlement-details').hide()
-
+            callbrands()
 
             container = $('#new-booking .source-list')
             container.html('')
@@ -3679,8 +3685,8 @@ var Global = {
             $('#select-model').html(html)
         }
         $('#new-booking .vehicle-select .veh-type-select').click(callbrands);
-        $('.navbar .new-booking-button').click(callbrands);
-        $('.navbar .new-lead-button').click(callbrands);
+        // $('.navbar .new-booking-button').click(callbrands);
+        // $('.navbar .new-lead-button').click(callbrands);
         // -- Load Model
         $('#select-make').change(function(event,data){
             car_box =  document.getElementById('Carnew');
@@ -5343,11 +5349,23 @@ var Global = {
                 for (i = 0; i < jobLen; i++) {
                     // for (i = 0; i < 2; i++) {
                     html += '<div class="row job-row">'
+
                     html += '<div class="col s9 m9 l9 job-summary-name">'
                     html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name'+i+'"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'" >Job - ' + (i+1) +'</label></div>'
-
-                    // html += val.job_summary[i]['Job']
                     html += '</div>'
+
+                    //
+                    // html += '<div class="col s2 m2 l2 job-summary-pre">'
+                    // html += '<div class="input-field"><input id="job_name'+i+'"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'" >Job - ' + (i+1) +'</label></div>'
+                    // html += '</div>'
+                    //
+                    // html += '<div class="col s2 m2 l2 job-summary-post">'
+                    // html += '<div class="input-field">'
+                    // html += '<i class="material-icons prefix">receipt</i><input id="job_name'+i+'"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'" >Job - ' + (i+1) +'</label></div>'
+                    // html += '</div>'
+
+
+
                     html += '<div class="col s2 m2 l2 job-summary-price">'
                     html += '<div class="input-field"><input id="job_price'+i+'"  type="number" value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'" >Price - ' + (i+1) +'</label></div>'
                     html += '</div>'
@@ -5464,7 +5482,7 @@ var Global = {
                 document.getElementById("payment_collector_bill").disabled = true;
             }
             if (val.booking_flag){
-                if (val.status == "Confirmed"){
+                if (val.status == "Acknowledged"){
                     for (i = 1; i < 2; i++) {
                         $('.status-change-'+i ).addClass('selected')
                     }
@@ -5527,6 +5545,10 @@ var Global = {
                     }
                     $('.status-change-9').addClass('selected')
                     $('.status-change-10').removeClass('selected')
+                }else if(val.status == "Confirmed"){
+                    for (i = 1; i < 11; i++) {
+                        $('.status-change-'+i ).removeClass('selected')
+                    }
                 }
             }else{
                 if (val.status == "Lead"){
@@ -6545,7 +6567,7 @@ var Global = {
 
             if (ALL_JOBS_NEW_BOOKING ==''){
                 ALL_JOBS_NEW_BOOKING = val.job_name;
-                job_obj = {"Job":val.job_name,"Price":val.total_price}
+                job_obj = {"Job":val.job_name,"Price":val.total_price,"Category":val.service_cat}
                 ALL_JOBS_NEW_BOOKING_LIST.push(job_obj)
             }else{
                 ALL_JOBS_NEW_BOOKING = ALL_JOBS_NEW_BOOKING +', '+val.job_name;
@@ -7054,7 +7076,7 @@ var Global = {
         container2.html(SOURCE_TABLE_2)
 
         STATUS_LEADS = ["Lead","Cold","Warm","Cancelled"]
-        STATUS_BOOKINGS = ["Confirmed","Assigned","Engineer Left","Reached Workshop","Estimate Shared","Job Completed","Feedback Taken","Cancelled","Escalation"]
+        STATUS_BOOKINGS = ["Confirmed","Acknowledged","Assigned","Engineer Left","Reached Workshop","Estimate Shared","Job Completed","Feedback Taken","Cancelled","Escalation"]
 
         container3 = $('#analytics .status-data-row').find('tbody.status-leads')
         container3.html('')
