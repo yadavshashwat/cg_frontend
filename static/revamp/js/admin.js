@@ -2881,6 +2881,7 @@ var Global = {
         // $('#cust_bill_locality').blur(function(){
         //      $(this).closest('.input-field').find('ul').hide()
         // });
+
         $('#bill-detail #cust_bill_number').on('keyup',function(e,event,data){
             // cust_number = $('#bill-detail #cust_bill_number').val()
             var cust_number = $(this).val();
@@ -2895,7 +2896,6 @@ var Global = {
             }
             Commons.ajaxData('fetch_all_users', {number: cust_number}, "get", _this, _this.loadSearchUser);
             $('#cust_bill_number').removeClass('invalid')
-
         });
 
         $('#bill-detail #cust_bill_number').change(function() {
@@ -3772,6 +3772,51 @@ var Global = {
             calculate_items()
         });
 
+        $('#new-booking #telephone').on('keyup',function(e,event,data){
+            // cust_number = $('#bill-detail #cust_bill_number').val()
+            var cust_number = $(this).val();
+            var code = (e.keyCode || e.which);
+            if(code == 37 || code == 38 || code == 39 || code == 40 || code == 13) {
+                return;
+            }
+            Commons.ajaxData('fetch_all_users', {number: cust_number}, "get", _this, _this.loadSearchUser);
+            $('#telephone').removeClass('invalid')
+        });
+
+        $('#new-booking #telephone').change(function() {
+            // $('#bill-detail #cust_bill_number').blur(function () {
+            console.log("Triggerred")
+            setTimeout(function(){
+                var cust_number = $('#new-booking #telephone').val();
+                // var cust_number = $(this).val();
+                console.log(cust_number)
+                Commons.ajaxData('fetch_all_users', {number2: cust_number}, "get", _this, _this.loadUserLeaddata);
+
+            },100);
+                //      // $('#cust_bill_number').removeClass('invalid')
+            });
+            $('#new-booking #telephone').on('keyup',function(e,event,data){
+            var code = (e.keyCode || e.which);
+            // console.log(code)
+            // alfa = $(this).find('li:hover')
+            // do nothing if it's an arrow key
+            if(code == 13) {
+                var cust_number = $(this).val();
+                // console.log('Enter')
+                Commons.ajaxData('fetch_all_users', {number2: cust_number}, "get", _this, _this.loadUserLeaddata);
+                $('#telephone').removeClass('invalid')
+                $('#new-booking #telephone').blur()
+                 $(this).closest('.input-field').find('ul').hide()
+            }else if(code == 37 || code == 38 || code == 39 || code == 40){
+                var cust_number = $(this).closest('.input-field').find('li.active').text();
+                Commons.ajaxData('fetch_all_users', {number2: cust_number}, "get", _this, _this.loadUserLeaddata);
+                $('#telephone').removeClass('invalid')
+            }else{
+                return;
+            }
+        });
+
+        
         $('#new-booking .btn-send-booking').click(function () {
             car_box =  document.getElementById('Carnew');
             bike_box =  document.getElementById('Bikenew');
@@ -7856,8 +7901,19 @@ var Global = {
             $('#cust_bill_city').val(val.user_city)
         });
         Materialize.updateTextFields();
-    }
+    },
+    loadUserLeaddata:function(data){
 
+        $.each(data, function(ix, val){
+            $('#name').val(val.first_name + ' '+ val.last_name)
+            $('#address').val(val.user_address)
+            $('#locality').val(val.user_locality)
+            $('#city').val(val.user_city)
+            $('#email').val(val.email_primary)
+
+        });
+        Materialize.updateTextFields();
+    },
 
 };
 
