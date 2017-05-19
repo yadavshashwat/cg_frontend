@@ -3172,7 +3172,8 @@ var Global = {
                 error = 1
                 $('#bill-detail #cust_bill_name').addClass("invalid");
             }
-            if(cust_number != "" && (cust_number > 9999999999 || cust_number < 1000000000 )){
+            if(cust_number != "" && (cust_number > 9999999999 || cust_number < 1000000000 || cust_number.length != 10)){
+                console.log(cust_number.legth)
                 error = 1
                 $('#bill-detail #cust_bill_number').addClass("invalid");
             }
@@ -3855,7 +3856,7 @@ var Global = {
                 // console.log('5')
 
             }
-            if(number <= 100000000 || number >= 9999999999){
+            if(number <= 100000000 || number >= 9999999999 || number == "" || number.length != 10){
                 $('#telephone').addClass("invalid");
                 error = 1;
                 // console.log('6')
@@ -7169,7 +7170,11 @@ var Global = {
             }else{
                 html += '											<td class="centered-text" >Pre-Invoice</td>';
             }
+            if(val.owner == "CG Receipt"){
+            html += '											<td class="centered-text" >CG Receipt</td>';
+            }else{
             html += '											<td class="centered-text" >'+val.agent_name+', '+val.state+'</td>';
+            }
             if (val.booking_data_id == ""){
                 html += '											<td class="" >#Job: NA <br> '+'#Reg: '+val.reg_number+'</td>';
             }else{

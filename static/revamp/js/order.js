@@ -750,7 +750,7 @@ var Global = {
                 $('#city').find('input').addClass("error-border");
                 error = 1;
             }
-            if(number <= 100000000 || number >= 9999999999){
+            if(number <= 100000000 || number >= 9999999999 || number == "" || number.length != 10){
                 $('#telephone').addClass("invalid");
                 error = 1;
             }
@@ -801,7 +801,7 @@ var Global = {
         $('#locality').on('keyup',function(e,event,data){
             var code = (e.keyCode || e.which);
             // do nothing if it's an arrow key
-            if(code == 37 || code == 38 || code == 39 || code == 40) {
+            if(code == 37 || code == 38 || code == 39 || code == 40 || code == 13) {
                 return;
             }
             var locality = $(this).val();

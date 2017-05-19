@@ -166,7 +166,7 @@ var Login = {
             var number = $('#telephone_login').val();
 
             error = 0;
-            if (number.length < 10) {
+            if (number.length != 10) {
                 $('#telephone_login').addClass("invalid");
                 error = 1;
             }
