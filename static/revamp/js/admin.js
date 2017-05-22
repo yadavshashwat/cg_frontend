@@ -3166,31 +3166,43 @@ var Global = {
                 invoice_number: invoice_number,
                 cust_number : cust_number
             }
+            console.log("Point 1")
             // Commons.ajaxData('generate_bill', params, "get", _this, _this.loadBillGenerated,null, '.loading-pane');
             error = 0
             if (bill_owner == ""){
                 error = 1
                 $('#bill_type').find('select').addClass('invalid-select-box')
+            console.log("Point 2")
+
             }
             if(cust_name == ""){
                 error = 1
                 $('#bill-detail #cust_bill_name').addClass("invalid");
+            console.log("Point 3")
+
             }
             if(cust_number != "" && (cust_number > 9999999999 || cust_number < 1000000000 || cust_number.length != 10)){
                 console.log(cust_number.legth)
                 error = 1
                 $('#bill-detail #cust_bill_number').addClass("invalid");
+            console.log("Point 4")
+
             }
             if(agent_name == ""){
                 error = 1
                 $('#bill-detail #agent_bill_name').addClass("invalid");
+            console.log("Point 5")
+
             }
             if(CURRENT_BILL_CART.length == 0){
                 error = 1
+            console.log("Point 6")
+
             }
             if(error == 1){
                 alert('Invalid Data')
             }else{
+                console.log("Point 7")
                 $('html, body').animate({scrollTop : 0},800);
                 // $('.loading-pane').show();
                 var url = Commons.getOrigin()+Commons.URLFromName['generate_bill']+'?'+jQuery.param( params );
