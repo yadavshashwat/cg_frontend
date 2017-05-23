@@ -373,10 +373,17 @@ var Login = {
             $('.admin-page .b2b-button-row').html('')
             $('.admin-page .agent-button-row').show()
             $('#agent_bill_name').val(data['first_name'] +' '+data['last_name'])
-            $('#agent_bill_address').val(data['user_address'] +', '+data['userocality']+', '+data['user_city'])
+            $('#agent_bill_address').val(data['user_address'] +', '+data['user_locality']+', '+data['user_city'])
             $('#agent_bill_vat').val(data['agent_vat'])
             $('#agent_bill_stax').val(data['agent_stax'])
             $('#agent_bill_cin').val(data['agent_cin'])
+            $('#payment_collector_bill').attr('disabled','')
+            $('#payment_collector_bill').val('Workshop')
+
+            // $('#payment_collector').val('Workshop')
+            $('#payment_collector').attr('disabled','')
+            $('#payment_collector').val('Workshop').hide()
+
             if (data['agent_vat'] != ""){
                 VAT_CONSUMABLE_PERCENT = parseFloat(data['vat_consumables'])
                 VAT_LUBE_PERCENT = parseFloat(data['vat_lube'])

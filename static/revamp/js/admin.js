@@ -316,7 +316,17 @@ var Global = {
 // =====================================================================================
 
         $(document).ready(function() {
+            var path = window.location.pathname.split('/')
+            if (path[1] == "ezgarage"){
+                $('.logochange').attr('src','/../../static/revamp/img/EZgarage.png')
+            }else if(path[1]=="adminpanel"){
+                $('.logochange').attr('src','/../../static/revamp/img/ClickGarage/logo-color-small1.png')
+            }else{
+                $('.logochange').attr('src','/../../static/revamp/img/EZgarage.png')
 
+                // console.log(path[1])
+
+            }
             // url_list = window.location.pathname.split('/')
             var sub_page_1      = $('#admin-page-state').attr('sub-page-1')
             var sub_page_2      = $('#admin-page-state').attr('sub-page-2')
@@ -1457,7 +1467,7 @@ var Global = {
             $('#customer-detail .booking-payment-card').show()
             $('#cover2').show()
             $('#payment_amount').val('')
-            $('#payment_collector').val('')
+            // $('#payment_collector').val('')
         });
 
         $('#customer-detail .btn-closebillmod').click(function(){
@@ -3166,48 +3176,48 @@ var Global = {
                 invoice_number: invoice_number,
                 cust_number : cust_number
             }
-            console.log("Point 1")
+            // console.log("Point 1")
             // Commons.ajaxData('generate_bill', params, "get", _this, _this.loadBillGenerated,null, '.loading-pane');
             error = 0
             if (bill_owner == ""){
                 error = 1
                 $('#bill_type').find('select').addClass('invalid-select-box')
-            console.log("Point 2")
+            // console.log("Point 2")
 
             }
             if(cust_name == ""){
                 error = 1
                 $('#bill-detail #cust_bill_name').addClass("invalid");
-            console.log("Point 3")
+            // console.log("Point 3")
 
             }
             if(cust_number != "" && (cust_number > 9999999999 || cust_number < 1000000000 || cust_number.length != 10)){
                 console.log(cust_number.legth)
                 error = 1
                 $('#bill-detail #cust_bill_number').addClass("invalid");
-            console.log("Point 4")
+            // console.log("Point 4")
 
             }
             if(agent_name == ""){
                 error = 1
                 $('#bill-detail #agent_bill_name').addClass("invalid");
-            console.log("Point 5")
+            // console.log("Point 5")
 
             }
             if(CURRENT_BILL_CART.length == 0){
                 error = 1
-            console.log("Point 6")
+            // console.log("Point 6")
 
             }
             if(error == 1){
                 alert('Invalid Data')
             }else{
-                console.log("Point 7")
+                // console.log("Point 7")
                 $('html, body').animate({scrollTop : 0},800);
                 var url = Commons.getOrigin()+Commons.URLFromName['generate_bill']+'?'+jQuery.param( params );
-
-                $('#download_data').attr('action',url)
-                // $('#download').find('iframe').attr('src',url)
+                console.log(url)
+                // $('#download_data').attr('action',url)
+                $('#download').find('iframe').attr('src',url)
             }
         })
 
