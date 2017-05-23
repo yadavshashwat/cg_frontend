@@ -3204,9 +3204,10 @@ var Global = {
             }else{
                 console.log("Point 7")
                 $('html, body').animate({scrollTop : 0},800);
-                // $('.loading-pane').show();
                 var url = Commons.getOrigin()+Commons.URLFromName['generate_bill']+'?'+jQuery.param( params );
-                $('#download').find('iframe').attr('src',url)
+
+                $('#download_data').attr('action',url)
+                // $('#download').find('iframe').attr('src',url)
             }
         })
 
@@ -3215,6 +3216,7 @@ var Global = {
             file_name = $(this).attr('data-class')
             params = {file_name: file_name}
             var url = Commons.getOrigin()+Commons.URLFromName['download_pdf']+'?'+jQuery.param( params )
+
             $('#download').find('iframe').attr('src',url)
 
             // $('.loading-pane').show()

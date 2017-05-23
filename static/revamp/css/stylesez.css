@@ -1,0 +1,223 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "cgfont";
+  src:url("../font/cgfont.eot");
+  src:url("../font/cgfont.eot?#iefix") format("embedded-opentype"),
+    url("../font/cgfont.woff") format("woff"),
+    url("../font/cgfont.ttf") format("truetype"),
+    url("../font/cgfont.svg#cgfont") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "cgfont" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "cgfont" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cg-quality:before {
+  content: "\71";
+}
+.icon-cg-location:before {
+  content: "\72";
+}
+.icon-cg-fair:before {
+  content: "\73";
+}
+.icon-air-conditioner:before {
+  content: "\61";
+}
+.icon-cg-accheck2:before {
+  content: "\62";
+}
+.icon-air-conditioner-2:before {
+  content: "\63";
+}
+.icon-cg-exterior:before {
+  content: "\64";
+}
+.icon-cg-car-standard:before {
+  content: "\66";
+}
+.icon-cg-dryclean:before {
+  content: "\67";
+}
+.icon-car-2:before {
+  content: "\68";
+}
+.icon-car-3:before {
+  content: "\69";
+}
+.icon-car-4:before {
+  content: "\6a";
+}
+.icon-cg-checkup:before {
+  content: "\74";
+}
+.icon-cg-scan:before {
+  content: "\75";
+}
+.icon-car-7:before {
+  content: "\76";
+}
+.icon-mechanic:before {
+  content: "\77";
+}
+.icon-long-checklist:before {
+  content: "\78";
+}
+.icon-cg-key:before {
+  content: "\79";
+}
+.icon-gas-station-1:before {
+  content: "\7a";
+}
+.icon-vehicle:before {
+  content: "\41";
+}
+.icon-cg-accheck:before {
+  content: "\42";
+}
+.icon-cg-repair:before {
+  content: "\43";
+}
+.icon-wrench-1:before {
+  content: "\44";
+}
+.icon-transport-2:before {
+  content: "\45";
+}
+.icon-cg-fuel:before {
+  content: "\46";
+}
+.icon-cg-contract:before {
+  content: "\47";
+}
+.icon-transport-1:before {
+  content: "\48";
+}
+.icon-cg-underbody:before {
+  content: "\49";
+}
+.icon-cg-brake:before {
+  content: "\4a";
+}
+.icon-cg-clutch:before {
+  content: "\4b";
+}
+.icon-towing-a-car:before {
+  content: "\4c";
+}
+.icon-cg-tow:before {
+  content: "\4d";
+}
+.icon-child-seat-for-the-car:before {
+  content: "\4e";
+}
+.icon-cg-alignment:before {
+  content: "\4f";
+}
+.icon-to-do-list:before {
+  content: "\50";
+}
+.icon-carwash:before {
+  content: "\51";
+}
+.icon-cg-wash:before {
+  content: "\52";
+}
+.icon-cg-tyre2:before {
+  content: "\53";
+}
+.icon-rim:before {
+  content: "\54";
+}
+.icon-car-contract2:before {
+  content: "\55";
+}
+.icon-cg-fork:before {
+  content: "\56";
+}
+.icon-car-1:before {
+  content: "\6b";
+}
+.icon-cg-engine:before {
+  content: "\6c";
+}
+.icon-gearstick:before {
+  content: "\6d";
+}
+.icon-cg-wire:before {
+  content: "\6e";
+}
+.icon-cg-chain:before {
+  content: "\6f";
+}
+.icon-cg-spark:before {
+  content: "\70";
+}
+.icon-cg-car-comp:before {
+  content: "\57";
+}
+.icon-cg-tyre:before {
+  content: "\58";
+}
+.icon-cg-checkup-1:before {
+  content: "\59";
+}
+.icon-cg-bike-standard:before {
+  content: "\5a";
+}
+.icon-noun-796852-cc:before {
+  content: "\30";
+}
+.icon-cg-comfort:before {
+  content: "\31";
+}
+.icon-cg-certificate:before {
+  content: "\32";
+}
+.icon-cg-message:before {
+  content: "\33";
+}
+.icon-cg-driver:before {
+  content: "\34";
+}
+.icon-cg-discount:before {
+  content: "\35";
+}
+.icon-cg-dashboard:before {
+  content: "\36";
+}
+.icon-cg-driver2:before {
+  content: "\37";
+}
+.icon-battery:before {
+  content: "\65";
+}
+.icon-credit-card:before {
+  content: "\38";
+}
