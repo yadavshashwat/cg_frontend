@@ -5,6 +5,10 @@
     background-color:#9c27b0;
 }
 
+.thank{
+    height:100px;
+    line-height: 100px;
+}
 #index-banner img{
     width:100%;
 }
@@ -21,3 +25,4 @@ img{height:150px;width:150px;border-radius:75px}.card-avatar .card-content{text-
 p{margin:15px
 0px}.card-avatar .card-content
 i{font-size:1.5rem}.card-avatar .card-content .card-title{line-height:30px !important}.parallax-container{min-height:200px}footer.page-footer{margin-top:0px !important}
+

@@ -390,6 +390,54 @@ var Global = {
                                             time_stamp      : timestamp}, "get", _this, _this.loadMessaged,null, '.loading-pane');
 
        });
+
+        $('#contact .submit-query-ez').click(function(event){
+           var fname = $('#icon_prefix').val();
+           var number = $('#icon_number').val();
+           var email = $('#icon_email').val();
+           var message = $('#icon_prefix2').val();
+            var error = 0 ;
+
+            // form validation
+            console.log('Click Booyakasha')
+           if(fname==""){
+               $('#first_name-2').addClass("invalid");
+               error = 1;
+           }
+
+           if(number <= 100000000 || number >= 9999999999){
+               $('#telephone-2').addClass("invalid");
+               error = 1;
+           }
+            if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+               $('#email-2').addClass("valid");
+               // error = 1;
+           }else{
+               $('#email-2').addClass("invalid");
+               error =1;
+           }
+           if(message==""){
+               $('#message-2').addClass("invalid");
+               error = 1;
+           }
+            if(error==1){
+                console.log("didnt work")
+               return;
+           }
+           //
+           // console.log("worked");
+            timestamp =  Date.now();
+            // Commons.ajaxData('get_location', {location_id: locality}, "get", _this, _this.loadLocation);
+            Commons.ajaxData('post_message', {firstname       : fname,
+                                            lastname        : '--',
+                                            number          : number,
+                                            email           : email,
+                                            message          : 'EZGarage Query' + message,
+                                            time_stamp      : timestamp}, "get", _this, _this.loadMessaged2,null, '.loading-pane');
+
+       });
+
+
          $('#telephone-2').on('keypress',function(e,event,data){
             var code = (e.keyCode || e.which);
             // do nothing if it's an arrow key
@@ -563,8 +611,14 @@ var Global = {
         $('#contact .message-button').removeClass('visible').addClass('invisible');
         $('#contact .message-confirm').removeClass('invisible').addClass('visible');
 
+    },
+    loadMessaged2:function(data){
+        $('#contact .contact-form').hide();
+        $('#contact .thank').show();
+
     }
-    
+
+
 };
 
 
