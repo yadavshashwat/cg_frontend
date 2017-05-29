@@ -177,6 +177,7 @@ var PHONE_NUMBER = "";
 var SOURCE_BOOK = "";
 var DATE_TYPE_END = "";
 var SEND_SMS = "1";
+var NUM_JOBS = 0;
 
 var CGHARYANA_VAT_NO = "06301844038"
 var CGHARYANA_STAX_NO = "AAVCS6335ESD001"
@@ -1244,9 +1245,29 @@ var Global = {
 
         $('#customer-detail').on('click','.btn-addjob',function(){
             container_parent = $('#customer-detail .jobs-list')
-            var row = $('#customer-detail .job-row.to-copy').clone()
-            row.removeClass('invisible').removeClass('to-copy')
-            container_parent.append(row)
+                html = ''
+                html += '<div class="row job-row">'
+                html += '<div class="col s5 m7 l7 job-summary-name">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name-'+ (NUM_JOBS+1) +'"  type="text" value=""><label for="job_name-'+ (NUM_JOBS+1) +'" >Job</label></div>'
+                html += '</div>'
+
+                html += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
+                html += '<input type="checkbox" id="pre-'+ (NUM_JOBS+1) +'" /><label for="pre-'+ (NUM_JOBS+1) +'"></label>'
+                html += '</div>'
+
+                html += '<div class="col s3 m2 l2 job-summary-post centered-text">'
+                html += '<input type="checkbox" id="post-'+ (NUM_JOBS+1) +'" /><label for="post-'+ (NUM_JOBS+1) +'"></label>'
+                html += '</div>'
+
+                html += '<div class="col s1 m1 l1 centered-text x20">'
+                html += '<i class="fa fa-trash-o delete-job"></i>'
+                html += '</div>'
+
+                html += '</div>'
+                NUM_JOBS = NUM_JOBS + 1;
+            // var row = $('#customer-detail .job-row.to-copy').clone()
+            // row.removeClass('invisible').removeClass('to-copy')
+            container_parent.append(html)
         })
 
         $('#customer-detail').on('click','.delete-job',function(){
@@ -1282,6 +1303,7 @@ var Global = {
                 estimate: estimate,
             }, "post", _this, _this.loadCustomershareestimate,null, '.loading-pane');
         });
+
         $('#customer-detail .btn-send-bill').click(function(){
             bid =$('#customer-detail #booking_id').attr('booking_data_id')
             Commons.ajaxData('send_booking_bill_estimate', {data_id:bid,bill_estimate:"Bill"}, "get", _this, _this.loadBillSent,null, '.loading-pane');
@@ -1430,9 +1452,17 @@ var Global = {
             jobs_summary_list = []
             $('#customer-detail .jobs-list .job-row').each(function(){
                 name = $(this).find('.job-summary-name input').val()
-                price = $(this).find('.job-summary-price input').val()
+                pre = $(this).find('.job-summary-pre input').is(':checked');
+                post = $(this).find('.job-summary-price input').is(':checked');
+                console.log(pre)
+                console.log(post)
+                price = 0
+                // if (pre){
+                //
+                // }
+
                 if (name != "" && name != " "){
-                    obj = {"Job":name,"Price":price}
+                    obj = {"Job":name,"Pre":pre,"Post":post,"Price":price}
                     jobs_summary_list.push(obj)
 
                 }
@@ -4203,6 +4233,21 @@ var Global = {
             $(this).addClass('unselected').removeClass('selected')
         });
 
+        $('#analytics').on('click','.btn-kpi-expand.unselected',function(){
+            // console.log("1")
+            $('#analytics .kpi-data-row').show()
+            $(this).addClass('selected').removeClass('unselected')
+            $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-up')
+        });
+        $('#analytics').on('click','.btn-kpi-expand.selected',function(){
+            // console.log("2")
+            $('#analytics .kpi-data-row').hide()
+            $(this).find('i').removeClass('fa-caret-up').addClass('fa-caret-down')
+            $(this).addClass('unselected').removeClass('selected')
+        });
+
+
+
         $('#analytics').on('click','.btn-source-expand.unselected',function(){
             // console.log("1")
             $('#analytics .source-data-row').show()
@@ -5330,7 +5375,7 @@ var Global = {
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">av_timer</i><input id="cust_odometer" type="number" value ="' + val.odometer + '"class="validate"><label for="cust_odometer">#Odometer</label></div>'
                 html += '</div>'
-                if (!val.booking_flag){
+                if (!val.booking_flag) {
                     html += '<div class="col s12 m12 l12">'
                     html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_follow" type="date" class="datepicker"><label for="date_follow">Date Follow</label></div>'
                     html += '</div>'
@@ -5349,7 +5394,7 @@ var Global = {
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time Booking</label></div>'
                 html += '</div>'
-                if (val.booking_flag){
+                if (val.booking_flag) {
                     html += '<div class="col s12 m12 l12">'
                     // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
                     html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" class="datepicker"><label for="date">Date Delivery</label></div>'
@@ -5366,50 +5411,82 @@ var Global = {
                 html += '</div>'
 
                 html += '<div class="col s12 m12 l12">'
-                html += '<b>JOBS SUMMARY</b><br><br>'
+                html += '<b>JOBS CARD DETAILS</b><br><br>'
 
                 jobLen = val.job_summary.length;
+                // html += '<div class="jobs-list">'
+                // for (i = 0; i < jobLen; i++) {
+                //     // for (i = 0; i < 2; i++) {
+                //     html += '<div class="row job-row">'
+                //
+                //     html += '<div class="col s9 m9 l9 job-summary-name">'
+                //     html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name'+i+'"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'" >Job - ' + (i+1) +'</label></div>'
+                //     html += '</div>'
+                //
+                //     //
+                //     // html += '<div class="col s2 m2 l2 job-summary-pre">'
+                //     // html += '<div class="input-field"><input id="job_name'+i+'"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'" >Job - ' + (i+1) +'</label></div>'
+                //     // html += '</div>'
+                //     //
+                //     // html += '<div class="col s2 m2 l2 job-summary-post">'
+                //     // html += '<div class="input-field">'
+                //     // html += '<i class="material-icons prefix">receipt</i><input id="job_name'+i+'"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'" >Job - ' + (i+1) +'</label></div>'
+                //     // html += '</div>'
+                //
+                //
+                //
+                //     html += '<div class="col s2 m2 l2 job-summary-price">'
+                //     html += '<div class="input-field"><input id="job_price'+i+'"  type="number" value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'" >Price - ' + (i+1) +'</label></div>'
+                // }
+                //
                 html += '<div class="jobs-list">'
+                html += '<div class="row">'
+                html += '<div class="col s5 m5 l7 job-summary-name centered-text"><b>Job Name</b></div>'
+                html += '<div class="col s3 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
+                html += '<div class="col s3 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+                html += '</div>'
+
                 for (i = 0; i < jobLen; i++) {
                     // for (i = 0; i < 2; i++) {
                     html += '<div class="row job-row">'
 
-                    html += '<div class="col s9 m9 l9 job-summary-name">'
-                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name'+i+'"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'" >Job - ' + (i+1) +'</label></div>'
+                    html += '<div class="col s5 m7 l7 job-summary-name">'
+                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name' + i + '"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
+                    html += '</div>'
+                    if (val.job_summary[i]['Pre']){
+                    html += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
+                    html += '<input type="checkbox" checked id="pre-' + (i + 1) + '" /><label for="pre-' + (i + 1) + '"></label>'
+                    html += '</div>'
+                    }else{
+                    html += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
+                    html += '<input type="checkbox" id="pre-' + (i + 1) + '" /><label for="pre-' + (i + 1) + '"></label>'
+                    html += '</div>'
+                        
+                    }
+
+                  if (val.job_summary[i]['Post']){
+                    html += '<div class="col s3 m2 l2 job-summary-post centered-text">'
+                    html += '<input type="checkbox" checked id="post-' + (i + 1) + '" /><label for="post-' + (i + 1) + '"></label>'
                     html += '</div>'
 
-                    //
-                    // html += '<div class="col s2 m2 l2 job-summary-pre">'
-                    // html += '<div class="input-field"><input id="job_name'+i+'"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'" >Job - ' + (i+1) +'</label></div>'
-                    // html += '</div>'
-                    //
-                    // html += '<div class="col s2 m2 l2 job-summary-post">'
-                    // html += '<div class="input-field">'
-                    // html += '<i class="material-icons prefix">receipt</i><input id="job_name'+i+'"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'" >Job - ' + (i+1) +'</label></div>'
-                    // html += '</div>'
-
-
-
-                    html += '<div class="col s2 m2 l2 job-summary-price">'
-                    html += '<div class="input-field"><input id="job_price'+i+'"  type="number" value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'" >Price - ' + (i+1) +'</label></div>'
+                  }else{
+                       html += '<div class="col s3 m2 l2 job-summary-post centered-text">'
+                    html += '<input type="checkbox" id="post-' + (i + 1) + '" /><label for="post-' + (i + 1) + '"></label>'
                     html += '</div>'
+
+                  }
+
+
+
+                    // html += '<div class="col s2 m2 l2 job-summary-price">'
+                    // html += '<div class="input-field"><input id="job_price'+i+'"  type="number" value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'" >Price - ' + (i+1) +'</label></div>'
+                    // html += '</div>'
                     html += '<div class="col s1 m1 l1 centered-text x20">'
                     html += '<i class="fa fa-trash-o delete-job"></i>'
                     html += '</div>'
                     html += '</div>'
+                    NUM_JOBS = (i + 1)
                 }
-                html += '</div>'
-
-                html += '<div class="row job-row to-copy invisible">'
-                html += '<div class="col s9 m9 l9 job-summary-name">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name" type="text"><label for="job_name">Job</label></div>'
-                html += '</div>'
-                html += '<div class="col s2 m2 l2 job-summary-price">'
-                html += '<div class="input-field"><input id="job_price" type="number" ><label for="job_price">Price</label></div>'
-                html += '</div>'
-                html += '<div class="col s1 m1 l1 centered-text x20">'
-                html += '<i class="fa fa-trash-o delete-job"></i>'
-                html += '</div>'
                 html += '</div>'
 
                 html+='<div class="col l12 s12 m12 centered-text">'
@@ -5479,26 +5556,58 @@ var Global = {
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l12">'
-                html += '<b>JOBS SUMMARY</b><br><br>'
+                html += '<b>JOBS CARD DETAILS</b><br><br>'
 
                 jobLen = val.job_summary.length;
-                html += '<div class="jobs-list">'
+                                html += '<div class="jobs-list">'
+                html += '<div class="row">'
+                html += '<div class="col s5 m5 l7 job-summary-name centered-text"><b>Job Name</b></div>'
+                html += '<div class="col s3 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
+                html += '<div class="col s3 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+                html += '</div>'
+
                 for (i = 0; i < jobLen; i++) {
                     // for (i = 0; i < 2; i++) {
                     html += '<div class="row job-row">'
-                    html += '<div class="col s9 m9 l9 job-summary-name">'
-                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name'+i+'" disabled type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'">Job - ' + (i+1) +'</label></div>'
 
-                    // html += val.job_summary[i]['Job']
+                    html += '<div class="col s5 m7 l7 job-summary-name">'
+                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input disabled  id="job_name' + i + '"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
                     html += '</div>'
-                    html += '<div class="col s3 m3 l3 job-summary-price">'
-                    html += '<div class="input-field"><input id="job_price'+i+'" type="number" disabled value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'">Price - ' + (i+1) +'</label></div>'
+                    if (val.job_summary[i]['Pre']){
+                    html += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
+                    html += '<input type="checkbox"  disabled checked id="pre-' + (i + 1) + '" /><label for="pre-' + (i + 1) + '"></label>'
                     html += '</div>'
-                    // html += '<div class="col s1 m1 l1 centered-text x20">'
-                    // html += '<i class="fa fa-trash-o delete-job"></i>'
+                    }else{
+                    html += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
+                    html += '<input type="checkbox"  disabled id="pre-' + (i + 1) + '" /><label for="pre-' + (i + 1) + '"></label>'
+                    html += '</div>'
+
+                    }
+
+                  if (val.job_summary[i]['Post']){
+                    html += '<div class="col s3 m2 l2 job-summary-post centered-text">'
+                    html += '<input type="checkbox" disabled  checked id="post-' + (i + 1) + '" /><label for="post-' + (i + 1) + '"></label>'
+                    html += '</div>'
+
+                  }else{
+                       html += '<div class="col s3 m2 l2 job-summary-post centered-text">'
+                    html += '<input type="checkbox" disabled id="post-' + (i + 1) + '" /><label for="post-' + (i + 1) + '"></label>'
+                    html += '</div>'
+
+                  }
+
+
+
+                    // html += '<div class="col s2 m2 l2 job-summary-price">'
+                    // html += '<div class="input-field"><input id="job_price'+i+'"  type="number" value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'" >Price - ' + (i+1) +'</label></div>'
                     // html += '</div>'
+                    html += '<div class="col s1 m1 l1 centered-text x20">'
+                    html += '<i class="fa fa-trash-o delete-job"></i>'
                     html += '</div>'
+                    html += '</div>'
+                    NUM_JOBS = (i + 1)
                 }
+                html += '</div>'
             }
             html += '</div>'
              if (val.req_user_agent){
@@ -7099,7 +7208,7 @@ var Global = {
         SOURCE_TABLE_2 += '</td></tr>'
         container2.html(SOURCE_TABLE_2)
 
-        STATUS_LEADS = ["Lead","Cold","Warm","Cancelled"]
+        STATUS_LEADS = ["Lead","Cold","Warm","Estimate Required","Cancelled"]
         STATUS_BOOKINGS = ["Confirmed","Acknowledged","Assigned","Engineer Left","Reached Workshop","Estimate Shared","Job Completed","Feedback Taken","Cancelled","Escalation"]
 
         container3 = $('#analytics .status-data-row').find('tbody.status-leads')
@@ -7132,7 +7241,9 @@ var Global = {
             STATUS_TABLE_BOOKINGS += '</td></tr>'
         }
         container4.html(STATUS_TABLE_BOOKINGS)
-
+        $('.kpi-data-row .avg-time-ack').text((data['avg_time_ack']/60)+' Mins.')
+        $('.kpi-data-row .avg-time-pick').text((data['avg_time_pick']/60)+' Mins.')
+        $('.kpi-data-row .avg-time-shest').text((data['avg_time_share_est']/60) +' Mins.')
 
 
     },
