@@ -424,11 +424,11 @@ var Global = {
                 }
 
             }else if (sub_page_1 == "bills"){
-                console.log('1')
+                // console.log('1')
                 allbillsopen()
                 // $('.navbar .coupon-button').click()
                 if (sub_page_2 == "newbill"){
-                    console.log('2')
+                    // console.log('2')
                     $('#bill-detail  .single-bill').click()
                     if (data_id != ""){
                         if(sub_page_3 == "pre"){
@@ -2722,9 +2722,12 @@ var Global = {
             $('#expense-details').hide();
             $('#bill-details').show()
             $('#settlement-details').hide()
+            // $('.bill-filter-summary').show()
+            // $('#cust_filter_invoice_number').val('')
+            // $('#cust_filter_bill_name').val('')
+            // $('#cust_filter_booking_id').val('')
 
-
-            $('#bill-detail  .all-bill').click()
+            $('#bill-detail .all-bill').click()
             // Commons.ajaxData('view_all_bills', {bill_type:"Invoice"}, "get", _this, _this.loadbillAll,null, '.loading-pane');
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,2).join('/')+'/bills/all'
@@ -2747,6 +2750,7 @@ var Global = {
             $('#bill-details').show()
             $('#settlement-details').hide()
             $('#bill-detail  .all-pre-bill').click()
+            // $('.bill-filter-summary').hide()
             // Commons.ajaxData('view_all_bills', {bill_type:"Pre-Invoice"}, "get", _this, _this.loadprebillAll,null, '.loading-pane');
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,2).join('/')+'/bills/pre'
@@ -2810,12 +2814,37 @@ var Global = {
             $('#bill-detail  .single-bill').removeClass('selected')
             $('#bill-detail  .all-bill').addClass('selected')
             $('#bill-detail  .all-pre-bill').removeClass('selected')
-
+            $('.bill-filter-summary').show()
+            $('#cust_filter_invoice_number').val('')
+            $('#cust_filter_bill_name').val('')
+            $('#cust_filter_booking_id').val('')
+             Materialize.updateTextFields();
             Commons.ajaxData('view_all_bills', {bill_type:"Invoice"}, "get", _this, _this.loadbillAll,null, '.loading-pane');
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/all/'
             history.pushState({},'',new_path)
         });
+
+        $('#bill-detail .btn-filterbills').click(function(){
+            invoice_number = $('#cust_filter_invoice_number').val()
+            name = $('#cust_filter_bill_name').val()
+            booking_id = $('#cust_filter_booking_id').val()
+             Commons.ajaxData('view_all_bills', {bill_type:"Invoice",cust_name:name,bid:booking_id, invoice_number : invoice_number}, "get", _this, _this.loadbillAll,null, '.loading-pane');
+        })
+
+
+
+        $('#bill-details .btn-downloadbills').click(function(){
+            invoice_number = $('#cust_filter_invoice_number').val()
+            name = $('#cust_filter_bill_name').val()
+            booking_id = $('#cust_filter_booking_id').val()
+            console.log('Downloaded')
+            params = {bill_type:"Invoice",cust_name:name,bid:booking_id, invoice_number : invoice_number,getcsv:"True"}
+            var url = Commons.getOrigin()+Commons.URLFromName['view_all_bills']+'?'+jQuery.param( params )
+            $('#download').find('iframe').attr('src',url)
+
+            // $('.loading-pane').show()
+        })
 
         $('#bill-detail .all-pre-bill').click(function(){
             $('#bill-detail .bill-list').show();
@@ -2823,6 +2852,7 @@ var Global = {
             $('#bill-detail  .single-bill').removeClass('selected')
             $('#bill-detail  .all-bill').removeClass('selected')
             $('#bill-detail  .all-pre-bill').addClass('selected')
+             $('.bill-filter-summary').hide()
             Commons.ajaxData('view_all_bills', {bill_type:"Pre-Invoice"}, "get", _this, _this.loadprebillAll,null, '.loading-pane');
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/pre/'
@@ -7241,9 +7271,9 @@ var Global = {
             STATUS_TABLE_BOOKINGS += '</td></tr>'
         }
         container4.html(STATUS_TABLE_BOOKINGS)
-        $('.kpi-data-row .avg-time-ack').text((data['avg_time_ack']/60)+' Mins.')
-        $('.kpi-data-row .avg-time-pick').text((data['avg_time_pick']/60)+' Mins.')
-        $('.kpi-data-row .avg-time-shest').text((data['avg_time_share_est']/60) +' Mins.')
+        $('.kpi-data-row .avg-time-ack').text(((data['avg_time_ack']/60).toFixed(2))+' Mins.')
+        $('.kpi-data-row .avg-time-pick').text(((data['avg_time_pick']/60).toFixed(2))+' Mins.')
+        $('.kpi-data-row .avg-time-shest').text(((data['avg_time_share_est']/60).toFixed(2)) +' Mins.')
 
 
     },
@@ -7338,6 +7368,12 @@ var Global = {
         $('.navbar .expenses-button').click()
     },
     loadbillAll:function(data){
+        $('#bill-detail .total-bill-amount').text(data['summary']['total_bill_amount'])
+        $('#bill-detail .total-bills').text(data['summary']['total_bills'])
+        $('#bill-detail .total-bill-labour').text(data['summary']['total_labour_amount'])
+        $('#bill-detail .total-bill-part').text(data['summary']['total_part_amount'])
+        $('#bill-detail .total-bill-due').text(data['summary']['total_due_amount'])
+
         container =        $('#bill-details .bill-list .pre-data')
         container.html('')
         html=''
@@ -7361,7 +7397,7 @@ var Global = {
         html += '										</tr>';
         html += '										</thead>';
         html += '										<tbody>';
-        $.each(data, function(ix, val) {
+        $.each(data['bills'], function(ix, val) {
             html += '<tr class="bill-row" data-class="'+val.id+'">'
             if(val.bill_type == "Invoice"){
                 if (val.status == "Cancelled"){
@@ -7404,7 +7440,11 @@ var Global = {
 
             }
             html += '											<td class="centered-text" style="color:purple; cursor:pointer" class="download-btn centered-text"><i data-class='+ val.file_name +' class="fa fa-download downloadbill"></i></td>';
-            html += '											<td class="centered-text" style="color:purple; cursor:pointer" class="modify-btn centered-text"><i class="fa fa-pencil updatebill"></i></td>';
+            if(val.status == "Cancelled"){
+                html += '											<td></td>';
+            }else{
+                html += '											<td class="centered-text" style="color:purple; cursor:pointer" class="modify-btn centered-text"><i class="fa fa-pencil updatebill"></i></td>';
+            }
             html += '										</tr>';
             i=i+1
         })
@@ -7438,7 +7478,7 @@ var Global = {
         html += '										</tr>';
         html += '										</thead>';
         html += '										<tbody>';
-        $.each(data, function(ix, val) {
+        $.each(data['bills'], function(ix, val) {
             html += '<tr class="bill-row" data-class="'+val.id+'">'
             if(val.bill_type == "Invoice"){
                 if (val.status == "Cancelled"){
@@ -7772,7 +7812,7 @@ var Global = {
 
     },
     loadModifyBill:function (data) {
-        $.each(data, function (ix, val) {
+        $.each(data['bills'], function (ix, val) {
             $('#bill-details .bill-modify-card').attr('data-class',val.id)
             $('#bill-details #bill_email').val(val.cust_email)
             $('#bill-details #bill_number').val(val.cust_number)
