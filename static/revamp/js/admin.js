@@ -727,7 +727,8 @@ var Global = {
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
                 date:DATE_TYPE,
-                status:"Escalation",
+                escalation_flag:"True",
+                // status:"Escalation",
                 name:CUST_NAME,
                 reg:REG_NUMBER,
                 date_end:DATE_TYPE_END,
@@ -739,7 +740,8 @@ var Global = {
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
                 del_date:DATE_TYPE,
-                status:"Escalation",
+                escalation_flag:"True",
+                // status:"Escalation",
                 name:CUST_NAME,
                 reg:REG_NUMBER,
                 date_end:DATE_TYPE_END,
@@ -1222,26 +1224,50 @@ var Global = {
             $('#customer-detail .booking-data').show();
             $('#customer-detail .booking-job-data').hide();
             $('#customer-detail .feedback-data').hide();
+                                    $('#customer-detail .booking-job-card').hide();
+
             $('#customer-detail .service-detail').removeClass('selected')
             $('#customer-detail .feedback-detail').removeClass('selected')
             $('#customer-detail .cust-detail').addClass('selected')
+                                    $('#customer-detail .job-card-detail').removeClass('selected')
+
         });
         $('#customer-detail .service-detail').click(function(){
             $('#customer-detail .booking-data').hide();
             $('#customer-detail .booking-job-data').show();
             $('#customer-detail .feedback-data').hide();
+                                    $('#customer-detail .booking-job-card').hide();
+
             $('#customer-detail .feedback-detail').removeClass('selected')
             $('#customer-detail .cust-detail').removeClass('selected')
             $('#customer-detail .service-detail').addClass('selected')
+                                    $('#customer-detail .job-card-detail').removeClass('selected')
+
         });
         $('#customer-detail .feedback-detail').click(function(){
             $('#customer-detail .booking-data').hide();
             $('#customer-detail .booking-job-data').hide();
             $('#customer-detail .feedback-data').show();
+                        $('#customer-detail .booking-job-card').hide();
+
             $('#customer-detail .feedback-detail').addClass('selected')
             $('#customer-detail .cust-detail').removeClass('selected')
             $('#customer-detail .service-detail').removeClass('selected')
+                        $('#customer-detail .job-card-detail').removeClass('selected')
+
         });
+        $('#customer-detail .job-card-detail').click(function(){
+            $('#customer-detail .booking-data').hide();
+            $('#customer-detail .booking-job-data').hide();
+            $('#customer-detail .feedback-data').hide();
+            $('#customer-detail .booking-job-card').show();
+
+            $('#customer-detail .feedback-detail').removeClass('selected')
+            $('#customer-detail .cust-detail').removeClass('selected')
+            $('#customer-detail .service-detail').removeClass('selected')
+            $('#customer-detail .job-card-detail').addClass('selected')
+        });
+
 
         $('#customer-detail').on('click','.btn-addjob',function(){
             container_parent = $('#customer-detail .jobs-list')
@@ -1448,12 +1474,15 @@ var Global = {
             time_follow = $('#customer-detail #time_follow').val()
             follow_status = $('#customer-detail #status_details_new').val()
             odometer = $('#customer-detail #cust_odometer').val()
+            escalation_reason = $('#customer-detail #escalation_reason').val()
+            escalation_resolution = $('#customer-detail #escalation_resolution').val()
+
             // ALL_JOBS_ADMIN = comment_n
             jobs_summary_list = []
             $('#customer-detail .jobs-list .job-row').each(function(){
                 name = $(this).find('.job-summary-name input').val()
                 pre = $(this).find('.job-summary-pre input').is(':checked');
-                post = $(this).find('.job-summary-price input').is(':checked');
+                post = $(this).find('.job-summary-post input').is(':checked');
                 console.log(pre)
                 console.log(post)
                 price = 0
@@ -1487,11 +1516,83 @@ var Global = {
                 time_follow:time_follow,
                 follow_status:follow_status,
                 odometer:odometer,
-                job_summary:JSON.stringify(jobs_summary_list)
+                job_summary:JSON.stringify(jobs_summary_list),
+                es_reason:escalation_reason,
+                es_resolution:escalation_resolution,
             }, "post", _this, _this.loadCustomerupdate,null, '.loading-pane');
 
         }
+          var update_cust2 = function(){
+            bid = $('#customer-detail #booking_id').attr('booking_id');
+            email_n = $('#customer-detail #email').val();
+            reg_n = $('#customer-detail #cust_regnumber').val();
+            date_n = $('#customer-detail #date').val();
+            time_n = $('#customer-detail #time_booking').val();
+            // comment_n = $('#customer-detail #comments').val();
+            notes_n = $('#customer-detail #notes').val();
+            amount_paid_n = $('#customer-detail #cust_amount_paid').val()
+            cust_name = $('#customer-detail #cust_name').val()
+            cust_number = $('#customer-detail #cust_number').val()
+            cust_address = $('#customer-detail #cust_address').val()
+            cust_locality = $('#customer-detail #cust_locality').val()
+            cust_city = $('#customer-detail #cust_city').val()
+            source = $('#customer-detail #source').val()
+            date_del = $('#customer-detail #date_delivery').val()
+            date_follow = $('#customer-detail #date_follow').val()
+            time_follow = $('#customer-detail #time_follow').val()
+            follow_status = $('#customer-detail #status_details_new').val()
+            odometer = $('#customer-detail #cust_odometer').val()
+            escalation_reason = $('#customer-detail #escalation_reason').val()
+            escalation_resolution = $('#customer-detail #escalation_resolution').val()
+
+            // ALL_JOBS_ADMIN = comment_n
+            jobs_summary_list = []
+            $('#customer-detail .jobs-list .job-row').each(function(){
+                name = $(this).find('.job-summary-name input').val()
+                pre = $(this).find('.job-summary-pre input').is(':checked');
+                post = $(this).find('.job-summary-post input').is(':checked');
+                console.log(pre)
+                console.log(post)
+                price = 0
+                // if (pre){
+                //
+                // }
+
+                if (name != "" && name != " "){
+                    obj = {"Job":name,"Pre":pre,"Post":post,"Price":price}
+                    jobs_summary_list.push(obj)
+
+                }
+            });
+
+            Commons.ajaxData('update_booking', {b_id: bid,
+                email: email_n,
+                reg_number: reg_n,
+                // comment: comment_n,
+                time: time_n,
+                date: date_n,
+                note:notes_n,
+                name : cust_name,
+                number : cust_number,
+                amount_paid : amount_paid_n,
+                address : cust_address,
+                locality : cust_locality,
+                city : cust_city,
+                source : source,
+                date_del : date_del,
+                date_follow:date_follow,
+                time_follow:time_follow,
+                follow_status:follow_status,
+                odometer:odometer,
+                job_summary:JSON.stringify(jobs_summary_list),
+                es_reason:escalation_reason,
+                es_resolution:escalation_resolution,
+            }, "post", _this, _this.loadCustomerupdate2,null, '.loading-pane');
+
+        }
         $('#customer-detail .btn-update-cust').click(update_cust);
+        $('#customer-detail .btn-update-cust2').click(update_cust2);
+
 
         $('#customer-detail').on('click','.btn-modifypayement',function(){
             $('#customer-detail .booking-payment-card').show()
@@ -5439,9 +5540,28 @@ var Global = {
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
                 html += '</div>'
+                if (val.escalation_flag){
+                    html += '<div class="col s12 m12 l12">'
+                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="escalation_reason" type="text" class="materialize-textarea">' + val.escalation_reason + '</textarea><label for="escalation_reason">Escalation Reason</label></div>'
+                    html += '</div>'
 
-                html += '<div class="col s12 m12 l12">'
-                html += '<b>JOBS CARD DETAILS</b><br><br>'
+                    html += '<div class="col s12 m12 l12">'
+                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="escalation_resolution" type="text"  class="materialize-textarea">' + val.escalation_resolution + '</textarea><label for="escalation_resolution">Escalation Resolution</label></div>'
+                    html += '</div>'
+                }else{
+                    html += '<div class="col s12 m12 l12 invisible">'
+                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="escalation_reason" type="text" class="materialize-textarea">' + val.escalation_reason + '</textarea><label for="escalation_reason">Escalation Reason</label></div>'
+                    html += '</div>'
+
+                    html += '<div class="col s12 m12 l12 invisible">'
+                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="escalation_resolution" type="text"  class="materialize-textarea">' + val.escalation_resolution + '</textarea><label for="escalation_resolution">Escalation Resolution</label></div>'
+                    html += '</div>'
+                }
+
+
+                html_jc = ''
+                html_jc += '<div class="col s12 m12 l12">'
+                html_jc += '<b>JOBS CARD DETAILS</b><br><br>'
 
                 jobLen = val.job_summary.length;
                 // html += '<div class="jobs-list">'
@@ -5469,40 +5589,40 @@ var Global = {
                 //     html += '<div class="input-field"><input id="job_price'+i+'"  type="number" value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'" >Price - ' + (i+1) +'</label></div>'
                 // }
                 //
-                html += '<div class="jobs-list">'
-                html += '<div class="row">'
-                html += '<div class="col s5 m5 l7 job-summary-name centered-text"><b>Job Name</b></div>'
-                html += '<div class="col s3 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
-                html += '<div class="col s3 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
-                html += '</div>'
+                html_jc += '<div class="jobs-list">'
+                html_jc += '<div class="row">'
+                html_jc += '<div class="col s5 m5 l7 job-summary-name centered-text"><b>Job Name</b></div>'
+                html_jc += '<div class="col s3 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
+                html_jc += '<div class="col s3 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+                html_jc += '</div>'
 
                 for (i = 0; i < jobLen; i++) {
                     // for (i = 0; i < 2; i++) {
-                    html += '<div class="row job-row">'
+                    html_jc += '<div class="row job-row">'
 
-                    html += '<div class="col s5 m7 l7 job-summary-name">'
-                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name' + i + '"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
-                    html += '</div>'
+                    html_jc += '<div class="col s5 m7 l7 job-summary-name">'
+                    html_jc += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name' + i + '"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
+                    html_jc += '</div>'
                     if (val.job_summary[i]['Pre']){
-                    html += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
-                    html += '<input type="checkbox" checked id="pre-' + (i + 1) + '" /><label for="pre-' + (i + 1) + '"></label>'
-                    html += '</div>'
+                    html_jc += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
+                    html_jc += '<input type="checkbox" checked id="pre-' + (i + 1) + '" /><label for="pre-' + (i + 1) + '"></label>'
+                    html_jc += '</div>'
                     }else{
-                    html += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
-                    html += '<input type="checkbox" id="pre-' + (i + 1) + '" /><label for="pre-' + (i + 1) + '"></label>'
-                    html += '</div>'
+                    html_jc += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
+                    html_jc += '<input type="checkbox" id="pre-' + (i + 1) + '" /><label for="pre-' + (i + 1) + '"></label>'
+                    html_jc += '</div>'
                         
                     }
 
                   if (val.job_summary[i]['Post']){
-                    html += '<div class="col s3 m2 l2 job-summary-post centered-text">'
-                    html += '<input type="checkbox" checked id="post-' + (i + 1) + '" /><label for="post-' + (i + 1) + '"></label>'
-                    html += '</div>'
+                    html_jc += '<div class="col s3 m2 l2 job-summary-post centered-text">'
+                    html_jc += '<input type="checkbox" checked id="post-' + (i + 1) + '" /><label for="post-' + (i + 1) + '"></label>'
+                    html_jc += '</div>'
 
                   }else{
-                       html += '<div class="col s3 m2 l2 job-summary-post centered-text">'
-                    html += '<input type="checkbox" id="post-' + (i + 1) + '" /><label for="post-' + (i + 1) + '"></label>'
-                    html += '</div>'
+                       html_jc += '<div class="col s3 m2 l2 job-summary-post centered-text">'
+                    html_jc += '<input type="checkbox" id="post-' + (i + 1) + '" /><label for="post-' + (i + 1) + '"></label>'
+                    html_jc += '</div>'
 
                   }
 
@@ -5511,17 +5631,17 @@ var Global = {
                     // html += '<div class="col s2 m2 l2 job-summary-price">'
                     // html += '<div class="input-field"><input id="job_price'+i+'"  type="number" value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'" >Price - ' + (i+1) +'</label></div>'
                     // html += '</div>'
-                    html += '<div class="col s1 m1 l1 centered-text x20">'
-                    html += '<i class="fa fa-trash-o delete-job"></i>'
-                    html += '</div>'
-                    html += '</div>'
+                    html_jc += '<div class="col s1 m1 l1 centered-text x20">'
+                    html_jc += '<i class="fa fa-trash-o delete-job"></i>'
+                    html_jc += '</div>'
+                    html_jc += '</div>'
                     NUM_JOBS = (i + 1)
                 }
-                html += '</div>'
+                html_jc += '</div>'
 
-                html+='<div class="col l12 s12 m12 centered-text">'
-                html +='<button class="waves-effect waves-light btn cg-primary btn-addjob" type="submit" name="action">Add Jobs'
-                html +='<i class="material-icons right">add</i></button></div><br><br>'
+                html_jc+='<div class="col l12 s12 m12 centered-text">'
+                html_jc +='<button class="waves-effect waves-light btn cg-primary btn-addjob" type="submit" name="action">Add Jobs'
+                html_jc +='<i class="material-icons right">add</i></button></div><br><br>'
 
 
                 if (!val.booking_flag){
@@ -5585,44 +5705,44 @@ var Global = {
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
                 html += '</div>'
-                html += '<div class="col s12 m12 l12">'
-                html += '<b>JOBS CARD DETAILS</b><br><br>'
+                html_jc = ''
+                html_jc += '<div class="col s12 m12 l12">'
+                html_jc += '<b>JOBS CARD DETAILS</b><br><br>'
 
                 jobLen = val.job_summary.length;
                                 html += '<div class="jobs-list">'
-                html += '<div class="row">'
-                html += '<div class="col s5 m5 l7 job-summary-name centered-text"><b>Job Name</b></div>'
-                html += '<div class="col s3 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
-                html += '<div class="col s3 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
-                html += '</div>'
+                html_jc += '<div class="row">'
+                html_jc += '<div class="col s5 m5 l8 job-summary-name centered-text"><b>Job Name</b></div>'
+                html_jc += '<div class="col s3 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
+                html_jc += '<div class="col s3 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+                html_jc += '</div>'
 
                 for (i = 0; i < jobLen; i++) {
                     // for (i = 0; i < 2; i++) {
-                    html += '<div class="row job-row">'
+                    html_jc += '<div class="row job-row">'
 
-                    html += '<div class="col s5 m7 l7 job-summary-name">'
-                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input disabled  id="job_name' + i + '"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
-                    html += '</div>'
+                    html_jc += '<div class="col s5 m7 l8 job-summary-name">'
+                    html_jc += '<div class="input-field"><i class="material-icons prefix">receipt</i><input disabled  id="job_name' + i + '"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
+                    html_jc += '</div>'
                     if (val.job_summary[i]['Pre']){
-                    html += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
-                    html += '<input type="checkbox"  disabled checked id="pre-' + (i + 1) + '" /><label for="pre-' + (i + 1) + '"></label>'
-                    html += '</div>'
+                        html_jc += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
+                        html_jc += '<input type="checkbox"  disabled checked id="pre-' + (i + 1) + '" /><label for="pre-' + (i + 1) + '"></label>'
+                        html_jc += '</div>'
                     }else{
-                    html += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
-                    html += '<input type="checkbox"  disabled id="pre-' + (i + 1) + '" /><label for="pre-' + (i + 1) + '"></label>'
-                    html += '</div>'
-
+                        html_jc += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
+                        html_jc += '<input type="checkbox"  disabled id="pre-' + (i + 1) + '" /><label for="pre-' + (i + 1) + '"></label>'
+                        html_jc += '</div>'
                     }
 
                   if (val.job_summary[i]['Post']){
-                    html += '<div class="col s3 m2 l2 job-summary-post centered-text">'
-                    html += '<input type="checkbox" disabled  checked id="post-' + (i + 1) + '" /><label for="post-' + (i + 1) + '"></label>'
-                    html += '</div>'
+                    html_jc += '<div class="col s3 m2 l2 job-summary-post centered-text">'
+                    html_jc += '<input type="checkbox" disabled  checked id="post-' + (i + 1) + '" /><label for="post-' + (i + 1) + '"></label>'
+                    html_jc += '</div>'
 
                   }else{
-                       html += '<div class="col s3 m2 l2 job-summary-post centered-text">'
-                    html += '<input type="checkbox" disabled id="post-' + (i + 1) + '" /><label for="post-' + (i + 1) + '"></label>'
-                    html += '</div>'
+                       html_jc += '<div class="col s3 m2 l2 job-summary-post centered-text">'
+                    html_jc += '<input type="checkbox" disabled id="post-' + (i + 1) + '" /><label for="post-' + (i + 1) + '"></label>'
+                    html_jc += '</div>'
 
                   }
 
@@ -5631,15 +5751,15 @@ var Global = {
                     // html += '<div class="col s2 m2 l2 job-summary-price">'
                     // html += '<div class="input-field"><input id="job_price'+i+'"  type="number" value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'" >Price - ' + (i+1) +'</label></div>'
                     // html += '</div>'
-                    html += '<div class="col s1 m1 l1 centered-text x20">'
-                    html += '<i class="fa fa-trash-o delete-job"></i>'
-                    html += '</div>'
-                    html += '</div>'
+                    // html += '<div class="col s1 m1 l1 centered-text x20">'
+                    // html += '<i class="fa fa-trash-o delete-job"></i>'
+                    // html += '</div>'
+                    html_jc += '</div>'
                     NUM_JOBS = (i + 1)
                 }
-                html += '</div>'
+                html_jc += '</div>'
             }
-            html += '</div>'
+            html_jc += '</div>'
              if (val.req_user_agent){
                 $('#bill-details #payment_collector_bill').val("Workshop")
                 document.getElementById("payment_collector_bill").disabled = true;
@@ -6408,6 +6528,9 @@ var Global = {
         container3 = $('#customer-detail .payment-history')
         // container3.html('')
         html4 = ''
+        var container_jc = $('#customer-detail .booking-job-card .pre-data')
+        container_jc.html('')
+        container_jc.html(html_jc)
         $.each(data,function(ix,val){
             payLen = val.payment_booking.length;
             for (i = 0; i < payLen; i++) {
@@ -6437,6 +6560,7 @@ var Global = {
             $('#customer-detail .payment-summary .total_due_amount').text(parseFloat(val.price_total) - parseFloat(val.amount_paid))
 
         });
+            Materialize.updateTextFields();
 
     },
     loadAgentdata:function(data){
@@ -6554,6 +6678,10 @@ var Global = {
     loadCustomerupdate:function(){
         data_id = $('#customer-detail #booking_id').attr('booking_data_id')
         Global.openbooking_new(data_id)
+    },
+    loadCustomerupdate2:function(){
+        data_id = $('#customer-detail #booking_id').attr('booking_data_id')
+        Global.openbooking_new2(data_id)
     },
     loadAddCoupon:function(){
         alert('Coupon Added!')
@@ -7078,6 +7206,9 @@ var Global = {
         time_follow = $('#customer-detail #time_follow').val()
         follow_status = $('#customer-detail #status_details_new').val()
         odometer = $('#customer-detail #cust_odometer').val()
+        escalation_reason = $('#customer-detail #escalation_reason').val()
+        escalation_resolution = $('#customer-detail #escalation_resolution').val()
+
         jobs_summary_list = []
         $('#customer-detail .jobs-list .job-row').each(function(){
             name = $(this).find('.job-summary-name input').val()
@@ -7109,7 +7240,10 @@ var Global = {
             time_follow:time_follow,
             follow_status:follow_status,
             odometer:odometer,
-            job_summary : JSON.stringify(jobs_summary_list)
+            job_summary : JSON.stringify(jobs_summary_list),
+            es_reason:escalation_reason,
+            es_resolution:escalation_resolution,
+
         }, "post", Global, Global.loadCustomerupdate,null, '.loading-pane');
 
     },
@@ -7119,9 +7253,29 @@ var Global = {
         $('#customer-detail .booking-data').show();
         $('#customer-detail .booking-job-data').hide();
         $('#customer-detail .feedback-data').hide();
+        $('#customer-detail .booking-job-card').hide();
         $('#customer-detail .feedback-detail').removeClass('selected')
         $('#customer-detail .service-detail').removeClass('selected')
+        $('#customer-detail .job-card-detail').removeClass('selected')
         $('#customer-detail .cust-detail').addClass('selected')
+        Commons.ajaxData('view_all_bookings', {data_id:data_id}, "get", Global, Global.loadBookingData,null, '.loading-pane');
+        Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", Global, Global.loadAgentdata,null, '.loading-pane');
+        Commons.ajaxData('get_all_feedback', {booking_data_id:data_id}, "get", Global, Global.loadFeedback,null, '.loading-pane');
+        var path = window.location.pathname.split('/')
+        var new_path = path.slice(0,3).join('/')+'/single/' + data_id
+        history.pushState({},'',new_path)
+    },
+    openbooking_new2:function(data_id){
+        $('#bookings').hide()
+        $('#booking-details').show()
+        $('#customer-detail .booking-data').hide();
+        $('#customer-detail .booking-job-data').hide();
+        $('#customer-detail .feedback-data').hide();
+        $('#customer-detail .booking-job-card').show();
+        $('#customer-detail .feedback-detail').removeClass('selected')
+        $('#customer-detail .service-detail').removeClass('selected')
+        $('#customer-detail .job-card-detail').addClass('selected')
+        $('#customer-detail .cust-detail').removeClass('selected')
         Commons.ajaxData('view_all_bookings', {data_id:data_id}, "get", Global, Global.loadBookingData,null, '.loading-pane');
         Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", Global, Global.loadAgentdata,null, '.loading-pane');
         Commons.ajaxData('get_all_feedback', {booking_data_id:data_id}, "get", Global, Global.loadFeedback,null, '.loading-pane');
