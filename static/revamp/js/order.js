@@ -838,7 +838,7 @@ var Global = {
             var paid_amt = "0";
             var price_total = $('#total-price').text();
             if (comment!= "" && comment != " "){
-                ALL_JOBS_LIST.push({"Job":comment,"Price":"0"})
+                ALL_JOBS_LIST.push({"Job":comment,"Price":"0", "Category":"NA"})
             }
             var time = $('#time-slot').find('.selectize-input').find('div').attr('data-value');
             Commons.ajaxData('send_booking', {otp:otp

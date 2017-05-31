@@ -1476,6 +1476,10 @@ var Global = {
             odometer = $('#customer-detail #cust_odometer').val()
             escalation_reason = $('#customer-detail #escalation_reason').val()
             escalation_resolution = $('#customer-detail #escalation_resolution').val()
+            driver_pick_name = $('#customer-detail #driver_pick_name').val()
+            driver_pick_number = $('#customer-detail #driver_pick_number').val()
+            driver_drop_name = $('#customer-detail #driver_drop_name').val()
+            driver_drop_number = $('#customer-detail #driver_drop_number').val()
 
             // ALL_JOBS_ADMIN = comment_n
             jobs_summary_list = []
@@ -1515,6 +1519,11 @@ var Global = {
                 date_follow:date_follow,
                 time_follow:time_follow,
                 follow_status:follow_status,
+                driver_pick_name:driver_pick_name,
+                driver_pick_number:driver_pick_number,
+                driver_drop_name:driver_drop_name,
+                driver_drop_number:driver_drop_number,
+
                 odometer:odometer,
                 job_summary:JSON.stringify(jobs_summary_list),
                 es_reason:escalation_reason,
@@ -1544,6 +1553,10 @@ var Global = {
             odometer = $('#customer-detail #cust_odometer').val()
             escalation_reason = $('#customer-detail #escalation_reason').val()
             escalation_resolution = $('#customer-detail #escalation_resolution').val()
+               driver_pick_name = $('#customer-detail #driver_pick_name').val()
+            driver_pick_number = $('#customer-detail #driver_pick_number').val()
+            driver_drop_name = $('#customer-detail #driver_drop_name').val()
+            driver_drop_number = $('#customer-detail #driver_drop_number').val()
 
             // ALL_JOBS_ADMIN = comment_n
             jobs_summary_list = []
@@ -1587,6 +1600,10 @@ var Global = {
                 job_summary:JSON.stringify(jobs_summary_list),
                 es_reason:escalation_reason,
                 es_resolution:escalation_resolution,
+                driver_pick_name:driver_pick_name,
+                driver_pick_number:driver_pick_number,
+                driver_drop_name:driver_drop_name,
+                driver_drop_number:driver_drop_number,
             }, "post", _this, _this.loadCustomerupdate2,null, '.loading-pane');
 
         }
@@ -4147,7 +4164,7 @@ var Global = {
                 // console.log(name_job)
                 price = 0
                 if (name_job != "" && name_job != " "){
-                    obj = {"Job":name_job,"Price":price}
+                    obj = {"Job":name_job,"Price":price,"Category":"NA"}
                     ALL_JOBS_NEW_BOOKING_LIST.push(obj)
                 }
             });
@@ -5497,6 +5514,8 @@ var Global = {
             }
             // if (is_agent)
             if (val.req_user_agent || val.req_user_staff || val.req_user_admin) {
+
+
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">email</i><input id="email" type="email" value ="' + val.cust_email + '"class="validate"><label for="email">Email</label></div>'
                 html += '</div>'
@@ -5530,6 +5549,19 @@ var Global = {
                     // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
                     html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" class="datepicker"><label for="date">Date Delivery</label></div>'
                     html += '</div>'
+                     html += '<div class="col s6 m6 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_pick_name" type="text" value ="' + val.driver_pick_name + '"class="validate"><label for="driver_pick_name">Drive PickUp Name</label></div>'
+                html += '</div>'
+                html += '<div class="col s6 m6 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_pick_number" type="number" value ="' + val.driver_pick_number + '"class="validate"><label for="driver_pick_number">Drive PickUp Number</label></div>'
+                html += '</div>'
+
+                html += '<div class="col s6 m6 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_drop_name" type="text" value ="' + val.driver_drop_name + '"class="validate"><label for="driver_drop_name">Drive PickUp Name</label></div>'
+                html += '</div>'
+                html += '<div class="col s6 m6 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_drop_number" type="number" value ="' + val.driver_drop_number + '"class="validate"><label for="driver_drop_number">Drive PickUp Number</label></div>'
+                html += '</div>'
 
                 }
                 // html += '<div class="col s12 m12 l12">'
@@ -5673,6 +5705,7 @@ var Global = {
                     html += '</div>'
                 }
             }else{
+
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">email</i><input id="email" disabled type="email" value ="' + val.cust_email + '"class="validate"><label for="email">Email</label></div>'
                 html += '</div>'
@@ -5695,6 +5728,20 @@ var Global = {
                     html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" disabled class="datepicker"><label for="date">Date Delivery</label></div>'
                     // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
                     html += '</div>'
+                        html += '<div class="col s6 m6 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_pick_name" type="text" disabled value ="' + val.driver_pick_name + '"class="validate"><label for="driver_pick_name">Drive PickUp Name</label></div>'
+                    html += '</div>'
+                    html += '<div class="col s6 m6 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_pick_number" type="number" disabled  value ="' + val.driver_pick_number + '"class="validate"><label for="driver_pick_number">Drive PickUp Number</label></div>'
+                    html += '</div>'
+
+                    html += '<div class="col s6 m6 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_drop_name" type="text" disabled  value ="' + val.driver_drop_name + '"class="validate"><label for="driver_drop_name">Drive PickUp Name</label></div>'
+                    html += '</div>'
+                    html += '<div class="col s6 m6 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_drop_number" type="number" disabled  value ="' + val.driver_drop_number + '"class="validate"><label for="driver_drop_number">Drive PickUp Number</label></div>'
+                    html += '</div>'
+
                 }else{
 
                 }
@@ -7208,6 +7255,10 @@ var Global = {
         odometer = $('#customer-detail #cust_odometer').val()
         escalation_reason = $('#customer-detail #escalation_reason').val()
         escalation_resolution = $('#customer-detail #escalation_resolution').val()
+        driver_pick_name = $('#customer-detail #driver_pick_name').val()
+            driver_pick_number = $('#customer-detail #driver_pick_number').val()
+            driver_drop_name = $('#customer-detail #driver_drop_name').val()
+            driver_drop_number = $('#customer-detail #driver_drop_number').val()
 
         jobs_summary_list = []
         $('#customer-detail .jobs-list .job-row').each(function(){
@@ -7243,6 +7294,10 @@ var Global = {
             job_summary : JSON.stringify(jobs_summary_list),
             es_reason:escalation_reason,
             es_resolution:escalation_resolution,
+            driver_pick_name:driver_pick_name,
+                driver_pick_number:driver_pick_number,
+                driver_drop_name:driver_drop_name,
+                driver_drop_number:driver_drop_number,
 
         }, "post", Global, Global.loadCustomerupdate,null, '.loading-pane');
 

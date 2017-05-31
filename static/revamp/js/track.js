@@ -476,6 +476,24 @@ var Global = {
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Engineer Details</label></div>'
                 html += '</div>'
+
+                 html += '<div class="col s12 m12 l12">'
+                    html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" disabled class="datepicker"><label for="date">Date Delivery</label></div>'
+                    // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+                    html += '</div>'
+                        html += '<div class="col s6 m6 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_pick_name" type="text" disabled value ="' + val.driver_pick_name + '"class="validate"><label for="driver_pick_name">Drive PickUp Name</label></div>'
+                    html += '</div>'
+                    html += '<div class="col s6 m6 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_pick_number" type="number" disabled  value ="' + val.driver_pick_number + '"class="validate"><label for="driver_pick_number">Drive PickUp Number</label></div>'
+                    html += '</div>'
+
+                    html += '<div class="col s6 m6 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_drop_name" type="text" disabled  value ="' + val.driver_drop_name + '"class="validate"><label for="driver_drop_name">Drive PickUp Name</label></div>'
+                    html += '</div>'
+                    html += '<div class="col s6 m6 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_drop_number" type="number" disabled  value ="' + val.driver_drop_number + '"class="validate"><label for="driver_drop_number">Drive PickUp Number</label></div>'
+                    html += '</div>'
                 // html += '</div>'
 
             // if (is_agent)
