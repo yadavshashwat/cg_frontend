@@ -3971,6 +3971,7 @@ var Global = {
             html =''
             new_container = container.clone().removeClass('invisible').removeClass('to-copy-row');
             new_container.appendTo(container_parent);
+            calculate_items()
         });
         // -- DELETE ITEM
         $('#new-booking .service-select').on('click',' .service-row .delete-item',function(){
@@ -6889,15 +6890,14 @@ var Global = {
         TOTAL_JOBS_NEW_BOOKING = 0;
         ADD_DISCOUNT = 0;
 
-
+        console.log("1")
 
 
         // ALL_JOBS = '';
         // CURRENT_CART =[];
         // JOBS_SUMMARY=[]
         $.each(data['cart_details'], function(ix, val) {
-
-
+            
             jsLen = val.default_comp.length;
             for (i = 0; i < jsLen; i++) {
                 CURRENT_CART_NEW_BOOKING.push(val.default_comp[i])
@@ -6909,7 +6909,7 @@ var Global = {
                 ALL_JOBS_NEW_BOOKING_LIST.push(job_obj)
             }else{
                 ALL_JOBS_NEW_BOOKING = ALL_JOBS_NEW_BOOKING +', '+val.job_name;
-                job_obj = {"Job":val.job_name,"Price":val.total_price}
+                job_obj = {"Job":val.job_name,"Price":val.total_price,"Category":val.service_cat}
                 ALL_JOBS_NEW_BOOKING_LIST.push(job_obj)
             }
             JOBS_SUMMARY_NEW_BOOKING.push({'category':val.service_cat,'job_name':val.job_name,'price_total':val.total_price,'price_part':val.total_part,'price_labour':val.total_labour,'price_discount':val.total_discount,"doorstep":val.doorstep})
