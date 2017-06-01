@@ -1224,36 +1224,36 @@ var Global = {
             $('#customer-detail .booking-data').show();
             $('#customer-detail .booking-job-data').hide();
             $('#customer-detail .feedback-data').hide();
-                                    $('#customer-detail .booking-job-card').hide();
+            $('#customer-detail .booking-job-card').hide();
 
             $('#customer-detail .service-detail').removeClass('selected')
             $('#customer-detail .feedback-detail').removeClass('selected')
             $('#customer-detail .cust-detail').addClass('selected')
-                                    $('#customer-detail .job-card-detail').removeClass('selected')
+            $('#customer-detail .job-card-detail').removeClass('selected')
 
         });
         $('#customer-detail .service-detail').click(function(){
             $('#customer-detail .booking-data').hide();
             $('#customer-detail .booking-job-data').show();
             $('#customer-detail .feedback-data').hide();
-                                    $('#customer-detail .booking-job-card').hide();
+            $('#customer-detail .booking-job-card').hide();
 
             $('#customer-detail .feedback-detail').removeClass('selected')
             $('#customer-detail .cust-detail').removeClass('selected')
             $('#customer-detail .service-detail').addClass('selected')
-                                    $('#customer-detail .job-card-detail').removeClass('selected')
+            $('#customer-detail .job-card-detail').removeClass('selected')
 
         });
         $('#customer-detail .feedback-detail').click(function(){
             $('#customer-detail .booking-data').hide();
             $('#customer-detail .booking-job-data').hide();
             $('#customer-detail .feedback-data').show();
-                        $('#customer-detail .booking-job-card').hide();
+            $('#customer-detail .booking-job-card').hide();
 
             $('#customer-detail .feedback-detail').addClass('selected')
             $('#customer-detail .cust-detail').removeClass('selected')
             $('#customer-detail .service-detail').removeClass('selected')
-                        $('#customer-detail .job-card-detail').removeClass('selected')
+            $('#customer-detail .job-card-detail').removeClass('selected')
 
         });
         $('#customer-detail .job-card-detail').click(function(){
@@ -1271,29 +1271,38 @@ var Global = {
 
         $('#customer-detail').on('click','.btn-addjob',function(){
             container_parent = $('#customer-detail .jobs-list')
-                html = ''
-                html += '<div class="row job-row">'
-                html += '<div class="col s5 m7 l7 job-summary-name">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name-'+ (NUM_JOBS+1) +'"  type="text" value=""><label for="job_name-'+ (NUM_JOBS+1) +'" >Job</label></div>'
-                html += '</div>'
+            html = ''
+            html += '<div class="row job-row">'
+            html += '<div class="col s5 m7 l7 job-summary-name">'
+            html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name-'+ (NUM_JOBS+1) +'"  type="text" value=""><label for="job_name-'+ (NUM_JOBS+1) +'" >Job</label></div>'
+            html += '</div>'
 
-                html += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
-                html += '<input type="checkbox" id="pre-'+ (NUM_JOBS+1) +'" /><label for="pre-'+ (NUM_JOBS+1) +'"></label>'
-                html += '</div>'
+            html += '<div class="col s2 m1 l1 job-summary-pre centered-text">'
+            html += '<input type="radio" name="groupok' + (NUM_JOBS + 1) + '" id="pre-ok-'+ (NUM_JOBS+1) +'" /><label for="pre-ok-'+ (NUM_JOBS+1) +'"></label>'
+            html += '</div>'
+            html += '<div class="col s2 m1 l1 job-summary-pre centered-text">'
+            html += '<input type="radio" name="groupok' + (NUM_JOBS + 1) + '" id="pre-notok-'+ (NUM_JOBS+1) +'" /><label for="pre-notok-'+ (NUM_JOBS+1) +'"></label>'
+            html += '</div>'
 
-                html += '<div class="col s3 m2 l2 job-summary-post centered-text">'
-                html += '<input type="checkbox" id="post-'+ (NUM_JOBS+1) +'" /><label for="post-'+ (NUM_JOBS+1) +'"></label>'
-                html += '</div>'
+            html += '<div class="col s2 m1 l1 job-summary-post centered-text">'
+            html += '<input type="radio"  name="groupnotok' + (NUM_JOBS + 1)  +'" id="post-ok-'+ (NUM_JOBS+1) +'" /><label for="post-ok-'+ (NUM_JOBS+1) +'"></label>'
+            html += '</div>'
 
-                html += '<div class="col s1 m1 l1 centered-text x20">'
-                html += '<i class="fa fa-trash-o delete-job"></i>'
-                html += '</div>'
+            html += '<div class="col s2 m1 l1 job-summary-post centered-text">'
+            html += '<input type="radio" name="groupnotok' + (NUM_JOBS + 1)  +'"  id="post-notok-'+ (NUM_JOBS+1) +'" /><label for="post-notok-'+ (NUM_JOBS+1) +'"></label>'
+            html += '</div>'
 
-                html += '</div>'
-                NUM_JOBS = NUM_JOBS + 1;
+            html += '<div class="col s1 m1 l1 centered-text x20">'
+            html += '<i class="fa fa-trash-o delete-job"></i>'
+            html += '</div>'
+
+            html += '</div>'
+            NUM_JOBS = NUM_JOBS + 1;
             // var row = $('#customer-detail .job-row.to-copy').clone()
             // row.removeClass('invisible').removeClass('to-copy')
             container_parent.append(html)
+
+
         })
 
         $('#customer-detail').on('click','.delete-job',function(){
@@ -1485,17 +1494,21 @@ var Global = {
             jobs_summary_list = []
             $('#customer-detail .jobs-list .job-row').each(function(){
                 name = $(this).find('.job-summary-name input').val()
-                pre = $(this).find('.job-summary-pre input').is(':checked');
-                post = $(this).find('.job-summary-post input').is(':checked');
-                console.log(pre)
-                console.log(post)
+                preok = $(this).find('.job-summary-pre-ok input').is(':checked');
+                prenotok = $(this).find('.job-summary-pre-notok input').is(':checked');
+
+                postok = $(this).find('.job-summary-post-ok input').is(':checked');
+                postnotok = $(this).find('.job-summary-post-notok input').is(':checked');
+
+                // console.log(pre)
+                // console.log(post)
                 price = 0
                 // if (pre){
                 //
                 // }
 
                 if (name != "" && name != " "){
-                    obj = {"Job":name,"Pre":pre,"Post":post,"Price":price}
+                    obj = {"Job":name,"Preok":preok,"Prenotok":prenotok,"Postok":postok,"Postnotok":postnotok,"Price":price}
                     jobs_summary_list.push(obj)
 
                 }
@@ -1531,7 +1544,7 @@ var Global = {
             }, "post", _this, _this.loadCustomerupdate,null, '.loading-pane');
 
         }
-          var update_cust2 = function(){
+        var update_cust2 = function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             email_n = $('#customer-detail #email').val();
             reg_n = $('#customer-detail #cust_regnumber').val();
@@ -1553,7 +1566,7 @@ var Global = {
             odometer = $('#customer-detail #cust_odometer').val()
             escalation_reason = $('#customer-detail #escalation_reason').val()
             escalation_resolution = $('#customer-detail #escalation_resolution').val()
-               driver_pick_name = $('#customer-detail #driver_pick_name').val()
+            driver_pick_name = $('#customer-detail #driver_pick_name').val()
             driver_pick_number = $('#customer-detail #driver_pick_number').val()
             driver_drop_name = $('#customer-detail #driver_drop_name').val()
             driver_drop_number = $('#customer-detail #driver_drop_number').val()
@@ -1562,17 +1575,21 @@ var Global = {
             jobs_summary_list = []
             $('#customer-detail .jobs-list .job-row').each(function(){
                 name = $(this).find('.job-summary-name input').val()
-                pre = $(this).find('.job-summary-pre input').is(':checked');
-                post = $(this).find('.job-summary-post input').is(':checked');
-                console.log(pre)
-                console.log(post)
+                preok = $(this).find('.job-summary-pre-ok input').is(':checked');
+                prenotok = $(this).find('.job-summary-pre-notok input').is(':checked');
+
+                postok = $(this).find('.job-summary-post-ok input').is(':checked');
+                postnotok = $(this).find('.job-summary-post-notok input').is(':checked');
+
+                // console.log(pre)
+                // console.log(post)
                 price = 0
                 // if (pre){
                 //
                 // }
 
                 if (name != "" && name != " "){
-                    obj = {"Job":name,"Pre":pre,"Post":post,"Price":price}
+                    obj = {"Job":name,"Preok":preok,"Prenotok":prenotok,"Postok":postok,"Postnotok":postnotok,"Price":price}
                     jobs_summary_list.push(obj)
 
                 }
@@ -1607,6 +1624,14 @@ var Global = {
             }, "post", _this, _this.loadCustomerupdate2,null, '.loading-pane');
 
         }
+
+
+        $('#customer-detail').on('click','.btn-callcustomer',function(){
+            cust_number = $('#customer-detail #cust_number').val()
+            Commons.ajaxData('call_customer', {cust_no: cust_number
+            }, "post", _this, _this.loadCallCustomer,null, '.loading-pane');
+
+        })
         $('#customer-detail .btn-update-cust').click(update_cust);
         $('#customer-detail .btn-update-cust2').click(update_cust2);
 
@@ -2936,7 +2961,7 @@ var Global = {
             $('#cust_filter_invoice_number').val('')
             $('#cust_filter_bill_name').val('')
             $('#cust_filter_booking_id').val('')
-             Materialize.updateTextFields();
+            Materialize.updateTextFields();
             Commons.ajaxData('view_all_bills', {bill_type:"Invoice"}, "get", _this, _this.loadbillAll,null, '.loading-pane');
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/all/'
@@ -2947,7 +2972,7 @@ var Global = {
             invoice_number = $('#cust_filter_invoice_number').val()
             name = $('#cust_filter_bill_name').val()
             booking_id = $('#cust_filter_booking_id').val()
-             Commons.ajaxData('view_all_bills', {bill_type:"Invoice",cust_name:name,bid:booking_id, invoice_number : invoice_number}, "get", _this, _this.loadbillAll,null, '.loading-pane');
+            Commons.ajaxData('view_all_bills', {bill_type:"Invoice",cust_name:name,bid:booking_id, invoice_number : invoice_number}, "get", _this, _this.loadbillAll,null, '.loading-pane');
         })
 
 
@@ -2970,7 +2995,7 @@ var Global = {
             $('#bill-detail  .single-bill').removeClass('selected')
             $('#bill-detail  .all-bill').removeClass('selected')
             $('#bill-detail  .all-pre-bill').addClass('selected')
-             $('.bill-filter-summary').hide()
+            $('.bill-filter-summary').hide()
             Commons.ajaxData('view_all_bills', {bill_type:"Pre-Invoice"}, "get", _this, _this.loadprebillAll,null, '.loading-pane');
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,3).join('/')+'/pre/'
@@ -3100,8 +3125,8 @@ var Global = {
                 Commons.ajaxData('fetch_all_users', {number2: cust_number}, "get", _this, _this.loadUserBilldata);
 
             },1000);
-                //      // $('#cust_bill_number').removeClass('invalid')
-            });
+            //      // $('#cust_bill_number').removeClass('invalid')
+        });
         // });                // console.log(cust_number)
 
 
@@ -3116,7 +3141,7 @@ var Global = {
                 Commons.ajaxData('fetch_all_users', {number2: cust_number}, "get", _this, _this.loadUserBilldata);
                 $('#cust_bill_number').removeClass('invalid')
                 $('#bill-detail #cust_bill_number').blur()
-                 $(this).closest('.input-field').find('ul').hide()
+                $(this).closest('.input-field').find('ul').hide()
             }else if(code == 37 || code == 38 || code == 39 || code == 40){
                 var cust_number = $(this).closest('.input-field').find('li.active').text();
                 Commons.ajaxData('fetch_all_users', {number2: cust_number}, "get", _this, _this.loadUserBilldata);
@@ -3360,31 +3385,31 @@ var Global = {
             if (bill_owner == ""){
                 error = 1
                 $('#bill_type').find('select').addClass('invalid-select-box')
-            // console.log("Point 2")
+                // console.log("Point 2")
 
             }
             if(cust_name == ""){
                 error = 1
                 $('#bill-detail #cust_bill_name').addClass("invalid");
-            // console.log("Point 3")
+                // console.log("Point 3")
 
             }
             if(cust_number != "" && (cust_number > 9999999999 || cust_number < 1000000000 || cust_number.length != 10)){
                 console.log(cust_number.legth)
                 error = 1
                 $('#bill-detail #cust_bill_number').addClass("invalid");
-            // console.log("Point 4")
+                // console.log("Point 4")
 
             }
             if(agent_name == ""){
                 error = 1
                 $('#bill-detail #agent_bill_name').addClass("invalid");
-            // console.log("Point 5")
+                // console.log("Point 5")
 
             }
             if(CURRENT_BILL_CART.length == 0){
                 error = 1
-            // console.log("Point 6")
+                // console.log("Point 6")
 
             }
             if(error == 1){
@@ -4002,9 +4027,9 @@ var Global = {
                 Commons.ajaxData('fetch_all_users', {number2: cust_number}, "get", _this, _this.loadUserLeaddata);
 
             },100);
-                //      // $('#cust_bill_number').removeClass('invalid')
-            });
-            $('#new-booking #telephone').on('keyup',function(e,event,data){
+            //      // $('#cust_bill_number').removeClass('invalid')
+        });
+        $('#new-booking #telephone').on('keyup',function(e,event,data){
             var code = (e.keyCode || e.which);
             // console.log(code)
             // alfa = $(this).find('li:hover')
@@ -4015,7 +4040,7 @@ var Global = {
                 Commons.ajaxData('fetch_all_users', {number2: cust_number}, "get", _this, _this.loadUserLeaddata);
                 $('#telephone').removeClass('invalid')
                 $('#new-booking #telephone').blur()
-                 $(this).closest('.input-field').find('ul').hide()
+                $(this).closest('.input-field').find('ul').hide()
             }else if(code == 37 || code == 38 || code == 39 || code == 40){
                 var cust_number = $(this).closest('.input-field').find('li.active').text();
                 Commons.ajaxData('fetch_all_users', {number2: cust_number}, "get", _this, _this.loadUserLeaddata);
@@ -4025,7 +4050,7 @@ var Global = {
             }
         });
 
-        
+
         $('#new-booking .btn-send-booking').click(function () {
             car_box =  document.getElementById('Carnew');
             bike_box =  document.getElementById('Bikenew');
@@ -5367,11 +5392,11 @@ var Global = {
         }
         $.each(data, function(ix, val) {
             html += '<div class="row">'
-            html += '<div id="booking_id" class="col s12 m12 l12 book_id" booking_data_id="'+val.id +'" booking_id="'+val.booking_id+'"><h4><b>#'+val.booking_id+'</h4></b></div>'
+            html += '<div id="booking_id" class="col s12 m12 l12 book_id" booking_data_id="' + val.id + '" booking_id="' + val.booking_id + '"><h4><b>#' + val.booking_id + '</h4></b></div>'
             html += '</div>'
             html += '<div class="row">'
             html += '<div class="col s12 m12 l12">'
-            html += '<div class="status-2 '+val.status.replace(" ","-") +'">'+val.status +'</div>'
+            html += '<div class="status-2 ' + val.status.replace(" ", "-") + '">' + val.status + '</div>'
             html += '</div>'
             html += '</div>'
 
@@ -5390,21 +5415,25 @@ var Global = {
                     html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text"  value ="' + val.booking_user_name + '"class="validate"><label for="cust_name">Name</label></div>'
                 }
                 html += '</div>'
-                html += '<div class="col s12 m12 l6">'
+                html += '<div class="col s8 m8 l4">'
                 if (val.booking_user_number == "") {
                     html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"   value ="' + val.cust_number + '"class="validate"><label for="cust_number">Number</label></div>'
                 } else {
                     html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"   value ="' + val.booking_user_number + '"class="validate"><label for="cust_number">Number</label></div>'
                 }
                 html += '</div>'
+                html += '<div class="col s4 m4 l2">'
+                html += '<button class="waves-effect waves-light btn cg-primary btn-callcustomer page-wide" type="submit" name="action">Call<i class="material-icons right">phone</i></button>'
+                html += '</div>'
+
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">my_location</i><input id="cust_address" type="text"   value ="' + val.cust_address + '"class="validate"><label for="cust_address">Address</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">location_on</i><input id="cust_locality" type="text"   value ="' +  val.cust_locality + '"class="validate"><label for="cust_address">Locality</label></div>'
+                html += '<div class="input-field"><i class="material-icons prefix">location_on</i><input id="cust_locality" type="text"   value ="' + val.cust_locality + '"class="validate"><label for="cust_address">Locality</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">business</i><input id="cust_city" type="text"   value ="'  + val.cust_city + '"class="validate"><label for="cust_address">City</label></div>'
+                html += '<div class="input-field"><i class="material-icons prefix">business</i><input id="cust_city" type="text"   value ="' + val.cust_city + '"class="validate"><label for="cust_address">City</label></div>'
                 html += '</div>'
 
                 html += '<div class="col s12 m12 l6">'
@@ -5418,9 +5447,9 @@ var Global = {
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
                 html += '</div>'
                 html += '<div class="col s4 m4 l2">'
-                if (val.bill_generation_flag){
+                if (val.bill_generation_flag) {
                     html += '<button class="waves-effect waves-light btn cg-primary btn-modifypayement page-wide" disabled type="submit" name="action">Modify<i class="material-icons right">mode_edit</i></button>'
-                }else{
+                } else {
                     html += '<button class="waves-effect waves-light btn cg-primary btn-modifypayement page-wide" type="submit" name="action">Modify<i class="material-icons right">mode_edit</i></button>'
                 }
                 html += '</div>'
@@ -5436,20 +5465,20 @@ var Global = {
                 html += '<option value="">Source</option>'
                 sourcelen = SOURCES.length;
                 for (i = 0; i < sourcelen; i++) {
-                    if (val.source == SOURCES[i]){
-                        html += '<option value="'+SOURCES[i]+'" selected>'+SOURCES[i]+'</option>'
-                    }else{
-                        html += '<option value="'+SOURCES[i]+'">'+SOURCES[i]+'</option>'
+                    if (val.source == SOURCES[i]) {
+                        html += '<option value="' + SOURCES[i] + '" selected>' + SOURCES[i] + '</option>'
+                    } else {
+                        html += '<option value="' + SOURCES[i] + '">' + SOURCES[i] + '</option>'
                     }
                 }
-                html +='</select>'
+                html += '</select>'
                 html += '</div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Engineer Details</label></div>'
                 html += '</div>'
                 html += '</div>'
-            }else{
+            } else {
                 html += '<div class="row">'
                 if (val.booking_user_name != val.cust_name) {
                     html += '<div class="col s12 m12 l12">'
@@ -5463,21 +5492,36 @@ var Global = {
                     html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="' + val.booking_user_name + '"class="validate"><label for="cust_name">Name</label></div>'
                 }
                 html += '</div>'
-                html += '<div class="col s12 m12 l6">'
-                if (val.booking_user_number == "") {
-                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="' + val.cust_number + '"class="validate"><label for="cust_number">Number</label></div>'
+                if (val.req_user_agent) {
+                    html += '<div class="col s8 m8 l4">'
+                    if (val.booking_user_number == "") {
+                        html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"   value ="' + val.cust_number + '"class="validate"><label for="cust_number">Number</label></div>'
+                    } else {
+                        html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"   value ="' + val.booking_user_number + '"class="validate"><label for="cust_number">Number</label></div>'
+                    }
+                    html += '</div>'
+                    html += '<div class="col s4 m4 l2">'
+                    html += '<button class="waves-effect waves-light btn cg-primary btn-callcustomer page-wide" type="submit" name="action">Call<i class="material-icons right">phone</i></button>'
+                    html += '</div>'
+
+
                 } else {
-                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="' + val.booking_user_number + '"class="validate"><label for="cust_number">Number</label></div>'
+                    html += '<div class="col s12 m12 l6">'
+                    if (val.booking_user_number == "") {
+                        html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="' + val.cust_number + '"class="validate"><label for="cust_number">Number</label></div>'
+                    } else {
+                        html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="' + val.booking_user_number + '"class="validate"><label for="cust_number">Number</label></div>'
+                    }
+                    html += '</div>'
                 }
-                html += '</div>'
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">my_location</i><input id="cust_address" disabled type="text"   value ="' + val.cust_address + '"class="validate"><label for="cust_address">Address</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">location_on</i><input id="cust_locality" disabled  type="text"   value ="' +  val.cust_locality + '"class="validate"><label for="cust_address">Locality</label></div>'
+                html += '<div class="input-field"><i class="material-icons prefix">location_on</i><input id="cust_locality" disabled  type="text"   value ="' + val.cust_locality + '"class="validate"><label for="cust_address">Locality</label></div>'
                 html += '</div>'
                 html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">business</i><input id="cust_city" type="text" disabled    value ="'  + val.cust_city + '"class="validate"><label for="cust_address">City</label></div>'
+                html += '<div class="input-field"><i class="material-icons prefix">business</i><input id="cust_city" type="text" disabled    value ="' + val.cust_city + '"class="validate"><label for="cust_address">City</label></div>'
                 html += '</div>'
                 // html += '<div class="col s12 m12 l6">'
                 // html += '<div class="input-field"><i class="material-icons prefix">my_location</i><input id="cust_address" type="text"  disabled value ="' + val.cust_address + ', ' + val.cust_locality + ', ' + val.cust_city + '"class="validate"><label for="cust_address">Address</label></div>'
@@ -5488,17 +5532,18 @@ var Global = {
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_coupon" type="text" disabled  value ="' + val.coupon + '"class="validate"><label for="cust_coupon">Coupon</label></div>'
                 html += '</div>'
-                if (val.req_user_agent){
+                if (val.req_user_agent) {
                     html += '<div class="col s8 m8 l4">'
                     html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
                     html += '</div>'
                     html += '<div class="col s4 m4 l2">'
-                    if (val.bill_generation_flag){
+                    if (val.bill_generation_flag) {
                         html += '<button class="waves-effect waves-light btn cg-primary btn-modifypayement page-wide" disabled type="submit" name="action">Modify<i class="material-icons right">mode_edit</i></button>'
-                    }else{
+                    } else {
                         html += '<button class="waves-effect waves-light btn cg-primary btn-modifypayement page-wide" type="submit" name="action">Modify<i class="material-icons right">mode_edit</i></button>'
-                    }                    html += '</div>'
-                }else{
+                    }
+                    html += '</div>'
+                } else {
                     html += '<div class="col s12 m12 l6">'
                     html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
                     html += '</div>'
@@ -5550,19 +5595,19 @@ var Global = {
                     // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
                     html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" class="datepicker"><label for="date">Date Delivery</label></div>'
                     html += '</div>'
-                     html += '<div class="col s6 m6 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_pick_name" type="text" value ="' + val.driver_pick_name + '"class="validate"><label for="driver_pick_name">Drive PickUp Name</label></div>'
-                html += '</div>'
-                html += '<div class="col s6 m6 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_pick_number" type="number" value ="' + val.driver_pick_number + '"class="validate"><label for="driver_pick_number">Drive PickUp Number</label></div>'
-                html += '</div>'
+                    html += '<div class="col s6 m6 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_pick_name" type="text" value ="' + val.driver_pick_name + '"class="validate"><label for="driver_pick_name">PickUp Driver Name</label></div>'
+                    html += '</div>'
+                    html += '<div class="col s6 m6 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_pick_number" type="number"   value ="' + val.driver_pick_number + '"class="validate"><label for="driver_pick_number">PickUp Driver Number</label></div>'
+                    html += '</div>'
 
-                html += '<div class="col s6 m6 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_drop_name" type="text" value ="' + val.driver_drop_name + '"class="validate"><label for="driver_drop_name">Drive PickUp Name</label></div>'
-                html += '</div>'
-                html += '<div class="col s6 m6 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_drop_number" type="number" value ="' + val.driver_drop_number + '"class="validate"><label for="driver_drop_number">Drive PickUp Number</label></div>'
-                html += '</div>'
+                    html += '<div class="col s6 m6 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_drop_name" type="text"   value ="' + val.driver_drop_name + '"class="validate"><label for="driver_drop_name">Drop Driver Name</label></div>'
+                    html += '</div>'
+                    html += '<div class="col s6 m6 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_drop_number" type="number"   value ="' + val.driver_drop_number + '"class="validate"><label for="driver_drop_number">Drop Driver Number</label></div>'
+                    html += '</div>'
 
                 }
                 // html += '<div class="col s12 m12 l12">'
@@ -5573,7 +5618,7 @@ var Global = {
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
                 html += '</div>'
-                if (val.escalation_flag){
+                if (val.escalation_flag) {
                     html += '<div class="col s12 m12 l12">'
                     html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="escalation_reason" type="text" class="materialize-textarea">' + val.escalation_reason + '</textarea><label for="escalation_reason">Escalation Reason</label></div>'
                     html += '</div>'
@@ -5581,7 +5626,7 @@ var Global = {
                     html += '<div class="col s12 m12 l12">'
                     html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="escalation_resolution" type="text"  class="materialize-textarea">' + val.escalation_resolution + '</textarea><label for="escalation_resolution">Escalation Resolution</label></div>'
                     html += '</div>'
-                }else{
+                } else {
                     html += '<div class="col s12 m12 l12 invisible">'
                     html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="escalation_reason" type="text" class="materialize-textarea">' + val.escalation_reason + '</textarea><label for="escalation_reason">Escalation Reason</label></div>'
                     html += '</div>'
@@ -5597,329 +5642,403 @@ var Global = {
                 html_jc += '<b>JOBS CARD DETAILS</b><br><br>'
 
                 jobLen = val.job_summary.length;
-                // html += '<div class="jobs-list">'
-                // for (i = 0; i < jobLen; i++) {
-                //     // for (i = 0; i < 2; i++) {
-                //     html += '<div class="row job-row">'
-                //
-                //     html += '<div class="col s9 m9 l9 job-summary-name">'
-                //     html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name'+i+'"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'" >Job - ' + (i+1) +'</label></div>'
-                //     html += '</div>'
-                //
-                //     //
-                //     // html += '<div class="col s2 m2 l2 job-summary-pre">'
-                //     // html += '<div class="input-field"><input id="job_name'+i+'"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'" >Job - ' + (i+1) +'</label></div>'
-                //     // html += '</div>'
-                //     //
-                //     // html += '<div class="col s2 m2 l2 job-summary-post">'
-                //     // html += '<div class="input-field">'
-                //     // html += '<i class="material-icons prefix">receipt</i><input id="job_name'+i+'"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'" >Job - ' + (i+1) +'</label></div>'
-                //     // html += '</div>'
-                //
-                //
-                //
-                //     html += '<div class="col s2 m2 l2 job-summary-price">'
-                //     html += '<div class="input-field"><input id="job_price'+i+'"  type="number" value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'" >Price - ' + (i+1) +'</label></div>'
-                // }
-                //
                 html_jc += '<div class="jobs-list">'
                 html_jc += '<div class="row">'
-                html_jc += '<div class="col s5 m5 l7 job-summary-name centered-text"><b>Job Name</b></div>'
-                html_jc += '<div class="col s3 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
-                html_jc += '<div class="col s3 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+                html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
+                html_jc += '<div class="col s4 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
+                html_jc += '<div class="col s4 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+                html_jc += '</div>'
+                html_jc += '<div class="row">'
+                html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b></b></div>'
+                html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
+                html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
+                html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
+                html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
                 html_jc += '</div>'
 
                 for (i = 0; i < jobLen; i++) {
                     // for (i = 0; i < 2; i++) {
                     html_jc += '<div class="row job-row">'
 
-                    html_jc += '<div class="col s5 m7 l7 job-summary-name">'
+                    html_jc += '<div class="col s4 m7 l7 job-summary-name">'
                     html_jc += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name' + i + '"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
                     html_jc += '</div>'
-                    if (val.job_summary[i]['Pre']){
-                    html_jc += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
-                    html_jc += '<input type="checkbox" checked id="pre-' + (i + 1) + '" /><label for="pre-' + (i + 1) + '"></label>'
-                    html_jc += '</div>'
+                    if (val.job_summary[i]['Preok']) {
+                        html_jc += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
+                        html_jc += '<input type="radio" name="groupok' + (i + 1) + '" checked id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
+                        html_jc += '</div>'
+                    } else {
+                        html_jc += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
+                        html_jc += '<input type="radio" name="groupok' + (i + 1) + '" id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
+                        html_jc += '</div>'
+
+                    }
+                    if (val.job_summary[i]['Prenotok']) {
+                        html_jc += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
+                        html_jc += '<input type="radio" name="groupok' + (i + 1) + '" checked id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
+                        html_jc += '</div>'
+                    } else {
+                        html_jc += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
+                        html_jc += '<input type="radio" name="groupok' + (i + 1) + '" id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
+                        html_jc += '</div>'
+
+                    }
+                    if (val.req_user_agent){
+                        if(val.post_check_enable){
+                            if (val.job_summary[i]['Postok']) {
+                                html_jc += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                html_jc += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                                html_jc += '</div>'
+                            } else {
+                                html_jc += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                html_jc += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                                html_jc += '</div>'
+                            }
+                            if (val.job_summary[i]['Postnotok']) {
+                                html_jc += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                html_jc += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                                html_jc += '</div>'
+                            } else {
+                                html_jc += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                html_jc += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                                html_jc += '</div>'
+                            }
+
+                        }else{
+                            if (val.job_summary[i]['Postok']) {
+                                html_jc += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                html_jc += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                                html_jc += '</div>'
+
+                            } else {
+                                html_jc += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                html_jc += '<input type="radio"  name="groupnotok' + (i + 1) + '" disabled   id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                                html_jc += '</div>'
+
+                            }
+
+                            if (val.job_summary[i]['Postnotok']) {
+                                html_jc += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                html_jc += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled  checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                                html_jc += '</div>'
+
+                            } else {
+                                html_jc += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                html_jc += '<input type="radio"  name="groupnotok' + (i + 1) + '"  disabled  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                                html_jc += '</div>'
+
+                            }
+
+                        }
                     }else{
-                    html_jc += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
-                    html_jc += '<input type="checkbox" id="pre-' + (i + 1) + '" /><label for="pre-' + (i + 1) + '"></label>'
-                    html_jc += '</div>'
-                        
+
+                    if (val.job_summary[i]['Postok']) {
+                        html_jc += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                        html_jc += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                        html_jc += '</div>'
+
+                    } else {
+                        html_jc += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                        html_jc += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                        html_jc += '</div>'
+
                     }
 
-                  if (val.job_summary[i]['Post']){
-                    html_jc += '<div class="col s3 m2 l2 job-summary-post centered-text">'
-                    html_jc += '<input type="checkbox" checked id="post-' + (i + 1) + '" /><label for="post-' + (i + 1) + '"></label>'
-                    html_jc += '</div>'
+                    if (val.job_summary[i]['Postnotok']) {
+                        html_jc += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                        html_jc += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                        html_jc += '</div>'
 
-                  }else{
-                       html_jc += '<div class="col s3 m2 l2 job-summary-post centered-text">'
-                    html_jc += '<input type="checkbox" id="post-' + (i + 1) + '" /><label for="post-' + (i + 1) + '"></label>'
-                    html_jc += '</div>'
+                    } else {
+                        html_jc += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                        html_jc += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                        html_jc += '</div>'
 
-                  }
-
-
-
-                    // html += '<div class="col s2 m2 l2 job-summary-price">'
-                    // html += '<div class="input-field"><input id="job_price'+i+'"  type="number" value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'" >Price - ' + (i+1) +'</label></div>'
-                    // html += '</div>'
-                    html_jc += '<div class="col s1 m1 l1 centered-text x20">'
-                    html_jc += '<i class="fa fa-trash-o delete-job"></i>'
-                    html_jc += '</div>'
-                    html_jc += '</div>'
-                    NUM_JOBS = (i + 1)
-                }
-                html_jc += '</div>'
-
-                html_jc+='<div class="col l12 s12 m12 centered-text">'
-                html_jc +='<button class="waves-effect waves-light btn cg-primary btn-addjob" type="submit" name="action">Add Jobs'
-                html_jc +='<i class="material-icons right">add</i></button></div><br><br>'
-
-
-                if (!val.booking_flag){
-                    html += '<div class="col s12 m12 l12">'
-                    html += '<b>FOLLOW UP SUMMARY</b><br><br>'
-
-                    fsLen = val.follow_up_status.length;
-
-                    for (i = 0; i < fsLen; i++) {
-                        // for (i = 0; i < 2; i++) {
-                        html += '<div class="row">'
-                        html += '<div class="col s12 m12 l2  follow-time-stamp">'
-                        html += val.follow_up_status[i]['Date']+' '+val.follow_up_status[i]['Time']
-                        html += '</div>'
-                        html += '<div class="col s12 m12 l10">'
-                        html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="status_details" type="text" disabled value ="'+ val.follow_up_status[i]['Status'] +'" class="validate"><label for="agent_details">Status - '+ (i+1) +'</label></div>'
-                        html += '</div>'
-                        html += '</div>'
                     }
-
-                    html += '<div class="row">'
-                    html += '<div class="col s12 m12 l2  follow-time-stamp">'
-                    html += ''
-                    html += '</div>'
-                    html += '<div class="col s12 m12 l10">'
-                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="status_details_new" type="text" value ="" class="validate"><label for="agent_details">Status - '+ (i+1) +'</label></div>'
-                    html += '</div>'
-                    html += '</div>'
-                    html += '</div>'
-                }
-            }else{
-
-                html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">email</i><input id="email" disabled type="email" value ="' + val.cust_email + '"class="validate"><label for="email">Email</label></div>'
-                html += '</div>'
-                html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_regnumber" disabled  type="text" value ="' + val.cust_regnumber + '"class="validate" style="text-transform: uppercase;"><label for="cust_regnumber">#Registration</label></div>'
-                html += '</div>'
-                html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">av_timer</i><input id="cust_odometer" disabled type="number" value ="' + val.odometer + '"class="validate" ><label for="cust_odometer">#Odometer</label></div>'
-                html += '</div>'
-
-                html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled class="datepicker"><label for="date">Date</label></div>'
-                // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
-                html += '</div>'
-                html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" disabled  value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
-                html += '</div>'
-                if (val.booking_flag){
-                    html += '<div class="col s12 m12 l12">'
-                    html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" disabled class="datepicker"><label for="date">Date Delivery</label></div>'
-                    // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
-                    html += '</div>'
-                        html += '<div class="col s6 m6 l6">'
-                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_pick_name" type="text" disabled value ="' + val.driver_pick_name + '"class="validate"><label for="driver_pick_name">Drive PickUp Name</label></div>'
-                    html += '</div>'
-                    html += '<div class="col s6 m6 l6">'
-                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_pick_number" type="number" disabled  value ="' + val.driver_pick_number + '"class="validate"><label for="driver_pick_number">Drive PickUp Number</label></div>'
-                    html += '</div>'
-
-                    html += '<div class="col s6 m6 l6">'
-                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_drop_name" type="text" disabled  value ="' + val.driver_drop_name + '"class="validate"><label for="driver_drop_name">Drive PickUp Name</label></div>'
-                    html += '</div>'
-                    html += '<div class="col s6 m6 l6">'
-                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_drop_number" type="number" disabled  value ="' + val.driver_drop_number + '"class="validate"><label for="driver_drop_number">Drive PickUp Number</label></div>'
-                    html += '</div>'
-
-                }else{
-
                 }
 
-                // html += '<div class="col s12 m12 l12">'
-                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" disabled class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
+
+
+
+
+                // html += '<div class="col s2 m2 l2 job-summary-price">'
+                // html += '<div class="input-field"><input id="job_price'+i+'"  type="number" value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'" >Price - ' + (i+1) +'</label></div>'
                 // html += '</div>'
-                html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
-                html += '</div>'
-                html_jc = ''
-                html_jc += '<div class="col s12 m12 l12">'
-                html_jc += '<b>JOBS CARD DETAILS</b><br><br>'
-
-                jobLen = val.job_summary.length;
-                                html += '<div class="jobs-list">'
-                html_jc += '<div class="row">'
-                html_jc += '<div class="col s5 m5 l8 job-summary-name centered-text"><b>Job Name</b></div>'
-                html_jc += '<div class="col s3 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
-                html_jc += '<div class="col s3 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+                html_jc += '<div class="col s1 m1 l1 centered-text x20">'
+                html_jc += '<i class="fa fa-trash-o delete-job"></i>'
                 html_jc += '</div>'
-
-                for (i = 0; i < jobLen; i++) {
-                    // for (i = 0; i < 2; i++) {
-                    html_jc += '<div class="row job-row">'
-
-                    html_jc += '<div class="col s5 m7 l8 job-summary-name">'
-                    html_jc += '<div class="input-field"><i class="material-icons prefix">receipt</i><input disabled  id="job_name' + i + '"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
-                    html_jc += '</div>'
-                    if (val.job_summary[i]['Pre']){
-                        html_jc += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
-                        html_jc += '<input type="checkbox"  disabled checked id="pre-' + (i + 1) + '" /><label for="pre-' + (i + 1) + '"></label>'
-                        html_jc += '</div>'
-                    }else{
-                        html_jc += '<div class="col s3 m2 l2 job-summary-pre centered-text">'
-                        html_jc += '<input type="checkbox"  disabled id="pre-' + (i + 1) + '" /><label for="pre-' + (i + 1) + '"></label>'
-                        html_jc += '</div>'
-                    }
-
-                  if (val.job_summary[i]['Post']){
-                    html_jc += '<div class="col s3 m2 l2 job-summary-post centered-text">'
-                    html_jc += '<input type="checkbox" disabled  checked id="post-' + (i + 1) + '" /><label for="post-' + (i + 1) + '"></label>'
-                    html_jc += '</div>'
-
-                  }else{
-                       html_jc += '<div class="col s3 m2 l2 job-summary-post centered-text">'
-                    html_jc += '<input type="checkbox" disabled id="post-' + (i + 1) + '" /><label for="post-' + (i + 1) + '"></label>'
-                    html_jc += '</div>'
-
-                  }
-
-
-
-                    // html += '<div class="col s2 m2 l2 job-summary-price">'
-                    // html += '<div class="input-field"><input id="job_price'+i+'"  type="number" value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'" >Price - ' + (i+1) +'</label></div>'
-                    // html += '</div>'
-                    // html += '<div class="col s1 m1 l1 centered-text x20">'
-                    // html += '<i class="fa fa-trash-o delete-job"></i>'
-                    // html += '</div>'
-                    html_jc += '</div>'
-                    NUM_JOBS = (i + 1)
-                }
                 html_jc += '</div>'
+                NUM_JOBS = (i + 1)
             }
             html_jc += '</div>'
-             if (val.req_user_agent){
+
+            html_jc += '<div class="col l12 s12 m12 centered-text">'
+            html_jc += '<button class="waves-effect waves-light btn cg-primary btn-addjob" type="submit" name="action">Add Jobs'
+            html_jc += '<i class="material-icons right">add</i></button></div><br><br>'
+
+
+            if (!val.booking_flag) {
+                html += '<div class="col s12 m12 l12">'
+                html += '<b>FOLLOW UP SUMMARY</b><br><br>'
+
+                fsLen = val.follow_up_status.length;
+
+                for (i = 0; i < fsLen; i++) {
+                    // for (i = 0; i < 2; i++) {
+                    html += '<div class="row">'
+                    html += '<div class="col s12 m12 l2  follow-time-stamp">'
+                    html += val.follow_up_status[i]['Date'] + ' ' + val.follow_up_status[i]['Time']
+                    html += '</div>'
+                    html += '<div class="col s12 m12 l10">'
+                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="status_details" type="text" disabled value ="' + val.follow_up_status[i]['Status'] + '" class="validate"><label for="agent_details">Status - ' + (i + 1) + '</label></div>'
+                    html += '</div>'
+                    html += '</div>'
+                }
+
+                html += '<div class="row">'
+                html += '<div class="col s12 m12 l2  follow-time-stamp">'
+                html += ''
+                html += '</div>'
+                html += '<div class="col s12 m12 l10">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="status_details_new" type="text" value ="" class="validate"><label for="agent_details">Status - ' + (i + 1) + '</label></div>'
+                html += '</div>'
+                html += '</div>'
+                html += '</div>'
+            }
+        } else {
+
+            html += '<div class="col s12 m12 l12">'
+            html += '<div class="input-field"><i class="material-icons prefix">email</i><input id="email" disabled type="email" value ="' + val.cust_email + '"class="validate"><label for="email">Email</label></div>'
+            html += '</div>'
+            html += '<div class="col s12 m12 l12">'
+            html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_regnumber" disabled  type="text" value ="' + val.cust_regnumber + '"class="validate" style="text-transform: uppercase;"><label for="cust_regnumber">#Registration</label></div>'
+            html += '</div>'
+            html += '<div class="col s12 m12 l12">'
+            html += '<div class="input-field"><i class="material-icons prefix">av_timer</i><input id="cust_odometer" disabled type="number" value ="' + val.odometer + '"class="validate" ><label for="cust_odometer">#Odometer</label></div>'
+            html += '</div>'
+
+            html += '<div class="col s12 m12 l12">'
+            html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled class="datepicker"><label for="date">Date</label></div>'
+            // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+            html += '</div>'
+            html += '<div class="col s12 m12 l12">'
+            html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" disabled  value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
+            html += '</div>'
+            if (val.booking_flag) {
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" disabled class="datepicker"><label for="date">Date Delivery</label></div>'
+                // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+                html += '</div>'
+                html += '<div class="col s6 m6 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_pick_name" type="text" disabled value ="' + val.driver_pick_name + '"class="validate"><label for="driver_pick_name">PickUp Driver Name</label></div>'
+                html += '</div>'
+                html += '<div class="col s6 m6 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_pick_number" type="number" disabled  value ="' + val.driver_pick_number + '"class="validate"><label for="driver_pick_number">PickUp Driver Number</label></div>'
+                html += '</div>'
+
+                html += '<div class="col s6 m6 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_drop_name" type="text" disabled  value ="' + val.driver_drop_name + '"class="validate"><label for="driver_drop_name">Drop Driver Name</label></div>'
+                html += '</div>'
+                html += '<div class="col s6 m6 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_drop_number" type="number" disabled  value ="' + val.driver_drop_number + '"class="validate"><label for="driver_drop_number">Drop Driver Number</label></div>'
+                html += '</div>'
+
+            } else {
+
+            }
+
+            // html += '<div class="col s12 m12 l12">'
+            // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" disabled class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
+            // html += '</div>'
+            html += '<div class="col s12 m12 l12">'
+            html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
+            html += '</div>'
+            html_jc = ''
+            html_jc += '<div class="col s12 m12 l12">'
+            html_jc += '<b>JOBS CARD DETAILS</b><br><br>'
+
+            jobLen = val.job_summary.length;
+            html_jc += '<div class="jobs-list">'
+            html_jc += '<div class="row">'
+            html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
+            html_jc += '<div class="col s4 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
+            html_jc += '<div class="col s4 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+            html_jc += '</div>'
+            html_jc += '<div class="row">'
+            html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b></b></div>'
+            html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
+            html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
+            html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
+            html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
+            html_jc += '</div>'
+
+            for (i = 0; i < jobLen; i++) {
+                // for (i = 0; i < 2; i++) {
+                html_jc += '<div class="row job-row">'
+
+                html_jc += '<div class="col s4 m7 l7 job-summary-name">'
+                html_jc += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name' + i + '"  disabled type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
+                html_jc += '</div>'
+                if (val.job_summary[i]['Preok']) {
+                    html_jc += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
+                    html_jc += '<input type="radio" name="groupok' + (i + 1) + '" disabled  checked id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
+                    html_jc += '</div>'
+                } else {
+                    html_jc += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
+                    html_jc += '<input type="radio" name="groupok' + (i + 1) + '" disabled  id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
+                    html_jc += '</div>'
+                }
+
+                if (val.job_summary[i]['Prenotok']) {
+                    html_jc += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
+                    html_jc += '<input type="radio" name="groupok' + (i + 1) + '" disabled  checked id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
+                    html_jc += '</div>'
+                } else {
+                    html_jc += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
+                    html_jc += '<input type="radio" name="groupok' + (i + 1) + '" disabled  id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
+                    html_jc += '</div>'
+
+                }
+                if (val.job_summary[i]['Postok']) {
+                    html_jc += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                    html_jc += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled  checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                    html_jc += '</div>'
+
+                } else {
+                    html_jc += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                    html_jc += '<input type="radio"  name="groupnotok' + (i + 1) + '" disabled   id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                    html_jc += '</div>'
+
+                }
+
+                if (val.job_summary[i]['Postnotok']) {
+                    html_jc += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                    html_jc += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled  checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                    html_jc += '</div>'
+
+                } else {
+                    html_jc += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                    html_jc += '<input type="radio"  name="groupnotok' + (i + 1) + '" disabled   id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                    html_jc += '</div>'
+
+                }
+
+
+                html_jc += '</div>'
+
+            }}
+            if (val.req_user_agent) {
                 $('#bill-details #payment_collector_bill').val("Workshop")
                 document.getElementById("payment_collector_bill").disabled = true;
             }
-            if (val.booking_flag){
-                if (val.status == "Acknowledged"){
+            if (val.booking_flag) {
+                if (val.status == "Acknowledged") {
                     for (i = 1; i < 2; i++) {
-                        $('.status-change-'+i ).addClass('selected')
+                        $('.status-change-' + i).addClass('selected')
                     }
                     for (i = 2; i < 11; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
+                        $('.status-change-' + i).removeClass('selected')
                     }
-                }else if(val.status == "Assigned"){
+                } else if (val.status == "Assigned") {
                     for (i = 1; i < 3; i++) {
-                        $('.status-change-'+i ).addClass('selected')
+                        $('.status-change-' + i).addClass('selected')
                     }
                     for (i = 3; i < 11; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
+                        $('.status-change-' + i).removeClass('selected')
                     }
-                }else if(val.status == "Engineer Left"){
+                } else if (val.status == "Engineer Left") {
                     for (i = 1; i < 4; i++) {
-                        $('.status-change-'+i ).addClass('selected')
+                        $('.status-change-' + i).addClass('selected')
                     }
                     for (i = 4; i < 11; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
+                        $('.status-change-' + i).removeClass('selected')
                     }
-                }else if(val.status == "Reached Workshop"){
+                } else if (val.status == "Reached Workshop") {
                     for (i = 1; i < 5; i++) {
-                        $('.status-change-'+i ).addClass('selected')
+                        $('.status-change-' + i).addClass('selected')
                     }
                     for (i = 5; i < 11; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
+                        $('.status-change-' + i).removeClass('selected')
                     }
-                }else if(val.status == "Estimate Shared"){
+                } else if (val.status == "Estimate Shared") {
                     for (i = 1; i < 6; i++) {
-                        $('.status-change-'+i ).addClass('selected')
+                        $('.status-change-' + i).addClass('selected')
                     }
                     for (i = 6; i < 11; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
+                        $('.status-change-' + i).removeClass('selected')
                     }
-                }else if(val.status == "Job Completed"){
+                } else if (val.status == "Job Completed") {
                     for (i = 1; i < 7; i++) {
-                        $('.status-change-'+i ).addClass('selected')
+                        $('.status-change-' + i).addClass('selected')
                     }
                     for (i = 7; i < 11; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
+                        $('.status-change-' + i).removeClass('selected')
                     }
-                }else if(val.status == "Feedback Taken"){
+                } else if (val.status == "Feedback Taken") {
                     for (i = 1; i < 8; i++) {
-                        $('.status-change-'+i ).addClass('selected')
+                        $('.status-change-' + i).addClass('selected')
                     }
                     for (i = 8; i < 11; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
+                        $('.status-change-' + i).removeClass('selected')
                     }
-                }else if(val.status == "Cancelled"){
+                } else if (val.status == "Cancelled") {
                     for (i = 1; i < 8; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
+                        $('.status-change-' + i).removeClass('selected')
                     }
                     $('.status-change-8').addClass('selected')
                     $('.status-change-9').removeClass('selected')
                     $('.status-change-10').removeClass('selected')
 
-                }else if(val.status == "Escalation"){
+                } else if (val.status == "Escalation") {
                     for (i = 1; i < 10; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
+                        $('.status-change-' + i).removeClass('selected')
                     }
                     $('.status-change-9').addClass('selected')
                     $('.status-change-10').removeClass('selected')
-                }else if(val.status == "Confirmed"){
+                } else if (val.status == "Confirmed") {
                     for (i = 1; i < 11; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
+                        $('.status-change-' + i).removeClass('selected')
                     }
                 }
-            }else{
-                if (val.status == "Lead"){
+            } else {
+                if (val.status == "Lead") {
                     for (i = 1; i < 2; i++) {
-                        $('.status-change-'+i ).addClass('selected')
+                        $('.status-change-' + i).addClass('selected')
                     }
                     for (i = 2; i < 7; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
+                        $('.status-change-' + i).removeClass('selected')
                     }
-                }else if(val.status == "Cold"){
+                } else if (val.status == "Cold") {
                     for (i = 1; i < 3; i++) {
-                        $('.status-change-'+i ).addClass('selected')
+                        $('.status-change-' + i).addClass('selected')
                     }
                     for (i = 3; i < 7; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
+                        $('.status-change-' + i).removeClass('selected')
                     }
-                }else if(val.status == "Estimate Required"){
+                } else if (val.status == "Estimate Required") {
                     for (i = 1; i < 4; i++) {
-                        $('.status-change-'+i ).addClass('selected')
+                        $('.status-change-' + i).addClass('selected')
                     }
                     for (i = 4; i < 7; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
+                        $('.status-change-' + i).removeClass('selected')
                     }
-                }else if(val.status == "Warm"){
+                } else if (val.status == "Warm") {
                     for (i = 1; i < 5; i++) {
-                        $('.status-change-'+i ).addClass('selected')
+                        $('.status-change-' + i).addClass('selected')
                     }
                     for (i = 5; i < 7; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
+                        $('.status-change-' + i).removeClass('selected')
                     }
-                }else if(val.status == "Confirmed"){
+                } else if (val.status == "Confirmed") {
                     for (i = 1; i < 6; i++) {
-                        $('.status-change-'+i ).addClass('selected')
+                        $('.status-change-' + i).addClass('selected')
                     }
                     for (i = 6; i < 7; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
+                        $('.status-change-' + i).removeClass('selected')
                     }
-                }else if(val.status == "Cancelled"){
+                } else if (val.status == "Cancelled") {
                     for (i = 1; i < 7; i++) {
-                        $('.status-change-'+i ).removeClass('selected')
+                        $('.status-change-' + i).removeClass('selected')
                     }
                     $('.status-change-6').addClass('selected')
                 }
@@ -5927,46 +6046,45 @@ var Global = {
             }
             // <----- New Booking Data---->>
             $('#customer-detail .sms-card #sms_cust_name').text(val.booking_user_name)
-            if (val.clickgarage_flag){
+            if (val.clickgarage_flag) {
                 $('#customer-detail .sms-card .agent-details').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Happy Motoring,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Team ClickGarage!')
-            }else{
+            } else {
                 $('#customer-detail .sms-card .agent-details').text('')
             }
 
-            if (val.req_user_admin){
+            if (val.req_user_admin) {
                 // Lead/ Booking Diff
-                if(val.booking_flag){
+                if (val.booking_flag) {
                     $('#customer-detail .lead-row').hide()
                     $('#customer-detail .confirm-row').show()
 
-                }else{
+                } else {
                     $('#customer-detail .lead-row').show()
                     $('#customer-detail .confirm-row').hide()
 
                 }
 
 
-                if (val.agent_details=="Not Assigned"){
+                if (val.agent_details == "Not Assigned") {
                     $('.bill-row').hide()
-                }else if (val.bill_generation_flag){
+                } else if (val.bill_generation_flag) {
                     $('#customer-detail .non-generated-bill').hide()
                     $('#customer-detail .generated-bill').show()
 
-                }else{
+                } else {
                     $('#customer-detail .non-generated-bill').show()
                     $('#customer-detail .generated-bill').hide()
                 }
 
 
-
-            }else if (val.req_user_staff){
+            } else if (val.req_user_staff) {
                 // Lead/ Booking Diff
 
-                if(val.booking_flag){
+                if (val.booking_flag) {
                     $('#customer-detail .lead-row').hide()
                     $('#customer-detail .confirm-row').show()
 
-                }else{
+                } else {
                     $('#customer-detail .lead-row').show()
                     $('#customer-detail .confirm-row').hide()
 
@@ -5977,62 +6095,59 @@ var Global = {
                     $('.staff-button-row').hide()
                 }
 
-                if (val.agent_details=="Not Assigned" || val.clickgarage_flag != true){
+                if (val.agent_details == "Not Assigned" || val.clickgarage_flag != true) {
                     $('.bill-row').hide()
 
-                }else if (val.bill_generation_flag){
+                } else if (val.bill_generation_flag) {
                     $('#customer-detail .non-generated-bill').hide()
                     $('#customer-detail .generated-bill').show()
 
-                }else{
+                } else {
                     $('#customer-detail .non-generated-bill').show()
                     $('#customer-detail .generated-bill').hide()
                 }
 
 
-
-
-
-            }else if(val.req_user_agent){
-                if(val.booking_flag){
+            } else if (val.req_user_agent) {
+                if (val.booking_flag) {
                     $('#customer-detail .lead-row').hide()
                     $('#customer-detail .confirm-row').show()
 
-                }else{
+                } else {
                     $('#customer-detail .lead-row').show()
                     $('#customer-detail .confirm-row').hide()
 
                 }
 
-                if (val.clickgarage_flag == true){
+                if (val.clickgarage_flag == true) {
                     $('.bill-row').hide()
-                }else if (val.bill_generation_flag){
+                } else if (val.bill_generation_flag) {
 
                     $('#customer-detail .non-generated-bill').hide()
                     $('#customer-detail .generated-bill').show()
 
-                }else{
+                } else {
                     $('#customer-detail .non-generated-bill').show()
                     $('#customer-detail .generated-bill').hide()
                 }
 
-            }else if (val.req_user_b2b){
-                if (val.status == "Confirmed"){
+            } else if (val.req_user_b2b) {
+                if (val.status == "Confirmed") {
                     $('#customer-detail .b2b-button-row-1').show()
-                }else{
+                } else {
                     $('#customer-detail .b2b-button-row-1').hide()
                 }
 
-                if (val.status == "Job Completed" || val.status == "Feedback Taken" || val.status == "Cancelled"){
+                if (val.status == "Job Completed" || val.status == "Feedback Taken" || val.status == "Cancelled") {
                     $('#customer-detail .b2b-button-row-2').hide()
-                }else{
+                } else {
                     $('#customer-detail .b2b-button-row-2').show()
                 }
 
-                if (val.bill_generation_flag){
+                if (val.bill_generation_flag) {
                     $('#customer-detail .generated-bill').show()
 
-                }else{
+                } else {
                     $('#customer-detail .generated-bill').hide()
                 }
 
@@ -6040,24 +6155,17 @@ var Global = {
             }
 
 
-
-
-
             date_string = val.date_booking
-
-            if (val.delivery_date==null){
-                // console.log("1")
-                // console.log(val.delivery_date)
+            console.log(date_string)
+            if (val.delivery_date == null) {
                 date_delivery_string = val.date_booking
-            } else{
-                // console.log(val.delivery_date)
-
-                // console.log("2")
+            } else {
                 date_delivery_string = val.delivery_date
             }
 
             date_follow_up = val.follow_up_date
             time_follow_up = val.follow_up_time
+
         })
         container.html(html);
         try{
@@ -6608,7 +6716,7 @@ var Global = {
             $('#customer-detail .payment-summary .total_due_amount').text(parseFloat(val.price_total) - parseFloat(val.amount_paid))
 
         });
-            Materialize.updateTextFields();
+        Materialize.updateTextFields();
 
     },
     loadAgentdata:function(data){
@@ -6897,7 +7005,7 @@ var Global = {
         // CURRENT_CART =[];
         // JOBS_SUMMARY=[]
         $.each(data['cart_details'], function(ix, val) {
-            
+
             jsLen = val.default_comp.length;
             for (i = 0; i < jsLen; i++) {
                 CURRENT_CART_NEW_BOOKING.push(val.default_comp[i])
@@ -7256,9 +7364,9 @@ var Global = {
         escalation_reason = $('#customer-detail #escalation_reason').val()
         escalation_resolution = $('#customer-detail #escalation_resolution').val()
         driver_pick_name = $('#customer-detail #driver_pick_name').val()
-            driver_pick_number = $('#customer-detail #driver_pick_number').val()
-            driver_drop_name = $('#customer-detail #driver_drop_name').val()
-            driver_drop_number = $('#customer-detail #driver_drop_number').val()
+        driver_pick_number = $('#customer-detail #driver_pick_number').val()
+        driver_drop_name = $('#customer-detail #driver_drop_name').val()
+        driver_drop_number = $('#customer-detail #driver_drop_number').val()
 
         jobs_summary_list = []
         $('#customer-detail .jobs-list .job-row').each(function(){
@@ -7295,9 +7403,9 @@ var Global = {
             es_reason:escalation_reason,
             es_resolution:escalation_resolution,
             driver_pick_name:driver_pick_name,
-                driver_pick_number:driver_pick_number,
-                driver_drop_name:driver_drop_name,
-                driver_drop_number:driver_drop_number,
+            driver_pick_number:driver_pick_number,
+            driver_drop_name:driver_drop_name,
+            driver_drop_number:driver_drop_number,
 
         }, "post", Global, Global.loadCustomerupdate,null, '.loading-pane');
 
@@ -7618,9 +7726,9 @@ var Global = {
                 html += '											<td class="centered-text" >Pre-Invoice</td>';
             }
             if(val.owner == "CG Receipt"){
-            html += '											<td class="centered-text" >CG Receipt</td>';
+                html += '											<td class="centered-text" >CG Receipt</td>';
             }else{
-            html += '											<td class="centered-text" >'+val.agent_name+', '+val.state+'</td>';
+                html += '											<td class="centered-text" >'+val.agent_name+', '+val.state+'</td>';
             }
             if (val.booking_data_id == ""){
                 html += '											<td class="" >#Job: NA <br> '+'#Reg: '+val.reg_number+'</td>';
@@ -8320,6 +8428,9 @@ var Global = {
         });
         Materialize.updateTextFields();
     },
+    loadCallCustomer:function(data){
+        alert('Call Generated')
+    }
 
 };
 
