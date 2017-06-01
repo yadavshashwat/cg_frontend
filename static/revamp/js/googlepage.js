@@ -630,7 +630,7 @@ var Global = {
 
             JOBS_SUMMARY_TOTAL = [{'category':service,'job_name':service,'price_total':"TBD",'price_part':"TBD",'price_labour':"TBD",'price_discount':"TBD","doorstep":doorstep}];
             //
-            ALL_JOBS_LIST = [{"Job":service,"Price":"0","Category":service},{"Job":additional,"Price":"0","Category":"NA"}]
+            ALL_JOBS_LIST = [{"Job":service,"Price":"0","Category":service,"Type":"Request"},{"Job":additional,"Price":"0","Category":"NA","Type":"Request"}]
 
            // console.log("worked");
             timestamp =  Date.now();

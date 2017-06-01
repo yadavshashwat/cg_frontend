@@ -225,7 +225,10 @@ var TOTAL_UNSETTLED_PAY_COLLECT = 0;
 var TOTAL_UNSETTLED_COMMISSION = 0 ;
 var TOTAL_SERVICE_TAX_COMMISSION = 0;
 var TOTAL_AMOUNT_FROM_CG_TO_VENDOR = 0;
-
+var VEHICLE_TYPE = ""
+var VEHICLE_MAKE = ""
+var VEHICLE_MODEL = ""
+var VEHICLE_FUEL = ""
 var MONTH_TABLE = ""
 var SOURCES = ['Google Adwords',
     'Repeat Customer',
@@ -867,7 +870,11 @@ var Global = {
 
         });
 
+        $('#booking-details').on('change','#brand-cust',function(){
+            vehicle_make_new = $(this).val()
+            Commons.ajaxData('get_make_model', {make_id: vehicle_make_new, vehicle_type: VEHICLE_TYPE}, "get", _this, _this.loadModelsBooking);
 
+        })
 
         DATE_TYPE = _this.date_format( new Date());
 
@@ -1270,9 +1277,9 @@ var Global = {
 
 
         $('#customer-detail').on('click','.btn-addjob',function(){
-            container_parent = $('#customer-detail .jobs-list')
+            container_parent = $('#customer-detail .jobs-list.request')
             html = ''
-            html += '<div class="row job-row">'
+            html += '<div class="row job-row" data-class="Request">'
             html += '<div class="col s5 m7 l7 job-summary-name">'
             html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name-'+ (NUM_JOBS+1) +'"  type="text" value=""><label for="job_name-'+ (NUM_JOBS+1) +'" >Job</label></div>'
             html += '</div>'
@@ -1489,7 +1496,19 @@ var Global = {
             driver_pick_number = $('#customer-detail #driver_pick_number').val()
             driver_drop_name = $('#customer-detail #driver_drop_name').val()
             driver_drop_number = $('#customer-detail #driver_drop_number').val()
+            try{
+                make = $('#brand-cust').val()
+                model = $('#make-cust').val()
+                fuel_start = model.indexOf("(")
+                fuel_end = model.indexOf(")")
+                fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
+                model = model.substr(0,fuel_start-1)
 
+            }catch(e){
+                make = ""
+                model = ""
+                fuel = ""
+            }
             // ALL_JOBS_ADMIN = comment_n
             jobs_summary_list = []
             $('#customer-detail .jobs-list .job-row').each(function(){
@@ -1499,16 +1518,12 @@ var Global = {
 
                 postok = $(this).find('.job-summary-post-ok input').is(':checked');
                 postnotok = $(this).find('.job-summary-post-notok input').is(':checked');
+                type_check = $(this).attr('data-class')
 
-                // console.log(pre)
-                // console.log(post)
                 price = 0
-                // if (pre){
-                //
-                // }
 
                 if (name != "" && name != " "){
-                    obj = {"Job":name,"Preok":preok,"Prenotok":prenotok,"Postok":postok,"Postnotok":postnotok,"Price":price}
+                    obj = {"Job":name,"Preok":preok,"Prenotok":prenotok,"Postok":postok,"Postnotok":postnotok,"Price":price,"Type":type_check}
                     jobs_summary_list.push(obj)
 
                 }
@@ -1536,6 +1551,9 @@ var Global = {
                 driver_pick_number:driver_pick_number,
                 driver_drop_name:driver_drop_name,
                 driver_drop_number:driver_drop_number,
+                make:make,
+                model:model,
+                fuel:fuel,
 
                 odometer:odometer,
                 job_summary:JSON.stringify(jobs_summary_list),
@@ -1570,30 +1588,39 @@ var Global = {
             driver_pick_number = $('#customer-detail #driver_pick_number').val()
             driver_drop_name = $('#customer-detail #driver_drop_name').val()
             driver_drop_number = $('#customer-detail #driver_drop_number').val()
+            try{
+                make = $('#brand-cust').val()
+                model = $('#make-cust').val()
+                fuel_start = model.indexOf("(")
+                fuel_end = model.indexOf(")")
+                fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
+                model = model.substr(0,fuel_start-1)
 
+            }catch(e){
+                make = ""
+                model = ""
+                fuel = ""
+            }
             // ALL_JOBS_ADMIN = comment_n
             jobs_summary_list = []
-            $('#customer-detail .jobs-list .job-row').each(function(){
+           $('#customer-detail .jobs-list .job-row').each(function(){
                 name = $(this).find('.job-summary-name input').val()
                 preok = $(this).find('.job-summary-pre-ok input').is(':checked');
                 prenotok = $(this).find('.job-summary-pre-notok input').is(':checked');
 
                 postok = $(this).find('.job-summary-post-ok input').is(':checked');
                 postnotok = $(this).find('.job-summary-post-notok input').is(':checked');
+                type_check = $(this).attr('data-class')
 
-                // console.log(pre)
-                // console.log(post)
                 price = 0
-                // if (pre){
-                //
-                // }
 
                 if (name != "" && name != " "){
-                    obj = {"Job":name,"Preok":preok,"Prenotok":prenotok,"Postok":postok,"Postnotok":postnotok,"Price":price}
+                    obj = {"Job":name,"Preok":preok,"Prenotok":prenotok,"Postok":postok,"Postnotok":postnotok,"Price":price,"Type":type_check}
                     jobs_summary_list.push(obj)
 
                 }
             });
+
 
             Commons.ajaxData('update_booking', {b_id: bid,
                 email: email_n,
@@ -1621,6 +1648,9 @@ var Global = {
                 driver_pick_number:driver_pick_number,
                 driver_drop_name:driver_drop_name,
                 driver_drop_number:driver_drop_number,
+                make:make,
+                model:model,
+                fuel:fuel,
             }, "post", _this, _this.loadCustomerupdate2,null, '.loading-pane');
 
         }
@@ -4190,7 +4220,7 @@ var Global = {
                 // console.log(name_job)
                 price = 0
                 if (name_job != "" && name_job != " "){
-                    obj = {"Job":name_job,"Price":price,"Category":"NA"}
+                    obj = {"Job":name_job,"Price":price,"Category":"NA","Type":"Request"}
                     ALL_JOBS_NEW_BOOKING_LIST.push(obj)
                 }
             });
@@ -5435,17 +5465,45 @@ var Global = {
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">business</i><input id="cust_city" type="text"   value ="' + val.cust_city + '"class="validate"><label for="cust_address">City</label></div>'
                 html += '</div>'
-
-                html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_vehicle" type="text"  disabled   value ="' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + '"class="validate"><label for="cust_vehicle">' + val.cust_vehicle_type + '</label></div>'
-                html += '</div>'
                 html += '<div class="col s12 m12 l6">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_coupon" type="text"  disabled   value ="' + val.coupon + '"class="validate"><label for="cust_coupon">Coupon</label></div>'
                 html += '</div>'
+
+                VEHICLE_TYPE = val.cust_vehicle_type
+                VEHICLE_MAKE = val.cust_make
+                VEHICLE_MODEL = val.cust_model
+                VEHICLE_FUEL = val.cust_fuel_varient
+                html += '</div>'
+                html += '<div class="row">'
+                html += '<div class="col s12 m12 l1">'
+                html += '<b>Vehicle : </b>'
+                html += '</select></div>'
+
+                html += '<div class="col s4 m4 l4">'
+                html += '<select id="brand-cust" class="browser-default">'
+                html += '</select></div>'
+
+                html += '<div class="col s8 m8 l7">'
+                html += '<select id="make-cust" class="browser-default">'
+                html += '</select></div>'
+                html += '</div><br>'
+
+                html += '<div class="row">'
+
                 // html += '<div class="col s12 m12 l6">'
+                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_vehicle" type="text"  disabled   value ="' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + '"class="validate"><label for="cust_vehicle">' + val.cust_vehicle_type + '</label></div>'
+                // html += '</div>'
+
+
+                // html += '<div class="col s12 m12 l6">'
+                html += '<div class="col s12 m12 l6">'
+                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Engineer Details</label></div>'
+                html += '</div>'
+
                 html += '<div class="col s8 m8 l4">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
                 html += '</div>'
+
                 html += '<div class="col s4 m4 l2">'
                 if (val.bill_generation_flag) {
                     html += '<button class="waves-effect waves-light btn cg-primary btn-modifypayement page-wide" disabled type="submit" name="action">Modify<i class="material-icons right">mode_edit</i></button>'
@@ -5458,7 +5516,7 @@ var Global = {
                 html += '<div class="col s12 m12 l1 header">'
                 html += '<b>Source:</b>'
                 html += '</div>'
-                html += '<div class="col s12 m12 l5">'
+                html += '<div class="col s12 m12 l11">'
                 html += '<div class="input-field source-admin">'
                 // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text"   value ="' + val.source + '"class="validate"><label for="source">Source</label></div>'
                 html += '<select id="source" class="browser-default">'
@@ -5473,9 +5531,6 @@ var Global = {
                 }
                 html += '</select>'
                 html += '</div>'
-                html += '</div>'
-                html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Engineer Details</label></div>'
                 html += '</div>'
                 html += '</div>'
             } else {
@@ -5640,293 +5695,533 @@ var Global = {
                 html_jc = ''
                 html_jc += '<div class="col s12 m12 l12">'
                 html_jc += '<b>JOBS CARD DETAILS</b><br><br>'
+                html_jc_c = ''
+                html_jc_r = ''
 
                 jobLen = val.job_summary.length;
-                html_jc += '<div class="jobs-list">'
-                html_jc += '<div class="row">'
-                html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
-                html_jc += '<div class="col s4 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
-                html_jc += '<div class="col s4 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
-                html_jc += '</div>'
-                html_jc += '<div class="row">'
-                html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b></b></div>'
-                html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
-                html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
-                html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
-                html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
-                html_jc += '</div>'
+
 
                 for (i = 0; i < jobLen; i++) {
                     // for (i = 0; i < 2; i++) {
-                    html_jc += '<div class="row job-row">'
+                    if ((val.job_summary[i]['Type'] == "Request") || (val.job_summary[i]['Type']==null) ||  (val.job_summary[i]['Type']===false)){
+                        html_jc_r += '<div class="row job-row" data-class="Request">'
 
-                    html_jc += '<div class="col s4 m7 l7 job-summary-name">'
-                    html_jc += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name' + i + '"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
-                    html_jc += '</div>'
-                    if (val.job_summary[i]['Preok']) {
-                        html_jc += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
-                        html_jc += '<input type="radio" name="groupok' + (i + 1) + '" checked id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
-                        html_jc += '</div>'
-                    } else {
-                        html_jc += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
-                        html_jc += '<input type="radio" name="groupok' + (i + 1) + '" id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
-                        html_jc += '</div>'
-
-                    }
-                    if (val.job_summary[i]['Prenotok']) {
-                        html_jc += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
-                        html_jc += '<input type="radio" name="groupok' + (i + 1) + '" checked id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
-                        html_jc += '</div>'
-                    } else {
-                        html_jc += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
-                        html_jc += '<input type="radio" name="groupok' + (i + 1) + '" id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
-                        html_jc += '</div>'
-
-                    }
-                    if (val.req_user_agent){
-                        if(val.post_check_enable){
-                            if (val.job_summary[i]['Postok']) {
-                                html_jc += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
-                                html_jc += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
-                                html_jc += '</div>'
-                            } else {
-                                html_jc += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
-                                html_jc += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
-                                html_jc += '</div>'
-                            }
-                            if (val.job_summary[i]['Postnotok']) {
-                                html_jc += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
-                                html_jc += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
-                                html_jc += '</div>'
-                            } else {
-                                html_jc += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
-                                html_jc += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
-                                html_jc += '</div>'
-                            }
-
-                        }else{
-                            if (val.job_summary[i]['Postok']) {
-                                html_jc += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
-                                html_jc += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
-                                html_jc += '</div>'
-
-                            } else {
-                                html_jc += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
-                                html_jc += '<input type="radio"  name="groupnotok' + (i + 1) + '" disabled   id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
-                                html_jc += '</div>'
-
-                            }
-
-                            if (val.job_summary[i]['Postnotok']) {
-                                html_jc += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
-                                html_jc += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled  checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
-                                html_jc += '</div>'
-
-                            } else {
-                                html_jc += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
-                                html_jc += '<input type="radio"  name="groupnotok' + (i + 1) + '"  disabled  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
-                                html_jc += '</div>'
-
-                            }
+                        html_jc_r += '<div class="col s4 m7 l7 job-summary-name">'
+                        html_jc_r += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name' + i + '"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
+                        html_jc_r += '</div>'
+                        if (val.job_summary[i]['Preok']) {
+                            html_jc_r += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
+                            html_jc_r += '<input type="radio" name="groupok' + (i + 1) + '" checked id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
+                            html_jc_r += '</div>'
+                        } else {
+                            html_jc_r += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
+                            html_jc_r += '<input type="radio" name="groupok' + (i + 1) + '" id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
+                            html_jc_r += '</div>'
 
                         }
+                        if (val.job_summary[i]['Prenotok']) {
+                            html_jc_r += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
+                            html_jc_r += '<input type="radio" name="groupok' + (i + 1) + '" checked id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
+                            html_jc_r += '</div>'
+                        } else {
+                            html_jc_r += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
+                            html_jc_r += '<input type="radio" name="groupok' + (i + 1) + '" id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
+                            html_jc_r += '</div>'
+
+                        }
+                        if (val.req_user_agent){
+                            if(val.post_check_enable){
+                                if (val.job_summary[i]['Postok']) {
+                                    html_jc_r += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                    html_jc_r += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                                    html_jc_r += '</div>'
+                                } else {
+                                    html_jc_r += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                    html_jc_r += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                                    html_jc_r += '</div>'
+                                }
+                                if (val.job_summary[i]['Postnotok']) {
+                                    html_jc_r += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                    html_jc_r += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                                    html_jc_r += '</div>'
+                                } else {
+                                    html_jc_r += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                    html_jc_r += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                                    html_jc_r += '</div>'
+                                }
+
+                            }else{
+                                if (val.job_summary[i]['Postok']) {
+                                    html_jc_r += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                    html_jc_r += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                                    html_jc_r += '</div>'
+
+                                } else {
+                                    html_jc_r += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                    html_jc_r += '<input type="radio"  name="groupnotok' + (i + 1) + '" disabled   id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                                    html_jc_r += '</div>'
+
+                                }
+
+                                if (val.job_summary[i]['Postnotok']) {
+                                    html_jc_r += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                    html_jc_r += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled  checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                                    html_jc_r += '</div>'
+
+                                } else {
+                                    html_jc_r += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                    html_jc_r += '<input type="radio"  name="groupnotok' + (i + 1) + '"  disabled  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                                    html_jc_r += '</div>'
+
+                                }
+
+                            }
+                        }else{
+
+                            if (val.job_summary[i]['Postok']) {
+                                html_jc_r += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                html_jc_r += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                                html_jc_r += '</div>'
+
+                            } else {
+                                html_jc_r += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                html_jc_r += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                                html_jc_r += '</div>'
+
+                            }
+
+                            if (val.job_summary[i]['Postnotok']) {
+                                html_jc_r += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                html_jc_r += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                                html_jc_r += '</div>'
+
+                            } else {
+                                html_jc_r += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                html_jc_r += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                                html_jc_r += '</div>'
+
+                            }
+                        }
+
+
+
+
+
+                        // html += '<div class="col s2 m2 l2 job-summary-price">'
+                        // html += '<div class="input-field"><input id="job_price'+i+'"  type="number" value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'" >Price - ' + (i+1) +'</label></div>'
+                        // html += '</div>'
+                        html_jc_r += '<div class="col s1 m1 l1 centered-text x20">'
+                        html_jc_r += '<i class="fa fa-trash-o delete-job"></i>'
+                        html_jc_r += '</div>'
+                        html_jc_r += '</div>'
+                        NUM_JOBS = (i + 1)
+
                     }else{
+                        html_jc_c += '<div class="row job-row" data-class="Check">'
 
-                    if (val.job_summary[i]['Postok']) {
-                        html_jc += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
-                        html_jc += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
-                        html_jc += '</div>'
+                        html_jc_c += '<div class="col s4 m7 l7 job-summary-name">'
+                        html_jc_c += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name' + i + '"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
+                        html_jc_c += '</div>'
+                        if (val.job_summary[i]['Preok']) {
+                            html_jc_c += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
+                            html_jc_c += '<input type="radio" name="groupok' + (i + 1) + '" checked id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
+                            html_jc_c += '</div>'
+                        } else {
+                            html_jc_c += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
+                            html_jc_c += '<input type="radio" name="groupok' + (i + 1) + '" id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
+                            html_jc_c += '</div>'
 
-                    } else {
-                        html_jc += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
-                        html_jc += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
-                        html_jc += '</div>'
+                        }
+                        if (val.job_summary[i]['Prenotok']) {
+                            html_jc_c += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
+                            html_jc_c += '<input type="radio" name="groupok' + (i + 1) + '" checked id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
+                            html_jc_c += '</div>'
+                        } else {
+                            html_jc_c += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
+                            html_jc_c += '<input type="radio" name="groupok' + (i + 1) + '" id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
+                            html_jc_c += '</div>'
 
+                        }
+                        if (val.req_user_agent){
+                            if(val.post_check_enable){
+                                if (val.job_summary[i]['Postok']) {
+                                    html_jc_c += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                    html_jc_c += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                                    html_jc_c += '</div>'
+                                } else {
+                                    html_jc_c += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                    html_jc_c += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                                    html_jc_c += '</div>'
+                                }
+                                if (val.job_summary[i]['Postnotok']) {
+                                    html_jc_c += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                    html_jc_c += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                                    html_jc_c += '</div>'
+                                } else {
+                                    html_jc_c += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                    html_jc_c += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                                    html_jc_c += '</div>'
+                                }
+
+                            }else{
+                                if (val.job_summary[i]['Postok']) {
+                                    html_jc_c += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                    html_jc_c += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                                    html_jc_c += '</div>'
+
+                                } else {
+                                    html_jc_c += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                    html_jc_c += '<input type="radio"  name="groupnotok' + (i + 1) + '" disabled   id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                                    html_jc_c += '</div>'
+
+                                }
+
+                                if (val.job_summary[i]['Postnotok']) {
+                                    html_jc_c += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                    html_jc_c += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled  checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                                    html_jc_c += '</div>'
+
+                                } else {
+                                    html_jc_c += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                    html_jc_c += '<input type="radio"  name="groupnotok' + (i + 1) + '"  disabled  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                                    html_jc_c += '</div>'
+
+                                }
+
+                            }
+                        }else{
+
+                            if (val.job_summary[i]['Postok']) {
+                                html_jc_c += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                html_jc_c += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                                html_jc_c += '</div>'
+
+                            } else {
+                                html_jc_c += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                html_jc_c += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                                html_jc_c += '</div>'
+
+                            }
+
+                            if (val.job_summary[i]['Postnotok']) {
+                                html_jc_c += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                html_jc_c += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                                html_jc_c += '</div>'
+
+                            } else {
+                                html_jc_c += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                html_jc_c += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                                html_jc_c += '</div>'
+
+                            }
+                        }
+
+
+
+
+
+                        // html += '<div class="col s2 m2 l2 job-summary-price">'
+                        // html += '<div class="input-field"><input id="job_price'+i+'"  type="number" value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'" >Price - ' + (i+1) +'</label></div>'
+                        // html += '</div>'
+                        html_jc_c += '<div class="col s1 m1 l1 centered-text x20">'
+                        html_jc_c += '<i class="fa fa-trash-o delete-job"></i>'
+                        html_jc_c += '</div>'
+                        html_jc_c += '</div>'
+                        NUM_JOBS = (i + 1)
                     }
 
-                    if (val.job_summary[i]['Postnotok']) {
-                        html_jc += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
-                        html_jc += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
-                        html_jc += '</div>'
-
-                    } else {
-                        html_jc += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
-                        html_jc += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
-                        html_jc += '</div>'
-
-                    }
                 }
+                html_jc += '<div class="jobs-list request">'
+                if (html_jc_r != ""){
+                    html_jc += '<b>Customer Requests</b><br>'
+                    html_jc += '<div class="row">'
+                    html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
+                    html_jc += '<div class="col s4 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
+                    html_jc += '<div class="col s4 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+                    html_jc += '</div>'
+                    html_jc += '<div class="row">'
+                    html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b></b></div>'
+                    html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
+                    html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
+                    html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
+                    html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
+                    html_jc += '</div><br>'
+                    html_jc += html_jc_r
 
-
-
-
-
-                // html += '<div class="col s2 m2 l2 job-summary-price">'
-                // html += '<div class="input-field"><input id="job_price'+i+'"  type="number" value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'" >Price - ' + (i+1) +'</label></div>'
-                // html += '</div>'
-                html_jc += '<div class="col s1 m1 l1 centered-text x20">'
-                html_jc += '<i class="fa fa-trash-o delete-job"></i>'
+                }
                 html_jc += '</div>'
+
+                html_jc += '<div class="col l12 s12 m12 centered-text">'
+                html_jc += '<button class="waves-effect waves-light btn cg-primary btn-addjob" type="submit" name="action">Add Jobs'
+                html_jc += '<i class="material-icons right">add</i></button></div><br><br>'
+
+                html_jc += '<div class="jobs-list checks">'
+                if (html_jc_c != ""){
+                    html_jc += '<br><b>General Checks</b>'
+                    html_jc += '<div class="row">'
+                    html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
+                    html_jc += '<div class="col s4 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
+                    html_jc += '<div class="col s4 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+                    html_jc += '</div>'
+                    html_jc += '<div class="row">'
+                    html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b></b></div>'
+                    html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
+                    html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
+                    html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
+                    html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
+                    html_jc += '</div><br>'
+                    html_jc += html_jc_c
+
+                }
                 html_jc += '</div>'
-                NUM_JOBS = (i + 1)
-            }
-            html_jc += '</div>'
-
-            html_jc += '<div class="col l12 s12 m12 centered-text">'
-            html_jc += '<button class="waves-effect waves-light btn cg-primary btn-addjob" type="submit" name="action">Add Jobs'
-            html_jc += '<i class="material-icons right">add</i></button></div><br><br>'
 
 
-            if (!val.booking_flag) {
-                html += '<div class="col s12 m12 l12">'
-                html += '<b>FOLLOW UP SUMMARY</b><br><br>'
 
-                fsLen = val.follow_up_status.length;
+                if (!val.booking_flag) {
+                    html += '<div class="col s12 m12 l12">'
+                    html += '<b>FOLLOW UP SUMMARY</b><br><br>'
 
-                for (i = 0; i < fsLen; i++) {
-                    // for (i = 0; i < 2; i++) {
+                    fsLen = val.follow_up_status.length;
+
+                    for (i = 0; i < fsLen; i++) {
+                        // for (i = 0; i < 2; i++) {
+                        html += '<div class="row">'
+                        html += '<div class="col s12 m12 l2  follow-time-stamp">'
+                        html += val.follow_up_status[i]['Date'] + ' ' + val.follow_up_status[i]['Time']
+                        html += '</div>'
+                        html += '<div class="col s12 m12 l10">'
+                        html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="status_details" type="text" disabled value ="' + val.follow_up_status[i]['Status'] + '" class="validate"><label for="agent_details">Status - ' + (i + 1) + '</label></div>'
+                        html += '</div>'
+                        html += '</div>'
+                    }
+
                     html += '<div class="row">'
                     html += '<div class="col s12 m12 l2  follow-time-stamp">'
-                    html += val.follow_up_status[i]['Date'] + ' ' + val.follow_up_status[i]['Time']
+                    html += ''
                     html += '</div>'
                     html += '<div class="col s12 m12 l10">'
-                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="status_details" type="text" disabled value ="' + val.follow_up_status[i]['Status'] + '" class="validate"><label for="agent_details">Status - ' + (i + 1) + '</label></div>'
+                    html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="status_details_new" type="text" value ="" class="validate"><label for="agent_details">Status - ' + (i + 1) + '</label></div>'
+                    html += '</div>'
                     html += '</div>'
                     html += '</div>'
                 }
-
-                html += '<div class="row">'
-                html += '<div class="col s12 m12 l2  follow-time-stamp">'
-                html += ''
-                html += '</div>'
-                html += '<div class="col s12 m12 l10">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="status_details_new" type="text" value ="" class="validate"><label for="agent_details">Status - ' + (i + 1) + '</label></div>'
-                html += '</div>'
-                html += '</div>'
-                html += '</div>'
-            }
-        } else {
-
-            html += '<div class="col s12 m12 l12">'
-            html += '<div class="input-field"><i class="material-icons prefix">email</i><input id="email" disabled type="email" value ="' + val.cust_email + '"class="validate"><label for="email">Email</label></div>'
-            html += '</div>'
-            html += '<div class="col s12 m12 l12">'
-            html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_regnumber" disabled  type="text" value ="' + val.cust_regnumber + '"class="validate" style="text-transform: uppercase;"><label for="cust_regnumber">#Registration</label></div>'
-            html += '</div>'
-            html += '<div class="col s12 m12 l12">'
-            html += '<div class="input-field"><i class="material-icons prefix">av_timer</i><input id="cust_odometer" disabled type="number" value ="' + val.odometer + '"class="validate" ><label for="cust_odometer">#Odometer</label></div>'
-            html += '</div>'
-
-            html += '<div class="col s12 m12 l12">'
-            html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled class="datepicker"><label for="date">Date</label></div>'
-            // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
-            html += '</div>'
-            html += '<div class="col s12 m12 l12">'
-            html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" disabled  value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
-            html += '</div>'
-            if (val.booking_flag) {
-                html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" disabled class="datepicker"><label for="date">Date Delivery</label></div>'
-                // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
-                html += '</div>'
-                html += '<div class="col s6 m6 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_pick_name" type="text" disabled value ="' + val.driver_pick_name + '"class="validate"><label for="driver_pick_name">PickUp Driver Name</label></div>'
-                html += '</div>'
-                html += '<div class="col s6 m6 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_pick_number" type="number" disabled  value ="' + val.driver_pick_number + '"class="validate"><label for="driver_pick_number">PickUp Driver Number</label></div>'
-                html += '</div>'
-
-                html += '<div class="col s6 m6 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_drop_name" type="text" disabled  value ="' + val.driver_drop_name + '"class="validate"><label for="driver_drop_name">Drop Driver Name</label></div>'
-                html += '</div>'
-                html += '<div class="col s6 m6 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_drop_number" type="number" disabled  value ="' + val.driver_drop_number + '"class="validate"><label for="driver_drop_number">Drop Driver Number</label></div>'
-                html += '</div>'
-
             } else {
 
-            }
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">email</i><input id="email" disabled type="email" value ="' + val.cust_email + '"class="validate"><label for="email">Email</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_regnumber" disabled  type="text" value ="' + val.cust_regnumber + '"class="validate" style="text-transform: uppercase;"><label for="cust_regnumber">#Registration</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">av_timer</i><input id="cust_odometer" disabled type="number" value ="' + val.odometer + '"class="validate" ><label for="cust_odometer">#Odometer</label></div>'
+                html += '</div>'
 
-            // html += '<div class="col s12 m12 l12">'
-            // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" disabled class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
-            // html += '</div>'
-            html += '<div class="col s12 m12 l12">'
-            html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
-            html += '</div>'
-            html_jc = ''
-            html_jc += '<div class="col s12 m12 l12">'
-            html_jc += '<b>JOBS CARD DETAILS</b><br><br>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled class="datepicker"><label for="date">Date</label></div>'
+                // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+                html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" disabled  value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
+                html += '</div>'
+                if (val.booking_flag) {
+                    html += '<div class="col s12 m12 l12">'
+                    html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" disabled class="datepicker"><label for="date">Date Delivery</label></div>'
+                    // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+                    html += '</div>'
+                    html += '<div class="col s6 m6 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_pick_name" type="text" disabled value ="' + val.driver_pick_name + '"class="validate"><label for="driver_pick_name">PickUp Driver Name</label></div>'
+                    html += '</div>'
+                    html += '<div class="col s6 m6 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_pick_number" type="number" disabled  value ="' + val.driver_pick_number + '"class="validate"><label for="driver_pick_number">PickUp Driver Number</label></div>'
+                    html += '</div>'
 
-            jobLen = val.job_summary.length;
-            html_jc += '<div class="jobs-list">'
-            html_jc += '<div class="row">'
-            html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
-            html_jc += '<div class="col s4 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
-            html_jc += '<div class="col s4 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
-            html_jc += '</div>'
-            html_jc += '<div class="row">'
-            html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b></b></div>'
-            html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
-            html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
-            html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
-            html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
-            html_jc += '</div>'
-
-            for (i = 0; i < jobLen; i++) {
-                // for (i = 0; i < 2; i++) {
-                html_jc += '<div class="row job-row">'
-
-                html_jc += '<div class="col s4 m7 l7 job-summary-name">'
-                html_jc += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name' + i + '"  disabled type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
-                html_jc += '</div>'
-                if (val.job_summary[i]['Preok']) {
-                    html_jc += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
-                    html_jc += '<input type="radio" name="groupok' + (i + 1) + '" disabled  checked id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
-                    html_jc += '</div>'
-                } else {
-                    html_jc += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
-                    html_jc += '<input type="radio" name="groupok' + (i + 1) + '" disabled  id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
-                    html_jc += '</div>'
-                }
-
-                if (val.job_summary[i]['Prenotok']) {
-                    html_jc += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
-                    html_jc += '<input type="radio" name="groupok' + (i + 1) + '" disabled  checked id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
-                    html_jc += '</div>'
-                } else {
-                    html_jc += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
-                    html_jc += '<input type="radio" name="groupok' + (i + 1) + '" disabled  id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
-                    html_jc += '</div>'
-
-                }
-                if (val.job_summary[i]['Postok']) {
-                    html_jc += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
-                    html_jc += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled  checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
-                    html_jc += '</div>'
+                    html += '<div class="col s6 m6 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_drop_name" type="text" disabled  value ="' + val.driver_drop_name + '"class="validate"><label for="driver_drop_name">Drop Driver Name</label></div>'
+                    html += '</div>'
+                    html += '<div class="col s6 m6 l6">'
+                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_drop_number" type="number" disabled  value ="' + val.driver_drop_number + '"class="validate"><label for="driver_drop_number">Drop Driver Number</label></div>'
+                    html += '</div>'
 
                 } else {
-                    html_jc += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
-                    html_jc += '<input type="radio"  name="groupnotok' + (i + 1) + '" disabled   id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
-                    html_jc += '</div>'
 
                 }
 
-                if (val.job_summary[i]['Postnotok']) {
-                    html_jc += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
-                    html_jc += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled  checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                // html += '<div class="col s12 m12 l12">'
+                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" disabled class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
+                // html += '</div>'
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
+                html += '</div>'
+                html_jc = ''
+                html_jc += '<div class="col s12 m12 l12">'
+                html_jc += '<b>JOBS CARD DETAILS</b><br><br>'
+                html_jc_c = ''
+                html_jc_r = ''
+
+
+                jobLen = val.job_summary.length;
+                // html_jc += '<div class="jobs-list">'
+                // html_jc += '<div class="row">'
+                // html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
+                // html_jc += '<div class="col s4 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
+                // html_jc += '<div class="col s4 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+                // html_jc += '</div>'
+                // html_jc += '<div class="row">'
+                // html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b></b></div>'
+                // html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
+                // html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
+                // html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
+                // html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
+                // html_jc += '</div>'
+
+                for (i = 0; i < jobLen; i++) {
+                    // for (i = 0; i < 2; i++) {
+                    if ((val.job_summary[i]['Type'] == "Request") || (val.job_summary[i]['Type'] == null) || (val.job_summary[i]['Type'] === false)) {
+                        html_jc_r += '<div class="row job-row" data-class="Request">'
+                        html_jc_r += '<div class="col s4 m7 l7 job-summary-name">'
+                        html_jc_r += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name' + i + '"  disabled type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
+                        html_jc_r += '</div>'
+                        if (val.job_summary[i]['Preok']) {
+                            html_jc_r += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
+                            html_jc_r += '<input type="radio" name="groupok' + (i + 1) + '" disabled  checked id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
+                            html_jc_r += '</div>'
+                        } else {
+                            html_jc_r += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
+                            html_jc_r += '<input type="radio" name="groupok' + (i + 1) + '" disabled  id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
+                            html_jc_r += '</div>'
+                        }
+
+                        if (val.job_summary[i]['Prenotok']) {
+                            html_jc_r += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
+                            html_jc_r += '<input type="radio" name="groupok' + (i + 1) + '" disabled  checked id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
+                            html_jc_r += '</div>'
+                        } else {
+                            html_jc_r += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
+                            html_jc_r += '<input type="radio" name="groupok' + (i + 1) + '" disabled  id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
+                            html_jc_r += '</div>'
+
+                        }
+                        if (val.job_summary[i]['Postok']) {
+                            html_jc_r += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                            html_jc_r += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled  checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                            html_jc_r += '</div>'
+
+                        } else {
+                            html_jc_r += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                            html_jc_r += '<input type="radio"  name="groupnotok' + (i + 1) + '" disabled   id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                            html_jc_r += '</div>'
+
+                        }
+
+                        if (val.job_summary[i]['Postnotok']) {
+                            html_jc_r += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                            html_jc_r += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled  checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                            html_jc_r += '</div>'
+
+                        } else {
+                            html_jc_r += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                            html_jc_r += '<input type="radio"  name="groupnotok' + (i + 1) + '" disabled   id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                            html_jc_r += '</div>'
+
+                        }
+
+
+                    } else {
+                        html_jc_c += '<div class="row job-row" data-class="Check">'
+                        html_jc_c += '<div class="col s4 m7 l7 job-summary-name">'
+                        html_jc_c += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name' + i + '"  disabled type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
+                        html_jc_c += '</div>'
+                        if (val.job_summary[i]['Preok']) {
+                            html_jc_c += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
+                            html_jc_c += '<input type="radio" name="groupok' + (i + 1) + '" disabled  checked id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
+                            html_jc_c += '</div>'
+                        } else {
+                            html_jc_c += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
+                            html_jc_c += '<input type="radio" name="groupok' + (i + 1) + '" disabled  id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
+                            html_jc_c += '</div>'
+                        }
+
+                        if (val.job_summary[i]['Prenotok']) {
+                            html_jc_c += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
+                            html_jc_c += '<input type="radio" name="groupok' + (i + 1) + '" disabled  checked id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
+                            html_jc_c += '</div>'
+                        } else {
+                            html_jc_c += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
+                            html_jc_c += '<input type="radio" name="groupok' + (i + 1) + '" disabled  id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
+                            html_jc_c += '</div>'
+
+                        }
+                        if (val.job_summary[i]['Postok']) {
+                            html_jc_c += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                            html_jc_c += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled  checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                            html_jc_c += '</div>'
+
+                        } else {
+                            html_jc_c += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                            html_jc_c += '<input type="radio"  name="groupnotok' + (i + 1) + '" disabled   id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
+                            html_jc_c += '</div>'
+
+                        }
+
+                        if (val.job_summary[i]['Postnotok']) {
+                            html_jc_c += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                            html_jc_c += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled  checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                            html_jc_c += '</div>'
+
+                        } else {
+                            html_jc_c += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                            html_jc_c += '<input type="radio"  name="groupnotok' + (i + 1) + '" disabled   id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                            html_jc_c += '</div>'
+
+                        }
+
+
+                    }
+                }
+
+                    html_jc += '<div class="jobs-list request">'
+                    if (html_jc_r != ""){
+                        html_jc += '<b>Customer Requests</b><br>'
+                        html_jc += '<div class="row">'
+                        html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
+                        html_jc += '<div class="col s4 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
+                        html_jc += '<div class="col s4 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+                        html_jc += '</div>'
+                        html_jc += '<div class="row">'
+                        html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b></b></div>'
+                        html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
+                        html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
+                        html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
+                        html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
+                        html_jc += '</div><br>'
+                        html_jc += html_jc_r
+
+                    }
                     html_jc += '</div>'
 
-                } else {
-                    html_jc += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
-                    html_jc += '<input type="radio"  name="groupnotok' + (i + 1) + '" disabled   id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
+                    html_jc += '<div class="jobs-list checks">'
+                    if (html_jc_c != ""){
+                        html_jc += '<br><b>General Checks</b>'
+                        html_jc += '<div class="row">'
+                        html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
+                        html_jc += '<div class="col s4 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
+                        html_jc += '<div class="col s4 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+                        html_jc += '</div>'
+                        html_jc += '<div class="row">'
+                        html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b></b></div>'
+                        html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
+                        html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
+                        html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
+                        html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
+                        html_jc += '</div><br>'
+                        html_jc += html_jc_c
+
+                    }
                     html_jc += '</div>'
 
                 }
 
-
-                html_jc += '</div>'
-
-            }}
             if (val.req_user_agent) {
                 $('#bill-details #payment_collector_bill').val("Workshop")
                 document.getElementById("payment_collector_bill").disabled = true;
@@ -6168,6 +6463,9 @@ var Global = {
 
         })
         container.html(html);
+        Commons.ajaxData('get_type_make', {vehicle_type: VEHICLE_TYPE}, "get", Global, Global.loadBrandsBooking);
+        Commons.ajaxData('get_make_model', {make_id: VEHICLE_MAKE, vehicle_type: VEHICLE_TYPE}, "get", Global, Global.loadModelsBooking);
+
         try{
             var $input = $('#customer-detail #date.datepicker').pickadate({
                 format: 'dd-mm-yyyy',
@@ -7367,16 +7665,38 @@ var Global = {
         driver_pick_number = $('#customer-detail #driver_pick_number').val()
         driver_drop_name = $('#customer-detail #driver_drop_name').val()
         driver_drop_number = $('#customer-detail #driver_drop_number').val()
+        try{
+            make = $('#brand-cust').val()
+            model = $('#make-cust').val()
+            fuel_start = model.indexOf("(")
+            fuel_end = model.indexOf(")")
+            fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
+            model = model.substr(0,fuel_start-1)
 
+        }catch(e){
+            make = ""
+            model = ""
+            fuel = ""
+        }
         jobs_summary_list = []
-        $('#customer-detail .jobs-list .job-row').each(function(){
-            name = $(this).find('.job-summary-name input').val()
-            price = $(this).find('.job-summary-price input').val()
-            if (name != "" && name != " "){
-                obj = {"Job":name,"Price":price}
-                jobs_summary_list.push(obj)
-            }
-        });
+       $('#customer-detail .jobs-list .job-row').each(function(){
+                name = $(this).find('.job-summary-name input').val()
+                preok = $(this).find('.job-summary-pre-ok input').is(':checked');
+                prenotok = $(this).find('.job-summary-pre-notok input').is(':checked');
+
+                postok = $(this).find('.job-summary-post-ok input').is(':checked');
+                postnotok = $(this).find('.job-summary-post-notok input').is(':checked');
+                type_check = $(this).attr('data-class')
+
+                price = 0
+
+                if (name != "" && name != " "){
+                    obj = {"Job":name,"Preok":preok,"Prenotok":prenotok,"Postok":postok,"Postnotok":postnotok,"Price":price,"Type":type_check}
+                    jobs_summary_list.push(obj)
+
+                }
+            });
+
 
 
         // ALL_JOBS_ADMIN = comment_n
@@ -7406,6 +7726,9 @@ var Global = {
             driver_pick_number:driver_pick_number,
             driver_drop_name:driver_drop_name,
             driver_drop_number:driver_drop_number,
+            make:make,
+            model:model,
+            fuel:fuel,
 
         }, "post", Global, Global.loadCustomerupdate,null, '.loading-pane');
 
@@ -8430,6 +8753,33 @@ var Global = {
     },
     loadCallCustomer:function(data){
         alert('Call Generated')
+    },
+    loadBrandsBooking:function (data) {
+        container = $('#brand-cust');
+        container.html('');
+        html = ''
+        $.each(data, function(ix, val){
+            if (val.make ==VEHICLE_MAKE){
+                html += '<option selected value="' +val.make +'">'+ val.make +'</option>'
+            }else{
+                html += '<option value="' +val.make +'">'+ val.make +'</option>'
+            }
+        });
+        container.html(html);
+
+    },
+    loadModelsBooking:function(data){
+        container = $('#make-cust');
+        container.html('');
+        html = ''
+        $.each(data, function(ix, val){
+            if (val.full_veh_name == (VEHICLE_MODEL+' ('+VEHICLE_FUEL+')')){
+                html += '<option selected value="' +val.full_veh_name +'">'+ val.full_veh_name +'</option>'
+            }else{
+                html += '<option value="' +val.full_veh_name +'">'+ val.full_veh_name +'</option>'
+            }
+        });
+        container.html(html);
     }
 
 };
