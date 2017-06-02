@@ -99,7 +99,7 @@ img{}
 h1, h2, h3{font-family:Roboto;font-weight:800;}
 h3{font-size:25px;letter-spacing:0px;line-height:32px;}
 h4{font-size:17px;letter-spacing:0px;line-height:19px;color:#232527;margin:10px!important;}
-h5{font-size:15px;letter-spacing:0px;line-height:18px;}
+h5{font-size:14px;letter-spacing:0px;line-height:18px;}
 p{color:#9e9e9e;}
 .section-title{margin-bottom:30px;}
 .section-title img{vertical-align:top;}
@@ -300,7 +300,7 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 #home .hero-text h1{font-size:40px;letter-spacing:2px;line-height:40px;margin-bottom:7px;color:#FFFFFF;text-transform:uppercase;}
 #home .hero-text h4{color:#FFFFFF;text-transform:uppercase;}
 #home .hero-text h3{font-size:15px;letter-spacing:2px;line-height:10px;margin-bottom:5px;color:#FFFFFF;text-transform:uppercase;}
-#home .home-form{height:100%;line-height:100%;margin-top:10%!important;padding:2%;}
+#home .home-form{height:100%;line-height:100%;margin-top:7%!important;padding:2%;}
 #vehicle-select-form{position:fixed;top:10%;width:100%;z-index:98;height:50%;height:100%;}
 .row-zero-margin{margin:0px!important;}
 #home .home-form-2,#vehicle-select-form .home-form-2{height:100%;line-height:100%;padding:2%;border-top-left-radius:0px;border-top-right-radius:0px;z-index:60;}
@@ -343,7 +343,7 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
         line-height: 70px;
 }
 
-#home .list-features-header .lists{text-align:left; font-size:25px}
+#home .list-features-header .lists{text-align:left; font-size:20px}
 #home .list-features-header .lists ul{margin:0px}
 
 #home .list-features-header .lists li{text-transform: None!important; margin-bottom: 15px;}
@@ -371,7 +371,7 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 #features .btn-more, .btn-arrow-stroke{color:#218be7;text-transform:uppercase;font-size:14px;letter-spacing:1px;font-style:normal;font-weight:600;}
 #features .feature-section p{font-style:normal;font-weight:400;font-size:15px;line-height:150%;color:#6d7579;margin:0;}
 #features .feature-section .feature-container{padding:5% 10%;
-min-height: 200px}
+min-height: 300px}
 #features .feature-section .cg-icon{color:#4a148c;
     -webkit-text-stroke: 0.5px;
 }
@@ -598,8 +598,10 @@ min-height: 200px}
 }
 #contact-bar .contact-details{
     /*font-size: 26px;*/
-    color:grey;
+    color:#FFF;
     opacity: 1;
+    font-size:23px;
+    font-weight: 700;
 
 }
 
@@ -658,9 +660,29 @@ min-height: 200px}
     font-weight: 700!important;;
     z-index: 10;
     padding:   5px 0px;
+    /*height: 100px;*/
     /*margin:20px;*/
     /*padding:2p;*/
     /*font-size: 26px;*/
+}
+#service-detail .service-step-2{
+    width: 100%;
+    /*margin-left: 20%;*/
+    border: 2px dotted grey;
+    background: #FFF;
+    font-size: 20px!important;
+    font-weight: 500!important;;
+    z-index: 10;
+    text-align: center;
+    /*padding:   5px 0px;*/
+    height: 100px;
+    line-height: 100px;
+    margin:0px!important;
+    /*padding:2p;*/
+    /*font-size: 26px;*/
+}
+#service-detail .about-cg{
+    font-size: 20px;
 }
 
 /*.borderimg {*/
@@ -671,12 +693,16 @@ min-height: 200px}
 
 
 #service-detail .list-service{
-    margin: 10px 70px;
+    /*margin: 10px 70px;*/
     text-align: left;
+    /*font-size: 16px;*/
+}
+#service-detail .stepoverall{
+    height :100px;
 }
 #service-detail li{
     list-style-type: lower-roman;
-    font-size: 16px;
+    font-size: 18px;
     color: grey;
 }
 #service-detail .overlay-pat3{
@@ -1498,12 +1524,12 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
 
 .static-page .header-tagline{
     padding:5% 5%;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 
 .static-page #how-it-works{
-    font-size: 20px!important;
+    font-size: 18px!important;
 }
 
 .static-page #how-it-works p{
@@ -1512,37 +1538,37 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
 
 .static-page #whycg p{
     color:black;
-    font-size: 20px!important;
+    font-size: 18px!important;
 }
 
 
 .static-page #faq{
-    font-size: 20px!important;
+    font-size: 18px!important;
 }
 
 .static-page #faq p{
      color:black;
-    font-size: 20px!important;
+    font-size: 18px!important;
 }
 
 .static-page #whycg{
-    font-size: 20px!important;
+    font-size: 18px!important;
 }
 
 .static-page .howlist li{
     height: 50px;
     line-height: 50px;
-    font-size: 23px;
+    font-size: 20px;
     cursor: pointer;
     text-align: left;
     width: 100%;
     margin: 0px 0px 20px 0px;
 }
 .static-page #how-it-works li{
-    font-size: 25px;
+    font-size: 20px;
 }
 .static-page #how-it-works li p{
-    font-size: 20px;
+    font-size: 18px;
 }
 .static-page .howlist li.selected{
     color: #4a148c!important;
