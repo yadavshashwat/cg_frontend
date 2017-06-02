@@ -1280,22 +1280,22 @@ var Global = {
             container_parent = $('#customer-detail .jobs-list.request')
             html = ''
             html += '<div class="row job-row" data-class="Request">'
-            html += '<div class="col s5 m7 l7 job-summary-name">'
+            html += '<div class="col s7 m7 l7 job-summary-name">'
             html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name-'+ (NUM_JOBS+1) +'"  type="text" value=""><label for="job_name-'+ (NUM_JOBS+1) +'" >Job</label></div>'
             html += '</div>'
 
-            html += '<div class="col s2 m1 l1 job-summary-pre centered-text">'
+            html += '<div class="col s1 m1 l1 job-summary-pre centered-text">'
             html += '<input type="radio" name="groupok' + (NUM_JOBS + 1) + '" id="pre-ok-'+ (NUM_JOBS+1) +'" /><label for="pre-ok-'+ (NUM_JOBS+1) +'"></label>'
             html += '</div>'
-            html += '<div class="col s2 m1 l1 job-summary-pre centered-text">'
+            html += '<div class="col s1 m1 l1 job-summary-pre centered-text">'
             html += '<input type="radio" name="groupok' + (NUM_JOBS + 1) + '" id="pre-notok-'+ (NUM_JOBS+1) +'" /><label for="pre-notok-'+ (NUM_JOBS+1) +'"></label>'
             html += '</div>'
 
-            html += '<div class="col s2 m1 l1 job-summary-post centered-text">'
+            html += '<div class="col s1 m1 l1 job-summary-post centered-text">'
             html += '<input type="radio"  name="groupnotok' + (NUM_JOBS + 1)  +'" id="post-ok-'+ (NUM_JOBS+1) +'" /><label for="post-ok-'+ (NUM_JOBS+1) +'"></label>'
             html += '</div>'
 
-            html += '<div class="col s2 m1 l1 job-summary-post centered-text">'
+            html += '<div class="col s1 m1 l1 job-summary-post centered-text">'
             html += '<input type="radio" name="groupnotok' + (NUM_JOBS + 1)  +'"  id="post-notok-'+ (NUM_JOBS+1) +'" /><label for="post-notok-'+ (NUM_JOBS+1) +'"></label>'
             html += '</div>'
 
