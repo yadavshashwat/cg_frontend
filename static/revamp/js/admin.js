@@ -5693,7 +5693,7 @@ var Global = {
 
 
                 html_jc = ''
-                html_jc += '<div class="col s12 m12 l12">'
+                // html_jc += '<div class="col s12 m12 l12">'
                 html_jc += '<b>JOBS CARD DETAILS</b><br><br>'
                 html_jc_c = ''
                 html_jc_r = ''
@@ -5934,17 +5934,17 @@ var Global = {
                 html_jc += '<div class="jobs-list request">'
                 if (html_jc_r != ""){
                     html_jc += '<b>Customer Requests</b><br>'
-                    html_jc += '<div class="row">'
-                    html_jc += '<div class="col s7 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
-                    html_jc += '<div class="col s2 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
-                    html_jc += '<div class="col s2 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
-                    html_jc += '</div>'
-                    html_jc += '<div class="row">'
-                    html_jc += '<div class="col s7 m7 l7 job-summary-name centered-text"><b></b></div>'
-                    html_jc += '<div class="col s1 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
-                    html_jc += '<div class="col s1 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
-                    html_jc += '<div class="col s1 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
-                    html_jc += '<div class="col s1 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
+                     html_jc += '<div class="row">'
+                        html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b>Job</b></div>'
+                        html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Inspect</b></div>'
+                        html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Delivery</b></div>'
+                        html_jc += '</div>'
+                        html_jc += '<div class="row">'
+                        html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b></b></div>'
+                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Ok</b></div>'
+                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Not Ok</b></div>'
+                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Resolve</b></div>'
+                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Refuse</b></div>'
                     html_jc += '</div><br>'
                     html_jc += html_jc_r
 
@@ -5959,21 +5959,21 @@ var Global = {
                 if (html_jc_c != ""){
                     html_jc += '<br><b>General Checks</b>'
                     html_jc += '<div class="row">'
-                    html_jc += '<div class="col s7 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
-                    html_jc += '<div class="col s2 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
-                    html_jc += '<div class="col s2 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
-                    html_jc += '</div>'
-                    html_jc += '<div class="row">'
-                    html_jc += '<div class="col s7 m7 l7 job-summary-name centered-text"><b></b></div>'
-                    html_jc += '<div class="col s1 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
-                    html_jc += '<div class="col s1 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
-                    html_jc += '<div class="col s1 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
-                    html_jc += '<div class="col s1 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
+                        html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b>Job</b></div>'
+                        html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Inspect</b></div>'
+                        html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Delivery</b></div>'
+                        html_jc += '</div>'
+                        html_jc += '<div class="row">'
+                        html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b></b></div>'
+                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Ok</b></div>'
+                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Not Ok</b></div>'
+                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Resolve</b></div>'
+                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Refuse</b></div>'
                     html_jc += '</div><br>'
                     html_jc += html_jc_c
 
                 }
-                html_jc += '</div>'
+                // html_jc += '</div>'
 
 
 
@@ -6071,8 +6071,8 @@ var Global = {
                 // html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b></b></div>'
                 // html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
                 // html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
-                // html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
-                // html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
+                // html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Resolve</b></div>'
+                // html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Refuse</b></div>'
                 // html_jc += '</div>'
 
                 for (i = 0; i < jobLen; i++) {
@@ -6184,16 +6184,16 @@ var Global = {
                     if (html_jc_r != ""){
                         html_jc += '<b>Customer Requests</b><br>'
                         html_jc += '<div class="row">'
-                        html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
-                        html_jc += '<div class="col s4 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
-                        html_jc += '<div class="col s4 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+                        html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b>Job</b></div>'
+                        html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Inspect</b></div>'
+                        html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Delivery</b></div>'
                         html_jc += '</div>'
                         html_jc += '<div class="row">'
-                        html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b></b></div>'
-                        html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
-                        html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
-                        html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
-                        html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
+                        html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b></b></div>'
+                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Ok</b></div>'
+                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Not Ok</b></div>'
+                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Resolve</b></div>'
+                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Refuse</b></div>'
                         html_jc += '</div><br>'
                         html_jc += html_jc_r
 
@@ -6203,17 +6203,17 @@ var Global = {
                     html_jc += '<div class="jobs-list checks">'
                     if (html_jc_c != ""){
                         html_jc += '<br><b>General Checks</b>'
-                        html_jc += '<div class="row">'
-                        html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
-                        html_jc += '<div class="col s4 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
-                        html_jc += '<div class="col s4 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+                     html_jc += '<div class="row">'
+                        html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b>Job</b></div>'
+                        html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Inspect</b></div>'
+                        html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Delivery</b></div>'
                         html_jc += '</div>'
                         html_jc += '<div class="row">'
-                        html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b></b></div>'
-                        html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
-                        html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
-                        html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
-                        html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
+                        html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b></b></div>'
+                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Ok</b></div>'
+                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Not Ok</b></div>'
+                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Resolve</b></div>'
+                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Refuse</b></div>'
                         html_jc += '</div><br>'
                         html_jc += html_jc_c
 
@@ -6603,12 +6603,12 @@ var Global = {
                 // Part Name
                 if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
                     if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
-                        html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
+                        html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default partnamebooking" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
                     }else{
-                        html += '<td>' + '<input id="part_name" type="text" class="browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
+                        html += '<td>' + '<input id="part_name" type="text" class="browser-default partnamebooking" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
                     }
                 }else{
-                    html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
+                    html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default  partnamebooking" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
                 }
                 // Part Type
                 if (val.req_user_admin || val.req_user_staff || val.req_user_agent){

@@ -1526,7 +1526,20 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
     padding:5% 5%;
     font-size: 20px;
 }
+td { min-width: 100px; }
+.booking-job-data .partnamebooking{
+    width: 200px;
+}
+.booking-job-card .pre-data{
+    /*width: 150%;*/
+    overflow: scroll;
+}
+.booking-job-card .job-summary-name1{
+    /*text-overflow:ellipsis;*/
+    white-space:nowrap;
+    overflow:hidden;
 
+}
 
 .static-page #how-it-works{
     font-size: 18px!important;
