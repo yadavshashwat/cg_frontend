@@ -288,7 +288,7 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 #home.background-color-home{background:rgba(74,20,140,0.50)!important;}
 #home{background:rgba(74,20,140,0.65);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5F85C5C,endColorstr=#E5F85C5C)";filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5F85C5C,endColorstr=#E5F85C5C);zoom:1;min-height:inherit;}
 
-#home .hero-text{padding-top:25%;}
+#home .hero-text{padding-top:15%;}
 
 @media(max-width: 992px) {
     #home .hero-text h1{font-size:30px;letter-spacing:2px;line-height:40px;margin-bottom:7px;color:#FFFFFF;text-transform:uppercase;}

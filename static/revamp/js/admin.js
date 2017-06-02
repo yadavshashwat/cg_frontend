@@ -5706,25 +5706,25 @@ var Global = {
                     if ((val.job_summary[i]['Type'] == "Request") || (val.job_summary[i]['Type']==null) ||  (val.job_summary[i]['Type']===false)){
                         html_jc_r += '<div class="row job-row" data-class="Request">'
 
-                        html_jc_r += '<div class="col s4 m7 l7 job-summary-name">'
+                        html_jc_r += '<div class="col s7 m7 l7 job-summary-name">'
                         html_jc_r += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name' + i + '"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
                         html_jc_r += '</div>'
                         if (val.job_summary[i]['Preok']) {
-                            html_jc_r += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
+                            html_jc_r += '<div class="col s1 m1 l1 job-summary-pre-ok centered-text">'
                             html_jc_r += '<input type="radio" name="groupok' + (i + 1) + '" checked id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
                             html_jc_r += '</div>'
                         } else {
-                            html_jc_r += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
+                            html_jc_r += '<div class="col s1 m1 l1 job-summary-pre-ok centered-text">'
                             html_jc_r += '<input type="radio" name="groupok' + (i + 1) + '" id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
                             html_jc_r += '</div>'
 
                         }
                         if (val.job_summary[i]['Prenotok']) {
-                            html_jc_r += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
+                            html_jc_r += '<div class="col s1 m1 l1 job-summary-pre-notok centered-text">'
                             html_jc_r += '<input type="radio" name="groupok' + (i + 1) + '" checked id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
                             html_jc_r += '</div>'
                         } else {
-                            html_jc_r += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
+                            html_jc_r += '<div class="col s1 m1 l1 job-summary-pre-notok centered-text">'
                             html_jc_r += '<input type="radio" name="groupok' + (i + 1) + '" id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
                             html_jc_r += '</div>'
 
@@ -5732,44 +5732,44 @@ var Global = {
                         if (val.req_user_agent){
                             if(val.post_check_enable){
                                 if (val.job_summary[i]['Postok']) {
-                                    html_jc_r += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                    html_jc_r += '<div class="col s1 m1 l1 job-summary-post-ok centered-text">'
                                     html_jc_r += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
                                     html_jc_r += '</div>'
                                 } else {
-                                    html_jc_r += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                    html_jc_r += '<div class="col s1 m1 l1 job-summary-post-ok centered-text">'
                                     html_jc_r += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
                                     html_jc_r += '</div>'
                                 }
                                 if (val.job_summary[i]['Postnotok']) {
-                                    html_jc_r += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                    html_jc_r += '<div class="col  s1 m1 l1 job-summary-post-notok centered-text">'
                                     html_jc_r += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
                                     html_jc_r += '</div>'
                                 } else {
-                                    html_jc_r += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                    html_jc_r += '<div class="col  s1 m1 l1 job-summary-post-notok centered-text">'
                                     html_jc_r += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
                                     html_jc_r += '</div>'
                                 }
 
                             }else{
                                 if (val.job_summary[i]['Postok']) {
-                                    html_jc_r += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                    html_jc_r += '<div class="col s1 m1 l1 job-summary-post-ok centered-text">'
                                     html_jc_r += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
                                     html_jc_r += '</div>'
 
                                 } else {
-                                    html_jc_r += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                    html_jc_r += '<div class="col s1 m1 l1 job-summary-post-ok centered-text">'
                                     html_jc_r += '<input type="radio"  name="groupnotok' + (i + 1) + '" disabled   id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
                                     html_jc_r += '</div>'
 
                                 }
 
                                 if (val.job_summary[i]['Postnotok']) {
-                                    html_jc_r += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                    html_jc_r += '<div class="col  s1 m1 l1 job-summary-post-notok centered-text">'
                                     html_jc_r += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled  checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
                                     html_jc_r += '</div>'
 
                                 } else {
-                                    html_jc_r += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                    html_jc_r += '<div class="col  s1 m1 l1 job-summary-post-notok centered-text">'
                                     html_jc_r += '<input type="radio"  name="groupnotok' + (i + 1) + '"  disabled  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
                                     html_jc_r += '</div>'
 
@@ -5779,24 +5779,24 @@ var Global = {
                         }else{
 
                             if (val.job_summary[i]['Postok']) {
-                                html_jc_r += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                html_jc_r += '<div class="col s1 m1 l1 job-summary-post-ok centered-text">'
                                 html_jc_r += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
                                 html_jc_r += '</div>'
 
                             } else {
-                                html_jc_r += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                html_jc_r += '<div class="col s1 m1 l1 job-summary-post-ok centered-text">'
                                 html_jc_r += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
                                 html_jc_r += '</div>'
 
                             }
 
                             if (val.job_summary[i]['Postnotok']) {
-                                html_jc_r += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                html_jc_r += '<div class="col  s1 m1 l1 job-summary-post-notok centered-text">'
                                 html_jc_r += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
                                 html_jc_r += '</div>'
 
                             } else {
-                                html_jc_r += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                html_jc_r += '<div class="col  s1 m1 l1 job-summary-post-notok centered-text">'
                                 html_jc_r += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
                                 html_jc_r += '</div>'
 
@@ -5819,25 +5819,25 @@ var Global = {
                     }else{
                         html_jc_c += '<div class="row job-row" data-class="Check">'
 
-                        html_jc_c += '<div class="col s4 m7 l7 job-summary-name">'
+                        html_jc_c += '<div class="col s7 m7 l7 job-summary-name">'
                         html_jc_c += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name' + i + '"  type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
                         html_jc_c += '</div>'
                         if (val.job_summary[i]['Preok']) {
-                            html_jc_c += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
+                            html_jc_c += '<div class="col s1 m1 l1 job-summary-pre-ok centered-text">'
                             html_jc_c += '<input type="radio" name="groupok' + (i + 1) + '" checked id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
                             html_jc_c += '</div>'
                         } else {
-                            html_jc_c += '<div class="col s2 m1 l1 job-summary-pre-ok centered-text">'
+                            html_jc_c += '<div class="col s1 m1 l1 job-summary-pre-ok centered-text">'
                             html_jc_c += '<input type="radio" name="groupok' + (i + 1) + '" id="pre-ok-' + (i + 1) + '" /><label for="pre-ok-' + (i + 1) + '"></label>'
                             html_jc_c += '</div>'
 
                         }
                         if (val.job_summary[i]['Prenotok']) {
-                            html_jc_c += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
+                            html_jc_c += '<div class="col s1 m1 l1 job-summary-pre-notok centered-text">'
                             html_jc_c += '<input type="radio" name="groupok' + (i + 1) + '" checked id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
                             html_jc_c += '</div>'
                         } else {
-                            html_jc_c += '<div class="col s2 m1 l1 job-summary-pre-notok centered-text">'
+                            html_jc_c += '<div class="col s1 m1 l1 job-summary-pre-notok centered-text">'
                             html_jc_c += '<input type="radio" name="groupok' + (i + 1) + '" id="pre-notok-' + (i + 1) + '" /><label for="pre-notok-' + (i + 1) + '"></label>'
                             html_jc_c += '</div>'
 
@@ -5845,44 +5845,44 @@ var Global = {
                         if (val.req_user_agent){
                             if(val.post_check_enable){
                                 if (val.job_summary[i]['Postok']) {
-                                    html_jc_c += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                    html_jc_c += '<div class="col s1 m1 l1 job-summary-post-ok centered-text">'
                                     html_jc_c += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
                                     html_jc_c += '</div>'
                                 } else {
-                                    html_jc_c += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                    html_jc_c += '<div class="col s1 m1 l1 job-summary-post-ok centered-text">'
                                     html_jc_c += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
                                     html_jc_c += '</div>'
                                 }
                                 if (val.job_summary[i]['Postnotok']) {
-                                    html_jc_c += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                    html_jc_c += '<div class="col  s1 m1 l1 job-summary-post-notok centered-text">'
                                     html_jc_c += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
                                     html_jc_c += '</div>'
                                 } else {
-                                    html_jc_c += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                    html_jc_c += '<div class="col  s1 m1 l1 job-summary-post-notok centered-text">'
                                     html_jc_c += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
                                     html_jc_c += '</div>'
                                 }
 
                             }else{
                                 if (val.job_summary[i]['Postok']) {
-                                    html_jc_c += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                    html_jc_c += '<div class="col s1 m1 l1 job-summary-post-ok centered-text">'
                                     html_jc_c += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
                                     html_jc_c += '</div>'
 
                                 } else {
-                                    html_jc_c += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                    html_jc_c += '<div class="col s1 m1 l1 job-summary-post-ok centered-text">'
                                     html_jc_c += '<input type="radio"  name="groupnotok' + (i + 1) + '" disabled   id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
                                     html_jc_c += '</div>'
 
                                 }
 
                                 if (val.job_summary[i]['Postnotok']) {
-                                    html_jc_c += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                    html_jc_c += '<div class="col  s1 m1 l1 job-summary-post-notok centered-text">'
                                     html_jc_c += '<input type="radio" name="groupnotok' + (i + 1) + '" disabled  checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
                                     html_jc_c += '</div>'
 
                                 } else {
-                                    html_jc_c += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                    html_jc_c += '<div class="col  s1 m1 l1 job-summary-post-notok centered-text">'
                                     html_jc_c += '<input type="radio"  name="groupnotok' + (i + 1) + '"  disabled  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
                                     html_jc_c += '</div>'
 
@@ -5892,24 +5892,24 @@ var Global = {
                         }else{
 
                             if (val.job_summary[i]['Postok']) {
-                                html_jc_c += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                html_jc_c += '<div class="col s1 m1 l1 job-summary-post-ok centered-text">'
                                 html_jc_c += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
                                 html_jc_c += '</div>'
 
                             } else {
-                                html_jc_c += '<div class="col s2 m1 l1 job-summary-post-ok centered-text">'
+                                html_jc_c += '<div class="col s1 m1 l1 job-summary-post-ok centered-text">'
                                 html_jc_c += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-ok-' + (i + 1) + '" /><label for="post-ok-' + (i + 1) + '"></label>'
                                 html_jc_c += '</div>'
 
                             }
 
                             if (val.job_summary[i]['Postnotok']) {
-                                html_jc_c += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                html_jc_c += '<div class="col  s1 m1 l1 job-summary-post-notok centered-text">'
                                 html_jc_c += '<input type="radio" name="groupnotok' + (i + 1) + '" checked id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
                                 html_jc_c += '</div>'
 
                             } else {
-                                html_jc_c += '<div class="col  s2 m1 l1 job-summary-post-notok centered-text">'
+                                html_jc_c += '<div class="col  s1 m1 l1 job-summary-post-notok centered-text">'
                                 html_jc_c += '<input type="radio"  name="groupnotok' + (i + 1) + '"  id="post-notok-' + (i + 1) + '" /><label for="post-notok-' + (i + 1) + '"></label>'
                                 html_jc_c += '</div>'
 
@@ -5935,16 +5935,16 @@ var Global = {
                 if (html_jc_r != ""){
                     html_jc += '<b>Customer Requests</b><br>'
                     html_jc += '<div class="row">'
-                    html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
-                    html_jc += '<div class="col s4 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
-                    html_jc += '<div class="col s4 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+                    html_jc += '<div class="col s7 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
+                    html_jc += '<div class="col s2 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
+                    html_jc += '<div class="col s2 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
                     html_jc += '</div>'
                     html_jc += '<div class="row">'
-                    html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b></b></div>'
-                    html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
-                    html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
-                    html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
-                    html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
+                    html_jc += '<div class="col s7 m7 l7 job-summary-name centered-text"><b></b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
                     html_jc += '</div><br>'
                     html_jc += html_jc_r
 
@@ -5959,16 +5959,16 @@ var Global = {
                 if (html_jc_c != ""){
                     html_jc += '<br><b>General Checks</b>'
                     html_jc += '<div class="row">'
-                    html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
-                    html_jc += '<div class="col s4 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
-                    html_jc += '<div class="col s4 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
+                    html_jc += '<div class="col s7 m7 l7 job-summary-name centered-text"><b>Job Name</b></div>'
+                    html_jc += '<div class="col s2 m2 l2 job-summary-pre centered-text"><b>Inspection</b></div>'
+                    html_jc += '<div class="col s2 m2 l2 job-summary-name centered-text"><b>PreDelivery</b></div>'
                     html_jc += '</div>'
                     html_jc += '<div class="row">'
-                    html_jc += '<div class="col s4 m7 l7 job-summary-name centered-text"><b></b></div>'
-                    html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
-                    html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
-                    html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
-                    html_jc += '<div class="col s2 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
+                    html_jc += '<div class="col s7 m7 l7 job-summary-name centered-text"><b></b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-pre centered-text"><b>Ok</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-pre centered-text"><b>Not Ok</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-pre centered-text"><b>Resolved</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-pre centered-text"><b>Refused</b></div>'
                     html_jc += '</div><br>'
                     html_jc += html_jc_c
 
