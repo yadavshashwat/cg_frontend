@@ -364,8 +364,8 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 
 
 
-#features{background:#FFF;}
-#features .feature-section{background-color:#FFF;}
+#features{background:#F7F7F7;}
+#features .feature-section{background-color:#F7F7F7;}
 #features .feature-section .icon{padding-bottom:20px;max-height:72px;}
 #features .feature-section .btn-more, .feature-section .btn-arrow-stroke{padding-top:20px;}
 #features .btn-more, .btn-arrow-stroke{color:#218be7;text-transform:uppercase;font-size:14px;letter-spacing:1px;font-style:normal;font-weight:600;}
@@ -654,8 +654,9 @@ min-height: 300px}
 #service-detail .service-step{
     width: 100%;
     /*margin-left: 20%;*/
-    border: 2px dotted grey;
+    /*border: 2px dotted grey;*/
     background: #FFF;
+    box-shadow: none!important;
     font-size: 20px!important;
     font-weight: 700!important;;
     z-index: 10;
@@ -668,15 +669,16 @@ min-height: 300px}
 #service-detail .service-step-2{
     width: 100%;
     /*margin-left: 20%;*/
-    border: 2px dotted grey;
+    /*border: 2px dotted grey;*/
     background: #FFF;
+    box-shadow: none!important;
     font-size: 20px!important;
     font-weight: 500!important;;
     z-index: 10;
     text-align: center;
     /*padding:   5px 0px;*/
-    height: 100px;
-    line-height: 100px;
+    height: 75px;
+    line-height: 75px;
     margin:0px!important;
     /*padding:2p;*/
     /*font-size: 26px;*/
@@ -684,6 +686,16 @@ min-height: 300px}
 #service-detail .about-cg{
     font-size: 20px;
 }
+
+#service-desc{
+        padding: 10px 0px;
+    background:#FFF;
+     position: relative;
+}
+#service-desc .about-cg{
+    font-size: 20px;
+}
+
 
 /*.borderimg {*/
     /*-webkit-border-image: url('../img/by-line.png') 30 round!important; !* Safari 3.1-5 *!*/
@@ -698,10 +710,10 @@ min-height: 300px}
     /*font-size: 16px;*/
 }
 #service-detail .stepoverall{
-    height :100px;
+    height :75px;
 }
 #service-detail li{
-    list-style-type: lower-roman;
+    list-style-type: circle;
     font-size: 18px;
     color: grey;
 }
