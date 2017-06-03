@@ -524,11 +524,11 @@ min-height: 300px}
     height: 120px;
 }
 #howitworks .line-vertical .text-hiw{
-        height: 168px;
+        height: 98px;
     text-align: center;
 }
 #howitworks .line-vertical .image-hiw{
-        height: 230px;
+        height: 160px;
 }
 
 
@@ -566,7 +566,7 @@ min-height: 300px}
 
 .vertical_dotted_line {
     border-left:  4px dotted  #4a148c;
-    height: 170px;
+    height: 100px;
     margin-left: 50%;
 
 }
