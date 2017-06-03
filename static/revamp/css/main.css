@@ -1536,7 +1536,7 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
 
 .static-page .header-tagline{
     padding:5% 5%;
-    font-size: 20px;
+    font-size: 24px;
 }
 td { min-width: 100px; }
 .booking-job-data .partnamebooking{
@@ -1575,6 +1575,21 @@ td { min-width: 100px; }
      color:black;
     font-size: 18px!important;
 }
+
+
+.static-page #cancel{
+    font-size: 18px!important;
+}
+
+.static-page #cancel p{
+     color:black;
+    font-size: 18px!important;
+}
+
+.static-page #cancel li{
+    list-style: circle;
+}
+
 
 .static-page #whycg{
     font-size: 18px!important;
@@ -1645,6 +1660,28 @@ td { min-width: 100px; }
     /*background: ;*/
 
 }
+.static-page #banner .cancel{
+    height: 350px;
+    background: url('../img/Backgrounds/cancel.jpg');
+    background-position: center bottom;
+    /*background: ;*/
+
+}
+
+
+.static-page #banner .faq{
+    height: 350px;
+    background: url('../img/Backgrounds/faq.jpg');
+    background-position: center bottom;
+}
+
+.static-page #banner .aboutus{
+    height: 350px;
+    background: url('../img/Backgrounds/aboutus2.jpg');
+    background-position: center bottom;
+    /*background: ;*/
+
+}
 #banner #color-overlay {
    position: absolute;
    top: 0;
@@ -1652,7 +1689,7 @@ td { min-width: 100px; }
    width: 100%;
     height: 350px;
    background-color: black;
-   opacity: 0.6;
+   opacity: 0.2;
 }
 
 

@@ -168,21 +168,21 @@ $(document).ready(function(){
     }else if(vehtype =="Car" && service == "Servicing"){
         var PAGEHEADER = "BEST CAR SERVICING WORKSHOP IN DELHI NCR"
         var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;40 point check-up</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Spares replacement</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Pick-up & drop</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Free washing</li></ul></div></div>"
-        var DESC = "ClickGarage provides best online car service in Gurgaon making car maintenance easy, affordable and completely transparent. We also provide you with the best car service deals. Full car service is faciliated at one of the ClickGarage car service centre. So book car service now!"
+        var DESC = "ClickGarage's scheduled maintenance services strictly follow processes recommended by OEM's. Standard Service includes a 40 point check up along with the consumables replacement and essential fluid top-ups. Standard service comes with free exterior wash, interior cleaning and free pick-up and drop. ClickGarage provides best online car service in Gurgaon making car maintenance easy, affordable and completely transparent. We also provide you with the best car service deals. Full car service is faciliated at one of the ClickGarage car service centre. So book car service now!"
         $('.car-service').show()
 
         // var FEATURES = "Lowest price - Upfront estimate&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics"
     }else if(vehtype =="Car" && service == "Repairing"){
         var PAGEHEADER = " TOP QUALITY CAR REPAIRS IN DELHI NCR"
         var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;40 point check-up</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Expert mechanics</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Upfront estimates </li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Pick-up & drop</li></ul></div></div>"
-        var DESC = "ClickGarage team of expert mechanics take care of car repair of your vehicle. From car ac service or car ac repair to clutch overhaul, the nearest ClickGarage car mechanic will take care of your vehicle and do the necessary car repairs. ClickGarage provides you will all repair solutions including steering repair, car headlight repair, tires for car, car engine repair etc. Book service now to get the best mechanic to fix your car."
+        var DESC = "ClickGarage team of expert mechanics take care of car repair of your vehicle. From car ac service or car ac repair to clutch overhaul, the nearest ClickGarage car mechanic will take care of your vehicle and do the necessary car repairs. ClickGarage provides you will all repair solutions including steering repair, car headlight repair, tires for car, car engine repair etc. Book service now to get the best mechanic to fix your car. Looking for minor fixes such as wiper blade replacement, horn malfunctioning, headlight replacement etc. ? ClickGarage auto experts will come to your doorstep and fix it."
         // var FEATURES = "OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop"
         $('.car-service').show()
 
     }else if(vehtype =="Car" && service == "Denting"){
         var PAGEHEADER = "BEST IN CLASS DENTING/ PAINTING FACILITY IN DELHI NCR"
         var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;High Quality paint only!</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Lowest prices</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;1 year warranty </li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Pick-up & drop</li></ul></div></div>"
-        var DESC = "ClickGarage provides the best car denting painting services. Quality car dent repair at a body shop. Car Paint lusture is restored and it is as good as new. All the car dent and car scratch are removed from the car by our expert mechanics"
+        var DESC = "ClickGarage provides you with the best custom denting/painting job using high quality Du-Pont paint and provides a 1 year warranty on the painting. It also includes rubbing & polishing of the panel. We have the best car denting painting services. Quality car dent repair at a body shop. Car Paint lusture is restored and it is as good as new. All the car dent and car scratch are removed from the car by our expert mechanics"
 
         // var FEATURES = "Upto 60% less than market&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;No paint mismatch with 1 year warranty&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Dust free paint booths"
         $('.car-service').show()
@@ -218,7 +218,7 @@ $(document).ready(function(){
     }
     $('#home span.header').html(PAGEHEADER);
     $('#home span.features').html(FEATURES);
-    $('#service-detail .about-cg').text(DESC)
+    $('#service-desc .about-cg').text(DESC)
 
             if (vehtype == "Bike"){
                 $('#city-bike').show()
@@ -282,16 +282,22 @@ var Global = {
                 500
             );
         });
+        $('.service-button').on('click', function(e){
+            $('body,html').animate(
+                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#howitworks').outerHeight()},
+                500
+            );
+        });
 
          $('.hiw-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()},
                 500
             );
         });
          $('.partners-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#features').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#features').outerHeight()+$('#howitworks').outerHeight()},
                 500
             );
         });
@@ -304,13 +310,13 @@ var Global = {
         });
         $('.brands-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#howitworks').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#service-desc').outerHeight()+$('#howitworks').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()},
                 500
             );
         });
         $('.contact-us-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#numbers').outerHeight()+$('#numbers-section').outerHeight()+$('#howitworks').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()+$('#brands').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#service-desc').outerHeight()+$('#numbers').outerHeight()+$('#numbers-section').outerHeight()+$('#howitworks').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()+$('#brands').outerHeight()},
                 500
             );
         });
