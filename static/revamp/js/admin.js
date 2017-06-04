@@ -3446,24 +3446,42 @@ var Global = {
                 alert('Invalid Data')
             }else{
                 // console.log("Point 7")
-                $('html, body').animate({scrollTop : 0},800);
-                var url = Commons.getOrigin()+Commons.URLFromName['generate_bill']+'?'+jQuery.param( params );
+
+        function postToIframe(data,url,target) {
+            $('body').append('<form action="' + url + '" method="post" target="' + target + '" id="postToIframe"></form>');
+
+            $.each(data, function (n, v) {
+                $('#postToIframe').append('<input type="hidden" name="' + n + '" value="' + encodeURIComponent(v) + '" />');
+            });
+            $('#postToIframe').submit().remove();
+        }
+                var url = Commons.getOrigin()+Commons.URLFromName['generate_bill']
                 console.log(url)
+                postToIframe(params,url,"downloadpost")
+                $('html, body').animate({scrollTop : 0},800);
+                // var url = Commons.getOrigin()+Commons.URLFromName['generate_bill']+'?'+jQuery.param( params );
                 // $('#download_data').attr('action',url)
-                $('#download').find('iframe').attr('src',url)
+                // $('#download').find('iframe').attr('src',url)
             }
         })
+
+
+
+
 
         $('#bill-details').on('click','.downloadbill',function(){
             console.log('Downloaded')
             file_name = $(this).attr('data-class')
             params = {file_name: file_name}
+            // var url = Commons.getOrigin()+Commons.URLFromName['download_pdf']
+
+            // postToIframe(params,url,"downloadpost")
             var url = Commons.getOrigin()+Commons.URLFromName['download_pdf']+'?'+jQuery.param( params )
 
             $('#download').find('iframe').attr('src',url)
 
             // $('.loading-pane').show()
-        })
+        });
 
 
         $('#bill-details .btn-closebillmod').click(function(){
