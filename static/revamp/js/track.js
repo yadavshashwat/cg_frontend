@@ -487,7 +487,6 @@ var Global = {
                     html += '<div class="col s6 m6 l6">'
                     html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_pick_number" type="number" disabled  value ="' + val.driver_pick_number + '"class="validate"><label for="driver_pick_number">Pick Up Driver Number</label></div>'
                     html += '</div>'
-
                     html += '<div class="col s6 m6 l6">'
                     html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_drop_name" type="text" disabled  value ="' + val.driver_drop_name + '"class="validate"><label for="driver_drop_name">Drop Driver Name</label></div>'
                     html += '</div>'

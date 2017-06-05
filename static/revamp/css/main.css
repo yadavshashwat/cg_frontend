@@ -445,7 +445,7 @@ min-height: 300px}
 
 #testimonials .testis p{
     color:#FFF!important;
-    font-size: 20px;
+    font-size: 15px;
     width: 50%;
     margin-left: 25% ;
 }
@@ -672,7 +672,7 @@ min-height: 300px}
     /*border: 2px dotted grey;*/
     background: #FFF;
     box-shadow: none!important;
-    font-size: 20px!important;
+    font-size: 18px!important;
     font-weight: 500!important;;
     z-index: 10;
     text-align: center;
@@ -693,7 +693,7 @@ min-height: 300px}
      position: relative;
 }
 #service-desc .about-cg{
-    font-size: 20px;
+    font-size: 15px;
 }
 
 
@@ -714,7 +714,7 @@ min-height: 300px}
 }
 #service-detail li{
     list-style-type: circle;
-    font-size: 18px;
+    font-size: 15px;
     color: grey;
 }
 #service-detail .overlay-pat3{
