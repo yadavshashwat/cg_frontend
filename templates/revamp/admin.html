@@ -1129,21 +1129,21 @@
             <div class="box card no-border-radius visible">
                 <div class="row filter-option invisible">
                     <div class="row">
-                        <div class="col l4 s12 m12">
+                        <div class="col l3 s12 m12">
                             <div class="input-field">
                                 <i class="material-icons prefix">today</i>
                                 <input id="filterdate" type="date" class="datepicker">
                                 <label for="filterdate" data-error="required">Date Start</label>
                             </div>
                         </div>
-                        <div class="col l4 s12 m12">
+                        <div class="col l3 s12 m12">
                             <div class="input-field">
                                 <i class="material-icons prefix">today</i>
                                 <input id="filterdate_end" type="date" class="datepicker">
                                 <label for="filterdate_end" data-error="required">Date End</label>
                             </div>
                         </div>
-                        <div class="col l4 s12 m12">
+                        <div class="col l3 s12 m12">
                             <div class="input-field" id ="Vehicle_type">
                                 <select class="browser-default">
                                     <option value="" disabled selected>Vehicle Type</option>
@@ -1153,11 +1153,7 @@
                                 </select>
                             </div>
                         </div>
-
-                    </div>
-                    <div class="row">
-
-                        <div class="col l4 s12 m12">
+                          <div class="col l3 s12 m12">
                             <div class="input-field" id ="Status">
                                 <select class="status-list browser-default lead-filter">
                                     <option value="" selected>Select Status</option>
@@ -1182,7 +1178,12 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col l4 s12 m12">
+
+                    </div>
+                    <div class="row">
+
+
+                        <div class="col l3 s12 m12">
                             <div class="input-field" id ="Source">
                                 <select class="status-list browser-default">
                                     <option value=""  selected>Select Source</option>
@@ -1190,30 +1191,39 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col l4 s12 m12">
+                        <div class="col l3 s12 m12">
+                            <div class="input-field" id ="Agent_name">
+                                <select class="status-list browser-default">
+                                    <option value=""  selected>Select Engineer</option>
+                                    <!--<option value="Google Adwords">Google Adwords</option>-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col l3 s12 m12">
                             <div class="input-field">
                                 <i class="material-icons prefix">receipt</i>
                                 <input id="book_number" type="number" class="validate">
                                 <label for="book_number">Phone #</label>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col l4 s12 m12">
+                        <div class="col l3 s12 m12">
                             <div class="input-field">
                                 <i class="material-icons prefix">receipt</i>
                                 <input id="booking_id" type="text" class="validate">
                                 <label for="booking_id">Job ID</label>
                             </div>
                         </div>
-                        <div class="col l4 s12 m12">
+
+                    </div>
+                    <div class="row">
+                         <div class="col l6 s12 m12">
                             <div class="input-field">
                                 <i class="material-icons prefix">account_circle</i>
                                 <input id="custname" type="text" class="validate">
                                 <label for="custname">Name</label>
                             </div>
                         </div>
-                        <div class="col l4 s12 m12">
+                        <div class="col l6 s12 m12">
                             <div class="input-field">
                                 <i class="material-icons prefix">receipt</i>
                                 <input id="regnumber" type="text" class="validate" style="text-transform:uppercase">
@@ -1221,7 +1231,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--<div class="row filter-details">-->
                     <div class="row">
                         <div class="col s12 m12 l12 centered-text">
                             <button class="waves-effect waves-light btn cg-primary btn-apply-filter" type="submit" name="action">Apply Filter
@@ -1231,28 +1240,10 @@
 
 
                     </div>
-
                 </div>
             </div>
             <div class="box visible">
                 <div class="row">
-                    <!--<div class="col l2 m2 s2 sort-booking">-->
-                    <!--<span class="">Sort :</span>-->
-                    <!--</div>-->
-                    <!--<div class="col l5 m4 s4">-->
-                    <!--<div class="input-field sort" id ="sort">-->
-                    <!--<select class="browser-default">-->
-                    <!--<option value="Booking ID" disabled selected>Sort By</option>-->
-                    <!--<option value="Booking ID">Booking ID</option>-->
-                    <!--<option value="Name">Name</option>-->
-                    <!--<option value="Status">Status</option>-->
-                    <!--<option value="Generation Date">Generation Date</option>-->
-                    <!--<option value="Follow Time">Follow Time</option>-->
-                    <!--<option value="Source">Source</option>-->
-                    <!--<option value="Date">Date</option>-->
-                    <!--</select>-->
-                    <!--</div>-->
-                    <!--</div>-->
                     <div class="col s12 m12 l12 centered-text booking-filter">
                         <div class="col l6 m6 s6 date-box  btn waves-effect waves-light card bookings-filter cardhover selected" data-class="Bookings">
                             Jobs
@@ -1276,6 +1267,8 @@
             <div class="col l2 s4 m4 invisible filter-remove" data-class="source">&nbsp;Source&nbsp;&nbsp;<i class="fa fa-times"></i>&nbsp;&nbsp;</div>
             <div class="col l2 s4 m4 invisible filter-remove" data-class="name">&nbsp;Name&nbsp;&nbsp;<i class="fa fa-times"></i>&nbsp;&nbsp;</div>
             <div class="col l2 s4 m4 invisible filter-remove" data-class="id">&nbsp;Job ID&nbsp;&nbsp;<i class="fa fa-times"></i>&nbsp;&nbsp;</div>
+            <div class="col l2 s4 m4 invisible filter-remove" data-class="agent">&nbsp;Engineer&nbsp;&nbsp;<i class="fa fa-times"></i>&nbsp;&nbsp;</div>
+
             <div class="col s12 m12 l2 centered-text if-filter-selected">
                 <button class="waves-effect waves-light btn cg-primary btn-remove-filter" type="submit" name="action">Remove All
                     <i class="material-icons right">not_interested</i>
@@ -4376,16 +4369,16 @@
         </div>
     </div>
 </section>
-<footer>
-	<div class="container">
-		<div class="row">
-			<div class="text-center">
-				<p>&copy;Sui Generis Innovations. All Rights Reserved.<br />
-					<!--<a href="https://www.clickgarage.in"><img src="" alt="ClickGarage Logo"></a>-->
-			</div>
-		</div>
-	</div>
-</footer>
+<!--<footer>-->
+	<!--<div class="container">-->
+		<!--<div class="row">-->
+			<!--<div class="text-center">-->
+				<!--<p>&copy;Sui Generis Innovations. All Rights Reserved.<br />-->
+					<!--&lt;!&ndash;<a href="https://www.clickgarage.in"><img src="" alt="ClickGarage Logo"></a>&ndash;&gt;-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--</div>-->
+<!--</footer>-->
 <div class="fixed-action-btn horizontal click-to-toggle invisible" id="god-view">
     <a class="btn-floating btn-large red">
         <i class="material-icons">menu</i>

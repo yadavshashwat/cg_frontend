@@ -20,7 +20,8 @@ $(document).ready(function() {
     container = $('#bookings #Source').find('select')
     container.html('')
     html = '<option value="" disabled selected>Select Source</option>'
-
+    Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", Global, Global.loadAgentdata3,null, '.loading-pane');
+    // container2 = $('#bookings #Agent_name').find('select')
     for (i = 0; i < sourcelen; i++) {
         html += '<option value="'+SOURCES[i] +'">'+SOURCES[i]+'</option>'
     }
@@ -176,6 +177,7 @@ var VEH_TYPE = "";
 var PHONE_NUMBER = "";
 var SOURCE_BOOK = "";
 var DATE_TYPE_END = "";
+var AGENT_BOOK = "";
 var SEND_SMS = "1";
 var NUM_JOBS = 0;
 
@@ -520,6 +522,12 @@ var Global = {
             }else{
                 $('#bookings .filter-remove[data-class="phone"]').hide()
             }
+            if (AGENT_BOOK != ""){
+                $('#bookings .filter-remove[data-class="agent"]').show()
+                remove = 1
+            }else{
+                $('#bookings .filter-remove[data-class="agent"]').hide()
+            }
             if (SOURCE_BOOK != "" && SOURCE_BOOK != null){
                 $('#bookings .filter-remove[data-class="source"]').show()
                 remove = 1
@@ -554,14 +562,41 @@ var Global = {
         $('#bookings .btn-loadmorebooking').click(function(){
             if (ESCALATION_FLAG){
                 status_marker = "Escalation"
+                  status_marker = STATUS_TYPE
+                    Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                    lead_booking:LEAD_TYPE,
+                    sort:SORT_TYPE,
+                    date:DATE_TYPE,
+                    escalation_flag:"True",
+                    // status:status_marker,
+                    name:CUST_NAME,
+                    reg:REG_NUMBER,
+                    date_end:DATE_TYPE_END,
+                    source_id:SOURCE_BOOK,
+                    phone_num:PHONE_NUMBER,
+                    veh_type:VEH_TYPE,
+                    page_num : PAGE_NUM,
+                    agent_id:AGENT_BOOK
+                    }, "get", _this, _this.loadBookings2,null, '.loading-pane3');
+                if (LEAD_TYPE == "Booking"){
+                    Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                        lead_booking:LEAD_TYPE,
+                        sort:SORT_TYPE,
+                        del_date:DATE_TYPE,
+                        escalation_flag:"True",
+                        // status:status_marker,
+                        name:CUST_NAME,
+                        reg:REG_NUMBER,
+                        date_end:DATE_TYPE_END,
+                        source_id:SOURCE_BOOK,
+                        phone_num:PHONE_NUMBER,
+                        veh_type:VEH_TYPE,
+                        page_num : PAGE_NUM,
+                        agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery2,null, '.loading-pane3');
+                }
             }else{
                 status_marker = STATUS_TYPE
-            }
-
-            if (document.body.scrollHeight ==
-                document.body.scrollTop +
-                window.innerHeight) {
-                Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                    Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                     lead_booking:LEAD_TYPE,
                     sort:SORT_TYPE,
                     date:DATE_TYPE,
@@ -572,7 +607,9 @@ var Global = {
                     source_id:SOURCE_BOOK,
                     phone_num:PHONE_NUMBER,
                     veh_type:VEH_TYPE,
-                    page_num : PAGE_NUM}, "get", _this, _this.loadBookings2,null, '.loading-pane3');
+                    page_num : PAGE_NUM,
+                    agent_id:AGENT_BOOK
+                    }, "get", _this, _this.loadBookings2,null, '.loading-pane3');
                 if (LEAD_TYPE == "Booking"){
                     Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                         lead_booking:LEAD_TYPE,
@@ -585,10 +622,14 @@ var Global = {
                         source_id:SOURCE_BOOK,
                         phone_num:PHONE_NUMBER,
                         veh_type:VEH_TYPE,
-                        page_num : PAGE_NUM}, "get", _this, _this.loadDelivery2,null, '.loading-pane3');
+                        page_num : PAGE_NUM,
+                        agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery2,null, '.loading-pane3');
                 }
-
             }
+
+
+
+
         });
         var allbookingsopen = function(){
             PAGE_NUM = 0
@@ -651,7 +692,8 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -663,7 +705,8 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
 
             var path = window.location.pathname.split('/')
@@ -735,10 +778,11 @@ var Global = {
                 name:CUST_NAME,
                 reg:REG_NUMBER,
                 date_end:DATE_TYPE_END,
-                source_id:SOURCE_BOOK,
+                // source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -748,10 +792,11 @@ var Global = {
                 name:CUST_NAME,
                 reg:REG_NUMBER,
                 date_end:DATE_TYPE_END,
-                source_id:SOURCE_BOOK,
+                // source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
 
             var path = window.location.pathname.split('/')
@@ -772,6 +817,7 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
+                agent_id:AGENT_BOOK,
                 getcsv:"True"}
             var url = Commons.getOrigin()+Commons.URLFromName['view_all_bookings']+'?'+jQuery.param( params )
             $('#download').find('iframe').attr('src',url)
@@ -850,7 +896,8 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
 
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,2).join('/')+'/leads/all'
@@ -920,10 +967,36 @@ var Global = {
             // console.log(DATE_TYPE)
             if (ESCALATION_FLAG){
                 status_marker = "Escalation"
+                Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                date:DATE_TYPE,
+                escalation_flag:"True",
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
+                veh_type:VEH_TYPE,
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
+            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                lead_booking:LEAD_TYPE,
+                sort:SORT_TYPE,
+                del_date:DATE_TYPE,
+                escalation_flag:"True",
+                name:CUST_NAME,
+                reg:REG_NUMBER,
+                date_end:DATE_TYPE_END,
+                source_id:SOURCE_BOOK,
+                phone_num:PHONE_NUMBER,
+                veh_type:VEH_TYPE,
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+
             }else{
                 status_marker = STATUS_TYPE
-            }
-            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
                 date:DATE_TYPE,
@@ -934,7 +1007,8 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -946,7 +1020,10 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+
+            }
 
         })
 
@@ -982,6 +1059,7 @@ var Global = {
             phone_selected = $('#bookings #book_number').val();
             source_selected = $('#bookings #Source').find('select').val()
             end_date = $('#bookings #filterdate_end').val()
+            agent_selected = $('#bookings #Agent_name').find('select').val()
 
             console.log(date_selected);
             console.log(status_selected);
@@ -1014,6 +1092,9 @@ var Global = {
             if (source_selected != ""){
                 SOURCE_BOOK = source_selected
             }
+            if (agent_selected != ""){
+                AGENT_BOOK = agent_selected
+            }
 
             if (end_date != ""){
                 DATE_TYPE_END = end_date
@@ -1030,7 +1111,8 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -1042,7 +1124,8 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
             $('#bookings .filter-option').hide();
             $('#bookings .filter-sort').addClass('closed').removeClass('open');
@@ -1060,7 +1143,7 @@ var Global = {
             $('#bookings #book_number').val('');
             $('#bookings #Source').find('select').val('')
             $('#bookings #filterdate_end').val('')
-
+            $('#bookings #Agent_name').find('select').val('')
             DATE_TYPE = _this.date_format( new Date());
             REG_NUMBER = "";
             CUST_NAME = "";
@@ -1071,6 +1154,8 @@ var Global = {
             PHONE_NUMBER = "";
             SOURCE_BOOK = "";
             DATE_TYPE_END = "";
+            AGENT_BOOK = "";
+
             checkfilters()
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
@@ -1083,7 +1168,9 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK
+            }, "get", _this, _this.loadBookings,null, '.loading-pane');
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -1095,7 +1182,8 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
             $('#bookings .date-filter .date-box').removeClass('selected');
             $('#bookings .date-filter .date-box.today').addClass('selected');
@@ -1127,6 +1215,10 @@ var Global = {
                 $('#bookings #book_number').val('');
                 PHONE_NUMBER = "";
 
+            }else if($(this).attr('data-class')== "agent"){
+                $('#bookings #Agent_name').val('');
+                AGENT_BOOK = "";
+
             }else if($(this).attr('data-class')== "source"){
                 $('#bookings #Source').find('select').val('')
                 SOURCE_BOOK = "";
@@ -1153,7 +1245,8 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -1165,7 +1258,8 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
         })
 
         $('#bookings #sort').change(function(){
@@ -1183,7 +1277,8 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -1195,7 +1290,8 @@ var Global = {
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
-                page_num : PAGE_NUM}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                page_num : PAGE_NUM,
+                agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
         })
 
@@ -7054,6 +7150,23 @@ var Global = {
         container3 = $('#agent-list-settle')
         container3.html('');
         html = '<option value="" selected>All</option>'
+        // html += '<option value="" disabled>Select Agent</option>'
+        $.each(data, function(ix, val) {
+            html += '<option value="'+val.id+'">'+val.first_name +' '+ val.last_name+' - '+val.phone +'</option>'
+        });
+        container3.html(html);
+        // console.log(container3);
+        // container3.find('select').material_select();
+
+    },
+    loadAgentdata3:function(data){
+        container3 = $('#Agent_name').find('select')
+        container3.html('');
+        html = '<option value="" selected>Select Engineer</option>'
+        html += '<option value="Not Assigned">Unassigned</option>'
+
+        // html += '<option value="" selected>All Engineer</option>'
+
         // html += '<option value="" disabled>Select Agent</option>'
         $.each(data, function(ix, val) {
             html += '<option value="'+val.id+'">'+val.first_name +' '+ val.last_name+' - '+val.phone +'</option>'
