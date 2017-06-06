@@ -774,7 +774,7 @@ footer a:hover{color:#979797;text-decoration:none;}
 .scrollToTop{text-align:center;font-weight:bold;color:#444;text-decoration:none;position:fixed;bottom:100px;right:7%;display:none;z-index:99;}
 .scrollToTop img{height:30px;}
 .scrollToTop:hover{text-decoration:none;}
-.call-button{text-align:center;font-weight:bold;position:fixed;bottom:0%;margin-bottom:12%;left:8%;z-index:95;}
+.call-button{text-align:center;font-weight:bold;position:fixed;bottom: 4%;    margin-bottom: 11%;left:4%;z-index:95;}
 .call-button img{height:55px;}
 .call-button:hover{text-decoration:none;}
 .order-page{background:#f4f4f4;}
@@ -822,6 +822,7 @@ footer a:hover{color:#979797;text-decoration:none;}
 #jobs .services .service-name .job-prices .job-tat{font-size:12px;margin-bottom:5px;font-weight:400;}
 #jobs .services .button-col{display:inline;margin-top:auto;margin-bottom:auto;text-align:Center;padding-top:17px;}
 #jobs .services .button-col .btn-service{width:110px;margin:2%;}
+#jobs .services .button-col .btn-service-remove{width:110px;margin:2%;}
 #jobs .services .service-name .button-row{text-align:center;height:50px;}
 #jobs .services .service-name .button-row .btn-service{width:110px;margin:1%;}
 #jobs .services-select-section .vertical-col{padding:0px 0px 10px 0px;}
@@ -899,6 +900,18 @@ footer a:hover{color:#979797;text-decoration:none;}
 .Warm{background:orangered!important;color:white!important;}
 .Cold{background:lightblue!important;color:black!important;}
 .Estimate-Required{background:lightgreen!important;color:black!important;}
+
+.icon-agentonline, .icon-agentonline2{
+line-height:55px!important;
+}
+
+#operator_avatar, .operator_avatar {
+       height: 55px!important;
+        width: 55px!important;
+}
+#livechat-compact-container, .livechatheight{
+    bottom: 50px !important;
+}
 
 
 #bookings .btn-remove-filter{margin-top:5px;width:100%}

@@ -562,8 +562,8 @@ var Global = {
         $('#bookings .btn-loadmorebooking').click(function(){
             if (ESCALATION_FLAG){
                 status_marker = "Escalation"
-                  status_marker = STATUS_TYPE
-                    Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                status_marker = STATUS_TYPE
+                Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                     lead_booking:LEAD_TYPE,
                     sort:SORT_TYPE,
                     date:DATE_TYPE,
@@ -577,7 +577,7 @@ var Global = {
                     veh_type:VEH_TYPE,
                     page_num : PAGE_NUM,
                     agent_id:AGENT_BOOK
-                    }, "get", _this, _this.loadBookings2,null, '.loading-pane3');
+                }, "get", _this, _this.loadBookings2,null, '.loading-pane3');
                 if (LEAD_TYPE == "Booking"){
                     Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                         lead_booking:LEAD_TYPE,
@@ -596,7 +596,7 @@ var Global = {
                 }
             }else{
                 status_marker = STATUS_TYPE
-                    Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                     lead_booking:LEAD_TYPE,
                     sort:SORT_TYPE,
                     date:DATE_TYPE,
@@ -609,7 +609,7 @@ var Global = {
                     veh_type:VEH_TYPE,
                     page_num : PAGE_NUM,
                     agent_id:AGENT_BOOK
-                    }, "get", _this, _this.loadBookings2,null, '.loading-pane3');
+                }, "get", _this, _this.loadBookings2,null, '.loading-pane3');
                 if (LEAD_TYPE == "Booking"){
                     Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                         lead_booking:LEAD_TYPE,
@@ -968,60 +968,60 @@ var Global = {
             if (ESCALATION_FLAG){
                 status_marker = "Escalation"
                 Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
-                lead_booking:LEAD_TYPE,
-                sort:SORT_TYPE,
-                date:DATE_TYPE,
-                escalation_flag:"True",
-                name:CUST_NAME,
-                reg:REG_NUMBER,
-                date_end:DATE_TYPE_END,
-                source_id:SOURCE_BOOK,
-                phone_num:PHONE_NUMBER,
-                veh_type:VEH_TYPE,
-                page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
-            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
-                lead_booking:LEAD_TYPE,
-                sort:SORT_TYPE,
-                del_date:DATE_TYPE,
-                escalation_flag:"True",
-                name:CUST_NAME,
-                reg:REG_NUMBER,
-                date_end:DATE_TYPE_END,
-                source_id:SOURCE_BOOK,
-                phone_num:PHONE_NUMBER,
-                veh_type:VEH_TYPE,
-                page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                    lead_booking:LEAD_TYPE,
+                    sort:SORT_TYPE,
+                    date:DATE_TYPE,
+                    escalation_flag:"True",
+                    name:CUST_NAME,
+                    reg:REG_NUMBER,
+                    date_end:DATE_TYPE_END,
+                    source_id:SOURCE_BOOK,
+                    phone_num:PHONE_NUMBER,
+                    veh_type:VEH_TYPE,
+                    page_num : PAGE_NUM,
+                    agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                    lead_booking:LEAD_TYPE,
+                    sort:SORT_TYPE,
+                    del_date:DATE_TYPE,
+                    escalation_flag:"True",
+                    name:CUST_NAME,
+                    reg:REG_NUMBER,
+                    date_end:DATE_TYPE_END,
+                    source_id:SOURCE_BOOK,
+                    phone_num:PHONE_NUMBER,
+                    veh_type:VEH_TYPE,
+                    page_num : PAGE_NUM,
+                    agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
             }else{
                 status_marker = STATUS_TYPE
                 Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
-                lead_booking:LEAD_TYPE,
-                sort:SORT_TYPE,
-                date:DATE_TYPE,
-                status:status_marker,
-                name:CUST_NAME,
-                reg:REG_NUMBER,
-                date_end:DATE_TYPE_END,
-                source_id:SOURCE_BOOK,
-                phone_num:PHONE_NUMBER,
-                veh_type:VEH_TYPE,
-                page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
-            Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
-                lead_booking:LEAD_TYPE,
-                sort:SORT_TYPE,
-                del_date:DATE_TYPE,
-                status:status_marker,
-                name:CUST_NAME,
-                reg:REG_NUMBER,
-                date_end:DATE_TYPE_END,
-                source_id:SOURCE_BOOK,
-                phone_num:PHONE_NUMBER,
-                veh_type:VEH_TYPE,
-                page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                    lead_booking:LEAD_TYPE,
+                    sort:SORT_TYPE,
+                    date:DATE_TYPE,
+                    status:status_marker,
+                    name:CUST_NAME,
+                    reg:REG_NUMBER,
+                    date_end:DATE_TYPE_END,
+                    source_id:SOURCE_BOOK,
+                    phone_num:PHONE_NUMBER,
+                    veh_type:VEH_TYPE,
+                    page_num : PAGE_NUM,
+                    agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
+                    lead_booking:LEAD_TYPE,
+                    sort:SORT_TYPE,
+                    del_date:DATE_TYPE,
+                    status:status_marker,
+                    name:CUST_NAME,
+                    reg:REG_NUMBER,
+                    date_end:DATE_TYPE_END,
+                    source_id:SOURCE_BOOK,
+                    phone_num:PHONE_NUMBER,
+                    veh_type:VEH_TYPE,
+                    page_num : PAGE_NUM,
+                    agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
             }
 
@@ -1417,9 +1417,8 @@ var Global = {
 
         $('#customer-detail .add-item .btn-additem-est').click(function(){
             container_parent = $('#customer-detail #estimate-table').find('tbody')
-            var row = container_parent.find('tr').eq(0).clone();
+            var row = container_parent.find('tr:eq(0)').clone();
             container_parent.append(row)
-
             TOTAL_ITEMS_ADMIN += 1;
             row.find('td:eq(0)').text(TOTAL_ITEMS_ADMIN)
             row.find('td:eq(1) input').val('')
@@ -1527,40 +1526,54 @@ var Global = {
 
         $('#customer-detail').on('click',' #estimate-table .delete',function(){
             TOTAL_PRICE_ADMIN = 0;
-            $(this).closest('tr').remove()
-            TOTAL_ITEMS_ADMIN -= 1;
-            var table = document.getElementById('estimate-table');
-            for (var i = 1, row; row = table.rows[i]; i++) {
-                for (var j = 0, col; col = row.cells[j]; j++) {
-                    if (j == 0) {
-                        $(row.cells[j]).text(i)
-                        // console.log(name_item)
-                    }if (j == 1) {
-                        name_item = $(row.cells[j]).find('input,select').eq(0).val()
-                        // console.log(name_item)
-                    } else if (j == 2) {
-                        type_item = $(row.cells[j]).find('input,select').eq(0).val()
-                        // console.log(type_item)
-                    } else if (j == 3) {
-                        price_item = $(row.cells[j]).find('input,select').eq(0).val()
-                        // console.log(price_item)
-                    } else if (j == 4){
-                        settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
+            if (TOTAL_ITEMS_ADMIN == 1){
+                $('table tr').find('td:eq(0)').text(TOTAL_ITEMS_ADMIN)
+                $('table tr').find('td:eq(1) input').val('')
+                $('table tr').find('td:eq(3) input').val('')
+                $('table tr').find('td:eq(4) input').val('')
+                $('table tr').find('td:eq(5) input').val('')
+                $('table tr').find('td:eq(6) input').val('')
+                $('table tr').find('td:eq(7)').html('')
+                $('table tr').find('td:eq(8) input').removeAttr('checked', this.checked)
+                $('table tr').find('td:eq(9) input').val('')
+                TOTAL_PRICE_ADMIN = 0
+            }else{
+                $(this).closest('tr').remove()
+                TOTAL_ITEMS_ADMIN -= 1;
+                var table = document.getElementById('estimate-table');
+                for (var i = 1, row; row = table.rows[i]; i++) {
+                    for (var j = 0, col; col = row.cells[j]; j++) {
+                        if (j == 0) {
+                            $(row.cells[j]).text(i)
+                            // console.log(name_item)
+                        }if (j == 1) {
+                            name_item = $(row.cells[j]).find('input,select').eq(0).val()
+                            // console.log(name_item)
+                        } else if (j == 2) {
+                            type_item = $(row.cells[j]).find('input,select').eq(0).val()
+                            // console.log(type_item)
+                        } else if (j == 3) {
+                            price_item = $(row.cells[j]).find('input,select').eq(0).val()
+                            // console.log(price_item)
+                        } else if (j == 4){
+                            settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
+                        }
+                    }
+                    if (type_item == "Labour") {
+                        TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
+                        TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(price_item)
+                    } else if (type_item == "Part" || type_item == "Lube" || type_item == "Consumable") {
+                        TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
+                        TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(price_item)
+                    } else if (type_item == "Discount") {
+                        TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN - parseFloat(price_item)
+                        TOTAL_DISCOUNT_ADMIN = TOTAL_DISCOUNT_ADMIN + parseFloat(price_item)
+                    } else {
+                        TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN
                     }
                 }
-                if (type_item == "Labour") {
-                    TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
-                    TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(price_item)
-                } else if (type_item == "Part" || type_item == "Lube" || type_item == "Consumable") {
-                    TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
-                    TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(price_item)
-                } else if (type_item == "Discount") {
-                    TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN - parseFloat(price_item)
-                    TOTAL_DISCOUNT_ADMIN = TOTAL_DISCOUNT_ADMIN + parseFloat(price_item)
-                } else {
-                    TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN
-                }
             }
+
             $('#customer-detail .total-amount').text(TOTAL_PRICE_ADMIN)
         });
 
@@ -1699,7 +1712,7 @@ var Global = {
             }
             // ALL_JOBS_ADMIN = comment_n
             jobs_summary_list = []
-           $('#customer-detail .jobs-list .job-row').each(function(){
+            $('#customer-detail .jobs-list .job-row').each(function(){
                 name = $(this).find('.job-summary-name input').val()
                 preok = $(this).find('.job-summary-pre-ok input').is(':checked');
                 prenotok = $(this).find('.job-summary-pre-notok input').is(':checked');
@@ -3543,14 +3556,14 @@ var Global = {
             }else{
                 // console.log("Point 7")
 
-        function postToIframe(data,url,target) {
-            $('body').append('<form action="' + url + '" method="post" target="' + target + '" id="postToIframe"></form>');
+                function postToIframe(data,url,target) {
+                    $('body').append('<form action="' + url + '" method="post" target="' + target + '" id="postToIframe"></form>');
 
-            $.each(data, function (n, v) {
-                $('#postToIframe').append('<input type="hidden" name="' + n + '" value="' + encodeURIComponent(v) + '" />');
-            });
-            $('#postToIframe').submit().remove();
-        }
+                    $.each(data, function (n, v) {
+                        $('#postToIframe').append('<input type="hidden" name="' + n + '" value="' + encodeURIComponent(v) + '" />');
+                    });
+                    $('#postToIframe').submit().remove();
+                }
                 var url = Commons.getOrigin()+Commons.URLFromName['generate_bill']
                 console.log(url)
                 postToIframe(params,url,"downloadpost")
@@ -5567,7 +5580,7 @@ var Global = {
                 }
                 html += '</div>'
                 html += '<div class="col s4 m4 l2">'
-                html += '<button class="waves-effect waves-light btn cg-primary btn-callcustomer page-wide" type="submit" name="action">Call<i class="material-icons right">phone</i></button>'
+                html += '<button class="waves-effect waves-light btn cg-primary btn-callcustomer page-wide" disabled type="submit" name="action">Call<i class="material-icons right">phone</i></button>'
                 html += '</div>'
 
                 html += '<div class="col s12 m12 l6">'
@@ -6048,17 +6061,17 @@ var Global = {
                 html_jc += '<div class="jobs-list request">'
                 if (html_jc_r != ""){
                     html_jc += '<b>Customer Requests</b><br>'
-                     html_jc += '<div class="row">'
-                        html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b>Job</b></div>'
-                        html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Inspect</b></div>'
-                        html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Delivery</b></div>'
-                        html_jc += '</div>'
-                        html_jc += '<div class="row">'
-                        html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b></b></div>'
-                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Ok</b></div>'
-                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Not Ok</b></div>'
-                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Resolve</b></div>'
-                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Refuse</b></div>'
+                    html_jc += '<div class="row">'
+                    html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b>Job</b></div>'
+                    html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Inspect</b></div>'
+                    html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Delivery</b></div>'
+                    html_jc += '</div>'
+                    html_jc += '<div class="row">'
+                    html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b></b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Ok</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Not Ok</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Resolve</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Refuse</b></div>'
                     html_jc += '</div><br>'
                     html_jc += html_jc_r
 
@@ -6073,16 +6086,16 @@ var Global = {
                 if (html_jc_c != ""){
                     html_jc += '<br><b>General Checks</b>'
                     html_jc += '<div class="row">'
-                        html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b>Job</b></div>'
-                        html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Inspect</b></div>'
-                        html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Delivery</b></div>'
-                        html_jc += '</div>'
-                        html_jc += '<div class="row">'
-                        html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b></b></div>'
-                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Ok</b></div>'
-                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Not Ok</b></div>'
-                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Resolve</b></div>'
-                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Refuse</b></div>'
+                    html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b>Job</b></div>'
+                    html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Inspect</b></div>'
+                    html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Delivery</b></div>'
+                    html_jc += '</div>'
+                    html_jc += '<div class="row">'
+                    html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b></b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Ok</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Not Ok</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Resolve</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Refuse</b></div>'
                     html_jc += '</div><br>'
                     html_jc += html_jc_c
 
@@ -6294,47 +6307,47 @@ var Global = {
                     }
                 }
 
-                    html_jc += '<div class="jobs-list request">'
-                    if (html_jc_r != ""){
-                        html_jc += '<b>Customer Requests</b><br>'
-                        html_jc += '<div class="row">'
-                        html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b>Job</b></div>'
-                        html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Inspect</b></div>'
-                        html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Delivery</b></div>'
-                        html_jc += '</div>'
-                        html_jc += '<div class="row">'
-                        html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b></b></div>'
-                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Ok</b></div>'
-                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Not Ok</b></div>'
-                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Resolve</b></div>'
-                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Refuse</b></div>'
-                        html_jc += '</div><br>'
-                        html_jc += html_jc_r
-
-                    }
+                html_jc += '<div class="jobs-list request">'
+                if (html_jc_r != ""){
+                    html_jc += '<b>Customer Requests</b><br>'
+                    html_jc += '<div class="row">'
+                    html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b>Job</b></div>'
+                    html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Inspect</b></div>'
+                    html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Delivery</b></div>'
                     html_jc += '</div>'
-
-                    html_jc += '<div class="jobs-list checks">'
-                    if (html_jc_c != ""){
-                        html_jc += '<br><b>General Checks</b>'
-                     html_jc += '<div class="row">'
-                        html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b>Job</b></div>'
-                        html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Inspect</b></div>'
-                        html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Delivery</b></div>'
-                        html_jc += '</div>'
-                        html_jc += '<div class="row">'
-                        html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b></b></div>'
-                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Ok</b></div>'
-                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Not Ok</b></div>'
-                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Resolve</b></div>'
-                        html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Refuse</b></div>'
-                        html_jc += '</div><br>'
-                        html_jc += html_jc_c
-
-                    }
-                    html_jc += '</div>'
+                    html_jc += '<div class="row">'
+                    html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b></b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Ok</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Not Ok</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Resolve</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Refuse</b></div>'
+                    html_jc += '</div><br>'
+                    html_jc += html_jc_r
 
                 }
+                html_jc += '</div>'
+
+                html_jc += '<div class="jobs-list checks">'
+                if (html_jc_c != ""){
+                    html_jc += '<br><b>General Checks</b>'
+                    html_jc += '<div class="row">'
+                    html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b>Job</b></div>'
+                    html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Inspect</b></div>'
+                    html_jc += '<div class="col s2 m2 l2 job-summary-name1 centered-text"><b>Delivery</b></div>'
+                    html_jc += '</div>'
+                    html_jc += '<div class="row">'
+                    html_jc += '<div class="col s7 m7 l7 job-summary-name1 centered-text"><b></b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Ok</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Not Ok</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Resolve</b></div>'
+                    html_jc += '<div class="col s1 m1 l1 job-summary-name1 centered-text"><b>Refuse</b></div>'
+                    html_jc += '</div><br>'
+                    html_jc += html_jc_c
+
+                }
+                html_jc += '</div>'
+
+            }
 
             if (val.req_user_agent) {
                 $('#bill-details #payment_collector_bill').val("Workshop")
@@ -6675,7 +6688,12 @@ var Global = {
             }
             html += '                                       </tr>';
             html += '                                       </thead>';
+
             html += '                                       <tbody>';
+
+
+
+
             compLen = val.service_items.length;
             // TOTAL_ITEM_ESTIMATE = compLen
 
@@ -7203,12 +7221,22 @@ var Global = {
                     // console.log(type_item)
                 } else if (j == 3) {
                     quantity = $(row.cells[j]).find('input,select').eq(0).val()
+                    if (quantity == "" ){
+                        quantity = "0"
+                    }
                     // console.log(type_item)
                 }else if (j == 4) {
                     unit_price = $(row.cells[j]).find('input,select').eq(0).val()
+                    if (unit_price == "" ){
+                        unit_price = "0"
+                    }
                     // console.log(type_item)
                 }else if (j == 5) {
                     price_item = $(row.cells[j]).find('input,select').eq(0).val()
+                    if (price_item == "" ){
+                        price_item = "0"
+                    }
+
                     // console.log(price_item)
                 }else if (j == 6){
                     comment =  $(row.cells[j]).find('input,select').eq(0).val()
@@ -7810,23 +7838,23 @@ var Global = {
             fuel = ""
         }
         jobs_summary_list = []
-       $('#customer-detail .jobs-list .job-row').each(function(){
-                name = $(this).find('.job-summary-name input').val()
-                preok = $(this).find('.job-summary-pre-ok input').is(':checked');
-                prenotok = $(this).find('.job-summary-pre-notok input').is(':checked');
+        $('#customer-detail .jobs-list .job-row').each(function(){
+            name = $(this).find('.job-summary-name input').val()
+            preok = $(this).find('.job-summary-pre-ok input').is(':checked');
+            prenotok = $(this).find('.job-summary-pre-notok input').is(':checked');
 
-                postok = $(this).find('.job-summary-post-ok input').is(':checked');
-                postnotok = $(this).find('.job-summary-post-notok input').is(':checked');
-                type_check = $(this).attr('data-class')
+            postok = $(this).find('.job-summary-post-ok input').is(':checked');
+            postnotok = $(this).find('.job-summary-post-notok input').is(':checked');
+            type_check = $(this).attr('data-class')
 
-                price = 0
+            price = 0
 
-                if (name != "" && name != " "){
-                    obj = {"Job":name,"Preok":preok,"Prenotok":prenotok,"Postok":postok,"Postnotok":postnotok,"Price":price,"Type":type_check}
-                    jobs_summary_list.push(obj)
+            if (name != "" && name != " "){
+                obj = {"Job":name,"Preok":preok,"Prenotok":prenotok,"Postok":postok,"Postnotok":postnotok,"Price":price,"Type":type_check}
+                jobs_summary_list.push(obj)
 
-                }
-            });
+            }
+        });
 
 
 

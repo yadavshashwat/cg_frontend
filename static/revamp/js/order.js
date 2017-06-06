@@ -13,12 +13,17 @@ $(document).ready(function() {
 
 });
 
+
 $(window).ready(function() {
     setTimeout(function() {
         $('.loading-pane-2').hide();
         $('#overlay').hide();
     }, 1000);
 });
+
+// $(document).ready(function(){
+//   
+// });
 
 window.onpopstate = function(event) {
     location.reload()
@@ -594,7 +599,7 @@ var Global = {
             // console.log(local.load('cgcart'))
             Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
             $(this).addClass('disabled')
-
+            $(this).closest('.job').find('.remove-btn').show()
             $(this).find('.book-status').text('Booked')
             $(this).parent('.row').find('i').hide()
 
@@ -621,9 +626,36 @@ var Global = {
             Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
             job_div = $("#jobs").find("[job-id='" + delC + "']");
             job_div.find('.book-btn').removeClass('disabled')
+            job_div.find('.remove-btn').hide();
             job_div.find('.book-btn .book-status').text('Book')
             job_div.find('.book-btn').parent('.row').find('i').show()
         });
+
+        $('#jobs').on('click','.job .remove-btn',function(e){
+            var parent = $(this).closest('.job');
+            var delC = parent.attr('job-id');
+            var obj_cookie = local.load();
+            var cookie_list = obj_cookie['cgcart'].split(',');
+            var code = obj_cookie['coupon']
+            var vehicle_type = $('#services').attr('data-vehicle-type')
+            var cartLen = cookie_list.length;
+            for (i = 0; i < cartLen; i++) {
+                if (cookie_list[i] == delC){
+                    cookie_list.splice(i,1);
+                }
+            }
+            cookie_list_string = cookie_list.join(',')
+            local.save('cgcart', cookie_list_string);
+            Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
+            Commons.ajaxData('check_coupon', {c_id:code,veh_type:vehicle_type}, "get", _this, _this.loadCheckCoupon,null, '.loading-pane');
+            Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
+            job_div = $("#jobs").find("[job-id='" + delC + "']");
+            job_div.find('.book-btn').removeClass('disabled')
+            job_div.find('.remove-btn').hide();
+            job_div.find('.book-btn .book-status').text('Book')
+            job_div.find('.book-btn').parent('.row').find('i').show()
+        });
+
         $('#cart .btn-checkout').on('click' ,function(e){
             $('.order-page .nav-services').hide();
             $('#jobs').hide()
@@ -1279,9 +1311,22 @@ var Global = {
                 html += '											<button class="waves-effect waves-light btn btn-small cg-primary  btn-service book-btn" type="submit" name="action"><span class="book-status">Book</span>';
                 html += '												<i class="material-icons right">send</i>';
             }
+            html += '											</button>';
+            html += '</div>'
+            html += '<div class="row btn-row">'
+            if (cart_list.indexOf(val.id)>=0){
+                html += '											<button class="waves-effect waves-light btn btn-small red  btn-service-remove remove-btn" type="submit" name="action"><span class="book-status">Remove</span>';
+                html += '										<i class="fa fa-times"></i>';
+            }else{
+                html += '											<button class="waves-effect waves-light btn btn-small red  btn-service-remove remove-btn invisible" type="submit" name="action"><span class="book-status">Remove</span>';
+                html += '												<i class="fa fa-times"></i>';
+            }
+
+
 
             html += '											</button>';
             html += '</div>'
+
             html += '										</div>';
             html += '									</div>';
             html += '								</div>';
@@ -1312,7 +1357,24 @@ var Global = {
             }
 
             html += '									</button>';
-            html += '								</div>';
+            html += '</div>'
+            html += '</div>'
+            html += '<div class="row hide-on-large-only centered-text">'
+             if (cart_list.indexOf(val.id)>=0){
+                html += '											<button class="waves-effect waves-light btn btn-small red  btn-service-remove remove-btn" type="submit" name="action"><span class="book-status">Remove</span>';
+                html += '										<i class="fa fa-times"></i>';
+            }else{
+                html += '											<button class="waves-effect waves-light btn btn-small red  btn-service-remove remove-btn invisible" type="submit" name="action"><span class="book-status">Remove</span>';
+                html += '												<i class="fa fa-times"></i>';
+            }
+            html += '									</button>';
+            html += '								</div><br>';
+
+            // html += '<div class="row btn-row">'
+
+            // html += '								</div>';
+
+
             html += '							</div>';
             html += '						</div>';
             html += '						<div class="info-div invisible">';
