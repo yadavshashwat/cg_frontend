@@ -377,12 +377,12 @@ var Login = {
             $('#agent_bill_vat').val(data['agent_vat'])
             $('#agent_bill_stax').val(data['agent_stax'])
             $('#agent_bill_cin').val(data['agent_cin'])
-            $('#payment_collector_bill').attr('disabled','')
-            $('#payment_collector_bill').val('Workshop')
+            // $('#payment_collector_bill').attr('disabled','')
+            // $('#payment_collector_bill').val('Workshop')
 
             // $('#payment_collector').val('Workshop')
-            $('#payment_collector').attr('disabled','')
-            $('#payment_collector').val('Workshop').hide()
+            // $('#payment_collector').attr('disabled','')
+            // $('#payment_collector').val('Workshop').hide()
 
             if (data['agent_vat'] != ""){
                 VAT_CONSUMABLE_PERCENT = parseFloat(data['vat_consumables'])

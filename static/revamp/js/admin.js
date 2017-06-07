@@ -1803,6 +1803,26 @@ var Global = {
             Materialize.updateTextFields();
             // console.log(pending_amt)
         })
+
+        $('#bill-details #payment_medium_bill').change(function(){
+            medium = $('#payment_medium_bill').val()
+            console.log(medium)
+            if (medium == "Credit"){
+                $('#payment_collector_bill').attr('disabled','')
+            }else{
+                $('#payment_collector_bill').removeAttr('disabled','')
+            }
+        })
+        $('#customer-detail #payment_medium').change(function(){
+            medium = $('#payment_medium').val()
+            console.log(medium)
+            if (medium == "Credit"){
+                $('#payment_collector').attr('disabled','')
+            }else{
+                $('#payment_collector').removeAttr('disabled','')
+            }
+        })
+
         $('#customer-detail .btn-addpayment').click(function(){
             amount = $('#payment_amount').val()
             col_by = $('#payment_collector').val()
@@ -1813,7 +1833,7 @@ var Global = {
                 error = 1;
                 $('#payment_amount').addClass("invalid");
             }
-            if (col_by == "" || col_by == null){
+            if ((col_by == "" || col_by == null) && medium != "Credit"){
                 error =1;
                 $('#payment_collector').addClass('invalid-select-box')
             }
@@ -3621,7 +3641,7 @@ var Global = {
                 error = 1;
                 $('#payment_amount_bill').addClass("invalid");
             }
-            if (col_by == "" || col_by == null){
+            if ((col_by == "" || col_by == null) && medium != "Credit") {
                 error =1;
                 $('#payment_collector_bill').addClass('invalid-select-box')
             }
@@ -7126,7 +7146,11 @@ var Global = {
                 html4 += val.payment_booking[i]['date_collected']
                 html4 += '</div>'
                 html4 += '<div class="row">'
-                html4 += 'Recieved by <b>' +val.payment_booking[i]['collected_by'] +'</b>'
+                if (val.payment_booking[i]['medium'] == "Credit"){
+                    html4 += 'Credited by <b>' +val.payment_booking[i]['collected_by'] +'</b>'
+                }else{
+                    html4 += 'Recieved by <b>' +val.payment_booking[i]['collected_by'] +'</b>'
+                }
                 html4 += '</div>'
                 html4 += '<div class="row">'
                 html4 += 'Payment Medium :' + val.payment_booking[i]['medium']
@@ -8628,7 +8652,11 @@ var Global = {
                 html4 += val.payment_bill[i]['date_collected']
                 html4 += '</div>'
                 html4 += '<div class="row">'
-                html4 += 'Recieved by <b>' + val.payment_bill[i]['collected_by'] + '</b>'
+               if (val.payment_bill[i]['medium'] == "Credit"){
+                    html4 += 'Credited by <b>' +val.payment_bill[i]['collected_by'] +'</b>'
+                }else{
+                    html4 += 'Recieved by <b>' +val.payment_bill[i]['collected_by'] +'</b>'
+                }
                 html4 += '</div>'
                 html4 += '<div class="row">'
                 html4 += 'Payment Medium :' + val.payment_bill[i]['medium']
@@ -8687,37 +8715,53 @@ var Global = {
         html = ''
         container.html('')
         html +="<table class='card striped'><tr><th colspan='5' class='centered-text'>Job Details</th><th></th><th colspan='7' class='centered-text'>Commission Details</th><th></th><th></th></tr>"
-        html +="<tr><th>Job ID</th><th>Date</th><th>Customer Name</th><th>Vehicle</th><th>Bill Amount</th><th>CG Collected</th><th>Part</th><th>Labour</th><th>Lube</th><th>Consumables</th><th>VAS</th><th>Denting</th><th>Total</th><th>Freeze</th><th>Settle</th></tr>"
+        html +="<tr><th>Job ID</th><th>Date</th><th>Customer Name</th><th>Vehicle</th><th>Bill Amount</th><th>Settl. Amount</th><th>CG Collected</th><th>Part</th><th>Labour</th><th>Lube</th><th>Consumables</th><th>VAS</th><th>Denting</th><th>Total</th><th>Freeze</th><th>Settle</th></tr>"
         j = 0
         $.each(data, function(ix, val) {
             total_collected_cg =0
             total_collected_uc=0
             total_collected_hj =0
             total_collected_credit =0
+            total_collected_credit_wc = 0
 
             html +='<tr data-class="'+val.id +'">'
             html +='<td><a target="_blank" href="/adminpanel/bookings/single/'+val.id+'">'+val.booking_id +'</a></td>'
             html +='<td>'+val.date_booking +'</td>'
             html +='<td>'+val.cust_name +'</td>'
             html +='<td>'+val.cust_make+' '+val.cust_model+' ('+val.cust_regnumber +')</td>'
+            html +='<td>'+val.price_total +'</td>'
             html +='<td>'+val.purchase_price_total +'</td>'
             TOTAL_BUSINESS_VENDOR = TOTAL_BUSINESS_VENDOR + parseFloat(val.purchase_price_total)
             pay = val.payment_booking
             paylen = pay.length;
             for (k = 0; k < paylen; k++) {
-                if (pay[k]['collected_by'] == "ClickGarage"){
-                    total_collected_cg = total_collected_cg + parseFloat(pay[k]['amount'])
+                if(pay[k]['medium'] == "Credit"){
+                     if (pay[k]['collected_by'] == "Workshop"){
+                           total_collected_credit_wc = total_collected_credit_wc  + parseFloat(pay[k]['amount'])
+                     }else{
+                          total_collected_credit = total_collected_credit + parseFloat(pay[k]['amount'])
+                     }
+
+                }else{
+                    if (pay[k]['collected_by'] == "ClickGarage"){
+                        total_collected_cg = total_collected_cg + parseFloat(pay[k]['amount'])
+                    }
+                    if (pay[k]['collected_by'] == "ClickGarage UC"){
+                        total_collected_uc = total_collected_uc + parseFloat(pay[k]['amount'])
+                    }
+                    if (pay[k]['collected_by'] == "ClickGarage HJ"){
+                        total_collected_hj = total_collected_hj + parseFloat(pay[k]['amount'])
+                    }
+                    if (pay[k]['collected_by'] == "ClickGarage Credit"){
+                        total_collected_credit = total_collected_credit + parseFloat(pay[k]['amount'])
+                     }
+
+
+
                 }
-                if (pay[k]['collected_by'] == "ClickGarage UC"){
-                    total_collected_uc = total_collected_uc + parseFloat(pay[k]['amount'])
-                }
-                if (pay[k]['collected_by'] == "ClickGarage HJ"){
-                    total_collected_hj = total_collected_hj + parseFloat(pay[k]['amount'])
-                }
-                if (pay[k]['collected_by'] == "ClickGarage Credit"){
-                    total_collected_credit = total_collected_credit + parseFloat(pay[k]['amount'])
-                }
+
             }
+
             html += '<td>'
             if(total_collected_cg >0){
                 html += 'CG : Rs.' + total_collected_cg + '</br>'
@@ -8729,8 +8773,19 @@ var Global = {
                 html += 'CGHJ:  Rs.' + total_collected_hj + '</br>'
             }
             if(total_collected_credit >0){
-                html += 'Credit:  Rs.' + total_collected_credit + '</br>'
+                if (total_collected_credit > parseFloat(val.purchase_price_total)){
+                    html += 'Credit (CG):  Rs.' + parseFloat(val.purchase_price_total) + '</br>'
+                    total_collected_credit = parseFloat(val.purchase_price_total)
+
+                }else{
+                    html += 'Credit (CG):  Rs.' + total_collected_credit + '</br>'
+
+                }
             }
+            if(total_collected_credit_wc >0){
+                html += 'Credit (WS):  Rs.' + total_collected_credit_wc + '</br>'
+            }
+
             html+='</td>'
             // html +='<td> CG: '+total_collected +'</td>'
             comm = val.commission_items
@@ -8805,9 +8860,9 @@ var Global = {
                 }
                 if (val.settlement_flag){
                     html +='<td><input type="checkbox" class="filled-in settle tochange" checked data-class="freeze-booking-'+ j +'"  id="settle-booking-' + j +'"/><label for="settle-booking-' +j +'"></label></td>'
-                    TOTAL_SETTLED_BUSINESS = TOTAL_SETTLED_BUSINESS + parseFloat(val.price_total)
+                    TOTAL_SETTLED_BUSINESS = TOTAL_SETTLED_BUSINESS + parseFloat(val.purchase_price_total)
                 }else{
-                    TOTAL_UNSETTLED_BUSINESS = TOTAL_UNSETTLED_BUSINESS + parseFloat(val.price_total)
+                    TOTAL_UNSETTLED_BUSINESS = TOTAL_UNSETTLED_BUSINESS + parseFloat(val.purchase_price_total)
                     TOTAL_UNSETTLED_PAY_COLLECT = TOTAL_UNSETTLED_PAY_COLLECT + parseFloat(total_collected_cg) + parseFloat(total_collected_uc)+ parseFloat(total_collected_hj)+ parseFloat(total_collected_credit)
                     TOTAL_UNSETTLED_COMMISSION = TOTAL_UNSETTLED_COMMISSION + parseFloat(val.total_commission)
                     html +='<td><input type="checkbox" class="filled-in settle tochange" data-class="freeze-booking-'+ j +'"    id="settle-booking-' + j+'"/><label for="settle-booking-' +j +'"></label></td>'
