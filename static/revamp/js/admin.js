@@ -3937,7 +3937,7 @@ var Global = {
             $('#bill-details').hide()
             $('#settlement-details').hide()
             callbrands()
-
+            call_category()
 
             container = $('#new-booking .source-list')
             container.html('')
@@ -3990,6 +3990,7 @@ var Global = {
             $('#bill-details').hide()
             $('#settlement-details').hide()
             callbrands()
+            call_category()
 
             container = $('#new-booking .source-list')
             container.html('')
@@ -7569,6 +7570,8 @@ var Global = {
         $('#new-booking #telephonepoc').val('');
         $('#new-booking #odo_number').val('');
         $('#date').val('');
+        ALL_JOBS_NEW_BOOKING_LIST = []
+        CURRENT_CART_NEW_BOOKING = []
         // var otp = $('#otp').val();
         $('#comment').val('');
         // cookie = local.load();
@@ -7577,6 +7580,49 @@ var Global = {
         $('#reg_number').val('');
         // var coupon = cookie['coupon']
         $('#time-slot').find('select').val('');
+        $('#new-booking .amount').text('0')
+         i = 1
+            $('#new-booking .add-jobs-list .job-row').each(function(){
+                if (i ==1){
+                     $(this).find('.job-summary-name input').val('')
+                }else{
+                    $(this).remove();
+                }
+                i += 1
+            });
+            j = 1
+            $('#new-booking .services-list .service-row').each(function(){
+                if (j ==1){
+                     $(this).find('select').val('')
+                }else{
+                    $(this).remove();
+                }
+                j += 1
+            });
+        if (data['user_type_control']){
+              $('#name').val('');
+             $('#telephone').val('');
+             $('#email').val('');
+             $('#address').val('');
+              $('#locality').val('');
+             $('#city').val('');
+             $('#date').val('');
+             $('#odo_number').val('')
+            //  otp = $('#otp').val();
+            //  comment = $('#comment').val();
+              $('#time_follow_lead').val('')
+            // console.log(time_follow)
+            // cookie = local.load();
+            //  fuel = $('#select-fuel').find('select').val();
+            //  veh_type = vehicle;
+             $('#select-make').find('select').val('');
+             $('#select-model').find('select').val('');
+              $('#source-booking').find('select').val('');
+
+
+        }
+                Materialize.updateTextFields();
+
         alert('Order Placed!')
     },
     loadCustomerStatus:function(data){
