@@ -533,8 +533,8 @@ var Global = {
             parent.find('.closed-more-info').addClass('open-more-info').removeClass('closed-more-info');
             parent.find('.service-name').addClass('service-name-border');
             parent.find('.info-div').slideDown('slow', function() {});
-
         });
+
         $('#jobs').on('click','.job .open-more-info' ,function(e){
             var parent = $(this).closest('.job');
             parent.find('.open-more-info').addClass('closed-more-info').removeClass('open-more-info');
@@ -1376,7 +1376,7 @@ var Global = {
 
 
             html += '							</div>';
-            html += '						</div>';
+            // html += '						</div>';
             html += '						<div class="info-div invisible">';
             html += '							<div class="row button-header">';
             html += '								<button class="waves-effect waves-light btn cg-primary  btn-service closed-more-info" type="submit" name="action">';
