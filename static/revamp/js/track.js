@@ -427,126 +427,126 @@ var Global = {
 
             html += '<div class="row card">'
 
-                html += '<div class="row">'
-                if (val.booking_user_name != val.cust_name) {
-                    html += '<div class="col s12 m12 l12">'
-                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="' + val.cust_name + '"class="validate"><label for="cust_name">Company Name</label></div>'
-                    html += '</div>'
-                }
-                html += '<div class="col s12 m12 l6">'
-                if (val.booking_user_name == "") {
-                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="' + val.cust_name + '"class="validate"><label for="cust_name">Name</label></div>'
-                } else {
-                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="' + val.booking_user_name + '"class="validate"><label for="cust_name">Name</label></div>'
-                }
+            html += '<div class="row">'
+            if (val.booking_user_name != val.cust_name) {
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="' + val.cust_name + '"class="validate"><label for="cust_name">Company Name</label></div>'
                 html += '</div>'
-                // html += '<div class="col s12 m12 l6">'
-                // if (val.booking_user_number == "") {
-                //     html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="' + val.cust_number + '"class="validate"><label for="cust_number">Number</label></div>'
-                // } else {
-                //     html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="' + val.booking_user_number + '"class="validate"><label for="cust_number">Number</label></div>'
-                // }
-                // html += '</div>'
-                html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">my_location</i><input id="cust_address" disabled type="text"   value ="' + val.cust_address +', '+val.cust_locality+', '+val.cust_city+ '"class="validate"><label for="cust_address">Address</label></div>'
-                html += '</div>'
-                // html += '<div class="col s12 m12 l6">'
-                // html += '<div class="input-field"><i class="material-icons prefix">location_on</i><input id="cust_locality" disabled  type="text"   value ="' +  val.cust_locality + '"class="validate"><label for="cust_address">Locality</label></div>'
-                // html += '</div>'
-                // html += '<div class="col s12 m12 l6">'
-                // html += '<div class="input-field"><i class="material-icons prefix">business</i><input id="cust_city" type="text" disabled    value ="'  + val.cust_city + '"class="validate"><label for="cust_address">City</label></div>'
-                // html += '</div>'
-                // html += '<div class="col s12 m12 l6">'
-                // html += '<div class="input-field"><i class="material-icons prefix">my_location</i><input id="cust_address" type="text"  disabled value ="' + val.cust_address + ', ' + val.cust_locality + ', ' + val.cust_city + '"class="validate"><label for="cust_address">Address</label></div>'
-                // html += '</div>'
-                html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_vehicle" type="text" disabled  value ="' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + '"class="validate"><label for="cust_vehicle">' + val.cust_vehicle_type + '</label></div>'
-                html += '</div>'
-                // html += '<div class="col s12 m12 l6">'
-                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_coupon" type="text" disabled  value ="' + val.coupon + '"class="validate"><label for="cust_coupon">Coupon</label></div>'
-                // html += '</div>'
-                html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
-                html += '</div>'
-                html += '</div>'
-                // html += '<div class="row">'
-                // html += '<div class="col s12 m12 l6">'
-                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text" disabled  value ="' + val.source + '"class="validate"><label for="source">Source</label></div>'
-                // html += '</div>'
-                html += '<div class="col s12 m12 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Engineer Details</label></div>'
-                html += '</div>'
+            }
+            html += '<div class="col s12 m12 l6">'
+            if (val.booking_user_name == "") {
+                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="' + val.cust_name + '"class="validate"><label for="cust_name">Name</label></div>'
+            } else {
+                html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="cust_name" type="text" disabled value ="' + val.booking_user_name + '"class="validate"><label for="cust_name">Name</label></div>'
+            }
+            html += '</div>'
+            // html += '<div class="col s12 m12 l6">'
+            // if (val.booking_user_number == "") {
+            //     html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="' + val.cust_number + '"class="validate"><label for="cust_number">Number</label></div>'
+            // } else {
+            //     html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="' + val.booking_user_number + '"class="validate"><label for="cust_number">Number</label></div>'
+            // }
+            // html += '</div>'
+            html += '<div class="col s12 m12 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">my_location</i><input id="cust_address" disabled type="text"   value ="' + val.cust_address +', '+val.cust_locality+', '+val.cust_city+ '"class="validate"><label for="cust_address">Address</label></div>'
+            html += '</div>'
+            // html += '<div class="col s12 m12 l6">'
+            // html += '<div class="input-field"><i class="material-icons prefix">location_on</i><input id="cust_locality" disabled  type="text"   value ="' +  val.cust_locality + '"class="validate"><label for="cust_address">Locality</label></div>'
+            // html += '</div>'
+            // html += '<div class="col s12 m12 l6">'
+            // html += '<div class="input-field"><i class="material-icons prefix">business</i><input id="cust_city" type="text" disabled    value ="'  + val.cust_city + '"class="validate"><label for="cust_address">City</label></div>'
+            // html += '</div>'
+            // html += '<div class="col s12 m12 l6">'
+            // html += '<div class="input-field"><i class="material-icons prefix">my_location</i><input id="cust_address" type="text"  disabled value ="' + val.cust_address + ', ' + val.cust_locality + ', ' + val.cust_city + '"class="validate"><label for="cust_address">Address</label></div>'
+            // html += '</div>'
+            html += '<div class="col s12 m12 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_vehicle" type="text" disabled  value ="' + val.cust_make + ' ' + val.cust_model + ' ' + val.cust_fuel_varient + '"class="validate"><label for="cust_vehicle">' + val.cust_vehicle_type + '</label></div>'
+            html += '</div>'
+            // html += '<div class="col s12 m12 l6">'
+            // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_coupon" type="text" disabled  value ="' + val.coupon + '"class="validate"><label for="cust_coupon">Coupon</label></div>'
+            // html += '</div>'
+            html += '<div class="col s12 m12 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_amount_paid" disabled type="number" value ="' + val.amount_paid + '"class="validate"><label for="cust_amount_paid">Amount Paid</label></div>'
+            html += '</div>'
+            html += '</div>'
+            // html += '<div class="row">'
+            // html += '<div class="col s12 m12 l6">'
+            // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text" disabled  value ="' + val.source + '"class="validate"><label for="source">Source</label></div>'
+            // html += '</div>'
+            html += '<div class="col s12 m12 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="agent_details" type="text" disabled  value ="' + val.agent_details + '"class="validate"><label for="agent_details">Engineer Details</label></div>'
+            html += '</div>'
 
-                 html += '<div class="col s12 m12 l12">'
-                    html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" disabled class="datepicker"><label for="date">Date Delivery</label></div>'
-                    // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
-                    html += '</div>'
-                        html += '<div class="col s6 m6 l6">'
-                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_pick_name" type="text" disabled value ="' + val.driver_pick_name + '"class="validate"><label for="driver_pick_name">Pick Up Driver Name</label></div>'
-                    html += '</div>'
-                    html += '<div class="col s6 m6 l6">'
-                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_pick_number" type="number" disabled  value ="' + val.driver_pick_number + '"class="validate"><label for="driver_pick_number">Pick Up Driver Number</label></div>'
-                    html += '</div>'
-                    html += '<div class="col s6 m6 l6">'
-                    html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_drop_name" type="text" disabled  value ="' + val.driver_drop_name + '"class="validate"><label for="driver_drop_name">Drop Driver Name</label></div>'
-                    html += '</div>'
-                    html += '<div class="col s6 m6 l6">'
-                    html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_drop_number" type="number" disabled  value ="' + val.driver_drop_number + '"class="validate"><label for="driver_drop_number">Drop Driver Number</label></div>'
-                    html += '</div>'
-                // html += '</div>'
+            html += '<div class="col s12 m12 l12">'
+            html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" disabled class="datepicker"><label for="date">Date Delivery</label></div>'
+            // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+            html += '</div>'
+            html += '<div class="col s6 m6 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_pick_name" type="text" disabled value ="' + val.driver_pick_name + '"class="validate"><label for="driver_pick_name">Pick Up Driver Name</label></div>'
+            html += '</div>'
+            html += '<div class="col s6 m6 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_pick_number" type="number" disabled  value ="' + val.driver_pick_number + '"class="validate"><label for="driver_pick_number">Pick Up Driver Number</label></div>'
+            html += '</div>'
+            html += '<div class="col s6 m6 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">account_circle</i><input id="driver_drop_name" type="text" disabled  value ="' + val.driver_drop_name + '"class="validate"><label for="driver_drop_name">Drop Driver Name</label></div>'
+            html += '</div>'
+            html += '<div class="col s6 m6 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="driver_drop_number" type="number" disabled  value ="' + val.driver_drop_number + '"class="validate"><label for="driver_drop_number">Drop Driver Number</label></div>'
+            html += '</div>'
+            // html += '</div>'
 
             // if (is_agent)
 
-                // html += '<div class="col s12 m12 l12">'
-                // html += '<div class="input-field"><i class="material-icons prefix">email</i><input id="email" disabled type="email" value ="' + val.cust_email + '"class="validate"><label for="email">Email</label></div>'
-                // html += '</div>'
-                // html += '<div class="col s12 m12 l12">'
-                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_regnumber" disabled  type="text" value ="' + val.cust_regnumber + '"class="validate" style="text-transform: uppercase;"><label for="cust_regnumber">#Registration</label></div>'
-                // html += '</div>'
-                // html += '<div class="col s12 m12 l12">'
-                // html += '<div class="input-field"><i class="material-icons prefix">av_timer</i><input id="cust_odometer" disabled type="number" value ="' + val.odometer + '"class="validate" ><label for="cust_odometer">#Odometer</label></div>'
-                // html += '</div>'
+            // html += '<div class="col s12 m12 l12">'
+            // html += '<div class="input-field"><i class="material-icons prefix">email</i><input id="email" disabled type="email" value ="' + val.cust_email + '"class="validate"><label for="email">Email</label></div>'
+            // html += '</div>'
+            // html += '<div class="col s12 m12 l12">'
+            // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="cust_regnumber" disabled  type="text" value ="' + val.cust_regnumber + '"class="validate" style="text-transform: uppercase;"><label for="cust_regnumber">#Registration</label></div>'
+            // html += '</div>'
+            // html += '<div class="col s12 m12 l12">'
+            // html += '<div class="input-field"><i class="material-icons prefix">av_timer</i><input id="cust_odometer" disabled type="number" value ="' + val.odometer + '"class="validate" ><label for="cust_odometer">#Odometer</label></div>'
+            // html += '</div>'
 
-                html += '<div class="col s6 m6 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled class="datepicker"><label for="date">Date Booking</label></div>'
-                // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
-                html += '</div>'
-                html += '<div class="col s6 m6 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" disabled  value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
-                html += '</div>'
-                // if (val.booking_flag){
-                html += '<div class="col s6 m6 l6">'
-                html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" disabled class="datepicker"><label for="date">Date Delivery</label></div>'
-                // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
-                html += '</div>'
+            html += '<div class="col s6 m6 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled class="datepicker"><label for="date">Date Booking</label></div>'
+            // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+            html += '</div>'
+            html += '<div class="col s6 m6 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="time_booking" type="text" disabled  value ="' + val.time_booking + '"class="validate"><label for="time_booking">Time</label></div>'
+            html += '</div>'
+            // if (val.booking_flag){
+            html += '<div class="col s6 m6 l6">'
+            html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date_delivery" type="date" disabled class="datepicker"><label for="date">Date Delivery</label></div>'
+            // html += '<div class="input-field"><i class="material-icons prefix">today</i><input id="date" type="date" disabled  value ="' + val.date_booking + '"class="datepicker"><label for="date">Date</label></div>'
+            html += '</div>'
 
-                // html += '<div class="col s12 m12 l12">'
-                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" disabled class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
-                // html += '</div>'
-                // html += '<div class="col s12 m12 l12">'
-                // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
-                // html += '</div>'
-                // html += '<div class="col s12 m12 l12">'
-                // html += '<b>JOBS SUMMARY</b><br><br>'
-                //
-                // jobLen = val.job_summary.length;
-                // html += '<div class="jobs-list">'
-                // for (i = 0; i < jobLen; i++) {
-                //     // for (i = 0; i < 2; i++) {
-                //     html += '<div class="row job-row">'
-                //     html += '<div class="col s12 m12 l12 job-summary-name">'
-                //     html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name'+i+'" disabled type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'">Job - ' + (i+1) +'</label></div>'
-                //
-                //     // html += val.job_summary[i]['Job']
-                //     html += '</div>'
-                //     // html += '<div class="col s3 m3 l3 job-summary-price">'
-                //     // html += '<div class="input-field"><input id="job_price'+i+'" type="number" disabled value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'">Price - ' + (i+1) +'</label></div>'
-                //     // html += '</div>'
-                //     // html += '<div class="col s1 m1 l1 centered-text x20">'
-                //     // html += '<i class="fa fa-trash-o delete-job"></i>'
-                //     // html += '</div>'
-                //     html += '</div>'
-                // }
+            // html += '<div class="col s12 m12 l12">'
+            // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" disabled class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
+            // html += '</div>'
+            // html += '<div class="col s12 m12 l12">'
+            // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
+            // html += '</div>'
+            // html += '<div class="col s12 m12 l12">'
+            // html += '<b>JOBS SUMMARY</b><br><br>'
+            //
+            // jobLen = val.job_summary.length;
+            // html += '<div class="jobs-list">'
+            // for (i = 0; i < jobLen; i++) {
+            //     // for (i = 0; i < 2; i++) {
+            //     html += '<div class="row job-row">'
+            //     html += '<div class="col s12 m12 l12 job-summary-name">'
+            //     html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name'+i+'" disabled type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name'+i+'">Job - ' + (i+1) +'</label></div>'
+            //
+            //     // html += val.job_summary[i]['Job']
+            //     html += '</div>'
+            //     // html += '<div class="col s3 m3 l3 job-summary-price">'
+            //     // html += '<div class="input-field"><input id="job_price'+i+'" type="number" disabled value="' + val.job_summary[i]['Price'] + '"><label for="job_price'+i+'">Price - ' + (i+1) +'</label></div>'
+            //     // html += '</div>'
+            //     // html += '<div class="col s1 m1 l1 centered-text x20">'
+            //     // html += '<i class="fa fa-trash-o delete-job"></i>'
+            //     // html += '</div>'
+            //     html += '</div>'
+            // }
 
             html += '</div>'
 
@@ -663,24 +663,24 @@ var Global = {
 
 
 
-                if (val.status == "Confirmed"){
-                    $('#customer-detail .user-button-row-1').show()
-                }else{
-                    $('#customer-detail .user-button-row-1').hide()
-                }
+            if (val.status == "Confirmed"){
+                $('#customer-detail .user-button-row-1').show()
+            }else{
+                $('#customer-detail .user-button-row-1').hide()
+            }
 
-                if (val.status == "Job Completed" || val.status == "Feedback Taken" || val.status == "Cancelled"){
-                    $('#customer-detail .user-button-row-2').hide()
-                }else{
-                    $('#customer-detail .user-button-row-2').show()
-                }
+            if (val.status == "Job Completed" || val.status == "Feedback Taken" || val.status == "Cancelled"){
+                $('#customer-detail .user-button-row-2').hide()
+            }else{
+                $('#customer-detail .user-button-row-2').show()
+            }
 
-                if (val.bill_generation_flag){
-                    $('#customer-detail .generated-bill').show()
+            if (val.bill_generation_flag){
+                $('#customer-detail .generated-bill').show()
 
-                }else{
-                    $('#customer-detail .generated-bill').hide()
-                }
+            }else{
+                $('#customer-detail .generated-bill').hide()
+            }
 
 
 
@@ -762,6 +762,7 @@ var Global = {
             html += '                                       <thead>';
             html += '                                       <tr>';
             html += '                                           <th data-field="id">S.No.</th>';
+            html += '                                           <th data-field="part" class="invisible">Part Make Type</th>';
             html += '                                           <th data-field="part">Name</th>';
             html += '                                           <th data-field="action">Type</th>';
             // html += '                                            <th data-field="part">Type</th>';
@@ -771,7 +772,7 @@ var Global = {
                 html += '                                           <th data-field="unit_price" class="">Unit Price (Rs.)</th>';
                 html += '                                           <th data-field="price" class="">Item Price (Rs.)</th>';
             }else{
-                 html += '                                           <th data-field="unit" class="invisible">Units</th>';
+                html += '                                           <th data-field="unit" class="invisible">Units</th>';
                 html += '                                           <th data-field="unit_price" class="invisible">Unit Price (Rs.)</th>';
                 html += '                                           <th data-field="price" class="invisible">Item Price (Rs.)</th>';
             }
@@ -783,8 +784,8 @@ var Global = {
 
 
 
-                html += '                                           <th data-field="cat-settle" class="invisible">Purchase Price</th>';
-                html += '                                           <th data-field="cat-settle" class="invisible">Settlement</th>';
+            html += '                                           <th data-field="cat-settle" class="invisible">Purchase Price</th>';
+            html += '                                           <th data-field="cat-settle" class="invisible">Settlement</th>';
 
             // }
 
@@ -830,12 +831,17 @@ var Global = {
                 // Cell item no.
                 html += '<td class="centered-text">' + item_no + '</td>';
                 // Part Name
-                    html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
+                if ( val.service_items[i].parttype==null ||  val.service_items[i].parttype===false || val.service_items[i].parttype=="NA") {
+                    html += '<td class="invisible">' + '<input id="partmaketype" type="text" disabled class="noborder browser-default" value ="NA" aria-required="true">' + '</td>';
+                }else {
+                    html += '<td class="invisible">' + '<input id="partmaketype" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].parttype + '" aria-required="true">' + '</td>';
+                }
+                html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
                 // Part Type
-                    html += '<td>' + '<input id="part_type" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].type + '" aria-required="true">' + '</td>';
+                html += '<td>' + '<input id="part_type" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].type + '" aria-required="true">' + '</td>';
 
                 // Price
-                   if (val.estimate_history_len > 1){
+                if (val.estimate_history_len > 1){
                     if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
                         html += '<td class="">' + '<input id="part_units" type="number" class="browser-default noborder " disabled  value ="1" aria-required="true">' + '</td>';
                         html += '<td class="">' + '<input id="part_unitprice" type="number" class="browser-default noborder " disabled  value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
@@ -847,7 +853,7 @@ var Global = {
                         html += '<td class="">' + '<input id="part_price" type="number" class="browser-default noborder " disabled value ="' + parseFloat(String(parseFloat(val.service_items[i].quantity) * parseFloat(val.service_items[i].unit_price)))  + '" aria-required="true">' + '</td>';
 
                     }}else{
-                        if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
+                    if ( val.service_items[i].quantity==null ||  val.service_items[i].quantity===false || val.service_items[i].quantity=="NA") {
                         html += '<td class="invisible">' + '<input id="part_units" type="number" class="browser-default noborder " disabled  value ="1" aria-required="true">' + '</td>';
                         html += '<td class="invisible">' + '<input id="part_unitprice" type="number" class="browser-default noborder " disabled  value ="' + val.service_items[i].price + '" aria-required="true">' + '</td>';
                         html += '<td class="invisible">' + '<input id="part_price" type="number" class="browser-default noborder " disabled value ="' + val.service_items[i].price  + '" aria-required="true">' + '</td>';
@@ -858,59 +864,59 @@ var Global = {
                         html += '<td class="invisible">' + '<input id="part_price" type="number" class="browser-default noborder " disabled value ="' + parseFloat(String(parseFloat(val.service_items[i].quantity) * parseFloat(val.service_items[i].unit_price)))  + '" aria-required="true">' + '</td>';
 
                     }
-                   }
+                }
 
 
                 // Part Comment
 
-                    if (val.service_items[i].comment==null ||  val.service_items[i].comment===false) {
-                        html += '<td>' + '<input id="part_comment" type="text" class="browser-default noborder" disabled aria-required="true">' + '</td>';
-                    }else{
-                        html += '<td>' + '<input id="part_comment" type="text" class="browser-default noborder" disabled value ="' + val.service_items[i].comment + '" aria-required="true">' + '</td>';
-                    }
+                if (val.service_items[i].comment==null ||  val.service_items[i].comment===false) {
+                    html += '<td>' + '<input id="part_comment" type="text" class="browser-default noborder" disabled aria-required="true">' + '</td>';
+                }else{
+                    html += '<td>' + '<input id="part_comment" type="text" class="browser-default noborder" disabled value ="' + val.service_items[i].comment + '" aria-required="true">' + '</td>';
+                }
 
 
                 // approval status
 
-                    if(val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
-                        if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
-                            html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
-                            html += '<td><input type="checkbox" class="filled-in approve-item tochange" disabled  id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
-                        }else{
-                            if (val.service_items[i].approved == "Yes"){
-                                html += '<td class="centered-text"><span class="approved">Approved</span></td>'
-                                html += '<td><input type="checkbox" class="filled-in approve-item" disabled checked="checked" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
-                            }else{
-                                html += '<td class="centered-text"><span class="denied">TBD</span></td>'
-                                html += '<td><input type="checkbox" class="filled-in approve-item tochange" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
-                            }
-                        }
-
+                if(val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
+                    if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
+                        html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
+                        html += '<td><input type="checkbox" class="filled-in approve-item tochange" disabled  id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
                     }else{
-                        if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
-                            html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
-                            html += '<td><input type="checkbox" class="filled-in approve-item tochange"  id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                        if (val.service_items[i].approved == "Yes"){
+                            html += '<td class="centered-text"><span class="approved">Approved</span></td>'
+                            html += '<td><input type="checkbox" class="filled-in approve-item" disabled checked="checked" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
                         }else{
-                            if (val.service_items[i].approved == "Yes"){
-                                html += '<td class="centered-text"><span class="approved">Approved</span></td>'
-                                html += '<td><input type="checkbox" class="filled-in approve-item" disabled checked="checked" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
-                            }else{
-                                html += '<td class="centered-text"><span class="denied">TBD</span></td>'
-                                html += '<td><input type="checkbox" class="filled-in approve-item tochange" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
-                            }
+                            html += '<td class="centered-text"><span class="denied">TBD</span></td>'
+                            html += '<td><input type="checkbox" class="filled-in approve-item tochange" disabled id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
                         }
-
                     }
+
+                }else{
+                    if (val.service_items[i].approved==null ||  val.service_items[i].comment===false){
+                        html += '<td  class="centered-text"><span class="denied">TBD</span></td>'
+                        html += '<td><input type="checkbox" class="filled-in approve-item tochange"  id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                    }else{
+                        if (val.service_items[i].approved == "Yes"){
+                            html += '<td class="centered-text"><span class="approved">Approved</span></td>'
+                            html += '<td><input type="checkbox" class="filled-in approve-item" disabled checked="checked" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                        }else{
+                            html += '<td class="centered-text"><span class="denied">TBD</span></td>'
+                            html += '<td><input type="checkbox" class="filled-in approve-item tochange" id="comp_item_select-'+i+'"/><label for="comp_item_select-'+i+'"></label></td>'
+                        }
+                    }
+
+                }
 
 
                 // Settlemet Status
 
-                    if (val.service_items[i].purchase_price==null || val.service_items[i].purchase_price===false) {
-                        html += '<td class="invisible"><input id="purchase_price" type="number"  disabled class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true"></td>'
-                    }else{
-                        html += '<td class="invisible"><input id="purchase_price" type="number" disabled  class="browser-default" value ="' + val.service_items[i].purchase_price + '" aria-required="true"></td>'
-                    }
-                    html += '<td class="invisible">' + '<input id="settle_type" type="text" disabled class="browser-default" value ="' + val.service_items[i].settlement_cat + '" aria-required="true">' + '</td>';
+                if (val.service_items[i].purchase_price==null || val.service_items[i].purchase_price===false) {
+                    html += '<td class="invisible"><input id="purchase_price" type="number"  disabled class="browser-default" value ="' + val.service_items[i].price + '" aria-required="true"></td>'
+                }else{
+                    html += '<td class="invisible"><input id="purchase_price" type="number" disabled  class="browser-default" value ="' + val.service_items[i].purchase_price + '" aria-required="true"></td>'
+                }
+                html += '<td class="invisible">' + '<input id="settle_type" type="text" disabled class="browser-default" value ="' + val.service_items[i].settlement_cat + '" aria-required="true">' + '</td>';
                 // Row Deletion
 
                 html += '                                       </tr>';
@@ -998,24 +1004,26 @@ var Global = {
         for (var i = 1, row; row = table.rows[i]; i++) {
             TOTAL_ITEMS_ADMIN = i;
             for (var j = 0, col; col = row.cells[j]; j++) {
-                if (j == 1) {
+                 if (j==1){
+                    partmaketype = $(row.cells[j]).find('input,select').eq(0).val()
+                }else if (j == 2) {
                     name_item = $(row.cells[j]).find('input,select').eq(0).val()
                     // console.log(name_item)
-                }else if (j == 2) {
+                }else if (j == 3) {
                     type_item = $(row.cells[j]).find('input,select').eq(0).val()
                     // console.log(type_item)
-                } else if (j == 3) {
+                } else if (j == 4) {
                     quantity = $(row.cells[j]).find('input,select').eq(0).val()
                     // console.log(type_item)
-                }else if (j == 4) {
+                }else if (j == 5) {
                     unit_price = $(row.cells[j]).find('input,select').eq(0).val()
                     // console.log(type_item)
-                }else if (j == 5) {
+                }else if (j == 6) {
                     price_item = $(row.cells[j]).find('input,select').eq(0).val()
                     // console.log(price_item)
-                }else if (j == 6){
+                }else if (j == 7){
                     comment =  $(row.cells[j]).find('input,select').eq(0).val()
-                }else if (j == 8){
+                }else if (j == 9){
                     if($(row.cells[j]).find('input,select')[0].checked){
                         approved = "Yes"
                         console.log(approved)
@@ -1023,12 +1031,12 @@ var Global = {
                         approved = "TBD"
                         console.log(approved)
                     }
-                }else if (j == 9){
+                }else if (j == 10){
                     purchase_price =  $(row.cells[j]).find('input,select').eq(0).val()
                     if (purchase_price == ""){
                         purchase_price = price_item
                     }
-                }else if (j == 10){
+                }else if (j == 11){
                     settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
                 }
             }
@@ -1054,7 +1062,8 @@ var Global = {
                 "quantity":quantity,
                 "unit_price":unit_price,
                 "approved":approved,
-                "purchase_price":purchase_price
+                "purchase_price":purchase_price,
+                "parttype":partmaketype
             }
             if (name_item != ""){
                 CURRENT_CART_ADMIN.push(cart_item)

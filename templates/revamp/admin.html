@@ -1153,7 +1153,7 @@
                                 </select>
                             </div>
                         </div>
-                          <div class="col l3 s12 m12">
+                        <div class="col l3 s12 m12">
                             <div class="input-field" id ="Status">
                                 <select class="status-list browser-default lead-filter">
                                     <option value="" selected>Select Status</option>
@@ -1216,7 +1216,7 @@
 
                     </div>
                     <div class="row">
-                         <div class="col l6 s12 m12">
+                        <div class="col l6 s12 m12">
                             <div class="input-field">
                                 <i class="material-icons prefix">account_circle</i>
                                 <input id="custname" type="text" class="validate">
@@ -2379,7 +2379,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="row add-item">
+                        <div class="row">
                             <!--<div class="row">-->
                             <div class="col l12 s12 m12 centered-text">
                                 <button class="waves-effect waves-light btn cg-primary btn-update-send-estimate page-wide" type="submit" name="action">Update and Share Estimate
@@ -3631,7 +3631,7 @@
                             </div>
 
                         </div>
-                        <div class="row staff-button-row">
+                        <div class="row staff-button-row-hide">
                             <b>Bill Type :</b>
                             <div class="input-field sort" id ="bill_type">
                                 <select  class="browser-default">
@@ -3749,6 +3749,7 @@
                                 <table class="striped card" id="bill-table">
                                     <thead>
                                     <tr>
+                                        <th data-field="parttype">Part Type</th>
                                         <th data-field="part">Part/Service</th>
                                         <th data-field="action">Type</th>
                                         <th data-field="unit">Units</th>
@@ -3760,6 +3761,13 @@
                                     </thead>
                                     <tbody>
                                     <tr>
+                                        <td><div class="input-field sort" id ="partmaketype"><select  class="browser-default">
+                                            <option value="OES" selected>OES</option>
+                                            <option value="OEM">OEM</option>
+                                            <option value="Aftermarket">Aftemarket</option>
+                                            <option value="Refurbished">Refubished</option>
+                                        </select></div>
+                                        </td>
                                         <td><input id="part_name" type="text" class="browser-default" aria-required="true"></td>
                                         <td><div class="input-field sort" id ="part_type"><select  class="browser-default">
                                             <option value="Part">Part</option>
@@ -3777,6 +3785,13 @@
                                 </table>
                                 <table class="invisible to-copy">
                                     <tr>
+                                        <td><div class="input-field sort" id ="partmaketype"><select  class="browser-default">
+                                            <option value="OES" selected>OES</option>
+                                            <option value="OEM">OEM</option>
+                                            <option value="Aftermarket">Aftemarket</option>
+                                            <option value="Refurbished">Refubished</option>
+                                        </select></div>
+                                        </td>
                                         <td><input id="part_name" type="text" class="browser-default" aria-required="true"></td>
                                         <td><div class="input-field sort" id ="part_type"><select  class="browser-default">
                                             <option value="Part">Part</option>
@@ -4446,14 +4461,14 @@
     </div>
 </section>
 <!--<footer>-->
-	<!--<div class="container">-->
-		<!--<div class="row">-->
-			<!--<div class="text-center">-->
-				<!--<p>&copy;Sui Generis Innovations. All Rights Reserved.<br />-->
-					<!--&lt;!&ndash;<a href="https://www.clickgarage.in"><img src="" alt="ClickGarage Logo"></a>&ndash;&gt;-->
-			<!--</div>-->
-		<!--</div>-->
-	<!--</div>-->
+<!--<div class="container">-->
+<!--<div class="row">-->
+<!--<div class="text-center">-->
+<!--<p>&copy;Sui Generis Innovations. All Rights Reserved.<br />-->
+<!--&lt;!&ndash;<a href="https://www.clickgarage.in"><img src="" alt="ClickGarage Logo"></a>&ndash;&gt;-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!--</footer>-->
 <div class="fixed-action-btn horizontal click-to-toggle invisible" id="god-view">
     <a class="btn-floating btn-large red">

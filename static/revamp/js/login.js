@@ -379,7 +379,6 @@ var Login = {
             $('#agent_bill_cin').val(data['agent_cin'])
             // $('#payment_collector_bill').attr('disabled','')
             // $('#payment_collector_bill').val('Workshop')
-
             // $('#payment_collector').val('Workshop')
             // $('#payment_collector').attr('disabled','')
             // $('#payment_collector').val('Workshop').hide()
@@ -403,7 +402,7 @@ var Login = {
             Materialize.updateTextFields();
             // STATE_BILL = data['user_state']
             // AGENT_STATE = STATE_BILL
-            // $('#bill-details #bill_type').find('select').val('Agent Bill').change()
+            $('#bill-details #bill_type').find('select').val('Agent Bill')
             $('#sms-credits').text(data['agent_sms_credits'])
 
         }else if(data['auth_rights']['b2b']){

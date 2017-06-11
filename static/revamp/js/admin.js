@@ -1434,7 +1434,7 @@ var Global = {
         $('#customer-detail .btn-update-send-estimate').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             _this.updateCart()
-            console.log(CURRENT_CART_ADMIN)
+            // console.log(CURRENT_CART_ADMIN)
             estimate = JSON.stringify(CURRENT_CART_ADMIN)
             Commons.ajaxData('update_estimate', {b_id: bid,
                 estimate: estimate,
@@ -1465,25 +1465,29 @@ var Global = {
             // $(this).closest('tr').find('#part_price').val(part_total_price)
             for (var i = 1, row; row = table.rows[i]; i++) {
                 for (var j = 0, col; col = row.cells[j]; j++) {
-                    if (j == 1) {
+                    // console.log
+                    if (j==1){
+                        partmaketype = $(row.cells[j]).find('input,select').eq(0).val()
+
+                    }else if (j == 2) {
                         name_item = $(row.cells[j]).find('input,select').eq(0).val()
                         // console.log(name_item)
-                    }else if (j == 2) {
+                    }else if (j == 3) {
                         type_item = $(row.cells[j]).find('input,select').eq(0).val()
                         // console.log(type_item)
-                    } else if (j == 3) {
+                    } else if (j == 4) {
                         quantity = $(row.cells[j]).find('input,select').eq(0).val()
                         // console.log(type_item)
-                    }else if (j == 4) {
+                    }else if (j == 5) {
                         unit_price = $(row.cells[j]).find('input,select').eq(0).val()
                         // console.log(type_item)
-                    }else if (j == 5) {
+                    }else if (j == 6) {
                         price_item = unit_price * quantity;
                         $(row.cells[j]).find('input,select').eq(0).val(price_item)
                         // console.log(price_item)
-                    }else if (j == 6){
+                    }else if (j == 7){
                         comment =  $(row.cells[j]).find('input,select').eq(0).val()
-                    }else if (j == 8){
+                    }else if (j == 9){
                         if($(row.cells[j]).find('input,select')[0].checked){
                             approved = "Yes"
                             // console.log(approved)
@@ -1491,11 +1495,17 @@ var Global = {
                             approved = "TBD"
                             // console.log(approved)
                         }
-                    }else if (j == 9){
+                    }else if (j == 10){
+                        purchase_price =  $(row.cells[j]).find('input,select').eq(0).val()
+                        if (purchase_price == ""){
+                            purchase_price = price_item
+                        }
+                    }else if (j == 11){
                         settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
                     }
+                    // console.log(j)
+                    // console.log(i)
                 }
-
 
                 if (type_item == "Labour") {
                     TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
@@ -1510,6 +1520,7 @@ var Global = {
                     TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN
                 }
                 $('#customer-detail .total-amount').text(TOTAL_PRICE_ADMIN)
+                // console.log(TOTAL_PRICE_ADMIN)
 
             }
         });
@@ -1546,13 +1557,15 @@ var Global = {
                         if (j == 0) {
                             $(row.cells[j]).text(i)
                             // console.log(name_item)
-                        }if (j == 1) {
+                        }else if (j==1){
+                            partmaketype = $(row.cells[j]).find('input,select').eq(0).val()
+                        }else if (j == 2) {
                             name_item = $(row.cells[j]).find('input,select').eq(0).val()
                             // console.log(name_item)
-                        } else if (j == 2) {
+                        } else if (j == 3) {
                             type_item = $(row.cells[j]).find('input,select').eq(0).val()
                             // console.log(type_item)
-                        } else if (j == 3) {
+                        } else if (j == 4) {
                             price_item = $(row.cells[j]).find('input,select').eq(0).val()
                             // console.log(price_item)
                         } else if (j == 4){
@@ -1889,7 +1902,7 @@ var Global = {
         $('#customer-detail .btn-update-estimate').click(function(){
             bid = $('#customer-detail #booking_id').attr('booking_id');
             _this.updateCart()
-            console.log(CURRENT_CART_ADMIN)
+            // console.log(CURRENT_CART_ADMIN)
             estimate = JSON.stringify(CURRENT_CART_ADMIN)
             Commons.ajaxData('update_estimate', {b_id: bid,
                 estimate: estimate,
@@ -3353,22 +3366,25 @@ var Global = {
             for (var i = 1, row; row = table.rows[i]; i++) {
                 for (var j = 0, col; col = row.cells[j]; j++) {
                     if (j == 0) {
-                        name_item = $(row.cells[j]).find('input,select').eq(0).val()
+                        partmaketype = $(row.cells[j]).find('input,select').eq(0).val()
                         // console.log(name_item)
                     }else if (j == 1) {
+                        name_item = $(row.cells[j]).find('input,select').eq(0).val()
+                        // console.log(name_item)
+                    }else if (j == 2) {
                         type_item = $(row.cells[j]).find('input,select').eq(0).val()
                         // console.log(type_item)
-                    } else if (j == 2) {
+                    } else if (j == 3) {
                         quantity = $(row.cells[j]).find('input,select').eq(0).val()
                         // console.log(type_item)
-                    }else if (j == 3) {
+                    }else if (j == 4) {
                         unit_price = $(row.cells[j]).find('input,select').eq(0).val()
                         // console.log(type_item)
-                    }else if (j == 4) {
+                    }else if (j == 5) {
                         price_item = unit_price * quantity;
                         $(row.cells[j]).find('input,select').eq(0).val(price_item)
                         // console.log(price_item)
-                    }else if (j == 5) {
+                    }else if (j == 6) {
                         if (name_item !=""){
                             if (type_item == "Labour") {
                                 applicable_tax = SERVICE_TAX_PERCENT
@@ -3424,7 +3440,9 @@ var Global = {
                                 "unit_price":unit_price,
                                 "approved":"Yes",
                                 "purchase_price": price_item,
-                                "purchase_price_pretax":price_item_pre_tax
+                                "purchase_price_pretax":price_item_pre_tax,
+                                "parttype":partmaketype
+
                             }
 
                             // if (name_item != ""){
@@ -6671,6 +6689,11 @@ var Global = {
             html += '                                       <thead>';
             html += '                                       <tr>';
             html += '                                           <th data-field="id">S.No.</th>';
+            if (val.req_user_admin || val.req_user_staff || val.req_user_agent) {
+                html += '                                           <th data-field="part_type">Part Make Type</th>';
+            }else{
+                html += '                                           <th class="invisible" data-field="part_type">Part Make Type</th>';
+            }
             html += '                                           <th data-field="part">Name</th>';
             html += '                                           <th data-field="action">Type</th>';
             // html += '                                            <th data-field="part">Type</th>';
@@ -6754,20 +6777,63 @@ var Global = {
                 // Cell item no.
                 html += '<td class="centered-text">' + item_no + '</td>';
                 // Part Name
-                if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-                    if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
+                if (val.req_user_admin || val.req_user_staff || val.req_user_agent) {
+                    if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag) {
+                        if (val.service_items[i].parttype == null || val.service_items[i].parttype === false || val.service_items[i].parttype == "NA") {
+                            html += '<td>' + '<input id="partmaketype" type="text" disabled class="noborder browser-default" value ="NA" aria-required="true">' + '</td>';
+                        } else {
+                            html += '<td>' + '<input id="partmaketype" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].parttype + '" aria-required="true">' + '</td>';
+                        }
                         html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default partnamebooking" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
-                    }else{
+                    } else {
+                        if (val.service_items[i].parttype == null || val.service_items[i].parttype === false || val.service_items[i].parttype == "NA") {
+                            html += '<td>' + '<div class="input-field sort" id ="partmaketype"><select  class="browser-default">'
+                            html += '<option value="OES" selected>OES</option>'
+                            html += '<option value="OEM">OEM</option>'
+                            html += '<option value="Aftermarket">Aftermarket</option>'
+                            html += '<option value="Refurbished">Refurbished</option>'
+                            html += '</select></div></td>'
+                        } else {
+                            html += '<td>' + '<div class="input-field sort" id ="partmaketype"><select  class="browser-default">'
+                            if (val.service_items[i].parttype == "OEM") {
+                                html += '<option value="OEM" selected>OEM</option>'
+                            } else {
+                                html += '<option value="OEM">OEM</option>'
+                            }
+                            if (val.service_items[i].parttype == "OES") {
+                                html += '<option value="OES" selected>OES</option>'
+                            } else {
+                                html += '<option value="OES">OES</option>'
+                            }
+
+                            if (val.service_items[i].parttype == "Aftermarket") {
+                                html += '<option value="Aftermarket" selected>Aftermarket</option>'
+                            } else {
+                                html += '<option value="Aftermarket">Aftermarket</option>'
+                            }
+                            if (val.service_items[i].parttype == "Refurbished") {
+                                html += '<option value="Refurbished" selected>Refurbished</option>'
+                            } else {
+                                html += '<option value="Refurbished">Refurbished</option>'
+                            }
+                            html += '</select></div></td>'
+                        }
                         html += '<td>' + '<input id="part_name" type="text" class="browser-default partnamebooking" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
                     }
                 }else{
+                    if ( val.service_items[i].parttype==null ||  val.service_items[i].parttype===false || val.service_items[i].parttype=="NA") {
+                        html += '<td class="invisible">' + '<input id="partmaketype" type="text" disabled class="noborder browser-default" value ="NA" aria-required="true">' + '</td>';
+                    }else{
+                        html += '<td class="invisible">' + '<input id="partmaketype" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].parttype + '" aria-required="true">' + '</td>';
+                    }
                     html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default  partnamebooking" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
                 }
                 // Part Type
-                if (val.req_user_admin || val.req_user_staff || val.req_user_agent){
-                    if(val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag){
+                if (val.req_user_admin || val.req_user_staff || val.req_user_agent) {
+                    if (val.bill_generation_flag || val.job_completion_flag || val.settlement_flag || val.frozen_flag) {
                         html += '<td>' + '<input id="part_type" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].type + '" aria-required="true">' + '</td>';
-                    }else{
+
+                    } else {
                         html += '<td>' + '<div class="input-field sort" id ="part_type"><select  class="browser-default">'
                         if (val.service_items[i].type == "Part") {
                             html += '<option value="Part" selected>Part</option>'
@@ -7107,7 +7173,11 @@ var Global = {
                 $('#comp_all_select').attr('disabled','')
             }else{
                 $('#customer-detail .btn-additem-est').show()
-                $('#customer-detail .btn-update-send-estimate').show()
+                if (val.clickgarage_flag && val.req_user_agent){
+                    $('#customer-detail .btn-update-send-estimate').hide()
+                }else{
+                    $('#customer-detail .btn-update-send-estimate').show()
+                }
 
                 $('#comp_all_select').removeAttr('disabled')
             }
@@ -7238,47 +7308,47 @@ var Global = {
         for (var i = 1, row; row = table.rows[i]; i++) {
             TOTAL_ITEMS_ADMIN = i;
             for (var j = 0, col; col = row.cells[j]; j++) {
-                if (j == 1) {
+                if (j==1){
+                    partmaketype = $(row.cells[j]).find('input,select').eq(0).val()
+
+                }else if (j == 2) {
                     name_item = $(row.cells[j]).find('input,select').eq(0).val()
                     // console.log(name_item)
-                }else if (j == 2) {
+                }else if (j == 3) {
                     type_item = $(row.cells[j]).find('input,select').eq(0).val()
                     // console.log(type_item)
-                } else if (j == 3) {
+                } else if (j == 4) {
                     quantity = $(row.cells[j]).find('input,select').eq(0).val()
                     if (quantity == "" ){
                         quantity = "0"
                     }
                     // console.log(type_item)
-                }else if (j == 4) {
+                }else if (j == 5) {
                     unit_price = $(row.cells[j]).find('input,select').eq(0).val()
                     if (unit_price == "" ){
                         unit_price = "0"
                     }
                     // console.log(type_item)
-                }else if (j == 5) {
+                }else if (j == 6) {
                     price_item = $(row.cells[j]).find('input,select').eq(0).val()
                     if (price_item == "" ){
                         price_item = "0"
                     }
-
-                    // console.log(price_item)
-                }else if (j == 6){
+                }else if (j == 7){
                     comment =  $(row.cells[j]).find('input,select').eq(0).val()
-                }else if (j == 8){
+                }else if (j == 9){
                     if($(row.cells[j]).find('input,select')[0].checked){
                         approved = "Yes"
-                        console.log(approved)
                     }else{
                         approved = "TBD"
-                        console.log(approved)
+                        // console.log(approved)
                     }
-                }else if (j == 9){
+                }else if (j == 10){
                     purchase_price =  $(row.cells[j]).find('input,select').eq(0).val()
                     if (purchase_price == ""){
                         purchase_price = price_item
                     }
-                }else if (j == 10){
+                }else if (j == 11){
                     settlement_cat =  $(row.cells[j]).find('input,select').eq(0).val()
                 }
             }
@@ -7295,6 +7365,7 @@ var Global = {
             } else {
                 TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN
             }
+            console.log(partmaketype)
             cart_item = {
                 "name": name_item,
                 "price": price_item,
@@ -7304,7 +7375,8 @@ var Global = {
                 "quantity":quantity,
                 "unit_price":unit_price,
                 "approved":approved,
-                "purchase_price":purchase_price
+                "purchase_price":purchase_price,
+                "parttype":partmaketype
             }
             if (name_item != ""){
                 CURRENT_CART_ADMIN.push(cart_item)
@@ -7581,47 +7653,47 @@ var Global = {
         // var coupon = cookie['coupon']
         $('#time-slot').find('select').val('');
         $('#new-booking .amount').text('0')
-         i = 1
-            $('#new-booking .add-jobs-list .job-row').each(function(){
-                if (i ==1){
-                     $(this).find('.job-summary-name input').val('')
-                }else{
-                    $(this).remove();
-                }
-                i += 1
-            });
-            j = 1
-            $('#new-booking .services-list .service-row').each(function(){
-                if (j ==1){
-                     $(this).find('select').val('')
-                }else{
-                    $(this).remove();
-                }
-                j += 1
-            });
+        i = 1
+        $('#new-booking .add-jobs-list .job-row').each(function(){
+            if (i ==1){
+                $(this).find('.job-summary-name input').val('')
+            }else{
+                $(this).remove();
+            }
+            i += 1
+        });
+        j = 1
+        $('#new-booking .services-list .service-row').each(function(){
+            if (j ==1){
+                $(this).find('select').val('')
+            }else{
+                $(this).remove();
+            }
+            j += 1
+        });
         if (data['user_type_control']){
-              $('#name').val('');
-             $('#telephone').val('');
-             $('#email').val('');
-             $('#address').val('');
-              $('#locality').val('');
-             $('#city').val('');
-             $('#date').val('');
-             $('#odo_number').val('')
+            $('#name').val('');
+            $('#telephone').val('');
+            $('#email').val('');
+            $('#address').val('');
+            $('#locality').val('');
+            $('#city').val('');
+            $('#date').val('');
+            $('#odo_number').val('')
             //  otp = $('#otp').val();
             //  comment = $('#comment').val();
-              $('#time_follow_lead').val('')
+            $('#time_follow_lead').val('')
             // console.log(time_follow)
             // cookie = local.load();
             //  fuel = $('#select-fuel').find('select').val();
             //  veh_type = vehicle;
-             $('#select-make').find('select').val('');
-             $('#select-model').find('select').val('');
-              $('#source-booking').find('select').val('');
+            $('#select-make').find('select').val('');
+            $('#select-model').find('select').val('');
+            $('#source-booking').find('select').val('');
 
 
         }
-                Materialize.updateTextFields();
+        Materialize.updateTextFields();
 
         alert('Order Placed!')
     },
@@ -8428,6 +8500,38 @@ var Global = {
             console.log(itemlist)
             for (i = 0; i < itemlist; i++) {
                 html += '<tr>'
+                if ( val.service_items[i]['parttype']==null || val.service_items[i]['parttype']===false || val.service_items[i]['parttype']=="NA") {
+                    html += '<td>' + '<div class="input-field sort" id ="partmaketype"><select  class="browser-default">'
+                    html += '<option value="OES" selected>OES</option>'
+                    html += '<option value="OEM">OEM</option>'
+                    html += '<option value="Aftermarket">Aftermarket</option>'
+                    html += '<option value="Refurbished">Refurbished</option>'
+                    html += '</select></div></td>'
+                }else{
+                    html += '<td>' + '<div class="input-field sort" id ="partmaketype"><select  class="browser-default">'
+                    if (val.service_items[i]['parttype'] == "OEM") {
+                        html += '<option value="OEM" selected>OEM</option>'
+                    } else {
+                        html += '<option value="OEM">OEM</option>'
+                    }
+                    if (val.service_items[i]['parttype'] == "OES") {
+                        html += '<option value="OES" selected>OES</option>'
+                    } else {
+                        html += '<option value="OES">OES</option>'
+                    }
+
+                    if (val.service_items[i]['parttype'] == "Aftermarket") {
+                        html += '<option value="Aftermarket" selected>Aftermarket</option>'
+                    } else {
+                        html += '<option value="Aftermarket">Aftermarket</option>'
+                    }
+                    if (val.service_items[i]['parttype'] == "Refurbished") {
+                        html += '<option value="Refurbished" selected>Refurbished</option>'
+                    } else {
+                        html += '<option value="Refurbished">Refurbished</option>'
+                    }
+                    html += '</select></div></td>'
+                }
                 html += '    <td><input id="part_name" type="text" class="browser-default" value="'+ val.service_items[i]['name'] +'" aria-required="true"></td>'
                 html += '    <td><div class="input-field sort" id ="part_type"><select  class="browser-default">'
                 if(val.service_items[i]['type'] == "Part"){
@@ -8593,6 +8697,38 @@ var Global = {
                 console.log(itemlist)
                 for (i = 0; i < itemlist; i++) {
                     html += '<tr>'
+                    if ( val.bill_components[i]['parttype']==null || val.bill_components[i]['parttype']===false || val.bill_components[i]['parttype']=="NA") {
+                        html += '<td>' + '<div class="input-field sort" id ="partmaketype"><select  class="browser-default">'
+                        html += '<option value="OES" selected>OES</option>'
+                        html += '<option value="OEM">OEM</option>'
+                        html += '<option value="Aftermarket">Aftermarket</option>'
+                        html += '<option value="Refurbished">Refurbished</option>'
+                        html += '</select></div></td>'
+                    }else{
+                        html += '<td>' + '<div class="input-field sort" id ="partmaketype"><select  class="browser-default">'
+                        if (val.bill_components[i]['parttype'] == "OEM") {
+                            html += '<option value="OEM" selected>OEM</option>'
+                        } else {
+                            html += '<option value="OEM">OEM</option>'
+                        }
+                        if (val.bill_components[i]['parttype'] == "OES") {
+                            html += '<option value="OES" selected>OES</option>'
+                        } else {
+                            html += '<option value="OES">OES</option>'
+                        }
+
+                        if (val.bill_components[i]['parttype'] == "Aftermarket") {
+                            html += '<option value="Aftermarket" selected>Aftermarket</option>'
+                        } else {
+                            html += '<option value="Aftermarket">Aftermarket</option>'
+                        }
+                        if (val.bill_components[i]['parttype'] == "Refurbished") {
+                            html += '<option value="Refurbished" selected>Refurbished</option>'
+                        } else {
+                            html += '<option value="Refurbished">Refurbished</option>'
+                        }
+                        html += '</select></div></td>'
+                    }
                     html += '    <td><input id="part_name" type="text" class="browser-default" value="' + val.bill_components[i]['name'] + '" aria-required="true"></td>'
                     html += '    <td><div class="input-field sort" id ="part_type"><select  class="browser-default">'
                     if (val.bill_components[i]['type'] == "Part") {
@@ -8698,7 +8834,7 @@ var Global = {
                 html4 += val.payment_bill[i]['date_collected']
                 html4 += '</div>'
                 html4 += '<div class="row">'
-               if (val.payment_bill[i]['medium'] == "Credit"){
+                if (val.payment_bill[i]['medium'] == "Credit"){
                     html4 += 'Credited by <b>' +val.payment_bill[i]['collected_by'] +'</b>'
                 }else{
                     html4 += 'Recieved by <b>' +val.payment_bill[i]['collected_by'] +'</b>'
@@ -8782,11 +8918,11 @@ var Global = {
             paylen = pay.length;
             for (k = 0; k < paylen; k++) {
                 if(pay[k]['medium'] == "Credit"){
-                     if (pay[k]['collected_by'] == "Workshop"){
-                           total_collected_credit_wc = total_collected_credit_wc  + parseFloat(pay[k]['amount'])
-                     }else{
-                          total_collected_credit = total_collected_credit + parseFloat(pay[k]['amount'])
-                     }
+                    if (pay[k]['collected_by'] == "Workshop"){
+                        total_collected_credit_wc = total_collected_credit_wc  + parseFloat(pay[k]['amount'])
+                    }else{
+                        total_collected_credit = total_collected_credit + parseFloat(pay[k]['amount'])
+                    }
 
                 }else{
                     if (pay[k]['collected_by'] == "ClickGarage"){
@@ -8800,7 +8936,7 @@ var Global = {
                     }
                     if (pay[k]['collected_by'] == "ClickGarage Credit"){
                         total_collected_credit = total_collected_credit + parseFloat(pay[k]['amount'])
-                     }
+                    }
 
 
 
