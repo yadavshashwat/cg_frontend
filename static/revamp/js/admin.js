@@ -1421,14 +1421,15 @@ var Global = {
             container_parent.append(row)
             TOTAL_ITEMS_ADMIN += 1;
             row.find('td:eq(0)').text(TOTAL_ITEMS_ADMIN)
-            row.find('td:eq(1) input').val('')
-            row.find('td:eq(3) input').val('')
+            row.find('td:eq(2) input').val('')
+            // row.find('td:eq(2) input').val('')
             row.find('td:eq(4) input').val('')
             row.find('td:eq(5) input').val('')
             row.find('td:eq(6) input').val('')
-            row.find('td:eq(7)').html('')
-            row.find('td:eq(8) input').removeAttr('checked', this.checked)
-            row.find('td:eq(9) input').val('')
+            row.find('td:eq(7) input').val('')
+            row.find('td:eq(8)').html('')
+            row.find('td:eq(9) input').removeAttr('checked', this.checked)
+            row.find('td:eq(10) input').val('')
             return
         });
         $('#customer-detail .btn-update-send-estimate').click(function(){
