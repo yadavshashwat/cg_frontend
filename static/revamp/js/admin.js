@@ -5840,6 +5840,7 @@ var Global = {
                 html += '<div class="col s12 m12 l12">'
                 html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
                 html += '</div>'
+
                 if (val.escalation_flag) {
                     html += '<div class="col s12 m12 l12">'
                     html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="escalation_reason" type="text" class="materialize-textarea">' + val.escalation_reason + '</textarea><label for="escalation_reason">Escalation Reason</label></div>'
@@ -5857,6 +5858,7 @@ var Global = {
                     html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="escalation_resolution" type="text"  class="materialize-textarea">' + val.escalation_resolution + '</textarea><label for="escalation_resolution">Escalation Resolution</label></div>'
                     html += '</div>'
                 }
+
 
 
                 html_jc = ''
@@ -6172,6 +6174,12 @@ var Global = {
                     html += '</div>'
                     html += '</div>'
                 }
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="file-field input-field"><div class="btn cg-primary"><span>Files</span><input type="file" multiple></div>'
+                html += '<div class="file-path-wrapper">'
+                html += '<input class="file-path validate" type="text" placeholder="Upload one or more files">'
+                html += '</div> </div></div>'
+                html += '</div>'
             } else {
 
                 html += '<div class="col s12 m12 l12">'
