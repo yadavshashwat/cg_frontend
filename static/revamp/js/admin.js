@@ -584,6 +584,7 @@ var Global = {
                         sort:SORT_TYPE,
                         del_date:DATE_TYPE,
                         escalation_flag:"True",
+                        ongoing_flag:"True",
                         // status:status_marker,
                         name:CUST_NAME,
                         reg:REG_NUMBER,
@@ -616,6 +617,7 @@ var Global = {
                         sort:SORT_TYPE,
                         del_date:DATE_TYPE,
                         status:status_marker,
+                        ongoing_flag:"True",
                         name:CUST_NAME,
                         reg:REG_NUMBER,
                         date_end:DATE_TYPE_END,
@@ -699,6 +701,7 @@ var Global = {
                 sort:SORT_TYPE,
                 del_date:DATE_TYPE,
                 status:STATUS_TYPE,
+                ongoing_flag:"True",
                 name:CUST_NAME,
                 reg:REG_NUMBER,
                 date_end:DATE_TYPE_END,
@@ -788,6 +791,7 @@ var Global = {
                 sort:SORT_TYPE,
                 del_date:DATE_TYPE,
                 escalation_flag:"True",
+                ongoing_flag:"True",
                 // status:"Escalation",
                 name:CUST_NAME,
                 reg:REG_NUMBER,
@@ -985,6 +989,7 @@ var Global = {
                     sort:SORT_TYPE,
                     del_date:DATE_TYPE,
                     escalation_flag:"True",
+                    ongoing_flag:"True",
                     name:CUST_NAME,
                     reg:REG_NUMBER,
                     date_end:DATE_TYPE_END,
@@ -1014,6 +1019,7 @@ var Global = {
                     sort:SORT_TYPE,
                     del_date:DATE_TYPE,
                     status:status_marker,
+                    ongoing_flag:"True",
                     name:CUST_NAME,
                     reg:REG_NUMBER,
                     date_end:DATE_TYPE_END,
@@ -1035,10 +1041,15 @@ var Global = {
             if (toshow=="Delivery"){
                 $('#bookings #bookings-list').hide()
                 $('#bookings #delivery-list').show()
-
+                $('#bookings .date-box.today').addClass("disabled")
+                $('#bookings .date-box.tomorrow').addClass("disabled")
+                $('#bookings .date-box.all').click()
             }else{
                 $('#bookings #bookings-list').show()
                 $('#bookings #delivery-list').hide()
+                $('#bookings .date-box.today').removeClass("disabled")
+                $('#bookings .date-box.tomorrow').removeClass("disabled")
+                $('#bookings .date-box.today').click()
 
             }
         })
@@ -1118,6 +1129,7 @@ var Global = {
                 sort:SORT_TYPE,
                 del_date:DATE_TYPE,
                 status:STATUS_TYPE,
+                ongoing_flag:"True",
                 name:CUST_NAME,
                 reg:REG_NUMBER,
                 date_end:DATE_TYPE_END,
@@ -1177,6 +1189,7 @@ var Global = {
                 del_date:DATE_TYPE,
                 status:STATUS_TYPE,
                 name:CUST_NAME,
+                ongoing_flag:"True",
                 reg:REG_NUMBER,
                 date_end:DATE_TYPE_END,
                 source_id:SOURCE_BOOK,
@@ -1254,6 +1267,7 @@ var Global = {
                 status:STATUS_TYPE,
                 name:CUST_NAME,
                 reg:REG_NUMBER,
+                ongoing_flag:"True",
                 date_end:DATE_TYPE_END,
                 source_id:SOURCE_BOOK,
                 phone_num:PHONE_NUMBER,
@@ -1284,6 +1298,7 @@ var Global = {
                 sort:SORT_TYPE,
                 del_date:DATE_TYPE,
                 status:STATUS_TYPE,
+                ongoing_flag:"True",
                 name:CUST_NAME,
                 reg:REG_NUMBER,
                 date_end:DATE_TYPE_END,
@@ -4102,7 +4117,7 @@ var Global = {
             }else{
                 vehicle ="Bike"
             }
-            console.log(vehicle)
+            // console.log(vehicle)
             Commons.ajaxData('get_type_make', {vehicle_type: vehicle}, "get", _this, _this.loadBrands);
             $('#select-fuel').hide()
             html = '<select class="browser-default"><option value="" disabled selected>Select Model</option></select>'
@@ -4121,7 +4136,7 @@ var Global = {
                 vehicle ="Bike"
             }
             var make = $('#select-make').find('select').val();
-            console.log(make)
+            // console.log(make)
             Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehicle}, "get", _this, _this.loadModels);
             // $('#select-fuel').hide()
             $('#select-model').show()
@@ -4270,7 +4285,7 @@ var Global = {
             // var otp = $('#otp').val();
             var comment = $('#comment').val();
             var time_follow = $('#time_follow_lead').val()
-            console.log(time_follow)
+            // console.log(time_follow)
             // cookie = local.load();
             // var fuel = $('#select-fuel').find('select').val();
             var veh_type = vehicle;
@@ -4307,35 +4322,35 @@ var Global = {
                 error = 1
                 $('#new-booking .category-select').find('select').addClass('invalid-select-box')
                 $('#new-booking .service-select').find('select').addClass('invalid-select-box')
-                // console.log('1')
+                console.log('1')
             }
             if(name==""){
                 $('#name').addClass("invalid");
                 error = 1;
-                // console.log('2')
+                console.log('2')
 
             }
             if(address==""){
                 $('#address').addClass("invalid");
                 error = 1;
-                // console.log('3')
+                console.log('3')
 
             }
             if(locality==""){
                 $('#locality').addClass("invalid");
                 error = 1;
-                // console.log('4')
+                console.log('4')
 
             }if(city==""){
                 $('#city').addClass("invalid-select-box");
                 error = 1;
-                // console.log('5')
+                console.log('5')
 
             }
             if(number <= 100000000 || number >= 9999999999 || number == "" || number.length != 10){
                 $('#telephone').addClass("invalid");
                 error = 1;
-                // console.log('6')
+                console.log('6')
 
             }
             if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
@@ -4351,13 +4366,13 @@ var Global = {
                 // $('#reg_number').addClass("invalid");
                 // error = 1;
                 reg_num = "--"
-                // console.log('8')
+                console.log('8')
 
             }
             if(date==""){
                 $('#date').addClass("invalid");
                 error = 1;
-                // console.log('9')
+                console.log('9')
 
             }
             if (flag == "True"){
@@ -4367,7 +4382,7 @@ var Global = {
                     error = 1;
                     $('#new-booking #time-slot').find('select').addClass('invalid-select-box')
                     // $('#choose-time-slot').text('Choose Time Slot');
-                    // console.log('10')
+                    console.log('10')
 
                 }
             }else{
@@ -4377,7 +4392,7 @@ var Global = {
                     error = 1;
                     $('#new-booking #time_follow_lead').addClass("invalid");
                     // $('#choose-time-slot').text('Choose Time Slot');
-                    // console.log('11')
+                    console.log('11')
 
                 }
             }
@@ -4393,7 +4408,7 @@ var Global = {
             });
 
             if(error==1){
-                // console.log("didnt work")
+                console.log("didnt work")
                 return;
             }else{
                 $('html, body').animate({scrollTop : 0},800);
@@ -6174,12 +6189,12 @@ var Global = {
                     html += '</div>'
                     html += '</div>'
                 }
-                html += '<div class="col s12 m12 l12">'
-                html += '<div class="file-field input-field"><div class="btn cg-primary"><span>Files</span><input type="file" multiple></div>'
-                html += '<div class="file-path-wrapper">'
-                html += '<input class="file-path validate" type="text" placeholder="Upload one or more files">'
-                html += '</div> </div></div>'
-                html += '</div>'
+                // html += '<div class="col s12 m12 l12">'
+                // html += '<div class="file-field input-field"><div class="btn cg-primary"><span>Files</span><input type="file" multiple></div>'
+                // html += '<div class="file-path-wrapper">'
+                // html += '<input class="file-path validate" type="text" placeholder="Upload one or more files">'
+                // html += '</div> </div></div>'
+                // html += '</div>'
             } else {
 
                 html += '<div class="col s12 m12 l12">'
@@ -7576,11 +7591,11 @@ var Global = {
 
             if (ALL_JOBS_NEW_BOOKING ==''){
                 ALL_JOBS_NEW_BOOKING = val.job_name;
-                job_obj = {"Job":val.job_name,"Price":val.total_price,"Category":val.service_cat}
+                job_obj = {"Job":val.job_name,"Type":"Request","Price":val.total_price,"Category":val.service_cat}
                 ALL_JOBS_NEW_BOOKING_LIST.push(job_obj)
             }else{
                 ALL_JOBS_NEW_BOOKING = ALL_JOBS_NEW_BOOKING +', '+val.job_name;
-                job_obj = {"Job":val.job_name,"Price":val.total_price,"Category":val.service_cat}
+                job_obj = {"Job":val.job_name,"Type":"Request","Price":val.total_price,"Category":val.service_cat}
                 ALL_JOBS_NEW_BOOKING_LIST.push(job_obj)
             }
             JOBS_SUMMARY_NEW_BOOKING.push({'category':val.service_cat,'job_name':val.job_name,'price_total':val.total_price,'price_part':val.total_part,'price_labour':val.total_labour,'price_discount':val.total_discount,"doorstep":val.doorstep})
