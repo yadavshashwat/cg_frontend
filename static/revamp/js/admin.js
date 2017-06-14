@@ -870,6 +870,9 @@ var Global = {
             $('#bill-details').hide()
             $('#settlement-details').hide()
             $('#Status').find('select').removeAttr('disabled','')
+            $('#bookings .date-box.today').removeClass("disabled")
+            $('#bookings .date-box.tomorrow').removeClass("disabled")
+            $('#bookings .date-box.today').click()
 
 
 
@@ -1320,6 +1323,7 @@ var Global = {
             $('#customer-detail .feedback-data').hide();
             $('#customer-detail .feedback-detail').removeClass('selected')
             $('#customer-detail .service-detail').removeClass('selected')
+            $('#customer-detail .job-card-detail').removeClass('selected')
             $('#customer-detail .cust-detail').addClass('selected')
             Commons.ajaxData('view_all_bookings', {data_id:data_id}, "get", _this, _this.loadBookingData,null, '.loading-pane');
             Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", _this, _this.loadAgentdata,null, '.loading-pane');
