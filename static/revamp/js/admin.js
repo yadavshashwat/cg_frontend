@@ -1320,6 +1320,8 @@ var Global = {
             $('#booking-details').show()
             $('#customer-detail .booking-data').show();
             $('#customer-detail .booking-job-data').hide();
+            $('#customer-detail .booking-job-card').hide();
+
             $('#customer-detail .feedback-data').hide();
             $('#customer-detail .feedback-detail').removeClass('selected')
             $('#customer-detail .service-detail').removeClass('selected')
@@ -5052,7 +5054,11 @@ var Global = {
             html += '        <div class="row card cardhover no-border-radius booking" data-class="' + val.id + '">'
             html += '            <div class="row"><div class="booking-open-btn">'
             html += '                <div class="col l1 s2 m2 booking-id-bar">'
-            html += '                    <b>#<span class="id">' + val.booking_id + '</span></b>'
+  if (val.clickgarage_flag){
+                html += '                    <b>CG #<span class="id">' + val.booking_id + '</span></b>'
+            }else{
+                html += '                    <b>#<span class="id">' + val.booking_id + '</span></b>'
+            }
             html += '                </div>'
             html += '                <div class="col l6 s7 m7">'
             html += '                    <div class="col l12 s12 m12">'
@@ -5296,7 +5302,11 @@ var Global = {
             html += '        <div class="row card cardhover no-border-radius booking" data-class="' + val.id + '">'
             html += '            <div class="row"><div class="booking-open-btn">'
             html += '                <div class="col l1 s2 m2 booking-id-bar">'
-            html += '                    <b>#<span class="id">' + val.booking_id + '</span></b>'
+            if (val.clickgarage_flag){
+                html += '                    <b>CG #<span class="id">' + val.booking_id + '</span></b>'
+            }else{
+                html += '                    <b>#<span class="id">' + val.booking_id + '</span></b>'
+            }
             html += '                </div>'
             html += '                <div class="col l6 s7 m7">'
             html += '                    <div class="col l12 s12 m12">'
