@@ -752,6 +752,14 @@ font-weight: 700;
     height:100%;
     z-index:1;
 }
+
+.back-button-row{
+    color: #4a148c;
+    cursor: pointer;
+    line-height: 20px;
+    padding: 10px 0px 10px 0px;
+}
+
 #contact h3{color:#232527;text-transform:uppercase;}
 #contact h5{margin-bottom:15px;text-transform:uppercase;}
 #contact h4{text-transform:uppercase;}

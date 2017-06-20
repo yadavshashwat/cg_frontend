@@ -180,7 +180,7 @@ var DATE_TYPE_END = "";
 var AGENT_BOOK = "";
 var SEND_SMS = "1";
 var NUM_JOBS = 0;
-
+var HEIGHT_JOB = 0;
 var CGHARYANA_VAT_NO = "06301844038"
 var CGHARYANA_STAX_NO = "AAVCS6335ESD001"
 var CGHARYANA_PAN_NO = "AAVCS6335E"
@@ -558,6 +558,10 @@ var Global = {
                 $('#bookings .if-filter-selected').hide()
             }
         }
+
+        $('.side-nav li').click(function () {
+            $('.drag-target').click();
+        });
         // Open Bookings
         $('#bookings .btn-loadmorebooking').click(function(){
             if (ESCALATION_FLAG){
@@ -1340,7 +1344,14 @@ var Global = {
 
         $('#bookings .pre-data').on('click','.booking ',function(event,data){
             bid =$(this).attr('data-class')
+            // HEIGHT_JOB = $(this).outerHeight()
+            HEIGHT_JOB = $(this).position()['top']
+
+            console.log(HEIGHT_JOB)
             openbooking(bid)
+             $('body,html').animate(
+                {'scrollTop':0}
+            );
         });
 
         // Switch between estimate and details in a booking
@@ -3976,6 +3987,7 @@ var Global = {
             $('#expense-details').hide();
             $('#bill-details').hide()
             $('#settlement-details').hide()
+            $('.new-lead-hide-row').show()
             callbrands()
             call_category()
 
@@ -4029,6 +4041,8 @@ var Global = {
             $('#expense-details').hide()
             $('#bill-details').hide()
             $('#settlement-details').hide()
+
+            $('.new-lead-hide-row').hide()
             callbrands()
             call_category()
 
@@ -4092,7 +4106,15 @@ var Global = {
         });
 
 
+        $('#booking-details .back-button').click(function(){
+            $('#booking-details').hide()
+            $('#bookings').show()
+            $('body,html').animate(
+                {'scrollTop':HEIGHT_JOB - 150},
+                500
+            );
 
+        })
         // -- Locality Search
         $('#locality').on('keyup',function(e,event,data){
             var code = (e.keyCode || e.which);
@@ -4337,10 +4359,10 @@ var Global = {
 
             }
             if(address==""){
-                $('#address').addClass("invalid");
-                error = 1;
-                console.log('3')
-
+                // $('#address').addClass("invalid");
+                // error = 1;
+                // console.log('3')
+                address = "--"
             }
             if(locality==""){
                 $('#locality').addClass("invalid");
