@@ -159,6 +159,7 @@ $(document).ready(function(){
     $('#home .ad-page-car').addClass('fa-motorcycle')
     }
 
+    $('.howitworks-section-2').hide()
     if (vehtype == "Car" && service == "CarCare"){
         var PAGEHEADER = "BEST CAR CLEANING SERVICES IN  DELHI NCR"
         var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Interior & Boot Vaccuming</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Seats Dusting</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Exterior Shampoo</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;3M/Meguiar Products used</li></ul></div></div>"
@@ -187,6 +188,8 @@ $(document).ready(function(){
         // var FEATURES = "OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop"
         // $('.car-service').show()
         $('.car-image').show()
+        $('.howitworks-section').hide()
+        $('.howitworks-section-2').show()
 
 
 
@@ -663,7 +666,7 @@ var Global = {
            var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
            model = model.substr(0,fuel_start-1)
 
-            
+
             JOBS_SUMMARY_TOTAL = [{'category':service,'job_name':service,'price_total':"TBD",'price_part':"TBD",'price_labour':"TBD",'price_discount':"TBD","doorstep":doorstep}];
             //
             ALL_JOBS_LIST = [{"Job":service,"Price":"0","Category":service,"Type":"Request"}]
