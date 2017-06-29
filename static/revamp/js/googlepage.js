@@ -165,6 +165,7 @@ $(document).ready(function(){
         var DESC = "ClickGarage provides quality exterior and interior car cleaning. Its eco friendly car wash makes sure that there is less harm to the environment. For all our car cleaning, we only use 3M and Wurth products. With our doorstep service and mutiple payment options, we aim to make auto detailing a customer delight. Our service include - car wash, car dry cleaning, mobile car detailing, car polishing etc. ClickGarage provides you with the professional car cleaning service at your doorstep. "
         // var FEATURES = "3M/Meguiar products&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Expert cleaners&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;doorstep service"
         $('.car-service').show()
+
     }else if(vehtype =="Car" && service == "Servicing"){
         var PAGEHEADER = "BEST CAR SERVICING WORKSHOP IN DELHI NCR"
         var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;40 point check-up</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Spares replacement</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Pick-up & drop</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Free washing</li></ul></div></div>"
@@ -178,6 +179,17 @@ $(document).ready(function(){
         var DESC = "ClickGarage team of expert mechanics take care of car repair of your vehicle. From car ac service or car ac repair to clutch overhaul, the nearest ClickGarage car mechanic will take care of your vehicle and do the necessary car repairs. ClickGarage provides you will all repair solutions including steering repair, car headlight repair, tires for car, car engine repair etc. Book service now to get the best mechanic to fix your car. Looking for minor fixes such as wiper blade replacement, horn malfunctioning, headlight replacement etc. ? ClickGarage auto experts will come to your doorstep and fix it."
         // var FEATURES = "OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop"
         $('.car-service').show()
+
+    }else if(vehtype =="Car" && service == "cgassist"){
+        var PAGEHEADER = " EMERGENCY ASSISTANCE ANYTIME ANYWHERE"
+        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;PAN India Presence</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;40 Minutes TAT</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Free Towing</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Unlimited Usage</li></ul></div></div>"
+        var DESC = "ClickGarage ASSIT is a premium road-side assistance programe, providing assistance anytime, anywhere, 24 hours a day, 7 days a week and 365 days a year. We have best of its kind pan-India network along with 24x7 assistance centre, duly approved by DOT."
+        // var FEATURES = "OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop"
+        // $('.car-service').show()
+        $('.car-image').show()
+
+
+
 
     }else if(vehtype =="Car" && service == "Denting"){
         var PAGEHEADER = "BEST IN CLASS DENTING/ PAINTING FACILITY IN DELHI NCR"
@@ -651,7 +663,7 @@ var Global = {
            var fuel =model.substr(fuel_start+1,fuel_end-fuel_start-1)
            model = model.substr(0,fuel_start-1)
 
-
+            
             JOBS_SUMMARY_TOTAL = [{'category':service,'job_name':service,'price_total':"TBD",'price_part':"TBD",'price_labour':"TBD",'price_discount':"TBD","doorstep":doorstep}];
             //
             ALL_JOBS_LIST = [{"Job":service,"Price":"0","Category":service,"Type":"Request"}]
