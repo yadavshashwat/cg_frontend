@@ -190,6 +190,8 @@ var CGHARYANA_ADDRESS = "2401, Basement"
 var CGHARYANA_LOCALITY = "DLF Phase 4, Opp. Galleria Market"
 var CGHARYANA_CITY = "Gurgaon"
 var CGHARYANA_STATE = "Haryana"
+var CGHARYANA_GST_NO = "07AAVCS6335E1ZZ"
+
 
 var CGDELHI_VAT_NO = "07146991638"
 var CGDELHI_STAX_NO = "AAVCS6335ESD001"
@@ -200,6 +202,8 @@ var CGDELHI_ADDRESS = "W22, 2nd Floor"
 var CGDELHI_LOCALITY = "Green Park Main"
 var CGDELHI_CITY = "New Delhi"
 var CGDELHI_STATE = "Delhi"
+var CGDELHI_GST_NO = "07AAVCS6335E1ZZ"
+
 
 var STATE_BILL = ""
 
@@ -211,6 +215,7 @@ var AGENT_ADDRESS = ""
 var AGENT_LOCALITY = ""
 var AGENT_CITY = ""
 var AGENT_STATE = ""
+var AGENT_GST_NO = ""
 
 var TOTAL_SETTLED_COMMISSION = 0 ;
 var TOTAL_UNSETTLED_COMMISSION = 0 ;
@@ -3219,8 +3224,11 @@ var Global = {
             history.pushState({},'',new_path)
 
         });
-
-
+    
+        
+        
+        // GST Correction - Corrected
+            
         $('#bill-detail #bill_type').change(function(){
             bill_type = $('#bill_type').find('select').val()
             // console.log(bill_type)
@@ -3230,6 +3238,8 @@ var Global = {
                 $('#agent_bill_vat').val(CGHARYANA_VAT_NO)
                 $('#agent_bill_stax').val(CGHARYANA_STAX_NO)
                 $('#agent_bill_cin').val(CGHARYANA_CIN_NO)
+                $('#agent_bill_gst').val(CGHARYANA_GST_NO)
+
                 STATE_BILL = CGHARYANA_STATE
                 Commons.ajaxData('get_all_taxes', {state:STATE_BILL}, "get", _this, _this.loadTaxUpdate,null, '.loading-pane');
                 setTimeout(function() {             $('#bill-table').click()       }, 1000);
@@ -3240,6 +3250,7 @@ var Global = {
                 $('#agent_bill_vat').val(CGDELHI_VAT_NO)
                 $('#agent_bill_stax').val(CGDELHI_STAX_NO)
                 $('#agent_bill_cin').val(CGDELHI_CIN_NO)
+                $('#agent_bill_gst').val(CGDELHI_GST_NO)
                 STATE_BILL = CGDELHI_STATE
                 Commons.ajaxData('get_all_taxes', {state:STATE_BILL}, "get", _this, _this.loadTaxUpdate,null, '.loading-pane');
                 setTimeout(function() {             $('#bill-table').click()       }, 1000);
@@ -3250,6 +3261,8 @@ var Global = {
                 $('#agent_bill_vat').val('')
                 $('#agent_bill_stax').val('')
                 $('#agent_bill_cin').val('')
+                $('#agent_bill_gst').val('')
+
                 VAT_CONSUMABLE_PERCENT = 0
                 VAT_LUBE_PERCENT = 0
                 VAT_PART_PERCENT = 0
@@ -3265,6 +3278,8 @@ var Global = {
                 $('#agent_bill_vat').val(AGENT_VAT_NO)
                 $('#agent_bill_stax').val(AGENT_STAX_NO)
                 $('#agent_bill_cin').val(AGENT_CIN_NO)
+                $('#agent_bill_gst').val(AGENT_GST_NO)
+
                 STATE_BILL = AGENT_STATE
                 Commons.ajaxData('get_all_taxes', {state:STATE_BILL}, "get", _this, _this.loadTaxUpdateAgent,null, '.loading-pane');
 
@@ -3355,8 +3370,9 @@ var Global = {
                 return;
             }
         });
+        // GST Correction - Corrected
 
-
+        
         $('#bill-detail #bill-table').on('click','.delete-bill-item' ,function(){
             $(this).closest('tr').remove()
             TOTAL_PRICE_BILL_ADMIN = 0
@@ -3364,15 +3380,31 @@ var Global = {
             VAT_LUBE_BILL_ADMIN = 0
             VAT_CONSUMABLE_BILL_ADMIN = 0
             SERVICE_TAX_BILL_ADMIN = 0
+
+            GST_PART_BILL_ADMIN = 0
+            GST_LUBE_BILL_ADMIN = 0
+            GST_CONSUMABLE_BILL_ADMIN = 0
+            GST_SERVICE_BILL_ADMIN = 0
+
+
+
+
             $('#bill-detail .total-amount-row-bill .total-amount').text(TOTAL_PRICE_BILL_ADMIN)
             $('#bill-detail .vat-part-amount').text(VAT_PART_BILL_ADMIN)
             $('#bill-detail .vat-lube-amount').text(VAT_LUBE_BILL_ADMIN)
             $('#bill-detail .vat-consumable-amount').text(VAT_CONSUMABLE_BILL_ADMIN)
             $('#bill-detail .stax-amount').text(SERVICE_TAX_BILL_ADMIN)
+
+            $('#bill-detail .gst-part-amount').text(GST_PART_BILL_ADMIN)
+            $('#bill-detail .gst-lube-amount').text(GST_LUBE_BILL_ADMIN)
+            $('#bill-detail .gst-consumable-amount').text(GST_CONSUMABLE_BILL_ADMIN)
+            $('#bill-detail .gst_service-amount').text(GST_SERVICE_BILL_ADMIN)
+
             $('#bill-detail table').click()
 
         })
-
+    
+        // GST Correction - Corrected
         $('#bill-detail').on('keyup click','table',function(e,event,data){
             TOTAL_PRICE_BILL_ADMIN = 0;
             TOTAL_LABOUR_BILL_ADMIN = 0;
@@ -3385,7 +3417,16 @@ var Global = {
             VAT_LUBE_BILL_ADMIN = 0;
             VAT_CONSUMABLE_BILL_ADMIN = 0;
             SERVICE_TAX_BILL_ADMIN = 0;
+
+            GST_PART_BILL_ADMIN = 0
+            GST_LUBE_BILL_ADMIN = 0
+            GST_CONSUMABLE_BILL_ADMIN = 0
+            GST_SERVICE_BILL_ADMIN = 0
+
+
+
             CURRENT_BILL_CART = [];
+
 
             var table = document.getElementById('bill-table');
             // console.log(table)
@@ -3420,17 +3461,27 @@ var Global = {
                     }else if (j == 6) {
                         if (name_item !=""){
                             if (type_item == "Labour") {
-                                applicable_tax = SERVICE_TAX_PERCENT
-                                SERVICE_TAX_BILL_ADMIN = SERVICE_TAX_BILL_ADMIN+ (price_item - (price_item /(1+(applicable_tax/100))))
+                                // applicable_tax = SERVICE_TAX_PERCENT
+                                applicable_tax = GST_SERVICE_PERCENT
+                                // SERVICE_TAX_BILL_ADMIN = SERVICE_TAX_BILL_ADMIN+ (price_item - (price_item /(1+(applicable_tax/100))))
+                                GST_SERVICE_BILL_ADMIN = GST_SERVICE_BILL_ADMIN+ (price_item - (price_item /(1+(applicable_tax/100))))
+
                             } else if (type_item == "Part") {
-                                applicable_tax = VAT_PART_PERCENT
-                                VAT_PART_BILL_ADMIN = VAT_PART_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+                                // applicable_tax = VAT_PART_PERCENT
+                                applicable_tax = GST_PART_PERCENT
+                                // VAT_PART_BILL_ADMIN = VAT_PART_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+                                GST_PART_BILL_ADMIN = GST_PART_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+
                             }else if(type_item == "Lube"){
-                                applicable_tax = VAT_LUBE_PERCENT
-                                VAT_LUBE_BILL_ADMIN = VAT_LUBE_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+                                // applicable_tax = VAT_LUBE_PERCENT
+                                applicable_tax = GST_LUBE_PERCENT
+                                // VAT_LUBE_BILL_ADMIN = VAT_LUBE_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+                                GST_LUBE_BILL_ADMIN = GST_LUBE_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
                             }else if(type_item == "Consumable"){
-                                applicable_tax = VAT_CONSUMABLE_PERCENT
-                                VAT_CONSUMABLE_BILL_ADMIN= VAT_CONSUMABLE_BILL_ADMIN+ (price_item - (price_item /(1+(applicable_tax/100))))
+                                // applicable_tax = VAT_CONSUMABLE_PERCENT
+                                applicable_tax = GST_CONSUMABLE_PERCENT
+                                // VAT_CONSUMABLE_BILL_ADMIN= VAT_CONSUMABLE_BILL_ADMIN+ (price_item - (price_item /(1+(applicable_tax/100))))
+                                GST_CONSUMABLE_BILL_ADMIN= GST_CONSUMABLE_BILL_ADMIN+ (price_item - (price_item /(1+(applicable_tax/100))))
                             }else if (type_item == "Discount") {
                                 applicable_tax = 0
                             } else {
@@ -3500,6 +3551,12 @@ var Global = {
                 VAT_CONSUMABLE_BILL_ADMIN = +(VAT_CONSUMABLE_BILL_ADMIN.toFixed(2))
                 SERVICE_TAX_BILL_ADMIN = +(SERVICE_TAX_BILL_ADMIN.toFixed(2))
 
+                GST_PART_BILL_ADMIN = +(GST_PART_BILL_ADMIN.toFixed(2))
+                GST_LUBE_BILL_ADMIN = +(GST_LUBE_BILL_ADMIN.toFixed(2))
+                GST_CONSUMABLE_BILL_ADMIN = +(GST_CONSUMABLE_BILL_ADMIN.toFixed(2))
+                GST_SERVICE_BILL_ADMIN = +(GST_SERVICE_BILL_ADMIN.toFixed(2))
+
+                
                 $('#bill-detail .total-amount-row-bill .total-amount').text(TOTAL_PRICE_BILL_ADMIN)
                 $('#bill-detail .vat-part-amount').text(VAT_PART_BILL_ADMIN)
                 $('#bill-detail .vat-lube-amount').text(VAT_LUBE_BILL_ADMIN)
@@ -3507,9 +3564,16 @@ var Global = {
                 $('#bill-detail .discount-amount').text(TOTAL_DISCOUNT_BILL_ADMIN)
                 $('#bill-detail .stax-amount').text(SERVICE_TAX_BILL_ADMIN)
 
+                $('#bill-detail .gst-part-amount').text(GST_PART_BILL_ADMIN)
+                $('#bill-detail .gst-lube-amount').text(GST_LUBE_BILL_ADMIN)
+                $('#bill-detail .gst-consumable-amount').text(GST_CONSUMABLE_BILL_ADMIN)
+                $('#bill-detail .gst-service-amount').text(GST_SERVICE_BILL_ADMIN)
+
+                
             }
         });
-
+        
+        // GST Correction - corrected
         $('#bill-detail .btn-generateinvoice').click(function () {
             booking_data_id         = $('#bill-detail .booking-id').attr('data-class')
             bill_owner              = $('#bill_type').find('select').val()
@@ -3522,17 +3586,34 @@ var Global = {
             vat_lube                = VAT_LUBE_BILL_ADMIN
             vat_consumable          = VAT_CONSUMABLE_BILL_ADMIN
             service_tax             = SERVICE_TAX_BILL_ADMIN
+
+
+            gst_part                = GST_PART_BILL_ADMIN
+            gst_lube                = GST_LUBE_BILL_ADMIN
+            gst_consumable          = GST_CONSUMABLE_BILL_ADMIN
+            gst_service             = GST_SERVICE_BILL_ADMIN
+
+
             payment_mode            = ""
             agent_name              = $('#agent_bill_name').val()
             agent_address           = $('#agent_bill_address').val()
             agent_vat               = $('#agent_bill_vat').val()
             agent_stax              = $('#agent_bill_stax').val()
             agent_cin               = $('#agent_bill_cin').val()
+            agent_gst               = $('#agent_bill_gst').val()
+
             state                   = STATE_BILL
             vat_part_percent        = VAT_PART_PERCENT
             vat_lube_percent        = VAT_LUBE_PERCENT
             vat_consumable_percent  = VAT_CONSUMABLE_PERCENT
             service_tax_percent     = SERVICE_TAX_PERCENT
+
+            gst_part_percent        = GST_PART_PERCENT
+            gst_lube_percent        = GST_LUBE_PERCENT
+            gst_consumable_percent  = GST_CONSUMABLE_PERCENT
+            gst_service_percent     = GST_SERVICE_PERCENT
+
+
             cust_veh_notes          = $('#bill-detail #cust_bill_reco').val()
             cust_name               = $('#bill-detail #cust_bill_name').val()
             cust_number               = $('#bill-detail #cust_bill_number').val()
@@ -3544,8 +3625,8 @@ var Global = {
             service_items           = JSON.stringify(CURRENT_BILL_CART)
             invoice_number          = $('#bill-detail #agent_invoice_number').val()
 
-            console.log(vat_part)
-            console.log(service_tax)
+            // console.log(vat_part)
+            // console.log(service_tax)
 
             bill_type = $(this).attr('data-class')
             if (bill_type == "Pre-Invoice"){
@@ -3567,17 +3648,32 @@ var Global = {
                 vat_lube: vat_lube,
                 vat_consumable: vat_consumable,
                 service_tax: service_tax,
+                
+                gst_part: gst_part,
+                gst_lube: gst_lube,
+                gst_consumable: gst_consumable,
+                gst_service: gst_service,
+                
+                
                 payment_mode: payment_mode,
                 full_agent_name: agent_name,
                 agent_address: agent_address,
                 agent_vat_no: agent_vat,
                 agent_cin: agent_cin,
                 agent_stax: agent_stax,
+                agent_gst_no: agent_gst,
+
                 state: state,
                 vat_part_percent: vat_part_percent,
                 vat_lube_percent: vat_lube_percent,
                 vat_consumable_percent: vat_consumable_percent,
                 service_tax_percent: service_tax_percent,
+
+                gst_part_percent: gst_part_percent,
+                gst_lube_percent: gst_lube_percent,
+                gst_consumable_percent: gst_consumable_percent,
+                gst_service_percent: gst_service_percent,
+
                 notes: cust_veh_notes,
                 cust_name: cust_name,
                 cust_address: cust_address,
@@ -3605,7 +3701,7 @@ var Global = {
 
             }
             if(cust_number != "" && (cust_number > 9999999999 || cust_number < 1000000000 || cust_number.length != 10)){
-                console.log(cust_number.legth)
+                // console.log(cust_number.legth)
                 error = 1
                 $('#bill-detail #cust_bill_number').addClass("invalid");
                 // console.log("Point 4")
@@ -3627,6 +3723,7 @@ var Global = {
             }else{
                 // console.log("Point 7")
 
+
                 function postToIframe(data,url,target) {
                     $('body').append('<form action="' + url + '" method="post" target="' + target + '" id="postToIframe"></form>');
 
@@ -3638,8 +3735,7 @@ var Global = {
                 var url = Commons.getOrigin()+Commons.URLFromName['generate_bill']
                 console.log(url)
                 postToIframe(params,url,"downloadpost")
-                $('html, body').animate({scrollTop : 0},800);
-                // var url = Commons.getOrigin()+Commons.URLFromName['generate_bill']+'?'+jQuery.param( params );
+                $('html, body').animate({scrollTop : 0},800);  // var url = Commons.getOrigin()+Commons.URLFromName['generate_bill']+'?'+jQuery.param( params );
                 // $('#download_data').attr('action',url)
                 // $('#download').find('iframe').attr('src',url)
             }
@@ -4762,6 +4858,8 @@ var Global = {
             user_state = $('#user-detail #user_state').val()
             agent_vat = $('#user-detail #agent_vat').val()
             agent_stax = $('#user-detail #agent_stax').val()
+            agent_gst = $('#user-detail #agent_gst').val()
+
             agent_cin = $('#user-detail #agent_cin').val()
             sms_credits = $('#user-detail #agent_sms_credits').val()
 
@@ -4839,6 +4937,7 @@ var Global = {
                         user_city:user_city,
                         user_state :user_state,
                         agent_vat:agent_vat,
+                        agent_gst:agent_gst,
                         agent_cin:agent_cin,
                         agent_stax:agent_stax,
                         b2b_st:b2b,
@@ -5559,6 +5658,12 @@ var Global = {
             } catch (e) {
 
             }
+            try {
+                $('#user-detail #agent_gst').val(val.agent_gst);
+            } catch (e) {
+
+            }
+
             try {
                 $('#user-detail #agent_vat').val(val.agent_vat);
             } catch (e) {
@@ -8523,7 +8628,7 @@ var Global = {
         container.html(html);
     },
 
-
+// GST Correction
     loadbillbookingdata:function(data){
         container = $('#bill-table').find('tbody')
         html = ''
@@ -8678,6 +8783,8 @@ var Global = {
         setTimeout(function() {             $('#bill-table').click()       }, 1000);
 
     },
+    
+    // GST Correction - Corrected
     loadTaxUpdateAgent:function(data){
         $.each(data, function(ix, val) {
             if (AGENT_VAT_NO != ""){
@@ -8695,20 +8802,46 @@ var Global = {
             }else{
                 SERVICE_TAX_PERCENT = 0
             }
+
+            if (AGENT_GST_NO != ""){
+                GST_CONSUMABLE_PERCENT = parseFloat(val.gst_consumables)
+                GST_LUBE_PERCENT = parseFloat(val.gst_lube)
+                GST_PART_PERCENT = parseFloat(val.gst_parts)
+                GST_SERVICE_PERCENT = parseFloat(val.gst_service)
+             }else{
+                GST_CONSUMABLE_PERCENT = 0
+                GST_LUBE_PERCENT = 0
+                GST_PART_PERCENT = 0
+                GST_SERVICE_PERCENT = 0
+            }
+
+
         });
         setTimeout(function() {             $('#bill-table').click()       }, 1000);
 
     },
+    // GST Correction - Corrected
+
     loadTaxUpdate:function(data){
         $.each(data, function(ix, val) {
             VAT_CONSUMABLE_PERCENT = parseFloat(val.vat_consumables)
             VAT_LUBE_PERCENT = parseFloat(val.vat_lube)
             VAT_PART_PERCENT = parseFloat(val.vat_parts)
             SERVICE_TAX_PERCENT = parseFloat(val.service_tax)
+
+            GST_CONSUMABLE_PERCENT = parseFloat(val.gst_consumables)
+            GST_LUBE_PERCENT = parseFloat(val.gst_lube)
+            GST_PART_PERCENT = parseFloat(val.gst_parts)
+            GST_SERVICE_PERCENT = parseFloat(val.gst_service)
+
+
         });
         setTimeout(function() {             $('#bill-table').click()       }, 1000);
 
     },
+
+    // GST Correction
+
     loadbillbookingdatapre:function(data) {
         container = $('#bill-table').find('tbody')
         html = ''
@@ -8738,6 +8871,12 @@ var Global = {
                 VAT_CONSUMABLE_BILL_ADMIN = 0;
                 VAT_LUBE_BILL_ADMIN = 0;
                 SERVICE_TAX_BILL_ADMIN = 0;
+
+                GST_PART_BILL_ADMIN = 0;
+                GST_CONSUMABLE_BILL_ADMIN = 0;
+                GST_LUBE_BILL_ADMIN = 0;
+                GST_SERVICE_BILL_ADMIN = 0;
+
                 STATE_BILL = val.bill_state
                 AGENT_STATE = val.bill_state
                 $('#agent_bill_name').val(val.bill_agent_name)
@@ -8745,11 +8884,21 @@ var Global = {
                 $('#agent_bill_vat').val(val.bill_agent_vat_no)
                 $('#agent_bill_stax').val(val.bill_agent_stax)
                 $('#agent_bill_cin').val(val.bill_agent_cin)
+                $('#agent_bill_gst').val(val.bill_agent_gst_no)
+
 
                 VAT_CONSUMABLE_PERCENT = parseFloat(val.bill_vat_consumable_percent)
                 VAT_LUBE_PERCENT = parseFloat(val.bill_vat_lube_percent)
                 VAT_PART_PERCENT = parseFloat(val.bill_vat_part_percent)
                 SERVICE_TAX_PERCENT = parseFloat(val.bill_service_tax_percent)
+
+
+                GST_CONSUMABLE_PERCENT = parseFloat(val.bill_gst_consumable_percent)
+                GST_LUBE_PERCENT = parseFloat(val.bill_gst_lube_percent)
+                GST_PART_PERCENT = parseFloat(val.bill_gst_part_percent)
+                GST_SERVICE_PERCENT = parseFloat(val.bill_gst_service_percent)
+
+
 
                 service_items = val.bill_components
 

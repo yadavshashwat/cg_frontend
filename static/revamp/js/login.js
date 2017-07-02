@@ -3,6 +3,11 @@ var VAT_LUBE_PERCENT = 0
 var VAT_PART_PERCENT = 0
 var SERVICE_TAX_PERCENT = 0
 
+var GST_CONSUMABLE_PERCENT = 0
+var GST_LUBE_PERCENT = 0
+var GST_PART_PERCENT = 0
+var GST_SERVICE_PERCENT = 0
+
 
 $(function () {
     $(".button").click(function (e) {
