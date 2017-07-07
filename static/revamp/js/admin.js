@@ -1638,6 +1638,7 @@ var Global = {
             time_n = $('#customer-detail #time_booking').val();
             // comment_n = $('#customer-detail #comments').val();
             notes_n = $('#customer-detail #notes').val();
+            remarks_n = $('#customer-detail #remarks').val();
             amount_paid_n = $('#customer-detail #cust_amount_paid').val()
             cust_name = $('#customer-detail #cust_name').val()
             cust_number = $('#customer-detail #cust_number').val()
@@ -1714,7 +1715,7 @@ var Global = {
                 make:make,
                 model:model,
                 fuel:fuel,
-
+                remark:remarks_n,
                 odometer:odometer,
                 job_summary:JSON.stringify(jobs_summary_list),
                 es_reason:escalation_reason,
@@ -5776,7 +5777,7 @@ var Global = {
                 }
                 html += '</div>'
                 html += '<div class="col s4 m4 l2">'
-                html += '<button class="waves-effect waves-light btn cg-primary btn-callcustomer page-wide" disabled type="submit" name="action">Call<i class="material-icons right">phone</i></button>'
+                html += '<button class="waves-effect waves-light btn cg-primary btn-callcustomer page-wide"  type="submit" name="action">Call<i class="material-icons right">phone</i></button>'
                 html += '</div>'
 
                 html += '<div class="col s12 m12 l6">'
@@ -5873,22 +5874,22 @@ var Global = {
                 if (val.req_user_agent) {
                     html += '<div class="col s8 m8 l4">'
                     if (val.booking_user_number == "") {
-                        html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"   value ="' + val.cust_number + '"class="validate"><label for="cust_number">Number</label></div>'
+                        html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled  value ="' + val.cust_number + '"class="validate"><label for="cust_number">Number</label></div>'
                     } else {
-                        html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"   value ="' + val.booking_user_number + '"class="validate"><label for="cust_number">Number</label></div>'
+                        html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled  value ="' + val.booking_user_number + '"class="validate"><label for="cust_number">Number</label></div>'
                     }
                     html += '</div>'
                     html += '<div class="col s4 m4 l2">'
-                    html += '<button class="waves-effect waves-light btn cg-primary btn-callcustomer page-wide" type="submit" name="action">Call<i class="material-icons right">phone</i></button>'
+                    html += '<button class="waves-effect waves-light btn cg-primary btn-callcustomer page-wide" disabled type="submit" name="action">Call<i class="material-icons right">phone</i></button>'
                     html += '</div>'
 
 
                 } else {
                     html += '<div class="col s12 m12 l6">'
                     if (val.booking_user_number == "") {
-                        html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="' + val.cust_number + '"class="validate"><label for="cust_number">Number</label></div>'
+                        html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text" disabled  value ="' + val.cust_number + '"class="validate"><label for="cust_number">Number</label></div>'
                     } else {
-                        html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text"  disabled value ="' + val.booking_user_number + '"class="validate"><label for="cust_number">Number</label></div>'
+                        html += '<div class="input-field"><i class="material-icons prefix">phone</i><input id="cust_number" type="text" disabled  value ="' + val.booking_user_number + '"class="validate"><label for="cust_number">Number</label></div>'
                     }
                     html += '</div>'
                 }
@@ -5994,8 +5995,13 @@ var Global = {
 
                 // Job Summary
                 html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Notes</label></div>'
                 html += '</div>'
+
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="remarks" type="text" class="materialize-textarea">' + val.customer_remarks + '</textarea><label for="remarks">Recommendations</label></div>'
+                html += '</div>'
+
 
                 if (val.escalation_flag) {
                     html += '<div class="col s12 m12 l12">'
@@ -6382,8 +6388,13 @@ var Global = {
                 // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="comments" type="text" disabled class="materialize-textarea">' + val.comments + '</textarea><label for="comments">Jobs Summary</label></div>'
                 // html += '</div>'
                 html += '<div class="col s12 m12 l12">'
-                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Customer Notes</label></div>'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="notes" type="text" disabled class="materialize-textarea">' + val.customer_notes + '</textarea><label for="notes">Notes</label></div>'
                 html += '</div>'
+
+                html += '<div class="col s12 m12 l12">'
+                html += '<div class="input-field"><i class="material-icons prefix">receipt</i><textarea id="remarks" type="text" class="materialize-textarea">' + val.customer_remarks + '</textarea><label for="remarks">Recommendations</label></div>'
+                html += '</div>'
+
                 html_jc = ''
                 html_jc += '<div class="col s12 m12 l12">'
                 html_jc += '<b>JOBS CARD DETAILS</b><br><br>'
@@ -8643,7 +8654,7 @@ var Global = {
             $('#bill-detail #cust_bill_city').val(val.cust_city)
             $('#bill-detail #cust_bill_vehicle').val(val.cust_make + ' ' + val.cust_model)
             $('#bill-detail #cust_bill_reg').val(val.cust_regnumber)
-            $('#bill-detail #cust_bill_reco').val(val.customer_notes)
+            $('#bill-detail #cust_bill_reco').val(val.customer_remarks)
 
             data_id = val.id
 
