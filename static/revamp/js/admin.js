@@ -3268,6 +3268,11 @@ var Global = {
                 VAT_LUBE_PERCENT = 0
                 VAT_PART_PERCENT = 0
                 SERVICE_TAX_PERCENT = 0
+                GST_CONSUMABLE_PERCENT = 0
+                GST_LUBE_PERCENT = 0
+                GST_PART_PERCENT = 0
+                GST_SERVICE_PERCENT = 0
+
                 STATE_BILL = CGDELHI_STATE
                 setTimeout(function() {             $('#bill-table').click()       }, 1000);
 
