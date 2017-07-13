@@ -1548,7 +1548,7 @@ var Global = {
                 if (type_item == "Labour") {
                     TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
                     TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(price_item)
-                } else if (type_item == "Part" ||  type_item == "Lube" || type_item == "Consumable") {
+                } else if (type_item == "Part" ||  type_item == "Lube" || type_item == "Consumable"||  type_item == "Part18" || type_item == "Part28"||  type_item == "Lube18" || type_item == "Lube28") {
                     TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
                     TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(price_item)
                 } else if (type_item == "Discount") {
@@ -1613,7 +1613,7 @@ var Global = {
                     if (type_item == "Labour") {
                         TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
                         TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(price_item)
-                    } else if (type_item == "Part" || type_item == "Lube" || type_item == "Consumable") {
+                    } else if (type_item == "Part" ||  type_item == "Lube" || type_item == "Consumable"||  type_item == "Part18" || type_item == "Part28"||  type_item == "Lube18" || type_item == "Lube28") {
                         TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
                         TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(price_item)
                     } else if (type_item == "Discount") {
@@ -7601,7 +7601,7 @@ var Global = {
             if (type_item == "Labour") {
                 TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
                 TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(price_item)
-            } else if (type_item == "Part" || type_item == "Lube" || type_item == "Consumable") {
+            } else if (type_item == "Part" || type_item == "Lube" || type_item == "Consumable" || type_item == "Part18"  || type_item == "Part28"  || type_item == "Lube18"   || type_item == "Lube28" ) {
                 TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(price_item)
                 TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(price_item)
             } else if (type_item == "Discount") {
