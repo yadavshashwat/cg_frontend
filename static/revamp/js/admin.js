@@ -3391,7 +3391,8 @@ var Global = {
             GST_LUBE_BILL_ADMIN = 0
             GST_CONSUMABLE_BILL_ADMIN = 0
             GST_SERVICE_BILL_ADMIN = 0
-
+            GST_18_BILL_ADMIN = 0
+            GST_28_BILL_ADMIN = 0
 
 
 
@@ -3405,6 +3406,10 @@ var Global = {
             $('#bill-detail .gst-lube-amount').text(GST_LUBE_BILL_ADMIN)
             $('#bill-detail .gst-consumable-amount').text(GST_CONSUMABLE_BILL_ADMIN)
             $('#bill-detail .gst_service-amount').text(GST_SERVICE_BILL_ADMIN)
+
+            $('#bill-detail .gst-18-amount').text(GST_18_BILL_ADMIN)
+            $('#bill-detail .gst_28-amount').text(GST_28_BILL_ADMIN)
+
 
             $('#bill-detail table').click()
 
@@ -3428,6 +3433,8 @@ var Global = {
             GST_LUBE_BILL_ADMIN = 0
             GST_CONSUMABLE_BILL_ADMIN = 0
             GST_SERVICE_BILL_ADMIN = 0
+            GST_18_BILL_ADMIN = 0
+            GST_28_BILL_ADMIN = 0
 
 
 
@@ -3471,48 +3478,76 @@ var Global = {
                                 applicable_tax = GST_SERVICE_PERCENT
                                 // SERVICE_TAX_BILL_ADMIN = SERVICE_TAX_BILL_ADMIN+ (price_item - (price_item /(1+(applicable_tax/100))))
                                 GST_SERVICE_BILL_ADMIN = GST_SERVICE_BILL_ADMIN+ (price_item - (price_item /(1+(applicable_tax/100))))
+                                GST_18_BILL_ADMIN = GST_18_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
 
-                            } else if (type_item == "Part") {
+                            } else if (type_item == "Part" || type_item == "Part28") {
                                 // applicable_tax = VAT_PART_PERCENT
                                 applicable_tax = GST_PART_PERCENT
                                 // VAT_PART_BILL_ADMIN = VAT_PART_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
                                 GST_PART_BILL_ADMIN = GST_PART_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+                                GST_28_BILL_ADMIN = GST_28_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
 
-                            }else if(type_item == "Lube"){
+                            } else if (type_item == "Part18") {
+                                // applicable_tax = VAT_PART_PERCENT
+                                applicable_tax = GST_LUBE_PERCENT
+                                // VAT_PART_BILL_ADMIN = VAT_PART_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+                                GST_PART_BILL_ADMIN = GST_PART_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+                                GST_18_BILL_ADMIN = GST_18_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+
+                            }else if(type_item == "Lube" || type_item == "Lube18" ){
                                 // applicable_tax = VAT_LUBE_PERCENT
                                 applicable_tax = GST_LUBE_PERCENT
                                 // VAT_LUBE_BILL_ADMIN = VAT_LUBE_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
                                 GST_LUBE_BILL_ADMIN = GST_LUBE_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+                                GST_18_BILL_ADMIN = GST_18_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+
+                            }else if(type_item == "Lube28" ){
+                                // applicable_tax = VAT_LUBE_PERCENT
+                                applicable_tax = GST_PART_PERCENT
+                                // VAT_LUBE_BILL_ADMIN = VAT_LUBE_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+                                GST_LUBE_BILL_ADMIN = GST_LUBE_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+                                GST_28_BILL_ADMIN = GST_28_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+
                             }else if(type_item == "Consumable"){
                                 // applicable_tax = VAT_CONSUMABLE_PERCENT
                                 applicable_tax = GST_CONSUMABLE_PERCENT
                                 // VAT_CONSUMABLE_BILL_ADMIN= VAT_CONSUMABLE_BILL_ADMIN+ (price_item - (price_item /(1+(applicable_tax/100))))
                                 GST_CONSUMABLE_BILL_ADMIN= GST_CONSUMABLE_BILL_ADMIN+ (price_item - (price_item /(1+(applicable_tax/100))))
+                                GST_28_BILL_ADMIN = GST_28_BILL_ADMIN + (price_item - (price_item /(1+(applicable_tax/100))))
+
                             }else if (type_item == "Discount") {
                                 applicable_tax = 0
                             } else {
                                 applicable_tax = 0
                             }
-
+                            settlement_item = ""
                             price_item_pre_tax = (price_item)/(1+applicable_tax/100);
                             price_item_pre_tax = +(price_item_pre_tax.toFixed(2))
                             $(row.cells[j]).find('input,select').eq(0).val(price_item_pre_tax)
                             if (type_item == "Labour") {
                                 TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN + parseFloat(price_item)
                                 TOTAL_LABOUR_BILL_ADMIN = TOTAL_LABOUR_BILL_ADMIN + parseFloat(price_item)
-                            } else if (type_item == "Part") {
+                                settlement_item = "Labour"
+                            } else if (type_item == "Part" || type_item == "Part18" || type_item == "Part28" ) {
                                 TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN + parseFloat(price_item)
                                 TOTAL_PARTS_BILL_ADMIN = TOTAL_PARTS_BILL_ADMIN + parseFloat(price_item)
-                            }else if(type_item == "Lube"){
+                                settlement_item = "Part"
+
+                            }else if(type_item == "Lube"|| type_item == "Lube18" || type_item == "Lube28" ){
                                 TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN + parseFloat(price_item)
                                 TOTAL_LUBES_BILL_ADMIN = TOTAL_LUBES_BILL_ADMIN + parseFloat(price_item)
+                                settlement_item = "Lube"
 
                             }else if(type_item == "Consumable"){
                                 TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN + parseFloat(price_item)
                                 TOTAL_CONSUMABLES_BILL_ADMIN = TOTAL_CONSUMABLES_BILL_ADMIN + parseFloat(price_item)
+                                settlement_item = "Consumbale"
+
                             }else if (type_item == "Discount") {
                                 TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN - parseFloat(price_item)
                                 TOTAL_DISCOUNT_BILL_ADMIN = TOTAL_DISCOUNT_BILL_ADMIN + parseFloat(price_item)
+                                settlement_item = "Discount"
+
                             } else {
                                 TOTAL_PRICE_BILL_ADMIN = TOTAL_PRICE_BILL_ADMIN
                             }
@@ -3524,7 +3559,7 @@ var Global = {
                                 "price": price_item,
                                 "pre_tax_price":price_item_pre_tax,
                                 "type": type_item,
-                                "settlement_cat":type_item,
+                                "settlement_cat":settlement_item,
                                 "comment": "",
                                 "quantity":quantity,
                                 "unit_price":unit_price,
@@ -3562,6 +3597,10 @@ var Global = {
                 GST_CONSUMABLE_BILL_ADMIN = +(GST_CONSUMABLE_BILL_ADMIN.toFixed(2))
                 GST_SERVICE_BILL_ADMIN = +(GST_SERVICE_BILL_ADMIN.toFixed(2))
 
+                GST_28_BILL_ADMIN = +(GST_28_BILL_ADMIN.toFixed(2))
+                GST_18_BILL_ADMIN = +(GST_18_BILL_ADMIN.toFixed(2))
+
+
                 
                 $('#bill-detail .total-amount-row-bill .total-amount').text(TOTAL_PRICE_BILL_ADMIN)
                 $('#bill-detail .vat-part-amount').text(VAT_PART_BILL_ADMIN)
@@ -3574,6 +3613,9 @@ var Global = {
                 $('#bill-detail .gst-lube-amount').text(GST_LUBE_BILL_ADMIN)
                 $('#bill-detail .gst-consumable-amount').text(GST_CONSUMABLE_BILL_ADMIN)
                 $('#bill-detail .gst-service-amount').text(GST_SERVICE_BILL_ADMIN)
+
+                $('#bill-detail .gst-28-amount').text(GST_28_BILL_ADMIN)
+                $('#bill-detail .gst-18-amount').text(GST_18_BILL_ADMIN)
 
                 
             }
@@ -3599,7 +3641,10 @@ var Global = {
             gst_consumable          = GST_CONSUMABLE_BILL_ADMIN
             gst_service             = GST_SERVICE_BILL_ADMIN
 
-
+            gst_18                  = GST_18_BILL_ADMIN
+            gst_28                  = GST_28_BILL_ADMIN
+            state_of_supply         = $('#bill-detail #cust_bill_state').val()
+            // console.log(state_of_supply)
             payment_mode            = ""
             agent_name              = $('#agent_bill_name').val()
             agent_address           = $('#agent_bill_address').val()
@@ -3659,8 +3704,10 @@ var Global = {
                 gst_lube: gst_lube,
                 gst_consumable: gst_consumable,
                 gst_service: gst_service,
-                
-                
+                gst_18:gst_18,
+                gst_28:gst_28,
+                state_of_supply : state_of_supply,
+
                 payment_mode: payment_mode,
                 full_agent_name: agent_name,
                 agent_address: agent_address,
@@ -3703,6 +3750,12 @@ var Global = {
             if(cust_name == ""){
                 error = 1
                 $('#bill-detail #cust_bill_name').addClass("invalid");
+                // console.log("Point 3")
+
+            }
+            if(state_of_supply == ""){
+                error = 1
+                $('#cust_bill_state').addClass('invalid-select-box')
                 // console.log("Point 3")
 
             }
@@ -7016,37 +7069,48 @@ var Global = {
 
                     } else {
                         html += '<td>' + '<div class="input-field sort" id ="part_type"><select  class="browser-default">'
-                        if (val.service_items[i].type == "Part") {
-                            html += '<option value="Part" selected>Part</option>'
+                        if (val.service_items[i].type == "Part18") {
+                            html += '<option value="Part18" selected>Part (18%)</option>'
                         } else {
-                            html += '<option value="Part">Part</option>'
+                            html += '<option value="Part18">Part (18%)</option>'
                         }
-                        if (val.service_items[i].type == "Lube") {
-                            html += '<option value="Lube" selected>Lube</option>'
+                        if (val.service_items[i].type == "Part28" || val.service_items[i].type == "Part" ) {
+                            html += '<option value="Part28" selected>Part (28%)</option>'
                         } else {
-                            html += '<option value="Lube">Lube</option>'
-                        }
-                        if (val.service_items[i].type == "Consumable") {
-                            html += '<option value="Consumable" selected>Consumable</option>'
-                        } else {
-                            html += '<option value="Consumable">Consumable</option>'
+                            html += '<option value="Part28">Part (28%)</option>'
                         }
 
-                        if (val.service_items[i].type == "Labour") {
-                            html += '<option value="Labour" selected>Labour</option>'
+                        if (val.service_items[i].type == "Lube18" || val.service_items[i].type == "Lube") {
+                            html += '<option value="Lube18" selected>Lube (18%)</option>'
                         } else {
-                            html += '<option value="Labour">Labour</option>'
+                            html += '<option value="Lube18">Lube (18%)</option>'
+                        }
+                        if (val.service_items[i].type == "Lube28") {
+                            html += '<option value="Lube28" selected>Lube (28%)</option>'
+                        } else {
+                            html += '<option value="Lube28">Lube (28%)</option>'
+                        }
+                        // if (val.service_items[i].type == "Consumable") {
+                        //     html += '<option value="Consumable" selected>Consumable</option>'
+                        // } else {
+                        //     html += '<option value="Consumable">Consumable</option>'
+                        // }
+
+                        if (val.service_items[i].type == "Labour") {
+                            html += '<option value="Labour" selected>Labour (18%)</option>'
+                        } else {
+                            html += '<option value="Labour">Labour (18%)</option>'
                         }
                         if (val.service_items[i].type == "Discount") {
                             html += '<option value="Discount" selected>Discount</option>'
                         } else {
                             html += '<option value="Discount">Discount</option>'
                         }
-                        if (val.service_items[i].type == "Total") {
-                            html += '<option value="Total" selected>Total</option>'
-                        } else {
-                            html += '<option value="Total">Total</option>'
-                        }
+                        // if (val.service_items[i].type == "Total") {
+                        //     html += '<option value="Total" selected>Total</option>'
+                        // } else {
+                        //     html += '<option value="Total">Total</option>'
+                        // }
                         html += '</select></div>' + '</td>';
                     }
                 }else{
@@ -8715,25 +8779,36 @@ var Global = {
                 }
                 html += '    <td><input id="part_name" type="text" class="browser-default" value="'+ val.service_items[i]['name'] +'" aria-required="true"></td>'
                 html += '    <td><div class="input-field sort" id ="part_type"><select  class="browser-default">'
-                if(val.service_items[i]['type'] == "Part"){
-                    html += '        <option value="Part" selected>Part</option>'
+                if(val.service_items[i]['type'] == "Part18"){
+                    html += '        <option value="Part18" selected>Part (18%)</option>'
                 }else{
-                    html += '        <option value="Part">Part</option>'
+                    html += '        <option value="Part18">Part (18%)</option>'
                 }
-                if(val.service_items[i]['type'] == "Lube"){
-                    html += '        <option value="Lube" selected>Lube</option>'
+                if(val.service_items[i]['type'] == "Part" || val.service_items[i]['type'] == "Consumable" || val.service_items[i]['type'] == "Part28"){
+                    html += '        <option value="Part28" selected>Part (28%)</option>'
                 }else{
-                    html += '        <option value="Lube">Lube</option>'
+                    html += '        <option value="Part28">Part (28%)</option>'
                 }
-                if(val.service_items[i]['type'] == "Consumable"){
-                    html += '        <option value="Consumable" selected>Consumable</option>'
+                if(val.service_items[i]['type'] == "Lube" || val.service_items[i]['type'] == "Lube18"){
+                    html += '        <option value="Lube18" selected>Lube (18%)</option>'
                 }else{
-                    html += '        <option value="Consumable">Consumable</option>'
+                    html += '        <option value="Lube18">Lube (18%)</option>'
                 }
+                if(val.service_items[i]['type'] == "Lube28"){
+                    html += '        <option value="Lube28" selected>Lube (28%)</option>'
+                }else{
+                    html += '        <option value="Lube28">Lube (28%)</option>'
+                }
+
+                // if(val.service_items[i]['type'] == "Consumable"){
+                //     html += '        <option value="Consumable" selected>Consumable</option>'
+                // }else{
+                //     html += '        <option value="Consumable">Consumable</option>'
+                // }
                 if(val.service_items[i]['type'] == "Labour"){
-                    html += '        <option value="Labour" selected>Labour</option>'
+                    html += '        <option value="Labour" selected>Labour (18%)</option>'
                 }else{
-                    html += '        <option value="Labour">Labour</option>'
+                    html += '        <option value="Labour">Labour (18%)</option>'
                 }
                 if(val.service_items[i]['type'] == "Discount"){
                     html += '        <option value="Discount" selected>Discount</option>'
@@ -8876,6 +8951,8 @@ var Global = {
                 $('#bill-detail #cust_bill_vehicle').val(val.bill_vehicle)
                 $('#bill-detail #cust_bill_reg').val(val.bill_reg_number)
                 $('#bill-detail #cust_bill_reco').val(val.bill_notes)
+                $('#bill-detail #cust_bill_state').val(val.bill_supply_state)
+
                 if (val.bill_clickgarage){
                     $('#bill_type').find('select').val(val.bill_owner)
                 }else{
@@ -8892,6 +8969,9 @@ var Global = {
                 GST_CONSUMABLE_BILL_ADMIN = 0;
                 GST_LUBE_BILL_ADMIN = 0;
                 GST_SERVICE_BILL_ADMIN = 0;
+                GST_18_BILL_ADMIN = 0;
+                GST_28_BILL_ADMIN = 0;
+
 
                 STATE_BILL = val.bill_state
                 AGENT_STATE = val.bill_state
@@ -8901,6 +8981,7 @@ var Global = {
                 $('#agent_bill_stax').val(val.bill_agent_stax)
                 $('#agent_bill_cin').val(val.bill_agent_cin)
                 $('#agent_bill_gst').val(val.bill_agent_gst_no)
+
 
 
                 VAT_CONSUMABLE_PERCENT = parseFloat(val.bill_vat_consumable_percent)
@@ -8956,26 +9037,61 @@ var Global = {
                     }
                     html += '    <td><input id="part_name" type="text" class="browser-default" value="' + val.bill_components[i]['name'] + '" aria-required="true"></td>'
                     html += '    <td><div class="input-field sort" id ="part_type"><select  class="browser-default">'
-                    if (val.bill_components[i]['type'] == "Part") {
-                        html += '        <option value="Part" selected>Part</option>'
-                    } else {
-                        html += '        <option value="Part">Part</option>'
+                    // if (val.bill_components[i]['type'] == "Part") {
+                    //     html += '        <option value="Part" selected>Part</option>'
+                    // } else {
+                    //     html += '        <option value="Part">Part</option>'
+                    // }
+                    // if (val.bill_components[i]['type'] == "Lube") {
+                    //     html += '        <option value="Lube" selected>Lube</option>'
+                    // } else {
+                    //     html += '        <option value="Lube">Lube</option>'
+                    // }
+                    // if (val.bill_components[i]['type'] == "Consumable") {
+                    //     html += '        <option value="Consumable" selected>Consumable</option>'
+                    // } else {
+                    //     html += '        <option value="Consumable">Consumable</option>'
+                    // }
+                    // if (val.bill_components[i]['type'] == "Labour") {
+                    //     html += '        <option value="Labour" selected>Labour</option>'
+                    // } else {
+                    //     html += '        <option value="Labour">Labour</option>'
+                    // }
+
+                    if(val.bill_components[i]['type'] == "Part18"){
+                        html += '        <option value="Part18" selected>Part (18%)</option>'
+                    }else{
+                        html += '        <option value="Part18">Part (18%)</option>'
                     }
-                    if (val.bill_components[i]['type'] == "Lube") {
-                        html += '        <option value="Lube" selected>Lube</option>'
-                    } else {
-                        html += '        <option value="Lube">Lube</option>'
+
+                    if(val.bill_components[i]['type'] == "Part" || val.bill_components[i]['type'] == "Consumable" || val.bill_components[i]['type'] == "Part28"){
+                    html += '        <option value="Part28" selected>Part (28%)</option>'
+                    }else{
+                        html += '        <option value="Part28">Part (28%)</option>'
                     }
-                    if (val.bill_components[i]['type'] == "Consumable") {
-                        html += '        <option value="Consumable" selected>Consumable</option>'
-                    } else {
-                        html += '        <option value="Consumable">Consumable</option>'
+                    if(val.bill_components[i]['type'] == "Lube" || val.bill_components[i]['type'] == "Lube18"){
+                        html += '        <option value="Lube18" selected>Lube (18%)</option>'
+                    }else{
+                        html += '        <option value="Lube18">Lube (18%)</option>'
                     }
-                    if (val.bill_components[i]['type'] == "Labour") {
-                        html += '        <option value="Labour" selected>Labour</option>'
-                    } else {
-                        html += '        <option value="Labour">Labour</option>'
+                    if(val.bill_components[i]['type'] == "Lube28"){
+                        html += '        <option value="Lube28" selected>Lube (28%)</option>'
+                    }else{
+                        html += '        <option value="Lube28">Lube (28%)</option>'
                     }
+
+                    // if(val.service_items[i]['type'] == "Consumable"){
+                    //     html += '        <option value="Consumable" selected>Consumable</option>'
+                    // }else{
+                    //     html += '        <option value="Consumable">Consumable</option>'
+                    // }
+                    if(val.bill_components[i]['type'] == "Labour"){
+                        html += '        <option value="Labour" selected>Labour (18%)</option>'
+                    }else{
+                        html += '        <option value="Labour">Labour (18%)</option>'
+                    }
+
+
                     if (val.bill_components[i]['type'] == "Discount") {
                         html += '        <option value="Discount" selected>Discount</option>'
                     } else {
