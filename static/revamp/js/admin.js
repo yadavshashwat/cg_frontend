@@ -163,7 +163,9 @@ var TOTAL_PARTS_NEW_BOOKING = 0;
 var TOTAL_DISCOUNT_NEW_BOOKING = 0;
 var COUP_DISCOUNT_NEW_BOOKING = 0 ;
 var TOTAL_JOBS_NEW_BOOKING = 0;
+var LEAD_FOLLOW = "Lead"
 // var TOTAL_ITEM_ESTIMATE = 0;
+
 var PAGE_NUM = 0
 // Sort Filter
 var LEAD_TYPE = "";
@@ -585,7 +587,8 @@ var Global = {
                     phone_num:PHONE_NUMBER,
                     veh_type:VEH_TYPE,
                     page_num : PAGE_NUM,
-                    agent_id:AGENT_BOOK
+                    agent_id:AGENT_BOOK,
+                   lead_follow:LEAD_FOLLOW
                 }, "get", _this, _this.loadBookings2,null, '.loading-pane3');
                 if (LEAD_TYPE == "Booking"){
                     Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
@@ -602,7 +605,8 @@ var Global = {
                         phone_num:PHONE_NUMBER,
                         veh_type:VEH_TYPE,
                         page_num : PAGE_NUM,
-                        agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery2,null, '.loading-pane3');
+                        agent_id:AGENT_BOOK,
+                        lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadDelivery2,null, '.loading-pane3');
                 }
             }else{
                 status_marker = STATUS_TYPE
@@ -618,7 +622,8 @@ var Global = {
                     phone_num:PHONE_NUMBER,
                     veh_type:VEH_TYPE,
                     page_num : PAGE_NUM,
-                    agent_id:AGENT_BOOK
+                    agent_id:AGENT_BOOK,
+                    lead_follow:LEAD_FOLLOW
                 }, "get", _this, _this.loadBookings2,null, '.loading-pane3');
                 if (LEAD_TYPE == "Booking"){
                     Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
@@ -634,7 +639,8 @@ var Global = {
                         phone_num:PHONE_NUMBER,
                         veh_type:VEH_TYPE,
                         page_num : PAGE_NUM,
-                        agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery2,null, '.loading-pane3');
+                        agent_id:AGENT_BOOK,
+                        lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadDelivery2,null, '.loading-pane3');
                 }
             }
 
@@ -678,6 +684,7 @@ var Global = {
 
             // $('#bookings .delivery-list').show()
             $('#bookings .booking-filter').show();
+
             $('#customer-detail .bill-row').show();
 
 
@@ -704,7 +711,8 @@ var Global = {
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
                 page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadBookings,null, '.loading-pane');
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -718,7 +726,8 @@ var Global = {
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
                 page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
 
             var path = window.location.pathname.split('/')
@@ -794,7 +803,8 @@ var Global = {
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
                 page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadBookings,null, '.loading-pane');
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -809,7 +819,8 @@ var Global = {
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
                 page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
 
             var path = window.location.pathname.split('/')
@@ -913,12 +924,16 @@ var Global = {
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
                 page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW
+            }, "get", _this, _this.loadBookings,null, '.loading-pane');
 
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,2).join('/')+'/leads/all'
             history.pushState({},'',new_path)
         }
+
+
         $('.navbar .lead-button').click(allleadsopen);
 
         $('#bookings').on('click','.filter-sort.closed',function () {
@@ -995,7 +1010,8 @@ var Global = {
                     phone_num:PHONE_NUMBER,
                     veh_type:VEH_TYPE,
                     page_num : PAGE_NUM,
-                    agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                    agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadBookings,null, '.loading-pane');
                 Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                     lead_booking:LEAD_TYPE,
                     sort:SORT_TYPE,
@@ -1009,7 +1025,8 @@ var Global = {
                     phone_num:PHONE_NUMBER,
                     veh_type:VEH_TYPE,
                     page_num : PAGE_NUM,
-                    agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                    agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
             }else{
                 status_marker = STATUS_TYPE
@@ -1025,7 +1042,8 @@ var Global = {
                     phone_num:PHONE_NUMBER,
                     veh_type:VEH_TYPE,
                     page_num : PAGE_NUM,
-                    agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                    agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadBookings,null, '.loading-pane');
                 Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                     lead_booking:LEAD_TYPE,
                     sort:SORT_TYPE,
@@ -1039,7 +1057,8 @@ var Global = {
                     phone_num:PHONE_NUMBER,
                     veh_type:VEH_TYPE,
                     page_num : PAGE_NUM,
-                    agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                    agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
             }
 
@@ -1065,6 +1084,21 @@ var Global = {
 
             }
         })
+
+        $('#bookings .lead-filter .date-box').click(function(){
+            $('#bookings .lead-filter .date-box').removeClass('selected');
+            $(this).addClass('selected');
+            toshow = $(this).attr('data-class')
+
+            if (toshow=="Leads"){
+                LEAD_FOLLOW = "Lead"
+            }else{
+                LEAD_FOLLOW = "Reminder"
+            }
+            allleadsopen()
+        })
+
+
 
         $('#bookings  .btn-apply-filter').click(function(){
             PAGE_NUM = 0
@@ -1135,7 +1169,8 @@ var Global = {
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
                 page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadBookings,null, '.loading-pane');
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -1149,7 +1184,8 @@ var Global = {
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
                 page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
             $('#bookings .filter-option').hide();
             $('#bookings .filter-sort').addClass('closed').removeClass('open');
@@ -1193,7 +1229,8 @@ var Global = {
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
                 page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK
+                agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW
             }, "get", _this, _this.loadBookings,null, '.loading-pane');
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
@@ -1208,7 +1245,8 @@ var Global = {
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
                 page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
             $('#bookings .date-filter .date-box').removeClass('selected');
             $('#bookings .date-filter .date-box.today').addClass('selected');
@@ -1271,7 +1309,8 @@ var Global = {
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
                 page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadBookings,null, '.loading-pane');
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -1285,7 +1324,8 @@ var Global = {
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
                 page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadDelivery,null, '.loading-pane');
         })
 
         $('#bookings #sort').change(function(){
@@ -1304,7 +1344,8 @@ var Global = {
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
                 page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadBookings,null, '.loading-pane');
             Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                 lead_booking:LEAD_TYPE,
                 sort:SORT_TYPE,
@@ -1318,7 +1359,8 @@ var Global = {
                 phone_num:PHONE_NUMBER,
                 veh_type:VEH_TYPE,
                 page_num : PAGE_NUM,
-                agent_id:AGENT_BOOK}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                agent_id:AGENT_BOOK,
+                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
         })
 
