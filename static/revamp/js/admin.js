@@ -7038,7 +7038,7 @@ var Global = {
                 if (val.service_items[i].type == "Labour") {
                     TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(val.service_items[i].price)
                     TOTAL_LABOUR_ADMIN = TOTAL_LABOUR_ADMIN + parseFloat(val.service_items[i].price)
-                } else if (val.service_items[i].type == "Part" || val.service_items[i].type == "Lube" || val.service_items[i].type == "Consumable") {
+                } else if (val.service_items[i].type == "Part" || val.service_items[i].type == "Lube" || val.service_items[i].type == "Consumable" || val.service_items[i].type == "Part18" || val.service_items[i].type == "Part28" || val.service_items[i].type == "Lube18" || val.service_items[i].type == "Lube28"  ) {
                     TOTAL_PRICE_ADMIN = TOTAL_PRICE_ADMIN + parseFloat(val.service_items[i].price)
                     TOTAL_PARTS_ADMIN = TOTAL_PARTS_ADMIN + parseFloat(val.service_items[i].price)
                 } else if (val.service_items[i].type == "Discount") {
