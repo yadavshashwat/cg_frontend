@@ -3327,6 +3327,7 @@ var Global = {
                 $('#agent_bill_stax').val(AGENT_STAX_NO)
                 $('#agent_bill_cin').val(AGENT_CIN_NO)
                 $('#agent_bill_gst').val(AGENT_GST_NO)
+                $('#cust_bill_state').val(AGENT_STATE)
 
                 STATE_BILL = AGENT_STATE
                 Commons.ajaxData('get_all_taxes', {state:STATE_BILL}, "get", _this, _this.loadTaxUpdateAgent,null, '.loading-pane');
@@ -8777,6 +8778,8 @@ var Global = {
             AGENT_VAT_NO = val.agent_vat
             AGENT_STAX_NO = val.agent_stax
             AGENT_CIN_NO = val.agent_cin
+            AGENT_GST_NO = val.agent_gst
+
             AGENT_NAME = val.agent_name
             AGENT_ADDRESS = val.agent_address
             AGENT_LOCALITY = val.agent_locality
