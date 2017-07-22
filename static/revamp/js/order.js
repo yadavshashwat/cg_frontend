@@ -1137,7 +1137,7 @@ var Global = {
                 $('#nav-cart .cart-2').hide()
 
                 html2 += '									<div class="row dealer-price">';
-                html2 += '										<div class="col s7 m7 l7"> Dealer Price :</div>';
+                html2 += '										<div class="col s7 m7 l7"> Market Price :</div>';
                 html2 += '										<div class="col s5 m5 l5 price">';
                 html2 += '											<strike><b>₹&nbsp;</b>';
                 html2 += val.comp_amount + PICK_DROP
@@ -1302,9 +1302,9 @@ var Global = {
             if (val.price_active == "1"){
                 html += '											<div class="job-amount"><b>CG Price : &#8377;&nbsp;</b>'+val.total_price+'&nbsp;<span class="old-price x12"><strike>&#8377;&nbsp;'+ (parseFloat(val.total_price)+parseFloat(val.discount)) +'</strike></span></div>';
                 if (parseFloat(val.total_price_comp) < 2000){
-                    html += '											<div class="job-amount-dealer x12 red-text"><b>Dealer : <strike>&#8377;&nbsp;'+ (parseFloat(val.total_price_comp) + 200) +'</b></strike></div>';
+                    html += '											<div class="job-amount-dealer x12 red-text"><b>Market : <strike>&#8377;&nbsp;'+ (parseFloat(val.total_price_comp) + 200) +'</b></strike></div>';
                 }else{
-                    html += '											<div class="job-amount-dealer x12 red-text"><b>Dealer : <strike>&#8377;&nbsp;'+val.total_price_comp+'</b></strike></div>';
+                    html += '											<div class="job-amount-dealer x12 red-text"><b>Market : <strike>&#8377;&nbsp;'+val.total_price_comp+'</b></strike></div>';
                 }
 
             }
