@@ -7351,13 +7351,15 @@ var Global = {
                             html += '<td><input id="purchase_price" type="number"   class="browser-default" value ="' + val.service_items[i].purchase_price + '" aria-required="true"></td>'
                         }
                         html += '<td>' + '<div class="input-field sort" id ="settle_type"><select  class="browser-default">'
+                        // console.log(val.service_items[i].settlement_cat)
                         if (val.service_items[i].settlement_cat==null || val.service_items[i].settlement_cat===false){
-                            if (val.service_items[i].type == "Part") {
+                            // console.log("1")
+                            if (val.service_items[i].type == "Part" || val.service_items[i].type == "Part18" || val.service_items[i].type == "Part28" ) {
                                 html += '<option value="Part" selected>Part</option>'
                             } else {
                                 html += '<option value="Part">Part</option>'
                             }
-                            if (val.service_items[i].type == "Lube") {
+                            if (val.service_items[i].type == "Lube"  || val.service_items[i].type == "Lube18" || val.service_items[i].type == "Lube28") {
                                 html += '<option value="Lube" selected>Lube</option>'
                             } else {
                                 html += '<option value="Lube">Lube</option>'
@@ -7388,17 +7390,18 @@ var Global = {
                                 html += '<option value="Denting">Denting</option>'
                             }
                         }else{
+                            // console.log("2")
                             if (val.service_items[i].settlement_cat == "Part") {
                                 html += '<option value="Part" selected>Part</option>'
                             } else {
                                 html += '<option value="Part">Part</option>'
                             }
-                            if (val.service_items[i].type == "Lube") {
+                            if (val.service_items[i].settlement_cat == "Lube") {
                                 html += '<option value="Lube" selected>Lube</option>'
                             } else {
                                 html += '<option value="Lube">Lube</option>'
                             }
-                            if (val.service_items[i].type == "Consumable") {
+                            if (val.service_items[i].settlement_cat == "Consumable") {
                                 html += '<option value="Consumable" selected>Consumable</option>'
                             } else {
                                 html += '<option value="Consumable">Consumable</option>'
@@ -7867,8 +7870,8 @@ var Global = {
 
         $.each(data['cart_summary'], function(ix, val) {
             if (val.car_bike=="Car"){
-                if (val.cg_amount_workshop <= 1800 && val.cg_amount_workshop > 0){
-                    PICK_DROP = 150
+                if (val.cg_amount_workshop <= 1500 && val.cg_amount_workshop > 0){
+                    PICK_DROP = 200
                 }else{
                     PICK_DROP = 0
                 }

@@ -1082,8 +1082,8 @@ var Global = {
         $.each(data['cart_summary'], function(ix, val) {
 
             if (val.car_bike=="Car"){
-                if (val.cg_amount_workshop <= 1800 && val.cg_amount_workshop > 0){
-                    PICK_DROP = 150
+                if (val.cg_amount_workshop <= 1500 && val.cg_amount_workshop > 0){
+                    PICK_DROP = 200
                 }else{
                     PICK_DROP = 0
                 }
@@ -1173,13 +1173,23 @@ var Global = {
 
                 }
 
-
+                html2 += '<div class="row">'
+                html2 += '										<div class="col s7 m7 l7">Taxes : </div>';
+                html2 += '										<div class="col s5 m5 l5 cg-price price">';
+                html2 += '											<b>₹&nbsp;</b>';
+                if (TOTAL_LABOUR > 0) {
+                    html2 += '<span id="total-price">' + parseFloat(TOTAL_LABOUR) * 0.18 + '</span>'
+                }else{
+                    html2 += '<span id="total-price">' + 0 + '</span>'
+                }
+                html2 += '										</div>';
+                html2 += '									</div>';
                 html2 += '									<div class="row">';
                 html2 += '										<div class="col s7 m7 l7">CG Price : </div>';
                 html2 += '										<div class="col s5 m5 l5 cg-price price">';
                 html2 += '											<b>₹&nbsp;</b>';
                 if (TOTAL_PRICE > 0) {
-                    html2 += '<span id="total-price">' + TOTAL_PRICE + '</span>'
+                    html2 += '<span id="total-price">' + (parseFloat(TOTAL_PRICE)  + (parseFloat(TOTAL_LABOUR) * 0.18)) + '</span>'
                 }else{
                     html2 += '<span id="total-price">' + 0 + '</span>'
                 }
@@ -1290,7 +1300,13 @@ var Global = {
             html += '										<div class="col s12 m12 l3 job-prices hide-on-med-and-down">';
             // html += '											<div class="job-amount"><b>&#8377;&nbsp;</b>'+val.total_price+'</div>';
             if (val.price_active == "1"){
-                html += '											<div class="job-amount"><b>&#8377;&nbsp;</b>'+val.total_price+'</div>';
+                html += '											<div class="job-amount"><b>CG Price : &#8377;&nbsp;</b>'+val.total_price+'&nbsp;<span class="old-price x12"><strike>&#8377;&nbsp;'+ (parseFloat(val.total_price)+parseFloat(val.discount)) +'</strike></span></div>';
+                if (parseFloat(val.total_price_comp) < 2000){
+                    html += '											<div class="job-amount-dealer x12 red-text"><b>Dealer : <strike>&#8377;&nbsp;'+ (parseFloat(val.total_price_comp) + 200) +'</b></strike></div>';
+                }else{
+                    html += '											<div class="job-amount-dealer x12 red-text"><b>Dealer : <strike>&#8377;&nbsp;'+val.total_price_comp+'</b></strike></div>';
+                }
+
             }
             if (val.time == "" || val.time == "0" || val.time =="NA"){
             }else{
@@ -1334,7 +1350,7 @@ var Global = {
             html += '							<div class="row hide-on-large-only">';
             html += '								<div class="s12 m12 l12 job-prices job-prices-mobile">';
             if (val.price_active == "1"){
-                html += '											<div class="job-amount"><b>&#8377;&nbsp;</b>'+val.total_price+'</div>';
+                html += '											<div class="job-amount"><b>&#8377;&nbsp;</b>'+val.total_price+'&nbsp;<span class="old-price x12"><strike>&#8377;&nbsp;'+ (parseFloat(val.total_price)+parseFloat(val.discount)) +'</strike></span></div>';
             }
             if (val.time == "" || val.time == "0" || val.time =="NA"){
             }else{
@@ -1446,7 +1462,11 @@ var Global = {
                     html += '											<td>'+item_no+'</td>';
                     html += '											<td>'+val.default_comp[i].name+'</td>';
                     html += '											<td>'+val.default_comp[i].action+'</td>';
+                    if (val.default_comp[i].type == "Labour"){
+                    html += '											<td>'+(parseFloat(val.default_comp[i].price)/1.18)+'</td>';
+                    }else{
                     html += '											<td>'+val.default_comp[i].price+'</td>';
+                    }
                     html += '										</tr>';
                 }
                 html += '										</tbody>';
