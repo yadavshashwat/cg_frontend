@@ -7962,6 +7962,7 @@ var Global = {
             }
             j += 1
         });
+        
         if (data['user_type_control']){
             $('#name').val('');
             $('#telephone').val('');
