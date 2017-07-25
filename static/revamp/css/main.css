@@ -711,7 +711,9 @@ font-weight: 700;
     /*border-image: url("../img/by-line.png") 30 round!important;;*/
 /*}*/
 
-
+#new-booking .delete-checks{
+    cursor: pointer;
+}
 #service-detail .list-service{
     /*margin: 10px 70px;*/
     text-align: left;

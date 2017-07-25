@@ -56,6 +56,7 @@
                         <li class ="name"><a><span class="uname"></span></a></li>
                         <li class ="new-lead-button"><a><i class="fa fa-leaf"></i>&nbsp;&nbsp;New Lead</a></li>
                         <li class ="new-booking-button"><a><i class="fa fa-car"></i>&nbsp;/&nbsp;<i class="fa fa-motorcycle"></i>&nbsp;&nbsp;New Job</a></li>
+                        <li class ="new-inspection-button"><a><i class="fa fa-check-circle-o"></i>&nbsp;&nbsp;New Inspection</a></li>
                         <li class ="lead-button"><a><i class="fa fa-pagelines "></i>&nbsp;&nbsp;Leads</a></li>
                         <li class ="booking-button"><a><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;Jobs</a></li>
                         <li class ="escalation-button"><a><i class="fa fa-fire-extinguisher"></i>&nbsp;&nbsp;Escalations</a></li>
@@ -74,6 +75,7 @@
                             <li class ="name"><a><span class="uname"></span></a></li>
                             <li class ="new-lead-button"><a><i class="fa fa-leaf"></i>&nbsp;&nbsp;New Lead</a></li>
                             <li class ="new-booking-button"><a><i class="fa fa-car"></i>&nbsp;&nbsp;<i class="fa fa-motorcycle"></i>&nbsp;&nbsp;New Job</a></li>
+                            <li class ="new-inspection-button"><a><i class="fa fa-check-circle-o"></i>&nbsp;&nbsp;New Inspection</a></li>
                             <li class ="lead-button"><a><i class="fa fa-pagelines "></i>&nbsp;&nbsp;Leads</a></li>
                             <li class ="booking-button"><a><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;Jobs</a></li>
                             <li class ="escalation-button"><a><i class="fa fa-fire-extinguisher"></i>&nbsp;&nbsp;Escalations</a></li>
@@ -639,22 +641,6 @@
 
     </section>
     <section id="new-booking" class="invisible page-section">
-        <!--<div class="row header-booking staff-button-row">-->
-        <!--<div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover book-btn selected">-->
-        <!--Booking-->
-        <!--</div>-->
-        <!--<div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover lead-btn">-->
-        <!--Lead-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row header-booking agent-button-row">-->
-        <!--<div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover book-btn selected">-->
-        <!--Booking-->
-        <!--</div>-->
-        <!--<div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover lead-btn">-->
-        <!--Lead-->
-        <!--</div>-->
-        <!--</div>-->
         <div class="container-fluid">
             <div class="row">
                 <div class="row booking-add visible">
@@ -704,14 +690,14 @@
                                 <!--</div>-->
                                 <!--</div>-->
                                 <br>
-                                <div class="row new-lead-hide-row">
+                                <div class="row new-lead-hide-row new-inspect-show-row">
                                     <div class="input-field col s12">
                                         <i class="material-icons prefix">receipt</i>
                                         <input id="reg_number" type="text" class="validate" style="text-transform:uppercase" required="" aria-required="true">
                                         <label for="reg_number" data-error="Required">Registration Numbers</label>
                                     </div>
                                 </div>
-                                <div class="row new-lead-hide-row">
+                                <div class="row new-lead-hide-row new-inspect-show-row">
                                     <div class="input-field col s12">
                                         <i class="material-icons prefix">av_timer</i>
                                         <input id="odo_number" type="number" class="validate" style="text-transform:uppercase" required="" aria-required="true">
@@ -965,7 +951,30 @@
                         </div>
 
                     </div>
-                    <div class="date-time-select card">
+                    <div class="checkup-select card">
+                        <div class="row">
+                            <div class="col l12 m12 s12 box-header">
+                                <h3>Check Up Select</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 m12 l6 centered-text">
+                                    <button class="waves-effect waves-light btn cg-primary page-wide btn-checkup Monsoon" data-type="Monsoon" type="submit" name="action">Monsoon Check Up
+                                        <i class="material-icons right">add</i>
+                                    </button>
+                                </div>
+                                <div class="col s12 m12 l6 centered-text">
+                                    <button class="waves-effect waves-light btn cg-primary page-wide  btn-checkup General" data-type="General" type="submit" name="action">General Check Up
+                                        <i class="material-icons right">add</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row checkups">
+
+                        </div>
+                    </div>
+
+                    <div class="date-time-select card new-inspect-hide-row">
                         <div class="row">
                             <div class="col l12 m12 s12 box-header">
                                 <h3><span class="booking-lead-2">Job</span>  Date & Time</h3>
@@ -2546,7 +2555,15 @@
                             </button>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col l12 s12 m12 centered-text">
+                            <button class="waves-effect waves-light btn cg-primary btn-update-share-report page-wide" type="submit" name="action">Share Report
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="staff-button-row">
                     <div class="row">
                         <div class="col l12 s12 m12 centered-text">
@@ -2555,6 +2572,14 @@
                             </button>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col l12 s12 m12 centered-text">
+                            <button class="waves-effect waves-light btn cg-primary btn-update-share-report page-wide" type="submit" name="action">Share Report
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>

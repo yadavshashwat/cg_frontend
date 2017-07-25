@@ -82,6 +82,7 @@ var Commons = {
         'send_booking_bill_estimate':'/api/send_booking_bill_estimate/',
         'add_delete_payment_bill':'/api/add_delete_payment_bill/',
         'call_customer':'/api/call_customer/',
+        'generate_send_report':'/api/generate_send_report/',
 
 
     },

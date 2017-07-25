@@ -468,6 +468,8 @@ var Global = {
             }else if (sub_page_1 == "newlead"){
                 opennewlead()
                 // $('.navbar .new-lead-button').click()
+            }else if (sub_page_1 == "newinspect") {
+                opennewinspect()
             }else if (sub_page_1 == "campaign") {
                 opencampaign()
                 // $('.navbar .campaign-button').click()
@@ -1867,6 +1869,13 @@ var Global = {
         })
         $('#customer-detail .btn-update-cust').click(update_cust);
         $('#customer-detail .btn-update-cust2').click(update_cust2);
+
+        $('#customer-detail .btn-update-share-report').click(function(){
+            // update_cust2()
+            bid = $('#customer-detail #booking_id').attr('booking_id');
+            Commons.ajaxData('generate_send_report', {b_id: bid}, "post", _this, _this.loadShareReport,null, '.loading-pane');
+
+        });
 
 
         $('#customer-detail').on('click','.btn-modifypayement',function(){
@@ -4186,6 +4195,12 @@ var Global = {
             $('#bill-details').hide()
             $('#settlement-details').hide()
             $('.new-lead-hide-row').show()
+            $('.new-inspect-hide-row').show()
+            $('#new-booking .service-select').show()
+            $('#new-booking .checkup-select').hide()
+            $('#new-booking .checkup-select .checkups').html('')
+            $('#new-booking .checkup-select .btn-checkup').removeClass('disabled')
+
             callbrands()
             call_category()
 
@@ -4241,6 +4256,12 @@ var Global = {
             $('#settlement-details').hide()
 
             $('.new-lead-hide-row').hide()
+            $('.new-inspect-hide-row').show()
+            $('#new-booking .service-select').show()
+            $('#new-booking .checkup-select').hide()
+            $('#new-booking .checkup-select .checkups').html('')
+            $('#new-booking .checkup-select .btn-checkup').removeClass('disabled')
+
             callbrands()
             call_category()
 
@@ -4272,7 +4293,58 @@ var Global = {
 
         $('.navbar .new-lead-button').click(opennewlead);
 
+        var opennewinspect = function(){
+            $('.navbar li').removeClass('selected')
+            $('.navbar .new-inspection-button').addClass('selected')
+            $('#booking-details').hide()
+            $('#bookings').hide()
+            $('#user-details').hide()
+            $('#coupon-details').hide()
+            $('#new-booking').show()
+            $('#subscription-details').hide()
+            $('#campaign-details').hide()
+            $('#analytics').hide()
+            $('#expense-details').hide()
+            $('#bill-details').hide()
+            $('#settlement-details').hide()
+            $('.new-lead-hide-row').hide()
+            $('.new-inspect-hide-row').hide()
+            $('.new-inspect-show-row').show()
+            $('#new-booking .service-select').hide()
+            $('#new-booking .checkup-select').show()
+            $('#new-booking .checkup-select .checkups').html('')
+            $('#new-booking .checkup-select .btn-checkup').removeClass('disabled')
 
+            callbrands()
+            call_category()
+
+            container = $('#new-booking .source-list')
+            container.html('')
+            html = ""
+
+            html += '<div class="input-field source-admin" id="source-booking">'
+            // html += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="source" type="text"   value ="' + val.source + '"class="validate"><label for="source">Source</label></div>'
+            html += '<select class="browser-default">'
+            html += '<option value="" selected disabled>Source</option>'
+            sourcelen = SOURCES.length;
+            for (i = 0; i < sourcelen; i++) {
+                html += '<option value="'+SOURCES[i]+'">'+SOURCES[i]+'</option>'
+            }
+            html +='</select>'
+            container.html(html)
+            $('#new-booking  .booking-lead').text("Inspection")
+            $('#new-booking  .booking-lead-2').text("Inspection Follow Up")
+            $('#new-booking  .lead-time').hide()
+            $('#new-booking  .booking-time').show()
+            $('#new-booking  .send-reminder').hide()
+            document.getElementById("send_details").checked = false;
+            var path = window.location.pathname.split('/')
+            var new_path = path.slice(0,2).join('/')+'/newinspect/'
+            history.pushState({},'',new_path)
+
+        };
+
+        $('.navbar .new-inspection-button').click(opennewinspect);
         $('#new-booking .header-booking .book-btn').click(function(){
             $('#new-booking  .lead-btn').removeClass('selected')
             $('#new-booking  .book-btn:hover').addClass('selected')
@@ -4292,12 +4364,74 @@ var Global = {
             // document.getElementById('send_details').removeAttribute("checked", "");
             $('#new-booking  .send-reminder').hide()
         });
+        var num_add_jobs = 2
 
         $('#new-booking .btn-addadditional').click(function(){
             var row_to_copy = $('#new-booking .job-row.to-copy').clone().removeClass('to-copy').removeClass('invisible');
+            row_to_copy.find('#job_name').attr('id','job_name_'+num_add_jobs)
+            row_to_copy.find('label').attr('for','job_name_'+num_add_jobs)
+
+            // row_to_copy.find('#job_name').attr("id") = "job_name"+num_add_jobs
             container_parent = $('#new-booking .add-jobs-list')
-            row_to_copy.appendTo(container_parent);
+
+            // html = ""
+            // html = container_parent.html()
+            // html += '<div class="job-row"><div class="input-field col s11 job-summary-name" ><i class="material-icons prefix">report_problem</i><input id="job_name'+num_add_jobs+'" type="text" class=""><label for="job_name'+num_add_jobs+'">Additional Request</label></div><div class="col s1 centered-text"><i class="fa fa-trash-o delete-job x25"></i> </div></div>'
+            num_add_jobs = num_add_jobs + 1
+            // container_parent.html(html);
+            container_parent.append(row_to_copy)
         });
+        var num_check_total = 0
+        $('#new-booking').on('click','.btn-checkup',function(){
+            checkup_type = $(this).attr('data-type')
+            // console.log(checkup_type)
+            $(this).addClass('disabled')
+
+            monsoon = ['Tyre Pressure','Tyre Tread Depth','Battery Water Level','Terminal Greasing','Battery Voltage','Underbody Damage', 'Underbody Rusting','Wiper Motors','Wiper Blades', 'Indicators','Headlamps Bulb','Fog Lights']
+            general = ['Hinge Noises','Scratches and Dents','Indicators','Front Light','Rear Lights','Horn','Power Windows','Cluster Lights','Tyre Condition','Wiper Assembly','Brakes','Clutch Check/ Gear Check','AC (Heating/ Cooling) Check','Battery Check','Suspension','WA-WB']
+            if (checkup_type == "Monsoon"){
+              check_up_list = monsoon
+            }else if (checkup_type == "General"){
+              check_up_list = general
+            }
+            no_checks = check_up_list.length
+            container = $('#new-booking .checkup-select .checkups')
+            html = container.html()
+            html += '<div class="row check-type-list" data-class="'+ checkup_type +'">'
+            html += '<div class="col s11 m11 l11"><b><span class="check-type x25">'+checkup_type+' ' + " Check Up" + '<span></b></div>'
+            html += '<div class="col s1 m1 l1 centered-text x20">'
+            html += '<i class="fa fa-trash-o delete-checks"></i>'
+            html += '</div><br>'
+
+            for (var i=0; i < no_checks;i++ ){
+                html += '<div class="row checkup">'
+                html += '<div class="col s6 m6 l6">'
+                html += '<span class="checkname x20">'+check_up_list[i]+'</span>'
+                html += '</div>'
+                html += '<div class="col s3 m3 l3 centered-text">'
+                html += '<input type="radio" name="groupok' + (i+ num_check_total  + 1) + '" class="ok" id="ok-' + (i + num_check_total + 1) + '" /><label for="ok-' + (i+ num_check_total  + 1) + '">Ok</label>'
+                html += '</div>'
+                html += '<div class="col s3 m3 l3 centered-text">'
+                html += '<input type="radio" name="groupok' + (i + num_check_total  + 1) + '" class="notok" id="notok-' + (i + num_check_total + 1) + '" /><label for="notok-' + (i+ num_check_total  + 1) + '">Not Ok</label>'
+                html+= '</div>'
+                html += '</div>'
+                html +='<hr>'
+            }
+            html += '</div>'
+            // console.log(html)
+            // console.log(html)
+            container.html(html)
+            num_check_total = i
+        });
+
+        $('#new-booking .checkup-select .checkups').on('click','.delete-checks',function(){
+            datatype = $(this).closest('.check-type-list').attr('data-class')
+            // console.log(datatype)
+            $(this).closest('.check-type-list').remove()
+            console.log(datatype)
+            alfa = $('#new-booking').find('.btn-checkup'+'.'+datatype).removeClass('disabled')
+                // console.log(alfa.html)
+        })
 
         $('#new-booking .add-jobs-list').on('click','.delete-job',function(){
             $(this).closest('.job-row').remove()
@@ -4531,7 +4665,7 @@ var Global = {
             var paid_amt = "0"
             var price_total = TOTAL_PRICE_NEW_BOOKING;
             var time = $('#time-slot').find('select').val();
-            if ($('#new-booking .booking-lead').text() =="Job" ){
+            if ($('#new-booking .booking-lead').text() =="Job" || $('#new-booking .booking-lead').text() =="Inspection" ){
                 var flag = "True"
             }else{
                 var flag= "False"
@@ -4544,11 +4678,37 @@ var Global = {
                 send_mess ="0"
             }
             error = 0
-            if(TOTAL_PRICE_NEW_BOOKING<= 0 ){
-                error = 1
-                $('#new-booking .category-select').find('select').addClass('invalid-select-box')
-                $('#new-booking .service-select').find('select').addClass('invalid-select-box')
-                console.log('1')
+            if ($('#new-booking .booking-lead').text() =="Inspection"){
+                CURRENT_CART_NEW_BOOKING = [{"action":"Labour",
+                    "category":"Labour",
+                    "name":"Inspection",
+                    "price":"0.0",
+                    "price_comp":"400.0",
+                    "quantity":"1",
+                    "settlement_cat":"Labour",
+                    "type":"Labour",
+                    "unit_price":"0"}]
+                    var today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth()+1; //January is 0!
+
+                    var yyyy = today.getFullYear();
+                    if(dd<10){
+                        dd='0'+dd;
+                    }
+                    if(mm<10){
+                        mm='0'+mm;
+                    }
+                    var date = dd+'-'+mm+'-'+yyyy;
+                    time = "09:30AM - 11:30AM"
+            }else{
+                if(TOTAL_PRICE_NEW_BOOKING<= 0 ){
+                    error = 1
+                    $('#new-booking .category-select').find('select').addClass('invalid-select-box')
+                    $('#new-booking .service-select').find('select').addClass('invalid-select-box')
+                    console.log('1')
+                }
+
             }
             if(name==""){
                 $('#name').addClass("invalid");
@@ -4622,16 +4782,37 @@ var Global = {
 
                 }
             }
+            if ($('#new-booking .booking-lead').text() =="Inspection"){
+                ALL_JOBS_NEW_BOOKING_LIST = []
+                $('#new-booking .checkup-select .checkups .checkup').each(function(){
+                    name_job = $(this).find('.checkname').text()
+                    console.log(name_job)
+                    price = 0
 
-            $('#new-booking .add-jobs-list .job-row').each(function(){
-                name_job = $(this).find('.job-summary-name input').val()
-                // console.log(name_job)
-                price = 0
-                if (name_job != "" && name_job != " "){
-                    obj = {"Job":name_job,"Price":price,"Category":"NA","Type":"Request"}
+                    preok =  $(this).find('.ok').is(':checked')
+                    prenotok =  $(this).find('.notok').is(':checked')
+                    obj = {"Job":name_job,"Price":price,"Category":"NA","Preok":preok,"Prenotok":prenotok,"Postok":false,"Postnotok":false,"Type":"Request"}
                     ALL_JOBS_NEW_BOOKING_LIST.push(obj)
-                }
-            });
+
+                });
+                console.log(ALL_JOBS_NEW_BOOKING)
+                JOBS_SUMMARY_NEW_BOOKING = [{'category':'Servicing','job_name':'Inspection','price_total':'0','price_part':'0','price_labour':'0','price_discount':'0',"doorstep":'1'}]
+
+
+            }else{
+                $('#new-booking .add-jobs-list .job-row').each(function(){
+                    name_job = $(this).find('.job-summary-name input').val()
+                    // console.log(name_job)
+                    price = 0
+                    if (name_job != "" && name_job != " "){
+                        obj = {"Job":name_job,"Price":price,"Category":"NA","Type":"Request"}
+                        ALL_JOBS_NEW_BOOKING_LIST.push(obj)
+                    }
+                });
+
+
+            }
+
 
             if(error==1){
                 console.log("didnt work")
@@ -7962,7 +8143,7 @@ var Global = {
             }
             j += 1
         });
-        
+
         if (data['user_type_control']){
             $('#name').val('');
             $('#telephone').val('');
@@ -7982,7 +8163,8 @@ var Global = {
             $('#select-make').find('select').val('');
             $('#select-model').find('select').val('');
             $('#source-booking').find('select').val('');
-
+            $('#new-booking .checkup-select .checkups').html('')
+            $('#new-booking .checkup-select .btn-checkup').removeClass('disabled')
 
         }
         Materialize.updateTextFields();
@@ -9566,6 +9748,9 @@ var Global = {
             }
         });
         container.html(html);
+    },
+    loadShareReport:function(data){
+        alert('Report Shared!')
     }
 
 };
