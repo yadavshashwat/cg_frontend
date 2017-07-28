@@ -70,7 +70,7 @@ var PICK_DROP = 0;
 var SHOW_ESTIMATE = 0;
 var COUPON_CODE = "";
 
-
+var ADDITIONAL_REQUESTS_SERVICE = ['Clutch','Brakes','Alignment and Balancing','Fuel Efficiency','Electrical','Battery','Dents/Scratches','AC']
 var COMPLETION_PATH = ""
 
 var logoMap = {
@@ -83,7 +83,7 @@ var logoMap = {
     'Scanning':'<i class="cg-icon cg-icon-card icon-cg-scan x50"></i>',
     'Brake Pad/Disc Pad Replacement':'<i class="cg-icon cg-icon-card icon-cg-brake x50"></i>',
     'Clutch Check':'<i class="cg-icon cg-icon-card icon-cg-clutch x50"></i>',
-    'Battery Charging/Replacement':'<i class="cg-icon cg-icon-card icon-cg-battery x50"></i>',
+    'Battery Charging/Replacement':'<i class="cg-icon cg-icon-card icon-battery x50"></i>',
     'Other Diagnosis':'<i class="cg-icon cg-icon-card icon-cg-repair x50"></i>',
     'Complete Car Detailing':'<i class="cg-icon cg-icon-card icon-cg-exterior x50"></i>',
     'Interior Dry Cleaning':'<i class="cg-icon cg-icon-card icon-cg-dryclean x50"></i>',
@@ -92,7 +92,7 @@ var logoMap = {
     'Underbody Anti Rust Treatment':'<i class="cg-icon cg-icon-card icon-cg-underbody x50"></i>',
     'Exterior Car Washing':'<i class="cg-icon cg-icon-card icon-cg-wash x50"></i>',
     'Flat Tyre':'<i class="cg-icon cg-icon-card icon-cg-tyre2 x50"></i>',
-    'Battery Jump Start':'<i class="cg-icon cg-icon-card icon-cg-battery x50"></i>',
+    'Battery Jump Start':'<i class="cg-icon cg-icon-card icon-battery x50"></i>',
     'Towing':'<i class="cg-icon cg-icon-card icon-cg-tow x50"></i>',
     'Minor Repairs':'<i class="cg-icon cg-icon-card icon-cg-repair x50"></i>',
     'Key Lockout':'<i class="cg-icon cg-icon-card icon-cg-key x50"></i>',
@@ -113,6 +113,8 @@ var logoMap = {
     'Door Rear Right':'<img class="" src="/../../static/revamp/img/Panel/Door Rear Right.png">',
     'Fender Left':'<img class="" src="/../../static/revamp/img/Panel/Fender Left.png">',
     'Fender Right':'<img class="" src="/../../static/revamp/img/Panel/Fender Rear.png">',
+    'Bonnet':'<img class="" src="/../../static/revamp/img/Panel/Bonnet.png">',
+    'Dicky':'<img class="" src="/../../static/revamp/img/Panel/Dicky.png">',
     'Bumper Front':'<img class="" src="/../../static/revamp/img/Panel/Bumper Front.png">',
     'Front Bumper':'<img class="" src="/../../static/revamp/img/Panel/Front Bumper.png">',
     'Quarter Panel Left':'<img class="" src="/../../static/revamp/img/Panel/Quarter Panel Left.png">',
@@ -583,6 +585,11 @@ var Global = {
             $('#cart .cart-coupon .discount-link').hide();
             $('#cart .cart-coupon .coupon-box').show();
         });
+
+
+
+
+        
 
         // adding item cart
         $('#jobs').on('click','.job .book-btn',function(e){

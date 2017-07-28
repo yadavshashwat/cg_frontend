@@ -65,8 +65,7 @@ $(document).ready(function() {
         $('.admin-page .navbar .logo-white').show()
 
     }
-
-
+    
 });
 
 $(window).resize(function() {
@@ -139,6 +138,8 @@ $(window).ready(function() {
         $('#overlay').hide();
     }, 1000);
 });
+
+
 
 $(".button-collapse").sideNav();
 
@@ -3291,6 +3292,7 @@ var Global = {
                 $('#agent_bill_stax').val(CGHARYANA_STAX_NO)
                 $('#agent_bill_cin').val(CGHARYANA_CIN_NO)
                 $('#agent_bill_gst').val(CGHARYANA_GST_NO)
+                $('#cust_bill_state').val("Haryana")
 
                 STATE_BILL = CGHARYANA_STATE
                 Commons.ajaxData('get_all_taxes', {state:STATE_BILL}, "get", _this, _this.loadTaxUpdate,null, '.loading-pane');
@@ -3303,6 +3305,7 @@ var Global = {
                 $('#agent_bill_stax').val(CGDELHI_STAX_NO)
                 $('#agent_bill_cin').val(CGDELHI_CIN_NO)
                 $('#agent_bill_gst').val(CGDELHI_GST_NO)
+                $('#cust_bill_state').val("Delhi")
                 STATE_BILL = CGDELHI_STATE
                 Commons.ajaxData('get_all_taxes', {state:STATE_BILL}, "get", _this, _this.loadTaxUpdate,null, '.loading-pane');
                 setTimeout(function() {             $('#bill-table').click()       }, 1000);
@@ -3723,6 +3726,8 @@ var Global = {
             cust_address            = $('#bill-detail #cust_bill_address').val()
             cust_locality           = $('#bill-detail #cust_bill_locality').val()
             cust_city               = $('#bill-detail #cust_bill_city').val()
+            cust_gst               = $('#bill-detail #cust_gst_number').val()
+
             cust_veh_reg            = $('#bill-detail #cust_bill_reg').val()
             cust_vehicle            = $('#bill-detail #cust_bill_vehicle').val()
             service_items           = JSON.stringify(CURRENT_BILL_CART)
@@ -3788,7 +3793,8 @@ var Global = {
                 vehicle: cust_vehicle,
                 service_items: service_items,
                 invoice_number: invoice_number,
-                cust_number : cust_number
+                cust_number : cust_number,
+                cust_gst_number: cust_gst
             }
             // console.log("Point 1")
             // Commons.ajaxData('generate_bill', params, "get", _this, _this.loadBillGenerated,null, '.loading-pane');
@@ -8953,6 +8959,7 @@ var Global = {
             $('#bill-detail #cust_bill_vehicle').val(val.cust_make + ' ' + val.cust_model)
             $('#bill-detail #cust_bill_reg').val(val.cust_regnumber)
             $('#bill-detail #cust_bill_reco').val(val.customer_remarks)
+            $('#bill-detail #cust_gst_number').val(val.cust_gst_number)
 
             data_id = val.id
 
@@ -9183,6 +9190,7 @@ var Global = {
                 $('#bill-detail #cust_bill_reg').val(val.bill_reg_number)
                 $('#bill-detail #cust_bill_reco').val(val.bill_notes)
                 $('#bill-detail #cust_bill_state').val(val.bill_supply_state)
+                $('#bill-detail #cust_gst_number').val(val.bill_cust_gst_no)
 
                 if (val.bill_clickgarage){
                     $('#bill_type').find('select').val(val.bill_owner)

@@ -728,6 +728,55 @@ font-weight: 700;
     font-size: 15px;
     color: grey;
 }
+
+#additional_services{
+    position: absolute;
+    width: 75%;
+    z-index: 45;
+    top: 20%;
+    left: 50%;
+    margin: 0 0 0 -37.5%;
+}
+.order-page .add-service-card{
+    height: 80px;
+    text-align: center;
+    /*padding: 20px;*/
+    font-size: 16px;
+    font-weight: 700;
+    padding: 5px 5px;
+    cursor: pointer;
+
+}
+#additional_services .add-service-list{
+    padding: 10px 10px;
+}
+#additional_services .skip-add{
+        width: 100%;
+    float: left;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 18px;
+    cursor: pointer;
+}
+#additional_services .add-request-header{
+    font-size: 20px;
+    font-weight: 700;
+
+
+}
+.order-page .add-service-card .add-service-name{
+    line-height: 80px;
+    /*text-align: left;*/
+}
+.order-page .add-service-card .name-div{
+    /*line-height: 80px;*/
+    text-align: left;
+}
+
+.order-page .add-service-card .image-div{
+    line-height: 80px;
+    /*text-align: left;*/
+}
 #service-detail .overlay-pat3{
     background: url(../img/tools-pat.png);
     background-size:300px auto;
@@ -1001,6 +1050,10 @@ line-height:55px!important;
 
 #bill-detail .pending-btn{
     line-height: 50px;
+}
+
+#bill-detail .items-list{
+    overflow: scroll;
 }
 #customer-detail .pending-btn{
     line-height: 50px;
