@@ -107,14 +107,30 @@ $(document).ready(function(){
 $(document).ready(function(){
     var a = $(window).height();
     var b = $('.home-form').height();
-    if (a>=b){
-        $("#home").height(a - 0)
-        $('#background img').height(a)
+    var viewportWidth = $(window).width();
+    // var btn_height = $('#home .infodiv').height();
+    // console.log(btn_height)
+    console.log(b)
+    console.log(a)
+    if (viewportWidth <= 992){
+          $("#home").height(200 + a)
+        // console.log('1')
     }else{
-        $("#home").height(b + 50)
-        $('#background img').height(b + 50)
+        if (a>=b){
+        // console.log('2')
+
+            $("#home").height(a - 0)
+            $('#background img').height(a)
+        }else{
+        // console.log('2')
+
+            $("#home").height(b + 50)
+            $('#background img').height(b + 50)
+        }
 
     }
+
+
 });
 
 // materialize css
@@ -675,27 +691,27 @@ var Global = {
             timestamp =  Date.now();
                         Commons.ajaxData('send_lead', {
                             name       : name
-                ,number     : number
-                ,email      : "--"
-                ,reg_number : "--"
-                ,address    : "--"
-                ,locality   : "--"
-                ,city       : city
-                ,order_list : JSON.stringify(CURRENT_CART)
-                ,make       : make
-                ,model      : model
-                ,fuel       : fuel
-                ,veh_type   : veh_type
-                ,date       : date
-                ,time       : "--"
-                // ,comment    : service + ', '+ additional
-                ,jobsummary_list : JSON.stringify(ALL_JOBS_LIST)
-                ,is_paid    : is_paid
-                ,paid_amt   : paid_amt
-                ,coupon     : coupon
-                ,price_total: 0
-                ,source     : source_type
-                ,int_summary :JSON.stringify(JOBS_SUMMARY_TOTAL)}, "post", _this, _this.loadPlaced,null, '.loading-pane');
+                            ,number     : number
+                            ,email      : "--"
+                            ,reg_number : "--"
+                            ,address    : "--"
+                            ,locality   : "--"
+                            ,city       : city
+                            ,order_list : JSON.stringify(CURRENT_CART)
+                            ,make       : make
+                            ,model      : model
+                            ,fuel       : fuel
+                            ,veh_type   : veh_type
+                            ,date       : date
+                            ,time       : "--"
+                            // ,comment    : service + ', '+ additional
+                            ,jobsummary_list : JSON.stringify(ALL_JOBS_LIST)
+                            ,is_paid    : is_paid
+                            ,paid_amt   : paid_amt
+                            ,coupon     : coupon
+                            ,price_total: 0
+                            ,source     : source_type
+                            ,int_summary :JSON.stringify(JOBS_SUMMARY_TOTAL)}, "post", _this, _this.loadPlaced,null, '.loading-pane');
 
             // Commons.ajaxData('get_location', {location_id: locality}, "get", _this, _this.loadLocation);
             // Commons.ajaxData('post_lead', {firstname       : fname,

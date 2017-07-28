@@ -657,6 +657,7 @@ font-weight: 700;
     margin-left: auto;
     margin-right: auto;
     height:160px;
+    max-width: 100%;
 }
 #service-detail .service-step{
     width: 100%;
