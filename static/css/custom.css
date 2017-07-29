@@ -18,7 +18,9 @@
 }
 
 
-
+.fr{
+	float: right;
+}
 /* Circle */
 .icon-button span {
 	border-radius: 0;

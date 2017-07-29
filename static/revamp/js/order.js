@@ -70,7 +70,7 @@ var PICK_DROP = 0;
 var SHOW_ESTIMATE = 0;
 var COUPON_CODE = "";
 
-var ADDITIONAL_REQUESTS_SERVICE = ['Clutch','Brakes','Alignment and Balancing','Fuel Efficiency','Electrical','Battery','Dents/Scratches','AC']
+var ADDITIONAL_REQUESTS_SERVICE = ['Clutch','Brakes','Allignment and Balancing','Fuel Efficiency','Electrical','Battery','Dents/Scratches','AC']
 var COMPLETION_PATH = ""
 
 var logoMap = {
@@ -122,6 +122,19 @@ var logoMap = {
     'Running Board Left':'<img class="" src="/../../static/revamp/img/Panel/Running Board Left.png">',
     'Running Board Right':'<img class="" src="/../../static/revamp/img/Panel/Running Board Right.png">',
     'Full Body':'<img class="" src="/../../static/revamp/img/Panel/Full Body.png">',
+    
+    'Clutch':'<i class="cg-icon cg-icon-card icon-cg-clutch x50"></i>',
+    'Brakes':'<i class="cg-icon cg-icon-card icon-cg-brake x50"></i>',
+    'AC':'<i class="cg-icon cg-icon-card icon-cg-accheck x50"></i>',
+    'Allignment and Balancing':'<i class="cg-icon cg-icon-card icon-cg-alignment x50"></i>',
+    'Fuel Efficiency':'<i class="cg-icon cg-icon-card icon-cg-scan x50"></i>',
+    'Electrical':'<i class="cg-icon cg-icon-card icon-cg-spark x50"></i>',
+    'Battery':'<i class="cg-icon cg-icon-card icon-battery x50"></i>',
+    'Dents/Scratches':'<i class="cg-icon cg-icon-card icon-cg-repair x50"></i>',
+
+
+
+
 };
 
 // $(window).on("popstate", function () {
@@ -246,7 +259,6 @@ var Global = {
             if (typeof(model) != "undefined") {
                fuel_start = model.indexOf("(")
                fuel_end = model.indexOf(")")
-
                var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
                model = model.substr(0, fuel_start - 1)
                 // console.log(fuel_start)
@@ -280,6 +292,22 @@ var Global = {
 
         // loading service categories based on car and bike
         $(document).ready(function() {
+            container = $('#additional_services .add-service-list')
+            container.html('')
+            html_add = ''
+            len_add_jobs = ADDITIONAL_REQUESTS_SERVICE.length
+
+            for (var p=0;p<len_add_jobs;p++){
+                html_add += '<div class="col s12 m6 l6 cardhover add-service-card card no-border-radius">'
+                html_add += '<div class="col l4 m4 s4 image-div">'
+                html_add +=  logoMap[ADDITIONAL_REQUESTS_SERVICE[p]]
+                html_add += '</div>'
+                html_add += '<div class="col l8 m8 s8 name-div"><span class="add-service-name">'
+                html_add += ADDITIONAL_REQUESTS_SERVICE[p]
+                html_add += '</span>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus"></i></div></div>'
+            }
+
+            container.html(html_add)
             cookie = local.load()
             vehicle_type_c = cookie['vehtype'];
             veh_make = cookie['vehmake'];
@@ -315,6 +343,7 @@ var Global = {
                 local.save('vehmake',name[0].replace("_", " "))
                 local.save('vehmodel',name[1].replace("_", " "))
                 local.save('vehfuel',name[2])
+                local.clearKey('additional_service')
             }
 
             $('#vehicle-name').text(name[0].replace("_", " ") + " " +name[1].replace("_", " "))
@@ -342,6 +371,7 @@ var Global = {
             if(service.length){
                 $('#services .service-card[data-class="'+service+'"]').click()
             }
+
             Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
         });
 
@@ -587,30 +617,86 @@ var Global = {
         });
 
 
-
-
-        
-
-        // adding item cart
-        $('#jobs').on('click','.job .book-btn',function(e){
-            var parent = $(this).closest('.job');
-            var newC = parent.attr('job-id');
-            var obj_cookie = local.load();
+    var addtocart = function(data_id){
+           var obj_cookie = local.load();
             var oldC = '';
             if(obj_cookie['cgcart']){
                 oldC = obj_cookie['cgcart'];
                 oldC += ','
             }
-            oldC += newC;
+            oldC += data_id;
             local.save('cgcart', oldC);
             // console.log(local.load('cgcart'))
             Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
+        }
+
+        // adding item cart
+        $('#jobs').on('click','.job .book-btn',function(e){
+            var parent = $(this).closest('.job');
+            var newC = parent.attr('job-id');
+            var service_name = parent.attr('service_name');
+            addtocart(newC)
             $(this).addClass('disabled')
             $(this).closest('.job').find('.remove-btn').show()
             $(this).find('.book-status').text('Booked')
             $(this).parent('.row').find('i').hide()
+            if (service_name == "Standard Service"){
+                $('#additional_services').show()
+                $('#cover2').show()
+            }else{
 
+            }
         });
+
+
+        $('#additional_services').on('click','.add-service-card',function() {
+            $(this).addClass('disabled')
+            $(this).find('i').removeClass('fa-plus').addClass('fa-minus')
+        })
+
+        $('#additional_services .skip-add').click(function(){
+            $('#additional_services').hide()
+            $('#cover2').hide()
+             $('#additional_services .add-service-list .add-service-card.disabled').each(function(){
+                 $(this).removeClass('disabled')
+                 $(this).find('i').addClass('fa-plus').removeClass('fa-minus')
+            });
+
+        })
+
+        $('#additional_services').on('click','.add-service-card.disabled',function() {
+            $(this).removeClass('disabled')
+            $(this).find('i').addClass('fa-plus').removeClass('fa-minus')
+
+        })
+
+
+        $('#additional_services .btn-add-additional-service').click(function(){
+            var obj_cookie = local.load();
+            // var additional_service = '';
+            var add_reqs = ''
+            if(obj_cookie['additional_service']){
+                add_reqs = obj_cookie['additional_service'];
+                add_reqs += ','
+            }
+
+         $('#additional_services .add-service-list .add-service-card.disabled').each(function(){
+                jobname = $(this).find('.add-service-name').text()
+                add_reqs += jobname
+                 add_reqs += ','
+                 // obj = {"Job":jobname,"Price":"0","Category":"Servicing","Type":"Request"}
+                // ALL_JOBS_LIST.push(obj)
+                 $(this).removeClass('disabled')
+                 $(this).find('i').addClass('fa-plus').removeClass('fa-minus')
+            });
+            $('#additional_services').hide()
+            $('#cover2').hide()
+            local.save('additional_service', add_reqs);
+            setTimeout(function() {
+                Commons.ajaxData('add_job_cart', {}, "get", _this, _this.loadCart);
+            }, 100);
+        });
+
 
         // Deleting item cart
         $('#cart').on('click','.cart-item .delete',function(e){
@@ -625,6 +711,12 @@ var Global = {
                 if (cookie_list[i] == delC){
                     cookie_list.splice(i,1);
                 }
+            }
+
+            job_name = parent.attr('service-name')
+            console.log(job_name)
+            if (job_name == "Standard Service"){
+                local.clearKey('additional_service')
             }
             cookie_list_string = cookie_list.join(',')
             local.save('cgcart', cookie_list_string);
@@ -650,6 +742,12 @@ var Global = {
                 if (cookie_list[i] == delC){
                     cookie_list.splice(i,1);
                 }
+            }
+
+
+            job_name = parent.attr('service_name')
+            if (job_name == "Standard Service"){
+                local.clearKey('additional_service')
             }
             cookie_list_string = cookie_list.join(',')
             local.save('cgcart', cookie_list_string);
@@ -1023,10 +1121,21 @@ var Global = {
         ALL_JOBS = '';
         ALL_JOBS_LIST = [];
         CURRENT_CART =[];
-
-
         JOBS_SUMMARY=[];
         SHOW_ESTIMATE = 0 ;
+
+        list_additional = [];
+        cookie_name = local.load()
+        if(cookie_name['additional_service']==null || cookie_name['additional_service']===false){
+            additional_list = '';
+        }else {
+            additional_list = cookie_name['additional_service'];
+
+        }
+        var list_additional = additional_list.split(',');
+        additional_list = additional_list.substr(0,additional_list.length -1 )
+        len_additional = list_additional.length;
+
         $.each(data['cart_details'], function(ix, val) {
             jsLen = val.default_comp.length;
             for (i = 0; i < jsLen; i++) {
@@ -1044,7 +1153,7 @@ var Global = {
             }
 
             JOBS_SUMMARY.push({'category':val.service_cat,'job_name':val.job_name,'price_total':val.total_price,'price_part':val.total_part,'price_labour':val.total_labour,'price_discount':val.total_discount,"doorstep":val.doorstep})
-            html +='<div class="cart-item" job-id="'+val.id+'">';
+            html +='<div class="cart-item" job-id="'+val.id+'" service-name="'+ val.job_name+'">';
             html +=' 								<div class="col s1 m1 l1">';
             html +=' 									<div class="delete x20">';
             html +=' 										<i class="fa fa-trash-o"></i>';
@@ -1054,9 +1163,12 @@ var Global = {
             html +=' 									<div class="item-name">';
             html += 									val.job_name
             html +=' 									</div>';
-            // html +=' 									<div class="item-desc">';
-            // html +=' 										Quotation Break-up';
-            // html +=' 									</div>';
+            if (val.job_name == "Standard Service" && len_additional > 1){
+                html +=' 									<div class="item-desc">';
+                html += '<b>Additional : </b>' + additional_list
+                html +=' 									</div>';
+
+            }
             html +=' 								</div>';
             html +=' 								<div class="col s3 m3 l3">';
             if (val.price_active == "1") {
@@ -1070,6 +1182,21 @@ var Global = {
             html +=' 								</div>';
             html +=' 							</div>'
         });
+        // console.log(len_additional)
+        // additional_list
+        for (var k=0;k<len_additional;k++){
+            if (list_additional[k] != ""){
+
+                obj = {'Job':list_additional[k],'Price':'0',"Category":"Servicing","Type":"Request"}
+                ALL_JOBS_LIST.push(obj)
+
+            }
+
+        }
+
+         cookie_name = local.load();
+
+
         JOBS_SUMMARY_TOTAL.push.apply(JOBS_SUMMARY_TOTAL,JOBS_SUMMARY);
         if (CURRENT_CART_COUP.length > 0 ){
             CURRENT_CART.push.apply(CURRENT_CART,CURRENT_CART_COUP)
@@ -1087,7 +1214,6 @@ var Global = {
         container2.html('');
         var html2 ='';
         $.each(data['cart_summary'], function(ix, val) {
-
             if (val.car_bike=="Car"){
                 if (val.cg_amount_workshop <= 1500 && val.cg_amount_workshop > 0){
                     PICK_DROP = 200
@@ -1222,7 +1348,7 @@ var Global = {
         container3.html('');
         var html3 ='';
         $.each(data['cart_details'], function(ix, val) {
-            html3 +='<div class="cart-item" job-id="'+val.id+'">';
+            html3 +='<div class="cart-item" job-id="'+val.id+'" service-name="'+ val.job_name+'">';
             // html3 +=' 								<div class="col s1 m1 l1">';
             // html3 +=' 									<div class="delete x25">';
             // html3 +=' 										<i class="fa fa-trash-o"></i>';
@@ -1232,6 +1358,12 @@ var Global = {
             html3 +=' 									<div class="item-name">';
             html3 += 									val.job_name
             html3 +=' 									</div>';
+            if (val.job_name == "Standard Service" && len_additional > 1){
+                html3 +=' 									<div class="item-desc">';
+                html3 += '<b>Additional : </b>' + additional_list
+                html3 +=' 									</div>';
+
+            }
             // html3 +=' 									<div class="item-desc">';
             // html3 +=' 										Quotation Break-up';
             // html3 +=' 									</div>';
@@ -1277,7 +1409,7 @@ var Global = {
         }
 
         $.each(data, function(ix, val) {
-            html += '<div class="job" job-id ='+val.id + '>';
+            html += '<div class="job" job-id ="'+val.id + '"service_name="'+val.job_name+'">';
             html += '<div class="card vertical-cards cardhover  service-name">';
             html += '<div class="row">';
             html += '<div class="col l12 s12 m12 service-content">';
@@ -1496,7 +1628,8 @@ var Global = {
         // $('#booking-details').hide()
         local.clearKey('cgcart')
         local.clearKey('coupon')
-        
+        local.clearKey('additional_service')
+
         // ga('require', 'ecommerce');
         // $.each(data['booking'], function(ix, val) {
         try{
