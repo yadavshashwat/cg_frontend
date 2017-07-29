@@ -1489,7 +1489,12 @@ var Global = {
             html += '							<div class="row hide-on-large-only">';
             html += '								<div class="s12 m12 l12 job-prices job-prices-mobile">';
             if (val.price_active == "1"){
-                html += '											<div class="job-amount"><b>&#8377;&nbsp;</b>'+val.total_price+'&nbsp;<span class="old-price x12"><strike>&#8377;&nbsp;'+ (parseFloat(val.total_price)+parseFloat(val.discount)) +'</strike></span></div>';
+                html += '											<div class="job-amount"><b>CG Price : &#8377;&nbsp;</b>'+val.total_price+'&nbsp;<span class="old-price x12"><strike>&#8377;&nbsp;'+ (parseFloat(val.total_price)+parseFloat(val.discount)) +'</strike></span></div>';
+                if (parseFloat(val.total_price_comp) < 2000){
+                    html += '											<div class="job-amount-dealer x12 red-text"><b>Market : <strike>&#8377;&nbsp;'+ (parseFloat(val.total_price_comp) + 200) +'</b></strike></div>';
+                }else{
+                    html += '											<div class="job-amount-dealer x12 red-text"><b>Market : <strike>&#8377;&nbsp;'+val.total_price_comp+'</b></strike></div>';
+                }
             }
             if (val.time == "" || val.time == "0" || val.time =="NA"){
             }else{
