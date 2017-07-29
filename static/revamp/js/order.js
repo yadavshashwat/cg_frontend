@@ -1590,7 +1590,8 @@ var Global = {
                 html += '											<th data-field="id">S.No.</th>';
                 html += '											<th data-field="part">Name</th>';
                 html += '											<th data-field="action">Item Action</th>';
-                html += '											<th data-field="price">Item Price</th>';
+                html += '											<th data-field="quantity">Quantity (L/Units)</th>';
+                html += '											<th data-field="price">Price</th>';
                 html += '										</tr>';
                 html += '										</thead>';
                 html += '										<tbody>';
@@ -1601,6 +1602,7 @@ var Global = {
                     html += '											<td>'+item_no+'</td>';
                     html += '											<td>'+val.default_comp[i].name+'</td>';
                     html += '											<td>'+val.default_comp[i].action+'</td>';
+                    html += '											<td>'+val.default_comp[i].quantity+'</td>';
                     if (val.default_comp[i].type == "Labour"){
                     html += '											<td>'+(parseFloat(val.default_comp[i].price)/1.18)+'</td>';
                     }else{
