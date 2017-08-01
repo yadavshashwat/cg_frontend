@@ -5428,13 +5428,21 @@ var Global = {
             html += '                </div>'
             if (LEAD_TYPE == "Booking"){
                 html += '                <div class="col l2 s3 m3 status-bar">'
+                html += '<div class="row">'
                 html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
-                html += '                </div></div>'
+                html += '                </div>'
+                html += '<div class="row">'
+                if(val.bill_generation_flag){
+                html += '                    <div class="bill-flag">Generated</div>'
+                }
+                html += '                </div>'
+                html += '                </div>'
+
+                html += '</div>'
             }else{
                 html += '                <div class="col l2 s3 m3 status-bar-2">'
                 html += '                    <div class="'+val.status.replace(" ","-")+' status">' + val.status + '</div>'
                 html += '                </div></div>'
-
             }
 
             // html += '<div class="col l2 hide-on-med-and-down feedback-btn-col">'

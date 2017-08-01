@@ -298,15 +298,16 @@ $('.close-more-info').click(function(){
 
 $('.book-now-info-button').click(function(){
     $('#info-div-adword').hide()
-    $('.infodiv').addClass('invisible');
-    var a = $('.home-form').removeClass('hide-on-med-and-down').addClass('visible').height();
-    $("#home").height(a + 30);
+    // $("#home").height(a + 30);
    $('#info-div-adword').hide()
-    $('#home .card-info').removeClass('card')
+    var viewportWidth = $(window).width();
+    if (viewportWidth <= 992){
+        $('#home .card-info').removeClass('card')
+        $('.home-form').removeClass('hide-on-med-and-down').addClass('visible')
+        $('.infodiv').addClass('invisible');
 
-    // var a = $('.home-form').removeClass('hide-on-med-and-down').addClass('visible').height();
-        $("#home").height(a + 30);
-            $('body,html').animate(
+    }
+        $('body,html').animate(
                 {'scrollTop':0},
                 500
             );
