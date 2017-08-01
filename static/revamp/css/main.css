@@ -91,6 +91,14 @@ body{background:#FFFFFF;padding-left:0px;padding-right:0px;font-family:"San Fran
     margin-left:-60px;
 }
 
+
+.grey-font{
+    color:grey;
+}
+
+.black-font{
+    color:black;
+}
 .loading-pane-2 .image-centre{text-align:center;position:fixed;top:50% !important;left:50%;}
 .loading-pane{z-index:96!important;}
 #overlay{position:fixed;background:#FFF;width:100%;height:100%;top:0;left:0;z-index:98!important;}
@@ -290,9 +298,19 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 #background{width:100%;position:fixed;top:0px;left:0px;z-index:-1;}
 #background img{width:100%;}
 #home.background-color-home{background:rgba(74,20,140,0.50)!important;}
+#home.background-color-home2{background:rgba(74,20,140,0)!important;}
 #home{background:rgba(74,20,140,0.65);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5F85C5C,endColorstr=#E5F85C5C)";filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5F85C5C,endColorstr=#E5F85C5C);zoom:1;min-height:inherit;}
 
+#home .hero-text2{padding-top:8%;}
 #home .hero-text{padding-top:15%;}
+
+
+#home{
+    padding-top: 5%;
+}
+#home .card-info{
+    /*margin-top: 5%;*/
+}
 
 @media(max-width: 992px) {
     #home .hero-text h1{font-size:30px;letter-spacing:2px;line-height:40px;margin-bottom:7px;color:#FFFFFF;text-transform:uppercase;}
@@ -302,7 +320,10 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 #home .hero-text h1{font-size:40px;letter-spacing:2px;line-height:40px;margin-bottom:7px;color:#FFFFFF;text-transform:uppercase;}
 #home .hero-text h4{color:#FFFFFF;text-transform:uppercase;}
 #home .hero-text h3{font-size:15px;letter-spacing:2px;line-height:10px;margin-bottom:5px;color:#FFFFFF;text-transform:uppercase;}
-#home .home-form{height:100%;line-height:100%;margin-top:7%!important;padding:2%;}
+#home .hero-text2 h1{font-size:40px;letter-spacing:2px;line-height:40px;margin-bottom:7px;color:#FFFFFF;text-transform:uppercase;}
+
+#home .home-form{height:100%;line-height:100%;margin-top:5%!important;padding:2%;
+margin-bottom: 5%!important;}
 #vehicle-select-form{position:fixed;top:10%;width:100%;z-index:98;
     /*height:50%;*/
     /*height:100%;*/
@@ -358,8 +379,8 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
     #home .list-features-header .lists li{text-transform: None!important; margin-bottom: 5px;}
 }
 #home .car-image-header img{
-    height:150px;
-    /*width: 60%;*/
+    /*height:150px;*/
+    width: 100%;
     margin: 10px;
 }
 #home .bike-image-header img{
@@ -367,8 +388,18 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
     margin: 10px;
 }
 
+#home .home-form{
+    border: 1px solid grey;
+}
 
-
+#home .call-details{
+    color:#4a148c;
+    text-align: center;
+    font-size: 17px;
+}
+#home .call-details-row{
+    text-align: center;
+}
 #features{background:#F7F7F7;}
 #features .feature-section{background-color:#F7F7F7;}
 #features .feature-section .icon{padding-bottom:20px;max-height:72px;}
@@ -643,9 +674,30 @@ font-weight: 700;
 #brands .brand-column{padding-top:2%;height:270px;}
 #brands .brand-section .button-row{text-align:center;}
 #brands .brand-section .brands-button{margin-top:3%;}
-#brands .brand-section .image-space{align-items:center;width:100%;height:100px;vertical-align:middle;margin-top:5px; opacity: 0.5;  }
+#brands .brand-section .image-space{align-items:center;width:100%;height:100px;vertical-align:middle;margin-top:5px; opacity: 1;  }
 #brands .brand-section .image-space:hover{opacity: 1;  }
 #brands .brand-section .image-space img{height:100px; }
+
+#home .service-info-button{
+    border: 1px solid #F44336;
+    padding: 10px;
+    color: #F44336;
+/*#F44336 !important*/
+    /*background:rgba(74,20,140,0.3)!important;*/
+}
+#home .service-info-button:hover{
+    border: 1px solid #F44336;
+    padding: 10px;
+    color: #FFF;
+    background:#F44336;
+    /*background: #4a148c;*/
+    /*backface-visibility: 0.4;*/
+
+}
+
+#home .infodiv{
+        padding: 4% 6%;
+}
 #service-detail{
     background:#F7F7F7;
     position: relative;
@@ -992,6 +1044,9 @@ line-height:55px!important;
     bottom: 50px !important;
 }
 
+.list-features-header li{
+    text-align: center;
+}
 
 #bookings .btn-remove-filter{margin-top:5px;width:100%}
 #bookings .box{margin:0px!important;}
@@ -1101,6 +1156,34 @@ line-height:55px!important;
     z-index: 99;
     /*left:50%;*/
 }
+
+#info-div-adword{
+    position: absolute;
+    width:500px;
+    z-index: 98;
+    top: 9%;
+    left: 50%;
+    /*margin: 0 0 0 0;*/
+    max-width: 100%;
+
+}
+
+
+#info-div-adword .items{
+    padding: 5%;
+}
+
+.booknowinforow{
+    text-align: center;
+}
+
+#info-div-adword .header{margin:3px;font-size:16px;}
+#info-div-adword .header .desc-name{font-size:18px;font-weight:500;padding-left:2%;padding-top:10px;}
+#info-div-adword .header .desc-content{padding-left:4%;font-size:12px;}
+#info-div-adword .button-header{text-align:right;}
+#info-div-adword .header .desc-content li{list-style:square;}
+#info-div-adword .list-things li{list-style:lower-roman!important;}
+
 #new-booking .services-list .delete-item{color:grey;cursor:pointer;line-height:60px;margin-top:5px;}
 #new-booking .btn-copy-poc{margin:1.46rem 0 1.168rem 0;}
 #new-booking .delete-job{
@@ -1720,6 +1803,9 @@ td { min-width: 100px; }
 
 }
 
+
+
+
 @media(max-width: 992px){
 
 .static-page #banner{
@@ -1813,3 +1899,49 @@ td { min-width: 100px; }
 @media (min-width:768px) and (max-width:979px){}
 @media (min-width:980px) and (max-width:1699px){}
 @media (min-width:1700px) and (max-width:2200px){}
+
+
+
+#info-div-adword .mt20 {
+    margin-top: 20px;
+}
+#info-div-adword .list-heading {
+    margin-bottom: 8px;
+}
+#info-div-adword .list-heading, h4 {
+    color: #797979;
+}
+#info-div-adword #promocode, .capitalize, .description h4, .info-small h2, .list-heading, h1.car-selected {
+    text-transform: uppercase;
+}
+
+#info-div-adword ul.list-items {
+    list-style-type: none;
+    padding: 0;
+}
+#info-div-adword .list-heading {
+    margin-bottom: 8px;
+}
+
+#info-div-adword ul.list-items>li.list-item:last-child {
+    border-bottom: 0 solid #dadada;
+}
+#info-div-adword ul.list-items>li.list-item {
+    padding: 5px;
+    border-bottom: 1px solid #dadada;
+    background-color: #eff0f1;
+    margin: 2px 0;
+}
+
+#info-div-adword ul.list-items>li.list-item>i.fa {
+    margin-right: 5px;
+}
+
+#info-div-adword .pull-right {
+    float: right;
+}
+
+#info-div-adword .service-action {
+    font-size: 11px;
+    line-height: 22px;
+}

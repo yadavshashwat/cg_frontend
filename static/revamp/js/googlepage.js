@@ -89,11 +89,19 @@ $(document).ready(function(){
             $('.navbar .nav-wrapper').removeClass('navbar-trans').removeClass('navbar-trans-ad').addClass('navbar-custom');
             $('.navbar .nav-wrapper .logo-trans').removeClass('visible').addClass('invisible');
             $('.navbar .nav-wrapper .logo-color').removeClass('invisible').addClass('visible');
+            // $('.navbar .nav-wrapper').addClass('navbar-trans').addClass('navbar-trans-ad').removeClass('navbar-custom');
+            // $('.navbar .nav-wrapper .logo-trans').addClass('visible').removeClass('invisible');
+            // $('.navbar .nav-wrapper .logo-color').addClass('invisible').removeClass('visible');
+
         } else {
             // if (viewportWidth > 992){
-            $('.navbar .nav-wrapper').addClass('navbar-trans').addClass('navbar-trans-ad').removeClass('navbar-custom');
-            $('.navbar .nav-wrapper .logo-trans').addClass('visible').removeClass('invisible');
-            $('.navbar .nav-wrapper .logo-color').addClass('invisible').removeClass('visible');
+            $('.navbar .nav-wrapper').removeClass('navbar-trans').removeClass('navbar-trans-ad').addClass('navbar-custom');
+            $('.navbar .nav-wrapper .logo-trans').removeClass('visible').addClass('invisible');
+            $('.navbar .nav-wrapper .logo-color').removeClass('invisible').addClass('visible');
+
+            // $('.navbar .nav-wrapper').addClass('navbar-trans').addClass('navbar-trans-ad').removeClass('navbar-custom');
+            // $('.navbar .nav-wrapper .logo-trans').addClass('visible').removeClass('invisible');
+            // $('.navbar .nav-wrapper .logo-color').addClass('invisible').removeClass('visible');
             // }}
         }});
 });
@@ -113,7 +121,7 @@ $(document).ready(function(){
     console.log(b)
     console.log(a)
     if (viewportWidth <= 992){
-          $("#home").height(200 + a)
+          $("#home").height(a)
         // console.log('1')
     }else{
         if (a>=b){
@@ -127,6 +135,13 @@ $(document).ready(function(){
             $("#home").height(b + 50)
             $('#background img').height(b + 50)
         }
+
+    }
+
+    if (viewportWidth <= 500){
+        $('#info-div-adword').css('margin-left','-'+(viewportWidth/2)+'px');
+    }else{
+        $('#info-div-adword').css('margin-left','-250px');
 
     }
 
@@ -150,6 +165,8 @@ $('.datepicker').pickadate({
 });
 
 $(".button-collapse").sideNav();
+
+
 
 
 $(function() {
@@ -178,30 +195,31 @@ $(document).ready(function(){
     $('.howitworks-section-2').hide()
     if (vehtype == "Car" && service == "CarCare"){
         var PAGEHEADER = "BEST CAR CLEANING SERVICES IN  DELHI NCR"
-        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Interior & Boot Vaccuming</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Seats Dusting</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Exterior Shampoo</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;3M/Meguiar Products used</li></ul></div></div>"
+        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Interior & Boot Vaccuming</li><li><i class='fa fa-check x10 icon'></i>&nbsp;Seats Dusting</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Exterior Shampoo</li><li><i class='fa fa-check x10 icon'></i>&nbsp;3M/Meguiar Products used</li></ul></div></div>"
+
         var DESC = "ClickGarage provides quality exterior and interior car cleaning. Its eco friendly car wash makes sure that there is less harm to the environment. For all our car cleaning, we only use 3M and Wurth products. With our doorstep service and mutiple payment options, we aim to make auto detailing a customer delight. Our service include - car wash, car dry cleaning, mobile car detailing, car polishing etc. ClickGarage provides you with the professional car cleaning service at your doorstep. "
-        // var FEATURES = "3M/Meguiar products&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Expert cleaners&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;doorstep service"
+        // var FEATURES = "3M/Meguiar products&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;Expert cleaners&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;doorstep service"
         $('.car-service').show()
 
     }else if(vehtype =="Car" && service == "Servicing"){
-        var PAGEHEADER = "BEST CAR SERVICING WORKSHOP IN DELHI NCR"
-        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;40 point check-up</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Spares replacement</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Pick-up & drop</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Free washing</li></ul></div></div>"
+        var PAGEHEADER = "#1 Car Service in Delhi-NCR"
+        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Full Car Service</li><li><i class='fa fa-check x10 icon'></i>&nbsp;Free Pick-Up & Drop</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Genuine Spares</li><li><i class='fa fa-check x10 icon'></i>&nbsp;2 Months Warranty</li></ul></div></div>"
         var DESC = "ClickGarage's scheduled maintenance services strictly follow processes recommended by OEM's. Standard Service includes a 40 point check up along with the consumables replacement and essential fluid top-ups. Standard service comes with free exterior wash, interior cleaning and free pick-up and drop. ClickGarage provides best online car service in Gurgaon making car maintenance easy, affordable and completely transparent. We also provide you with the best car service deals. Full car service is faciliated at one of the ClickGarage car service centre. So book car service now!"
         $('.car-service').show()
 
-        // var FEATURES = "Lowest price - Upfront estimate&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics"
+        // var FEATURES = "Lowest price - Upfront estimate&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;OES/OEM Parts used&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;Trained mechanics"
     }else if(vehtype =="Car" && service == "Repairing"){
         var PAGEHEADER = " TOP QUALITY CAR REPAIRS IN DELHI NCR"
-        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;40 point check-up</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Expert mechanics</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Upfront estimates </li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Pick-up & drop</li></ul></div></div>"
+        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;40 point check-up</li><li><i class='fa fa-check x10 icon'></i>&nbsp;Expert mechanics</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Upfront estimates </li><li><i class='fa fa-check x10 icon'></i>&nbsp;Pick-up & drop</li></ul></div></div>"
         var DESC = "ClickGarage team of expert mechanics take care of car repair of your vehicle. From car ac service or car ac repair to clutch overhaul, the nearest ClickGarage car mechanic will take care of your vehicle and do the necessary car repairs. ClickGarage provides you will all repair solutions including steering repair, car headlight repair, tires for car, car engine repair etc. Book service now to get the best mechanic to fix your car. Looking for minor fixes such as wiper blade replacement, horn malfunctioning, headlight replacement etc. ? ClickGarage auto experts will come to your doorstep and fix it."
-        // var FEATURES = "OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop"
+        // var FEATURES = "OES/OEM Parts used&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;Trained mechanics&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;Free pick up and drop"
         $('.car-service').show()
 
     }else if(vehtype =="Car" && service == "cgassist"){
         var PAGEHEADER = " EMERGENCY ASSISTANCE ANYTIME ANYWHERE"
-        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;PAN India Presence</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;40 Minutes TAT</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Free Towing</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Unlimited Usage</li></ul></div></div>"
+        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;PAN India Presence</li><li><i class='fa fa-check x10 icon'></i>&nbsp;40 Minutes TAT</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Free Towing</li><li><i class='fa fa-check x10 icon'></i>&nbsp;Unlimited Usage</li></ul></div></div>"
         var DESC = "ClickGarage ASSIT is a premium road-side assistance programe, providing assistance anytime, anywhere, 24 hours a day, 7 days a week and 365 days a year. We have best of its kind pan-India network along with 24x7 assistance centre, duly approved by DOT."
-        // var FEATURES = "OES/OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop"
+        // var FEATURES = "OES/OEM Parts used&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;Trained mechanics&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;Free pick up and drop"
         // $('.car-service').show()
         $('.car-image').show()
         $('.howitworks-section').hide()
@@ -212,17 +230,17 @@ $(document).ready(function(){
 
     }else if(vehtype =="Car" && service == "Denting"){
         var PAGEHEADER = "BEST IN CLASS DENTING/ PAINTING FACILITY IN DELHI NCR"
-        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;High Quality paint only!</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Lowest prices</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;1 year warranty </li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Pick-up & drop</li></ul></div></div>"
+        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;High Quality paint only!</li><li><i class='fa fa-check x10 icon'></i>&nbsp;Lowest prices</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;1 year warranty </li><li><i class='fa fa-check x10 icon'></i>&nbsp;Pick-up & drop</li></ul></div></div>"
         var DESC = "ClickGarage provides you with the best custom denting/painting job using high quality Du-Pont paint and provides a 1 year warranty on the painting. It also includes rubbing & polishing of the panel. We have the best car denting painting services. Quality car dent repair at a body shop. Car Paint lusture is restored and it is as good as new. All the car dent and car scratch are removed from the car by our expert mechanics"
 
-        // var FEATURES = "Upto 60% less than market&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;No paint mismatch with 1 year warranty&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Free pick up and drop&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Dust free paint booths"
+        // var FEATURES = "Upto 60% less than market&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;No paint mismatch with 1 year warranty&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;Free pick up and drop&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;Dust free paint booths"
         $('.car-service').show()
 
     }else if(vehtype =="Bike" && service == "Repairing"){
         var PAGEHEADER = "DOORSTEP BIKE REPAIRS. NOW IN GURUGRAM"
-        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Doorstep service</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;40 point check-up</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Spares replacement</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Expert mechanics</li></ul></div></div>"
+        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Doorstep service</li><li><i class='fa fa-check x10 icon'></i>&nbsp;40 point check-up</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Spares replacement</li><li><i class='fa fa-check x10 icon'></i>&nbsp;Expert mechanics</li></ul></div></div>"
         var DESC = ""
-        // var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Top quality repairs"
+        // var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;Top quality repairs"
         $('.bike-service').show()
 
     }else if(vehtype =="Bike" && service == "Servicing"){
@@ -230,22 +248,31 @@ $(document).ready(function(){
         if(source_type == "Mahindra"){
         $('.bike-service').show()
             var PAGEHEADER = "MAHINDRA AUTHORIZED DOORSTEP BIKE SERVICING. NOW IN GURUGRAM"
-            // var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Mahindra Authorized Service"
-        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Doorstep service</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;40 point check-up</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Spares replacement</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Expert mechanics</li></ul></div></div>"
+            // var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;Mahindra Authorized Service"
+        var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Doorstep service</li><li><i class='fa fa-check x10 icon'></i>&nbsp;40 point check-up</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Spares replacement</li><li><i class='fa fa-check x10 icon'></i>&nbsp;Expert mechanics</li></ul></div></div>"
         var DESC = ""
         }else{
             var PAGEHEADER = "DOORSTEP BIKE SERVICING. NOW IN GURUGRAM"
-            // var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;From Rs. 249 only!"
-           var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Doorstep service</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;40 point check-up</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Spares replacement</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Expert mechanics</li></ul></div></div>"
+            // var FEATURES = "Trained mechanics&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;OEM Parts used&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;From Rs. 249 only!"
+           var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Doorstep service</li><li><i class='fa fa-check x10 icon'></i>&nbsp;40 point check-up</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Spares replacement</li><li><i class='fa fa-check x10 icon'></i>&nbsp;Expert mechanics</li></ul></div></div>"
             var DESC = ""
         }
 
     }else{
         $('.car-service').show()
         var PAGEHEADER = "CAR & BIKE CARE <br> MADE EASY"
-        // var FEATURES = "One Stop Shop&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Doorstep Service&nbsp;<i class='fa fa-circle x10 icon'></i>&nbsp;Instant Cost Estimate"
-           var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;One Stop Shop</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Doorstep Service</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-circle x10 icon'></i>&nbsp;Instant Cost Estimate</li><li><i class='fa fa-circle x10 icon'></i>&nbsp;Expert mechanics</li></ul></div></div>"
+        // var FEATURES = "One Stop Shop&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;Doorstep Service&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;Instant Cost Estimate"
+           var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;One Stop Shop</li><li><i class='fa fa-check x10 icon'></i>&nbsp;Doorstep Service</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Instant Cost Estimate</li><li><i class='fa fa-check x10 icon'></i>&nbsp;Expert mechanics</li></ul></div></div>"
             var DESC = ""
+    }
+
+    if (vehtype== "Car"){
+        $('.car-brands').show()
+        $('.bike-brands').hide()
+    }else if(vehtype == "Bike"){
+        $('.car-brands').hide()
+        $('.bike-brands').show()
+
     }
     $('#home span.header').html(PAGEHEADER);
     $('#home span.features').html(FEATURES);
@@ -262,6 +289,17 @@ $(document).ready(function(){
             }
 
 });
+
+
+$('.close-more-info').click(function(){
+    $('#info-div-adword').hide()
+})
+
+$('.book-now-info-button').click(function(){
+    $('#info-div-adword').hide()
+    $('.home-form').show()
+
+})
 
 $(window).ready(function() {
      setTimeout(function() {
@@ -301,12 +339,18 @@ var Global = {
             );
         });
         
+        $('.service-info-button').on('click', function(e){
+            $('#info-div-adword').show()
+        });
+
         $('.learn-more-button').on('click', function(e){
-            $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()},
+         $('body,html').animate(
+                {'scrollTop':$('#home').outerHeight()+$('#clients').outerHeight()},
                 500
             );
         });
+
+
         $('.about-us-button').on('click', function(e){
             $('body,html').animate(
                 {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()},
@@ -315,33 +359,35 @@ var Global = {
         });
         $('.service-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#howitworks').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#howitworks').outerHeight()+$('#numbers').outerHeight()+$('#testimonials').outerHeight()+$('#clients').outerHeight()},
                 500
             );
         });
 
          $('.hiw-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()},
                 500
             );
         });
          $('.partners-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#features').outerHeight()+$('#howitworks').outerHeight()},
+                // {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#features').outerHeight()+$('#howitworks').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()},
+
                 500
             );
         });
 
-        $('.testi-button').on('click', function(e){
-            $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()},
-                500
-            );
-        });
+        // $('.testi-button').on('click', function(e){
+        //     $('body,html').animate(
+        //         {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()},
+        //         500
+        //     );
+        // });
         $('.brands-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#service-desc').outerHeight()+$('#howitworks').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#service-detail').outerHeight()+$('#service-desc').outerHeight()+$('#howitworks').outerHeight()+$('#numbers').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()},
                 500
             );
         });
