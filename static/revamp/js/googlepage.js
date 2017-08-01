@@ -151,6 +151,7 @@ $(document).ready(function(){
 // materialize css
 
 
+
 $('.datepicker').pickadate({
     format: 'dd-mm-yyyy',
     closeOnSelect: true,
@@ -297,9 +298,23 @@ $('.close-more-info').click(function(){
 
 $('.book-now-info-button').click(function(){
     $('#info-div-adword').hide()
-    $('.home-form').show()
+    $('.infodiv').addClass('invisible');
+    var a = $('.home-form').removeClass('hide-on-med-and-down').addClass('visible').height();
+    $("#home").height(a + 30);
+   $('#info-div-adword').hide()
+    $('#home .card-info').removeClass('card')
+
+    // var a = $('.home-form').removeClass('hide-on-med-and-down').addClass('visible').height();
+        $("#home").height(a + 30);
+            $('body,html').animate(
+                {'scrollTop':0},
+                500
+            );
+
 
 })
+
+
 
 $(window).ready(function() {
      setTimeout(function() {
@@ -413,8 +428,12 @@ var Global = {
         $('.book-btn').click(function (event) {
             $('.infodiv').addClass('invisible');
             var a = $('.home-form').removeClass('hide-on-med-and-down').addClass('visible').height();
+           $('#home .card-info').removeClass('card')
+
             $("#home").height(a + 30);
         });
+
+
 
         $('.book-btn-2').click(function (event) {
             $('.infodiv').addClass('invisible');
