@@ -312,6 +312,10 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 #home{
     padding-top: 2%;
 }
+
+.home-form-ad .form-submit{
+    height: 33px;
+}
 #home .card-info{
     /*margin-top: 5%;*/
 }
