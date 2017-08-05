@@ -310,7 +310,7 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 
 
 #home{
-    padding-top: 5%;
+    padding-top: 2%;
 }
 #home .card-info{
     /*margin-top: 5%;*/
@@ -1910,6 +1910,10 @@ td { min-width: 100px; }
     height: 350px;
    background-color: black;
    opacity: 0.2;
+}
+
+.home-form-ad h3{
+    margin: 0px!important;
 }
 
 
