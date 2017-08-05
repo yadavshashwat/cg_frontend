@@ -182,31 +182,38 @@ var Global = {
 
         $('.learn-more-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()},
+                // {'scrollTop':$('#home').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#clients').outerHeight()},
+
                 500
             );
         });
          $('.partners-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()},
+               {'scrollTop':$('#home').outerHeight()},
+                // {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()},
                 500
             );
         });
         $('.testi-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#howitworks').outerHeight()+$('#numbers').outerHeight()},
                 500
             );
         });
         $('.brands-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()},
+                // {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#howitworks').outerHeight()+$('#numbers').outerHeight()+$('#testimonials').outerHeight()+$('#service-desc').outerHeight()+$('#service-detail').outerHeight()},
+
                 500
             );
         });
         $('.contact-us-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()+$('#brands').outerHeight()},
+                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#howitworks').outerHeight()+$('#numbers').outerHeight()+$('#service-desc').outerHeight()+$('#testimonials').outerHeight()+$('#service-detail').outerHeight()+$('#brands').outerHeight()},
+
+                // {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()+$('#brands').outerHeight()},
                 500
             );
         });
@@ -272,6 +279,46 @@ var Global = {
           console.log(make)
             Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehtype}, "get", _this, _this.loadModels);
         });
+
+
+        $('#testimonials .image-testi').click(function(){
+            $('#testimonials .image-testi img').removeClass('selected')
+            // $(this).find('img').animate({top:'100px',left:'50px'}, 500);
+            $(this).find('img').addClass('selected')
+
+            testi = $(this).attr('data-class')
+            // console.log(testi)
+            $('#testimonials .testes').hide()
+           alfa =  $('#testimonials .testis').find("[data-class='" + testi + "']")
+            // console.log(alfa)
+            alfa.show()
+        });
+        TESTI_COUNTER = 2
+        window.onload = function start_testi() {
+            testi();
+        }
+        function testi() {
+            window.setInterval(function () {
+
+                $('#testimonials .image-testi img').removeClass('selected')
+                // $(this).find('img').animate({top:'100px',left:'50px'}, 500);
+                $('#testimonials .image-testi .testiimage-'+TESTI_COUNTER).addClass('selected')
+
+                testi =$('#testimonials .image-testi .testiimage-'+TESTI_COUNTER).closest('.image-testi').attr('data-class')
+                // console.log(testi)
+                $('#testimonials .testes').hide()
+               alfa =  $('#testimonials .testis').find("[data-class='" + testi + "']")
+                // console.log(alfa)
+                alfa.show()
+                if (TESTI_COUNTER == 3){
+                    TESTI_COUNTER = 1
+                }else{
+                    TESTI_COUNTER = TESTI_COUNTER + 1
+                }
+                    // console.log(TESTI_COUNTER)
+                }, 3000); // repeat forever, polling every 3 seconds
+        }
+
 
 
        $('#home .veh-cat-card').click(function(){

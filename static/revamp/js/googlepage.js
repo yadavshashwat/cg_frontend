@@ -122,18 +122,22 @@ $(document).ready(function(){
     console.log(a)
     if (viewportWidth <= 992){
           $("#home").height(a)
+            $('#background .background').css("height", a);
         // console.log('1')
     }else{
         if (a>=b){
         // console.log('2')
 
             $("#home").height(a - 0)
-            $('#background img').height(a)
+            $('#background .background').css("height", a);
+            // $('#background img').height(a)
         }else{
         // console.log('2')
 
             $("#home").height(b + 50)
-            $('#background img').height(b + 50)
+            $('#background .background').css("height", b);
+
+            // $('#background img').height(b + 50)
         }
 
     }
@@ -294,16 +298,20 @@ $(document).ready(function(){
 
 $('.close-more-info').click(function(){
     $('#info-div-adword').hide()
+    $('body').removeClass('scroll-lock')
+
 })
 
 $('.book-now-info-button').click(function(){
     $('#info-div-adword').hide()
+    $('body').removeClass('scroll-lock')
+
     // $("#home").height(a + 30);
-   $('#info-div-adword').hide()
+   // $('#info-div-adword').hide()
     var viewportWidth = $(window).width();
     if (viewportWidth <= 992){
         $('#home .card-info').removeClass('card')
-        $('.home-form').removeClass('hide-on-med-and-down').addClass('visible')
+        $('.home-form-ad').removeClass('hide-on-med-and-down').addClass('visible')
         $('.infodiv').addClass('invisible');
 
     }
@@ -357,6 +365,7 @@ var Global = {
         
         $('.service-info-button').on('click', function(e){
             $('#info-div-adword').show()
+            $('body').addClass('scroll-lock')
         });
 
         $('.learn-more-button').on('click', function(e){
@@ -428,7 +437,7 @@ var Global = {
 
         $('.book-btn').click(function (event) {
             $('.infodiv').addClass('invisible');
-            var a = $('.home-form').removeClass('hide-on-med-and-down').addClass('visible').height();
+            var a = $('.home-form-ad').removeClass('hide-on-med-and-down').addClass('visible').height();
            $('#home .card-info').removeClass('card')
 
             $("#home").height(a + 30);

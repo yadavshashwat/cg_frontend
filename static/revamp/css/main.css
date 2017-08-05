@@ -303,7 +303,9 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 #home.background-color-home2{background:rgba(74,20,140,0)!important;}
 #home{background:rgba(74,20,140,0.65);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5F85C5C,endColorstr=#E5F85C5C)";filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5F85C5C,endColorstr=#E5F85C5C);zoom:1;min-height:inherit;}
 
-#home .hero-text2{padding-top:8%;}
+#home .hero-text2{
+    /*padding-top:8%;*/
+}
 #home .hero-text{padding-top:15%;}
 
 
@@ -322,10 +324,24 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 #home .hero-text h1{font-size:40px;letter-spacing:2px;line-height:40px;margin-bottom:7px;color:#FFFFFF;text-transform:uppercase;}
 #home .hero-text h4{color:#FFFFFF;text-transform:uppercase;}
 #home .hero-text h3{font-size:15px;letter-spacing:2px;line-height:10px;margin-bottom:5px;color:#FFFFFF;text-transform:uppercase;}
-#home .hero-text2 h1{font-size:35px;letter-spacing:2px;line-height:40px;margin-bottom:7px;color:#FFFFFF;text-transform:uppercase;}
+#home .hero-text2 h1{font-size:30px;letter-spacing:2px;line-height:30px;margin-bottom:3px;color:#FFFFFF;text-transform:uppercase;}
 
-#home .home-form{height:100%;line-height:100%;margin-top:5%!important;padding:3% 4%;
+#home .home-form{height:100%;line-height:100%;margin-top:2%!important;padding:2% 2%;
 margin-bottom: 5%!important;}
+
+#home .home-form-ad{height:100%;line-height:100%;margin-top:2%!important;padding:2% 2%;
+/*margin-bottom: 5%!important;*/
+margin-left: 2%}
+
+.scroll-lock{
+    overflow: hidden;
+}
+
+#home .advert-input-field{
+    padding:0px 10px !important;
+    /*margin: 0px 10px;*/
+}
+
 #vehicle-select-form{position:fixed;top:10%;width:100%;z-index:98;
     /*height:50%;*/
     /*height:100%;*/
@@ -359,7 +375,13 @@ margin-bottom: 5%!important;}
 }
 #home .service-card .service-name{padding:15px!important;}
 #home .header-website{text-align:center;}
-#home .header-btn{margin:5% 0%!important;}
+#home .header-btn{
+    margin:5% 0%!important;
+}
+
+#home .header-btn-ad{
+    /*margin:5% 0%!important;*/
+}
 #home .list-features-header{text-align:center;vertical-align:middle;color:#FFFFFF;line-height:20px;letter-spacing:2px;}
 #home .list-features-header{text-align:center;vertical-align:middle;color:#FFFFFF;line-height:20px;letter-spacing:2px;}
 
@@ -382,7 +404,7 @@ margin-bottom: 5%!important;}
 }
 #home .car-image-header img{
     /*height:150px;*/
-    width: 100%;
+    width: 95%;
     margin: 10px;
 }
 #home .bike-image-header img{
@@ -401,6 +423,7 @@ margin-bottom: 5%!important;}
 }
 #home .call-details-row{
     text-align: center;
+    margin-top: 15px;
 }
 #features{background:#F7F7F7;}
 #features .feature-section{background-color:#F7F7F7;}
@@ -698,7 +721,7 @@ font-weight: 700;
 }
 
 #home .infodiv{
-        padding: 4% 6%;
+        padding: 2% 2%;
 }
 #service-detail{
     background:#F7F7F7;
@@ -1889,6 +1912,48 @@ td { min-width: 100px; }
    opacity: 0.2;
 }
 
+
+#background .background.Car-Servicing{
+    /*height: 350px;*/
+    /*height: ;*/
+    background: url('../img/Backgrounds/Car-Servicing.jpg');
+    background-position: center bottom;
+}
+
+#background .background.Car-Repairing{
+    /*height: 350px;*/
+    /*height: ;*/
+    background: url('../img/Backgrounds/Car-Repairing.jpg');
+    background-position: center bottom;
+}
+
+#background .background.Car-Denting{
+    /*height: 350px;*/
+    /*height: ;*/
+    background: url('../img/Backgrounds/Car-Denting.jpg');
+    background-position: center bottom;
+}
+
+#background .background.Car-cgassist{
+    /*height: 350px;*/
+    /*height: ;*/
+    background: url('../img/Backgrounds/Car-cgassist.jpg');
+    background-position: center bottom;
+}
+
+#background .background.Bike-Servicing{
+    /*height: 350px;*/
+    /*height: ;*/
+    background: url('../img/Backgrounds/Bike-Servicing.jpg');
+    background-position: center bottom;
+}
+
+#background .background.Bike-Repairing{
+    /*height: 350px;*/
+    /*height: ;*/
+    background: url('../img/Backgrounds/Bike-Repairing.jpg');
+    background-position: center bottom;
+}
 
 
 .logoeznav img{

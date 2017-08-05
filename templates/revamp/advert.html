@@ -87,7 +87,7 @@
 	<!--</script>-->
 </head>
 
-<body>
+<body class="">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZVGSZV"
 				  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -159,28 +159,29 @@
 						<!--<li>Instant Cost Estimate</li>-->
 						<!--</ul>-->
 					</h5>
-					<div class="row header-btn">
+					<div class="row header-btn-ad">
 						<button class="btn waves-effect waves-light btn hide-on-large-only book-btn red cg-btn" href=""><i class="icon-chevron-down"></i>Book Now</button>
 					</div>
-					<div class="row header-btn">
+					<div class="row header-btn-ad">
 						<div class="waves-effect waves-light  cg-btn service-info-button">Service Details</div>
 					</div>
 
 				</div>
 			</div>
-			<div class = "home-form card col s12 m12 l4 offset-l1 hide-on-med-and-down">
+			<div class = "home-form-ad card col s12 m12 l5 hide-on-med-and-down">
 				<div class="row form-title text-left">
 					<h3 class="black-font" style="text-transform: none; text-align: center;">Think Car Service, Think ClickGarage.</h3>
 				</div>
 
 
-				<div class="row text-left vehicle-details">
+				<!--<div class="row text-left vehicle-details">-->
 					<!--<div class="row field-title text-left">-->
 					<!--<h4>Vehicle Details</h4>-->
 					<!--</div>-->
 					<br>
-					<form id="formValidate">
-						<div class="input-field col s12 m12 l12 " >
+				<div class="row form-row">
+
+						<div class="input-field advert-input-field col s12 m12 l12 " >
 							<div class="select-div-2">
 								<div class="prefix-select">
 									<i class="fa ad-page-car x25"></i>
@@ -200,7 +201,7 @@
 							<!--</select>-->
 							<!--<label data-error="Select a Brand">Type of Question</label>-->
 						</div>
-						<div class="input-field col s12 m12 l12 ">
+						<div class="input-field  advert-input-field col s12 m12 l12 ">
 							<div class="select-div-2">
 								<div class="prefix-select">
 									<i class="fa ad-page-car x25"></i>
@@ -215,124 +216,29 @@
 
 
 						</div>
-						<!--<div class="input-field col s4 m4 l2" id="fuel-type-select">-->
-						<!--<select>-->
-						<!--<option value="" disabled selected>Fuel</option>-->
-						<!--<option value="petrol">Petrol</option>-->
-						<!--<option value="diesel">Diesel</option>-->
-						<!--<option value="cng">LPG/CNG</option>-->
-						<!--</select>-->
-						<!--</div>-->
-					</form>
-					<!--<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-vehicle-error"></span>-->
 					<span class = "error-message" id="choose-vehicle-error"></span>
 
-				</div>
 
-				<!--<div class = "row service-headers" id="selected-service">-->
-				<!--<div class="row field-title text-left">-->
-				<!--<h4>Service Details</h4>-->
-				<!--</div>-->
 
-				<!--<div class="col s6 m6 l4">-->
-				<!--<div class="card cardhover service-card">-->
-				<!--<div class="card-content service-name">-->
-				<!--<p>Servicing</p>-->
-				<!--</div>-->
-				<!--</div>-->
-				<!--</div>-->
-				<!--<div class="col s6 m6 l4">-->
-				<!--<div class="card cardhover service-card">-->
-				<!--<div class="card-content service-name">-->
-				<!--<p>Car Care</p>-->
-				<!--</div>-->
-				<!--</div>-->
-				<!--</div>-->
-				<!--<div class="col s6 m6 l4">-->
-				<!--<div class="card cardhover service-card">-->
-				<!--<div class="card-content service-name">-->
-				<!--<p>Repairing</p>-->
-				<!--</div>-->
-				<!--</div>-->
-				<!--</div>-->
-				<!--<div class="col s6 m6 l4">-->
-				<!--<div class="card cardhover service-card">-->
-				<!--<div class="card-content service-name">-->
-				<!--<p>Denting/Painting</p>-->
-				<!--</div>-->
-				<!--</div>-->
-				<!--</div>-->
-				<!--<div class="col s6 m6 l4">-->
-				<!--<div class="card cardhover service-card">-->
-				<!--<div class="card-content service-name">-->
-				<!--<p>General Check-Up</p>-->
-				<!--</div>-->
-				<!--</div>-->
-				<!--</div>-->
-				<!--<div class="col s6 m6 l4">-->
-				<!--<div class="card cardhover service-card">-->
-				<!--<div class="card-content service-name">-->
-				<!--<p>Emergency</p>-->
-				<!--</div>-->
-				<!--</div>-->
-				<!--</div>-->
-				<!--<span class = "col s11 m11 l11 offset-m1 offset-s1 offset-l1 error-message" id="choose-category-error"></span>-->
-				<!--</div>-->
-				<!--<div class="col s12 service-headers" id="selected-service">-->
-				<!--<form>-->
-				<!--<div class="row">-->
-				<!--<div class="input-field col s12" >-->
-				<!--<i class="material-icons prefix">report_problem</i>-->
-				<!--<textarea id="additional" class="materialize-textarea"></textarea>-->
-				<!--<label for="additional">Specific issues/ request?</label>-->
-				<!--</div>-->
-				<!--</div>-->
-				<!--</form>-->
-				<!--</div>-->
-
-				<div class="row form-row">
-					<!--<div class="col s12">-->
-					<!--<div class="row field-title text-left">-->
-					<!--<h4>Booking Details</h4>-->
-					<!--</div>-->
-
-					<div class="row">
-						<div class="input-field col s12">
+					<!--<div class="row">-->
+						<div class="input-field  advert-input-field  col s12">
 							<i class="material-icons prefix">account_circle</i>
 							<input id="first_name" type="text" class="validate" required="" aria-required="true">
 							<label for="first_name" data-error="Required">Name</label>
 						</div>
-						<!--<div class="input-field col s6">-->
-
-						<!--<input id="last_name" type="text" class="validate" required="" aria-required="true">-->
-						<!--<label for="last_name" data-error="Required">Last Name</label>-->
-						<!--</div>-->
-					</div>
+					<!--</div>-->
 					<!--<div class="row">-->
-					<!--&lt;!&ndash;<div class="input-field col s6">&ndash;&gt;-->
-					<!--&lt;!&ndash;<i class="material-icons prefix">location_on</i>&ndash;&gt;-->
-					<!--&lt;!&ndash;<input id="address" type="text" class="validate">&ndash;&gt;-->
-					<!--&lt;!&ndash;<label for="address">House No./ Street Name</label>&ndash;&gt;-->
-					<!--&lt;!&ndash;</div>&ndash;&gt;-->
-					<!--<div class="input-field col s12">-->
-					<!--<i class="material-icons prefix">location_on</i>-->
-					<!--<input type="text" id="locality" class="autocomplete" required="" aria-required="true">-->
-					<!--<label for="locality" data-error="Required">Locality</label>-->
-
-					<!--</div>-->
-					<!--</div>-->
-					<div class="row">
-						<div class="input-field col s12">
+						<div class="input-field  advert-input-field col s12">
 							<i class="material-icons prefix">phone</i>
 							<input id="telephone" type="number" required="" aria-required="true">
 							<label for="telephone" data-error="Invalid Number" >Mobile</label>
 						</div>
-					</div>
-					<div class="row select-div ad-page-select"  id="city">
+					<!--</div>-->
+					<div class="select-div ad-page-select s12"  id="city">
 						<div class="prefix-select">
 							<i class ="make-model-prefix fa fa-map x23"></i>
 						</div>
-						<div class="input-field select-width invisible" id ="city-bike">
+						<div class="input-field  advert-input-field  select-width invisible" id ="city-bike">
 							<select>
 								<option value="" disabled selected>City</option>
 								<option value="Gurgaon" >Gurgaon</option>
@@ -423,7 +329,7 @@
 				<!--</button>-->
 				<!--&lt;!&ndash;</a>&ndash;&gt;-->
 				<!--</div>-->
-				<div class="row button-row  submit">
+				<div class="row button-row centered-text submit">
 					<button class="waves-effect waves-light btn btn-large red form-submit" type="submit" name="action">Request A Callback
 						<i class="material-icons right">send</i>
 					</button>
@@ -487,238 +393,6 @@
 <!--features Section-->
 
 
-<div id="info-div-adword" class="card invisible">
-	<div class="row button-header">
-		<button class="waves-effect waves-light btn cg-primary  btn-service close-more-info" type="submit" name="action">
-			<i class="fa fa-times"></i>
-		</button>
-	</div>
-	<!--<div class="header gen-desc">-->
-	<!--<div class="desc-name">-->
-	<!--Description:-->
-	<!--</div>-->
-	<!--<div class="desc-content">-->
-	<!--ClickGarage's scheduled maintenance services strictly follow processes recommended by oem's. Standard service includes a 40 point check up along with the consumables replacement and essential fluid top-ups. Standard service comes with free exterior wash, interior cleaning and free pick-up and drop. Any other additional problems will be reported post vehicle inspection. This service is backed by ClickGarage warranty-->
-	<!--</div>-->
-	<!--</div>-->
-	<!--<div class="header symptoms">-->
-	<!--<div class="desc-name">-->
-	<!--When is it required?-->
-	<!--</div>-->
-	<!--<div class="desc-content">-->
-	<!--<ul>-->
-	<!--<li>Oil leakages</li>-->
-	<!--<li>Drop in fuel economy</li>-->
-	<!--<li>Unwanted noises</li>-->
-	<!--<li>Rough driving experience</li>-->
-	<!--</ul>-->
-	<!--</div>-->
-	<!--</div>-->
-    <div class="items">
-        <div class="header parts-breakup">
-            <div class="desc-name ">
-                What all is covered?
-            </div>
-            <!--<div class="desc-content">-->
-            <!--<ul>-->
-            <!--<li>Pick up &amp; drop</li>-->
-            <!--<li>Complete exterior wash</li>-->
-            <!--<li>40 point inspection</li>-->
-            <!--<li>Interior vacuum cleaning</li>-->
-            <!--<li>Dashboard and door polish</li>-->
-            <!--<li>Parts replacement</li>-->
-            <!--</ul>-->
-            <!--</div>-->
-            <!--<div class="desc-content">-->
-            <!--<table class="striped">-->
-            <!--<thead>-->
-            <!--<tr>-->
-            <!--<th data-field="id">S.No.</th>-->
-            <!--<th data-field="part">Name</th>-->
-            <!--<th data-field="action">Item Action</th>-->
-            <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody>-->
-            <!--<tr><td>1</td><td>Engine Oil</td><td>Replace</td></tr>-->
-            <!--<tr><td>2</td><td>Oil Filter</td><td>Replace</td></tr>-->
-            <!--<tr><td>3</td><td>Air Filter</td><td>Replace</td></tr>-->
-            <!--<tr><td>4</td><td>Brake and Clutch Fluid</td><td>Top Up</td></tr>-->
-            <!--<tr><td>5</td><td>Windshield Water Fluid</td><td>Top Up</td></tr>-->
-            <!--<tr><td>6</td><td>Coolant</td><td>Top Up</td></tr>-->
-            <!--<tr><td>7</td><td>Service Labour</td><td>Labour</td></tr>-->
-            <!--</tbody>-->
-            <!--</table>-->
-            <!--</div>-->
-        </div>
-        <!--<div class="list-items ">-->
-            <!--<ul>-->
-                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Engine Oil Replaced</li>-->
-                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Oil Filter Replaced</li>-->
-                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Air Filter Replaced</li>-->
-                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Brake and Clutch Fluid Top Up</li>-->
-                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Coolant Top Up</li>-->
-                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Windshield Washer Fluid Top up</li>-->
-                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Battery Water Top Up*</li>-->
-                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Power Steering Oil Top Up*</li>-->
-                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;External Vehicle Washing</li>-->
-                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Internal Vacuume Cleaning</li>-->
-
-            <!--</ul>-->
-        <!--</div>-->
-        <div class="header parts-breakup">
-            <div class="desc-name ">
-                Replacement/ Top Up
-            </div>
-        </div>
-
-        <div class="action-list">
-            <div class="list-heading mt20">Filters</div>
-            <ul class="list-items">
-                <li class="list-item"> Oil Filter  <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Replaced</span></li>
-                <li class="list-item"> Air Filter <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Replaced</span></li>
-            </ul>
-
-            <div class="list-heading mt20">Fluids</div>
-            <ul class="list-items">
-                <li class="list-item"> Engine Oil  <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Replaced</span></li>
-                <li class="list-item"> Brake and Clutch Fluid <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Top Up</span></li>
-                <li class="list-item"> Windshield Fluid <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Top Up</span></li>
-                <li class="list-item"> Coolant <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Top Up</span></li>
-                <li class="list-item"> Battery Water <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Top Up</span></li>
-                <li class="list-item"> Power Steering Fluid<span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Top Up</span></li>
-
-
-            </ul>
-        <div class="header parts-breakup">
-            <div class="desc-name ">
-                Checks/Cleaning
-            </div>
-        </div>
-
-
-            <div class="list-heading mt20">Lighting</div>
-            <ul class="list-items">
-                <li class="list-item"> Head Lamp  <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> Tail Lamp <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Air Conditioning</div>
-            <ul class="list-items">
-                <li class="list-item"> Compressor <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Battery</div>
-            <ul class="list-items">
-                <li class="list-item"> Battery Terminal <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Clean</span></li>
-            </ul>
-            <div class="list-heading mt20">Horns</div>
-            <ul class="list-items">
-                <li class="list-item"> Horns <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Spark Plugs</div>
-            <ul class="list-items">
-                <li class="list-item"> Spark Plugs <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Clean</span></li>
-            </ul>
-            <div class="list-heading mt20">Instrument Clustor</div>
-            <ul class="list-items">
-                <li class="list-item"> Instrument Clustor <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Fluids</div>
-            <ul class="list-items">
-                <li class="list-item"> Gear Oil <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Filters</div>
-            <ul class="list-items">
-                <li class="list-item"> Fuel Filter <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> AC Filter <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-
-            </ul>
-            <div class="list-heading mt20">Clutch</div>
-            <ul class="list-items">
-                <li class="list-item"> Clutch Plate <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Steering</div>
-            <ul class="list-items">
-                <li class="list-item"> Basic Steering Functionality <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> Steering Wheel <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Spring</div>
-            <ul class="list-items">
-                <li class="list-item"> Basic Ball Joints Functionality <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Hydraulic Brakes</div>
-            <ul class="list-items">
-                <li class="list-item"> Basic Brakes Functionality <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Parking Brake</div>
-            <ul class="list-items">
-                <li class="list-item"> Parking Brake Lever <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Wheel</div>
-            <ul class="list-items">
-                <li class="list-item"> Alignment <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> Balancing <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Mirrors</div>
-            <ul class="list-items">
-                <li class="list-item"> Outside rear view mirror  <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Locking</div>
-            <ul class="list-items">
-                <li class="list-item"> Central Locking System <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Wiring</div>
-            <ul class="list-items">
-                <li class="list-item"> Harnessing <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Tyre</div>
-            <ul class="list-items">
-                <li class="list-item"> Tyre Rear  <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Exterior Body</div>
-            <ul class="list-items">
-                <li class="list-item"> Door Handles <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> Door Hinges <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> Front Bumper <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> Doors <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Clean</span></li>
-                <li class="list-item"> Fuel Lid <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> Rear Bumper <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Clean</span></li>
-                <li class="list-item"> Windshield Front <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Clean</span></li>
-                <li class="list-item"> Wiper Arm <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-
-            <div class="list-heading mt20">Interior Body</div>
-            <ul class="list-items">
-                <li class="list-item"> Console <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> Door Latch System <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> Door Locking System <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> Panels <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Denting/Painting</div>
-            <ul class="list-items">
-                <li class="list-item"> Dent <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> Full Body Paint <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Under the hood Noise</div>
-            <ul class="list-items">
-                <li class="list-item"> Belts &amp; Pulleys Noise <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> Dead Battery Noise <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> Hoses Noise <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> Manifold Noise <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-            <div class="list-heading mt20">Under the body Noise</div>
-            <ul class="list-items">
-                <li class="list-item"> Brake Noise <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> Exhaust System Noise <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-                <li class="list-item"> Suspension Noise <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
-            </ul>
-        </div>
-
-        <div class="row booknowinforow">
-            <button class="waves-effect waves-light waves-cg red btn-large cg-btn-2 message-submit red book-now-info-button" type="submit" name="action">BOOK NOW
-                <i class="material-icons right">send</i>
-            </button>
-        </div>
-    </div>
-</div>
 <section id="features">
 	<div class="feature-section">
 		<div class="container-fluid">
@@ -1838,6 +1512,238 @@
 		</div>
 	</div>
 </section>
+<div id="info-div-adword" class="card invisible">
+	<div class="row button-header">
+		<button class="waves-effect waves-light btn cg-primary  btn-service close-more-info" type="submit" name="action">
+			<i class="fa fa-times"></i>
+		</button>
+	</div>
+	<!--<div class="header gen-desc">-->
+	<!--<div class="desc-name">-->
+	<!--Description:-->
+	<!--</div>-->
+	<!--<div class="desc-content">-->
+	<!--ClickGarage's scheduled maintenance services strictly follow processes recommended by oem's. Standard service includes a 40 point check up along with the consumables replacement and essential fluid top-ups. Standard service comes with free exterior wash, interior cleaning and free pick-up and drop. Any other additional problems will be reported post vehicle inspection. This service is backed by ClickGarage warranty-->
+	<!--</div>-->
+	<!--</div>-->
+	<!--<div class="header symptoms">-->
+	<!--<div class="desc-name">-->
+	<!--When is it required?-->
+	<!--</div>-->
+	<!--<div class="desc-content">-->
+	<!--<ul>-->
+	<!--<li>Oil leakages</li>-->
+	<!--<li>Drop in fuel economy</li>-->
+	<!--<li>Unwanted noises</li>-->
+	<!--<li>Rough driving experience</li>-->
+	<!--</ul>-->
+	<!--</div>-->
+	<!--</div>-->
+    <div class="items">
+        <div class="header parts-breakup">
+            <div class="desc-name ">
+                What all is covered?
+            </div>
+            <!--<div class="desc-content">-->
+            <!--<ul>-->
+            <!--<li>Pick up &amp; drop</li>-->
+            <!--<li>Complete exterior wash</li>-->
+            <!--<li>40 point inspection</li>-->
+            <!--<li>Interior vacuum cleaning</li>-->
+            <!--<li>Dashboard and door polish</li>-->
+            <!--<li>Parts replacement</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--<div class="desc-content">-->
+            <!--<table class="striped">-->
+            <!--<thead>-->
+            <!--<tr>-->
+            <!--<th data-field="id">S.No.</th>-->
+            <!--<th data-field="part">Name</th>-->
+            <!--<th data-field="action">Item Action</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<tr><td>1</td><td>Engine Oil</td><td>Replace</td></tr>-->
+            <!--<tr><td>2</td><td>Oil Filter</td><td>Replace</td></tr>-->
+            <!--<tr><td>3</td><td>Air Filter</td><td>Replace</td></tr>-->
+            <!--<tr><td>4</td><td>Brake and Clutch Fluid</td><td>Top Up</td></tr>-->
+            <!--<tr><td>5</td><td>Windshield Water Fluid</td><td>Top Up</td></tr>-->
+            <!--<tr><td>6</td><td>Coolant</td><td>Top Up</td></tr>-->
+            <!--<tr><td>7</td><td>Service Labour</td><td>Labour</td></tr>-->
+            <!--</tbody>-->
+            <!--</table>-->
+            <!--</div>-->
+        </div>
+        <!--<div class="list-items ">-->
+            <!--<ul>-->
+                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Engine Oil Replaced</li>-->
+                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Oil Filter Replaced</li>-->
+                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Air Filter Replaced</li>-->
+                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Brake and Clutch Fluid Top Up</li>-->
+                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Coolant Top Up</li>-->
+                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Windshield Washer Fluid Top up</li>-->
+                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Battery Water Top Up*</li>-->
+                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Power Steering Oil Top Up*</li>-->
+                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;External Vehicle Washing</li>-->
+                <!--<li><i class="fa fa-check"></i>&nbsp;&nbsp;Internal Vacuume Cleaning</li>-->
+
+            <!--</ul>-->
+        <!--</div>-->
+        <div class="header parts-breakup">
+            <div class="desc-name ">
+                Replacement/ Top Up
+            </div>
+        </div>
+
+        <div class="action-list">
+            <div class="list-heading mt20">Filters</div>
+            <ul class="list-items">
+                <li class="list-item"> Oil Filter  <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Replaced</span></li>
+                <li class="list-item"> Air Filter <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Replaced</span></li>
+            </ul>
+
+            <div class="list-heading mt20">Fluids</div>
+            <ul class="list-items">
+                <li class="list-item"> Engine Oil  <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Replaced</span></li>
+                <li class="list-item"> Brake and Clutch Fluid <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Top Up</span></li>
+                <li class="list-item"> Windshield Fluid <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Top Up</span></li>
+                <li class="list-item"> Coolant <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Top Up</span></li>
+                <li class="list-item"> Battery Water <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Top Up</span></li>
+                <li class="list-item"> Power Steering Fluid<span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Top Up</span></li>
+
+
+            </ul>
+        <div class="header parts-breakup">
+            <div class="desc-name ">
+                Checks/Cleaning
+            </div>
+        </div>
+
+
+            <div class="list-heading mt20">Lighting</div>
+            <ul class="list-items">
+                <li class="list-item"> Head Lamp  <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> Tail Lamp <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Air Conditioning</div>
+            <ul class="list-items">
+                <li class="list-item"> Compressor <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Battery</div>
+            <ul class="list-items">
+                <li class="list-item"> Battery Terminal <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Clean</span></li>
+            </ul>
+            <div class="list-heading mt20">Horns</div>
+            <ul class="list-items">
+                <li class="list-item"> Horns <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Spark Plugs</div>
+            <ul class="list-items">
+                <li class="list-item"> Spark Plugs <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Clean</span></li>
+            </ul>
+            <div class="list-heading mt20">Instrument Clustor</div>
+            <ul class="list-items">
+                <li class="list-item"> Instrument Clustor <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Fluids</div>
+            <ul class="list-items">
+                <li class="list-item"> Gear Oil <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Filters</div>
+            <ul class="list-items">
+                <li class="list-item"> Fuel Filter <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> AC Filter <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+
+            </ul>
+            <div class="list-heading mt20">Clutch</div>
+            <ul class="list-items">
+                <li class="list-item"> Clutch Plate <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Steering</div>
+            <ul class="list-items">
+                <li class="list-item"> Basic Steering Functionality <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> Steering Wheel <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Spring</div>
+            <ul class="list-items">
+                <li class="list-item"> Basic Ball Joints Functionality <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Hydraulic Brakes</div>
+            <ul class="list-items">
+                <li class="list-item"> Basic Brakes Functionality <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Parking Brake</div>
+            <ul class="list-items">
+                <li class="list-item"> Parking Brake Lever <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Wheel</div>
+            <ul class="list-items">
+                <li class="list-item"> Alignment <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> Balancing <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Mirrors</div>
+            <ul class="list-items">
+                <li class="list-item"> Outside rear view mirror  <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Locking</div>
+            <ul class="list-items">
+                <li class="list-item"> Central Locking System <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Wiring</div>
+            <ul class="list-items">
+                <li class="list-item"> Harnessing <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Tyre</div>
+            <ul class="list-items">
+                <li class="list-item"> Tyre Rear  <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Exterior Body</div>
+            <ul class="list-items">
+                <li class="list-item"> Door Handles <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> Door Hinges <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> Front Bumper <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> Doors <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Clean</span></li>
+                <li class="list-item"> Fuel Lid <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> Rear Bumper <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Clean</span></li>
+                <li class="list-item"> Windshield Front <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Clean</span></li>
+                <li class="list-item"> Wiper Arm <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+
+            <div class="list-heading mt20">Interior Body</div>
+            <ul class="list-items">
+                <li class="list-item"> Console <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> Door Latch System <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> Door Locking System <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> Panels <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Denting/Painting</div>
+            <ul class="list-items">
+                <li class="list-item"> Dent <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> Full Body Paint <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Under the hood Noise</div>
+            <ul class="list-items">
+                <li class="list-item"> Belts &amp; Pulleys Noise <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> Dead Battery Noise <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> Hoses Noise <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> Manifold Noise <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+            <div class="list-heading mt20">Under the body Noise</div>
+            <ul class="list-items">
+                <li class="list-item"> Brake Noise <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> Exhaust System Noise <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+                <li class="list-item"> Suspension Noise <span class="service-action capitalize pull-right"><i class="fa fa-check"></i>&nbsp;Check</span></li>
+            </ul>
+        </div>
+
+        <div class="row booknowinforow">
+            <button class="waves-effect waves-light waves-cg red btn-large cg-btn-2 message-submit red book-now-info-button" type="submit" name="action">BOOK NOW
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </div>
+</div>
 
 <footer>
 	<div class="container">
@@ -1854,8 +1760,10 @@
 </footer>
 
 <div id="background">
-	<div class="background">
-		<img src="/../../static/revamp/img/Backgrounds/{{veh_type}}-{{service}}.jpg" alt="" class="background">
+	<!--<div class="background">-->
+	<div class="background {{veh_type}}-{{service}}"></div>
+
+		<!--<img src="/../../static/revamp/img/Backgrounds/{{veh_type}}-{{service}}.jpg" alt="" class="background">-->
 	</div>
 </div>
 <div class="loading-pane">
