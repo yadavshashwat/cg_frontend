@@ -47,6 +47,20 @@ $(document).ready(function(){
 
 });
 
+        $('.autocomplete').focusout(function(){
+            setTimeout(function(){
+            $('.autocomplete-content').hide();
+                    }, 100);
+        })
+
+
+// $('body').on('click','.autocomplete-content li',function(){
+//
+//     var data = $(this).text()
+//     console.log(data)
+//     $(this).closest('div').find('input').value(data)
+// });
+
 
 // Navbar Colour - white transition
 

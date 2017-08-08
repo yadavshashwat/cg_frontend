@@ -481,6 +481,22 @@ var Global = {
         });
 
 
+
+
+
+        $('.autocomplete').focusout(function(){
+            setTimeout(function(){
+            $('.autocomplete-content').hide();
+                    }, 100);
+        })
+
+
+        // $('body').on('click','.autocomplete-content li',function(){
+        //     var data = $(this).text()
+        //     console.log(data)
+        //     $(this).closest('div').find('input').value(data)
+        // });
+
 // =====================================================================================
 //     Booking/ Lead Management
 // =====================================================================================
@@ -4453,6 +4469,8 @@ var Global = {
             );
 
         })
+
+
         // -- Locality Search
         $('#locality').on('keyup',function(e,event,data){
             var code = (e.keyCode || e.which);
@@ -4597,11 +4615,11 @@ var Global = {
 
         $('#new-booking #telephone').change(function() {
             // $('#bill-detail #cust_bill_number').blur(function () {
-            console.log("Triggerred")
+            // console.log("Triggerred")
             setTimeout(function(){
                 var cust_number = $('#new-booking #telephone').val();
                 // var cust_number = $(this).val();
-                console.log(cust_number)
+                // console.log(cust_number)
                 Commons.ajaxData('fetch_all_users', {number2: cust_number}, "get", _this, _this.loadUserLeaddata);
 
             },100);
@@ -4627,6 +4645,90 @@ var Global = {
                 return;
             }
         });
+
+
+
+        $('#booking-details').on('keyup','#part_name',function(e,event,data){
+            var make = $('#booking-details #brand-cust').val()
+            var model = $('#booking-details #make-cust').val()
+            if (typeof(model) != "undefined") {
+               fuel_start = model.indexOf("(")
+               fuel_end = model.indexOf(")")
+               var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
+               model = model.substr(0, fuel_start - 1)
+           }
+
+            var part_name = $(this).val();
+                console.log(part_name)
+
+            var code = (e.keyCode || e.which);
+            if(code == 37 || code == 38 || code == 39 || code == 40 || code == 13) {
+                return;
+            }
+            Commons.ajaxData('get_parts_vehicle', {make_id: make,model_id :model,fuel_id :fuel,part_name:part_name}, "get", _this, _this.loadSearchPart);
+            $('#telephone').removeClass('invalid')
+        });
+
+        $('#booking-details').on('change','#part_name',function() {
+            // $('#bill-detail #cust_bill_number').blur(function () {
+            // console.log("Triggerred")
+            setTimeout(function(){
+            var make = $('#booking-details #brand-cust').val()
+            var model = $('#booking-details #make-cust').val()
+            if (typeof(model) != "undefined") {
+               fuel_start = model.indexOf("(")
+               fuel_end = model.indexOf(")")
+               var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
+               model = model.substr(0, fuel_start - 1)
+           }
+
+            var part_name = $(this).val();
+                // var cust_number = $(this).val();
+                // console.log(cust_number)
+            Commons.ajaxData('get_parts_vehicle', {make_id: make,model_id :model,fuel_id :fuel,part_name:part_name}, "get", _this, _this.loadPartDetails);
+
+            },100);
+            //      // $('#cust_bill_number').removeClass('invalid')
+        });
+        $('#booking-details').on('keyup','#part_name',function(e,event,data){
+            var code = (e.keyCode || e.which);
+            // console.log(code)
+            // alfa = $(this).find('li:hover')
+            // do nothing if it's an arrow key
+            var make = $('#booking-details #brand-cust').val()
+            var model = $('#booking-details #make-cust').val()
+            if (typeof(model) != "undefined") {
+               fuel_start = model.indexOf("(")
+               fuel_end = model.indexOf(")")
+               var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
+               model = model.substr(0, fuel_start - 1)
+           }
+            if(code == 13) {
+                var make = $('#booking-details #brand-cust').val()
+                var model = $('#booking-details #make-cust').val()
+            if (typeof(model) != "undefined") {
+               fuel_start = model.indexOf("(")
+               fuel_end = model.indexOf(")")
+               var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
+               model = model.substr(0, fuel_start - 1)
+           }
+
+            var part_name = $(this).val();
+                // console.log('Enter')
+                Commons.ajaxData('get_parts_vehicle', {make_id: make,model_id :model,fuel_id :fuel,part_name:part_name}, "get", _this, _this.loadPartDetails);
+                $('#new-booking #telephone').blur()
+                $(this).closest('.input-field').find('ul').hide()
+            }else if(code == 37 || code == 38 || code == 39 || code == 40){
+                var cust_number = $(this).closest('.input-field').find('li.active').text();
+                Commons.ajaxData('get_parts_vehicle', {make_id: make,model_id :model,fuel_id :fuel,part_name:part_name}, "get", _this, _this.loadPartDetails);
+            }else{
+                return;
+            }
+        });
+
+
+
+
 
 
         $('#new-booking .btn-send-booking').click(function () {
@@ -7290,7 +7392,7 @@ var Global = {
                             }
                             html += '</select></div></td>'
                         }
-                        html += '<td>' + '<input id="part_name" type="text" class="browser-default partnamebooking" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
+                        html += '<td>' + '<input id="part_name" type="text" class="browser-default partnamebooking autocomplete" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
                     }
                 }else{
                     if ( val.service_items[i].parttype==null ||  val.service_items[i].parttype===false || val.service_items[i].parttype=="NA") {
@@ -7298,7 +7400,7 @@ var Global = {
                     }else{
                         html += '<td class="invisible">' + '<input id="partmaketype" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].parttype + '" aria-required="true">' + '</td>';
                     }
-                    html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default  partnamebooking" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
+                    html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default  partnamebooking"  value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
                 }
                 // Part Type
                 if (val.req_user_admin || val.req_user_staff || val.req_user_agent) {
@@ -9733,6 +9835,26 @@ var Global = {
             $('#email').val(val.email_primary)
 
         });
+        Materialize.updateTextFields();
+    },
+
+
+    loadSearchPart:function(data){
+        var container = $('input.autocomplete');
+            
+        var parts = {};
+        container.autocomplete({
+            data : {}
+        })
+        // var locations = {};
+
+        $.each(data, function(ix, val){
+            parts[val.name] = null
+        });
+        // console.log(locations)
+        container.autocomplete({
+            data : parts
+        })
         Materialize.updateTextFields();
     },
     loadCallCustomer:function(data){
