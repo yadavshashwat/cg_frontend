@@ -1638,8 +1638,9 @@ var Global = {
             TOTAL_PRICE_ADMIN = 0;
             if (TOTAL_ITEMS_ADMIN == 1){
                 $('table tr').find('td:eq(0)').text(TOTAL_ITEMS_ADMIN)
-                $('table tr').find('td:eq(1) input').val('')
-                $('table tr').find('td:eq(3) input').val('')
+                $('table tr').find('td:eq(1) input').val('OES')
+                $('table tr').find('td:eq(2) input').val('')
+                $('table tr').find('td:eq(3) input').val('Labour')
                 $('table tr').find('td:eq(4) input').val('')
                 $('table tr').find('td:eq(5) input').val('')
                 $('table tr').find('td:eq(6) input').val('')
@@ -4625,7 +4626,7 @@ var Global = {
             },100);
             //      // $('#cust_bill_number').removeClass('invalid')
         });
-        $('#new-booking #telephone').on('keyup',function(e,event,data){
+        $('#new-booking #telephone').on('keyup',function(e){
             var code = (e.keyCode || e.which);
             // console.log(code)
             // alfa = $(this).find('li:hover')
@@ -4648,7 +4649,8 @@ var Global = {
 
 
 
-        $('#booking-details').on('keyup','#part_name',function(e,event,data){
+        $('#booking-details').on('keyup','.partnamebooking',function(e){
+            //console.log("1")
             var make = $('#booking-details #brand-cust').val()
             var model = $('#booking-details #make-cust').val()
             if (typeof(model) != "undefined") {
@@ -4659,20 +4661,23 @@ var Global = {
            }
 
             var part_name = $(this).val();
-                console.log(part_name)
+                //console.log(part_name)
 
             var code = (e.keyCode || e.which);
             if(code == 37 || code == 38 || code == 39 || code == 40 || code == 13) {
                 return;
+            }else{
+                $('#part_name').closest('tbody').find('ul').remove()
+
+                Commons.ajaxData('get_parts_vehicle', {make_id: make,model_id :model,fuel_id :fuel,part_name:part_name}, "get", _this, _this.loadSearchPart);
             }
-            Commons.ajaxData('get_parts_vehicle', {make_id: make,model_id :model,fuel_id :fuel,part_name:part_name}, "get", _this, _this.loadSearchPart);
-            $('#telephone').removeClass('invalid')
         });
 
-        $('#booking-details').on('change','#part_name',function() {
+        $('#booking-details').on('change','.partnamebooking',function() {
             // $('#bill-detail #cust_bill_number').blur(function () {
             // console.log("Triggerred")
-            setTimeout(function(){
+            console.log("2")
+
             var make = $('#booking-details #brand-cust').val()
             var model = $('#booking-details #make-cust').val()
             if (typeof(model) != "undefined") {
@@ -4681,50 +4686,60 @@ var Global = {
                var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
                model = model.substr(0, fuel_start - 1)
            }
+            CONTAINER = $(this);
 
-            var part_name = $(this).val();
-                // var cust_number = $(this).val();
-                // console.log(cust_number)
-            Commons.ajaxData('get_parts_vehicle', {make_id: make,model_id :model,fuel_id :fuel,part_name:part_name}, "get", _this, _this.loadPartDetails);
+            setTimeout(function(){
+                part_name = CONTAINER.val();
+                console.log(part_name)
+                Commons.ajaxData('get_parts_vehicle', {make_id: make,model_id :model,fuel_id :fuel,part_name:part_name}, "get", _this, _this.loadPartDetails)
+            },10);
 
-            },100);
             //      // $('#cust_bill_number').removeClass('invalid')
         });
-        $('#booking-details').on('keyup','#part_name',function(e,event,data){
-            var code = (e.keyCode || e.which);
-            // console.log(code)
-            // alfa = $(this).find('li:hover')
-            // do nothing if it's an arrow key
-            var make = $('#booking-details #brand-cust').val()
-            var model = $('#booking-details #make-cust').val()
-            if (typeof(model) != "undefined") {
-               fuel_start = model.indexOf("(")
-               fuel_end = model.indexOf(")")
-               var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
-               model = model.substr(0, fuel_start - 1)
-           }
-            if(code == 13) {
-                var make = $('#booking-details #brand-cust').val()
-                var model = $('#booking-details #make-cust').val()
-            if (typeof(model) != "undefined") {
-               fuel_start = model.indexOf("(")
-               fuel_end = model.indexOf(")")
-               var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
-               model = model.substr(0, fuel_start - 1)
-           }
 
-            var part_name = $(this).val();
-                // console.log('Enter')
-                Commons.ajaxData('get_parts_vehicle', {make_id: make,model_id :model,fuel_id :fuel,part_name:part_name}, "get", _this, _this.loadPartDetails);
-                $('#new-booking #telephone').blur()
-                $(this).closest('.input-field').find('ul').hide()
-            }else if(code == 37 || code == 38 || code == 39 || code == 40){
-                var cust_number = $(this).closest('.input-field').find('li.active').text();
-                Commons.ajaxData('get_parts_vehicle', {make_id: make,model_id :model,fuel_id :fuel,part_name:part_name}, "get", _this, _this.loadPartDetails);
-            }else{
-                return;
-            }
-        });
+        // $('#booking-details').on('keyup','.partnamebooking',function(e,event,data){
+        // // $('#part_name').closest('td').find('ul').remove()
+        //    console.log("3")
+        
+        //    var code = (e.keyCode || e.which);
+        //    // console.log(code)
+        //    // alfa = $(this).find('li:hover')
+        //    // do nothing if it's an arrow key
+        //    var make = $('#booking-details #brand-cust').val()
+        //    var model = $('#booking-details #make-cust').val()
+        //    if (typeof(model) != "undefined") {
+        //       fuel_start = model.indexOf("(")
+        //       fuel_end = model.indexOf(")")
+        //       var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
+        //       model = model.substr(0, fuel_start - 1)
+        //   }
+        //    if(code == 13) {
+        //                         $('#part_name').closest('td').find('ul').remove()
+
+        //        var make = $('#booking-details #brand-cust').val()
+        //        var model = $('#booking-details #make-cust').val()
+        //    if (typeof(model) != "undefined") {
+        //       fuel_start = model.indexOf("(")
+        //       fuel_end = model.indexOf(")")
+        //       var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
+        //       model = model.substr(0, fuel_start - 1)
+        //   }
+        
+        //    var part_name = $(this).val();
+        //        // console.log('Enter')
+        //        Commons.ajaxData('get_parts_vehicle', {make_id: make,model_id :model,fuel_id :fuel,part_name:part_name}, "get", _this, _this.loadPartDetails);
+        //        $('#new-booking #telephone').blur()
+        //        $(this).closest('.input-field').find('ul').hide()
+        //    }else if(code == 37 || code == 38 || code == 39 || code == 40){
+
+        //        var cust_number = $(this).closest('.input-field').find('li.active').text();
+        //        Commons.ajaxData('get_parts_vehicle', {make_id: make,model_id :model,fuel_id :fuel,part_name:part_name}, "get", _this, _this.loadPartDetails);
+        //    }else{
+        //     $('#part_name').closest('td').find('ul').remove()
+
+        //        return;
+        //    }
+        // });
 
 
 
@@ -6869,6 +6884,7 @@ var Global = {
 
                     } else {
                         html_jc_c += '<div class="row job-row" data-class="Check">'
+
                         html_jc_c += '<div class="col s4 m7 l7 job-summary-name">'
                         html_jc_c += '<div class="input-field"><i class="material-icons prefix">receipt</i><input id="job_name' + i + '"  disabled type="text" value="' + val.job_summary[i]['Job'] + '"><label for="job_name' + i + '" >Job - ' + (i + 1) + '</label></div>'
                         html_jc_c += '</div>'
@@ -7358,7 +7374,7 @@ var Global = {
                         } else {
                             html += '<td>' + '<input id="partmaketype" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].parttype + '" aria-required="true">' + '</td>';
                         }
-                        html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default partnamebooking" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
+                        html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default partnamebooking" value ="' + val.service_items[i].name + '" aria-required="true">' + '<label for="part_name"></label></td>';
                     } else {
                         if (val.service_items[i].parttype == null || val.service_items[i].parttype === false || val.service_items[i].parttype == "NA") {
                             html += '<td>' + '<div class="input-field sort" id ="partmaketype"><select  class="browser-default">'
@@ -7392,7 +7408,7 @@ var Global = {
                             }
                             html += '</select></div></td>'
                         }
-                        html += '<td>' + '<input id="part_name" type="text" class="browser-default partnamebooking autocomplete" value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
+                        html += '<td>' + '<input id="part_name" type="text" class="browser-default partnamebooking autocomplete" value ="' + val.service_items[i].name + '" aria-required="true"><label for="part_name"></label>' + '</td>';
                     }
                 }else{
                     if ( val.service_items[i].parttype==null ||  val.service_items[i].parttype===false || val.service_items[i].parttype=="NA") {
@@ -7400,7 +7416,7 @@ var Global = {
                     }else{
                         html += '<td class="invisible">' + '<input id="partmaketype" type="text" disabled class="noborder browser-default" value ="' + val.service_items[i].parttype + '" aria-required="true">' + '</td>';
                     }
-                    html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default  partnamebooking"  value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
+                    html += '<td>' + '<input id="part_name" type="text" disabled class="noborder browser-default partnamebooking"  value ="' + val.service_items[i].name + '" aria-required="true">' + '</td>';
                 }
                 // Part Type
                 if (val.req_user_admin || val.req_user_staff || val.req_user_agent) {
@@ -8302,6 +8318,7 @@ var Global = {
     },
     loadLocation:function(data){
         var container = $('input.autocomplete');
+
         var locations = {};
         container.autocomplete({
             data : locations
@@ -9840,22 +9857,43 @@ var Global = {
 
 
     loadSearchPart:function(data){
-        var container = $('input.autocomplete');
-            
+        $('#part_name').closest('td').find('ul').remove();
+
+        var container = $('input#part_name.autocomplete');
         var parts = {};
         container.autocomplete({
-            data : {}
+            data : parts
         })
-        // var locations = {};
 
         $.each(data, function(ix, val){
             parts[val.name] = null
         });
-        // console.log(locations)
         container.autocomplete({
             data : parts
         })
         Materialize.updateTextFields();
+    },
+
+    loadPartDetails:function(data){
+
+        //console.log("3")
+        //console.log(CONTAINER)
+          $.each(data, function(ix, val){
+            //console.log(val.type)
+            //console.log(val.quantity)
+            //console.log(val.unit_price)
+            //console.log(val.price)
+
+            CONTAINER.closest('tr').find('#part_type').val(val.type)
+            CONTAINER.closest('tr').find('#part_units').val(val.quantity)
+            CONTAINER.closest('tr').find('#part_unitprice').val(val.unit_price)
+            CONTAINER.closest('tr').find('#part_price').val(val.price)
+        });
+        Materialize.updateTextFields();
+
+        $('#customer-detail #estimate-table').click()
+
+
     },
     loadCallCustomer:function(data){
         alert('Call Generated')
