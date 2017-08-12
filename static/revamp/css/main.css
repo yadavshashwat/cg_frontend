@@ -1303,7 +1303,7 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
     cursor: pointer;
 }
 .header-sms{
-    background: #F85D5D;
+    background: #9c27b0;
     color: #FFF;
 }
 #bookings .selected-filters-row{

@@ -14,21 +14,14 @@ $(document).ready(function() {
     // var b = $('.home-form').height();
     // console.log(a)
     alfa = parseInt('80px')
-    // console.log(a-alfa)
-    sourcelen = SOURCES.length;
-
-    container = $('#bookings #Source').find('select')
-    container.html('')
-    html = '<option value="" disabled selected>Select Source</option>'
     Commons.ajaxData('fetch_all_users', {type:"agent"}, "get", Global, Global.loadAgentdata3,null, '.loading-pane');
-    // container2 = $('#bookings #Agent_name').find('select')
-    for (i = 0; i < sourcelen; i++) {
-        html += '<option value="'+SOURCES[i] +'">'+SOURCES[i]+'</option>'
-    }
+    Commons.ajaxData('view_all_campaigns',  {}, "get", Global, Global.loadCampaignList,null, '.loading-pane');
+
+    // console.log(a-alfa)
 
 
 
-    container.html(html)
+    //container.html(html)
 
     var viewportWidth = $(window).width();
     if (viewportWidth <= 600) {
@@ -240,36 +233,37 @@ var VEHICLE_MAKE = ""
 var VEHICLE_MODEL = ""
 var VEHICLE_FUEL = ""
 var MONTH_TABLE = ""
-var SOURCES = ['Google Adwords',
-    'Repeat Customer',
-    'Employee Referral',
-    'External Referral',
-    'JustDial',
-    'Pamphlet',
-    'Auto Advertisement',
-    'On-Ground Marketing',
-    'Sulekha',
-    'Database - Cold Calling',
-    'Chat',
-    'B2B',
-    'Partner - Droom',
-    'Partner - Wishup',
-    'Partner - Housejoy',
-    'Partner - UrbanClap',
-    'SMB1M',
-    'SMB1F',
-    'SMB2M',
-    'SMB2F',
-    'Walk in',
-    'Partner - Mr Right',
-    'Web Search',
-    'Unknown',
-    'Society Camps',
-    'Check Up Camps',
-    'Sign Up Lead',
-    'Facebook Ad',
-    'Mahindra Authorized',
-    'Exotel']
+var SOURCES = []
+//var SOURCES = ['Google Adwords',
+//    'Repeat Customer',
+//    'Employee Referral',
+//    'External Referral',
+//    'JustDial',
+//    'Pamphlet',
+//    'Auto Advertisement',
+//    'On-Ground Marketing',
+//    'Sulekha',
+//    'Database - Cold Calling',
+//    'Chat',
+//    'B2B',
+//    'Partner - Droom',
+//    'Partner - Wishup',
+//    'Partner - Housejoy',
+//    'Partner - UrbanClap',
+//    'SMB1M',
+//    'SMB1F',
+//    'SMB2M',
+//    'SMB2F',
+//    'Walk in',
+//    'Partner - Mr Right',
+//    'Web Search',
+//    'Unknown',
+//    'Society Camps',
+//    'Check Up Camps',
+//    'Sign Up Lead',
+//    'Facebook Ad',
+//    'Mahindra Authorized',
+//    'Exotel']
 // DATE_TYPE =
 
 // Super Admin Code Start
@@ -4183,7 +4177,7 @@ var Global = {
             $('#expense-details').hide()
             $('#bill-details').hide()
             $('#settlement-details').hide()
-
+            Commons.ajaxData('view_all_campaigns',  {}, "get", _this, _this.loadCampaignList,null, '.loading-pane');
 
             var path = window.location.pathname.split('/')
             var new_path = path.slice(0,2).join('/')+'/campaign/'
@@ -4194,10 +4188,29 @@ var Global = {
         $('#campaign-details .send-sms-campaign').click(function() {
             message =     $('#sms_campaign_message').val()
             Commons.ajaxData('send_sms_campaign',  {message: message}, "get", _this, _this.loadCampaign,null, '.loading-pane');
+        });
+        $('#campaign-details .btn-addcampaign').click(function() {
+            c_name =     $('#camp_name').val()
+            c_desc =     $('#camp_desc').val()
 
-            // Commons.ajaxData('send_sms_campaign', {message: message}, "get", _this, _this.loadModels);
+            Commons.ajaxData('add_delete_campaign',  {c_name: c_name,c_desc:c_desc,add_del:"add"}, "get", _this, _this.loadNewCampaignList,null, '.loading-pane');
+            setTimeout(function(){
+                Commons.ajaxData('view_all_campaigns',  {}, "get", _this, _this.loadCampaignList,null, '.loading-pane');
+            },100)
+        });
+
+        $('#campaign-details').on('click',' .delete-camp',function() {
+            c_name =     $(this).closest('tr').attr('data-class')
+            //c_desc =     $('#camp_desc').val()
+
+            Commons.ajaxData('add_delete_campaign',  {c_name: c_name,add_del:"del"}, "get", _this, _this.loadDelCampaignList,null, '.loading-pane');
+            setTimeout(function(){
+                Commons.ajaxData('view_all_campaigns',  {}, "get", _this, _this.loadCampaignList,null, '.loading-pane');
+            },100)
 
         });
+
+
 // =====================================================================================
 //    New Booking
 // =====================================================================================
@@ -9927,7 +9940,45 @@ var Global = {
     },
     loadShareReport:function(data){
         alert('Report Shared!')
+    },
+    loadCampaignList:function(data){
+        SOURCES = []
+         container = $('#campaign-details .campaigns-list');
+                container.html('');
+                html = ''
+        var i = 1
+                $.each(data['detail'], function(ix, val){
+
+                    html += '<tr data-class="'+val.campaign_name+'">'
+                    html += '<td>' + i + '</td>'
+                    html += '<td>' + val.date_generated + '</td>'
+                    html += '<td>' + val.campaign_name + '</td>'
+                    html += '<td>' + val.campaign_desc + '</td>'
+                    html += '<td><i class="fa fa-trash-o delete delete-camp"></i></td>'
+                    i = i + 1
+                    SOURCES.push(val.campaign_name)
+
+                });
+                container.html(html);
+            sourcelen = SOURCES.length;
+            container2 = $('#bookings #Source').find('select')
+            container2.html('')
+            html2=''
+            html2 = '<option value="" disabled selected>Select Source</option>'
+            // container2 = $('#bookings #Agent_name').find('select')
+            for (i = 0; i < sourcelen; i++) {
+                html2 += '<option value="'+SOURCES[i] +'">'+SOURCES[i]+'</option>'
+            }
+        container2.html(html2)
+
     }
+    ,
+    loadNewCampaignList:function(data){
+    alert('Campaign Added')
+    },
+    loadDelCampaignList:function(data){
+    alert('Campaign Deleted')
+    },
 
 };
 

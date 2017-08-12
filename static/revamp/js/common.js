@@ -84,6 +84,8 @@ var Commons = {
         'call_customer':'/api/call_customer/',
         'generate_send_report':'/api/generate_send_report/',
         'get_parts_vehicle':'/api/get_parts_vehicle/',
+        'view_all_campaigns':'/api/view_all_campaigns/',
+        'add_delete_campaign':'/api/add_delete_campaign/',
 
 
     },
