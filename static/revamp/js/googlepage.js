@@ -636,7 +636,7 @@ var Global = {
 
 
 
-        $('#home .home-form .submit button').click(function(event){
+        $('#home .home-form-ad .submit button').click(function(event){
           var make = $('#brand-select').find('.selectize-input').find('div').attr('data-value');
            var model = $('#vehicle-select').find('.selectize-input').find('div').attr('data-value');
            var source_type = $('#home').attr('source-type')
