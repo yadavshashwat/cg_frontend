@@ -14,19 +14,19 @@ $(document).ready(function() {
     // console.log(a)
     alfa = parseInt('80px')
     // console.log(a-alfa)
-    sourcelen = SOURCES.length;
+    // sourcelen = SOURCES.length;
 
-    container = $('#bookings #Source').find('select')
-    container.html('')
-    html = '<option value="" disabled selected>Select Source</option>'
+    // container = $('#bookings #Source').find('select')
+    // container.html('')
+    // html = '<option value="" disabled selected>Select Source</option>'
 
-    for (i = 0; i < sourcelen; i++) {
-        html += '<option value="'+SOURCES[i] +'">'+SOURCES[i]+'</option>'
-    }
+    // for (i = 0; i < sourcelen; i++) {
+    //     html += '<option value="'+SOURCES[i] +'">'+SOURCES[i]+'</option>'
+    // }
 
 
 
-    container.html(html)
+    // container.html(html)
 
 
 

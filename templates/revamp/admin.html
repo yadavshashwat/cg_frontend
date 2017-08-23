@@ -3,7 +3,8 @@
     <meta charset="utf-8">
 
     <title>Car & Bike - Repair, Cleaning, Servicing | Road Side Assistance | Doorstep services</title>
-    <meta name="description" content="Click Garage is the ideal one-stop solution for all types of car & bike repair, service, interior cleaning and other associated works. We also offer quick and efficient road side assistance for cars (Nissan, Datsun, Volkswagen, Toyota, Tata, Skoda,  Renault, Maruti Suzuki, Mahindra, Hyundai, Honda, Ford, Fiat, Chevrolet) and bikes (Royal Enfield, Suzuki, TVS, Bajaj, KTM, Yamaha, Hero)."/>
+    <meta name="description" content="Click Garage is the ideal one-stop solution for all types of car & bike repair, service, interior cleaning and other associated works. We also offer quick and
+    efficient road side assistance for cars (Nissan, Datsun, Volkswagen, Toyota, Tata, Skoda,  Renault, Maruti Suzuki, Mahindra, Hyundai, Honda, Ford, Fiat, Chevrolet) and bikes (Royal Enfield, Suzuki, TVS, Bajaj, KTM, Yamaha, Hero)."/>
     <meta name="keywords" content="Car, Car Repair, Car Dry Cleaning, Bike, Bike Repair , car dent repair, Bumper Repair, car interior cleaning, road side assistance, motorcycle maintenance"/>
     <meta property="og:image" content="/../../static/revamp/img/Logo-Black.jpg"/>
     <meta name="viewport" content="width=device-width">
@@ -11,7 +12,9 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.clickgarage.in">
     <meta property="og:site_name" content="ClickGarage">
-    <meta property="og:description" content="Click Garage is the ideal one-stop solution for all types of car & bike repair, service, interior cleaning and other associated works. We also offer quick and efficient road side assistance for cars (Nissan, Datsun, Volkswagen, Toyota, Tata, Skoda,  Renault, Maruti Suzuki, Mahindra, Hyundai, Honda, Ford, Fiat, Chevrolet) and bikes (Royal Enfield, Suzuki, TVS, Bajaj, KTM, Yamaha, Hero).">
+    <meta property="og:description" content="Click Garage is the ideal one-stop solution for all types of car & bike repair, service, interior cleaning and other associated works. We also offer quick and
+     efficient road side assistance for cars (Nissan, Datsun, Volkswagen, Toyota, Tata, Skoda,  Renault, Maruti Suzuki, Mahindra, Hyundai, Honda, Ford, Fiat, Chevrolet) and bikes (Royal Enfield,
+      Suzuki, TVS, Bajaj, KTM, Yamaha, Hero).">
 
     <!-- Styles -->
     <link rel="stylesheet" href="/../../static/revamp/css/font-awesome.css">
@@ -4421,81 +4424,152 @@
         </div>
     </section>
     <section id="campaign-details" class="invisible page-section">
+        <div class="row header-coupon">
+            <div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover all-campaign selected">
+                All Campaigns
+            </div>
+            <div class="col s6 m6 l6 date-box  btn waves-effect waves-light card cardhover single-campaign">
+                Add/Edit Campaign
+            </div>
+        </div>
+
         <div class="container-fluid">
-            <div class="sms_send_box">
+            <div class="add_modify_campaign card invisible">
                 <div class="row">
-                    <div  class="card ">
-                        <div class="col l12 m12 s12 header-sms centered-text x23">
-                            <b>SMS Campaigns</b></br>
-                            SMS Credits Availaible : <span id="sms-credits">0</span>
+                    <h3 class="centered-text">Campaign Details</h3>
+                </div>
+                <div class="row">
+                    <div class="col l12 s12 m12">
+                        <div class="input-field">
+                            <i class="material-icons prefix">receipt</i>
+                            <input id="campaign_name" type="text" class="validate" required="" aria-required="true">
+                            <label for="campaign_name" data-error="Required">Campaign Name</label>
                         </div>
-                        <!--<div>-->
-                        <!--<input type="text"  name="timepicker" class="timepicker" />-->
-                        <!--</div>-->
-                        <!--</div>-->
-
-                        <!--<div id="sms-campaign" class="card">-->
-                        <br>
-
-                        <br>
-                        <br>
-                        <br>
-
-                        <div class="row">
-                            <div class="input-field col s12" >
-                                <i class="material-icons prefix">report_problem</i>
-                                <textarea id="sms_campaign_message" class="materialize-textarea"></textarea>
-                                <label for="sms_campaign_message">SMS Data</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col l12 s12 m12 centered-text">
-                                <button class="waves-effect waves-light btn-large cg-primary send-sms-campaign" type="submit" name="action">Send SMS
-                                    <i class="material-icons right">send</i>
-                                </button>
-                            </div>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col l12 s12 m12">
+                        <div class="input-field">
+                            <i class="material-icons prefix">assignment</i>
+                            <input id="campaign_desc" type="text" class="validate" required="" aria-required="true">
+                            <label for="campaign_desc" data-error="Required">Campaign Description</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col l12 s12 m12">
+                        <div class="input-field">
+                            <i class="material-icons prefix">message</i>
+                            <textarea id="sms_campaign_message" class="materialize-textarea"></textarea>
+                            <label for="sms_campaign_message" data-error="Required">SMS Content</label>
+                        </div>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note - Use $name$ to mention the first name of the customer
+                </div>
+
+                <div class="row">
+                    <div class="col l12 s12 m12 centered-text">
+                        <input type="checkbox" checked="" id="auto_flag"/><label for="auto_flag">Automatic Flag</label>'
+                    </div>
+                </div>
+                <br>
+                <h3 class="centered-text">Automatic Campaign Variables</h3>
+                <div class="row">
+                    <div class="col l12 s12 m12">
+                        <div class="input-field">
+                            <i class="material-icons prefix">alarm</i>
+                            <input id="campaign_freq" type="number" class="validate" required="" aria-required="true">
+                            <label for="campaign_freq" data-error="Required">Campaign Frequency</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col l12 s12 m12">
+                        <div class="input-field">
+                            <select id="campaign_type" class="browser-default">
+                                <option disabled selected value="">Type of Campaign</option>
+                                <option  value="Number of Bookings">Number of Bookings</option>
+                                <option  value="Last Booking Date">Last Booking Date</option>
+                                <option  value="Total Billing">Total Billing</option>
+                                <option  value="Birthday">Birthday</option>
+                                <option  value="Anniversary">Anniversary</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col l12 s12 m12">
+                        <div class="input-field">
+                            <i class="material-icons prefix">network_check</i>
+                            <input id="campaign_target" type="number" class="validate" required="" aria-required="true">
+                            <label for="campaign_target" data-error="Required">Target Variable</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col l12 s12 m12 centered-text">
+                        <button class="waves-effect waves-light btn-large cg-primary btn-addcampaign page-wide" type="submit" name="action">Add/Modify Campaign
+                            <i class="material-icons right">add</i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col l12 s12 m12 centered-text">
+                        <button class="waves-effect waves-light btn-large cg-primary btn-addruncampaign page-wide" type="submit" name="action">Add/Modify and Run Manual Campaign
+                            <i class="material-icons right">add</i>
+                        </button>
+                    </div>
+                </div>
+
             </div>
+
+            <!--<div class="sms_send_box">-->
+            <!--<div class="row">-->
+            <!--<div  class="card ">-->
+            <!--<div class="col l12 m12 s12 header-sms centered-text x23">-->
+            <!--<b>SMS Campaigns</b></br>-->
+            <!--SMS Credits Availaible : <span id="sms-credits">0</span>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="text"  name="timepicker" class="timepicker" />&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<div id="sms-campaign" class="card">&ndash;&gt;-->
+            <!--<br>-->
+            <!--<br>-->
+            <!--<br>-->
+            <!--<br>-->
+            <!-- <div class="row">
+            <div class="input-field col s12" >
+            <i class="material-icons prefix">report_problem</i> -->
+            <!--<textarea id="sms_campaign_message" class="materialize-textarea"></textarea>-->
+            <!--<label for="sms_campaign_message">SMS Data</label>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+            <!--<div class="col l12 s12 m12 centered-text">-->
+            <!--<button class="waves-effect waves-light btn-large cg-primary send-sms-campaign" type="submit" name="action">Send SMS-->
+            <!--<i class="material-icons right">send</i>-->
+            <!--</button>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<br>-->
+            <!--<br>-->
+            <!--<br>-->
+
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
             <div class="campaigns">
                 <div class="row">
-                    <div  class="card">
-                        <div class="row header-sms centered-text x23">
-                            <b>Campaign Add</b></br>
-                        </div>
-                        <br>
-
-                        <div class="row">
-
-                            <div class="input-field col s3 m3 l3 ">
-                                <i class="material-icons prefix">receipt</i>
-                                <input id="camp_name" type="text" class="validate">
-                                <label for="camp_name" data-error="Invalid Number">Campaign Name</label>
-                            </div>
-                            <div class="input-field col s9 m9 l7 ">
-                                <i class="material-icons prefix">receipt</i>
-                                <input id="camp_desc" type="text" class="validate">
-                                <label for="camp_desc" data-error="Invalid Number">Campaign Description</label>
-                            </div>
-                            <div class="col l2 s12 m12 centered-text">
-                                <button class="waves-effect waves-light btn-large cg-primary btn-addcampaign page-wide" type="submit" name="action">Add
-                                    <i class="material-icons right">add</i>
-                                </button>
-                            </div>
-                        </div>
-                        <br>
-
-                    </div>
                     <div class="row">
-                        <div class="row header-sms centered-text x23">
-                            <b>Campaign List</b></br>
-                        </div>
-                        <br>
+                        <!--<div class="row header-sms centered-text x23">-->
+                        <!--<b>Campaign List</b></br>-->
+                        <!--</div>-->
+                        <!--<br>-->
 
                         <div class="col l12 m12 s12">
                             <table class="striped card centered-text">
@@ -4504,11 +4578,17 @@
                                 <th>Start Date</th>
                                 <th>Campaign Name</th>
                                 <th>Campaign Desc</th>
+                                <th>Automatic</th>
+                                <th>SMS Sent</th>
+                                <th>Type</th>
+                                <th>Frequency</th>
+                                <th>Target</th>
+                                <th></th>
                                 <th></th>
                                 </thead>
                                 <tbody class="campaigns-list">
                                 </tbody>
-                                </table>
+                            </table>
                         </div>
                     </div>
 

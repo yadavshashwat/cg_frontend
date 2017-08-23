@@ -58,7 +58,7 @@ $(document).ready(function() {
         $('.admin-page .navbar .logo-white').show()
 
     }
-    
+
 });
 
 $(window).resize(function() {
@@ -480,8 +480,8 @@ var Global = {
 
         $('.autocomplete').focusout(function(){
             setTimeout(function(){
-            $('.autocomplete-content').hide();
-                    }, 100);
+                $('.autocomplete-content').hide();
+            }, 100);
         })
 
 
@@ -601,7 +601,7 @@ var Global = {
                     veh_type:VEH_TYPE,
                     page_num : PAGE_NUM,
                     agent_id:AGENT_BOOK,
-                   lead_follow:LEAD_FOLLOW
+                    lead_follow:LEAD_FOLLOW
                 }, "get", _this, _this.loadBookings2,null, '.loading-pane3');
                 if (LEAD_TYPE == "Booking"){
                     Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
@@ -1024,7 +1024,7 @@ var Global = {
                     veh_type:VEH_TYPE,
                     page_num : PAGE_NUM,
                     agent_id:AGENT_BOOK,
-                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                    lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadBookings,null, '.loading-pane');
                 Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                     lead_booking:LEAD_TYPE,
                     sort:SORT_TYPE,
@@ -1039,7 +1039,7 @@ var Global = {
                     veh_type:VEH_TYPE,
                     page_num : PAGE_NUM,
                     agent_id:AGENT_BOOK,
-                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                    lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
             }else{
                 status_marker = STATUS_TYPE
@@ -1056,7 +1056,7 @@ var Global = {
                     veh_type:VEH_TYPE,
                     page_num : PAGE_NUM,
                     agent_id:AGENT_BOOK,
-                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadBookings,null, '.loading-pane');
+                    lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadBookings,null, '.loading-pane');
                 Commons.ajaxData('view_all_bookings', {b_id:BOOKING_ID,
                     lead_booking:LEAD_TYPE,
                     sort:SORT_TYPE,
@@ -1071,7 +1071,7 @@ var Global = {
                     veh_type:VEH_TYPE,
                     page_num : PAGE_NUM,
                     agent_id:AGENT_BOOK,
-                lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadDelivery,null, '.loading-pane');
+                    lead_follow:LEAD_FOLLOW}, "get", _this, _this.loadDelivery,null, '.loading-pane');
 
             }
 
@@ -1409,7 +1409,7 @@ var Global = {
 
             console.log(HEIGHT_JOB)
             openbooking(bid)
-             $('body,html').animate(
+            $('body,html').animate(
                 {'scrollTop':0}
             );
         });
@@ -3288,11 +3288,11 @@ var Global = {
             history.pushState({},'',new_path)
 
         });
-    
-        
-        
+
+
+
         // GST Correction - Corrected
-            
+
         $('#bill-detail #bill_type').change(function(){
             bill_type = $('#bill_type').find('select').val()
             // console.log(bill_type)
@@ -3444,7 +3444,7 @@ var Global = {
         });
         // GST Correction - Corrected
 
-        
+
         $('#bill-detail #bill-table').on('click','.delete-bill-item' ,function(){
             $(this).closest('tr').remove()
             TOTAL_PRICE_BILL_ADMIN = 0
@@ -3480,7 +3480,7 @@ var Global = {
             $('#bill-detail table').click()
 
         })
-    
+
         // GST Correction - Corrected
         $('#bill-detail').on('keyup click','table',function(e,event,data){
             TOTAL_PRICE_BILL_ADMIN = 0;
@@ -3667,7 +3667,7 @@ var Global = {
                 GST_18_BILL_ADMIN = +(GST_18_BILL_ADMIN.toFixed(2))
 
 
-                
+
                 $('#bill-detail .total-amount-row-bill .total-amount').text(TOTAL_PRICE_BILL_ADMIN)
                 $('#bill-detail .vat-part-amount').text(VAT_PART_BILL_ADMIN)
                 $('#bill-detail .vat-lube-amount').text(VAT_LUBE_BILL_ADMIN)
@@ -3683,10 +3683,10 @@ var Global = {
                 $('#bill-detail .gst-28-amount').text(GST_28_BILL_ADMIN)
                 $('#bill-detail .gst-18-amount').text(GST_18_BILL_ADMIN)
 
-                
+
             }
         });
-        
+
         // GST Correction - corrected
         $('#bill-detail .btn-generateinvoice').click(function () {
             booking_data_id         = $('#bill-detail .booking-id').attr('data-class')
@@ -3767,7 +3767,7 @@ var Global = {
                 vat_lube: vat_lube,
                 vat_consumable: vat_consumable,
                 service_tax: service_tax,
-                
+
                 gst_part: gst_part,
                 gst_lube: gst_lube,
                 gst_consumable: gst_consumable,
@@ -4190,14 +4190,90 @@ var Global = {
             Commons.ajaxData('send_sms_campaign',  {message: message}, "get", _this, _this.loadCampaign,null, '.loading-pane');
         });
         $('#campaign-details .btn-addcampaign').click(function() {
-            c_name =     $('#camp_name').val()
-            c_desc =     $('#camp_desc').val()
+            c_name =     $('#campaign_name').val()
+            c_desc =     $('#campaign_desc').val()
+            sms_camp =     $('#sms_campaign_message').val()
 
-            Commons.ajaxData('add_delete_campaign',  {c_name: c_name,c_desc:c_desc,add_del:"add"}, "get", _this, _this.loadNewCampaignList,null, '.loading-pane');
+            auto_flag = document.getElementById('auto_flag').checked;
+            // auto =     $('#auto_flag').checked
+            campaign_freq =     $('#campaign_freq').val()
+            campaign_type =     $('#campaign_type').val()
+            campaign_target =     $('#campaign_target').val()
+            error = 0
+            if (c_name == ""){
+                error = 1
+               $('#campaign_name').addClass("invalid");
+            }
+
+            if (c_desc == ""){
+                   error = 1
+               $('#campaign_desc').addClass("invalid");
+            }
+
+            if (auto_flag){
+                if(campaign_freq == "" || campaign_freq < 0 ){
+                    error = 1
+                     $('#campaign_freq').addClass("invalid");
+                }
+                if(campaign_type == ""){
+                     error = 1
+                     $('#campaign_type').addClass("invalid");
+                }
+                if(campaign_target == "" || campaign_freq < 0 ){
+                     error = 1
+                     $('#campaign_target').addClass("invalid");
+                }
+                if(sms_camp == ""){
+                     error = 1
+                     $('#sms_campaign_message').addClass("invalid");
+                }
+            }
+
+            if (error == 0){
+               Commons.ajaxData('add_delete_campaign',  {c_name: c_name,c_desc:c_desc,add_del:"add",sms_camp:sms_camp, auto_flag:auto_flag, campaign_freq: campaign_freq, campaign_type: campaign_type, campaign_target:campaign_target}, "get", _this, _this.loadNewCampaignList,null, '.loading-pane');
+            }
+
             setTimeout(function(){
                 Commons.ajaxData('view_all_campaigns',  {}, "get", _this, _this.loadCampaignList,null, '.loading-pane');
             },100)
         });
+        $('#campaign-details .btn-addruncampaign').click(function() {
+            c_name =     $('#campaign_name').val()
+            c_desc =     $('#campaign_desc').val()
+            sms_camp =     $('#sms_campaign_message').val()
+            // auto_flag = document.getElementById('auto_flag').checked;
+            // // auto =     $('#auto_flag').checked
+            // campaign_freq =     $('#campaign_freq').val()
+            // campaign_type =     $('#campaign_type').val()
+            // campaign_target =     $('#campaign_target').val()
+
+            error = 0
+            if (c_name == ""){
+                error = 1
+               $('#campaign_name').addClass("invalid");
+            }
+
+            if (c_desc == ""){
+                   error = 1
+               $('#campaign_desc').addClass("invalid");
+            }
+
+            if(sms_camp == ""){
+                 error = 1
+                 $('#sms_campaign_message').addClass("invalid");
+            }
+
+            if (error == 0){
+               Commons.ajaxData('add_delete_campaign',  {c_name: c_name,c_desc:c_desc,add_del:"run",sms_camp:sms_camp}, "get", _this, _this.loadNewCampaignList,null, '.loading-pane');
+            }
+
+            setTimeout(function(){
+                Commons.ajaxData('view_all_campaigns',  {}, "get", _this, _this.loadCampaignList,null, '.loading-pane');
+            },100)
+        });
+
+
+
 
         $('#campaign-details').on('click',' .delete-camp',function() {
             c_name =     $(this).closest('tr').attr('data-class')
@@ -4209,6 +4285,36 @@ var Global = {
             },100)
 
         });
+
+        $('#campaign-details').on('click',' .modify-camp',function() {
+            c_id =     $(this).closest('tr').attr('data-id')
+            $('#campaign-details .date-box.single-campaign').click()
+               Commons.ajaxData('view_all_campaigns',  {c_id:c_id}, "get", _this, _this.loadCampaignModify,null, '.loading-pane');
+        });
+
+
+
+        $('#campaign-details .date-box.all-campaign').click(function(){
+            Commons.ajaxData('view_all_campaigns',  {}, "get", _this, _this.loadCampaignList,null, '.loading-pane');
+            $('#campaign-details .date-box').removeClass('selected')
+            $(this).addClass('selected')
+            $('#campaign-details .add_modify_campaign').hide()
+            $('#campaign-details .campaigns').show()
+        })
+
+        $('#campaign-details .date-box.single-campaign').click(function(){
+            $('#campaign-details .date-box').removeClass('selected')
+            $(this).addClass('selected')
+            $('#campaign-details .add_modify_campaign').show()
+            $('#campaign-details .campaigns').hide()
+            $('#campaign_name').val('')
+            $('#campaign_desc').val('')
+            $('#sms_campaign_message').val('')
+            $('#campaign_freq').val('')
+            $('#campaign_type').val('')
+            $('#campaign_target').val('')
+
+        })
 
 
 // =====================================================================================
@@ -4426,9 +4532,9 @@ var Global = {
             monsoon = ['Tyre Pressure','Tyre Tread Depth','Battery Water Level','Terminal Greasing','Battery Voltage','Underbody Damage', 'Underbody Rusting','Wiper Motors','Wiper Blades', 'Indicators','Headlamps Bulb','Fog Lights']
             general = ['Hinge Noises','Scratches and Dents','Indicators','Front Light','Rear Lights','Horn','Power Windows','Cluster Lights','Tyre Condition','Wiper Assembly','Brakes','Clutch Check/ Gear Check','AC (Heating/ Cooling) Check','Battery Check','Suspension','WA-WB']
             if (checkup_type == "Monsoon"){
-              check_up_list = monsoon
+                check_up_list = monsoon
             }else if (checkup_type == "General"){
-              check_up_list = general
+                check_up_list = general
             }
             no_checks = check_up_list.length
             container = $('#new-booking .checkup-select .checkups')
@@ -4466,7 +4572,7 @@ var Global = {
             $(this).closest('.check-type-list').remove()
             console.log(datatype)
             alfa = $('#new-booking').find('.btn-checkup'+'.'+datatype).removeClass('disabled')
-                // console.log(alfa.html)
+            // console.log(alfa.html)
         })
 
         $('#new-booking .add-jobs-list').on('click','.delete-job',function(){
@@ -4667,14 +4773,14 @@ var Global = {
             var make = $('#booking-details #brand-cust').val()
             var model = $('#booking-details #make-cust').val()
             if (typeof(model) != "undefined") {
-               fuel_start = model.indexOf("(")
-               fuel_end = model.indexOf(")")
-               var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
-               model = model.substr(0, fuel_start - 1)
-           }
+                fuel_start = model.indexOf("(")
+                fuel_end = model.indexOf(")")
+                var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
+                model = model.substr(0, fuel_start - 1)
+            }
 
             var part_name = $(this).val();
-                //console.log(part_name)
+            //console.log(part_name)
 
             var code = (e.keyCode || e.which);
             if(code == 37 || code == 38 || code == 39 || code == 40 || code == 13) {
@@ -4694,11 +4800,11 @@ var Global = {
             var make = $('#booking-details #brand-cust').val()
             var model = $('#booking-details #make-cust').val()
             if (typeof(model) != "undefined") {
-               fuel_start = model.indexOf("(")
-               fuel_end = model.indexOf(")")
-               var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
-               model = model.substr(0, fuel_start - 1)
-           }
+                fuel_start = model.indexOf("(")
+                fuel_end = model.indexOf(")")
+                var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
+                model = model.substr(0, fuel_start - 1)
+            }
             CONTAINER = $(this);
 
             setTimeout(function(){
@@ -4713,7 +4819,7 @@ var Global = {
         // $('#booking-details').on('keyup','.partnamebooking',function(e,event,data){
         // // $('#part_name').closest('td').find('ul').remove()
         //    console.log("3")
-        
+
         //    var code = (e.keyCode || e.which);
         //    // console.log(code)
         //    // alfa = $(this).find('li:hover')
@@ -4737,7 +4843,7 @@ var Global = {
         //       var fuel = model.substr(fuel_start + 1, fuel_end - fuel_start - 1)
         //       model = model.substr(0, fuel_start - 1)
         //   }
-        
+
         //    var part_name = $(this).val();
         //        // console.log('Enter')
         //        Commons.ajaxData('get_parts_vehicle', {make_id: make,model_id :model,fuel_id :fuel,part_name:part_name}, "get", _this, _this.loadPartDetails);
@@ -4824,19 +4930,19 @@ var Global = {
                     "settlement_cat":"Labour",
                     "type":"Labour",
                     "unit_price":"0"}]
-                    var today = new Date();
-                    var dd = today.getDate();
-                    var mm = today.getMonth()+1; //January is 0!
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth()+1; //January is 0!
 
-                    var yyyy = today.getFullYear();
-                    if(dd<10){
-                        dd='0'+dd;
-                    }
-                    if(mm<10){
-                        mm='0'+mm;
-                    }
-                    var date = dd+'-'+mm+'-'+yyyy;
-                    time = "09:30AM - 11:30AM"
+                var yyyy = today.getFullYear();
+                if(dd<10){
+                    dd='0'+dd;
+                }
+                if(mm<10){
+                    mm='0'+mm;
+                }
+                var date = dd+'-'+mm+'-'+yyyy;
+                time = "09:30AM - 11:30AM"
             }else{
                 if(TOTAL_PRICE_NEW_BOOKING<= 0 ){
                     error = 1
@@ -5563,7 +5669,7 @@ var Global = {
                 html += '                </div>'
                 html += '<div class="row">'
                 if(val.bill_generation_flag){
-                html += '                    <div class="bill-flag">Generated</div>'
+                    html += '                    <div class="bill-flag">Generated</div>'
                 }
                 html += '                </div>'
                 html += '                </div>'
@@ -5602,7 +5708,7 @@ var Global = {
             html += '        <div class="row card cardhover no-border-radius booking" data-class="' + val.id + '">'
             html += '            <div class="row"><div class="booking-open-btn">'
             html += '                <div class="col l1 s2 m2 booking-id-bar">'
-  if (val.clickgarage_flag){
+            if (val.clickgarage_flag){
                 html += '                    <b>CG #<span class="id">' + val.booking_id + '</span></b>'
             }else{
                 html += '                    <b>#<span class="id">' + val.booking_id + '</span></b>'
@@ -9252,7 +9358,7 @@ var Global = {
         setTimeout(function() {             $('#bill-table').click()       }, 1000);
 
     },
-    
+
     // GST Correction - Corrected
     loadTaxUpdateAgent:function(data){
         $.each(data, function(ix, val) {
@@ -9277,7 +9383,7 @@ var Global = {
                 GST_LUBE_PERCENT = parseFloat(val.gst_lube)
                 GST_PART_PERCENT = parseFloat(val.gst_parts)
                 GST_SERVICE_PERCENT = parseFloat(val.gst_service)
-             }else{
+            }else{
                 GST_CONSUMABLE_PERCENT = 0
                 GST_LUBE_PERCENT = 0
                 GST_PART_PERCENT = 0
@@ -9444,7 +9550,7 @@ var Global = {
                     }
 
                     if(val.bill_components[i]['type'] == "Part" || val.bill_components[i]['type'] == "Consumable" || val.bill_components[i]['type'] == "Part28"){
-                    html += '        <option value="Part28" selected>Part (28%)</option>'
+                        html += '        <option value="Part28" selected>Part (28%)</option>'
                     }else{
                         html += '        <option value="Part28">Part (28%)</option>'
                     }
@@ -9891,7 +9997,7 @@ var Global = {
 
         //console.log("3")
         //console.log(CONTAINER)
-          $.each(data, function(ix, val){
+        $.each(data, function(ix, val){
             //console.log(val.type)
             //console.log(val.quantity)
             //console.log(val.unit_price)
@@ -9943,43 +10049,78 @@ var Global = {
     },
     loadCampaignList:function(data){
         SOURCES = []
-         container = $('#campaign-details .campaigns-list');
-                container.html('');
-                html = ''
+        container = $('#campaign-details .campaigns-list');
+        container.html('');
+        html = ''
         var i = 1
-                $.each(data['detail'], function(ix, val){
+        $.each(data['detail'], function(ix, val){
 
-                    html += '<tr data-class="'+val.campaign_name+'">'
-                    html += '<td>' + i + '</td>'
-                    html += '<td>' + val.date_generated + '</td>'
-                    html += '<td>' + val.campaign_name + '</td>'
-                    html += '<td>' + val.campaign_desc + '</td>'
-                    html += '<td><i class="fa fa-trash-o delete delete-camp"></i></td>'
-                    i = i + 1
-                    SOURCES.push(val.campaign_name)
-
-                });
-                container.html(html);
-            sourcelen = SOURCES.length;
-            container2 = $('#bookings #Source').find('select')
-            container2.html('')
-            html2=''
-            html2 = '<option value="" disabled selected>Select Source</option>'
-            // container2 = $('#bookings #Agent_name').find('select')
-            for (i = 0; i < sourcelen; i++) {
-                html2 += '<option value="'+SOURCES[i] +'">'+SOURCES[i]+'</option>'
+            html += '<tr data-class="'+val.campaign_name+'" data-id="'+val.id+'">'
+            html += '<td>' + i + '</td>'
+            html += '<td>' + val.date_generated + '</td>'
+            html += '<td>' + val.campaign_name + '</td>'
+            html += '<td>' + val.campaign_desc + '</td>'
+            if (val.auto_flag){
+                html += '<td style="text-align: center;color:green"><i class="fa fa-circle"></i></td>'
+            }else{
+                html += '<td style="text-align: center;color:red"><i class="fa fa-circle"></i></td>'
             }
+            html += '<td>' + val.sms_sent + '</td>'
+            html += '<td>' + val.type + '</td>'
+            html += '<td>' + val.frequency + '</td>'
+            html += '<td>' + val.target + '</td>'
+
+            html += '<td><i style="color:purple; cursor:pointer" class="fa fa-trash-o delete delete-camp"></i></td>'
+            html += '<td><i style="color:purple; cursor:pointer" class="fa fa-pencil modify-camp"></i></td>'
+            i = i + 1
+            SOURCES.push(val.campaign_name)
+
+        });
+        container.html(html);
+        sourcelen = SOURCES.length;
+        container2 = $('#bookings #Source').find('select')
+        container2.html('')
+        html2=''
+        html2 = '<option value="" disabled selected>Select Source</option>'
+        // container2 = $('#bookings #Agent_name').find('select')
+        for (i = 0; i < sourcelen; i++) {
+            html2 += '<option value="'+SOURCES[i] +'">'+SOURCES[i]+'</option>'
+        }
         container2.html(html2)
 
     }
     ,
     loadNewCampaignList:function(data){
-    alert('Campaign Added')
+        alert('Campaign Added')
+         $('#campaign_name').val('')
+         $('#campaign_desc').val('')
+        $('#sms_campaign_message').val('')
+        $('#campaign_freq').val('')
+        $('#campaign_type').val('')
+        $('#campaign_target').val('')
     },
     loadDelCampaignList:function(data){
-    alert('Campaign Deleted')
+        alert('Campaign Deleted')
     },
+    loadCampaignModify:function(data) {
+        $.each(data['detail'], function (ix, val) {
+            $('#campaign_name').val(val.campaign_name)
+            $('#campaign_desc').val(val.campaign_desc)
+            $('#sms_campaign_message').val(val.sms_draft)
+            if (val.type == "null"){
+                $('#campaign_type').val('')
+            }else{
 
+            }
+            $('#campaign_freq').val(val.frequency)
+            $('#campaign_type').val(val.type)
+            $('#campaign_target').val(val.target)
+            if (val.auto_flag){
+                document.getElementById('auto_flag').checked = true
+            }else{
+                document.getElementById('auto_flag').checked = false
+            }
+        })
+         Materialize.updateTextFields();
+    }
 };
-
-
