@@ -5,11 +5,11 @@ document.onreadystatechange = function () {
 window.onpopstate = function(event) {
     location.reload()
 };
+
 // materialize css
 $(document).ready(function() {
     $('select').material_select();
     var a = $(window).height();
-
     // var b = $('.home-form').height();
     // console.log(a)
     alfa = parseInt('80px')

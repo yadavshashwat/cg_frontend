@@ -6,7 +6,7 @@
 .text-center{text-align:center;}
 .text-left{text-align:left;}
 .text-right{text-align:right;}
-.cardhover:hover{z-index:10;box-shadow:0 10px 40px rgba(74,20,140,0.3);}
+.cardhover:hover{z-index:10;box-shadow:0 10px 40px rgba(244,67,54,0.3);}
 .visible{display:inherit;}
 .invisible{display:none;}
 .invalid-select-box{border-color:red;}
