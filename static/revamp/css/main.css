@@ -454,11 +454,11 @@ font-weight: 700;
 #clients{background:transparent;}
 #clients .client-section{}
 #clients .purple-overlay{background:rgba(215,56,35,0.80);padding:130px 0px 130px 0px;-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7)";filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7);zoom:1;}
-#clients .red-overlay{background:rgba(66, 31, 134,0.30);padding:2% 0% 2% 0%;-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7)";filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7);zoom:1;}
+#clients .red-overlay{background:rgba(66, 31, 134,0.25);padding:2% 0% 2% 0%;-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7)";filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7);zoom:1;}
 #clients .featured-section-title{padding-top:10px;color:#FFFFFF;text-transform:uppercase;}
 #clients .client{text-align:center;
-border: 1px solid #fff;
-background-color : #fff;
+/*border: 1px solid #fff;*/
+/*background-color : #fff;*/
 }
 /*#testimonials{background:#F7F7F7;}*/
 #testimonials .testimonial-section{background-color:#F7F7F7;}
