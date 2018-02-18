@@ -460,6 +460,14 @@ font-weight: 700;
 /*border: 1px solid #fff;*/
 /*background-color : #fff;*/
 }
+
+#clients .client img{
+    /*height: 80px;*/
+    /*padding: ;*/
+    background: #fff;
+    /*padding: 2px;*/
+    margin: 4px;
+}
 /*#testimonials{background:#F7F7F7;}*/
 #testimonials .testimonial-section{background-color:#F7F7F7;}
 #testimonials h3{color:#232527;}
