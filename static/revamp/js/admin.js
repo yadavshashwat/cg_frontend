@@ -5152,7 +5152,7 @@ var Global = {
         month[11] = "December";
         var n = month[today.getMonth()];
         to_month = n +" " + today.getFullYear()
-        list_months = diff('January 2017', to_month)
+        list_months = diff('January 2018', to_month)
 
         var openanalytics = function(){
             $('.navbar li').removeClass('selected')
