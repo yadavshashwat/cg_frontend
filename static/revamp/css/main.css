@@ -300,7 +300,7 @@ body>.select2-container{width:auto !important;margin-top:-35px!important;}
 #background{width:100%;position:fixed;top:0px;left:0px;z-index:-1;}
 #background img{width:100%;}
 #home.background-color-home{background:rgba(215,56,35,0.7)!important;}
-#home.background-color-home2{background:rgba(215,56,35,0)!important;}
+#home.background-color-home2{background:rgba(215,56,35,0.2)!important;}
 #home{background:rgba(215,56,35,0.20);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5F85C5C,endColorstr=#E5F85C5C)";filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5F85C5C,endColorstr=#E5F85C5C);zoom:1;min-height:inherit;}
 
 #home .hero-text2{
