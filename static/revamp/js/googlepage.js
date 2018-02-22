@@ -199,7 +199,7 @@ $(document).ready(function(){
 
     $('.howitworks-section-2').hide()
     if (vehtype == "Car" && service == "CarCare"){
-        var PAGEHEADER = "BEST CAR CLEANING SERVICES IN  DELHI NCR"
+        var PAGEHEADER = "BEST CAR CLEANING SERVICES IN  India"
         var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Interior & Boot Vaccuming</li><li><i class='fa fa-check x10 icon'></i>&nbsp;Seats Dusting</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Exterior Shampoo</li><li><i class='fa fa-check x10 icon'></i>&nbsp;3M/Meguiar Products used</li></ul></div></div>"
 
         var DESC = "CarCrew provides quality exterior and interior car cleaning. Its eco friendly car wash makes sure that there is less harm to the environment. For all our car cleaning, we only use 3M and Wurth products. With our doorstep service and mutiple payment options, we aim to make auto detailing a customer delight. Our service include - car wash, car dry cleaning, mobile car detailing, car polishing etc. CarCrew provides you with the professional car cleaning service at your doorstep. "
@@ -207,14 +207,14 @@ $(document).ready(function(){
         $('.car-service').show()
 
     }else if(vehtype =="Car" && service == "Servicing"){
-        var PAGEHEADER = "#1 Car Service in Delhi-NCR"
+        var PAGEHEADER = "#1 Car Service in India"
         var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Full Car Service</li><li><i class='fa fa-check x10 icon'></i>&nbsp;Free Pick-Up & Drop</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Genuine Spares</li><li><i class='fa fa-check x10 icon'></i>&nbsp;2 Months Warranty</li></ul></div></div>"
         var DESC = "CarCrew's scheduled maintenance services strictly follow processes recommended by OEM's. Standard Service includes a 40 point check up along with the consumables replacement and essential fluid top-ups. Standard service comes with free exterior wash, interior cleaning and free pick-up and drop. CarCrew provides best online car service in Gurgaon making car maintenance easy, affordable and completely transparent. We also provide you with the best car service deals. Full car service is faciliated at one of the CarCrew car service centre. So book car service now!"
         $('.car-service').show()
 
         // var FEATURES = "Lowest price - Upfront estimate&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;OES/OEM Parts used&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;Trained mechanics"
     }else if(vehtype =="Car" && service == "Repairing"){
-        var PAGEHEADER = " TOP QUALITY CAR REPAIRS IN DELHI NCR"
+        var PAGEHEADER = " TOP QUALITY CAR REPAIRS IN INDIA"
         var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;40 point check-up</li><li><i class='fa fa-check x10 icon'></i>&nbsp;Expert mechanics</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;Upfront estimates </li><li><i class='fa fa-check x10 icon'></i>&nbsp;Pick-up & drop</li></ul></div></div>"
         var DESC = "CarCrew team of expert mechanics take care of car repair of your vehicle. From car ac service or car ac repair to clutch overhaul, the nearest CarCrew car mechanic will take care of your vehicle and do the necessary car repairs. CarCrew provides you will all repair solutions including steering repair, car headlight repair, tires for car, car engine repair etc. Book service now to get the best mechanic to fix your car. Looking for minor fixes such as wiper blade replacement, horn malfunctioning, headlight replacement etc. ? CarCrew auto experts will come to your doorstep and fix it."
         // var FEATURES = "OES/OEM Parts used&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;Trained mechanics&nbsp;<i class='fa fa-check x10 icon'></i>&nbsp;Free pick up and drop"
@@ -234,7 +234,7 @@ $(document).ready(function(){
 
 
     }else if(vehtype =="Car" && service == "Denting"){
-        var PAGEHEADER = "BEST IN CLASS DENTING/ PAINTING FACILITY IN DELHI NCR"
+        var PAGEHEADER = "BEST IN CLASS DENTING/ PAINTING FACILITY IN INDIA"
         var FEATURES = "<div class='row lists'><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;High Quality paint only!</li><li><i class='fa fa-check x10 icon'></i>&nbsp;Lowest prices</li></ul></div><div class='col l6 m6 s12'><ul><li><i class='fa fa-check x10 icon'></i>&nbsp;1 year warranty </li><li><i class='fa fa-check x10 icon'></i>&nbsp;Pick-up & drop</li></ul></div></div>"
         var DESC = "CarCrew provides you with the best custom denting/painting job using high quality Du-Pont paint and provides a 1 year warranty on the painting. It also includes rubbing & polishing of the panel. We have the best car denting painting services. Quality car dent repair at a body shop. Car Paint lusture is restored and it is as good as new. All the car dent and car scratch are removed from the car by our expert mechanics"
 
