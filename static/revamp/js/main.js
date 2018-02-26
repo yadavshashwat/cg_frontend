@@ -396,7 +396,9 @@ var Global = {
            var make = $('#brand-select').find('.selectize-input').find('div').attr('data-value');
            var model = $('#vehicle-select').find('.selectize-input').find('div').attr('data-value');
            // var fuel = $('#fuel-type-select').find('.active span').text();
-           var vehtype = $('#home .veh-cat-card.selected').text().trim()
+           // var vehtype = $('#home .veh-cat-card.selected').text().trim()
+           var vehtype = "Car"
+
            var error = 0 ;
            if (typeof(model) != "undefined") {
                fuel_start = model.indexOf("(")

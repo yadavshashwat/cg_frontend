@@ -351,7 +351,10 @@ margin-left: 2%}
     /*height:100%;*/
 }
 .row-zero-margin{margin:0px!important;}
-#home .home-form-2,#vehicle-select-form .home-form-2{height:100%;line-height:100%;padding:2%;border-top-left-radius:0px;border-top-right-radius:0px;z-index:60;}
+#home .home-form-2,#vehicle-select-form .home-form-2{height:100%;line-height:100%;padding:2%;
+    /*border-top-left-radius:0px;*/
+    /*border-top-right-radius:0px;*/
+    z-index:60;}
 #home .home-form-2 .vehicle-details,#vehicle-select-form .home-form-2 .vehicle-details, .home-form .vehicle-details{
     /*padding:5%;*/
 }

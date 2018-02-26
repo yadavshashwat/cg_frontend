@@ -236,7 +236,9 @@ var Global = {
             var make = $('#brand-select').find('.selectize-input').find('div').attr('data-value');
             var model = $('#vehicle-select').find('.selectize-input').find('div').attr('data-value');
             // var fuel = $('#fuel-type-select').find('.active span').text();
-            var vehtype = $('#vehicle-select-form .veh-cat-card.selected').text().trim()
+            // var vehtype = $('#vehicle-select-form .veh-cat-card.selected').text().trim()
+            var vehtype = "Car"
+
             var error = 0 ;
             // if(make == "" || model == "" ||make == "Make" || model == "Model" ) {
             //     $('#choose-vehicle-error').text('Please select vehicle');
