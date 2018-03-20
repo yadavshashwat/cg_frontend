@@ -2,7 +2,7 @@
 var Global = {
     init:function(){
         var _this = this;
-//    $("[data-role=panel]").panel().enhanceWithin();  
+//    $("[data-role=panel]").panel().enhanceWithin();
         _this.events();
         Commons.eventHandlers();
         //$('#submit-button').button('disable');
@@ -43,7 +43,7 @@ var Global = {
         if(_this.eventsAdded)
             return false;
         _this.eventsAdded = true;
-        console.log('adding hanlder')   
+        console.log('adding hanlder')
 
     $('.booking-search').on("click", function(event, data) {
 //          console.log( data.state.info );
@@ -333,7 +333,7 @@ var Global = {
     $('.centered-content').on('click', '#sms-button', function(e){
         console.log('testing');
         var obj = {};
-        var parent_div = $(this).closest('.booking-entry') 
+        var parent_div = $(this).closest('.booking-entry')
         obj.bkg_id = parent_div.find('#id-div p').text();
         obj.service = parent_div.find('#service-div #service-type').text().replace("Service: ","");
         obj.pickup_time = parent_div.find('#service-div #pickup-time').text().replace("Pickup-time: ","");
@@ -394,10 +394,10 @@ var Global = {
         $('.sms-popup .driver-details').text(driver_det);
             }
         );
-        
+
     $('#select-advisor').on('change', function(e){
         var advisor_det = $('#select-advisor option:selected').text();
-        $('.sms-popup .advisor-details').text(advisor_det);        
+        $('.sms-popup .advisor-details').text(advisor_det);
             }
         );
 
@@ -813,5 +813,3 @@ var Global = {
 document.onreadystatechange = function () {
       Global.init();
 }
-
-
