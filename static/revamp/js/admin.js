@@ -181,13 +181,28 @@ var HEIGHT_JOB = 0;
 var CGHARYANA_VAT_NO = "06301844038"
 var CGHARYANA_STAX_NO = "AAVCS6335ESD001"
 var CGHARYANA_PAN_NO = "AAVCS6335E"
-var CGHARYANA_CIN_NO = "U72200DL2015PTC278194"
+var CGHARYANA_CIN_NO = "U74999MH2016PTC284432"
 var CGHARYANA_NAME = "Carcrew Technology Pvt Ltd"
-var CGHARYANA_ADDRESS = "2401, Basement"
-var CGHARYANA_LOCALITY = "DLF Phase 4, Opp. Galleria Market"
-var CGHARYANA_CITY = "Gurgaon"
-var CGHARYANA_STATE = "Haryana"
+var CGHARYANA_ADDRESS = "139,A 1, Shah & Nahar Industrial Estate"
+var CGHARYANA_LOCALITY = "Lower Parel West"
+var CGHARYANA_CITY = "Mumbai"
+var CGHARYANA_STATE = "Maharashtra"
 var CGHARYANA_GST_NO = "27AAGCC5961K1Z9"
+
+
+var CCMAHARASHTRA_VAT_NO = "06301844038"
+var CCMAHARASHTRA_STAX_NO = "AAVCS6335ESD001"
+var CCMAHARASHTRA_PAN_NO = "AAVCS6335E"
+var CCMAHARASHTRA_CIN_NO = "U74999MH2016PTC284432"
+var CCMAHARASHTRA_NAME = "Carcrew Technology Pvt Ltd"
+var CCMAHARASHTRA_ADDRESS = "139,A 1, Shah & Nahar Industrial Estate"
+var CCMAHARASHTRA_LOCALITY = "Lower Parel West"
+var CCMAHARASHTRA_CITY = "Mumbai"
+var CCMAHARASHTRA_STATE = "Maharashtra"
+var CCMAHARASHTRA_GST_NO = "27AAGCC5961K1Z9"
+
+
+
 
 
 var CGDELHI_VAT_NO = "07146991638"
@@ -3310,6 +3325,19 @@ var Global = {
                 Commons.ajaxData('get_all_taxes', {state:STATE_BILL}, "get", _this, _this.loadTaxUpdate,null, '.loading-pane');
                 setTimeout(function() {             $('#bill-table').click()       }, 1000);
 
+            }if (bill_type == "Carcrew Mumbai"){
+                $('#agent_bill_name').val(CCMAHARASHTRA_NAME)
+                $('#agent_bill_address').val(CCMAHARASHTRA_ADDRESS +', '+CCMAHARASHTRA_LOCALITY+', '+CCMAHARASHTRA_CITY)
+                $('#agent_bill_vat').val(CCMAHARASHTRA_VAT_NO)
+                $('#agent_bill_stax').val(CCMAHARASHTRA_STAX_NO)
+                $('#agent_bill_cin').val(CCMAHARASHTRA_CIN_NO)
+                $('#agent_bill_gst').val(CCMAHARASHTRA_GST_NO)
+                $('#cust_bill_state').val("Maharshtra")
+
+                STATE_BILL = CCMAHARASHTRA_STATE
+                Commons.ajaxData('get_all_taxes', {state:STATE_BILL}, "get", _this, _this.loadTaxUpdate,null, '.loading-pane');
+                setTimeout(function() {             $('#bill-table').click()       }, 1000);
+
             }else if (bill_type == "CG Delhi"){
                 $('#agent_bill_name').val(CGDELHI_NAME)
                 $('#agent_bill_address').val(CGDELHI_ADDRESS +', '+CGDELHI_LOCALITY+', '+CGDELHI_CITY)
@@ -3322,9 +3350,9 @@ var Global = {
                 Commons.ajaxData('get_all_taxes', {state:STATE_BILL}, "get", _this, _this.loadTaxUpdate,null, '.loading-pane');
                 setTimeout(function() {             $('#bill-table').click()       }, 1000);
 
-            }else if(bill_type == "CG Receipt"){
-                $('#agent_bill_name').val(CGDELHI_NAME)
-                $('#agent_bill_address').val(CGHARYANA_ADDRESS +', '+CGHARYANA_LOCALITY+', '+CGHARYANA_CITY)
+            }else if(bill_type == "Carcrew Receipt"){
+              $('#agent_bill_name').val(CCMAHARASHTRA_NAME)
+              $('#agent_bill_address').val(CCMAHARASHTRA_ADDRESS +', '+CCMAHARASHTRA_LOCALITY+', '+CCMAHARASHTRA_CITY)
                 $('#agent_bill_vat').val('')
                 $('#agent_bill_stax').val('')
                 $('#agent_bill_cin').val('')
@@ -9057,7 +9085,6 @@ var Global = {
         html += '											<th class="centered-text" data-field="code">Date Created</th>';
         html += '											<th class="centered-text" data-field="veh_type">Customer Name</th>';
         html += '											<th class="centered-text"  data-field="category">Total Amount</th>';
-        // html += '											<th data-field="end_date">Bill Status</th>';
         html += '											<th class="centered-text" data-field="start_date">Payment Status</th>';
         html += '											<th class="centered-text" data-field="end_date">Due Amount</th>';
         html += '											<th class="centered-text" data-field="download-bill" >Download</th>';
