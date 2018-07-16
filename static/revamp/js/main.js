@@ -691,7 +691,7 @@ var Global = {
         },
     loadBrands1:function(data){
             var container = $('#brand-select1');
-            vehtype = $('#home .veh-cat-card1.selected').text().trim()
+            vehtype = $('#parts .veh-cat-card1.selected').text().trim()
             // console.log(vehtype)
             if(vehtype == ""){
                 vehtype ="Car"
