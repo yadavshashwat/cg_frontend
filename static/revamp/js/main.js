@@ -331,9 +331,20 @@ var Global = {
             Commons.ajaxData('get_type_make', {vehicle_type: vehtype}, "get", _this, _this.loadBrands);
         }
 
+        var callbrands1 =function(){
+            vehtype = $('#parts .veh-cat-card1.selected').text().trim()
+
+            console.log(vehtype)
+            if(vehtype == ""){
+                vehtype ="Car"
+            }else{
+            }
+            Commons.ajaxData('get_type_make', {vehicle_type: vehtype}, "get", _this, _this.loadBrands);
+        }
+
         $(document).on('ready',callbrands);
         $('#home').on('click','.veh-cat-card',callbrands);
-        $('#parts').on('click','.veh-cat-card1',callbrands);
+        $('#parts').on('click','.veh-cat-card1',callbrands1);
 
 
       $('#brand-select').change(function(event,data){
@@ -350,7 +361,7 @@ var Global = {
         });
 
       $('#brand-select1').change(function(event,data){
-            vehtype = $('#parts .veh-cat-card.selected').text().trim()
+            vehtype = $('#parts .veh-cat-card1.selected').text().trim()
             // console.log(vehtype)
             if(vehtype == ""){
                 vehtype ="Car"

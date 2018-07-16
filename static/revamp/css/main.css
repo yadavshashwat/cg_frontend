@@ -515,7 +515,7 @@ margin-left: 2%}
 }
 #parts .vehicle-select-form1, #vehicle-select-form1 .vehicle-select-form1{margin-top:5%;}
 #parts .veh-cat-card1, #vehicle-select-form1 .veh-cat-card1{height:60px;text-align:center;line-height:60px;margin:0px!important;border-radius:0px;font-size:20px;}
-#parts .veh-cat-card.selected1, #vehicle-select-form1 .veh-cat-card.selected1{z-index:50;color:#D73823;font-weight:700;border-bottom:2px solid #D73823;}
+#parts .veh-cat-card1.selected1, #vehicle-select-form1 .veh-cat-card.selected1{z-index:50;color:#D73823;font-weight:700;border-bottom:2px solid #D73823;}
 #parts .veh-cat-card1:hover,#vehicle-select-form1 .veh-cat-card1:hover{z-index:200;color:#D73823;cursor:pointer;}
 #parts .bike-card, #vehicle-select-form1 .bike-card{border-top-right-radius:10px!important;}
 #parts .car-card, #vehicle-select-form1 .car-card{border-top-left-radius:10px!important;;}
