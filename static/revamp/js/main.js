@@ -339,7 +339,7 @@ var Global = {
                 vehtype ="Car"
             }else{
             }
-            Commons.ajaxData('get_type_make', {vehicle_type: vehtype}, "get", _this, _this.loadBrands);
+            Commons.ajaxData('get_type_make', {vehicle_type: vehtype}, "get", _this, _this.loadBrands1);
         }
 
         $(document).on('ready',callbrands);
