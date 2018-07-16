@@ -454,6 +454,140 @@ min-height: 300px}
 font-weight: 700;
 }
 
+#parts.background-color-home{background:rgba(215,56,35,0.7)!important;}
+#parts.background-color-home2{background:rgba(215,56,35,0.2)!important;}
+#parts{background:rgba(215,56,35,0.20);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5F85C5C,endColorstr=#E5F85C5C)";filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5F85C5C,endColorstr=#E5F85C5C);zoom:1;min-height:inherit;}
+
+#parts .hero-text2{
+    /*padding-top:8%;*/
+}
+#parts .hero-text{padding-top:15%;}
+
+
+#parts{
+    padding-top: 2%;
+}
+
+.home-form-ad .form-submit{
+    height: 33px;
+}
+#parts .card-info{
+    /*margin-top: 5%;*/
+}
+
+@media(max-width: 992px) {
+    #parts .hero-text h1{font-size:30px;letter-spacing:2px;line-height:40px;margin-bottom:7px;color:#FFFFFF;text-transform:uppercase;}
+    #parts .hero-text{padding-top:10%;}
+}
+
+#parts .hero-text h1{font-size:40px;letter-spacing:2px;line-height:40px;margin-bottom:7px;color:#FFFFFF;text-transform:uppercase;}
+#parts .hero-text h4{color:#FFFFFF;text-transform:uppercase;}
+#parts .hero-text h3{font-size:15px;letter-spacing:2px;line-height:10px;margin-bottom:5px;color:#FFFFFF;text-transform:uppercase;}
+#parts .hero-text2 h1{font-size:30px;letter-spacing:2px;line-height:30px;margin-bottom:3px;color:#FFFFFF;text-transform:uppercase;}
+
+#parts .home-form{height:100%;line-height:100%;margin-top:2%!important;padding:2% 2%;
+margin-bottom: 5%!important;}
+
+#parts .home-form-ad{height:100%;line-height:100%;margin-top:2%!important;padding:2% 2%;
+/*margin-bottom: 5%!important;*/
+margin-left: 2%}
+
+.scroll-lock{
+    overflow: hidden;
+}
+
+#parts .advert-input-field{
+    padding:0px 10px !important;
+    /*margin: 0px 10px;*/
+}
+
+#vehicle-select-form{position:fixed;top:10%;width:100%;z-index:98;
+    /*height:50%;*/
+    /*height:100%;*/
+}
+.row-zero-margin{margin:0px!important;}
+#parts .home-form-21,#vehicle-select-form1 .home-form-2{height:100%;line-height:100%;padding:2%;
+    /*border-top-left-radius:0px;*/
+    /*border-top-right-radius:0px;*/
+    z-index:60;}
+#parts .home-form-21 .vehicle-details1,#vehicle-select-form1 .home-form-21 .vehicle-details1, .home-form1 .vehicle-details1{
+    /*padding:5%;*/
+}
+#parts .vehicle-select-form1, #vehicle-select-form1 .vehicle-select-form1{margin-top:5%;}
+#parts .veh-cat-card1, #vehicle-select-form1 .veh-cat-card1{height:60px;text-align:center;line-height:60px;margin:0px!important;border-radius:0px;font-size:20px;}
+#parts .veh-cat-card.selected1, #vehicle-select-form1 .veh-cat-card.selected1{z-index:50;color:#D73823;font-weight:700;border-bottom:2px solid #D73823;}
+#parts .veh-cat-card1:hover,#vehicle-select-form1 .veh-cat-card1:hover{z-index:200;color:#D73823;cursor:pointer;}
+#parts .bike-card, #vehicle-select-form1 .bike-card{border-top-right-radius:10px!important;}
+#parts .car-card, #vehicle-select-form1 .car-card{border-top-left-radius:10px!important;;}
+#parts .veh-cat-col, #vehicle-select-form1 .veh-cat-col1{padding:0px!important;}
+#parts h4{text-transform:uppercase;}
+.error-message{color:red;font-size:13px;text-align:right;margin-top:-10px;}
+.error-border{border-bottom:2px solid red!important;}
+::-webkit-input-placeholder{color:#9e9e9e;left:0;font-size:1rem;padding-left:5px;}
+::-moz-placeholder{color:#9e9e9e;left:0;font-size:1rem;padding-left:5px;}
+:-ms-input-placeholder{color:#9e9e9e;left:0;font-size:1rem;padding-left:5px;}
+:-moz-placeholder{color:#9e9e9e;left:0;font-size:1rem;padding-left:5px;}
+#parts .service-card{text-align:center;vertical-align:middle;font-size:12px;}
+#parts .form-row{
+    /*padding:5% 1%;*/
+}
+
+#parts .ad-page-car{
+    line-height: 50px;
+}
+#parts .service-card .service-name{padding:15px!important;}
+#parts .header-website{text-align:center;}
+#parts .header-btn{
+    margin:5% 0%!important;
+}
+
+#parts .header-btn-ad{
+    /*margin:5% 0%!important;*/
+}
+#parts .list-features-header{text-align:center;vertical-align:middle;color:#FFFFFF;line-height:20px;letter-spacing:2px;}
+#parts .list-features-header{text-align:center;vertical-align:middle;color:#FFFFFF;line-height:20px;letter-spacing:2px;}
+
+#parts .service-card.selected{background:teal;color:#FFF!important;}
+#parts .home-form1 .button-row{text-align:center;margin-bottom:2rem!important;}
+#parts .home-form-21 .button-row, #vehicle-select-form .home-form-2 .button-row{text-align:center;margin-bottom:2rem!important;}
+#parts .order-confirm{text-align:center;font-size:24px;line-height:100%;padding:5%;}
+.startup-partners{
+        line-height: 70px;
+}
+
+#parts .list-features-header .lists{text-align:left; font-size:16px}
+#parts .list-features-header .lists ul{margin:0px}
+
+#parts .list-features-header .lists li{text-transform: None!important; margin-bottom: 15px;}
+
+@media (max-width: 992px){
+    #parts .list-features-header .lists{text-align:left; font-size:16px}
+    #parts .list-features-header .lists li{text-transform: None!important; margin-bottom: 5px;}
+}
+#parts .car-image-header img{
+    /*height:150px;*/
+    width: 95%;
+    margin: 10px;
+}
+#parts .bike-image-header img{
+    height:150px;
+    margin: 10px;
+}
+
+#parts .home-form{
+    /*border: 1px solid grey;*/
+}
+
+#parts .call-details{
+    color:#D73823;
+    text-align: center;
+    font-size: 17px;
+}
+#parts .call-details-row{
+    text-align: center;
+    margin-top: 15px;
+}
+
 #clients{background:transparent;}
 #clients .client-section{}
 #clients .purple-overlay{background:rgba(215,56,35,0.80);padding:130px 0px 130px 0px;-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7)";filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#EA75D2D7,endColorstr=#EA75D2D7);zoom:1;}

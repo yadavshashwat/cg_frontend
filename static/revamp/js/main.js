@@ -259,6 +259,7 @@ var Global = {
                 500
             );
         });
+
         $('.brands-button').on('click', function(e){
             $('body,html').animate(
                 // {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()},
@@ -270,6 +271,15 @@ var Global = {
         $('.contact-us-button').on('click', function(e){
             $('body,html').animate(
                 {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#howitworks').outerHeight()+$('#numbers').outerHeight()+$('#service-desc').outerHeight()+$('#testimonials').outerHeight()+$('#service-detail').outerHeight()+$('#brands').outerHeight()},
+
+                // {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()+$('#brands').outerHeight()},
+                500
+            );
+        });
+
+        $('.parts-button').on('click', function(e){
+            $('body,html').animate(
+                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#howitworks').outerHeight()+$('#numbers').outerHeight()+$('#service-desc').outerHeight()+$('#testimonials').outerHeight()+$('#service-detail').outerHeight()+$('#brands').outerHeight()+$('#contact-info').outerHeight() },
 
                 // {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()+$('#brands').outerHeight()},
                 500
@@ -338,6 +348,19 @@ var Global = {
             Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehtype}, "get", _this, _this.loadModels);
         });
 
+      $('#brand-select1').change(function(event,data){
+            vehtype = $('#home .veh-cat-card.selected').text().trim()
+            // console.log(vehtype)
+            if(vehtype == ""){
+                vehtype ="Car"
+            }else{
+
+            }
+            var make = $(this).find('.selectize-input').find('div').attr('data-value');
+          console.log(make)
+            Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehtype}, "get", _this, _this.loadModels);
+        });
+
 
         $('#testimonials .image-testi').click(function(){
             $('#testimonials .image-testi img').removeClass('selected')
@@ -390,6 +413,19 @@ var Global = {
            $('#home #vehicle-select').find('select').selectize();
             vehicle = $('#home .veh-cat-card:hover').text()
            $('#home .home-form-2 .vehicle-type').text(vehicle);
+        });
+
+        $('#parts .veh-cat-card').click(function(){
+            $('#parts .veh-cat-card').removeClass('selected');
+            $('#parts .veh-cat-card:hover').addClass('selected');
+
+           var html = '<select id="vehicle-select-list1" class="">';
+            html += '<option value="" disabled selected>Model</option>';
+            html += '</select>';
+             $('#home #vehicle-select1').html(html);
+           $('#home #vehicle-select1').find('select').selectize();
+            vehicle = $('#home .veh-cat-card:hover').text()
+           $('#home .home-form-2 .vehicle-type1').text(vehicle);
         });
 
        $('#home .home-form-2 .form-proceed').click(function(event){
