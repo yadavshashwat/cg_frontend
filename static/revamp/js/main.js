@@ -343,6 +343,7 @@ var Global = {
         }
 
         $(document).on('ready',callbrands);
+        $(document).on('ready',callbrands1);
         $('#home').on('click','.veh-cat-card',callbrands);
         $('#parts').on('click','.veh-cat-card1',callbrands1);
 
