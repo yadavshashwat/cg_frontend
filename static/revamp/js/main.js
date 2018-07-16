@@ -333,6 +333,7 @@ var Global = {
 
         $(document).on('ready',callbrands);
         $('#home').on('click','.veh-cat-card',callbrands);
+        $('#parts').on('click','.veh-cat-card1',callbrands);
 
 
       $('#brand-select').change(function(event,data){
@@ -349,7 +350,7 @@ var Global = {
         });
 
       $('#brand-select1').change(function(event,data){
-            vehtype = $('#home .veh-cat-card.selected').text().trim()
+            vehtype = $('#parts .veh-cat-card.selected').text().trim()
             // console.log(vehtype)
             if(vehtype == ""){
                 vehtype ="Car"
