@@ -371,7 +371,7 @@ var Global = {
             }
             var make = $(this).find('.selectize-input').find('div').attr('data-value');
           console.log(make)
-            Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehtype}, "get", _this, _this.loadModels);
+            Commons.ajaxData('get_make_model', {make_id: make, vehicle_type: vehtype}, "get", _this, _this.loadModels1);
         });
 
 
