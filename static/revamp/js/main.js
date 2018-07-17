@@ -279,7 +279,7 @@ var Global = {
 
         $('.parts-button').on('click', function(e){
             $('body,html').animate(
-                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#howitworks').outerHeight()+$('#numbers').outerHeight()+$('#service-desc').outerHeight()+$('#testimonials').outerHeight()+$('#service-detail').outerHeight()+$('#brands').outerHeight()+$('#contact-info').outerHeight() },
+                {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#howitworks').outerHeight()+$('#numbers').outerHeight()+$('#service-desc').outerHeight()+$('#testimonials').outerHeight()+$('#service-detail').outerHeight()+$('#brands').outerHeight()+$('#contact-bar').outerHeight()+$('#contact').outerHeight()},
 
                 // {'scrollTop':$('#home').outerHeight()+$('#features').outerHeight()+$('#clients').outerHeight()+$('#testimonials').outerHeight()+$('#brands').outerHeight()},
                 500
@@ -310,6 +310,15 @@ var Global = {
             if ($('#home').height() > a){
             }else{
             $("#home").height(a + 30);
+            }
+        });
+
+         $('.book-btn-21').click(function (event) {
+            $('.infodiv1').addClass('invisible');
+            var a = $('.vehicle-select-form1').removeClass('hide-on-med-and-down').addClass('visible').height();
+            if ($('#parts').height() > a){
+            }else{
+            $("#parts").height(a + 30);
             }
         });
 
@@ -413,7 +422,19 @@ var Global = {
                 }, 3000); // repeat forever, polling every 3 seconds
         }
 
+        $("#partInquiry").click(function() {
+            model = $('#parts .veh-cat-card1.selected').text().trim()
+            var make = $(this).find('.selectize-input').find('div').attr('data-value');
+            var parts_description = $('#pdi').val()
+            var name = $('#first_name-2').val()
+            var phone = $('#telephone-21').val()
 
+            Commons.ajaxData('parts_inquiry', {make:make, model:model, name:name, pd: parts_description, phone: phone}, 'get', _this, _this.partsInquiry);
+             $('#formValidate1').hide();
+             $('#partInquiry').hide();
+            $('.parts-thanks').show();
+
+        });
 
        $('#home .veh-cat-card').click(function(){
             $('#home .veh-cat-card').removeClass('selected');
@@ -881,8 +902,10 @@ var Global = {
         $('#contact .contact-form').hide();
         $('#contact .thank').show();
 
+    },
+    partsInquiry: function (data) {
+        console.log("Inquiry sent")
     }
-
 
 };
 

@@ -1561,16 +1561,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class = "col s12 m12 l6 infodiv">
                 <div class="header-website hero-text fadeOnLoad " style="display:none;">
                     <!--<h1>Car Care</br></i>Made Easy</h1>-->
-                    <h1>Inquire about</br></i>Parts</h1>
-
-
-                        <!--<ul class="list-features-header">-->
-                        <!--<li>One Stop Shop</li>&nbsp;<i class="fa fa-circle x10 icon"></i>&nbsp;-->
-                        <!--<li>Doorstep Service</li>&nbsp;<i class="fa fa-circle x10 icon"></i>&nbsp;-->
-                        <!--<li>Instant Cost Estimate</li>-->
-                        <!--</ul>-->
-                    </h4>
+                    <h1>India's biggest online supplier of Auto spare parts.</h1>
                 </div>
+				<h4 class="list-features-header">ALL CARS ALL BRANDS<i class="fa fa-circle x10 icon"></i>&nbsp;GENUINE OEM & OES PARTS&nbsp;<i class="fa fa-circle x10 icon"></i>&nbsp;BEST PRICES, BULK DISCOUNT&nbsp;<i class="fa fa-circle x10 icon"></i>&nbsp;DELIVERY AT YOUR DOOR STEP&nbsp;<i class="fa fa-circle x10 icon"></i>&nbsp;EASY PAYMENTS</h4>
+
+
             </div>
 
             <div class = "vehicle-select-form1 col s12 m12 l6 hide-on-med-and-down">
@@ -1593,7 +1588,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="row text-left vehicle-details">
 
                         <div class="row field-title text-left">
-                        <h3><b>&nbsp;&nbsp;Parts Inquiry</b></h3>
+                        <h3><b>&nbsp;&nbsp;Contact Us</b></h3>
                         </div>
 
                         <form id="formValidate1">
@@ -1621,7 +1616,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             </div>
 							<div class="row">
                                 <div class="col s12 m12 l12">
-									<b>Part:</b> <input type="text" name="part">
+									<input type="text" name="part" id="pdi" placeholder="Part name and description">
                                 </div>
                             </div>
                             <div class="col m6 l6 s12">
@@ -1632,35 +1627,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<div class="input-field col s12 l6 m6">
 			<i class="material-icons prefix">account_circle</i>
 			<input id="first_name-2" type="text" class="validate">
-			<label for="first_name-2" data-error="Required">First Name</label>
-			</div>
-			<div class="input-field col s12 l6 m6">
-
-			<input id="last_name-2" type="text" class="validate">
-			<label for="last_name-2"  data-error="Required">Last Name</label>
+			<label for="first_name-2" data-error="Required">Name</label>
 			</div>
 			</div>
 			<div class="row">
 			<div class="input-field col s12 l12 m12">
 			<i class="material-icons prefix">phone</i>
-			<input id="telephone-2" type="number" class="validate">
-			<label for="telephone-2"  data-error="Invalid Number | Example : 9829098290">Telephone</label>
+			<input id="telephone-21" type="number" class="validate">
 			</div>
 			</div>
-			<div class="row">
-			<div class="input-field col s12 l12 m12">
-			<i class="material-icons prefix">email</i>
-			<input id="email-2" type="email" class="validate">
-			<label for="email-2" data-error="Invalid Email">Email</label>
-			</div>
-			</div>
-			<div class="row">
-			<div class="input-field col s12">
-			<i class="material-icons prefix">chat_bubble_outline</i>
-			<textarea id="message-2" class="materialize-textarea"></textarea>
-			<label for="message-2" data-error="Required">Message</label>
-			</div>
-			</div>
+			<!--<div class="row">-->
+			<!--<div class="input-field col s12 l12 m12">-->
+			<!--<i class="material-icons prefix">email</i>-->
+			<!--<input id="email-2" type="email" class="validate">-->
+			<!--<label for="email-2" data-error="Invalid Email">Email</label>-->
+			<!--</div>-->
+			<!--</div>-->
 
 			<!--<div class="row message-button">-->
 			<!--<button class="waves-effect waves-light waves-cg red btn cg-btn-2 message-submit red" type="submit" name="action"><i class="fa fa-send"></i> &nbsp; Send</button>-->
@@ -1670,13 +1652,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<!--</div>-->
 			</div>
                         </form>
+
                         <span class = "error-message" id="choose-vehicle-error1"></span>
+                        <div class="parts-thanks card row invisible">
+							<br>
+							<br>
+							<span class="x20 thanks-note">Thank you for your inquiry we will get in touch with you.</span>
+							<br>
+							<br>
+							<span class="x20 thanks-note">For immediate requirements please contact us at <b>07045996412</b>.</span>
+							<br>
+							<br>
+							<br>
+						</div>
                     </div>
 
 
                     <div class="row button-row proceed">
                         <!--<a href="#home">	-->
-                        <button class="waves-effect waves-light btn-large red form-proceed" type="submit" name="action">Submit Inquiry
+                        <button class="waves-effect waves-light btn-large red" id="partInquiry" name="partInq">Submit Inquiry
                             <i class="material-icons right">send</i>
                         </button>
                         <!--</a>-->
@@ -1691,7 +1685,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <!--</div>-->
 
                 </div>
+				<div class="row header-btn">
+                        <button class="btn waves-effect waves-light btn-large hide-on-large-only book-btn-21 red cg-btn" href=""><i class="icon-chevron-down"></i>Inquire</button>
+                    </div>
+				<br>
+						<br>
+						<br>
             </div>
+
         </div>
     </div>
 </section>
