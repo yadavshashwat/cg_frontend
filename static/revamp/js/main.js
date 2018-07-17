@@ -423,11 +423,11 @@ var Global = {
         }
 
         $("#partInquiry").click(function() {
-            model = $('#parts .veh-cat-card1.selected').text().trim()
-            var make = $(this).find('.selectize-input').find('div').attr('data-value');
-            var parts_description = $('#pdi').val()
-            var name = $('#first_name-2').val()
-            var phone = $('#telephone-21').val()
+            var model = $("#brand-select1 option:selected").text().trim();
+            var make = $("#vehicle-select1 option:selected").text().trim();
+            var parts_description = $('#pdi').val();
+            var name = $('#first_name-2').val();
+            var phone = $('#telephone-21').val();
 
             Commons.ajaxData('parts_inquiry', {make:make, model:model, name:name, pd: parts_description, phone: phone}, 'get', _this, _this.partsInquiry);
              $('#formValidate1').hide();
