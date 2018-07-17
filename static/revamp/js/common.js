@@ -86,7 +86,7 @@ var Commons = {
         'get_parts_vehicle':'/api/get_parts_vehicle/',
         'view_all_campaigns':'/api/view_all_campaigns/',
         'add_delete_campaign':'/api/add_delete_campaign/',
-        'parts_inquiry': '/api/parts_inquiry'
+        'parts_inquiry': '/api/parts_inquiry/'
 
 
     },

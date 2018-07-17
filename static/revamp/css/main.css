@@ -466,6 +466,7 @@ font-weight: 700;
 
 #parts{
     padding-top: 2%;
+    background:#f7f7f7d6;
 }
 
 .home-form-ad .form-submit{
@@ -480,10 +481,10 @@ font-weight: 700;
     #parts .hero-text{padding-top:10%;}
 }
 
-#parts .hero-text h1{font-size:40px;letter-spacing:2px;line-height:40px;margin-bottom:7px;color:#FFFFFF;text-transform:uppercase;}
-#parts .hero-text h4{color:#FFFFFF;text-transform:uppercase;}
+#parts .hero-text h1{font-size:40px;letter-spacing:2px;line-height:40px;margin-bottom:7px;color:#ff2121;text-transform:uppercase;}
+#parts .hero-text h4{color:#ff2121;text-transform:uppercase;}
 #parts .hero-text h3{font-size:15px;letter-spacing:2px;line-height:10px;margin-bottom:5px;color:#FFFFFF;text-transform:uppercase;}
-#parts .hero-text2 h1{font-size:30px;letter-spacing:2px;line-height:30px;margin-bottom:3px;color:#FFFFFF;text-transform:uppercase;}
+#parts .hero-text2 h1{font-size:30px;letter-spacing:2px;line-height:30px;margin-bottom:3px;color:#ff2121;text-transform:uppercase;}
 
 #parts .home-form{height:100%;line-height:100%;margin-top:2%!important;padding:2% 2%;
 margin-bottom: 5%!important;}
@@ -544,7 +545,7 @@ margin-left: 2%}
 #parts .header-btn-ad{
     /*margin:5% 0%!important;*/
 }
-#parts .list-features-header{text-align:center;vertical-align:middle;color:#FFFFFF;line-height:20px;letter-spacing:2px;}
+#parts .list-features-header{text-align:center;vertical-align:middle;color:#ff2121;line-height:20px;letter-spacing:2px;}
 
 #parts .service-card.selected{background:teal;color:#FFF!important;}
 #parts .home-form1 .button-row{text-align:center;margin-bottom:2rem!important;}
